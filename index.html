@@ -2,7 +2,12 @@
 <html lang="en">
     <head>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/timeline.js"></script>
+        
+        <script src="js/libs/graphael/raphael-min.js" type="text/javascript"></script> 
+        <script src="js/libs/graphael/g.raphael-min.js" type="text/javascript"></script> 
+        <script src="js/libs/graphael/g.bar-min.js" type="text/javascript"></script>
+        <script src="js/timeline.js" type="text/javascript"></script>
+        
         <link rel="stylesheet" type="text/css" href="css/secondary.css" />
         <link rel="stylesheet" type="text/css" href="css/global.css" />
         <title>Project High Jump</title>
@@ -23,14 +28,14 @@
         <div id="contentBox">
            
            <div id="padding">
-               <div id="table">
-                   <div id="table-body">
+               <div id="column-layout">
+                   <div id="row">
                        
-                       <div id="table-row" style="width:50%">
+                       <div id="cell" style="width:50%">
                            <h1>Primary Page Title Here</h1><span title="what">What Descriptor</span><span title="where">Where Descriptor</span><span title="when">When Descriptor</span>    
                        </div>
                        
-                       <div id="table-row" style="width:50%">
+                       <div id="cell" style="width:50%">
                            <h3>Secondary column box</h3>
                        </div>
                        
@@ -39,11 +44,10 @@
            </div>
         </div>
        
-        <h3 style="margin: 10px 0 0 0">Timeline label</h3>
+        <h3 style="margin: 10px 0 0 0; display: inline-block">Timeline label</h3>
+        <div id="timer">Tracking from: June 10, 2011 00:03:05 - LIVE</div>
        
-        <div id="timeline-container">
-            <canvas id="timeline-canvas"></canvas>
-        </div>
+        <div id="timeline-container"></div>
         
     </div>
 </div>
@@ -57,11 +61,11 @@
 
 <div id="content">
     
-    <div id="table">
-        <div id="table-body">
+    <div id="column-layout">
+        <div id="row">
             
             <!-- Left column -->
-            <div id="table-row" style="width:100%; padding-right:20px">
+            <div id="cell" style="width:100%; padding-right:20px">
                 <h2>Section Label</h2>
                 <div id="contentBox">
                     <div id="padding">Hello world</div>
@@ -75,8 +79,7 @@
             </div>
             
             <!-- Right column -->
-            <div id="table-row">
-                
+            <div id="cell">
                 <h2>Section Label</h2>
                 <div id="contentBox" style="width:300px; height:200px">
                     <div id="padding">Hello world</div>

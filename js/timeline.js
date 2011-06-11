@@ -1,34 +1,35 @@
 $( function() {
     
-    var canvas, container, width, height, context;
-    
+    var r, container, width, height, data;
     container = $("#timeline-container")[0];
-    canvas =    $("#timeline-canvas")[0];
-
-    canvas.width = width = container.clientWidth;
-    canvas.height = height = container.clientHeight;
     
-    context = canvas.getContext("2d");
-       
-    function draw()
+    width = $(container).width();
+    height = $(container).height();
+    
+    data = populateData();
+
+    r = Raphael(container);
+    r.g.barchart(0, 20, width, height, [data], {colors:["#666666"], gutter:"10%"}).hover(fadeIn, fadeOut);
+
+    function fadeIn ()
     {
-        var i, len, barW, barH, padding;
-        
-        barW = 13;
-        padding = 2;
-        len = Math.floor(width / barW+padding);
-        
-        console.log(len);
-        
-        context.clearRect(0, 0, width, height);
-        context.fillStyle = "rgb(80,80,80)";
-        
+        this.flag = r.g.popup(this.bar.x, this.bar.y, (this.bar.value || "0") + " records").insertBefore(this);
+    }
+    
+    function fadeOut ()
+    {
+        this.flag.animate({opacity: 0}, 100, function () {this.remove();});
+    }
+    
+     
+    function populateData()
+    {
+        var result = [];
+        var len = 50+Math.random()*100;
         for(i = 0; i < len; i += 1)
         {
-            barH = Math.round(Math.random()*((height-20)-i));
-            context.fillRect(i*(barW+padding), height-barH, barW, barH);
+            result.push(Math.round(Math.random()*(len-i)));
         }
+        return result;
     }
-
-    draw();
 });
