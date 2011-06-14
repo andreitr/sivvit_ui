@@ -37,6 +37,5 @@ $( function() {
 		}
 	}
 	
-	
 	drawTimeline();
 });
