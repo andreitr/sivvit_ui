@@ -10,6 +10,7 @@
     display: block;
     width:100%;
     height: auto;
+    overflow:hidden;
     background: #E6E6E6 url("../img/css/middle-bg-gradient.png") repeat-x top;
     background-image: -moz-linear-gradient(#E6E6E6, #7B7B7C 400px);
     background-image: -webkit-gradient(linear, 0 0, 0 400, from(#E6E6E6), to(#7B7B7C));
