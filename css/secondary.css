@@ -37,6 +37,19 @@
     overflow: hidden;
 }
 
+#timeline-expand
+{
+	width: auto;
+	height: auto;
+	float: right;
+	padding: 3px;
+	margin-top: 8px;
+	display: inline-block;
+	color: #FFFFFF;
+	background-color: #666666;
+	cursor: pointer;
+}
+
 #timer
 {
     display: inline-block;

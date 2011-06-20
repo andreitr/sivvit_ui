@@ -1,5 +1,24 @@
 $( function() {
 	
+	var expanded = false;
+	
+	$("#timeline-expand").click(function()
+	{
+		expanded = !expanded ? true : false;
+		
+		if(expanded)
+		{
+			$("#middle").animate({height:"500px"}, 300);
+			$("#timeline-expand").text("Less Stats");
+		}else{
+			$("#middle").animate({height:"222px"}, 300);
+			$("#timeline-expand").text("More Stats");
+		}
+	});
+	
+	
+	
+	
 	//	Draws main timeline 
 	function drawTimeline()
 	{
