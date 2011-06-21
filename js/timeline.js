@@ -1,17 +1,19 @@
 $( function() {
 	
-	var expanded = false;
+	var statsExpanded, statsDivHeight;
+	
+	statsDivHeight = $("#middle").height();
 	
 	$("#timeline-expand").click(function()
 	{
-		expanded = !expanded ? true : false;
+		statsExpanded = !statsExpanded ? true : false;
 		
-		if(expanded)
+		if(statsExpanded)
 		{
 			$("#middle").animate({height:"500px"}, 300);
 			$("#timeline-expand").text("Less Stats");
 		}else{
-			$("#middle").animate({height:"222px"}, 300);
+			$("#middle").animate({height:statsDivHeight}, 300);
 			$("#timeline-expand").text("More Stats");
 		}
 	});
