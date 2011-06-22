@@ -10,7 +10,7 @@ $( function() {
 		
 		if(statsExpanded)
 		{
-			$("#middle").animate({height:"500px"}, 300);
+			$("#middle").animate({height:"500px"}, 500);
 			$("#timeline-expand").text("Less Stats");
 		}else{
 			$("#middle").animate({height:statsDivHeight}, 300);
