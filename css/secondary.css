@@ -4,6 +4,11 @@
     display: block;
 }
 
+#pageHeader
+{
+	min-height: 70px;
+	display: block;
+}
 
 #middle
 {
