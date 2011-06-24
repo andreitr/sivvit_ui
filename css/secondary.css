@@ -34,13 +34,15 @@
     background-image: -webkit-gradient(linear, 0 0, 0 55, from(#FFFFFF), to(#E6E6E6));
 }
 
-#timeline-container
+#timeline-container, #stats-container
 {
     width: auto;
     height: 110px;
     display: block;
     overflow: hidden;
 }
+
+
 
 #timeline-expand
 {
