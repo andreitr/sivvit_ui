@@ -43,17 +43,15 @@
 }
 
 
-
 #timeline-expand
 {
 	width: auto;
 	height: auto;
-	float: right;
-	padding: 3px;
-	margin-top: 8px;
+	padding: 2px 5px 2px 5px;
+	margin-left: 15px;
 	display: inline-block;
 	color: #FFFFFF;
-	background-color: #666666;
+	background-color: #999999;
 	cursor: pointer;
 }
 
