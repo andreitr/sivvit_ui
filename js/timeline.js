@@ -2,7 +2,7 @@ $( function() {
 	
 	var statsExpanded, statsDivHeight;
 	
-	statsDivHeight = $("#monkey").height();
+	statsDivHeight = $("#stats").height();
 	
 	$("#timeline-expand").click(function()
 	{
@@ -10,10 +10,10 @@ $( function() {
 		
 		if(statsExpanded)
 		{
-			$("#monkey").animate({height:"200px"}, 500, onStatsShowHide);
+			$("#stats").animate({height:"200px"}, 500, onStatsShowHide);
 			$("#timeline-expand").text("Less Stats");
 		}else{
-			$("#monkey").animate({height:statsDivHeight}, 300, onStatsShowHide);
+			$("#stats").animate({height:statsDivHeight}, 300, onStatsShowHide);
 			$("#timeline-expand").text("More Stats");
 		}
 	});
@@ -23,8 +23,7 @@ $( function() {
 	 */
 	function onStatsShowHide()
 	{
-		console.log(statsExpanded);
-	}
+		}
 	
 	
 	//	Draws main timeline 
