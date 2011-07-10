@@ -65,7 +65,10 @@ h3
     float: left;
     width:115px;
     height: 35px;
+    background-image: url("../img/css/logo.png");
     background-color: #007AA2;
+	background-repeat: no-repeat;
+	background-position: center;
     color: #FFFFFF;
 }
 
