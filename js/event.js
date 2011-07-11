@@ -23,8 +23,16 @@ $( function() {
 	 */
 	function onStatsShowHide()
 	{
+		if(statsExpanded)
+		{
+			$("#extracharts").fadeIn();
+		}else{
+			$("#extracharts").hide();
 		}
+		
+	}
 	
+
 	
 	//	Draws main timeline 
 	function drawTimeline()
