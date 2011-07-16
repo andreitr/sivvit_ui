@@ -1,6 +1,6 @@
 $( function() {
 	
-	var statsExpanded, statsDivHeight;
+	var statsExpanded, statsDivHeight, isStatsDivDrawn = false;
 	
 	statsDivHeight = $("#stats").height();
 	
@@ -26,15 +26,39 @@ $( function() {
 		if(statsExpanded)
 		{
 			$("#extracharts").fadeIn();
+			
+			if(!isStatsDivDrawn)
+			{
+				drawPieChart({id:"#chart-left", radius:55, labels:["%% - status", "%% - media", "%% - check-ins"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
+				drawPieChart({id:"#chart-middle", radius:55, labels:["%% - exact location", "%% - account location", "%% - no location"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
+				
+				// Make sure pie charts are drawn only once. 
+				// Drawing g.raphel chart in an invisible div screws it up.
+				isStatsDivDrawn = true;
+			}
+
 		}else{
 			$("#extracharts").hide();
 		}
-		
 	}
 	
-
+	/*
+	 * Draws g.raphael pie chart using passed parameters.
+	 * @param Initialization object containing all required parameters {id:"#div", radius:20, labels:[], data:[]} 
+	 */
+	function drawPieChart(initObj)
+	{
+		var container = $(initObj.id)[0], raphael;
+		
+		raphael = Raphael(container);
+		raphael.g.txtattr.font = "12px Helvetica, Arial, sans-serif";
+		raphael.g.piechart(initObj.radius, initObj.radius, initObj.radius, initObj.data, {legend: initObj.labels, legendcolor:"#585858" ,legendpos: "east", colors:["#0B405E","#007AA2", "#FFFFFF"]});
+	}
 	
-	//	Draws main timeline 
+		
+	/**
+	 * Draws the main event timemeline histogram.
+	 */
 	function drawTimeline()
 	{
 		var r, container, width, height, data;
@@ -59,6 +83,10 @@ $( function() {
 		}
 
 
+		/**
+		 * Populates data for the bar graph.
+		 * @return data object
+		 */
 		function populateData()
 		{
 			var result = [];

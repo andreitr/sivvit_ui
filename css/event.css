@@ -7,7 +7,7 @@
 	display: none;	
 }
 
-#stats #contaier
+#stats #contaier, #container-right
 {
 	display: table-cell;
     vertical-align: top;  
@@ -18,9 +18,9 @@
 }
 
 
-
 #chart, #chart-left, #chart-right, #chart-middle 
 {
+	padding:10px 0 0 0;
 	width: auto;
 	height: 130px;
 	display: block;
