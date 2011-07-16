@@ -10,7 +10,7 @@ $( function() {
 		
 		if(statsExpanded)
 		{
-			$("#stats").animate({height:"200px"}, 500, onStatsShowHide);
+			$("#stats").animate({height:"200px"}, 300, onStatsShowHide);
 			$("#timeline-expand").text("Less Stats");
 		}else{
 			$("#stats").animate({height:statsDivHeight}, 300, onStatsShowHide);
@@ -32,6 +32,7 @@ $( function() {
 				drawPieChart({id:"#chart-left", radius:55, labels:["%% - status", "%% - media", "%% - check-ins"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
 				drawPieChart({id:"#chart-middle", radius:55, labels:["%% - exact location", "%% - account location", "%% - no location"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
 				
+				drawLineChart({id:"#chart-right"});
 				// Make sure pie charts are drawn only once. 
 				// Drawing g.raphel chart in an invisible div screws it up.
 				isStatsDivDrawn = true;
@@ -55,6 +56,17 @@ $( function() {
 		raphael.g.piechart(initObj.radius, initObj.radius, initObj.radius, initObj.data, {legend: initObj.labels, legendcolor:"#585858" ,legendpos: "east", colors:["#0B405E","#007AA2", "#FFFFFF"]});
 	}
 	
+	/**
+	 * Draws g.graphel bar chart using passed parameters.
+	 * #@param Initialization object contains {div:"#div"}
+	 */
+	function drawLineChart(initObj)
+	{
+		var container = $(initObj.id)[0], raphael, width, height;
+		
+		raphael = Raphael(container);
+		raphael.g.linechart(0, 0,  $(container).width(), $(container).height(), [10,20,30,40,50], [[20,22,18,7,3],[13,16,12,4,2]], {nostroke: true, shade: true, colors:["#0B405E","#007AA2", "#FFFFFF"]});
+	}
 		
 	/**
 	 * Draws the main event timemeline histogram.
