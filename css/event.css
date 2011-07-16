@@ -1,7 +1,27 @@
 #stats
 {
 }
+
 #extracharts
 {
 	display: none;	
+}
+
+#stats #contaier
+{
+	display: table-cell;
+    vertical-align: top;  
+	width:33%;
+	padding: 0 20px 0 20px;
+	margin: 0 20px 0 20px;
+	border-right: 1px solid #CCCCCC;
+}
+
+
+
+#chart, #chart-left, #chart-right, #chart-middle 
+{
+	width: auto;
+	height: 130px;
+	display: block;
 }

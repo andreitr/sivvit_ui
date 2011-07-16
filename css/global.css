@@ -31,6 +31,7 @@ h3
 {
     font-size: 17px;
     font-weight: 200;
+    margin: 0 0 5px 0;
 }
 
 #header
@@ -109,20 +110,30 @@ h3
     background: #333333;
 }
 
-[title^="what"]:after
+span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event
 {
-    margin:0 5px 0 5px;
-    content: url("../img/css/i_what.png");
+	margin:0 5px 0 5px;
+    height: 11px;
+    width: 11px;
+    display: inline-block;
 }
-[title^="where"]:after
+
+span.icon-location
 {
-    margin:0 5px 0 5px;
-    content: url("../img/css/i_where.png");
+	 background: url("../img/css/sprite-icons.png") no-repeat scroll -224px -64px transparent;
 }
-[title^="when"]:after
+span.icon-user
 {
-    margin:0 5px 0 5px;
-    content: url("../img/css/i_when.png");
+	 background: url("../img/css/sprite-icons.png") no-repeat scroll -227px -33px transparent;
+}
+span.icon-time
+{
+	 background: url("../img/css/sprite-icons.png") no-repeat scroll -191px -14px transparent;
+}
+span.icon-event
+{
+	 background: url("../img/css/sprite-icons.png") no-repeat scroll -81px -33px transparent;
+	 width: 14px;
 }
 
 img[src*="gravatar.com/avatar"]
