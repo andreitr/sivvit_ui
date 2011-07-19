@@ -34,6 +34,11 @@ h3
     margin: 0 0 5px 0;
 }
 
+a:link
+{
+	color: #118bff;
+}
+
 #header
 {
     width: 100%;
@@ -120,7 +125,7 @@ span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event
 
 span.icon-location
 {
-	 background: url("../img/css/sprite-icons.png") no-repeat scroll -224px -64px transparent;
+	 background: url("../img/css/sprite-icons.png") no-repeat scroll -220px -64px transparent;
 }
 span.icon-user
 {

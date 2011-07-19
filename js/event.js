@@ -62,10 +62,11 @@ $( function() {
 	 */
 	function drawLineChart(initObj)
 	{
-		var container = $(initObj.id)[0], raphael, width, height;
+		var container = $(initObj.id)[0], raphael, line;
 		
 		raphael = Raphael(container);
-		raphael.g.linechart(0, 0,  $(container).width(), $(container).height(), [10,20,30,40,50], [[20,22,18,7,3],[13,16,12,4,2]], {nostroke: true, shade: true, colors:["#0B405E","#007AA2", "#FFFFFF"]});
+		raphael.g.txtattr.font = "12px Helvetica, Arial, sans-serif";
+		line = raphael.g.linechart(0, 0,  $(container).width(), $(container).height(), [10,20,30,40,50], [[20,22,18,7,3]], {nostroke: true, shade: true, colors:["#0B405E","#007AA2", "#FFFFFF"]});
 	}
 		
 	/**
