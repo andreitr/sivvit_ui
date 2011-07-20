@@ -26,26 +26,32 @@
 	display: block;
 }
 
-#status
+
+
+.status
 {
+	float: left;
 	width: 100%;
-	height: auto;
 	border-bottom: 1px solid #CCCCCC;
-	padding-bottom: 10px;
+	
 }
 
-#status #avatar
+.avatar
 {
+	float: left;
 	width: 48px;
 	height: 48px;
-	display: block;
-}
-#status #post
-{
-	display: block;	
+	text-align: right;
 }
 
-#status #post-meta
+.post
+{
+	margin-left:58px;
+	position: relative;
+	word-wrap: break-word;
+}
+
+#post-meta
 {
 	font-size: 12px;
 	padding:5px 0 5px 0;
