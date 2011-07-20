@@ -69,6 +69,9 @@ $( function() {
 		line = raphael.g.linechart(0, 0,  $(container).width(), $(container).height(), [10,20,30,40,50], [[20,22,18,7,3]], {nostroke: true, shade: true, colors:["#0B405E","#007AA2", "#FFFFFF"]});
 	}
 	
+	/**
+	 * Draws twitter status table.
+	 */
 	function drawStatusTable()
 	{
 		var i, len=5, output="";
