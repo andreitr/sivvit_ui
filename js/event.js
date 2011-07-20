@@ -68,7 +68,21 @@ $( function() {
 		raphael.g.txtattr.font = "12px Helvetica, Arial, sans-serif";
 		line = raphael.g.linechart(0, 0,  $(container).width(), $(container).height(), [10,20,30,40,50], [[20,22,18,7,3]], {nostroke: true, shade: true, colors:["#0B405E","#007AA2", "#FFFFFF"]});
 	}
+	
+	function drawStatusTable()
+	{
+		var i, len=5, output="";
+		for(i=0; i < len; i += 1)
+		{
+			output += "<li class=\"status\"><div id=\"post-avatar\"><img src=\"http://a2.twimg.com/profile_images/1220150566/7b040b04c98b3b2a2accaeb313f3730b_normal.jpeg\"></div>";
+			output += "<div id=\"post\">Something to think about for sure: HTML5 could pose bigger security threat http://ow.ly/5IFIw #webappsec</a>";
+			output += "<div id=\"post-meta\">Twitter:<span class=\"icon-location\"></span>Denver, CO<span class=\"icon-time\"></span>9 hours ago<span class=\"icon-user\"></span>by&nbsp;<a href=\"#\">aaronott</a>";
+			output += "</div></div></li>";
+		}
 		
+		$("#status-list").html(output);
+
+	}
 	/**
 	 * Draws the main event timemeline histogram.
 	 */
@@ -102,7 +116,7 @@ $( function() {
 		 */
 		function populateData()
 		{
-			var result = [];
+			var result = [], i;
 			var len = 50+Math.random()*100;
 			for(i = 0; i < len; i += 1)
 			{
@@ -113,4 +127,5 @@ $( function() {
 	}
 	
 	drawTimeline();
+	drawStatusTable();
 });

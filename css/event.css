@@ -26,17 +26,23 @@
 	display: block;
 }
 
-
+ol 
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
 
 .status
 {
 	float: left;
 	width: 100%;
 	border-bottom: 1px solid #CCCCCC;
-	
+	padding-bottom: 10px;
+	margin-bottom: 10px;
 }
 
-.avatar
+#post-avatar
 {
 	float: left;
 	width: 48px;
@@ -44,7 +50,7 @@
 	text-align: right;
 }
 
-.post
+#post
 {
 	margin-left:58px;
 	position: relative;
@@ -54,6 +60,7 @@
 #post-meta
 {
 	font-size: 12px;
+	margin-top:10px;
 	padding:5px 0 5px 0;
 	color: #999999;
 }
