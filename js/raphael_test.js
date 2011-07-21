@@ -3,13 +3,12 @@
  */
 $(function ()
 {
-	
 	/**
 	 * Draws timeline histogram.
 	 * @param canvas Div histogram container
 	 * @param data Data container [12, 22, 30]
 	 */
-	function drawHistogram(canvas, data)
+	function drawHistogram(canvas, data, attributes)
 	{
 		var histogram, i, len = data.length, max=25, maxHeight=$(canvas).height(), percent, barW, barH, barX, barY, barPadding=2, bar;
 		
@@ -25,7 +24,7 @@ $(function ()
 			barY = Math.round( $(canvas).height() - barH)
 			
 			bar = histogram.rect(barX, barY, barW, barH);
-			bar.attr({fill: "#000", "stroke-width":0});
+			bar.attr(attributes);
 		}
 	}
 	
@@ -41,5 +40,5 @@ $(function ()
 		return result;
 	}
 	
-	drawHistogram($("#canvas")[0], populateData());
+	drawHistogram($("#canvas")[0], populateData(), {fill:"#999999", "stroke-width":0});
 });
