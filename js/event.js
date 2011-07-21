@@ -18,6 +18,7 @@ $( function() {
 		}
 	});
 	
+	
 	/*
 	 * Shows hides charts when
 	 */
@@ -94,7 +95,7 @@ $( function() {
 	 */
 	function drawHistogram(canvas, data, attributes)
 	{
-		var histogram, i, len, maxVal, minVal, maxHeight, percent, barW, barH, barX, barY, barXPadding, bar;
+		var histogram, i, len, maxVal, minVal, maxHeight, percent, barW, barH, barX, barY, barXPadding;
 		
 		len = data.values.length;
 		maxVal = data.max;
@@ -113,8 +114,17 @@ $( function() {
 			barX = Math.round(i*(barW+barXPadding));
 			barY = Math.round( $(canvas).height() - barH)
 			
-			bar = histogram.rect(barX, barY, barW, barH);
-			bar.attr(attributes);
+			var bar = histogram.rect(barX, barY, barW, barH).attr(attributes)
+			
+			bar.mouseover(function ()
+			{
+				this.attr({fill:"#007AA2", cursor:"pointer"});
+			});
+			
+			bar.mouseout(function ()
+			{
+				this.attr(attributes);
+			});
 		}
 	}
 	
@@ -142,6 +152,6 @@ $( function() {
 		return {values:points, min:min, max:max};
 	}
 
-	drawHistogram($("#timeline-container")[0], populateData(), {fill:"#555555", "stroke-width":0})
+	drawHistogram($("#timeline-container")[0], populateData(), {gradient:"90-#333333-#555555", "stroke-width":0})
 	drawStatusTable();
 });
