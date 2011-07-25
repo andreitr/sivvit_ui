@@ -30,10 +30,11 @@ $( function() {
 			
 			if(!isStatsDivDrawn)
 			{
-				drawPieChart({id:"#chart-left", radius:55, labels:["%% - status", "%% - media", "%% - check-ins"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
-				drawPieChart({id:"#chart-middle", radius:55, labels:["%% - exact location", "%% - account location", "%% - no location"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
+				drawPieChart({id:"#chart-left", radius:60, labels:["%% - status", "%% - media", "%% - check-ins"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
+				drawPieChart({id:"#chart-middle", radius:60, labels:["%% - exact location", "%% - account location", "%% - no location"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
 				
-				drawLineChart({id:"#chart-right"});
+				drawLineChart($("#chart-right")[0], {values:[22, 36, 12, 38, 50, 80, 100], labels:["10km","50km","100km","500km","1,000km","10,000km"], max:100}, {"stroke-width":0, fill: "#0B405E"});
+				
 				// Make sure pie charts are drawn only once. 
 				// Drawing g.raphel chart in an invisible div screws it up.
 				isStatsDivDrawn = true;
@@ -57,19 +58,7 @@ $( function() {
 		raphael.g.piechart(initObj.radius, initObj.radius, initObj.radius, initObj.data, {legend: initObj.labels, legendcolor:"#585858" ,legendpos: "east", colors:["#0B405E","#007AA2", "#FFFFFF"]});
 	}
 	
-	/**
-	 * Draws g.graphel bar chart using passed parameters.
-	 * #@param Initialization object contains {div:"#div"}
-	 */
-	function drawLineChart(initObj)
-	{
-		var container = $(initObj.id)[0], raphael, line;
-		
-		raphael = Raphael(container);
-		raphael.g.txtattr.font = "12px Helvetica, Arial, sans-serif";
-		line = raphael.g.linechart(0, 0,  $(container).width(), $(container).height(), [10,20,30,40,50], [[20,22,18,7,3]], {nostroke: true, shade: true, colors:["#0B405E","#007AA2", "#FFFFFF"]});
-	}
-	
+
 	/**
 	 * Draws twitter status table.
 	 */
@@ -129,6 +118,38 @@ $( function() {
 	}
 	
 	/**
+	 * Draws distance line chart. 
+	 */
+	function drawLineChart(canvas, data, attributes)
+	{
+		var histogram, i, len = data.values.length, max = data.max, stepWidth, stepHeight, maxHeight, linePath;
+		
+		stepWidth = $(canvas).width()/(len-1);
+		maxHeight = $(canvas).height() - 40;
+		histogram = Raphael(canvas, $(canvas).width(), $(canvas).height());
+		
+		linePath = "M0 "+$(canvas).height();
+		
+		for(i=0; i<len; i +=1)
+		{
+			percent = (data.values[i] / max) * 100;
+			stepHeight = maxHeight * percent / 100;
+			linePath += " L"+Math.round(stepWidth*i)+" "+Math.round($(canvas).height() - stepHeight);
+			
+			if(i > 0 && i < len-1)
+			{
+				histogram.text(Math.round(stepWidth*i), 20, data.labels[i]).attr({"font-family":"Helvetica","font-size": 12,"fill":"#585858"});
+				histogram.path("M"+Math.round(stepWidth*i)+" 40 L"+Math.round(stepWidth*i)+" "+$(canvas).height()).attr({"stroke-width":1, stroke:"#CCCCCC"})
+			}
+		}
+		
+		linePath += " L"+Math.round($(canvas).width())+" "+Math.round($(canvas).height())+" L0 "+Math.round($(canvas).height());
+	
+		histogram.path(linePath).attr(attributes);	
+	}
+
+	
+	/**
 	 * Populates data for the bar graph.
 	 * @return data object
 	 */
@@ -152,6 +173,7 @@ $( function() {
 		return {values:points, min:min, max:max};
 	}
 
-	drawHistogram($("#timeline-container")[0], populateData(), {gradient:"90-#333333-#555555", "stroke-width":0})
+	drawHistogram($("#timeline-container")[0], populateData(), {gradient:"90-#333333-#555555", "stroke-width":0});
+	
 	drawStatusTable();
 });
