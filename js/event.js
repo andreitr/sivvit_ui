@@ -33,7 +33,7 @@ $( function() {
 				drawPieChart({id:"#chart-left", radius:60, labels:["%% - status", "%% - media", "%% - check-ins"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
 				drawPieChart({id:"#chart-middle", radius:60, labels:["%% - exact location", "%% - account location", "%% - no location"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
 				
-				drawLineChart($("#chart-right")[0], {values:[22, 36, 12, 38, 50, 80, 100], labels:["10km","50km","100km","500km","1,000km","10,000km"], max:100}, {"stroke-width":0, fill: "#0B405E"});
+				drawLineChart($("#chart-right")[0], {values:[22, 36, 12, 38, 50, 80, 100], labels:["10km","50km","100km","500km","1,000km","rest..."], max:100}, {"stroke-width":0, fill: "#0B405E"});
 				
 				// Make sure pie charts are drawn only once. 
 				// Drawing g.raphel chart in an invisible div screws it up.
