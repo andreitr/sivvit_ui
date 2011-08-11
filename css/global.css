@@ -86,6 +86,12 @@ a:link
 	float: left;	
 }
 
+#social #embed
+{
+	float: right;	
+}
+
+
 #padding
 {
     padding: 10px;
