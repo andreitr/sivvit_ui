@@ -78,6 +78,14 @@ a:link
     color: #FFFFFF;
 }
 
+#social
+{
+	width: 95%;
+	margin-left:20px;
+	display: block;
+	float: left;	
+}
+
 #padding
 {
     padding: 10px;
