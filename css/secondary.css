@@ -27,43 +27,7 @@
     display: inline-block;
 }
 
-#timeline-footer
-{
-    height: 55px;
-    background-image: -moz-linear-gradient(#FFFFFF, #E6E6E6 55px);
-    background-image: -webkit-gradient(linear, 0 0, 0 55, from(#FFFFFF), to(#E6E6E6));
-}
 
-#timeline-container, #stats-container
-{
-    width: auto;
-    height: 110px;
-    display: block;
-    overflow: hidden;
-}
-
-
-#timeline-expand
-{
-	width: auto;
-	height: auto;
-	padding: 2px 5px 2px 5px;
-	margin-left: 15px;
-	display: inline-block;
-	color: #FFFFFF;
-	background-color: #999999;
-	cursor: pointer;
-}
-
-#timer
-{
-    display: inline-block;
-    background-color: #FFF7AC;
-    border: 2px solid #FFFFFF;
-    -moz-border-radius: 7px;
-    border-radius: 7px;
-    padding: 3px 6px 3px 6px;
-}
 
 #column-layout
 {
