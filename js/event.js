@@ -1,4 +1,10 @@
 $( function() {
+
+	jQuery(document).ready(function($)
+	{
+  		$('a[rel*=facebox]').facebox();
+	})
+	
 	
 	var statsExpanded, statsDivHeight, isStatsDivDrawn = false;
 	
