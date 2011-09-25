@@ -1,0 +1,44 @@
+{"id":"4e4fc2bb8efd97951a000008","title":"Hurricane Irene","author":"testuserid","description":"","keywords":["hurricane","irene"],"location":null,"startDate":"Tue Aug 5 19:00:43 +0000 2011","endDate":"Tue Aug 29 20:03:43 +0000 2011","status":1,"stats":{"total":7660,"posts":7362,"images":234,"videos":56},"histogram":
+
+[{"timestamp":"Tue Aug 23 19:00:43 +0000 2011","count":4},
+{"timestamp":"Tue Aug 24 20:00:43 +0000 2011","count":3},
+{"timestamp":"Tue Aug 25 20:00:43 +0000 2011","count":6},
+{"timestamp":"Tue Aug 27 20:03:43 +0000 2011","count":2}],
+"content":{
+"photo":[
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 23 19:00:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_0.png"},
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 23 19:20:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_1.jpg"},
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 23 21:12:55 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_2.jpg"},
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 23 22:15:10 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_3.png"},
+
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 24 01:02:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_4.png"},
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 24 02:18:00 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_5.jpg"},
+{"rank":9,"author":"andreitr","timestamp":"Tue Aug 24 18:00:00 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_6.jpg"},
+
+{"rank":8,"author":"andreitr","timestamp":"Tue Aug 25 20:10:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_7.jpg"},
+{"rank":7,"author":"andreitr","timestamp":"Tue Aug 25 20:15:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_8.jpg"},
+{"rank":6,"author":"andreitr","timestamp":"Tue Aug 25 20:30:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_9.jpg"},
+{"rank":5,"author":"andreitr","timestamp":"Tue Aug 25 20:35:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_10.jpg"},
+{"rank":13,"author":"andreitr","timestamp":"Tue Aug 25 20:40:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_12.png"},
+{"rank":15,"author":"andreitr","timestamp":"Tue Aug 25 20:45:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_13.png"},
+
+{"rank":11,"author":"andreitr","timestamp":"Tue Aug 27 20:02:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_11.png"},
+{"rank":1,"author":"andreitr","timestamp":"Tue Aug 27 20:03:43 +0000 2011","source":"http://www.flickr.com","content":"assets/tweet_14.jpg"}],
+
+"post":[
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 23 19:00:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_0.png", "content":"Get ready to sell your creative works on The Bazaar this weekend! http://ow.ly/6D0Kr" },
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 23 19:20:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_1.jpg","content":"Here's What Spotify's New Facebook Integration Looks Like http://rww.to/nmITVB"},
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 23 21:12:55 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_2.jpg","content":"Daily Deals Proliferating: What's in Your Digital Wallet? [INFOGRAPHIC] - http://on.mash.to/q6KpWP"},
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 23 22:15:10 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_3.png", "content":"@DonMeltz learn it before postgis 2 ships. It effectively deprecates every currently shipping esri product."},
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 24 01:02:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_4.png", "content":"Seeing @laurarich @virtuallybing @jlongtine @dannynewman all in one day? Spectacular. #luckygirl"},
+{"rank":10,"author":"andreitr","timestamp":"Tue Aug 24 02:18:00 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_5.jpg", "content":"@sbixel may be time to invest. Recommendations? #travelrods"},
+{"rank":9,"author":"andreitr","timestamp":"Tue Aug 24 18:00:00 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_6.jpg", "content":"@cili007 you son of a bitch! I can't believe you Fat Boothed my daughter! yfrog.com/kkgi0qlj"},
+{"rank":8,"author":"andreitr","timestamp":"Tue Aug 25 20:10:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_7.jpg", "content":"@cageyjames I only send email to selfdeprecation@safe.com"},
+{"rank":7,"author":"andreitr","timestamp":"Tue Aug 25 20:15:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_8.jpg", "content":"ok, time to start calling in favors and asking friends for a bit of help. extortion is on for later."},
+{"rank":6,"author":"andreitr","timestamp":"Tue Aug 25 20:30:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_9.jpg","content":"It’s a celebration, bitches! New Let’s Make Mistakes is up! Part 2 of the @Sacca interview: http://5by5.tv/mistakes/19"},
+{"rank":5,"author":"andreitr","timestamp":"Tue Aug 25 20:35:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_10.jpg","content":"My brain pain is subsiding! This a good thing #MigranesSuck"},
+{"rank":13,"author":"andreitr","timestamp":"Tue Aug 25 20:40:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_12.png","content":"The Latin Grammys were just announced. I can’t believe I was overlooked for my solo album, El Hombre Muy Blanco."},
+{"rank":15,"author":"andreitr","timestamp":"Tue Aug 25 20:45:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_13.png","content":"A Petition I can get behind - Direct the Patent Office to Cease Issuing Software Patents http://wh.gov/gEm"},
+{"rank":11,"author":"andreitr","timestamp":"Tue Aug 27 20:02:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_11.png","content":"Romney surge on Intrade. Now considered almost twice as likely (45%) as Perry (27%) to win GOP nom. http://bit.ly/dNIXBW"},
+{"rank":1,"author":"andreitr","timestamp":"Tue Aug 27 20:03:43 +0000 2011","source":"http://twitter.com","avatar":"assets/tweet_14.jpg","content":"Tweetspot map of #misabc geotweets http://flic.kr/p/apLNJw"}
+]}}
