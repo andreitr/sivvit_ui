@@ -70,7 +70,7 @@ $( function() {
 	 */
 	function drawStatusTable()
 	{
-		var i, len=5, output="";
+		var i, len=12, output="";
 		for(i=0; i < len; i += 1)
 		{
 			output += "<li class=\"status\"><div id=\"post-avatar\"><img src=\"http://a2.twimg.com/profile_images/1220150566/7b040b04c98b3b2a2accaeb313f3730b_normal.jpeg\"></div>";
@@ -163,7 +163,7 @@ $( function() {
 	{
 		var points, i, min, max, value, len;
 			
-		len = 50+Math.random()*100;
+		len = 10+Math.random()*100;
 		points = [];
 		min = 0;
 		max = 0;
