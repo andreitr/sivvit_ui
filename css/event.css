@@ -87,6 +87,25 @@ ol
 	position: relative;
 }
 
+#contentButton
+{
+	min-width: 10px;
+	position: relative;
+	display: inline-block;
+	background-color: #999999;
+	-moz-border-radius: 5px;
+	border-radius:5px;
+	padding: 5px 10px 5px 10px;
+	margin: 0 0 10px ;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#contentButton:hover
+{
+	background-color: #666666;
+}
+
 #post-avatar
 {
 	float: left;
