@@ -1,10 +1,4 @@
 $( function() {
-
-	jQuery(document).ready(function($)
-	{
-  		$('a[rel*=facebox]').facebox();
-	})
-	
 	
 	var statsExpanded, statsDivHeight, isStatsDivDrawn = false;
 	
@@ -96,7 +90,7 @@ $( function() {
 		maxVal = data.max;
 		minVal = data.min;
 		maxHeight = $(canvas).height()-20;
-		barXPadding = 3;
+		barXPadding = 1;
 		
 		histogram = Raphael(canvas, $(canvas).width(), $(canvas).height());
 		
@@ -163,14 +157,14 @@ $( function() {
 	{
 		var points, i, min, max, value, len;
 			
-		len = 10+Math.random()*100;
+		len =30;
 		points = [];
 		min = 0;
 		max = 0;
 			
 		for(i = 0; i < len; i += 1)
 		{
-			value = Math.round(Math.random()*(len-i));
+			value = 5 +Math.round(Math.random()*(len-i));
 			min = Math.min(min, value);
 			max = Math.max(max, value);
 				

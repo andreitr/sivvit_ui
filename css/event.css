@@ -26,6 +26,25 @@
 	display: block;
 }
 
+#subheader
+{
+	min-height:10px;
+	background-color: #666666;
+	color: #FFFFFF;
+	padding: 5px 0 5px 0;
+}
+
+#subheader .live
+{
+	min-height:10px;
+	color: #000000;
+	background-color: #FFFF00;
+	padding: 5px 10px 5px 10px;
+	margin: 0 5px 0 0;
+	font-weight: bold;	
+}
+
+
 #timer
 {
     display: inline-block;
@@ -105,6 +124,7 @@ ol
 {
 	background-color: #666666;
 }
+
 
 #post-avatar
 {
