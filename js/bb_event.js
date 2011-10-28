@@ -1,38 +1,54 @@
-$(document).ready(function(jQuery) {
+$(document).ready(function(jQuery)
+{
 	
 	HistogramModel = Backbone.Model.extend({
-	
+		defaults:
+		{
+			startDate:"",
+			endDate:""
+		}
 	});
 	
-	MapModel = Backbone.Model.extend({
-		
-	})
 	
 	HistogramView = Backbone.View.extend({
 
 		el : '#timeline-container',
-
-		events : {
-			'click #sayhello' : 'onButtonClicked'
+		
+		initialize: function (options)
+		{
+			this.model = options.model;
+			this.model.bind("change", this.render, this);
 		},
-
-		onButtonClicked : function() {
-			console.log("buttonclicked");
-		},
-		render : function(model) {
-			$("#start-date").html(model.startDate);
-			$("#end-date").html(model.endDate);
+		
+		render : function() {
+			$(this.el).html(this.model.get("startDate"));
+			$(this.el).append(this.model.get("endDate"));
+			
+			console.log(this.model.startDate);			
 		},
 	});
+	
+	
+	MapModel = Backbone.Model.extend({
+		defaults: {
+            location: {"lon":0, "lat":0}
+        },
+	});
+	
 	
 	MapView = Backbone.View.extend({
 		
 		el: '#mapCanvas',
-		
-		render: function (model)
+	
+		initialize: function (options)
 		{
+			this.model = options.model;
+			this.model.bind("change", this.render, this);
+		},
 		
-			var latlng = new google.maps.LatLng(model.get("location").lon,model.get("location").lat);
+		render: function ()
+		{
+			var latlng = new google.maps.LatLng(this.model.get("location").lon, this.model.get("location").lat);
 	
 			var myOptions = {
 				zoom : 9,
@@ -41,19 +57,21 @@ $(document).ready(function(jQuery) {
 				disableDefaultUI : true
 			};
 	
-			var map = new google.maps.Map( container = $('#mapCanvas')[0], myOptions);
-
-
+			var map = new google.maps.Map( container = $(this.el)[0], myOptions);
 		}
-		
-	})
+	});
+	
+	var mapModel = new MapModel();
+	var mapView = new MapView({model:mapModel});
+	
+	var histModel = new HistogramModel();
+	var histView = new HistogramView({model:histModel});
 
+	
 	$.getJSON("embed/json/event.json", {}, function(data) {
 
-		var histModel = new HistogramModel({startDate:data.startDate, endDate:data.endDate});
-		
-		var mapModel = new MapModel({location:data.location});
-		var mapView = new MapView();
-		mapView.render(mapModel);
+		mapModel.set({location:data.location});
+		histModel.set({startDate:data.startDate, endDate:data.endDate});		
+
 	})
 });
