@@ -38,8 +38,8 @@ $(document).ready(function(jQuery)
 			// Acutal count of temporal slots
 			len = this.model.get("histogram").length;
 			
-			maxVal = 6;
-			minVal = 2;
+			maxVal = 10;
+			minVal = 1;
 			maxHeight = $(this.el).height() - 20;
 			barXPadding = 1;
 			histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
