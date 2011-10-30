@@ -1,6 +1,23 @@
 $(document).ready(function(jQuery)
 {
 	
+	ContentModel = Backbone.Model.extend({
+		
+		defaults:
+		{
+			content:"",
+			source:"",
+			timestamp:new Date(),
+			rank:0,
+			author:"",
+			avatar:""
+		}
+	});
+	
+	ContentCollection = Backbone.Collection.extend({
+		model:ContentModel		
+	});
+	
 	HistogramModel = Backbone.Model.extend({
 		defaults:
 		{
@@ -9,7 +26,6 @@ $(document).ready(function(jQuery)
 			histogram: []
 		}
 	});
-	
 	
 	HistogramView = Backbone.View.extend({
 
@@ -116,9 +132,18 @@ $(document).ready(function(jQuery)
 	var histModel = new HistogramModel();
 	var histView = new HistogramView({model:histModel});
 
+	var contentCollection = new ContentCollection();
+
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
 		mapModel.set({location:data.location});
-		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate), histogram:data.histogram.global});		
+		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate), histogram:data.histogram.post});
+		
+		// Populate content collection
+		for(var i=0; i<data.content.post.length; i++)
+		{
+			contentCollection.add(new ContentModel(data.content.post[i]));
+		}
+		
 	});
 });
