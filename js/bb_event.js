@@ -18,6 +18,23 @@ $(document).ready(function(jQuery)
 		model:ContentModel		
 	});
 	
+	
+	ContentView = Backbone.View.extend({
+		
+		el: '#status-list',	
+		
+		initialize: function (options)
+		{
+			this.model = options.model;
+			this.model.bind("add", this.onContentAdded, this);	
+		},
+		
+		onContentAdded: function (itm)
+		{
+			$(this.el).append("<li class='status'>"+itm.get("content")+"</li>");
+		}
+	});
+	
 	HistogramModel = Backbone.Model.extend({
 		defaults:
 		{
@@ -122,7 +139,7 @@ $(document).ready(function(jQuery)
 	
 			var map = new google.maps.Map( container = $(this.el)[0], myOptions);
 			
-			$("#mapLabel").append("Denver, Co");
+			$("#mapLabel").append("Red Rocks, Morrison CO");
 		}
 	});
 	
@@ -133,7 +150,8 @@ $(document).ready(function(jQuery)
 	var histView = new HistogramView({model:histModel});
 
 	var contentCollection = new ContentCollection();
-
+	var contentView = new ContentView({model:contentCollection});
+	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
 		mapModel.set({location:data.location});
@@ -144,6 +162,5 @@ $(document).ready(function(jQuery)
 		{
 			contentCollection.add(new ContentModel(data.content.post[i]));
 		}
-		
 	});
 });
