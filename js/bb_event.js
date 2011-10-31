@@ -15,23 +15,25 @@ $(document).ready(function(jQuery)
 	});
 	
 	ContentCollection = Backbone.Collection.extend({
-		model:ContentModel		
+		model:ContentModel,		
 	});
 	
 	
 	ContentView = Backbone.View.extend({
 		
 		el: '#status-list',	
+		template: $.template("contentTemplate",	"<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>"),
 		
 		initialize: function (options)
 		{
 			this.model = options.model;
-			this.model.bind("add", this.onContentAdded, this);	
+			this.model.bind("add", this.onContentAdded, this);
 		},
 		
 		onContentAdded: function (itm)
 		{
-			$(this.el).append("<li class='status'>"+itm.get("content")+"</li>");
+			var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+			$(this.el).append(html);
 		}
 	});
 	
