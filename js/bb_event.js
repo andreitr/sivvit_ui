@@ -13,8 +13,17 @@ $(document).ready(function(jQuery)
 			"click #mapBtn": "onButtonClicked"
 		},
 		
+		prevButton: "",
+		activeButton: "",
+		
 		onButtonClicked: function(event)
 		{
+			this.prevButton = this.activeButton;
+			this.activeButton = "#"+event.target.id;
+			
+			$(this.activeButton,this).toggleClass('contentButtonSelected');
+			$(this.prevButton,this).toggleClass('contentButton');
+			
 			switch(event.target.id)
 			{
 				case "allBtn":

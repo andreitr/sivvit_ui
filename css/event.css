@@ -111,7 +111,7 @@ ol
 	background-color:#fffbde;
 }
 
-.contentButton
+.contentButton, .contentButtonSelected
 {
 	min-width: 10px;
 	position: relative;
@@ -123,6 +123,11 @@ ol
 	margin: 0 0 10px ;
 	color: #FFFFFF;
 	text-decoration: none;
+}
+
+.contentButtonSelected
+{
+	background-color: #333333;
 }
 
 .contentButton:hover
