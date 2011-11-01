@@ -110,7 +110,8 @@ ol
 {
 	background-color:#fffbde;
 }
-#contentButton
+
+.contentButton
 {
 	min-width: 10px;
 	position: relative;
@@ -124,7 +125,7 @@ ol
 	text-decoration: none;
 }
 
-#contentButton:hover
+.contentButton:hover
 {
 	background-color: #666666;
 }

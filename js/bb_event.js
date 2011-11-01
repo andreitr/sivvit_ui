@@ -1,6 +1,60 @@
 $(document).ready(function(jQuery)
 {
 	
+	ControlsView = Backbone.View.extend({
+		
+		el: "body",
+		
+		events: 
+		{
+			"click #allBtn": "onButtonClicked",
+			"click #postBtn": "onButtonClicked",
+			"click #mediaBtn": "onButtonClicked",
+			"click #mapBtn": "onButtonClicked"
+		},
+		
+		onButtonClicked: function(event)
+		{
+			switch(event.target.id)
+			{
+				case "allBtn":
+					histModel.set({histogram:jsonModel.get("histogram").global});
+					break;
+					
+				case "postBtn":
+					histModel.set({histogram:jsonModel.get("histogram").post});
+					break;
+					
+				case "mediaBtn":
+					histModel.set({histogram:jsonModel.get("histogram").media});
+					break;
+			}
+		}
+	});
+	
+	
+	/**
+	 * Contains loaded JSON data.
+	 */
+	JsonModel = Backbone.Model.extend({
+		
+		defaults:
+		{
+			id:"",
+			title:"",
+			author:"",
+			description:"",
+			keywords:[],
+			location:{lon:39.75, lat:-104.87},
+			startDate:new Date(),
+			endDate:new Date(),
+			status:1,
+			stats: { total:0, posts:0, images:0, videos:0 },
+			histogram: {global:[], media:[], post:[]},
+			content: {media: [], post:[]},  
+		}
+	})
+	
 	ContentModel = Backbone.Model.extend({
 		
 		defaults:
@@ -34,6 +88,11 @@ $(document).ready(function(jQuery)
 		{
 			var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 			$(this.el).append(html);
+		},
+		
+		render: function()
+		{
+			
 		}
 	});
 	
@@ -154,10 +213,17 @@ $(document).ready(function(jQuery)
 	var contentCollection = new ContentCollection();
 	var contentView = new ContentView({model:contentCollection});
 	
+	var controls = new ControlsView({views:[]});
+	
+	var jsonModel = new JsonModel();
+	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
-		mapModel.set({location:data.location});
-		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate), histogram:data.histogram.post});
+		jsonModel.set(data);
+
+		mapModel.set({location:jsonModel.get("location")});
+	
+		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate), histogram:jsonModel.get("histogram").global});
 		
 		// Populate content collection
 		for(var i=0; i<data.content.post.length; i++)
