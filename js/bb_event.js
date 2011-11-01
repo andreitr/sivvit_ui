@@ -1,9 +1,48 @@
 $(document).ready(function(jQuery)
 {
+	/**
+	 * Contains loaded JSON data.
+	 */
+	JsonModel = Backbone.Model.extend({
+		
+		defaults:
+		{
+			id:null,
+			title:null,
+			author:null,
+			description:null,
+			keywords:[],
+			location:{lon:null, lat:null},
+			startDate:new Date(),
+			endDate:new Date(),
+			status:0,
+			stats: { total:0, posts:0, images:0, videos:0 },
+			histogram: {global:[], media:[], post:[]},
+			content: {media: [], post:[]},  
+		}
+	})
 	
+	
+	/**
+	 * Controls general view. 
+	 */
 	ControlsView = Backbone.View.extend({
 		
 		el: "body",
+		
+		prevButton: null,
+		activeButton: "#allBtn",
+		
+		initialize: function (options)
+		{
+			this.model = options.model;
+			this.model.bind("change", this.render, this);
+		},
+		
+		render: function ()
+		{
+			$(this.activeButton).click();
+		},
 		
 		events: 
 		{
@@ -13,21 +52,18 @@ $(document).ready(function(jQuery)
 			"click #mapBtn": "onButtonClicked"
 		},
 		
-		prevButton: "",
-		activeButton: "",
-		
 		onButtonClicked: function(event)
 		{
 			this.prevButton = this.activeButton;
 			this.activeButton = "#"+event.target.id;
 			
-			$(this.activeButton,this).toggleClass('contentButtonSelected');
+			$(this.activeButton,this).toggleClass('contentButtonSelected',true);
 			$(this.prevButton,this).toggleClass('contentButton');
 			
 			switch(event.target.id)
 			{
 				case "allBtn":
-					histModel.set({histogram:jsonModel.get("histogram").global});
+					histModel.set({startDate:new Date(jsonModel.get("startDate")), endDate:new Date(jsonModel.endDate), histogram:jsonModel.get("histogram").global});
 					break;
 					
 				case "postBtn":
@@ -41,29 +77,9 @@ $(document).ready(function(jQuery)
 		}
 	});
 	
-	
 	/**
-	 * Contains loaded JSON data.
+	 * Generic conetnt model
 	 */
-	JsonModel = Backbone.Model.extend({
-		
-		defaults:
-		{
-			id:"",
-			title:"",
-			author:"",
-			description:"",
-			keywords:[],
-			location:{lon:39.75, lat:-104.87},
-			startDate:new Date(),
-			endDate:new Date(),
-			status:1,
-			stats: { total:0, posts:0, images:0, videos:0 },
-			histogram: {global:[], media:[], post:[]},
-			content: {media: [], post:[]},  
-		}
-	})
-	
 	ContentModel = Backbone.Model.extend({
 		
 		defaults:
@@ -98,11 +114,7 @@ $(document).ready(function(jQuery)
 			var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 			$(this.el).append(html);
 		},
-		
-		render: function()
-		{
 			
-		}
 	});
 	
 	HistogramModel = Backbone.Model.extend({
@@ -124,9 +136,9 @@ $(document).ready(function(jQuery)
 			this.model.bind("change", this.render, this);
 		},
 		
-		render : function() {
-			
-			$(this.el).html(this.model.get("startDate"));
+		render : function()
+		 {
+		 	console.log(this.model.get("histogram"));
 			this.drawHistogram();
 		},
 		
@@ -222,9 +234,10 @@ $(document).ready(function(jQuery)
 	var contentCollection = new ContentCollection();
 	var contentView = new ContentView({model:contentCollection});
 	
-	var controls = new ControlsView({views:[]});
-	
 	var jsonModel = new JsonModel();
+	
+	var controls = new ControlsView({model:jsonModel});
+	
 	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
@@ -232,7 +245,6 @@ $(document).ready(function(jQuery)
 
 		mapModel.set({location:jsonModel.get("location")});
 	
-		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate), histogram:jsonModel.get("histogram").global});
 		
 		// Populate content collection
 		for(var i=0; i<data.content.post.length; i++)
