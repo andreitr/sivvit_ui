@@ -1,7 +1,9 @@
 $(document).ready(function(jQuery)
 {
+	var mapModel, mapView, histModel, histView, contentCollection, contentView, jsonModel, controls;
+	
 	/**
-	 * Contains loaded JSON data.
+	 * Main container for the loaded JSON data. 
 	 */
 	JsonModel = Backbone.Model.extend({
 		
@@ -41,7 +43,7 @@ $(document).ready(function(jQuery)
 		
 		render: function ()
 		{
-			$(this.activeButton).click();
+			//$(this.activeButton).click();
 		},
 		
 		events: 
@@ -63,22 +65,41 @@ $(document).ready(function(jQuery)
 			switch(event.target.id)
 			{
 				case "allBtn":
-					histModel.set({startDate:new Date(jsonModel.get("startDate")), endDate:new Date(jsonModel.endDate), histogram:jsonModel.get("histogram").global});
+					histModel.set({histogram:this.model.get("histogram").global});
+					this.populateContent(this.model.get("content").post);
 					break;
 					
 				case "postBtn":
-					histModel.set({histogram:jsonModel.get("histogram").post});
+					histModel.set({histogram:this.model.get("histogram").post});
+					this.populateContent(this.model.get("content").post);
 					break;
 					
 				case "mediaBtn":
-					histModel.set({histogram:jsonModel.get("histogram").media});
+					histModel.set({histogram:this.model.get("histogram").media});
+					this.populateContent(this.model.get("content").media);
 					break;
 			}
+		},
+		
+		/**
+		 * Populates content data
+		 */
+		populateContent: function (content)
+		{
+			var tmpCollection = [];
+			
+			// Populate content collection
+			for(var i=0; i<content.length; i++)
+			{
+				tmpCollection.push(new ContentModel(content[i]));
+			}
+			contentCollection.reset(tmpCollection);
 		}
 	});
 	
+	
 	/**
-	 * Generic conetnt model
+	 * Generic conetnt model.
 	 */
 	ContentModel = Backbone.Model.extend({
 		
@@ -93,11 +114,18 @@ $(document).ready(function(jQuery)
 		}
 	});
 	
+	
+	/**
+	 * 
+	 */
 	ContentCollection = Backbone.Collection.extend({
 		model:ContentModel,		
 	});
 	
 	
+	/**
+	 * 
+	 */
 	ContentView = Backbone.View.extend({
 		
 		el: '#status-list',	
@@ -106,26 +134,37 @@ $(document).ready(function(jQuery)
 		initialize: function (options)
 		{
 			this.model = options.model;
-			this.model.bind("add", this.onContentAdded, this);
+			this.model.bind("reset", this.displayContent, this);
 		},
 		
-		onContentAdded: function (itm)
-		{
-			var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-			$(this.el).append(html);
-		},
-			
+		displayContent: function ()
+		{	
+			$(this.el).empty();
+			this.model.each(function (itm)
+			{
+				var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				$(this.el).append(html);
+			}, this);
+		}
 	});
 	
+	
+	/**
+	 * 
+	 */
 	HistogramModel = Backbone.Model.extend({
 		defaults:
 		{
 			startDate: new Date(),
 			endDate: new Date(),
-			histogram: []
+			histogram:null
 		}
 	});
 	
+	
+	/**
+	 * 
+	 */
 	HistogramView = Backbone.View.extend({
 
 		el : '#timeline-container',
@@ -133,20 +172,20 @@ $(document).ready(function(jQuery)
 		initialize: function (options)
 		{
 			this.model = options.model;
-			this.model.bind("change", this.render, this);
+			this.model.bind("change:histogram", this.render, this);
 		},
 		
 		render : function()
-		 {
-		 	console.log(this.model.get("histogram"));
-			this.drawHistogram();
+		{
+		 	this.drawHistogram();
 		},
 		
 		
-		drawHistogram: function () {
+		drawHistogram: function () 
+		{
 			var histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding, attributes;
 			
-			attributes = {gradient : "90-#333333-#555555","stroke-width" : 0};
+			attributes = {fill : "#999999","stroke-width" : 0};
 				
 			// Total count of available slots	
 			lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime())/86400000);
@@ -161,20 +200,20 @@ $(document).ready(function(jQuery)
 			barW = ($(this.el).width() - (barXPadding * lenTotal)) / lenTotal;
 
 			for( i = 0; i < len; i += 1)
-			{
+			{				
 				var frame = this.model.get("histogram")[i];
+				
 				percentY = (frame.count / maxVal) * 100;
 				percentX = (new Date(frame.timestamp).getTime()-this.model.get("startDate").getTime()) / (this.model.get("endDate").getTime()-this.model.get("startDate").getTime());
 				
 				barW*Math.round(percentX*(lenTotal-1));
-				//console.log(barW*Math.round(percentX*(len-1)))
 				
 				barH = Math.round(percentY * maxHeight / 100);
-				barX = barW*Math.round(percentX*(lenTotal-1));//Math.round(i * (barW + barXPadding));
+				barX = barW*Math.round(percentX*(lenTotal-1));
 				barY = Math.round($(this.el).height() - barH)
 
 				var bar = histogram.rect(barX, barY, barW, barH).attr(attributes);
-
+				
 				bar.mouseover(function() {
 					this.attr({
 						fill : "#007AA2",
@@ -184,13 +223,15 @@ $(document).ready(function(jQuery)
 
 				bar.mouseout(function() {
 					this.attr(attributes);
-				});
+				});		
 			}
 		}
-		});
+	});
 
 	
-	
+	/**
+	 * 
+	 */
 	MapModel = Backbone.Model.extend({
 		defaults: {
             location: {"lon":0, "lat":0}
@@ -198,6 +239,9 @@ $(document).ready(function(jQuery)
 	});
 	
 	
+	/**
+	 * 
+	 */
 	MapView = Backbone.View.extend({
 		
 		el: '#mapCanvas',
@@ -225,31 +269,29 @@ $(document).ready(function(jQuery)
 		}
 	});
 	
-	var mapModel = new MapModel();
-	var mapView = new MapView({model:mapModel});
 	
-	var histModel = new HistogramModel();
-	var histView = new HistogramView({model:histModel});
+	
+	mapModel = new MapModel();
+	mapView = new MapView({model:mapModel});
+	
+	histModel = new HistogramModel();
+	histView = new HistogramView({model:histModel});
 
-	var contentCollection = new ContentCollection();
-	var contentView = new ContentView({model:contentCollection});
+	contentCollection = new ContentCollection();
 	
-	var jsonModel = new JsonModel();
+	contentView = new ContentView({model:contentCollection});
+	jsonModel = new JsonModel();
 	
-	var controls = new ControlsView({model:jsonModel});
+	controls = new ControlsView({model:jsonModel});
+	
 	
 	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
 		jsonModel.set(data);
-
-		mapModel.set({location:jsonModel.get("location")});
-	
 		
-		// Populate content collection
-		for(var i=0; i<data.content.post.length; i++)
-		{
-			contentCollection.add(new ContentModel(data.content.post[i]));
-		}
+		histModel.set({startDate:new Date(jsonModel.get("startDate")), endDate:new Date(jsonModel.get("endDate"))});
+		
+		mapModel.set({location:jsonModel.get("location")});		
 	});
 });
