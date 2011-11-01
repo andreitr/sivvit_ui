@@ -144,7 +144,7 @@ ol
 	text-align: right;
 }
 
-#post
+#post-content
 {
 	margin-left:58px;
 	position: relative;
@@ -152,6 +152,35 @@ ol
 }
 
 #post-meta
+{
+	font-size: 12px;
+	margin-top:10px;
+	padding:0;
+	color: #999999;
+	width: 400px;
+}
+
+
+#list-avatar
+{
+	float: left;
+	width: 48px;
+	height: 48px;
+	text-align: right;
+}
+
+#list-content
+{
+	position: relative;
+	word-wrap: break-word;
+}
+
+#list-media
+{
+	text-align: center;
+}
+
+#list-meta
 {
 	font-size: 12px;
 	margin-top:10px;

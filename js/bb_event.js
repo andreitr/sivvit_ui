@@ -62,8 +62,8 @@ $(document).ready(function(jQuery)
 			$(this.activeButton,this).toggleClass('contentButtonSelected',true);
 			$(this.prevButton,this).toggleClass('contentButton');
 			
-			var postTemplate = "<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>";
-			var mediaTemplate = "<li class='status'><div id='post'><img src='${content}'><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>";
+			var postTemplate = "<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post-content'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>";
+			var mediaTemplate = "<li class='status'><div id='list-content'><div id='list-media'><img height='200' src='${content}'></div><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>";
 			
 			switch(event.target.id)
 			{
@@ -200,7 +200,7 @@ $(document).ready(function(jQuery)
 			maxVal = 10;
 			minVal = 1;
 			maxHeight = $(this.el).height() - 20;
-			barXPadding = 1;
+			barXPadding = 0;
 			histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 			barW = ($(this.el).width() - (barXPadding * lenTotal)) / lenTotal;
 
