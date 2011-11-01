@@ -43,7 +43,7 @@ $(document).ready(function(jQuery)
 		
 		render: function ()
 		{
-			//$(this.activeButton).click();
+			//$(this.activeButton).click(this);
 		},
 		
 		events: 
@@ -62,21 +62,24 @@ $(document).ready(function(jQuery)
 			$(this.activeButton,this).toggleClass('contentButtonSelected',true);
 			$(this.prevButton,this).toggleClass('contentButton');
 			
+			var postTemplate = "<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>";
+			var mediaTemplate = "<li class='status'><div id='post'><img src='${content}'><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>";
+			
 			switch(event.target.id)
 			{
 				case "allBtn":
 					histModel.set({histogram:this.model.get("histogram").global});
-					this.populateContent(this.model.get("content").post);
+					this.populateContent(this.model.get("content").post, postTemplate);
 					break;
 					
 				case "postBtn":
 					histModel.set({histogram:this.model.get("histogram").post});
-					this.populateContent(this.model.get("content").post);
+					this.populateContent(this.model.get("content").post, postTemplate);
 					break;
 					
 				case "mediaBtn":
 					histModel.set({histogram:this.model.get("histogram").media});
-					this.populateContent(this.model.get("content").media);
+					this.populateContent(this.model.get("content").media, mediaTemplate);
 					break;
 			}
 		},
@@ -84,7 +87,7 @@ $(document).ready(function(jQuery)
 		/**
 		 * Populates content data
 		 */
-		populateContent: function (content)
+		populateContent: function (content, template)
 		{
 			var tmpCollection = [];
 			
@@ -93,7 +96,10 @@ $(document).ready(function(jQuery)
 			{
 				tmpCollection.push(new ContentModel(content[i]));
 			}
+		
 			contentCollection.reset(tmpCollection);
+		
+			contentView.render({collection:contentCollection, template: template});
 		}
 	});
 	
@@ -129,18 +135,17 @@ $(document).ready(function(jQuery)
 	ContentView = Backbone.View.extend({
 		
 		el: '#status-list',	
-		template: $.template("contentTemplate",	"<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>"),
 		
-		initialize: function (options)
-		{
-			this.model = options.model;
-			this.model.bind("reset", this.displayContent, this);
-		},
-		
-		displayContent: function ()
+		render: function (options)
 		{	
+			this.collection = options.collection;
+			this.template = options.template;
+			
+			// Clear out previous content 
 			$(this.el).empty();
-			this.model.each(function (itm)
+			
+			// Render collection
+			this.collection.each(function (itm)
 			{
 				var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				$(this.el).append(html);
@@ -279,12 +284,10 @@ $(document).ready(function(jQuery)
 
 	contentCollection = new ContentCollection();
 	
-	contentView = new ContentView({model:contentCollection});
+	contentView = new ContentView();
 	jsonModel = new JsonModel();
 	
 	controls = new ControlsView({model:jsonModel});
-	
-	
 	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
