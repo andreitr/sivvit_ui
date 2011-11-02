@@ -1,6 +1,6 @@
 $(document).ready(function(jQuery)
 {
-	var mapModel, mapView, histModel, histView, contentCollection, contentView, jsonModel, controls;
+	var mapModel, mapView, histModel, histView, contentCollection, postView, mediaView, jsonModel, controls;
 	
 	/**
 	 * Main container for the loaded JSON data. 
@@ -62,24 +62,21 @@ $(document).ready(function(jQuery)
 			$(this.activeButton,this).toggleClass('contentButtonSelected',true);
 			$(this.prevButton,this).toggleClass('contentButton');
 			
-			var postTemplate = "<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post-content'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>";
-			var mediaTemplate = "<li class='status'><div id='list-content'><div id='list-media'><img height='200' src='${content}'></div><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>";
-			
 			switch(event.target.id)
 			{
 				case "allBtn":
 					histModel.set({histogram:this.model.get("histogram").global});
-					this.populateContent(this.model.get("content").post, postTemplate);
+					postView.render({model:this.populateContent(this.model.get("content").post)});
 					break;
 					
 				case "postBtn":
 					histModel.set({histogram:this.model.get("histogram").post});
-					this.populateContent(this.model.get("content").post, postTemplate);
+					postView.render({model:this.populateContent(this.model.get("content").post)});
 					break;
 					
 				case "mediaBtn":
 					histModel.set({histogram:this.model.get("histogram").media});
-					this.populateContent(this.model.get("content").media, mediaTemplate);
+					mediaView.render({model:this.populateContent(this.model.get("content").media)});
 					break;
 			}
 		},
@@ -87,7 +84,7 @@ $(document).ready(function(jQuery)
 		/**
 		 * Populates content data
 		 */
-		populateContent: function (content, template)
+		populateContent: function (content)
 		{
 			var tmpCollection = [];
 			
@@ -97,9 +94,7 @@ $(document).ready(function(jQuery)
 				tmpCollection.push(new ContentModel(content[i]));
 			}
 		
-			contentCollection.reset(tmpCollection);
-		
-			contentView.render({collection:contentCollection, template: template});
+			return contentCollection.reset(tmpCollection);
 		}
 	});
 	
@@ -129,29 +124,49 @@ $(document).ready(function(jQuery)
 	});
 	
 	
-	/**
-	 * 
-	 */
-	ContentView = Backbone.View.extend({
+	PostView = Backbone.View.extend({
 		
 		el: '#status-list',	
-		
+		template: "<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post-content'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+
 		render: function (options)
 		{	
-			this.collection = options.collection;
-			this.template = options.template;
+			this.model = options.model;
 			
 			// Clear out previous content 
 			$(this.el).empty();
 			
 			// Render collection
-			this.collection.each(function (itm)
+			this.model.each(function (itm)
 			{
 				var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				$(this.el).append(html);
 			}, this);
 		}
 	});
+	
+	
+	MediaView = Backbone.View.extend({
+		
+		el: '#status-list',	
+		template: "<li class='status'><div id='list-content'><div id='list-media'><img height='200' src='${content}'></div><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+
+		render: function (options)
+		{	
+			this.model = options.model;
+			
+			// Clear out previous content 
+			$(this.el).empty();
+			
+			// Render collection
+			this.model.each(function (itm)
+			{
+				var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				$(this.el).append(html);
+			}, this);
+		}
+	});
+	
 	
 	
 	/**
@@ -284,7 +299,8 @@ $(document).ready(function(jQuery)
 
 	contentCollection = new ContentCollection();
 	
-	contentView = new ContentView();
+	postView = new PostView();
+	mediaView = new MediaView();
 	jsonModel = new JsonModel();
 	
 	controls = new ControlsView({model:jsonModel});
