@@ -1,6 +1,6 @@
 $(document).ready(function(jQuery)
 {
-	var mapModel, mapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
+	var mapModel, mapView, histModel, histView, postView, mediaView, allView, mapView, jsonModel, controls;
 	
 	/**
 	 * Main container for the loaded JSON data. 
@@ -68,7 +68,7 @@ $(document).ready(function(jQuery)
 		
 		render: function ()
 		{
-			//$(this.activeButton).click(this);
+			$(this.activeButton).click(this);
 		},
 		
 		events: 
@@ -103,6 +103,12 @@ $(document).ready(function(jQuery)
 					histModel.set({histogram:this.model.get("histogram").media});
 					mediaView.render({collection:this.populateContent(this.model.get("content"))});
 					break;
+					
+				case "mapBtn":
+					histModel.set({histogram:this.model.get("histogram").global});
+					mapContentView.render({collection:this.populateContent(this.model.get("content"))});
+					break;
+					
 			}
 		},
 		
@@ -126,7 +132,7 @@ $(document).ready(function(jQuery)
 	
 	AllView = Backbone.View.extend({
 		
-		el: '#status-list',	
+		el:'#xxx',
 
 		render: function (options)
 		{	
@@ -134,8 +140,12 @@ $(document).ready(function(jQuery)
 			
 			// Clear out previous content 
 			$(this.el).empty();
+			$(this.el).html("<ol id='status-list'></ol>");
+			
+			this.el = "#status-list";
 			
 			var html;
+			
 			// Render collection
 			this.model.each(function (itm)
 			{
@@ -145,6 +155,7 @@ $(document).ready(function(jQuery)
 				}else if(itm.get("type") == "post"){
 					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}
+				
 				$(this.el).append(html);
 			}, this);
 		}
@@ -153,7 +164,8 @@ $(document).ready(function(jQuery)
 	
 	PostView = Backbone.View.extend({
 		
-		el: '#status-list',	
+		
+		el:'#xxx',
 		template: "<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post-content'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		render: function (options)
@@ -162,6 +174,9 @@ $(document).ready(function(jQuery)
 			
 			// Clear out previous content 
 			$(this.el).empty();
+			$(this.el).html("<ol id='status-list'></ol>");
+			
+			this.el = "#status-list";
 			
 			// Render collection
 			this.model.each(function (itm)
@@ -178,7 +193,7 @@ $(document).ready(function(jQuery)
 	
 	MediaView = Backbone.View.extend({
 		
-		el: '#status-list',	
+		el: '#xxx',	
 		template: "<li class='status'><div id='list-content'><div id='list-media'><img height='200' src='${content}'></div><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		render: function (options)
@@ -187,6 +202,9 @@ $(document).ready(function(jQuery)
 			
 			// Clear out previous content 
 			$(this.el).empty();
+			$(this.el).html("<ol id='status-list'></ol>");
+			
+			this.el = "#status-list";
 			
 			// Render collection
 			this.model.each(function (itm)
@@ -197,6 +215,33 @@ $(document).ready(function(jQuery)
 					$(this.el).append(html);
 				}
 			}, this);
+		}
+	});
+	
+	
+	MapContentView = Backbone.View.extend({
+		
+		el: '#xxx',	
+
+		render: function (options)
+		{	
+			this.model = options.collection;
+			
+			// Clear out previous content
+			$(this.el).empty();
+			$(this.el).html("<div id='mapCanvasA' style='height:500px; width:auto'></div>");
+			
+			this.el = "#mapCanvasA";
+			var latlng = new google.maps.LatLng(jsonModel.get("location").lon, jsonModel.get("location").lat);
+			var myOptions = {
+				zoom : 13,
+				center:latlng,
+				mapTypeId : google.maps.MapTypeId.SATELLITE,
+			};
+	
+			this.map = new google.maps.Map( container = $(this.el)[0], myOptions);
+			
+
 		}
 	});
 	
@@ -334,6 +379,8 @@ $(document).ready(function(jQuery)
 	allView = new AllView();
 	postView = new PostView();
 	mediaView = new MediaView();
+	mapContentView = new MapContentView();
+	
 	jsonModel = new JsonModel();
 	
 	controls = new ControlsView({model:jsonModel});
