@@ -1,6 +1,6 @@
 $(document).ready(function(jQuery)
 {
-	var mapModel, mapView, histModel, histView, contentCollection, postView, mediaView, jsonModel, controls;
+	var mapModel, mapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
 	
 	/**
 	 * Main container for the loaded JSON data. 
@@ -20,10 +20,31 @@ $(document).ready(function(jQuery)
 			status:0,
 			stats: { total:0, posts:0, images:0, videos:0 },
 			histogram: {global:[], media:[], post:[]},
-			content: {media: [], post:[]},  
+			content: [],  
 		}
 	})
 	
+	/**
+	 * Generic conetnt model.
+	 */
+	ContentModel = Backbone.Model.extend({
+		
+		defaults:
+		{
+			type:null,
+			location:[], 
+			content:null,
+			source:null,
+			timestamp:new Date(),
+			rank:0,
+			author:null,
+			avatar:null
+		}
+	});
+	
+	ContentCollection = Backbone.Collection.extend({
+		model:ContentModel,		
+	});
 	
 	/**
 	 * Controls general view. 
@@ -66,17 +87,17 @@ $(document).ready(function(jQuery)
 			{
 				case "allBtn":
 					histModel.set({histogram:this.model.get("histogram").global});
-					postView.render({model:this.populateContent(this.model.get("content").post)});
+					allView.render({collection:this.populateContent(this.model.get("content"))});
 					break;
 					
 				case "postBtn":
 					histModel.set({histogram:this.model.get("histogram").post});
-					postView.render({model:this.populateContent(this.model.get("content").post)});
+					postView.render({collection:this.populateContent(this.model.get("content"))});
 					break;
 					
 				case "mediaBtn":
 					histModel.set({histogram:this.model.get("histogram").media});
-					mediaView.render({model:this.populateContent(this.model.get("content").media)});
+					mediaView.render({collection:this.populateContent(this.model.get("content"))});
 					break;
 			}
 		},
@@ -94,34 +115,36 @@ $(document).ready(function(jQuery)
 				tmpCollection.push(new ContentModel(content[i]));
 			}
 		
-			return contentCollection.reset(tmpCollection);
+			return new ContentCollection(tmpCollection);
 		}
 	});
 	
 	
-	/**
-	 * Generic conetnt model.
-	 */
-	ContentModel = Backbone.Model.extend({
+	AllView = Backbone.View.extend({
 		
-		defaults:
-		{
-			content:"",
-			source:"",
-			timestamp:new Date(),
-			rank:0,
-			author:"",
-			avatar:""
+		el: '#status-list',	
+
+		render: function (options)
+		{	
+			this.model = options.collection;
+			
+			// Clear out previous content 
+			$(this.el).empty();
+			
+			var html;
+			// Render collection
+			this.model.each(function (itm)
+			{
+				if(itm.get("type") == "media")
+				{
+					 html = $.tmpl(mediaView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				}else if(itm.get("type") == "post"){
+					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				}
+				$(this.el).append(html);
+			}, this);
 		}
-	});
-	
-	
-	/**
-	 * 
-	 */
-	ContentCollection = Backbone.Collection.extend({
-		model:ContentModel,		
-	});
+	})
 	
 	
 	PostView = Backbone.View.extend({
@@ -131,7 +154,7 @@ $(document).ready(function(jQuery)
 
 		render: function (options)
 		{	
-			this.model = options.model;
+			this.model = options.collection;
 			
 			// Clear out previous content 
 			$(this.el).empty();
@@ -139,8 +162,11 @@ $(document).ready(function(jQuery)
 			// Render collection
 			this.model.each(function (itm)
 			{
-				var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				$(this.el).append(html);
+				if(itm.get("type") == "post")
+				{
+					var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					$(this.el).append(html);
+				}
 			}, this);
 		}
 	});
@@ -153,7 +179,7 @@ $(document).ready(function(jQuery)
 
 		render: function (options)
 		{	
-			this.model = options.model;
+			this.model = options.collection;
 			
 			// Clear out previous content 
 			$(this.el).empty();
@@ -161,8 +187,11 @@ $(document).ready(function(jQuery)
 			// Render collection
 			this.model.each(function (itm)
 			{
-				var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				$(this.el).append(html);
+				if(itm.get("type") == "media")
+				{
+					var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					$(this.el).append(html);
+				}
 			}, this);
 		}
 	});
@@ -209,6 +238,7 @@ $(document).ready(function(jQuery)
 				
 			// Total count of available slots	
 			lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime())/86400000);
+			
 			// Acutal count of temporal slots
 			len = this.model.get("histogram").length;
 			
@@ -296,9 +326,8 @@ $(document).ready(function(jQuery)
 	
 	histModel = new HistogramModel();
 	histView = new HistogramView({model:histModel});
-
-	contentCollection = new ContentCollection();
 	
+	allView = new AllView();
 	postView = new PostView();
 	mediaView = new MediaView();
 	jsonModel = new JsonModel();
