@@ -43,7 +43,11 @@ $(document).ready(function(jQuery)
 	});
 	
 	ContentCollection = Backbone.Collection.extend({
-		model:ContentModel,		
+		model:ContentModel,
+		
+		comparator: function(itm) {
+  			return itm.get("timestamp");
+		},
 	});
 	
 	/**
@@ -114,7 +118,7 @@ $(document).ready(function(jQuery)
 			{
 				tmpCollection.push(new ContentModel(content[i]));
 			}
-		
+				
 			return new ContentCollection(tmpCollection);
 		}
 	});
