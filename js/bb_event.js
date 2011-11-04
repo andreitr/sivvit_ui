@@ -192,7 +192,7 @@ $(document).ready(function(jQuery)
 		el: '#xxx',	
 		//template: "<li class='status'><div id='list-content'><div id='list-media'><img height='200' src='${content}'></div><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
-		template: "<li><div class='mediaContainer'><img width='160' src='${content}'></div><div class='footer'>by ${author}</div></li>",
+		template: "<li class='media'><div class='mediaContainer'><img width='160' src='${content}'></div><div class='footer'>by ${author}</div></li>",
 		
 		render: function (options)
 		{	
@@ -201,9 +201,9 @@ $(document).ready(function(jQuery)
 			// Clear out previous content 
 			$(this.el).empty();
 			//$(this.el).html("<ol id='status-list'></ol>");
-			$(this.el).html("<ol id='grid'></ol>");
+			$(this.el).html("<ol id='status-list'></ol>");
 			
-			this.el = "#grid";
+			this.el = "#status-list";
 			
 			// Render collection
 			this.model.each(function (itm)

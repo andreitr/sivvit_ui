@@ -98,18 +98,6 @@ ol
 
 
 
-ol#grid li 
-{
-  list-style: none outside;
-  float: left;
-  margin-right: 10px;
-  margin-bottom: 35px;
-  width: 160px;
-  height: 100px;
-  text-align: center;
-}
-
-
 .mediaContainer {
 	width: 160px;
 	height: 100px;
@@ -127,6 +115,17 @@ ol#grid li
 	overflow: hidden;
 	padding: 2px;
 	width: 158px;
+}
+
+.media
+{
+  float: left;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 35px;
+  width: 160px;
+  height: 100px;
+  text-align: center;
 }
 
 .status
