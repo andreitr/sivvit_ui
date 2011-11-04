@@ -96,6 +96,39 @@ ol
 	list-style: none;
 }
 
+
+
+ol#grid li 
+{
+  list-style: none outside;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 35px;
+  width: 160px;
+  height: 100px;
+  text-align: center;
+}
+
+
+.mediaContainer {
+	width: 160px;
+	height: 100px;
+	overflow: hidden;
+  	vertical-align: middle;
+  	border: solid 1px #000000;
+  	background-color: #000000;
+  	
+}
+
+.footer
+{
+	background-color: #CCCCCC;
+	text-align: left;
+	overflow: hidden;
+	padding: 2px;
+	width: 158px;
+}
+
 .status
 {
 	min-height: 50px;
