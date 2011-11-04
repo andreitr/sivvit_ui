@@ -68,7 +68,7 @@ $(document).ready(function(jQuery)
 		
 		render: function ()
 		{
-			$(this.activeButton).click(this);
+			$(this.activeButton).click();
 		},
 		
 		events: 
@@ -358,9 +358,9 @@ $(document).ready(function(jQuery)
 	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
-		jsonModel.set(data);
+		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate)});
 		
-		histModel.set({startDate:new Date(jsonModel.get("startDate")), endDate:new Date(jsonModel.get("endDate"))});
+		jsonModel.set(data);
 		
 		mapModel.set({location:jsonModel.get("location")});		
 	});
