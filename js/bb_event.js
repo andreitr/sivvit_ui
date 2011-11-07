@@ -153,7 +153,7 @@ $(document).ready(function(jQuery)
 			{
 				if(itm.get("type") == "media")
 				{
-					 html = $.tmpl(mediaView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					 html = $.tmpl(mediaView.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}else if(itm.get("type") == "post"){
 					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}
@@ -195,7 +195,8 @@ $(document).ready(function(jQuery)
 	MediaView = Backbone.View.extend({
 		
 		el: '#xxx',	
-		//template: "<li class='status'><div id='list-content'><div id='list-media'><img height='200' src='${content}'></div><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		
+		templateAll: "<li class='status'><div id='list-content'><div id='list-media'><img height='200' src='${content}'></div><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		template: "<li class='media'><div class='mediaContainer'><img width='160' src='${content}'></div><div class='footer'>by ${author}</div></li>",
 		
