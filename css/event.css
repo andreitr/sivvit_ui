@@ -54,6 +54,7 @@
     border-radius: 7px;
     padding: 3px 6px 3px 6px;
 }
+
 #timeline-footer
 {
     height: 55px;
@@ -104,8 +105,7 @@ ol
 	overflow: hidden;
   	vertical-align: middle;
   	border: solid 1px #000000;
-  	background-color: #000000;
-  	
+  	background-color: #000000; 	
 }
 
 .footer
@@ -160,6 +160,7 @@ ol
 .contentButtonSelected
 {
 	background-color: #333333;
+	cursor: default;
 }
 
 .contentButton:hover

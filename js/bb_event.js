@@ -84,8 +84,14 @@ $(document).ready(function(jQuery)
 			this.prevButton = this.activeButton;
 			this.activeButton = "#"+event.target.id;
 			
-			$(this.activeButton,this).toggleClass('contentButtonSelected',true);
-			$(this.prevButton,this).toggleClass('contentButton');
+			$(this.activeButton).toggleClass('contentButton',false);
+			$(this.activeButton).toggleClass('contentButtonSelected',true);
+			
+			if(this.prevButton != this.activeButton)
+			{
+				$(this.prevButton).toggleClass('contentButton', true);
+				$(this.prevButton).toggleClass('contentButtonSelected', false);
+			}
 			
 			switch(event.target.id)
 			{
@@ -160,7 +166,6 @@ $(document).ready(function(jQuery)
 	
 	PostView = Backbone.View.extend({
 		
-		
 		el:'#xxx',
 		template: "<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post-content'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
@@ -200,7 +205,6 @@ $(document).ready(function(jQuery)
 			
 			// Clear out previous content 
 			$(this.el).empty();
-			//$(this.el).html("<ol id='status-list'></ol>");
 			$(this.el).html("<ol id='status-list'></ol>");
 			
 			this.el = "#status-list";
