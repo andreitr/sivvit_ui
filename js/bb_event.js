@@ -108,9 +108,7 @@ $(document).ready(function(jQuery)
 				case "mediaBtn":
 					histModel.set({histogram:this.model.get("histogram").media});
 					mediaView.render({collection:this.populateContent(this.model.get("content"))});
-					break;
-					
-					
+					break;		
 			}
 		},
 		
@@ -136,8 +134,12 @@ $(document).ready(function(jQuery)
 		
 		el:'#xxx',
 
+		
+
 		render: function (options)
 		{	
+			//histModel.bind("change:startRange", function (){console.log(histModel.get("startRange"))}, this),
+		
 			this.model = options.collection;
 			
 			// Clear out previous content 
@@ -232,6 +234,8 @@ $(document).ready(function(jQuery)
 		{
 			startDate: new Date(),
 			endDate: new Date(),
+			startRange: new Date(), 
+			endRange: new Date(),
 			histogram:null
 		}
 	});
@@ -253,9 +257,28 @@ $(document).ready(function(jQuery)
 		render : function()
 		{
 		 	this.drawHistogram();
+		 	this.drawSlider();
 		},
 		
-		
+		drawSlider: function ()
+		{
+			$("#timeline-slider").slider({
+				range: true,
+				min: this.model.get("startDate").getTime(),
+				max: this.model.get("endDate").getTime(),
+				values: [ this.model.get("startDate").getTime(), this.model.get("endDate").getTime() ],
+				model: this.model,
+				slide: this.onSliderDragged
+			});
+		},
+
+		onSliderDragged: function (event, ui)
+		{
+			console.log(event);
+			//this.model.get("startRange") = new Date(ui.values[0]);
+			//this.model.get("endRange") = new Date(ui.values[1]);
+		},
+
 		drawHistogram: function () 
 		{
 			var histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding, attributes;
@@ -346,7 +369,6 @@ $(document).ready(function(jQuery)
 	});
 	
 	
-	
 	mapModel = new MapModel();
 	mapView = new MapView({model:mapModel});
 	
@@ -363,10 +385,10 @@ $(document).ready(function(jQuery)
 	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
-		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate)});
+		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate), startRange:new Date(data.startDate), endRange:new Date(data.endDate)});
 		
 		jsonModel.set(data);
 		
-		mapModel.set({location:jsonModel.get("location")});		
+		mapModel.set({location:jsonModel.get("location")});
 	});
 });
