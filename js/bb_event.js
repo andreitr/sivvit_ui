@@ -267,16 +267,14 @@ $(document).ready(function(jQuery)
 				min: this.model.get("startDate").getTime(),
 				max: this.model.get("endDate").getTime(),
 				values: [ this.model.get("startDate").getTime(), this.model.get("endDate").getTime() ],
-				model: this.model,
-				slide: this.onSliderDragged
+				slide: this.onSliderDragged(),
 			});
 		},
 
-		onSliderDragged: function (event, ui)
+		onSliderDragged: function (event, ui, options)
 		{
-			console.log(event);
-			//this.model.get("startRange") = new Date(ui.values[0]);
-			//this.model.get("endRange") = new Date(ui.values[1]);
+			//model.get("startRange")// = new Date(ui.values[0]);
+			//event.model.get("endRange")// = new Date(ui.values[1]);
 		},
 
 		drawHistogram: function () 
