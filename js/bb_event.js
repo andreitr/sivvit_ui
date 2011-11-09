@@ -262,19 +262,23 @@ $(document).ready(function(jQuery)
 		
 		drawSlider: function ()
 		{
+			self = this;
+			
 			$("#timeline-slider").slider({
 				range: true,
 				min: this.model.get("startDate").getTime(),
 				max: this.model.get("endDate").getTime(),
 				values: [ this.model.get("startDate").getTime(), this.model.get("endDate").getTime() ],
-				slide: this.onSliderDragged(),
+				slide: function (event, ui){ self.onSliderDragged(event, ui)}, 
 			});
 		},
+		
 
-		onSliderDragged: function (event, ui, options)
+		onSliderDragged: function (event, ui)
 		{
-			//model.get("startRange")// = new Date(ui.values[0]);
-			//event.model.get("endRange")// = new Date(ui.values[1]);
+			console.log(this.model.get("startRange"));
+			//this.model.get("startRange") = new Date(ui.values[0]);
+			//this.model.get("endRange") = new Date(ui.values[1]);
 		},
 
 		drawHistogram: function () 
