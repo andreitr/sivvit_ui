@@ -269,16 +269,15 @@ $(document).ready(function(jQuery)
 				min: this.model.get("startDate").getTime(),
 				max: this.model.get("endDate").getTime(),
 				values: [ this.model.get("startDate").getTime(), this.model.get("endDate").getTime() ],
-				slide: function (event, ui){ self.onSliderDragged(event, ui)}, 
+				stop: function (event, ui){ self.onSliderDragged(event, ui)}, 
 			});
 		},
 		
 
 		onSliderDragged: function (event, ui)
 		{
-			console.log(this.model.get("startRange"));
-			//this.model.get("startRange") = new Date(ui.values[0]);
-			//this.model.get("endRange") = new Date(ui.values[1]);
+			this.model.set({"startRange": new Date(ui.values[0])});
+			this.model.set({"endRange": new Date(ui.values[1])})
 		},
 
 		drawHistogram: function () 
