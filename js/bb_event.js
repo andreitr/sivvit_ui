@@ -62,21 +62,16 @@ $(document).ready(function(jQuery)
 		activeView:"",
 		
 		
-		
 		initialize: function (options)
 		{
-			self = this;
 			this.model = options.model;
 			this.model.bind("change", this.render, this);
 			
-			histModel.bind("change:startRange", function (){
-				//$(self.activeButton).click();
-				}, this);
 		},
 		
 		render: function ()
 		{
-			$(self.activeButton).click();
+			$(this.activeButton).click();
 		},
 		
 		events: 
@@ -85,8 +80,6 @@ $(document).ready(function(jQuery)
 			"click #postBtn": "onButtonClicked",
 			"click #mediaBtn": "onButtonClicked",
 			"click #mapBtn": "onButtonClicked",
-			
-			
 		},
 		
 		onButtonClicked: function(event)
@@ -293,14 +286,18 @@ $(document).ready(function(jQuery)
 		onSliderDragged: function (event, ui)
 		{
 			this.model.set({"startRange": new Date(ui.values[0])});
-			this.model.set({"endRange": new Date(ui.values[1])})
+			this.model.set({"endRange": new Date(ui.values[1])});
+			
+			controls.render();
+			this.drawHistogram();
 		},
 
 		drawHistogram: function () 
 		{
-			var histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding, attributes;
+			if(this.model.get("histogram"))
+			{
 			
-			attributes = {fill : "#999999","stroke-width" : 0};
+			var barFill, histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding;
 				
 			// Total count of available slots	
 			lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime())/86400000);
@@ -327,19 +324,17 @@ $(document).ready(function(jQuery)
 				barH = Math.round(percentY * maxHeight / 100);
 				barX = barW*Math.round(percentX*(lenTotal-1));
 				barY = Math.round($(this.el).height() - barH)
-
-				var bar = histogram.rect(barX, barY, barW, barH).attr(attributes);
 				
-				bar.mouseover(function() {
-					this.attr({
-						fill : "#007AA2",
-						cursor : "pointer"
-					});
-				});
-
-				bar.mouseout(function() {
-					this.attr(attributes);
-				});		
+				if(new Date(frame.timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(frame.timestamp).getTime() <= this.model.get("endRange").getTime())
+				{
+					barFill = "#333333";
+				}else{
+					barFill = "#CCCCCC";
+				}
+				
+				var bar = histogram.rect(barX, barY, barW, barH).attr({fill : barFill,"stroke-width" : 0});
+				
+				}
 			}
 		}
 	});
