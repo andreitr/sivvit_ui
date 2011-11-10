@@ -59,16 +59,24 @@ $(document).ready(function(jQuery)
 		
 		prevButton: null,
 		activeButton: "#allBtn",
+		activeView:"",
+		
+		
 		
 		initialize: function (options)
 		{
+			self = this;
 			this.model = options.model;
 			this.model.bind("change", this.render, this);
+			
+			histModel.bind("change:startRange", function (){
+				//$(self.activeButton).click();
+				}, this);
 		},
 		
 		render: function ()
 		{
-			$(this.activeButton).click();
+			$(self.activeButton).click();
 		},
 		
 		events: 
@@ -76,7 +84,9 @@ $(document).ready(function(jQuery)
 			"click #allBtn": "onButtonClicked",
 			"click #postBtn": "onButtonClicked",
 			"click #mediaBtn": "onButtonClicked",
-			"click #mapBtn": "onButtonClicked"
+			"click #mapBtn": "onButtonClicked",
+			
+			
 		},
 		
 		onButtonClicked: function(event)
@@ -110,6 +120,7 @@ $(document).ready(function(jQuery)
 					mediaView.render({collection:this.populateContent(this.model.get("content"))});
 					break;		
 			}
+			
 		},
 		
 		/**
@@ -122,7 +133,15 @@ $(document).ready(function(jQuery)
 			// Populate content collection
 			for(var i=0; i<content.length; i++)
 			{
-				tmpCollection.push(new ContentModel(content[i]));
+				if(content[i].hasOwnProperty("timestamp"))
+				{
+					var timestamp = new Date(content[i].timestamp).getTime();
+										
+					if(timestamp >= histModel.get("startRange").getTime() && timestamp <= histModel.get("endRange").getTime())
+					{
+						tmpCollection.push(new ContentModel(content[i]));
+					}			
+				}
 			}
 				
 			return new ContentCollection(tmpCollection);
@@ -134,11 +153,8 @@ $(document).ready(function(jQuery)
 		
 		el:'#xxx',
 
-		
-
 		render: function (options)
 		{	
-			//histModel.bind("change:startRange", function (){console.log(histModel.get("startRange"))}, this),
 		
 			this.model = options.collection;
 			
@@ -268,7 +284,7 @@ $(document).ready(function(jQuery)
 				range: true,
 				min: this.model.get("startDate").getTime(),
 				max: this.model.get("endDate").getTime(),
-				values: [ this.model.get("startDate").getTime(), this.model.get("endDate").getTime() ],
+				values: [ this.model.get("startRange").getTime(), this.model.get("endRange").getTime() ],
 				stop: function (event, ui){ self.onSliderDragged(event, ui)}, 
 			});
 		},
