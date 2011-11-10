@@ -163,3 +163,30 @@ img[src*="gravatar.com/avatar"]
 	float: left;
 	margin-right: 10px;
 }
+
+
+/** Buttons */
+.tabBtn, .tabBtnSelected
+{
+	min-width: 10px;
+	position: relative;
+	display: inline-block;
+	background-color: #999999;
+	-moz-border-radius: 5px;
+	border-radius:5px;
+	padding: 5px 10px 5px 10px;
+	margin: 0 0 10px ;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.tabBtnSelected
+{
+	background-color: #333333;
+	cursor: default;
+}
+
+.tabBtn:hover
+{
+	background-color: #666666;
+}

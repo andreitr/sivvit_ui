@@ -87,13 +87,13 @@ $(document).ready(function(jQuery)
 			this.prevButton = this.activeButton;
 			this.activeButton = "#"+event.target.id;
 			
-			$(this.activeButton).toggleClass('contentButton',false);
-			$(this.activeButton).toggleClass('contentButtonSelected',true);
+			$(this.activeButton).toggleClass('tabBtn',false);
+			$(this.activeButton).toggleClass('tabBtnSelected',true);
 			
 			if(this.prevButton != this.activeButton)
 			{
-				$(this.prevButton).toggleClass('contentButton', true);
-				$(this.prevButton).toggleClass('contentButtonSelected', false);
+				$(this.prevButton).toggleClass('tabBtn', true);
+				$(this.prevButton).toggleClass('tabBtnSelected', false);
 			}
 			
 			switch(event.target.id)
@@ -178,7 +178,7 @@ $(document).ready(function(jQuery)
 	PostView = Backbone.View.extend({
 		
 		el:'#xxx',
-		template: "<li class='status'><div id='post-avatar'><img src='${avatar}'></div><div id='post-content'>${content}<div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id='content'>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		render: function (options)
 		{	
@@ -207,9 +207,9 @@ $(document).ready(function(jQuery)
 		
 		el: '#xxx',	
 		
-		templateAll: "<li class='status'><div id='list-content'><div id='list-media'><img height='200' src='${content}'></div><div id='post-meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		templateAll: "<li id='post-list'><img height='200' src='${content}'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></li>",
 
-		template: "<li class='media'><div class='mediaContainer'><img width='160' src='${content}'></div><div class='footer'>by ${author}</div></li>",
+		template: "<li id='media-list'><div id='container'><img width='160' src='${content}'></div><div id='footer'>by ${author}</div></li>",
 		
 		render: function (options)
 		{	
