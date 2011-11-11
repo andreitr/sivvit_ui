@@ -144,7 +144,7 @@ $(document).ready(function(jQuery)
 	
 	AllView = Backbone.View.extend({
 		
-		el:'#xxx',
+		el:'#dynamic-content',
 
 		render: function (options)
 		{	
@@ -153,9 +153,9 @@ $(document).ready(function(jQuery)
 			
 			// Clear out previous content 
 			$(this.el).empty();
-			$(this.el).html("<ol id='status-list'></ol>");
+			$(this.el).html("<ol id='nothing'></ol>");
 			
-			this.el = "#status-list";
+			this.el = "#nothing";
 			
 			var html;
 			
@@ -177,7 +177,7 @@ $(document).ready(function(jQuery)
 	
 	PostView = Backbone.View.extend({
 		
-		el:'#xxx',
+		el:'#dynamic-content',
 		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id='content'>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		render: function (options)
@@ -186,9 +186,9 @@ $(document).ready(function(jQuery)
 			
 			// Clear out previous content 
 			$(this.el).empty();
-			$(this.el).html("<ol id='status-list'></ol>");
+			$(this.el).html("<ol id='nothing'></ol>");
 			
-			this.el = "#status-list";
+			this.el = "#nothing";
 			
 			// Render collection
 			this.model.each(function (itm)
@@ -205,7 +205,7 @@ $(document).ready(function(jQuery)
 	
 	MediaView = Backbone.View.extend({
 		
-		el: '#xxx',	
+		el: '#dynamic-content',	
 		
 		templateAll: "<li id='post-list'><img height='200' src='${content}'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></li>",
 
@@ -217,9 +217,9 @@ $(document).ready(function(jQuery)
 			
 			// Clear out previous content 
 			$(this.el).empty();
-			$(this.el).html("<ol id='status-list'></ol>");
+			$(this.el).html("<ol id='nothing'></ol>");
 			
-			this.el = "#status-list";
+			this.el = "#nothing";
 			
 			// Render collection
 			this.model.each(function (itm)

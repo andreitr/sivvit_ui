@@ -40,7 +40,7 @@ ol
 }
 
 
-#media-list
+li#media-list
 {
   float: left;
   display: inline-block;
@@ -51,7 +51,7 @@ ol
   text-align: center;
 }
 
-#media-list #container
+li#media-list #container
 {
 	width: 160px;
 	height: 100px;
@@ -62,7 +62,7 @@ ol
 }
 
 
-#media-list #footer
+li#media-list #footer
 {
 	background-color: #CCCCCC;
 	text-align: left;
@@ -73,7 +73,7 @@ ol
 }
 
 
-#post-list
+li#post-list
 {
 	min-height: 50px;
 	width: 100%;
@@ -83,12 +83,12 @@ ol
 	position: relative;
 }
 
-#post-list:hover
+li#post-list:hover
 {
 	background-color:#fffbde;
 }
 
-#post-list #content
+li#post-list #content
 {
 	width: auto;
 	margin-left:58px;
@@ -96,7 +96,7 @@ ol
 	word-wrap: break-word;
 }
 
-#post-list #avatar
+li#post-list #avatar
 {
 	float: left;
 	width: 48px;
@@ -104,7 +104,7 @@ ol
 	text-align: right;
 }
 
-#post-list #meta
+li#post-list #meta
 {
 	font-size: 12px;
 	margin-top:10px;

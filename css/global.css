@@ -98,7 +98,7 @@ a:link
 }
 
 
-#content
+#content-container
 {
     display: block;
     margin: auto;
@@ -165,7 +165,7 @@ img[src*="gravatar.com/avatar"]
 }
 
 
-/** Buttons */
+/** Tab buttons, used on event page */
 .tabBtn, .tabBtnSelected
 {
 	min-width: 10px;
@@ -180,13 +180,13 @@ img[src*="gravatar.com/avatar"]
 	text-decoration: none;
 }
 
+.tabBtn:hover
+{
+	background-color: #666666;
+}
+
 .tabBtnSelected
 {
 	background-color: #333333;
 	cursor: default;
-}
-
-.tabBtn:hover
-{
-	background-color: #666666;
 }
