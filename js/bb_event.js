@@ -263,6 +263,8 @@ $(document).ready(function(jQuery)
 			this.model.bind("change:histogram", this.render, this);
 		},
 		
+		bars:[],
+		
 		render : function()
 		{
 		 	this.drawHistogram();
@@ -289,51 +291,57 @@ $(document).ready(function(jQuery)
 			this.model.set({"endRange": new Date(ui.values[1])});
 			
 			controls.render();
-			this.drawHistogram();
+			this.updateHistogram();
+		},
+
+		updateHistogram: function ()
+		{
+			for(var i=0; i<this.bars.length; i++)
+			{
+				if(new Date(this.bars[i].timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(this.bars[i].timestamp).getTime() <= this.model.get("endRange").getTime())
+				{
+					this.bars[i].attr({fill:"#333333"});
+				}else{
+					this.bars[i].attr({fill:"#CCCCCC"});
+				}
+			}
 		},
 
 		drawHistogram: function () 
 		{
 			if(this.model.get("histogram"))
 			{
-			
-			var barFill, histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding;
+				var barFill, histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding;
+					
+				// Total count of available slots	
+				lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime())/86400000);
 				
-			// Total count of available slots	
-			lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime())/86400000);
-			
-			// Acutal count of temporal slots
-			len = this.model.get("histogram").length;
-			
-			maxVal = 10;
-			minVal = 1;
-			maxHeight = $(this.el).height() - 20;
-			barXPadding = 0;
-			histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
-			barW = ($(this.el).width() - (barXPadding * lenTotal)) / lenTotal;
-
-			for( i = 0; i < len; i += 1)
-			{				
-				var frame = this.model.get("histogram")[i];
+				// Acutal count of temporal slots
+				len = this.model.get("histogram").length;
 				
-				percentY = (frame.count / maxVal) * 100;
-				percentX = (new Date(frame.timestamp).getTime()-this.model.get("startDate").getTime()) / (this.model.get("endDate").getTime()-this.model.get("startDate").getTime());
-				
-				barW*Math.round(percentX*(lenTotal-1));
-				
-				barH = Math.round(percentY * maxHeight / 100);
-				barX = barW*Math.round(percentX*(lenTotal-1));
-				barY = Math.round($(this.el).height() - barH)
-				
-				if(new Date(frame.timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(frame.timestamp).getTime() <= this.model.get("endRange").getTime())
-				{
-					barFill = "#333333";
-				}else{
-					barFill = "#CCCCCC";
-				}
-				
-				var bar = histogram.rect(barX, barY, barW, barH).attr({fill : barFill,"stroke-width" : 0});
-				
+				maxVal = 10;
+				minVal = 1;
+				maxHeight = $(this.el).height() - 20;
+				barXPadding = 0;
+				histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
+				barW = ($(this.el).width() - (barXPadding * lenTotal)) / lenTotal;
+	
+				for( i = 0; i < len; i += 1)
+				{				
+					var frame = this.model.get("histogram")[i];
+					
+					percentY = (frame.count / maxVal) * 100;
+					percentX = (new Date(frame.timestamp).getTime()-this.model.get("startDate").getTime()) / (this.model.get("endDate").getTime()-this.model.get("startDate").getTime());
+					
+					barW*Math.round(percentX*(lenTotal-1));
+					
+					barH = Math.round(percentY * maxHeight / 100);
+					barX = barW*Math.round(percentX*(lenTotal-1));
+					barY = Math.round($(this.el).height() - barH)
+					
+					var bar = histogram.rect(barX, barY, barW, barH).attr({fill:"#333333", "stroke-width" : 0});
+					bar.timestamp = frame.timestamp;
+					this.bars.push(bar);
 				}
 			}
 		}
