@@ -1,6 +1,7 @@
 $(document).ready(function(jQuery)
 {
 	var mapModel, mapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
+	var renderedContent = [];
 	
 	/**
 	 * Main container for the loaded JSON data. 
@@ -126,17 +127,8 @@ $(document).ready(function(jQuery)
 			// Populate content collection
 			for(var i=0; i<content.length; i++)
 			{
-				if(content[i].hasOwnProperty("timestamp"))
-				{
-					var timestamp = new Date(content[i].timestamp).getTime();
-										
-					if(timestamp >= histModel.get("startRange").getTime() && timestamp <= histModel.get("endRange").getTime())
-					{
-						tmpCollection.push(new ContentModel(content[i]));
-					}			
-				}
+				tmpCollection.push(new ContentModel(content[i]));
 			}
-				
 			return new ContentCollection(tmpCollection);
 		}
 	});
@@ -148,30 +140,32 @@ $(document).ready(function(jQuery)
 
 		render: function (options)
 		{	
-		
-			this.model = options.collection;
-			
-			// Clear out previous content 
-			$(this.el).empty();
-			$(this.el).html("<ol id='nothing'></ol>");
-			
-			this.el = "#nothing";
-			
-			var html;
-			
-			// Render collection
-			this.model.each(function (itm)
-			{
-				if(itm.get("type") == "media")
-				{
-					 html = $.tmpl(mediaView.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				}else if(itm.get("type") == "post"){
-					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				}
+				this.model = options.collection;
 				
-				$(this.el).append(html);
-			}, this);
-		}
+				// Clear out previous content 
+				$(this.el).empty();
+				$(this.el).html("<ol id='nothing'></ol>");
+				
+				this.el = "#nothing";
+				
+				var html;
+				
+				// Render collection
+				this.model.each(function (itm)
+				{
+					if(itm.get("type") == "media")
+					{
+						 html = $.tmpl(mediaView.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					}else if(itm.get("type") == "post"){
+						 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					}
+					
+					renderedContent.push({timestamp:itm.timestamp, html:html});
+					
+					$(this.el).append(html);
+				}, this);
+			}
+		
 	})
 	
 	
@@ -196,6 +190,7 @@ $(document).ready(function(jQuery)
 				if(itm.get("type") == "post")
 				{
 					var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					renderedContent.push({timestamp:itm.timestamp, html:html});
 					$(this.el).append(html);
 				}
 			}, this);
@@ -227,6 +222,7 @@ $(document).ready(function(jQuery)
 				if(itm.get("type") == "media")
 				{
 					var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					renderedContent.push({timestamp:itm.timestamp, html:html});
 					$(this.el).append(html);
 				}
 			}, this);
@@ -269,6 +265,25 @@ $(document).ready(function(jQuery)
 		{
 		 	this.drawHistogram();
 		 	this.drawSlider();
+		 	
+		 	if(renderedContent.length > 0)
+		 	{
+		 		for(var i=0; i<renderedContent.length; i++)
+		 		{
+		 			console.log(renderedContent[i])
+		 			if(renderedContent[i].hasOwnProperty("timestamp"))
+					{
+						var timestamp = new Date(content[i].timestamp).getTime();
+										
+						if(timestamp >= histModel.get("startRange").getTime() && timestamp <= histModel.get("endRange").getTime())
+						{
+							$(renderedContent[i].html).show();
+						}else{
+							$(renderedContent[i].html).hide();
+						}
+					}
+		 		}
+		 	}
 		},
 		
 		drawSlider: function ()
@@ -290,7 +305,6 @@ $(document).ready(function(jQuery)
 			this.model.set({"startRange": new Date(ui.values[0])});
 			this.model.set({"endRange": new Date(ui.values[1])});
 			
-			controls.render();
 			this.updateHistogram();
 		},
 
