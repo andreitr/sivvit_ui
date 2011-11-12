@@ -4,8 +4,7 @@ $(document).ready(function(jQuery)
 	
 	//Currently-rendered content objects
 	var renderedContent = [];
-	
-	
+		
 	/**
 	 * Main container for the loaded JSON data. 
 	 */
@@ -32,7 +31,6 @@ $(document).ready(function(jQuery)
 	 * Generic conetnt model.
 	 */
 	ContentModel = Backbone.Model.extend({
-		
 		defaults:
 		{
 			type:null,
@@ -45,6 +43,7 @@ $(document).ready(function(jQuery)
 			avatar:null
 		}
 	});
+	
 	
 	ContentCollection = Backbone.Collection.extend({
 		model:ContentModel,
@@ -65,7 +64,6 @@ $(document).ready(function(jQuery)
 		prevButton: null,
 		activeButton: "#allBtn",
 		activeView:"",
-		
 		
 		initialize: function (options)
 		{
@@ -105,10 +103,7 @@ $(document).ready(function(jQuery)
 			{
 				case "allBtn":
 					histModel.set({histogram:this.model.get("histogram").global});
-					if(!allView.model)
-					{
-						allView.model = this.populateContent(this.model.get("content"));
-					}
+					if(!allView.model){ allView.model = this.populateContent(this.model.get("content"));}
 					
 					allView.render();
 					break;
@@ -116,19 +111,13 @@ $(document).ready(function(jQuery)
 				case "postBtn":
 					histModel.set({histogram:this.model.get("histogram").post});
 					
-					if(!postView.model)
-					{
-						postView.model = this.populateContent(this.model.get("content"));
-					}
+					if(!postView.model){ postView.model = this.populateContent(this.model.get("content"));}
 					postView.render();
 					break;
 					
 				case "mediaBtn":
 					histModel.set({histogram:this.model.get("histogram").media});
-					if(!mediaView.model)
-					{
-						mediaView.model = this.populateContent(this.model.get("content"))
-					}
+					if(!mediaView.model){ mediaView.model = this.populateContent(this.model.get("content"));}
 					mediaView.render();
 					break;		
 			}
@@ -152,40 +141,55 @@ $(document).ready(function(jQuery)
 	});
 	
 	
-	AllView = Backbone.View.extend({
-		
+	AbstractView = Backbone.View.extend(
+	{
 		el:'#dynamic-content',
+				
+		showHide: function (item)
+		{
+			var timestamp = new Date(item.timestamp).getTime();
+
+			if(timestamp >= histModel.get("startRange").getTime() && timestamp <= histModel.get("endRange").getTime()) {
+				$(item.html).show();
+			} else {
+			 $(item.html).hide();
+			}
+		}	
+	});
+	
+	AllView = AbstractView.extend({
 		
 		render: function ()
 		{	
-				// Clear out previous content 
-				$(this.el).empty();
-				$(this.el).html("<ol id='nothing'></ol>");
-				
-				this.el = "#nothing";
-				
-				var html;
-				
-				// Render collection
-				this.model.each( function(itm)
-				{
-					if(itm.get("type") == "media")
-					{
-						 html = $.tmpl(mediaView.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					}else if(itm.get("type") == "post"){
-						 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					}
-					renderedContent.push({timestamp:itm.get("timestamp"), html:html});
+			// Clear out previous content 
+			$(this.el).empty();
+			$(this.el).html("<ol id='nothing'></ol>");
+			
+			this.el = "#nothing";
+			
+			var html, itm;
 					
-					$(this.el).append(html);
-				}, this);
-			}
-	})
+			// Render collection
+			this.model.each( function(itm)
+			{
+				if(itm.get("type") == "media")
+				{
+					 html = $.tmpl(mediaView.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				}else if(itm.get("type") == "post"){
+					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				}
+				itm = {timestamp:itm.get("timestamp"), html:html};
+				renderedContent.push(itm);
+				this.showHide(itm);
+				
+				$(this.el).append(html);
+			}, this);
+		}, 
+	});
 	
 	
-	PostView = Backbone.View.extend({
+	PostView = AbstractView.extend({
 		
-		el:'#dynamic-content',
 		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id='content'>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		render: function ()
@@ -196,13 +200,18 @@ $(document).ready(function(jQuery)
 			
 			this.el = "#nothing";
 			
+			var html, itm;
+			
 			// Render collection
 			this.model.each(function (itm)
 			{
 				if(itm.get("type") == "post")
 				{
-					var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					renderedContent.push({timestamp:itm.get("timestamp"), html:html});
+					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					itm = {timestamp:itm.get("timestamp"), html:html};
+					renderedContent.push(itm);
+					this.showHide(itm);
+					
 					$(this.el).append(html);
 				}
 			}, this);
@@ -210,9 +219,7 @@ $(document).ready(function(jQuery)
 	});
 	
 	
-	MediaView = Backbone.View.extend({
-		
-		el: '#dynamic-content',	
+	MediaView = AbstractView.extend({
 		
 		templateAll: "<li id='post-list'><img height='200' src='${content}'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></li>",
 
@@ -226,13 +233,18 @@ $(document).ready(function(jQuery)
 			
 			this.el = "#nothing";
 			
+			var html, itm;
+			
 			// Render collection
 			this.model.each(function (itm)
 			{
 				if(itm.get("type") == "media")
 				{
-					var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					renderedContent.push({timestamp:itm.get("timestamp"), html:html});
+					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					itm = {timestamp:itm.get("timestamp"), html:html};
+					renderedContent.push(itm);
+					this.showHide(itm);
+					
 					$(this.el).append(html);
 				}
 			}, this);
@@ -274,9 +286,7 @@ $(document).ready(function(jQuery)
 		render : function()
 		{
 		 	this.drawHistogram();
-		 	this.drawSlider();
-		 	
-		 	
+		 	this.drawSlider();	
 		},
 		
 		drawSlider: function ()
@@ -434,6 +444,7 @@ $(document).ready(function(jQuery)
 	jsonModel = new JsonModel();
 	
 	controls = new ControlsView({model:jsonModel});
+	
 	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
