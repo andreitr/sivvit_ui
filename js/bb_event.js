@@ -62,7 +62,7 @@ $(document).ready(function(jQuery)
 		el: "body",
 		
 		prevButton: null,
-		activeButton: "#allBtn",
+		activeButton: null,
 		activeView:"",
 		
 		initialize: function (options)
@@ -74,7 +74,8 @@ $(document).ready(function(jQuery)
 		
 		render: function ()
 		{
-			$(this.activeButton).click();
+			// Select first button by default
+			$("#allBtn").click();
 		},
 		
 		events: 
@@ -87,6 +88,8 @@ $(document).ready(function(jQuery)
 		
 		onButtonClicked: function(event)
 		{
+			if(this.activeButton == "#"+event.target.id) return;
+			
 			this.prevButton = this.activeButton;
 			this.activeButton = "#"+event.target.id;
 			
