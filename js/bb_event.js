@@ -159,8 +159,7 @@ $(document).ready(function(jQuery)
 					}else if(itm.get("type") == "post"){
 						 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 					}
-					
-					renderedContent.push({timestamp:itm.timestamp, html:html});
+					renderedContent.push({timestamp:itm.get("timestamp"), html:html});
 					
 					$(this.el).append(html);
 				}, this);
@@ -190,7 +189,7 @@ $(document).ready(function(jQuery)
 				if(itm.get("type") == "post")
 				{
 					var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					renderedContent.push({timestamp:itm.timestamp, html:html});
+					renderedContent.push({timestamp:itm.get("timestamp"), html:html});
 					$(this.el).append(html);
 				}
 			}, this);
@@ -222,7 +221,7 @@ $(document).ready(function(jQuery)
 				if(itm.get("type") == "media")
 				{
 					var html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					renderedContent.push({timestamp:itm.timestamp, html:html});
+					renderedContent.push({timestamp:itm.get("timestamp"), html:html});
 					$(this.el).append(html);
 				}
 			}, this);
@@ -266,24 +265,7 @@ $(document).ready(function(jQuery)
 		 	this.drawHistogram();
 		 	this.drawSlider();
 		 	
-		 	if(renderedContent.length > 0)
-		 	{
-		 		for(var i=0; i<renderedContent.length; i++)
-		 		{
-		 			console.log(renderedContent[i])
-		 			if(renderedContent[i].hasOwnProperty("timestamp"))
-					{
-						var timestamp = new Date(content[i].timestamp).getTime();
-										
-						if(timestamp >= histModel.get("startRange").getTime() && timestamp <= histModel.get("endRange").getTime())
-						{
-							$(renderedContent[i].html).show();
-						}else{
-							$(renderedContent[i].html).hide();
-						}
-					}
-		 		}
-		 	}
+		 	
 		},
 		
 		drawSlider: function ()
@@ -306,6 +288,20 @@ $(document).ready(function(jQuery)
 			this.model.set({"endRange": new Date(ui.values[1])});
 			
 			this.updateHistogram();
+			
+			if(renderedContent.length > 0)
+		 	{
+		 		for(var i=0; i<renderedContent.length; i++)
+		 		{
+		 			var timestamp = new Date(renderedContent[i].timestamp).getTime();
+
+					if(timestamp >= this.model.get("startRange").getTime() && timestamp <= this.model.get("endRange").getTime()) {
+						$(renderedContent[i].html).fadeIn();
+					} else {
+						$(renderedContent[i].html).fadeOut();
+					}
+		 		}
+		 	}
 		},
 
 		updateHistogram: function ()
