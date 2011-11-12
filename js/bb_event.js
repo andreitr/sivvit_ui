@@ -1,7 +1,10 @@
 $(document).ready(function(jQuery)
 {
 	var mapModel, mapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
+	
+	//Currently-rendered content objects
 	var renderedContent = [];
+	
 	
 	/**
 	 * Main container for the loaded JSON data. 
@@ -36,7 +39,7 @@ $(document).ready(function(jQuery)
 			location:[], 
 			content:null,
 			source:null,
-			timestamp:new Date(),
+			timestamp:"",
 			rank:0,
 			author:null,
 			avatar:null
@@ -46,6 +49,7 @@ $(document).ready(function(jQuery)
 	ContentCollection = Backbone.Collection.extend({
 		model:ContentModel,
 		
+		// Sort content by timestamp
 		comparator: function(itm) {
   			return itm.get("timestamp");
 		},
@@ -101,17 +105,31 @@ $(document).ready(function(jQuery)
 			{
 				case "allBtn":
 					histModel.set({histogram:this.model.get("histogram").global});
-					allView.render({collection:this.populateContent(this.model.get("content"))});
+					if(!allView.model)
+					{
+						allView.model = this.populateContent(this.model.get("content"));
+					}
+					
+					allView.render();
 					break;
 					
 				case "postBtn":
 					histModel.set({histogram:this.model.get("histogram").post});
-					postView.render({collection:this.populateContent(this.model.get("content"))});
+					
+					if(!postView.model)
+					{
+						postView.model = this.populateContent(this.model.get("content"));
+					}
+					postView.render();
 					break;
 					
 				case "mediaBtn":
 					histModel.set({histogram:this.model.get("histogram").media});
-					mediaView.render({collection:this.populateContent(this.model.get("content"))});
+					if(!mediaView.model)
+					{
+						mediaView.model = this.populateContent(this.model.get("content"))
+					}
+					mediaView.render();
 					break;		
 			}
 			
@@ -137,11 +155,9 @@ $(document).ready(function(jQuery)
 	AllView = Backbone.View.extend({
 		
 		el:'#dynamic-content',
-
-		render: function (options)
+		
+		render: function ()
 		{	
-				this.model = options.collection;
-				
 				// Clear out previous content 
 				$(this.el).empty();
 				$(this.el).html("<ol id='nothing'></ol>");
@@ -151,7 +167,7 @@ $(document).ready(function(jQuery)
 				var html;
 				
 				// Render collection
-				this.model.each(function (itm)
+				this.model.each( function(itm)
 				{
 					if(itm.get("type") == "media")
 					{
@@ -164,7 +180,6 @@ $(document).ready(function(jQuery)
 					$(this.el).append(html);
 				}, this);
 			}
-		
 	})
 	
 	
@@ -173,10 +188,8 @@ $(document).ready(function(jQuery)
 		el:'#dynamic-content',
 		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id='content'>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
-		render: function (options)
+		render: function ()
 		{	
-			this.model = options.collection;
-			
 			// Clear out previous content 
 			$(this.el).empty();
 			$(this.el).html("<ol id='nothing'></ol>");
@@ -205,10 +218,8 @@ $(document).ready(function(jQuery)
 
 		template: "<li id='media-list'><div id='container'><img width='160' src='${content}'></div><div id='footer'>by ${author}</div></li>",
 		
-		render: function (options)
+		render: function ()
 		{	
-			this.model = options.collection;
-			
 			// Clear out previous content 
 			$(this.el).empty();
 			$(this.el).html("<ol id='nothing'></ol>");
@@ -289,6 +300,8 @@ $(document).ready(function(jQuery)
 			
 			this.updateHistogram();
 			
+			// --------------------------------------------------------------
+			// This needs to be moved somewhere else
 			if(renderedContent.length > 0)
 		 	{
 		 		for(var i=0; i<renderedContent.length; i++)
@@ -304,6 +317,7 @@ $(document).ready(function(jQuery)
 		 	}
 		},
 
+		// Updates histogram bars 
 		updateHistogram: function ()
 		{
 			for(var i=0; i<this.bars.length; i++)
@@ -312,6 +326,7 @@ $(document).ready(function(jQuery)
 			}
 		},
 		
+		// Sets histogram bar colors based on the visible range
 		updateHistogramBar: function (bar)
 		{
 			if(new Date(bar.timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(bar.timestamp).getTime() <= this.model.get("endRange").getTime())
@@ -321,7 +336,8 @@ $(document).ready(function(jQuery)
 					bar.attr({fill:"#CCCCCC"});
 				}
 		},
-			
+		
+		// Draws histogram
 		drawHistogram: function () 
 		{
 			if(this.model.get("histogram"))
