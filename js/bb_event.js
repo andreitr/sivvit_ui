@@ -308,15 +308,20 @@ $(document).ready(function(jQuery)
 		{
 			for(var i=0; i<this.bars.length; i++)
 			{
-				if(new Date(this.bars[i].timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(this.bars[i].timestamp).getTime() <= this.model.get("endRange").getTime())
-				{
-					this.bars[i].attr({fill:"#333333"});
-				}else{
-					this.bars[i].attr({fill:"#CCCCCC"});
-				}
+				this.updateHistogramBar(this.bars[i]);
 			}
 		},
-
+		
+		updateHistogramBar: function (bar)
+		{
+			if(new Date(bar.timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(bar.timestamp).getTime() <= this.model.get("endRange").getTime())
+				{
+					bar.attr({fill:"#333333"});
+				}else{
+					bar.attr({fill:"#CCCCCC"});
+				}
+		},
+			
 		drawHistogram: function () 
 		{
 			if(this.model.get("histogram"))
@@ -351,6 +356,7 @@ $(document).ready(function(jQuery)
 					
 					var bar = histogram.rect(barX, barY, barW, barH).attr({fill:"#333333", "stroke-width" : 0});
 					bar.timestamp = frame.timestamp;
+					this.updateHistogramBar(bar);
 					this.bars.push(bar);
 				}
 			}
