@@ -1,9 +1,6 @@
 $(document).ready(function(jQuery)
 {
 	var mapModel, mapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
-	
-	//Currently-rendered content objects
-	var renderedContent = [];
 		
 	/**
 	 * Main container for the loaded JSON data. 
@@ -63,13 +60,14 @@ $(document).ready(function(jQuery)
 		
 		prevButton: null,
 		activeButton: null,
-		activeView:"",
+		
+		activeView:null,
+		prevView:null,
 		
 		initialize: function (options)
 		{
 			this.model = options.model;
 			this.model.bind("change", this.render, this);
-			
 		},
 		
 		render: function ()
@@ -102,29 +100,33 @@ $(document).ready(function(jQuery)
 				$(this.prevButton).toggleClass('tabBtnSelected', false);
 			}
 			
+			if(this.activeView)
+			{
+				this.prevView = this.activeView;
+				this.prevView.unbind({temporal:histModel});
+			}
+			
 			switch(event.target.id)
 			{
 				case "allBtn":
 					histModel.set({histogram:this.model.get("histogram").global});
-					if(!allView.model){ allView.model = this.populateContent(this.model.get("content"));}
-					
-					allView.render();
+					this.activeView = allView;
 					break;
 					
 				case "postBtn":
 					histModel.set({histogram:this.model.get("histogram").post});
-					
-					if(!postView.model){ postView.model = this.populateContent(this.model.get("content"));}
-					postView.render();
+					this.activeView = postView;
 					break;
 					
 				case "mediaBtn":
 					histModel.set({histogram:this.model.get("histogram").media});
-					if(!mediaView.model){ mediaView.model = this.populateContent(this.model.get("content"));}
-					mediaView.render();
+					this.activeView = mediaView;
 					break;		
 			}
 			
+			if(!this.activeView.model){ this.activeView.model = this.populateContent(this.model.get("content"));}
+			this.activeView.bind({temporal:histModel});
+			this.activeView.render();
 		},
 		
 		/**
@@ -147,7 +149,30 @@ $(document).ready(function(jQuery)
 	AbstractView = Backbone.View.extend(
 	{
 		el:'#dynamic-content',
-				
+		// Rendered elements
+		rendered:[],
+		
+		bind: function(options)
+		{
+			options.temporal.bind("change:startRange", this.filter, this);
+			options.temporal.bind("change:endRange", this.filter, this)
+		},
+		
+		unbind: function (options)
+		{
+			options.temporal.unbind("change:startRange", this.filter, this);
+			options.temporal.unbind("change:endRange", this.filter, this)
+		},
+		
+		// Filters temporal content
+		filter: function ()
+		{
+			for(var i = 0; i < this.rendered.length; i++) {
+				this.showHide(this.rendered[i]);
+			}
+		},
+		
+		// Shows / hides temporal elements
 		showHide: function (item)
 		{
 			var timestamp = new Date(item.timestamp).getTime();
@@ -155,10 +180,11 @@ $(document).ready(function(jQuery)
 			if(timestamp >= histModel.get("startRange").getTime() && timestamp <= histModel.get("endRange").getTime()) {
 				$(item.html).show();
 			} else {
-			 $(item.html).hide();
+			 	$(item.html).hide();
 			}
-		}	
+		}
 	});
+	
 	
 	AllView = AbstractView.extend({
 		
@@ -182,7 +208,7 @@ $(document).ready(function(jQuery)
 					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}
 				itm = {timestamp:itm.get("timestamp"), html:html};
-				renderedContent.push(itm);
+				this.rendered.push(itm);
 				this.showHide(itm);
 				
 				$(this.el).append(html);
@@ -212,7 +238,7 @@ $(document).ready(function(jQuery)
 				{
 					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 					itm = {timestamp:itm.get("timestamp"), html:html};
-					renderedContent.push(itm);
+					this.rendered.push(itm);
 					this.showHide(itm);
 					
 					$(this.el).append(html);
@@ -245,7 +271,7 @@ $(document).ready(function(jQuery)
 				{
 					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 					itm = {timestamp:itm.get("timestamp"), html:html};
-					renderedContent.push(itm);
+					this.rendered.push(itm);
 					this.showHide(itm);
 					
 					$(this.el).append(html);
@@ -312,22 +338,6 @@ $(document).ready(function(jQuery)
 			this.model.set({"endRange": new Date(ui.values[1])});
 			
 			this.updateHistogram();
-			
-			// --------------------------------------------------------------
-			// This needs to be moved somewhere else
-			if(renderedContent.length > 0)
-		 	{
-		 		for(var i=0; i<renderedContent.length; i++)
-		 		{
-		 			var timestamp = new Date(renderedContent[i].timestamp).getTime();
-
-					if(timestamp >= this.model.get("startRange").getTime() && timestamp <= this.model.get("endRange").getTime()) {
-						$(renderedContent[i].html).fadeIn();
-					} else {
-						$(renderedContent[i].html).fadeOut();
-					}
-		 		}
-		 	}
 		},
 
 		// Updates histogram bars 
@@ -447,6 +457,7 @@ $(document).ready(function(jQuery)
 	jsonModel = new JsonModel();
 	
 	controls = new ControlsView({model:jsonModel});
+	
 	
 	
 	$.getJSON("embed/json/event.json", {}, function(data)
