@@ -404,7 +404,9 @@ SIVVIT = $(document).ready(function(jQuery)
 
 	
 	/**
-	 * 
+	 * -------------------
+	 * not sure if we even need this model, might as well just set parametes directly on the view.
+	 * I don't see why this model will be ever changed. 
 	 */
 	MapModel = Backbone.Model.extend({
 		defaults: {
