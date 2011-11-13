@@ -1,4 +1,4 @@
-$(document).ready(function(jQuery)
+SIVVIT = $(document).ready(function(jQuery)
 {
 	var mapModel, mapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
 		
@@ -178,9 +178,9 @@ $(document).ready(function(jQuery)
 			var timestamp = new Date(item.timestamp).getTime();
 
 			if(timestamp >= histModel.get("startRange").getTime() && timestamp <= histModel.get("endRange").getTime()) {
-				$(item.html).show();
+				$(item.html).fadeIn();
 			} else {
-			 	$(item.html).hide();
+			 	$(item.html).fadeOut();
 			}
 		}
 	});
@@ -428,17 +428,7 @@ $(document).ready(function(jQuery)
 		
 		render: function ()
 		{
-			var latlng = new google.maps.LatLng(this.model.get("location").lon, this.model.get("location").lat);
-	
-			var myOptions = {
-				zoom : 13,
-				center : latlng,
-				mapTypeId : google.maps.MapTypeId.ROADMAP,
-				disableDefaultUI : true
-			};
-	
-			var map = new google.maps.Map( container = $(this.el)[0], myOptions);
-			
+			$(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center="+this.model.get("location").lon+","+this.model.get("location").lat+"&zoom=10&size="+$(this.el).width()+"x"+$(this.el).height()+"&sensor=false\">");
 			$("#mapLabel").append("Red Rocks, Morrison CO");
 		}
 	});
