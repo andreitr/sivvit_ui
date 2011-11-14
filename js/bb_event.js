@@ -1,6 +1,6 @@
 SIVVIT = $(document).ready(function(jQuery)
 {
-	var mapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
+	var sideMapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
 		
 	/**
 	 * Main container for the loaded JSON data. 
@@ -423,9 +423,10 @@ SIVVIT = $(document).ready(function(jQuery)
 	
 	
 	/**
-	 * 
+	 * Display static map in the sidebar. 
+	 * Not sure that we even need this view. 
 	 */
-	MapView = Backbone.View.extend({
+	SidebarMapView = Backbone.View.extend({
 		
 		el: '#mapCanvas',
 	
@@ -437,7 +438,7 @@ SIVVIT = $(document).ready(function(jQuery)
 	});
 	
 
-	mapView = new MapView();
+	sideMapView = new SidebarMapView();
 	
 	histModel = new HistogramModel();
 	histView = new HistogramView({model:histModel});
@@ -451,13 +452,12 @@ SIVVIT = $(document).ready(function(jQuery)
 	controls = new ControlsView({model:jsonModel});
 	
 	
-	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
 		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate), startRange:new Date(data.startDate), endRange:new Date(data.endDate)});
 		
 		jsonModel.set(data);
 		
-		mapView.render(jsonModel.get("location").lon, jsonModel.get("location").lat);
+		sideMapView.render(jsonModel.get("location").lon, jsonModel.get("location").lat);
 	});
 });
