@@ -152,6 +152,9 @@ SIVVIT = $(document).ready(function(jQuery)
 		// Rendered elements
 		rendered:[],
 		
+		// Set to true when al least of content is displayed
+		displayed:false,
+		
 		bind: function(options)
 		{
 			options.temporal.bind("change:startRange", this.filter, this);
@@ -164,12 +167,37 @@ SIVVIT = $(document).ready(function(jQuery)
 			options.temporal.unbind("change:endRange", this.filter, this)
 		},
 		
+		render: function ()
+		{
+			// Clear out previous content 
+			$(this.el).empty();
+			$(this.el).html("<ol id='nothing'></ol>");
+			
+			this.el = "#nothing";
+			this.displayed = false;
+			
+			var html, itm;
+			
+			this.display();
+			
+			this.checkFiltered();
+		},		
+		
+		// Loops throught the model displays content
+		display: function ()
+		{
+			throw new Error("Method must be overriden by a subclass");
+		},
+
 		// Filters temporal content
 		filter: function ()
 		{
+			this.displayed = false;
+			
 			for(var i = 0; i < this.rendered.length; i++) {
 				this.showHide(this.rendered[i]);
 			}
+			this.checkFiltered();
 		},
 		
 		// Shows / hides temporal elements
@@ -178,9 +206,23 @@ SIVVIT = $(document).ready(function(jQuery)
 			var timestamp = new Date(item.timestamp).getTime();
 
 			if(timestamp >= histModel.get("startRange").getTime() && timestamp <= histModel.get("endRange").getTime()) {
-				$(item.html).fadeIn();
+				$(item.html).show();
+				this.displayed = true;
 			} else {
-			 	$(item.html).fadeOut();
+			 	$(item.html).hide();
+			}
+		}, 
+		
+		checkFiltered: function ()
+		{
+			if(!this.displayed)
+			{
+				if($("#xxxs").length <= 0)
+				{
+					$(this.el).append("<p id=\"xxxs\">No content in filtered timespan.</p>");
+				}
+			}else{
+				$("#xxxs").remove();
 			}
 		}
 	});
@@ -188,16 +230,8 @@ SIVVIT = $(document).ready(function(jQuery)
 	
 	AllView = AbstractView.extend({
 		
-		render: function ()
+		display: function ()
 		{	
-			// Clear out previous content 
-			$(this.el).empty();
-			$(this.el).html("<ol id='nothing'></ol>");
-			
-			this.el = "#nothing";
-			
-			var html, itm;
-					
 			// Render collection
 			this.model.each( function(itm)
 			{
@@ -221,16 +255,8 @@ SIVVIT = $(document).ready(function(jQuery)
 		
 		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id='content'>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
-		render: function ()
+		display: function ()
 		{	
-			// Clear out previous content 
-			$(this.el).empty();
-			$(this.el).html("<ol id='nothing'></ol>");
-			
-			this.el = "#nothing";
-			
-			var html, itm;
-			
 			// Render collection
 			this.model.each(function (itm)
 			{
@@ -254,16 +280,8 @@ SIVVIT = $(document).ready(function(jQuery)
 
 		template: "<li id='media-list'><div id='container'><img width='160' src='${content}'></div><div id='footer'>by ${author}</div></li>",
 		
-		render: function ()
+		display: function ()
 		{	
-			// Clear out previous content 
-			$(this.el).empty();
-			$(this.el).html("<ol id='nothing'></ol>");
-			
-			this.el = "#nothing";
-			
-			var html, itm;
-			
 			// Render collection
 			this.model.each(function (itm)
 			{
