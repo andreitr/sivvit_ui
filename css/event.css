@@ -20,11 +20,23 @@
 #timeline-container
 {
     width: auto;
-    height: 130px;
+    height: 110px;
     display: block;
     overflow: hidden;
 }
-
+#timline-label
+{
+	display:block; 
+	height: 20px;
+}
+#timeline-maxtime
+{
+	float:left;
+}
+#timeline-maxtime
+{
+	float: right;
+}
 #timeline-slider
 {
 	height:10px;

@@ -333,7 +333,7 @@ SIVVIT = $(document).ready(function(jQuery)
 		render : function()
 		{
 		 	this.drawHistogram();
-		 	this.drawSlider();	
+		 	this.drawSlider();
 		},
 		
 		drawSlider: function ()
@@ -347,9 +347,12 @@ SIVVIT = $(document).ready(function(jQuery)
 				values: [ this.model.get("startRange").getTime(), this.model.get("endRange").getTime() ],
 				stop: function (event, ui){ self.onSliderDragged(event, ui)}, 
 			});
+			
+			this.updateDateDisplay();
 		},
 		
-
+		
+		
 		onSliderDragged: function (event, ui)
 		{
 			this.model.set({"startRange": new Date(ui.values[0])});
@@ -365,7 +368,21 @@ SIVVIT = $(document).ready(function(jQuery)
 			{
 				this.updateHistogramBar(this.bars[i]);
 			}
+			
+			this.updateDateDisplay();
 		},
+		
+		updateDateDisplay: function ()
+		{
+			function formatDate(date)
+			{
+				return date.getMonth()+1+"/"+date.getDay()+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+			}
+			
+			$("#timeline-mintime").html(formatDate(this.model.get("startRange")));
+			$("#timeline-maxtime").html(formatDate(this.model.get("endRange")));
+		},
+	
 		
 		// Sets histogram bar colors based on the visible range
 		updateHistogramBar: function (bar)
@@ -393,7 +410,7 @@ SIVVIT = $(document).ready(function(jQuery)
 				
 				maxVal = 10;
 				minVal = 1;
-				maxHeight = $(this.el).height() - 20;
+				maxHeight = $(this.el).height();
 				barXPadding = 0;
 				histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 				barW = ($(this.el).width() - (barXPadding * lenTotal)) / lenTotal;
@@ -450,7 +467,6 @@ SIVVIT = $(document).ready(function(jQuery)
 	jsonModel = new JsonModel();
 	
 	controls = new ControlsView({model:jsonModel});
-	
 	
 	$.getJSON("embed/json/event.json", {}, function(data)
 	{
