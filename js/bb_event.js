@@ -1,6 +1,6 @@
 SIVVIT = $(document).ready(function(jQuery)
 {
-	var mapModel, mapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
+	var mapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
 		
 	/**
 	 * Main container for the loaded JSON data. 
@@ -217,12 +217,12 @@ SIVVIT = $(document).ready(function(jQuery)
 		{
 			if(!this.displayed)
 			{
-				if($("#xxxs").length <= 0)
+				if($("#no-content").length <= 0)
 				{
-					$(this.el).append("<p id=\"xxxs\">No content in filtered timespan.</p>");
+					$(this.el).append("<p id=\"no-content\" style=\"text-align:center\">No content in selected timespan.</p>");
 				}
 			}else{
-				$("#xxxs").remove();
+				$("#no-content").remove();
 			}
 		}
 	});
@@ -421,17 +421,6 @@ SIVVIT = $(document).ready(function(jQuery)
 	});
 
 	
-	/**
-	 * -------------------
-	 * not sure if we even need this model, might as well just set parametes directly on the view.
-	 * I don't see why this model will be ever changed. 
-	 */
-	MapModel = Backbone.Model.extend({
-		defaults: {
-            location: {"lon":0, "lat":0}
-        },
-	});
-	
 	
 	/**
 	 * 
@@ -440,22 +429,15 @@ SIVVIT = $(document).ready(function(jQuery)
 		
 		el: '#mapCanvas',
 	
-		initialize: function (options)
+		render: function (lon, lat)
 		{
-			this.model = options.model;
-			this.model.bind("change", this.render, this);
-		},
-		
-		render: function ()
-		{
-			$(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center="+this.model.get("location").lon+","+this.model.get("location").lat+"&zoom=10&size="+$(this.el).width()+"x"+$(this.el).height()+"&sensor=false\">");
+			$(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center="+lon+","+lat+"&zoom=10&size="+$(this.el).width()+"x"+$(this.el).height()+"&sensor=false\">");
 			$("#mapLabel").append("Red Rocks, Morrison CO");
 		}
 	});
 	
-	
-	mapModel = new MapModel();
-	mapView = new MapView({model:mapModel});
+
+	mapView = new MapView();
 	
 	histModel = new HistogramModel();
 	histView = new HistogramView({model:histModel});
@@ -476,6 +458,6 @@ SIVVIT = $(document).ready(function(jQuery)
 		
 		jsonModel.set(data);
 		
-		mapModel.set({location:jsonModel.get("location")});
+		mapView.render(jsonModel.get("location").lon, jsonModel.get("location").lat);
 	});
 });
