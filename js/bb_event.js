@@ -374,6 +374,7 @@ SIVVIT = $(document).ready(function(jQuery)
 		
 		updateDateDisplay: function ()
 		{
+			
 			function formatDate(date)
 			{
 				return date.getMonth()+1+"/"+date.getDay()+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
