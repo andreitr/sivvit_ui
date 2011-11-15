@@ -1,5 +1,7 @@
-SIVVIT = $(document).ready(function(jQuery)
+SIVVIT = (function(jQuery, json_path)
 {
+	var self = this;
+	
 	var sideMapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
 		
 	/**
@@ -469,7 +471,7 @@ SIVVIT = $(document).ready(function(jQuery)
 	
 	controls = new ControlsView({model:jsonModel});
 	
-	$.getJSON("embed/json/event.json", {}, function(data)
+	$.getJSON(json_path, {}, function(data)
 	{
 		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate), startRange:new Date(data.startDate), endRange:new Date(data.endDate)});
 		
