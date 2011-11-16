@@ -24,6 +24,8 @@ SIVVIT = (function(jQuery, json_path)
 			histogram: {global:[], media:[], post:[]},
 			content: [],  
 		}
+		
+		
 	})
 	
 	/**
@@ -310,8 +312,8 @@ SIVVIT = (function(jQuery, json_path)
 		{
 			startDate: new Date(),
 			endDate: new Date(),
-			startRange: new Date(), 
-			endRange: new Date(),
+			startRange: null,
+			endRange: null,
 			histogram:null
 		}
 	});
@@ -468,15 +470,33 @@ SIVVIT = (function(jQuery, json_path)
 	mediaView = new MediaView();
 	
 	jsonModel = new JsonModel();
+	jsonModel.url = json_path;
+	jsonModel.fetch();
+	
+	// setInterval(function() {
+  		// jsonModel.fetch();
+	// }, 10000);
+	
+	jsonModel.bind("change", function ()
+	{
+		// Update histogram
+		if(jsonModel.hasChanged("startDate") || jsonModel.hasChanged("endDate"))
+		{
+			histModel.set({startDate: new Date(jsonModel.get("startDate")), endDate: new Date(jsonModel.get("endDate"))});
+			
+			// Set range only for the first time. 
+			if(!histModel.get("startRange")) histModel.set({startRange: new Date(jsonModel.get("startDate"))});
+			if(!histModel.get("endRange")) histModel.set({endRange: new Date(jsonModel.get("endDate"))});
+		}
+		
+		// Update location
+		if(jsonModel.hasChanged("location"))
+		{
+			sideMapView.render(jsonModel.get("location").lon, jsonModel.get("location").lat);
+		}
+	})
+	
 	
 	controls = new ControlsView({model:jsonModel});
 	
-	$.getJSON(json_path, {}, function(data)
-	{
-		histModel.set({startDate:new Date(data.startDate), endDate:new Date(data.endDate), startRange:new Date(data.startDate), endRange:new Date(data.endDate)});
-		
-		jsonModel.set(data);
-		
-		sideMapView.render(jsonModel.get("location").lon, jsonModel.get("location").lat);
-	});
 });
