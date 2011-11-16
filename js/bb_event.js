@@ -60,34 +60,38 @@ SIVVIT = (function(jQuery, json_path)
 		
 		el: "body",
 		
+		events: 
+		{
+			"click #allBtn": 	"render",
+			"click #postBtn": 	"render",
+			"click #mediaBtn": 	"render",
+			"click #mapBtn": 	"render",
+		},
+		
 		prevButton: null,
 		activeButton: null,
 		
 		activeView:null,
 		prevView:null,
 		
-		initialize: function (options)
+		render: function (event)
 		{
-			this.model = options.model;
-			this.model.bind("change", this.render, this);
+			if(this.activeView)
+			{
+				// Reset active model
+				this.activeView.reset();
+				this.updateView(event ? event : {target:{id:"allBtn"}});
+			}else{
+				this.renderView(event ? event : {target:{id:"allBtn"}});
+			}
 		},
 		
-		render: function ()
+		/**
+		 * Renders view when a user clicks on one of the buttons.
+		 */
+		renderView: function(event)
 		{
-			// Select first button by default
-			$("#allBtn").click();
-		},
-		
-		events: 
-		{
-			"click #allBtn": "onButtonClicked",
-			"click #postBtn": "onButtonClicked",
-			"click #mediaBtn": "onButtonClicked",
-			"click #mapBtn": "onButtonClicked",
-		},
-		
-		onButtonClicked: function(event)
-		{
+			// Don't do anything if a view is already rendered
 			if(this.activeButton == "#"+event.target.id) return;
 			
 			this.prevButton = this.activeButton;
@@ -108,6 +112,14 @@ SIVVIT = (function(jQuery, json_path)
 				this.prevView.unbind({temporal:histModel});
 			}
 			
+			this.updateView(event);
+		},
+		
+		/**
+		 * Updates view properties and re-renders the view.
+		 */
+		updateView: function (event)
+		{
 			switch(event.target.id)
 			{
 				case "allBtn":
@@ -123,13 +135,14 @@ SIVVIT = (function(jQuery, json_path)
 				case "mediaBtn":
 					histModel.set({histogram:this.model.get("histogram").media});
 					this.activeView = mediaView;
-					break;		
+					break;
 			}
 			
 			if(!this.activeView.model){	this.activeView.model = this.populateContent(this.model.get("content"));}
 			this.activeView.bind({temporal:histModel});
 			this.activeView.render();
 		},
+	
 		
 		/**
 		 * Populates content data
@@ -167,6 +180,11 @@ SIVVIT = (function(jQuery, json_path)
 		{
 			options.temporal.unbind("change:startRange", this.filter, this);
 			options.temporal.unbind("change:endRange", this.filter, this)
+		},
+		
+		reset: function ()
+		{
+			this.model = null;
 		},
 		
 		render: function ()
@@ -462,7 +480,8 @@ SIVVIT = (function(jQuery, json_path)
 		}
 	});
 	
-
+	controls = new ControlsView();
+	
 	sideMapView = new SidebarMapView();
 	
 	histModel = new HistogramModel();
@@ -472,6 +491,7 @@ SIVVIT = (function(jQuery, json_path)
 	postView = new PostView();
 	mediaView = new MediaView();
 	
+		
 	jsonModel = new JsonModel();
 	jsonModel.url = json_path;
 	jsonModel.fetch();
@@ -498,7 +518,8 @@ SIVVIT = (function(jQuery, json_path)
 		{
 			sideMapView.render(jsonModel.get("location").lon, jsonModel.get("location").lat);
 		}
+		
+		if(!controls.model) controls.model = jsonModel;
+		controls.render();
 	});
-	
-	controls = new ControlsView({model:jsonModel});
 });
