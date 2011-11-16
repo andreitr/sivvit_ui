@@ -49,7 +49,7 @@ SIVVIT = (function(jQuery, json_path)
 		
 		// Sort content by timestamp
 		comparator: function(itm) {
-  			return itm.get("timestamp");
+  			return - itm.get("timestamp");
 		},
 	});
 	
@@ -76,11 +76,11 @@ SIVVIT = (function(jQuery, json_path)
 		
 		render: function (event)
 		{
-			if(this.activeView)
+			if(this.activeView && !event)
 			{
 				// Reset active model
 				this.activeView.reset();
-				this.updateView(event ? event : {target:{id:"allBtn"}});
+				this.updateView({target:{id:"allBtn"}});
 			}else{
 				this.renderView(event ? event : {target:{id:"allBtn"}});
 			}
