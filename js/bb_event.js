@@ -23,10 +23,8 @@ SIVVIT = (function(jQuery, json_path)
 			stats: { total:0, posts:0, images:0, videos:0 },
 			histogram: {global:[], media:[], post:[]},
 			content: [],  
-		}
-		
-		
-	})
+		}		
+	});
 	
 	/**
 	 * Generic conetnt model.
@@ -128,7 +126,7 @@ SIVVIT = (function(jQuery, json_path)
 					break;		
 			}
 			
-			if(!this.activeView.model){ this.activeView.model = this.populateContent(this.model.get("content"));}
+			if(!this.activeView.model){	this.activeView.model = this.populateContent(this.model.get("content"));}
 			this.activeView.bind({temporal:histModel});
 			this.activeView.render();
 		},
@@ -228,6 +226,11 @@ SIVVIT = (function(jQuery, json_path)
 			}else{
 				$("#no-content").remove();
 			}
+		},
+		
+		update: function ()
+		{
+			$(this.el).prepend("New content is available");
 		}
 	});
 	
@@ -473,9 +476,10 @@ SIVVIT = (function(jQuery, json_path)
 	jsonModel.url = json_path;
 	jsonModel.fetch();
 	
-	// setInterval(function() {
-  		// jsonModel.fetch();
-	// }, 10000);
+	setInterval(function() {
+  		jsonModel.fetch();
+	}, 10000);
+	
 	
 	jsonModel.bind("change", function ()
 	{
@@ -494,9 +498,7 @@ SIVVIT = (function(jQuery, json_path)
 		{
 			sideMapView.render(jsonModel.get("location").lon, jsonModel.get("location").lat);
 		}
-	})
-	
+	});
 	
 	controls = new ControlsView({model:jsonModel});
-	
 });
