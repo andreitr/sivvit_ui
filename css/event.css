@@ -13,12 +13,21 @@
 	padding:2px 3px 1px 3px;
 }
 
+#pending-content
+{
+	text-align: center;
+	padding: 5px;
+	border: 1px solid #027B9E;
+	margin-bottom:10px; 
+}
+
 ol 
 {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
+
 
 
 #timeline-container

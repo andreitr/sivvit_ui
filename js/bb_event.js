@@ -79,8 +79,7 @@ SIVVIT = (function(jQuery, json_path)
 			if(this.activeView && !event)
 			{
 				// Reset active model
-				this.activeView.reset();
-				this.updateView({target:{id:"allBtn"}});
+				this.activeView.update(this.populateContent(this.model.get("content")));
 			}else{
 				this.renderView(event ? event : {target:{id:"allBtn"}});
 			}
@@ -112,14 +111,6 @@ SIVVIT = (function(jQuery, json_path)
 				this.prevView.unbind({temporal:histModel});
 			}
 			
-			this.updateView(event);
-		},
-		
-		/**
-		 * Updates view properties and re-renders the view.
-		 */
-		updateView: function (event)
-		{
 			switch(event.target.id)
 			{
 				case "allBtn":
@@ -138,11 +129,14 @@ SIVVIT = (function(jQuery, json_path)
 					break;
 			}
 			
-			if(!this.activeView.model){	this.activeView.model = this.populateContent(this.model.get("content"));}
+			if(!this.activeView.model){	
+				this.activeView.model = this.populateContent(this.model.get("content"));
+			}
+			
 			this.activeView.bind({temporal:histModel});
 			this.activeView.render();
 		},
-	
+		
 		
 		/**
 		 * Populates content data
@@ -167,6 +161,9 @@ SIVVIT = (function(jQuery, json_path)
 		// Rendered elements
 		rendered:[],
 		
+		// Newly added elements
+		pending:[],
+		
 		// Set to true when al least of content is displayed
 		displayed:false,
 		
@@ -182,11 +179,6 @@ SIVVIT = (function(jQuery, json_path)
 			options.temporal.unbind("change:endRange", this.filter, this)
 		},
 		
-		reset: function ()
-		{
-			this.model = null;
-		},
-		
 		render: function ()
 		{
 			// Clear out previous content 
@@ -200,8 +192,17 @@ SIVVIT = (function(jQuery, json_path)
 			
 			this.display();
 			
+			if(this.pending.length > 0){
+				this.showPending();
+			}
+			
 			this.checkFiltered();
 		},		
+		
+		update: function (collection)
+		{
+			throw new Error("Method must be overriden by a subclass");
+		},
 		
 		// Loops throught the model displays content
 		display: function ()
@@ -246,33 +247,73 @@ SIVVIT = (function(jQuery, json_path)
 			}
 		},
 		
-		update: function ()
+		// Dispalays pending message.
+		showPending: function ()
 		{
-			$(this.el).prepend("New content is available");
+			$(this.el).prepend("<div id=\"pending-content\">"+this.pending.length+" new items.</div>");
+			
+			var self = this;
+			$("#pending-content").click(function (event)
+			{
+				$("#pending-content").remove();
+				self.renderPending();
+			})
+		},
+		
+		// Renders pending content content
+		renderPending: function ()
+		{
+			for(var i=0; i<this.pending.length; i++)
+			{
+				this.rendered.push(this.pending[i]);
+				this.showHide(this.pending[i]);
+				$(this.el).prepend(this.pending[i].html);
+			}
+			
+			// Clear out pending array after rendering
+			this.pending = [];
 		}
 	});
 	
 	
 	AllView = AbstractView.extend({
 		
+		// Renders the entire collection
 		display: function ()
-		{	
-			// Render collection
+		{
 			this.model.each( function(itm)
 			{
-				if(itm.get("type") == "media")
-				{
-					 html = $.tmpl(mediaView.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				}else if(itm.get("type") == "post"){
-					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				}
-				itm = {timestamp:itm.get("timestamp"), html:html};
+				itm = this.buildTemplate(itm);
 				this.rendered.push(itm);
 				this.showHide(itm);
 				
 				$(this.el).append(html);
 			}, this);
+		},
+		
+		// Adds new items to the pending queue
+		update: function (collection)
+		{
+			var self = this;
+			collection.each(function(itm)
+			{
+				itm = self.buildTemplate(itm);
+				self.pending.push(itm);
+			});
+			this.showPending();
 		}, 
+		
+		// Builds each item, returns {timestamp, html} object
+		buildTemplate: function (itm)
+		{
+			if(itm.get("type") == "media")
+			{
+				 html = $.tmpl(mediaView.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+			}else if(itm.get("type") == "post"){
+				 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+			}
+			return {timestamp:itm.get("timestamp"), html:html};
+		}
 	});
 	
 	
@@ -490,16 +531,17 @@ SIVVIT = (function(jQuery, json_path)
 	allView = new AllView();
 	postView = new PostView();
 	mediaView = new MediaView();
-	
-		
+
 	jsonModel = new JsonModel();
 	jsonModel.url = json_path;
 	jsonModel.fetch();
 	
+
 	setInterval(function() {
-  		jsonModel.fetch();
+		jsonModel.fetch();
 	}, 10000);
-	
+
+
 	
 	jsonModel.bind("change", function ()
 	{
