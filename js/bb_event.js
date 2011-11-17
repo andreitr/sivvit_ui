@@ -132,13 +132,15 @@ SIVVIT = (function(jQuery, json_path)
 			if(!this.activeView.model){	
 				this.activeView.model = this.populateContent(this.model.get("content"));
 			}
-			
 			this.activeView.bind({temporal:histModel});
 			this.activeView.render();
 		},
 		
 		
 		/**
+		 * --- OPTIMIZE ----------------------
+		 * We don't need to generate collections for each separate view.
+		 * 
 		 * Populates content data
 		 */
 		populateContent: function (content)
@@ -188,8 +190,6 @@ SIVVIT = (function(jQuery, json_path)
 			this.el = "#nothing";
 			this.displayed = false;
 			
-			var html, itm;
-			
 			this.display();
 			
 			if(this.pending.length > 0){
@@ -199,15 +199,17 @@ SIVVIT = (function(jQuery, json_path)
 			this.checkFiltered();
 		},		
 		
+		// Adds new items to the pending queue
 		update: function (collection)
 		{
-			throw new Error("Method must be overriden by a subclass");
-		},
-		
-		// Loops throught the model displays content
-		display: function ()
-		{
-			throw new Error("Method must be overriden by a subclass");
+			collection.each(function(itm){
+				itm = this.buildTemplate(itm);
+				this.pending.push(itm);
+			}, this);
+			
+			if(this.pending.length > 0){
+				this.showPending();
+			}
 		},
 
 		// Filters temporal content
@@ -250,14 +252,18 @@ SIVVIT = (function(jQuery, json_path)
 		// Dispalays pending message.
 		showPending: function ()
 		{
-			$(this.el).prepend("<div id=\"pending-content\">"+this.pending.length+" new items.</div>");
-			
 			var self = this;
-			$("#pending-content").click(function (event)
+			
+			if(this.pending.length > 0)
 			{
-				$("#pending-content").remove();
-				self.renderPending();
-			})
+				$(this.el).prepend("<div id=\"pending-content\">"+this.pending.length+" new items.</div>");
+				
+				$("#pending-content").click(function (event)
+				{
+					$("#pending-content").remove();
+					self.renderPending();
+				});
+			}
 		},
 		
 		// Renders pending content content
@@ -269,7 +275,6 @@ SIVVIT = (function(jQuery, json_path)
 				this.showHide(this.pending[i]);
 				$(this.el).prepend(this.pending[i].html);
 			}
-			
 			// Clear out pending array after rendering
 			this.pending = [];
 		}
@@ -287,22 +292,10 @@ SIVVIT = (function(jQuery, json_path)
 				this.rendered.push(itm);
 				this.showHide(itm);
 				
-				$(this.el).append(html);
+				$(this.el).append(itm.html);
 			}, this);
 		},
-		
-		// Adds new items to the pending queue
-		update: function (collection)
-		{
-			var self = this;
-			collection.each(function(itm)
-			{
-				itm = self.buildTemplate(itm);
-				self.pending.push(itm);
-			});
-			this.showPending();
-		}, 
-		
+				
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate: function (itm)
 		{
@@ -326,16 +319,26 @@ SIVVIT = (function(jQuery, json_path)
 			// Render collection
 			this.model.each(function (itm)
 			{
-				if(itm.get("type") == "post")
+				itm = this.buildTemplate(itm);
+				if(itm)
 				{
-					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					itm = {timestamp:itm.get("timestamp"), html:html};
 					this.rendered.push(itm);
 					this.showHide(itm);
-					
-					$(this.el).append(html);
+					$(this.el).append(itm.html);
 				}
 			}, this);
+		}, 
+		
+		// Builds each item, returns {timestamp, html} object
+		buildTemplate: function (itm)
+		{
+			if(itm.get("type") == "post")
+			{
+				html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				return {timestamp:itm.get("timestamp"), html:html};
+			}else{
+				return null;
+			}
 		}
 	});
 	
@@ -343,24 +346,33 @@ SIVVIT = (function(jQuery, json_path)
 	MediaView = AbstractView.extend({
 		
 		templateAll: "<li id='post-list'><img height='200' src='${content}'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></li>",
-
 		template: "<li id='media-list'><div id='container'><img width='160' src='${content}'></div><div id='footer'>by ${author}</div></li>",
 		
 		display: function ()
-		{	
+		{
 			// Render collection
 			this.model.each(function (itm)
 			{
-				if(itm.get("type") == "media")
+				itm = this.buildTemplate(itm);
+				if(itm)
 				{
-					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					itm = {timestamp:itm.get("timestamp"), html:html};
 					this.rendered.push(itm);
 					this.showHide(itm);
-					
-					$(this.el).append(html);
+					$(this.el).append(itm.html);
 				}
 			}, this);
+		},
+		
+		// Builds each item, returns {timestamp, html} object
+		buildTemplate: function (itm)
+		{
+			if(itm.get("type") == "media")
+			{
+				html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				return {timestamp:itm.get("timestamp"), html:html};
+			}else{
+				return null;
+			}
 		}
 	});
 
@@ -417,13 +429,10 @@ SIVVIT = (function(jQuery, json_path)
 			this.updateDateDisplay();
 		},
 		
-		
-		
 		onSliderDragged: function (event, ui)
 		{
 			this.model.set({"startRange": new Date(ui.values[0])});
 			this.model.set({"endRange": new Date(ui.values[1])});
-			
 			this.updateHistogram();
 		},
 
