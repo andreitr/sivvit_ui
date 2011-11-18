@@ -81,7 +81,7 @@ SIVVIT = (function(jQuery, json_path)
 			var tmp = [];
 			var con = jsonModel.get("content");
 			var len = this.collection ? this.collection.length : 0;
-			var i;
+			var i, itm, pending;
 			
 			if(!this.collection){
 				
@@ -96,12 +96,19 @@ SIVVIT = (function(jQuery, json_path)
 			}else{
 				
 				// Add new items to the exisiting collection
+				pending = 0;
 				
 				for(i = 0; i<con.length; i++){
-					this.collection.add(new ContentModel(con[i]), {at:len +=1, silent:true});
+					itm = new ContentModel(con[i]);
+					this.collection.add(itm, {at:len +=1, silent:true});
+					
+					
+					// Show pending content only for the specific type
+					if(this.activeView.buildTemplate(itm)){
+						pending++;
+					}
 				}
-				
-				if(this.activeView) this.activeView.update(i);
+				if(pending > 0) this.activeView.update(pending);
 			}
 		},
 		
