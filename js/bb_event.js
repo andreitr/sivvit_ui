@@ -49,7 +49,7 @@ SIVVIT = (function(jQuery, json_path)
 		
 		// Sort content by timestamp
 		comparator: function(itm) {
-  			return - itm.get("timestamp");
+  			return itm.get("timestamp");
 		},
 	});
 	
@@ -74,15 +74,41 @@ SIVVIT = (function(jQuery, json_path)
 		activeView:null,
 		prevView:null,
 		
+		collection:null,
+		
+		update: function(){
+			
+			var tmp = [];
+			var con = jsonModel.get("content");
+			var len = this.collection ? this.collection.length : 0;
+			var i;
+			
+			if(!this.collection){
+				
+				// Create new collection	
+				
+				for(i = 0; i<con.length; i++){
+					tmp.push(new ContentModel(con[i]));	
+				}
+				this.collection = new ContentCollection(tmp);
+				this.render();
+
+			}else{
+				
+				// Add new items to the exisiting collection
+				
+				for(i = 0; i<con.length; i++){
+					this.collection.add(new ContentModel(con[i]), {at:len +=1, silent:true});
+				}
+				
+				if(this.activeView) this.activeView.update(i);
+			}
+		},
+		
+		
 		render: function (event)
 		{
-			if(this.activeView && !event)
-			{
-				// Reset active model
-				this.activeView.update(this.populateContent(this.model.get("content")));
-			}else{
-				this.renderView(event ? event : {target:{id:"allBtn"}});
-			}
+			this.renderView(event ? event : {target:{id:"allBtn"}});
 		},
 		
 		/**
@@ -114,71 +140,58 @@ SIVVIT = (function(jQuery, json_path)
 			switch(event.target.id)
 			{
 				case "allBtn":
-					histModel.set({histogram:this.model.get("histogram").global});
+					histModel.set({histogram:jsonModel.get("histogram").global});
 					this.activeView = allView;
 					break;
 					
 				case "postBtn":
-					histModel.set({histogram:this.model.get("histogram").post});
+					histModel.set({histogram:jsonModel.get("histogram").post});
 					this.activeView = postView;
 					break;
 					
 				case "mediaBtn":
-					histModel.set({histogram:this.model.get("histogram").media});
+					histModel.set({histogram:jsonModel.get("histogram").media});
 					this.activeView = mediaView;
 					break;
 			}
-			
-			if(!this.activeView.model){	
-				this.activeView.model = this.populateContent(this.model.get("content"));
-			}
+			this.activeView.model = this.collection;
 			this.activeView.bind({temporal:histModel});
 			this.activeView.render();
 		},
-		
-		
-		/**
-		 * --- OPTIMIZE ----------------------
-		 * We don't need to generate collections for each separate view.
-		 * 
-		 * Populates content data
-		 */
-		populateContent: function (content)
-		{
-			var tmpCollection = [];
-			
-			// Populate content collection
-			for(var i=0; i<content.length; i++)
-			{
-				tmpCollection.push(new ContentModel(content[i]));
-			}
-			return new ContentCollection(tmpCollection);
-		}
 	});
 	
 	
 	AbstractView = Backbone.View.extend(
 	{
 		el:'#dynamic-content',
+		
 		// Rendered elements
 		rendered:[],
-		
-		// Newly added elements
-		pending:[],
 		
 		// Set to true when al least of content is displayed
 		displayed:false,
 		
-		bind: function(options)
-		{
+		bind: function(options){
 			options.temporal.bind("change:startRange", this.filter, this);
 			options.temporal.bind("change:endRange", this.filter, this)
 		},
 		
-		unbind: function (options)
-		{
+		unbind: function (options){
 			options.temporal.unbind("change:startRange", this.filter, this);
 			options.temporal.unbind("change:endRange", this.filter, this)
+		},
+		
+		// Adds new items to the pending queue
+		update: function (pending)
+		{
+			var self = this;
+			$(this.el).prepend("<div id=\"pending-content\">"+pending+" new items.</div>");
+				
+			$("#pending-content").click(function (event)
+			{
+				$("#pending-content").remove();
+				self.render();
+			});
 		},
 		
 		render: function ()
@@ -190,27 +203,12 @@ SIVVIT = (function(jQuery, json_path)
 			this.el = "#nothing";
 			this.displayed = false;
 			
+			this.rendered = [];
+			
 			this.display();
-			
-			if(this.pending.length > 0){
-				this.showPending();
-			}
-			
 			this.checkFiltered();
 		},		
 		
-		// Adds new items to the pending queue
-		update: function (collection)
-		{
-			collection.each(function(itm){
-				itm = this.buildTemplate(itm);
-				this.pending.push(itm);
-			}, this);
-			
-			if(this.pending.length > 0){
-				this.showPending();
-			}
-		},
 
 		// Filters temporal content
 		filter: function ()
@@ -248,36 +246,7 @@ SIVVIT = (function(jQuery, json_path)
 				$("#no-content").remove();
 			}
 		},
-		
-		// Dispalays pending message.
-		showPending: function ()
-		{
-			var self = this;
-			
-			if(this.pending.length > 0)
-			{
-				$(this.el).prepend("<div id=\"pending-content\">"+this.pending.length+" new items.</div>");
-				
-				$("#pending-content").click(function (event)
-				{
-					$("#pending-content").remove();
-					self.renderPending();
-				});
-			}
-		},
-		
-		// Renders pending content content
-		renderPending: function ()
-		{
-			for(var i=0; i<this.pending.length; i++)
-			{
-				this.rendered.push(this.pending[i]);
-				this.showHide(this.pending[i]);
-				$(this.el).prepend(this.pending[i].html);
-			}
-			// Clear out pending array after rendering
-			this.pending = [];
-		}
+	
 	});
 	
 	
@@ -286,6 +255,8 @@ SIVVIT = (function(jQuery, json_path)
 		// Renders the entire collection
 		display: function ()
 		{
+			this.rendered = [];
+			
 			this.model.each( function(itm)
 			{
 				itm = this.buildTemplate(itm);
@@ -439,8 +410,7 @@ SIVVIT = (function(jQuery, json_path)
 		// Updates histogram bars 
 		updateHistogram: function ()
 		{
-			for(var i=0; i<this.bars.length; i++)
-			{
+			for(var i=0; i<this.bars.length; i++){
 				this.updateHistogramBar(this.bars[i]);
 			}
 			
@@ -570,7 +540,6 @@ SIVVIT = (function(jQuery, json_path)
 			sideMapView.render(jsonModel.get("location").lon, jsonModel.get("location").lat);
 		}
 		
-		if(!controls.model) controls.model = jsonModel;
-		controls.render();
+		controls.update();
 	});
 });

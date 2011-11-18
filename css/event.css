@@ -15,9 +15,11 @@
 
 #pending-content
 {
+	font-weight: bold;
 	text-align: center;
-	padding: 5px;
-	border: 1px solid #027B9E;
+	padding: 10px;
+	border: 2px solid #1e87ff;
+	background-color: #89ddff;
 	margin-bottom:10px; 
 }
 
