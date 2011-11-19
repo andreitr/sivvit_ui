@@ -177,6 +177,7 @@ SIVVIT = (function(jQuery, json_path)
 		// Set to true when al least of content is displayed
 		displayed:false,
 		
+		
 		bind: function(options){
 			options.temporal.bind("change:startRange", this.filter, this);
 			options.temporal.bind("change:endRange", this.filter, this)
@@ -202,7 +203,8 @@ SIVVIT = (function(jQuery, json_path)
 					self.render();
 				});
 			}else{
-				
+				//!!!------FIX ME
+				// This displays only the latest content, needs to display all pending.
 				$("#pending-content").html(pending+" new items");
 			}
 		},
