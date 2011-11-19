@@ -191,14 +191,20 @@ SIVVIT = (function(jQuery, json_path)
 		update: function (pending)
 		{
 			var self = this;
-			$(this.el).prepend("<div id=\"pending-content\">"+pending+" new items</div>");
 			
-			$("#pending-content").hide();
-			$("#pending-content").slideDown("slow");
-			$("#pending-content").click(function (event){
-				$("#pending-content").remove();
-				self.render();
-			});
+			if($("#pending-content").length <= 0)
+			{
+				$(this.el).prepend("<div id=\"pending-content\">"+pending+" new items</div>");
+				$("#pending-content").hide();
+				$("#pending-content").slideDown("slow");
+				$("#pending-content").click(function (event){
+					$("#pending-content").remove();
+					self.render();
+				});
+			}else{
+				
+				$("#pending-content").html(pending+" new items");
+			}
 		},
 		
 		render: function ()
