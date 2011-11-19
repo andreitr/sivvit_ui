@@ -102,7 +102,6 @@ SIVVIT = (function(jQuery, json_path)
 					itm = new ContentModel(con[i]);
 					this.collection.add(itm, {at:len +=1, silent:true});
 					
-					
 					// Show pending content only for the specific type
 					if(this.activeView.buildTemplate(itm)){
 						pending++;
@@ -193,7 +192,10 @@ SIVVIT = (function(jQuery, json_path)
 		{
 			var self = this;
 			$(this.el).prepend("<div id=\"pending-content\">"+pending+" new items.</div>");
-				
+			
+			$("#pending-content").hide();
+			$("#pending-content").slideDown("slow");
+
 			$("#pending-content").click(function (event)
 			{
 				$("#pending-content").remove();
