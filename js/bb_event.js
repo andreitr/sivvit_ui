@@ -22,7 +22,7 @@ SIVVIT = (function(jQuery, json_path)
 			status:0,
 			stats: { total:0, posts:0, images:0, videos:0 },
 			histogram: {global:[], media:[], post:[]},
-			content: [],  
+			content: []
 		}		
 	});
 	
@@ -50,7 +50,7 @@ SIVVIT = (function(jQuery, json_path)
 		// Sort content by timestamp
 		comparator: function(itm) {
   			return itm.get("timestamp");
-		},
+		}
 	});
 	
 	/**
@@ -60,14 +60,6 @@ SIVVIT = (function(jQuery, json_path)
 		
 		el: "body",
 		
-		events: 
-		{
-			"click #allBtn": 	"render",
-			"click #postBtn": 	"render",
-			"click #mediaBtn": 	"render",
-			"click #mapBtn": 	"render",
-		},
-		
 		prevButton: null,
 		activeButton: null,
 		
@@ -75,6 +67,14 @@ SIVVIT = (function(jQuery, json_path)
 		prevView:null,
 		
 		collection:null,
+		
+		events: 
+		{
+			"click #allBtn": 	"render",
+			"click #postBtn": 	"render",
+			"click #mediaBtn": 	"render",
+			"click #mapBtn": 	"render"
+		},
 		
 		update: function(){
 			
@@ -107,7 +107,10 @@ SIVVIT = (function(jQuery, json_path)
 						pending++;
 					}
 				}
-				if(pending > 0) this.activeView.update(pending);
+				if(pending > 0){
+					this.activeView.update(pending);
+				} 
+					
 			}
 		},
 		
@@ -123,7 +126,10 @@ SIVVIT = (function(jQuery, json_path)
 		renderView: function(event)
 		{
 			// Don't do anything if a view is already rendered
-			if(this.activeButton == "#"+event.target.id) return;
+			if(this.activeButton == "#"+event.target.id)
+			{
+				return;	
+			}
 			
 			this.prevButton = this.activeButton;
 			this.activeButton = "#"+event.target.id;
@@ -163,7 +169,7 @@ SIVVIT = (function(jQuery, json_path)
 			this.activeView.model = this.collection;
 			this.activeView.bind({temporal:histModel});
 			this.activeView.render();
-		},
+		}
 	});
 	
 	
@@ -180,12 +186,12 @@ SIVVIT = (function(jQuery, json_path)
 		
 		bind: function(options){
 			options.temporal.bind("change:startRange", this.filter, this);
-			options.temporal.bind("change:endRange", this.filter, this)
+			options.temporal.bind("change:endRange", this.filter, this);
 		},
 		
 		unbind: function (options){
 			options.temporal.unbind("change:startRange", this.filter, this);
-			options.temporal.unbind("change:endRange", this.filter, this)
+			options.temporal.unbind("change:endRange", this.filter, this);
 		},
 		
 		// Adds new items to the pending queue
@@ -260,8 +266,7 @@ SIVVIT = (function(jQuery, json_path)
 			}else{
 				$("#no-content").remove();
 			}
-		},
-	
+		}
 	});
 	
 	
@@ -408,8 +413,10 @@ SIVVIT = (function(jQuery, json_path)
 				range: true,
 				min: this.model.get("startDate").getTime(),
 				max: this.model.get("endDate").getTime(),
-				values: [ this.model.get("startRange").getTime(), this.model.get("endRange").getTime() ],
-				stop: function (event, ui){ self.onSliderDragged(event, ui)}, 
+				values: [ this.model.get("startRange").getTime(), this.model.get("endRange").getTime() ],		
+				stop: function (event, ui) {
+					self.onSliderDragged(event, ui);
+				}
 			});
 			
 			this.updateDateDisplay();
@@ -483,11 +490,9 @@ SIVVIT = (function(jQuery, json_path)
 					percentY = (frame.count / maxVal) * 100;
 					percentX = (new Date(frame.timestamp).getTime()-this.model.get("startDate").getTime()) / (this.model.get("endDate").getTime()-this.model.get("startDate").getTime());
 					
-					barW*Math.round(percentX*(lenTotal-1));
-					
 					barH = Math.round(percentY * maxHeight / 100);
 					barX = barW*Math.round(percentX*(lenTotal-1));
-					barY = Math.round($(this.el).height() - barH)
+					barY = Math.round($(this.el).height() - barH);
 					
 					var bar = histogram.rect(barX, barY, barW, barH).attr({fill:"#333333", "stroke-width" : 0});
 					bar.timestamp = frame.timestamp;
@@ -545,8 +550,12 @@ SIVVIT = (function(jQuery, json_path)
 			histModel.set({startDate: new Date(jsonModel.get("startDate")), endDate: new Date(jsonModel.get("endDate"))});
 			
 			// Set range only for the first time. 
-			if(!histModel.get("startRange")) histModel.set({startRange: new Date(jsonModel.get("startDate"))});
-			if(!histModel.get("endRange")) histModel.set({endRange: new Date(jsonModel.get("endDate"))});
+			if(!histModel.get("startRange")){
+				histModel.set({startRange: new Date(jsonModel.get("startDate"))});
+			} 
+			if(!histModel.get("endRange")){
+				 histModel.set({endRange: new Date(jsonModel.get("endDate"))});
+			}
 		}
 		
 		// Update location
