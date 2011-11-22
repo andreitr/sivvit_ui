@@ -112,7 +112,14 @@ li#post-list
 
 li#post-list:hover
 {
-	background-color:#fffbde;
+	background-color:#FFFFFF;
+}
+
+li#post-list .item-delete
+{
+	float: right;
+	display: none;
+	cursor: pointer;
 }
 
 li#post-list #content

@@ -303,7 +303,7 @@ SIVVIT = (function(jQuery, json_path)
 	
 	PostView = AbstractView.extend({
 		
-		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id='content'>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id='content'><span class='item-delete' id='deleteBtn'><span class='icon-delete'></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display: function ()
 		{	
@@ -311,11 +311,29 @@ SIVVIT = (function(jQuery, json_path)
 			this.model.each(function (itm)
 			{
 				itm = this.buildTemplate(itm);
-				if(itm)
-				{
-					this.rendered.push(itm);
-					this.showHide(itm);
-					$(this.el).append(itm.html);
+					if(itm !== null)
+					{
+						
+					
+					var self = itm.html;
+					
+					self.find("#deleteBtn").click(function(){
+						self.fadeOut();
+					});
+					
+					itm.html.hover(function(event){
+						self.find("#deleteBtn").show();
+					}, 
+					function(event){
+						self.find("#deleteBtn").hide();
+					});
+					
+					if(itm)
+					{
+						this.rendered.push(itm);
+						this.showHide(itm);
+						$(this.el).append(itm.html);
+					}
 				}
 			}, this);
 		}, 
