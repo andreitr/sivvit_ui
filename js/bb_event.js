@@ -565,5 +565,6 @@ SIVVIT = (function(jQuery, json_path)
 		}
 		
 		controls.update();
+		
 	});
 });
