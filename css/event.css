@@ -109,10 +109,6 @@ li#post-list
 	position: relative;
 }
 
-li#post-list:hover
-{
-	background-color:#FFFFFF;
-}
 
 li#post-list .item-edit
 {

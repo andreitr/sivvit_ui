@@ -273,9 +273,49 @@ SIVVIT = (function(jQuery, json_path)
 			}
 		},
 		
-		deleteItem: function(itm) {
+		initItem: function(itm){
+			
+			var self = this;
+			
+			if(itm !== null){
+				itm.html.find("#del-itm").hide();
+				itm.html.find("#apr-itm").hide();
+						
+				itm.html.find("#del-itm").click(function(){
+					self.deleteItem(itm);
+				});
+						
+				itm.html.find("#apr-itm").click(function(){
+					self.approveItem(itm);
+				});
+						
+				itm.html.hover(function(event){
+						itm.html.find("#del-itm").show();
+						itm.html.find("#apr-itm").show();
+					}, function(event){
+						itm.html.find("#del-itm").hide();
+						itm.html.find("#apr-itm").hide();
+				});
+
+				this.rendered.push(itm);
+				this.showHide(itm);
+					$(this.el).append(itm.html);
+			}
+		},
+		
+		deleteItem: function(itm){
 			itm.html.fadeOut();
 			this.model.remove(itm.model, {silent : true});
+		},
+		
+		approveItem: function(itm){
+			itm.model.set({status:itm.model.get("status") === 1 ? 0 : 1});
+			this.render();
+		},
+		
+		updateItem: function(itm){
+			//update_item.json?id=00002&status=1
+			//delete_item.json?id=00002	
 		}
 	});
 	
@@ -313,40 +353,16 @@ SIVVIT = (function(jQuery, json_path)
 	
 	PostView = AbstractView.extend({
 		
-		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
-
+		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\" id=\"btns\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		tpl: "<li id='post-list' style=\"background-color:#FFCC00\"><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		
 		display: function ()
 		{	
-			var self = this;
 			// Render collection
-			this.model.each(function (itm)
-			{
+			this.model.each(function(itm){
 				itm = this.buildTemplate(itm);
-					if(itm !== null){
-						
-						itm.html.find("#del-itm").hide();
-						itm.html.find("#apr-itm").hide();
-						
-						itm.html.find("#del-itm").click(function(){
-							self.deleteItem(itm);
-						});
-						
-						itm.html.hover(function(event) {
-							itm.html.find("#del-itm").show();
-							itm.html.find("#apr-itm").show();
-						}, function(event) {
-							itm.html.find("#del-itm").hide();
-							itm.html.find("#apr-itm").hide();
-						});
-
-						if(itm) {
-							this.rendered.push(itm);
-							this.showHide(itm);
-							$(this.el).append(itm.html);
-						}
-					}
-				},
-			this);
+				this.initItem(itm);
+			},this);
 		}, 
 		
 		// Builds each item, returns {timestamp, html} object
@@ -354,12 +370,12 @@ SIVVIT = (function(jQuery, json_path)
 		{
 			if(itm.get("type") == "post")
 			{
-				html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				html = $.tmpl(itm.get("status") === 1 ? this.template : this.tpl, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				return {timestamp:itm.get("timestamp"), html:html, model:itm};
 			}else{
 				return null;
 			}
-		}
+		}	
 	});
 	
 	

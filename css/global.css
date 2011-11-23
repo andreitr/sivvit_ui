@@ -174,6 +174,15 @@ span.icon-check:hover
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -240px -143px transparent;
 }
 
+
+span.loader
+{
+	background: url("../img/css/loader.gif");
+	width: 16px;
+	height: 11px;
+	display: inline-block;
+}
+
 img[src*="gravatar.com/avatar"]
 {
 	padding: 2px;
