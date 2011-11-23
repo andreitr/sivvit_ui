@@ -40,7 +40,6 @@ ol
 }
 
 
-
 #timeline-container
 {
     width: auto;
@@ -115,11 +114,12 @@ li#post-list:hover
 	background-color:#FFFFFF;
 }
 
-li#post-list .item-delete
+li#post-list .item-edit
 {
 	float: right;
-	display: none;
-	cursor: pointer;
+	width: 50px;
+	height: 20px;
+	display: block;
 }
 
 li#post-list #content
@@ -146,3 +146,15 @@ li#post-list #meta
 	color: #999999;
 	width: 400px;
 }
+
+/** Override global icons */
+span.icon-delete
+{
+	cursor: pointer;
+}
+
+span.icon-check
+{
+	cursor: pointer;
+}
+

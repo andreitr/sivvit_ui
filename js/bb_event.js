@@ -303,7 +303,7 @@ SIVVIT = (function(jQuery, json_path)
 	
 	PostView = AbstractView.extend({
 		
-		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id='content'><span class='item-delete' id='deleteBtn'><span class='icon-delete'></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display: function ()
 		{	
@@ -311,31 +311,27 @@ SIVVIT = (function(jQuery, json_path)
 			this.model.each(function (itm)
 			{
 				itm = this.buildTemplate(itm);
-					if(itm !== null)
-					{
+					if(itm !== null){
 						
-					
-					var self = itm.html;
-					
-					self.find("#deleteBtn").click(function(){
-						self.fadeOut();
-					});
-					
-					itm.html.hover(function(event){
-						self.find("#deleteBtn").show();
-					}, 
-					function(event){
-						self.find("#deleteBtn").hide();
-					});
-					
-					if(itm)
-					{
-						this.rendered.push(itm);
-						this.showHide(itm);
-						$(this.el).append(itm.html);
+						itm.html.find("#del-itm").hide();
+						itm.html.find("#apr-itm").hide();
+						
+						itm.html.hover(function(event) {
+							itm.html.find("#del-itm").show();
+							itm.html.find("#apr-itm").show();
+						}, function(event) {
+							itm.html.find("#del-itm").hide();
+							itm.html.find("#apr-itm").hide();
+						});
+
+						if(itm) {
+							this.rendered.push(itm);
+							this.showHide(itm);
+							$(this.el).append(itm.html);
+						}
 					}
-				}
-			}, this);
+				},
+			this);
 		}, 
 		
 		// Builds each item, returns {timestamp, html} object
@@ -559,7 +555,6 @@ SIVVIT = (function(jQuery, json_path)
 	}, 10000);
 
 
-	
 	jsonModel.bind("change", function ()
 	{
 		// Update histogram

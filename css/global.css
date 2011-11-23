@@ -129,7 +129,7 @@ a:link
     background: #333333;
 }
 
-span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-delete
+span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete
 {
 	margin:0 5px 0 5px;
     height: 11px;
@@ -154,7 +154,6 @@ span.icon-event
 	 background: url("../img/css/sprite-icons.png") no-repeat scroll -81px -33px transparent;
 	 width: 14px;
 }
-
 span.icon-delete
 {
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -272px -14px transparent;
@@ -163,6 +162,16 @@ span.icon-delete
 span.icon-delete:hover
 {
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -141px transparent;
+}
+span.icon-check
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -256px -143px transparent;
+	width: 12px;
+	height: 12px;
+}
+span.icon-check:hover
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -240px -143px transparent;
 }
 
 img[src*="gravatar.com/avatar"]
