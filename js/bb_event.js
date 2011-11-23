@@ -32,6 +32,9 @@ SIVVIT = (function(jQuery, json_path)
 	ContentModel = Backbone.Model.extend({
 		defaults:
 		{
+			id:null,
+			cid:null,
+			status:null,
 			type:null,
 			location:[], 
 			content:null,
@@ -81,14 +84,16 @@ SIVVIT = (function(jQuery, json_path)
 			var tmp = [];
 			var con = jsonModel.get("content");
 			var len = this.collection ? this.collection.length : 0;
-			var i, itm, pending;
+			var i, itm, pending, model;
 			
 			if(!this.collection){
 				
 				// Create new collection	
 				
 				for(i = 0; i<con.length; i++){
-					tmp.push(new ContentModel(con[i]));	
+					model = new ContentModel(con[i]);
+					model.set({cid:i});
+					tmp.push(model);	
 				}
 				this.collection = new ContentCollection(tmp);
 				this.render();
@@ -100,6 +105,7 @@ SIVVIT = (function(jQuery, json_path)
 				
 				for(i = 0; i<con.length; i++){
 					itm = new ContentModel(con[i]);
+					console.log(itm.get(".cid"));
 					this.collection.add(itm, {at:len +=1, silent:true});
 					
 					// Show pending content only for the specific type
@@ -307,6 +313,7 @@ SIVVIT = (function(jQuery, json_path)
 
 		display: function ()
 		{	
+			var self = this;
 			// Render collection
 			this.model.each(function (itm)
 			{
@@ -315,6 +322,11 @@ SIVVIT = (function(jQuery, json_path)
 						
 						itm.html.find("#del-itm").hide();
 						itm.html.find("#apr-itm").hide();
+						
+						
+						itm.html.find("#del-itm").click(function(){
+							self.deleteItem(itm);
+						});
 						
 						itm.html.hover(function(event) {
 							itm.html.find("#del-itm").show();
@@ -334,13 +346,19 @@ SIVVIT = (function(jQuery, json_path)
 			this);
 		}, 
 		
+		deleteItem: function(itm){
+			itm.html.fadeOut();
+			//this.model.remove(this.model.at(itm.cid), {silent:true});
+
+		},
+		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate: function (itm)
 		{
 			if(itm.get("type") == "post")
 			{
 				html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				return {timestamp:itm.get("timestamp"), html:html};
+				return {timestamp:itm.get("timestamp"), html:html, cid:itm.get("cid")};
 			}else{
 				return null;
 			}
