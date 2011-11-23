@@ -33,7 +33,6 @@ SIVVIT = (function(jQuery, json_path)
 		defaults:
 		{
 			id:null,
-			cid:null,
 			status:null,
 			type:null,
 			location:[], 
@@ -272,6 +271,11 @@ SIVVIT = (function(jQuery, json_path)
 			}else{
 				$("#no-content").remove();
 			}
+		},
+		
+		deleteItem: function(itm) {
+			itm.html.fadeOut();
+			this.model.remove(itm.model, {silent : true});
 		}
 	});
 	
@@ -302,7 +306,7 @@ SIVVIT = (function(jQuery, json_path)
 			}else if(itm.get("type") == "post"){
 				 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 			}
-			return {timestamp:itm.get("timestamp"), html:html};
+			return {timestamp:itm.get("timestamp"), html:html, model:itm};
 		}
 	});
 	
@@ -322,7 +326,6 @@ SIVVIT = (function(jQuery, json_path)
 						
 						itm.html.find("#del-itm").hide();
 						itm.html.find("#apr-itm").hide();
-						
 						
 						itm.html.find("#del-itm").click(function(){
 							self.deleteItem(itm);
@@ -346,19 +349,13 @@ SIVVIT = (function(jQuery, json_path)
 			this);
 		}, 
 		
-		deleteItem: function(itm){
-			itm.html.fadeOut();
-			//this.model.remove(this.model.at(itm.cid), {silent:true});
-
-		},
-		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate: function (itm)
 		{
 			if(itm.get("type") == "post")
 			{
 				html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				return {timestamp:itm.get("timestamp"), html:html, cid:itm.get("cid")};
+				return {timestamp:itm.get("timestamp"), html:html, model:itm};
 			}else{
 				return null;
 			}
@@ -392,7 +389,7 @@ SIVVIT = (function(jQuery, json_path)
 			if(itm.get("type") == "media")
 			{
 				html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				return {timestamp:itm.get("timestamp"), html:html};
+				return {timestamp:itm.get("timestamp"), html:html, model:itm};
 			}else{
 				return null;
 			}
