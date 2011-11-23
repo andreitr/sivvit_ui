@@ -330,10 +330,7 @@ SIVVIT = (function(jQuery, json_path)
 			this.model.each( function(itm)
 			{
 				itm = this.buildTemplate(itm);
-				this.rendered.push(itm);
-				this.showHide(itm);
-				
-				$(this.el).append(itm.html);
+				this.initItem(itm);
 			}, this);
 		},
 				
@@ -354,7 +351,7 @@ SIVVIT = (function(jQuery, json_path)
 	PostView = AbstractView.extend({
 		
 		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\" id=\"btns\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
-		tpl: "<li id='post-list' style=\"background-color:#FFCC00\"><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		tpl: "<li id=\"pending-list\"><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 		
 		display: function ()
 		{	

@@ -99,7 +99,8 @@ li#media-list #footer
 }
 
 
-li#post-list
+
+li#post-list, #pending-list
 {
 	min-height: 50px;
 	width: 100%;
@@ -109,8 +110,13 @@ li#post-list
 	position: relative;
 }
 
+li#pending-list
+{
+	background-color: #FFFBDE;	
+}
 
-li#post-list .item-edit
+
+.item-edit
 {
 	float: right;
 	width: 50px;
@@ -118,7 +124,7 @@ li#post-list .item-edit
 	display: block;
 }
 
-li#post-list #content
+#content
 {
 	width: auto;
 	margin-left:58px;
@@ -126,7 +132,7 @@ li#post-list #content
 	word-wrap: break-word;
 }
 
-li#post-list #avatar
+#avatar
 {
 	float: left;
 	width: 48px;
@@ -134,7 +140,7 @@ li#post-list #avatar
 	text-align: right;
 }
 
-li#post-list #meta
+#meta
 {
 	font-size: 12px;
 	margin-top:10px;
