@@ -129,7 +129,7 @@ a:link
     background: #333333;
 }
 
-span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete
+span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live
 {
 	margin:0 5px 0 5px;
     height: 11px;
@@ -148,6 +148,12 @@ span.icon-user
 span.icon-time
 {
 	 background: url("../img/css/sprite-icons.png") no-repeat scroll -191px -14px transparent;
+}
+span.icon-live
+{
+	 background: url("../img/css/timer.gif");
+	 width: 16px;
+	 height: 16px;
 }
 span.icon-event
 {
