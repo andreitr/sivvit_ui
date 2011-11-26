@@ -60,6 +60,22 @@
 			}
 		});
 		
+				
+		/**
+		 * 
+		 */
+		HistogramModel = Backbone.Model.extend({
+			defaults:
+			{
+				startDate: new Date(),
+				endDate: new Date(),
+				startRange: null,
+				endRange: null,
+				histogram:null
+			}
+		});
+		
+		
 		/**
 		 * Controls general view. 
 		 */
@@ -359,7 +375,7 @@
 			{
 				if(itm.get("type") == "media")
 				{
-					 html = $.tmpl(mediaView.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					 html = $.tmpl(mediaView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}else if(itm.get("type") == "post"){
 					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}
@@ -394,11 +410,18 @@
 		});
 		
 		
+		PendingView = AbstractView.extend({
+			template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>"
+			
+			
+		});
+		
+		
 		MediaView = AbstractView.extend({
 		
-			templateAll: "<li id='post-list'><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media-container\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></li>",
-			template: "<li id='media-list'><div id='container'><img width='160' src='${content}'></div><div id='footer'>by ${author} <div class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></div></div></li>",
-		
+			template: "<li id='post-list'><div id='media-content'><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
+			
+			
 			display: function ()
 			{
 				// Render collection
@@ -414,30 +437,14 @@
 			{
 				if(itm.get("type") == "media")
 				{
-					html = $.tmpl(this.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 					return {timestamp:itm.get("timestamp"), html:html, model:itm};
 				}else{
 					return null;
 				}
 			}
 		});
-	
-		
-		
-		/**
-		 * 
-		 */
-		HistogramModel = Backbone.Model.extend({
-			defaults:
-			{
-				startDate: new Date(),
-				endDate: new Date(),
-				startRange: null,
-				endRange: null,
-				histogram:null
-			}
-		});
-		
+
 		
 		/**
 		 * 
