@@ -1,7 +1,5 @@
-SIVVIT = (function(jQuery, json_path)
+var SIVVIT = function(jQuery, json_path)
 {
-	var self = this;
-	
 	var sideMapView, histModel, histView, postView, mediaView, allView, jsonModel, controls;
 		
 	/**
@@ -45,7 +43,9 @@ SIVVIT = (function(jQuery, json_path)
 		}
 	});
 	
-	
+	/**
+	 * 
+	 */
 	ContentCollection = Backbone.Collection.extend({
 		model:ContentModel,
 		
@@ -115,7 +115,6 @@ SIVVIT = (function(jQuery, json_path)
 				if(pending > 0){
 					this.activeView.update(pending);
 				} 
-					
 			}
 		},
 		
@@ -131,8 +130,7 @@ SIVVIT = (function(jQuery, json_path)
 		renderView: function(event)
 		{
 			// Don't do anything if a view is already rendered
-			if(this.activeButton == "#"+event.target.id)
-			{
+			if(this.activeButton == "#"+event.target.id){
 				return;	
 			}
 			
@@ -299,7 +297,8 @@ SIVVIT = (function(jQuery, json_path)
 
 				this.rendered.push(itm);
 				this.showHide(itm);
-					$(this.el).append(itm.html);
+				this.showHidePending(itm);
+				$(this.el).append(itm.html);
 			}
 		},
 		
@@ -309,8 +308,18 @@ SIVVIT = (function(jQuery, json_path)
 		},
 		
 		approveItem: function(itm){
+			// toggle status
 			itm.model.set({status:itm.model.get("status") === 1 ? 0 : 1});
-			this.render();
+			this.showHidePending(itm);
+		},
+		
+		showHidePending: function(itm){
+			if(itm.model.get("status") === 1)
+			{
+				itm.html.find("#pending-notice").hide();				
+			}else{
+				itm.html.find("#pending-notice").show();
+			}
 		},
 		
 		updateItem: function(itm){
@@ -350,11 +359,10 @@ SIVVIT = (function(jQuery, json_path)
 	
 	PostView = AbstractView.extend({
 		
-		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\" id=\"btns\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
-		tpl: "<li id=\"pending-list\"><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 		
-		display: function ()
-		{	
+		display: function (){
+				
 			// Render collection
 			this.model.each(function(itm){
 				itm = this.buildTemplate(itm);
@@ -365,21 +373,21 @@ SIVVIT = (function(jQuery, json_path)
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate: function (itm)
 		{
-			if(itm.get("type") == "post")
-			{
-				html = $.tmpl(itm.get("status") === 1 ? this.template : this.tpl, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+			if(itm.get("type") == "post"){
+				html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				return {timestamp:itm.get("timestamp"), html:html, model:itm};
 			}else{
 				return null;
 			}
-		}	
+		}
 	});
 	
 	
 	MediaView = AbstractView.extend({
-		
+	
 		templateAll: "<li id='post-list'><img height='200' src='${content}'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></li>",
 		template: "<li id='media-list'><div id='container'><img width='160' src='${content}'></div><div id='footer'>by ${author}</div></li>",
+	
 		
 		display: function ()
 		{
@@ -546,7 +554,6 @@ SIVVIT = (function(jQuery, json_path)
 	});
 
 	
-	
 	/**
 	 * Display static map in the sidebar. 
 	 * Not sure that we even need this view. 
@@ -576,13 +583,12 @@ SIVVIT = (function(jQuery, json_path)
 	jsonModel = new JsonModel();
 	jsonModel.url = json_path;
 	jsonModel.fetch();
-	
-
+		
 	setInterval(function() {
 		jsonModel.fetch();
 	}, 10000);
 
-
+	
 	jsonModel.bind("change", function ()
 	{
 		// Update histogram
@@ -608,4 +614,4 @@ SIVVIT = (function(jQuery, json_path)
 		controls.update();
 		
 	});
-});
+};

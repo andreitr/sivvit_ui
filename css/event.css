@@ -94,7 +94,7 @@ li#media-list #footer
 
 
 
-li#post-list, #pending-list
+li#post-list
 {
 	min-height: 50px;
 	width: 100%;
@@ -104,13 +104,7 @@ li#post-list, #pending-list
 	position: relative;
 }
 
-li#pending-list
-{
-	background-color: #FFFBDE;	
-}
-
-
-.item-edit
+li#post-list .item-edit
 {
 	float: right;
 	width: 50px;
@@ -118,7 +112,18 @@ li#pending-list
 	display: block;
 }
 
-#content
+#pending-notice
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -158px transparent;
+	width: 55px;
+	height: 18px;
+	display: block;
+	position: absolute;
+	top:20px;
+	margin-left: 6px;
+}
+
+li#post-list #content
 {
 	width: auto;
 	margin-left:58px;
@@ -126,7 +131,7 @@ li#pending-list
 	word-wrap: break-word;
 }
 
-#avatar
+li#post-list #avatar
 {
 	float: left;
 	width: 48px;
@@ -134,7 +139,7 @@ li#pending-list
 	text-align: right;
 }
 
-#meta
+li#post-list #meta
 {
 	font-size: 12px;
 	margin-top:10px;
