@@ -83,7 +83,7 @@ var SIVVIT = function(jQuery, json_path)
 			var tmp = [];
 			var con = jsonModel.get("content");
 			var len = this.collection ? this.collection.length : 0;
-			var i, itm, pending, model;
+			var i, itm, newCount, model;
 			
 			if(!this.collection){
 				
@@ -100,7 +100,7 @@ var SIVVIT = function(jQuery, json_path)
 			}else{
 				
 				// Add new items to the exisiting collection
-				pending = 0;
+				newCount = 0;
 				
 				for(i = 0; i<con.length; i++){
 					itm = new ContentModel(con[i]);
@@ -109,11 +109,11 @@ var SIVVIT = function(jQuery, json_path)
 					
 					// Show pending content only for the specific type
 					if(this.activeView.buildTemplate(itm)){
-						pending++;
+						newCount++;
 					}
 				}
-				if(pending > 0){
-					this.activeView.update(pending);
+				if(newCount > 0){
+					this.activeView.update(newCount);
 				} 
 			}
 		},
@@ -182,6 +182,7 @@ var SIVVIT = function(jQuery, json_path)
 		
 		// Rendered elements
 		rendered:[],
+		newCount:0,
 		
 		// Set to true when al least of content is displayed
 		displayed:false,
@@ -198,23 +199,25 @@ var SIVVIT = function(jQuery, json_path)
 		},
 		
 		// Adds new items to the pending queue
-		update: function (pending)
+		update: function (count)
 		{
 			var self = this;
 			
-			if($("#pending-content").length <= 0)
+			if($("#new-content").length <= 0)
 			{
-				$(this.el).prepend("<div id=\"pending-content\">"+pending+" new items</div>");
-				$("#pending-content").hide();
-				$("#pending-content").slideDown("slow");
-				$("#pending-content").click(function (event){
-					$("#pending-content").remove();
+				this.newCount = count;
+				$(this.el).prepend("<div id=\"new-content\">"+this.newCount+" new items</div>");
+				$("#new-content").hide();
+				$("#new-content").slideDown("slow");
+				$("#new-content").click(function (event){
+					$("#new-content").remove();
 					self.render();
+					self.newCount = 0;
 				});
 			}else{
 				//!!!------FIX ME
 				// This displays only the latest content, needs to display all pending.
-				$("#pending-content").html(pending+" new items");
+				$("#new-content").html((this.newCount+count)+" new items");
 			}
 		},
 		
@@ -275,6 +278,8 @@ var SIVVIT = function(jQuery, json_path)
 			
 			var self = this;
 			
+			// Add session check. 
+			// Don't Call this functionality of a user is not logged in.
 			if(itm !== null){
 				itm.html.find("#del-itm").hide();
 				itm.html.find("#apr-itm").hide();
@@ -295,9 +300,10 @@ var SIVVIT = function(jQuery, json_path)
 						itm.html.find("#apr-itm").hide();
 				});
 
-				this.rendered.push(itm);
-				this.showHide(itm);
 				this.showHidePending(itm);
+				
+				this.showHide(itm);
+				this.rendered.push(itm);
 				$(this.el).append(itm.html);
 			}
 		},
@@ -490,9 +496,7 @@ var SIVVIT = function(jQuery, json_path)
 		
 		updateDateDisplay: function ()
 		{
-			
-			function formatDate(date)
-			{
+			function formatDate(date){
 				return date.getMonth()+1+"/"+date.getDay()+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
 			}
 			
@@ -504,19 +508,17 @@ var SIVVIT = function(jQuery, json_path)
 		// Sets histogram bar colors based on the visible range
 		updateHistogramBar: function (bar)
 		{
-			if(new Date(bar.timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(bar.timestamp).getTime() <= this.model.get("endRange").getTime())
-				{
-					bar.attr({fill:"#333333"});
-				}else{
-					bar.attr({fill:"#CCCCCC"});
-				}
+			if(new Date(bar.timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(bar.timestamp).getTime() <= this.model.get("endRange").getTime()){
+				bar.attr({fill:"#333333"});
+			}else{
+				bar.attr({fill:"#CCCCCC"});
+			}
 		},
 		
 		// Draws histogram
 		drawHistogram: function () 
 		{
-			if(this.model.get("histogram"))
-			{
+			if(this.model.get("histogram")){
 				var barFill, histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding;
 					
 				// Total count of available slots	
