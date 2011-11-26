@@ -42,7 +42,7 @@
 
 "content":[
 {"id":"00001", "status":1, "rank":10, "type":"media","location":[39, -104], "author":"andreitr","timestamp":"Tue Aug 24 01:02:43 +0000 2011","source":"http://www.flickr.com","content":"http://s1-04.twitpicproxy.com/photos/large/437235468.jpg"},
-{"id":"00002", "status":1, "rank":10, "type":"media","location":[39, -104], "author":"andreitr","timestamp":"Tue Aug 24 02:18:00 +0000 2011","source":"http://www.flickr.com","content":"http://desmond.yfrog.com/Himg610/scaled.php?tn=0&server=610&filename=oftam.jpg&xsize=640&ysize=640"},
+{"id":"00002", "status":1, "rank":9, "type":"media","location":[39, -104], "author":"andreitr","timestamp":"Tue Aug 24 02:18:00 +0000 2011","source":"http://www.flickr.com","content":"http://desmond.yfrog.com/Himg610/scaled.php?tn=0&server=610&filename=oftam.jpg&xsize=640&ysize=640"},
 {"id":"00003", "status":1, "rank":9, "type":"media","location":[39, -104], "author":"andreitr","timestamp":"Tue Aug 24 18:00:00 +0000 2011","source":"http://www.flickr.com","content":"http://desmond.yfrog.com/Himg44/scaled.php?tn=0&server=44&filename=lkhsw.jpg&xsize=640&ysize=640"},
 {"id":"00004", "status":0, "rank":8, "type":"media","location":[39, -104], "author":"andreitr","timestamp":"Tue Aug 25 20:10:43 +0000 2011","source":"http://www.flickr.com","content":"http://desmond.yfrog.com/Himg861/scaled.php?tn=0&server=861&filename=o3uol.jpg&xsize=640&ysize=640"},
 {"id":"00005", "status":1, "rank":7, "type":"media","location":[39, -104], "author":"andreitr","timestamp":"Tue Aug 25 20:15:43 +0000 2011","source":"http://www.flickr.com","content":"http://desmond.yfrog.com/Himg576/scaled.php?tn=0&server=576&filename=6fjrv.jpg&xsize=640&ysize=640"},

@@ -391,8 +391,8 @@ var SIVVIT = function(jQuery, json_path)
 	
 	MediaView = AbstractView.extend({
 	
-		templateAll: "<li id='post-list'><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><img height='200' src='${content}'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></li>",
-		template: "<li id='media-list'><div id='container'><img width='160' src='${content}'></div><div id='footer'>by ${author}</div></li>",
+		templateAll: "<li id='post-list'><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media-container\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></li>",
+		template: "<li id='media-list'><div id='container'><img width='160' src='${content}'></div><div id='footer'>by ${author} <div class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span></div></div></li>",
 	
 		display: function ()
 		{
@@ -400,12 +400,7 @@ var SIVVIT = function(jQuery, json_path)
 			this.model.each(function (itm)
 			{
 				itm = this.buildTemplate(itm);
-				if(itm)
-				{
-					this.rendered.push(itm);
-					this.showHide(itm);
-					$(this.el).append(itm.html);
-				}
+				this.initItem(itm);
 			}, this);
 		},
 		
@@ -414,7 +409,7 @@ var SIVVIT = function(jQuery, json_path)
 		{
 			if(itm.get("type") == "media")
 			{
-				html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				html = $.tmpl(this.templateAll, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				return {timestamp:itm.get("timestamp"), html:html, model:itm};
 			}else{
 				return null;
