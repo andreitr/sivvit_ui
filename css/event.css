@@ -66,11 +66,6 @@ li#post-list
 	position: relative;
 }
 
-li#post-list:hover
-{
-	background-color:#f8f8f8;
-}
-
 .item-edit
 {
 	float: right;
@@ -106,10 +101,12 @@ li#post-list #media-content
 
 li#post-list #media
 {
+	padding:5px;
 	width: 300px;
 	height: 160px;
 	overflow: hidden;
-  	background-color: #000000;
+  	background-color: #EDEDED;
+  	border:1px solid #CCCCCC;
   	margin-bottom:10px;
   	text-align: center;
 }

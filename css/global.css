@@ -212,6 +212,7 @@ img[src*="gravatar.com/avatar"]
 	margin: 0 0 10px ;
 	color: #FFFFFF;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 .tabBtn:hover

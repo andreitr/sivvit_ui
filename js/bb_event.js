@@ -81,22 +81,24 @@
 		 */
 		ControlsView = Backbone.View.extend({
 			
-			el: "body",
+			el: "#navigation-content",
 			
 			prevButton: null,
 			activeButton: null,
-			
 			activeView:null,
 			prevView:null,
 			
 			collection:null,
+			
+			pendingCount:0,
 			
 			events: 
 			{
 				"click #allBtn": 	"render",
 				"click #postBtn": 	"render",
 				"click #mediaBtn": 	"render",
-				"click #mapBtn": 	"render"
+				"click #mapBtn": 	"render",
+				"click #pendingBtn": 	"render"
 			},
 			
 			update: function(){
@@ -109,11 +111,12 @@
 				if(!this.collection){
 					
 					// Create new collection	
-					
 					for(i = 0; i<con.length; i++){
 						model = new ContentModel(con[i]);
-						model.set({cid:i});
-						tmp.push(model);	
+						tmp.push(model);
+						
+						// We have pending content.	
+						if(model.get("status") === 0){ this.pendingCount +=1; }
 					}
 					this.collection = new ContentCollection(tmp);
 					this.render();
@@ -137,8 +140,20 @@
 						this.activeView.update(newCount);
 					} 
 				}
+				
+				if(this.pendingCount > 0)
+				{
+					$("#pendingBtn").html("Pending "+this.pendingCount+" items");
+				}
 			},
 			
+			updatePending: function(value)
+			{
+				this.pendingCount = value === 0 ? this.pendingCount +1 : this.pendingCount -1;
+				if(this.pendingCount >= 0){
+					$("#pendingBtn").html("Pending "+this.pendingCount+" items");
+				}
+			},
 			
 			render: function (event)
 			{
@@ -189,6 +204,14 @@
 						histModel.set({histogram:jsonModel.get("histogram").media});
 						this.activeView = mediaView;
 						break;
+					
+					case "pendingBtn":
+						// Not sure if we need a separate histogram for pending content? 
+						// Discuss this with Aaron.
+						histModel.set({histogram:jsonModel.get("histogram").global});
+						this.activeView = pendingView;
+						break;
+						
 				}
 				this.activeView.model = this.collection;
 				this.activeView.bind({temporal:histModel});
@@ -236,8 +259,6 @@
 						self.newCount = 0;
 					});
 				}else{
-					//!!!------FIX ME
-					// This displays only the latest content, needs to display all pending.
 					$("#new-content").html((this.newCount+count)+" new items");
 				}
 			},
@@ -284,11 +305,9 @@
 			
 			checkFiltered: function ()
 			{
-				if(!this.displayed)
-				{
-					if($("#no-content").length <= 0)
-					{
-						$(this.el).append("<p id=\"no-content\" style=\"text-align:center\">No content in selected timespan.</p>");
+				if(!this.displayed){
+					if($("#no-content").length <= 0){
+						$(this.el).append("<p id=\"no-content\" style=\"text-align:center;\">No content in selected timespan.</p>");
 					}
 				}else{
 					$("#no-content").remove();
@@ -337,16 +356,18 @@
 			approveItem: function(itm){
 				// toggle status
 				itm.model.set({status:itm.model.get("status") === 1 ? 0 : 1});
+				controls.updatePending(itm.model.get("status"));
 				this.showHidePending(itm);
 			},
 			
 			showHidePending: function(itm){
 				if(itm.model.get("status") === 1)
 				{
-					itm.html.find("#pending-notice").hide();				
+					itm.html.find("#pending-notice").hide();
 				}else{
 					itm.html.find("#pending-notice").show();
 				}
+				
 			},
 			
 			updateItem: function(itm){
@@ -411,16 +432,48 @@
 		
 		
 		PendingView = AbstractView.extend({
-			template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>"
 			
+			// Renders the entire collection
+			display: function ()
+			{
+				this.rendered = [];
+				
+				this.model.each( function(itm)
+				{
+					itm = this.buildTemplate(itm);
+					this.initItem(itm);
+				}, this);
+			},
+					
+			// Builds each item, returns {timestamp, html} object
+			buildTemplate: function (itm){
+				if(itm.get("status") === 0)
+				{
+					if(itm.get("type") === "media")
+					{
+						 html = $.tmpl(mediaView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					}else if(itm.get("type") === "post"){
+						 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					}
+					return {timestamp:itm.get("timestamp"), html:html, model:itm};
+				}else{
+					return null;
+				}
+			},
 			
+			// Override abstract method to remove item from the list
+			approveItem: function(itm){
+				// toggle status
+				itm.model.set({status:itm.model.get("status") === 1 ? 0 : 1});
+				controls.updatePending(itm.model.get("status"));
+				itm.html.fadeOut();
+			}
 		});
 		
 		
 		MediaView = AbstractView.extend({
 		
 			template: "<li id='post-list'><div id='media-content'><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
-			
 			
 			display: function ()
 			{
@@ -588,7 +641,8 @@
 			allView = new AllView();
 			postView = new PostView();
 			mediaView = new MediaView();
-		
+			pendingView = new PendingView();
+					
 			jsonModel = new JsonModel();
 			jsonModel.url = json_path;
 			jsonModel.fetch();
