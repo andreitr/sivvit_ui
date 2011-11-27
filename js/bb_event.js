@@ -127,32 +127,27 @@
 					newCount = 0;
 					
 					for(i = 0; i<con.length; i++){
-						itm = new ContentModel(con[i]);
-						console.log(itm.get(".cid"));
-						this.collection.add(itm, {at:len +=1, silent:true});
+						model = new ContentModel(con[i]);
+						this.collection.add(model, {at:len +=1, silent:true});
 						
 						// Show pending content only for the specific type
-						if(this.activeView.buildTemplate(itm)){
-							newCount++;
-						}
+						if(this.activeView.buildTemplate(model)){	newCount++;	}
+						
+						// We have pending content.	
+						if(model.get("status") === 0){ this.pendingCount +=1; }
 					}
 					if(newCount > 0){
 						this.activeView.update(newCount);
 					} 
 				}
-				
-				if(this.pendingCount > 0)
-				{
-					$("#pendingBtn").html("Pending "+this.pendingCount+" items");
-				}
+				// Display pending content
+				if(this.pendingCount > 0){ $("#pendingBtn").html("Pending "+this.pendingCount+" items");}
 			},
 			
 			updatePending: function(value)
 			{
 				this.pendingCount = value === 0 ? this.pendingCount +1 : this.pendingCount -1;
-				if(this.pendingCount >= 0){
-					$("#pendingBtn").html("Pending "+this.pendingCount+" items");
-				}
+				if(this.pendingCount >= 0){	$("#pendingBtn").html("Pending "+this.pendingCount+" items");}
 			},
 			
 			render: function (event)
@@ -366,8 +361,7 @@
 			},
 			
 			showHidePending: function(itm){
-				if(itm.model.get("status") === 1)
-				{
+				if(itm.model.get("status") === 1){
 					itm.html.find("#pending-notice").hide();
 				}else{
 					itm.html.find("#pending-notice").show();
@@ -441,37 +435,33 @@
 			// Renders the entire collection
 			display: function ()
 			{
-				this.rendered = [];
+				$(this.el).append("<div id=\"deleteAll\"><a href=\"#\">Select all</a></div>");
 				
-				this.model.each( function(itm)
-				{
+				var self = this;
+				var i;
+				
+				this.rendered = [];
+				this.model.each( function(itm){
 					itm = this.buildTemplate(itm);
 					this.initItem(itm);
 				}, this);
+				
+				$("#deleteAll").click(function(){
+					for(i=0; i<self.rendered.length; i+=1){
+						self.deleteItem(self.rendered[i]);	
+					}
+				});
+				
 			},
 					
 			// Builds each item, returns {timestamp, html} object
 			buildTemplate: function (itm){
-				if(itm.get("status") === 0)
-				{
-					if(itm.get("type") === "media")
-					{
-						 html = $.tmpl(mediaView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					}else if(itm.get("type") === "post"){
-						 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-					}
-					return {timestamp:itm.get("timestamp"), html:html, model:itm};
-				}else{
-					return null;
+				if(itm.get("type") === "media"){
+					 html = $.tmpl(mediaView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+				}else if(itm.get("type") === "post"){
+					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}
-			},
-			
-			// Override abstract method to remove item from the list
-			approveItem: function(itm){
-				// toggle status
-				itm.model.set({status:itm.model.get("status") === 1 ? 0 : 1});
-				controls.updatePending(itm.model.get("status"));
-				itm.html.fadeOut();
+				return {timestamp:itm.get("timestamp"), html:html, model:itm};
 			}
 		});
 		
