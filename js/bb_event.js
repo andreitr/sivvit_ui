@@ -324,20 +324,25 @@
 					itm.html.find("#del-itm").hide();
 					itm.html.find("#apr-itm").hide();
 							
-					itm.html.find("#del-itm").click(function(){
-						self.deleteItem(itm);
-					});
-							
-					itm.html.find("#apr-itm").click(function(){
-						self.approveItem(itm);
-					});
-							
 					itm.html.hover(function(event){
 							itm.html.find("#del-itm").show();
 							itm.html.find("#apr-itm").show();
 						}, function(event){
 							itm.html.find("#del-itm").hide();
 							itm.html.find("#apr-itm").hide();
+					});
+					
+					itm.html.click(function(event){
+						switch(event.target.id)	{
+							case "apr-itm":
+								self.approveItem(itm);
+								break;
+							
+							case "del-itm":
+								self.deleteItem(itm);
+								break;
+						}
+						event.stopPropagation();
 					});
 	
 					this.showHidePending(itm);
