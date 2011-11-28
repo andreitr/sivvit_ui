@@ -328,6 +328,7 @@
 					});
 					
 					itm.html.click(function(event){
+						
 						switch(event.target.id)	{
 							case "apr-itm":
 								self.approveItem(itm);
@@ -336,6 +337,9 @@
 							case "del-itm":
 								self.deleteItem(itm);
 								break;
+								
+							default:
+								itm.html.find("#xxx").attr('checked', !itm.html.find("#xxx").is(':checked'));
 						}
 						event.stopPropagation();
 					});
@@ -406,7 +410,7 @@
 		
 		PostView = AbstractView.extend({
 			
-			template: "<li id='post-list'><div id='avatar'><img src='${avatar}'></div><div id=\"content\"><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+			template: "<li id='post-list'><div id=\"content\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"xxx\"/></div><div id='avatar'><img src='${avatar}'></div><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 			
 			display: function (){
 					

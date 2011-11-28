@@ -87,10 +87,28 @@ li#post-list
 
 li#post-list #content 
 {
-	width: auto;
-	margin-left:58px;
 	position: relative;
 	word-wrap: break-word;
+}
+
+li#post-list #checkbox
+{
+	float:left;
+	display: inline-block;
+	width: 40px;
+	height: 20px;
+	margin-top:12px;
+}
+
+
+li#post-list #avatar
+{
+	float: left;
+	width: 48px;
+	height: 48px;
+	margin-right: 10px;
+	text-align: right;
+	display: inline-block;
 }
 
 li#post-list #media-content
@@ -112,21 +130,15 @@ li#post-list #media
 }
 
 
-li#post-list #avatar
-{
-	float: left;
-	width: 48px;
-	height: 48px;
-	text-align: right;
-}
-
 li#post-list #meta
 {
 	font-size: 12px;
 	margin-top:10px;
 	padding:0;
 	color: #999999;
-	width: 400px;
+	width: auto;
+	position: relative;
+	display: block;
 }
 
 /** Override global icons */
