@@ -446,23 +446,27 @@
 			// Renders the entire collection
 			display: function ()
 			{
-				$(this.el).append("<div id=\"deleteAll\"><a href=\"#\">Select all</a></div>");
-				
-				var self = this;
-				var i;
-				
+				var self = this, itm, checked;
 				this.rendered = [];
+				
+				$(this.el).append("<div id=\"padding\"><input type=\"checkbox\" id=\"group-select\"></div>");
+
 				this.model.each( function(itm){
 					itm = this.buildTemplate(itm);
 					this.initItem(itm);
 				}, this);
-				
-				$("#deleteAll").click(function(){
-					for(i=0; i<self.rendered.length; i+=1){
-						self.deleteItem(self.rendered[i]);	
+			
+				 $("#group-select").click(function(){
+				 	
+				 	var len = self.rendered.length;
+					
+					for(var i=0; i<len; i++){
+						itm =  self.rendered[i];
+						checked  = $("#group-select").is(":checked");
+						itm.html.find("#itm-check").attr('checked', checked);
+						itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
 					}
-				});
-				
+				 });					
 			},
 					
 			// Builds each item, returns {timestamp, html} object
