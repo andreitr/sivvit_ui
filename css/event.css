@@ -64,6 +64,7 @@ li#post-list
 	min-height: 50px;
 	border-bottom: 1px solid #CCCCCC;
 	position: relative;
+	background-color: #FFFFFF;
 }
 
 .item-edit

@@ -329,6 +329,8 @@
 					
 					itm.html.click(function(event){
 						
+						var checked;
+						
 						switch(event.target.id)	{
 							case "apr-itm":
 								self.approveItem(itm);
@@ -339,7 +341,11 @@
 								break;
 								
 							default:
-								itm.html.find("#xxx").attr('checked', !itm.html.find("#xxx").is(':checked'));
+								if(itm.html.find("#itm-check").length > 0){
+									checked = itm.html.find("#itm-check").is(':checked');
+									itm.html.find("#itm-check").attr('checked', !checked);
+									itm.html.css("background-color", checked ? "#FFFFFF" : "#FFFFCC");
+								}
 						}
 						event.stopPropagation();
 					});
@@ -399,9 +405,9 @@
 			{
 				if(itm.get("type") == "media")
 				{
-					 html = $.tmpl(mediaView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					 html = $.tmpl(mediaView.tplDefault, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}else if(itm.get("type") == "post"){
-					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					 html = $.tmpl(postView.tplDefault, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}
 				return {timestamp:itm.get("timestamp"), html:html, model:itm};
 			}
@@ -410,7 +416,8 @@
 		
 		PostView = AbstractView.extend({
 			
-			template: "<li id='post-list'><div id=\"content\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"xxx\"/></div><div id='avatar'><img src='${avatar}'></div><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+			tplDefault: "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+			tplEdit:"<li id='post-list'><div id=\"content\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div><div id='avatar'><img src='${avatar}'></div><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 			
 			display: function (){
 					
@@ -425,7 +432,7 @@
 			buildTemplate: function (itm)
 			{
 				if(itm.get("type") == "post"){
-					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					html = $.tmpl(this.tplDefault, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 					return {timestamp:itm.get("timestamp"), html:html, model:itm};
 				}else{
 					return null;
@@ -461,9 +468,9 @@
 			// Builds each item, returns {timestamp, html} object
 			buildTemplate: function (itm){
 				if(itm.get("type") === "media"){
-					 html = $.tmpl(mediaView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					 html = $.tmpl(mediaView.tplEdit, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}else if(itm.get("type") === "post"){
-					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					 html = $.tmpl(postView.tplEdit, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}
 				return {timestamp:itm.get("timestamp"), html:html, model:itm};
 			}
@@ -472,7 +479,8 @@
 		
 		MediaView = AbstractView.extend({
 		
-			template: "<li id='post-list'><div id='media-content'><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
+			tplDefault: "<li id='post-list'><div id='media-content'><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
+			tplEdit: "<li id='post-list'><div id='media-content'><div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
 			
 			display: function ()
 			{
@@ -489,7 +497,7 @@
 			{
 				if(itm.get("type") == "media")
 				{
-					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					html = $.tmpl(this.tplDefault, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 					return {timestamp:itm.get("timestamp"), html:html, model:itm};
 				}else{
 					return null;
