@@ -363,9 +363,16 @@
 				this.model.remove(itm.model, {silent : true});
 			},
 			
-			approveItem: function(itm){
+			approveItem: function(itm, value){
+				
+				if(!value){
+					 value = itm.model.get("status") === 1 ? 0 : 1;
+				}else{
+					value = value === "true" ? 1 : 0;	
+				}
+				
 				// toggle status
-				itm.model.set({status:itm.model.get("status") === 1 ? 0 : 1});
+				itm.model.set({status:value});
 				controls.updatePending(itm.model.get("status"));
 				this.showHidePending(itm);
 			},
@@ -446,23 +453,46 @@
 			// Renders the entire collection
 			display: function ()
 			{
-				var self = this, itm, checked;
+				var self = this;
 				this.rendered = [];
 				
-				$(this.el).append("<div id=\"padding\"><input type=\"checkbox\" id=\"group-select\"></div>");
+				$(this.el).append("<div id=\"padding\"><input type=\"checkbox\" id=\"group-select\"><a id=\"del-all\" class=\"tabBtn\">Delete</a><a id=\"apr-all\" class=\"tabBtn\">Approve</a></div>");
 
 				this.model.each( function(itm){
 					itm = this.buildTemplate(itm);
 					this.initItem(itm);
 				}, this);
 			
+				
+				$("#del-all").click(function(){
+					
+					var len = self.rendered.length;
+					for(var i=0; i<len; i++){
+						var itm =  self.rendered[i];
+						if(itm.html.find("#itm-check").is(':checked')){
+							self.deleteItem(itm);		
+						}
+					}
+				});
+				
+				$("#apr-all").click(function(){
+					
+					var len = self.rendered.length;
+					for(var i=0; i<len; i++){
+						var itm =  self.rendered[i];
+						if(itm.html.find("#itm-check").is(':checked')){
+							self.approveItem(itm, true);		
+						}
+					}
+				});
+			
 				 $("#group-select").click(function(){
 				 	
 				 	var len = self.rendered.length;
 					
 					for(var i=0; i<len; i++){
-						itm =  self.rendered[i];
-						checked  = $("#group-select").is(":checked");
+						var itm =  self.rendered[i];
+						var checked  = $("#group-select").is(":checked");
 						itm.html.find("#itm-check").attr('checked', checked);
 						itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
 					}
