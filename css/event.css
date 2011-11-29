@@ -25,6 +25,13 @@
 	background-color: #88D9ED;
 }
 
+
+#controls-container
+{
+	padding:10px;
+	border-bottom:1px solid #CCCCCC;
+}
+
 ol {
 	margin: 0;
 	padding: 0;
@@ -70,9 +77,10 @@ li#post-list
 .item-edit
 {
 	float: right;
-	width: 48px;
+	width: 43px;
 	height: 48px;
 	display: block;
+	margin-left: 
 }
 
 #pending-notice
@@ -83,7 +91,7 @@ li#post-list
 	display: block;
 	position: absolute;
 	top:20px;
-	margin-left: 4px;
+	margin-left: -1px;
 }
 
 li#post-list #content 
@@ -92,13 +100,11 @@ li#post-list #content
 	word-wrap: break-word;
 }
 
-li#post-list #checkbox
+#checkbox
 {
 	float:left;
 	display: inline-block;
 	width: 40px;
-	height: 20px;
-	margin-top:12px;
 }
 
 
@@ -152,4 +158,5 @@ span.icon-check
 {
 	cursor: pointer;
 }
+
 

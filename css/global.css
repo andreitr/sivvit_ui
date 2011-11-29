@@ -131,7 +131,7 @@ a:link
 
 span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live
 {
-	margin:0 5px 0 5px;
+	margin:0 5px 0 0;
     height: 11px;
     width: 11px;
     display: inline-block;
@@ -163,7 +163,7 @@ span.icon-event
 span.icon-delete
 {
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -272px -14px transparent;
-	height: 14px;
+	height: 12px;
 }
 span.icon-delete:hover
 {
@@ -173,13 +173,12 @@ span.icon-check
 {
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -256px -143px transparent;
 	width: 12px;
-	height: 12px;
+	height: 10px;
 }
 span.icon-check:hover
 {
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -240px -143px transparent;
 }
-
 
 span.loader
 {
@@ -187,6 +186,18 @@ span.loader
 	width: 16px;
 	height: 11px;
 	display: inline-block;
+}
+
+a.link
+{
+	text-decoration: underline;
+	color: #118BFF;
+	margin-right: 15px;
+	cursor: pointer;
+}
+a.link:hover
+{
+	text-decoration: none;
 }
 
 img[src*="gravatar.com/avatar"]
@@ -200,7 +211,7 @@ img[src*="gravatar.com/avatar"]
 
 
 /** Tab buttons, used on event page */
-.tabBtn, .tabBtnSelected
+.tabBtn, .tabBtnSelected, .tabBtnEdit
 {
 	min-width: 10px;
 	position: relative;
@@ -213,6 +224,11 @@ img[src*="gravatar.com/avatar"]
 	color: #FFFFFF;
 	text-decoration: none;
 	cursor: pointer;
+}
+
+.tabBtnEdit{
+	background-color: #FF0000;
+	float: right;
 }
 
 .tabBtn:hover

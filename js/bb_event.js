@@ -141,13 +141,13 @@
 					} 
 				}
 				// Display pending content
-				if(this.pendingCount > 0){ $("#pendingBtn").html("Pending "+this.pendingCount+" items");}
+				//if(this.pendingCount > 0){ $("#pendingBtn").html("Edit.Pending "+this.pendingCount+" items");}
 			},
 			
 			updatePending: function(value)
 			{
 				this.pendingCount = value === 0 ? this.pendingCount +1 : this.pendingCount -1;
-				if(this.pendingCount >= 0){	$("#pendingBtn").html("Pending "+this.pendingCount+" items");}
+				//if(this.pendingCount >= 0){	$("#pendingBtn").html("Pending "+this.pendingCount+" items");}
 			},
 			
 			render: function (event)
@@ -302,7 +302,7 @@
 			{
 				if(!this.displayed){
 					if($("#no-content").length <= 0){
-						$(this.el).append("<p id=\"no-content\" style=\"text-align:center;\">No content in selected timespan.</p>");
+						$(this.el).append("<div id=\"padding\"><p id=\"no-content\" style=\"text-align:center;\">No content in selected timespan.</p></div>");
 					}
 				}else{
 					$("#no-content").remove();
@@ -368,12 +368,12 @@
 				if(!value){
 					 value = itm.model.get("status") === 1 ? 0 : 1;
 				}else{
-					value = value === "true" ? 1 : 0;	
+					value = value === true ? 1 : 0;	
 				}
 				
 				// toggle status
 				itm.model.set({status:value});
-				controls.updatePending(itm.model.get("status"));
+				//controls.updatePending(itm.model.get("status"));
 				this.showHidePending(itm);
 			},
 			
@@ -456,7 +456,7 @@
 				var self = this;
 				this.rendered = [];
 				
-				$(this.el).append("<div id=\"padding\"><input type=\"checkbox\" id=\"group-select\"><a id=\"del-all\" class=\"tabBtn\">Delete</a><a id=\"apr-all\" class=\"tabBtn\">Approve</a></div>");
+				$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"apr-all\" class=\"link\"><span class=\"icon-check\"></span>Approve</a></div>");
 
 				this.model.each( function(itm){
 					itm = this.buildTemplate(itm);
@@ -489,10 +489,10 @@
 				 $("#group-select").click(function(){
 				 	
 				 	var len = self.rendered.length;
+					var checked  = $("#group-select").is(":checked");
 					
 					for(var i=0; i<len; i++){
 						var itm =  self.rendered[i];
-						var checked  = $("#group-select").is(":checked");
 						itm.html.find("#itm-check").attr('checked', checked);
 						itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
 					}
