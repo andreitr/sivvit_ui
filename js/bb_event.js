@@ -98,7 +98,6 @@
 				"click #postBtn": 	"render",
 				"click #mediaBtn": 	"render",
 				"click #mapBtn": 	"render",
-				"click #pendingBtn": 	"render"
 			},
 			
 			update: function(){
@@ -199,14 +198,6 @@
 						histModel.set({histogram:jsonModel.get("histogram").media});
 						this.activeView = mediaView;
 						break;
-					
-					case "pendingBtn":
-						// Not sure if we need a separate histogram for pending content? 
-						// Discuss this with Aaron.
-						histModel.set({histogram:jsonModel.get("histogram").global});
-						this.activeView = pendingView;
-						break;
-						
 				}
 				this.activeView.model = this.collection;
 				this.activeView.bind({temporal:histModel});
@@ -269,10 +260,54 @@
 				
 				this.rendered = [];
 				
+				this.displayEdit();
 				this.display();
 				this.checkFiltered();
 			},		
 			
+			displayEdit: function()
+			{
+				$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"apr-all\" class=\"link\"><span class=\"icon-check\"></span>Approve</a></div>");
+				
+				var self = this;
+				
+				// Delete all approved items
+				$("#del-all").click(function(){
+					
+					var i = self.rendered.length;
+					while(i--){
+						var itm =  self.rendered[i];
+						if(itm.html.find("#itm-check").is(':checked')){
+							self.deleteItem(itm);		
+						}
+					}
+				});
+				
+				// Approve all selected items
+				$("#apr-all").click(function(){
+					
+					var i = self.rendered.length;
+					while(i--){
+						var itm =  self.rendered[i];
+						if(itm.html.find("#itm-check").is(':checked')){
+							self.approveItem(itm, true);		
+						}
+					}
+				});
+				
+				// Select all items
+				$("#group-select").click(function(){
+				 	
+					var i = self.rendered.length;
+					var checked  = $("#group-select").is(":checked");
+					
+					while(i--){
+						var itm =  self.rendered[i];
+						itm.html.find("#itm-check").attr('checked', checked);
+						itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
+					}
+				 });
+			},
 	
 			// Filters temporal content
 			filter: function ()
@@ -316,6 +351,10 @@
 				// Add session check. 
 				// Don't Call this functionality of a user is not logged in.
 				if(itm !== null){
+					
+					// Prepend editing check box
+					itm.html.find("#content").prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
+					
 					itm.html.find("#del-itm").hide();
 					itm.html.find("#apr-itm").hide();
 							
@@ -398,8 +437,6 @@
 			// Renders the entire collection
 			display: function ()
 			{
-				this.rendered = [];
-				
 				this.model.each( function(itm)
 				{
 					itm = this.buildTemplate(itm);
@@ -412,9 +449,9 @@
 			{
 				if(itm.get("type") == "media")
 				{
-					 html = $.tmpl(mediaView.tplDefault, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					 html = $.tmpl(mediaView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}else if(itm.get("type") == "post"){
-					 html = $.tmpl(postView.tplDefault, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					 html = $.tmpl(postView.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 				}
 				return {timestamp:itm.get("timestamp"), html:html, model:itm};
 			}
@@ -423,11 +460,10 @@
 		
 		PostView = AbstractView.extend({
 			
-			tplDefault: "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
-			tplEdit:"<li id='post-list'><div id=\"content\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div><div id='avatar'><img src='${avatar}'></div><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+			template: "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 			
 			display: function (){
-					
+				
 				// Render collection
 				this.model.each(function(itm){
 					itm = this.buildTemplate(itm);
@@ -439,82 +475,18 @@
 			buildTemplate: function (itm)
 			{
 				if(itm.get("type") == "post"){
-					html = $.tmpl(this.tplDefault, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 					return {timestamp:itm.get("timestamp"), html:html, model:itm};
 				}else{
 					return null;
 				}
 			}
 		});
-		
-		
-		PendingView = AbstractView.extend({
-			
-			// Renders the entire collection
-			display: function ()
-			{
-				var self = this;
-				this.rendered = [];
-				
-				$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"apr-all\" class=\"link\"><span class=\"icon-check\"></span>Approve</a></div>");
-
-				this.model.each( function(itm){
-					itm = this.buildTemplate(itm);
-					this.initItem(itm);
-				}, this);
-			
-				
-				$("#del-all").click(function(){
-					
-					var len = self.rendered.length;
-					for(var i=0; i<len; i++){
-						var itm =  self.rendered[i];
-						if(itm.html.find("#itm-check").is(':checked')){
-							self.deleteItem(itm);		
-						}
-					}
-				});
-				
-				$("#apr-all").click(function(){
-					
-					var len = self.rendered.length;
-					for(var i=0; i<len; i++){
-						var itm =  self.rendered[i];
-						if(itm.html.find("#itm-check").is(':checked')){
-							self.approveItem(itm, true);		
-						}
-					}
-				});
-			
-				 $("#group-select").click(function(){
-				 	
-				 	var len = self.rendered.length;
-					var checked  = $("#group-select").is(":checked");
-					
-					for(var i=0; i<len; i++){
-						var itm =  self.rendered[i];
-						itm.html.find("#itm-check").attr('checked', checked);
-						itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
-					}
-				 });					
-			},
-					
-			// Builds each item, returns {timestamp, html} object
-			buildTemplate: function (itm){
-				if(itm.get("type") === "media"){
-					 html = $.tmpl(mediaView.tplEdit, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				}else if(itm.get("type") === "post"){
-					 html = $.tmpl(postView.tplEdit, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
-				}
-				return {timestamp:itm.get("timestamp"), html:html, model:itm};
-			}
-		});
-		
+	
 		
 		MediaView = AbstractView.extend({
 		
-			tplDefault: "<li id='post-list'><div id='media-content'><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
-			tplEdit: "<li id='post-list'><div id='media-content'><div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
+			template: "<li id='post-list'><div id='content'><span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
 			
 			display: function ()
 			{
@@ -531,7 +503,7 @@
 			{
 				if(itm.get("type") == "media")
 				{
-					html = $.tmpl(this.tplDefault, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
+					html = $.tmpl(this.template, {content:itm.get("content"), avatar:itm.get("avatar"), timestamp:itm.get("timestamp"), author: itm.get("author")});
 					return {timestamp:itm.get("timestamp"), html:html, model:itm};
 				}else{
 					return null;
@@ -682,7 +654,6 @@
 			allView = new AllView();
 			postView = new PostView();
 			mediaView = new MediaView();
-			pendingView = new PendingView();
 					
 			jsonModel = new JsonModel();
 			jsonModel.url = json_path;

@@ -118,12 +118,6 @@ li#post-list #avatar
 	display: inline-block;
 }
 
-li#post-list #media-content
-{
-	width: auto;
-	position: relative;
-}
-
 li#post-list #media
 {
 	padding:5px;
