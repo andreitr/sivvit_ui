@@ -4,6 +4,10 @@
 	padding:2px 3px 1px 3px;
 }
 
+#event-application{
+	display:none;
+}
+
 /** Show the number of newly-loaded items. */
 #new-content {
  	font-weight: 400;

@@ -16,7 +16,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		sideMapView : null,
 		sideHistView : null,
 
-		edit : true,
+		edit : false,
 
 		init : function(json) {
 			var self = this;
@@ -60,6 +60,19 @@ if( typeof (SIVVIT) == 'undefined') {
 			}, 10000);
 
 			this.eventModel.bind("change", function() {
+				
+				// Cretate title
+				$("#event-title").append(self.eventModel.get("title"));
+				$("#event-meta").append("<span class=\"icon-location\"></span>"+self.eventModel.get("location").name);
+				$("#event-meta").append("<span class=\"icon-user\"></span>by&nbsp;"+self.eventModel.get("author"));
+				if(self.eventModel.get("status") === 1){
+					$("#event-meta").prepend("<span class=\"live\">LIVE</span>")
+				}
+				
+
+				$("#event-application").show();
+				
+				
 				// Update histogram
 				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("endDate")) {
 					self.temporalModel.set({

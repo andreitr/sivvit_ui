@@ -139,7 +139,8 @@ span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, 
 
 span.icon-location
 {
-	 background: url("../img/css/sprite-icons.png") no-repeat scroll -220px -64px transparent;
+	 background: url("../img/css/sprite-icons.png") no-repeat scroll -224px -64px transparent;
+	 width:8px;
 }
 span.icon-user
 {
