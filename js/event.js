@@ -16,7 +16,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		sideMapView : null,
 		sideHistView : null,
 
-		logged : true,
+		edit : true,
 
 		init : function(json) {
 			var self = this;
@@ -30,15 +30,15 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.eventModel = new SIVVIT.EventModel();
 
 			this.postView = new SIVVIT.PostView({
-				edit : this.logged,
+				edit : this.edit,
 				temporalModel : this.temporalModel
 			});
 			this.mediaView = new SIVVIT.MediaView({
-				edit : this.logged,
+				edit : this.edit,
 				temporalModel : this.temporalModel
 			});
 			this.allView = new SIVVIT.AllView({
-				edit : this.logged,
+				edit : this.edit,
 				temporalModel : this.temporalModel,
 				mediaView : this.mediaView,
 				postView : this.postView
