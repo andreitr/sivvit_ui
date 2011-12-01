@@ -1,179 +1,765 @@
-$( function() {
-	
-	var statsExpanded, statsDivHeight, isStatsDivDrawn = false;
-	
-	statsDivHeight = $("#stats").height();
-	
-	$("#timeline-expand").click(function()
-	{
-		statsExpanded = !statsExpanded ? true : false;
-		
-		if(statsExpanded)
-		{
-			$("#stats").animate({height:"200px"}, 300, onStatsShowHide);
-			$("#timeline-expand").text("Less Stats");
-		}else{
-			$("#stats").animate({height:statsDivHeight}, 300, onStatsShowHide);
-			$("#timeline-expand").text("More Stats");
-		}
-	});
-	
-	
-	/*
-	 * Shows hides charts when
-	 */
-	function onStatsShowHide()
-	{
-		if(statsExpanded)
-		{
-			$("#extracharts").fadeIn();
-			
-			if(!isStatsDivDrawn)
-			{
-				drawPieChart({id:"#chart-left", radius:60, labels:["%% - status", "%% - media", "%% - check-ins"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
-				drawPieChart({id:"#chart-middle", radius:60, labels:["%% - exact location", "%% - account location", "%% - no location"], data:[Math.random()*100, Math.random()*100, Math.random()*100]});
-				
-				drawLineChart($("#chart-right")[0], {values:[22, 36, 12, 38, 50, 80, 100], labels:["10km","50km","100km","500km","1,000km","rest..."], max:100}, {"stroke-width":0, fill: "#0B405E"});
-				
-				// Make sure pie charts are drawn only once. 
-				// Drawing g.raphel chart in an invisible div screws it up.
-				isStatsDivDrawn = true;
-			}
+if( typeof (SIVVIT) == 'undefined') {
+	SIVVIT = {};
+}
 
-		}else{
-			$("#extracharts").hide();
-		}
-	}
-	
-	/*
-	 * Draws g.raphael pie chart using passed parameters.
-	 * @param Initialization object containing all required parameters {id:"#div", radius:20, labels:[], data:[]} 
-	 */
-	function drawPieChart(initObj)
-	{
-		var container = $(initObj.id)[0], raphael;
-		
-		raphael = Raphael(container);
-		raphael.g.txtattr.font = "12px Helvetica, Arial, sans-serif";
-		raphael.g.piechart(initObj.radius, initObj.radius, initObj.radius, initObj.data, {legend: initObj.labels, legendcolor:"#585858" ,legendpos: "east", colors:["#0B405E","#007AA2", "#FFFFFF"]});
-	}
-	
+(function(jQuery) {
 
-	/**
-	 * Draws twitter status table.
-	 */
-	function drawStatusTable()
-	{
-		var i, len=12, output="";
-		for(i=0; i < len; i += 1)
-		{
-			output += "<li class=\"status\"><div id=\"post-avatar\"><img src=\"http://a2.twimg.com/profile_images/1220150566/7b040b04c98b3b2a2accaeb313f3730b_normal.jpeg\"></div>";
-			output += "<div id=\"post\">Something to think about for sure: HTML5 could pose bigger security threat http://ow.ly/5IFIw #webappsec</a>";
-			output += "<div id=\"post-meta\">Twitter:<span class=\"icon-location\"></span>Denver, CO<span class=\"icon-time\"></span>9 hours ago<span class=\"icon-user\"></span>by&nbsp;<a href=\"#\">aaronott</a>";
-			output += "</div></div></li>";
-		}
-		
-		$("#status-list").html(output);
+	SIVVIT.Event = {
+		eventModel : null, // instance of EventModel
+		temporalModel : null, // instance of TemporalModel
 
-	}
-	
-	/**
-	 * Draws timeline histogram.
-	 * @param canvas Div histogram container
-	 * @param data Data container {data:[12, 22, 30], min:0, max:100}
-	 */
-	function drawHistogram(canvas, data, attributes)
-	{
-		var histogram, i, len, maxVal, minVal, maxHeight, percent, barW, barH, barX, barY, barXPadding;
-		
-		len = data.values.length;
-		maxVal = data.max;
-		minVal = data.min;
-		maxHeight = $(canvas).height()-20;
-		barXPadding = 1;
-		
-		histogram = Raphael(canvas, $(canvas).width(), $(canvas).height());
-		
-		barW = ($(canvas).width()-(barXPadding*len)) / len;
-		
-		for(i = 0; i < len; i += 1)
-		{
-			percent = (data.values[i] / maxVal) * 100;
-			barH = Math.round(percent * maxHeight / 100);
-			barX = Math.round(i*(barW+barXPadding));
-			barY = Math.round( $(canvas).height() - barH)
-			
-			var bar = histogram.rect(barX, barY, barW, barH).attr(attributes)
-			
-			bar.mouseover(function ()
-			{
-				this.attr({fill:"#007AA2", cursor:"pointer"});
+		appView : null,
+		postView : null,
+		mediaView : null,
+		allView : null,
+
+		sideMapView : null,
+		sideHistView : null,
+
+		logged : true,
+
+		init : function(json) {
+			var self = this;
+
+			this.sideMapView = new SIVVIT.SidebarMapView();
+			this.temporalModel = new SIVVIT.TemporalModel();
+			this.sideHistView = new SIVVIT.HistogramView({
+				model : this.temporalModel
 			});
-			
-			bar.mouseout(function ()
-			{
-				this.attr(attributes);
+
+			this.eventModel = new SIVVIT.EventModel();
+
+			this.postView = new SIVVIT.PostView({
+				edit : this.logged,
+				temporalModel : this.temporalModel
+			});
+			this.mediaView = new SIVVIT.MediaView({
+				edit : this.logged,
+				temporalModel : this.temporalModel
+			});
+			this.allView = new SIVVIT.AllView({
+				edit : this.logged,
+				temporalModel : this.temporalModel,
+				mediaView : this.mediaView,
+				postView : this.postView
+			});
+
+			this.appView = new SIVVIT.AppView({
+				eventModel : this.eventModel,
+				temporalModel : this.temporalModel,
+				postView : this.postView,
+				mediaView : this.mediaView,
+				allView : this.allView
+			});
+
+			this.eventModel.url = json;
+			this.eventModel.fetch();
+
+			setInterval(function() {
+				this.eventModel.fetch();
+			}, 10000);
+
+			this.eventModel.bind("change", function() {
+				// Update histogram
+				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("endDate")) {
+					self.temporalModel.set({
+						startDate : new Date(self.eventModel.get("startDate")),
+						endDate : new Date(self.eventModel.get("endDate"))
+					});
+
+					// Set range only for the first time.
+					if(!self.temporalModel.get("startRange")) {
+						self.temporalModel.set({
+							startRange : new Date(self.eventModel.get("startDate"))
+						});
+					}
+					if(!self.temporalModel.get("endRange")) {
+						self.temporalModel.set({
+							endRange : new Date(self.eventModel.get("endDate"))
+						});
+					}
+				}
+
+				// Update location
+				if(self.eventModel.hasChanged("location")) {
+					self.sideMapView.render(self.eventModel.get("location").lon, self.eventModel.get("location").lat);
+				}
+
+				self.appView.update();
 			});
 		}
+	};
+})();
+
+/**
+ * Main container for the loaded JSON data.
+ */
+SIVVIT.EventModel = Backbone.Model.extend({
+
+	defaults : {
+		id : null,
+		title : null,
+		author : null,
+		description : null,
+		keywords : [],
+		location : {
+			lon : null,
+			lat : null
+		},
+		startDate : new Date(),
+		endDate : new Date(),
+		status : 0,
+		stats : {
+			total : 0,
+			posts : 0,
+			images : 0,
+			videos : 0
+		},
+		histogram : {
+			global : [],
+			media : [],
+			post : []
+		},
+		content : []
 	}
-	
-	/**
-	 * Draws distance line chart. 
-	 */
-	function drawLineChart(canvas, data, attributes)
-	{
-		var histogram, i, len = data.values.length, max = data.max, stepWidth, stepHeight, maxHeight, linePath;
-		
-		stepWidth = $(canvas).width()/(len-1);
-		maxHeight = $(canvas).height() - 40;
-		histogram = Raphael(canvas, $(canvas).width(), $(canvas).height());
-		
-		linePath = "M0 "+$(canvas).height();
-		
-		for(i=0; i<len; i +=1)
-		{
-			percent = (data.values[i] / max) * 100;
-			stepHeight = maxHeight * percent / 100;
-			linePath += " L"+Math.round(stepWidth*i)+" "+Math.round($(canvas).height() - stepHeight);
-			
-			if(i > 0 && i < len-1)
-			{
-				histogram.text(Math.round(stepWidth*i), 20, data.labels[i]).attr({"font-family":"Helvetica","font-size": 12,"fill":"#585858"});
-				histogram.path("M"+Math.round(stepWidth*i)+" 40 L"+Math.round(stepWidth*i)+" "+$(canvas).height()).attr({"stroke-width":1, stroke:"#CCCCCC"})
+});
+
+/**
+ * Generic conetnt model.
+ */
+SIVVIT.ContentModel = Backbone.Model.extend({
+	defaults : {
+		id : null,
+		status : null,
+		type : null,
+		location : [],
+		content : null,
+		source : null,
+		timestamp : "",
+		rank : 0,
+		author : null,
+		avatar : null
+	}
+});
+
+/**
+ *
+ */
+SIVVIT.ContentCollection = Backbone.Collection.extend({
+	model : SIVVIT.ContentModel,
+
+	// Sort content by timestamp
+	comparator : function(itm) {
+		return itm.get("timestamp");
+	}
+});
+
+/**
+ * Histogram data.
+ */
+SIVVIT.TemporalModel = Backbone.Model.extend({
+	defaults : {
+		startDate : new Date(),
+		endDate : new Date(),
+		startRange : null,
+		endRange : null,
+		histogram : null
+	}
+});
+
+/**
+ * Main application view. Acts like a controller of sorts.
+ */
+SIVVIT.AppView = Backbone.View.extend({
+
+	el : "#navigation-content",
+
+	prevButton : null,
+	activeButton : null,
+
+	activeView : null, // Implementation of the AbstractView
+	prevView : null, // Implementation of the AbstractView
+
+	eventModel : null, // Instance of EventModel
+	temporalModel : null, // Instance of HistogramModel
+
+	allView : null, // Instance of AllView
+	postView : null, // Instance of PostView
+	mediaView : null, // Instance of MediaView
+
+	collection : null,
+
+	events : {
+		"click #allBtn" : "render",
+		"click #postBtn" : "render",
+		"click #mediaBtn" : "render",
+		"click #mapBtn" : "render"
+	},
+
+	initialize : function(options) {
+		this.eventModel = options.eventModel;
+		this.temporalModel = options.temporalModel;
+		this.allView = options.allView;
+		this.postView = options.postView;
+		this.mediaView = options.mediaView;
+	},
+	update : function() {
+
+		var tmp = [];
+		var con = this.eventModel.get("content");
+		var len = this.collection ? this.collection.length : 0;
+		var i, itm, newCount, model;
+
+		if(!this.collection) {
+
+			// Create new collection
+			for( i = 0; i < con.length; i++) {
+				model = new SIVVIT.ContentModel(con[i]);
+				tmp.push(model);
+			}
+			this.collection = new SIVVIT.ContentCollection(tmp);
+			this.render();
+
+		} else {
+
+			// Add new items to the exisiting collection
+			newCount = 0;
+
+			for( i = 0; i < con.length; i++) {
+				model = new ContentModel(con[i]);
+				this.collection.add(model, {
+					at : len += 1,
+					silent : true
+				});
+
+				// Show pending content only for the specific type
+				if(this.activeView.buildTemplate(model)) {
+					newCount++;
+				}
+
+			}
+			if(newCount > 0) {
+				this.activeView.update(newCount);
 			}
 		}
-		
-		linePath += " L"+Math.round($(canvas).width())+" "+Math.round($(canvas).height())+" L0 "+Math.round($(canvas).height());
-	
-		histogram.path(linePath).attr(attributes);	
-	}
-
-	
-	/**
-	 * Populates data for the bar graph.
-	 * @return data object
-	 */
-	function populateData()
-	{
-		var points, i, min, max, value, len;
-			
-		len =30;
-		points = [];
-		min = 0;
-		max = 0;
-			
-		for(i = 0; i < len; i += 1)
-		{
-			value = 5 +Math.round(Math.random()*(len-i));
-			min = Math.min(min, value);
-			max = Math.max(max, value);
-				
-			points.push(value);
+	},
+	render : function(event) {
+		this.renderView( event ? event : {
+			target : {
+				id : "allBtn"
+			}
+		});
+	},
+	// Renders view when a user clicks on one of the buttons.
+	renderView : function(event) {
+		// Don't do anything if a view is already rendered
+		if(this.activeButton == "#" + event.target.id) {
+			return;
 		}
-		return {values:points, min:min, max:max};
-	}
 
-	drawHistogram($("#timeline-container")[0], populateData(), {gradient:"90-#333333-#555555", "stroke-width":0});
-	
-	drawStatusTable();
+		this.prevButton = this.activeButton;
+		this.activeButton = "#" + event.target.id;
+
+		$(this.activeButton).toggleClass('tabBtn', false);
+		$(this.activeButton).toggleClass('tabBtnSelected', true);
+
+		if(this.prevButton != this.activeButton) {
+			$(this.prevButton).toggleClass('tabBtn', true);
+			$(this.prevButton).toggleClass('tabBtnSelected', false);
+		}
+
+		if(this.activeView) {
+			this.prevView = this.activeView;
+			this.prevView.unbind({
+				temporal : this.temporalModel
+			});
+		}
+
+		switch(event.target.id) {
+			case "allBtn":
+				this.temporalModel.set({
+					histogram : this.eventModel.get("histogram").global
+				});
+				this.activeView = this.allView;
+				break;
+
+			case "postBtn":
+				this.temporalModel.set({
+					histogram : this.eventModel.get("histogram").post
+				});
+				this.activeView = this.postView;
+				break;
+
+			case "mediaBtn":
+				this.temporalModel.set({
+					histogram : this.eventModel.get("histogram").media
+				});
+				this.activeView = this.mediaView;
+				break;
+		}
+
+		this.activeView.model = this.collection;
+		this.activeView.bind({
+			temporal : this.temporalModel
+		});
+		this.activeView.render();
+	}
+});
+
+/**
+ * Abstract core class for all content views.
+ */
+SIVVIT.AbstractView = Backbone.View.extend({
+	el : '#dynamic-content',
+
+	// Rendered elements
+	rendered : [],
+	newCount : 0,
+
+	temporalModel : null, // Instance of TemporalModel
+
+	// Enable content editing. Assumes that user is logged in
+	edit : false,
+
+	// Set to true when al least of content is displayed
+	displayed : false,
+
+	initialize : function(options) {
+		this.edit = options.edit;
+		this.temporalModel = options.temporalModel;
+
+	},
+	bind : function(options) {
+		options.temporal.bind("change:startRange", this.filter, this);
+		options.temporal.bind("change:endRange", this.filter, this);
+	},
+	unbind : function(options) {
+		options.temporal.unbind("change:startRange", this.filter, this);
+		options.temporal.unbind("change:endRange", this.filter, this);
+	},
+	// Adds new items to the pending queue
+	update : function(count) {
+		var self = this;
+
+		if($("#new-content").length <= 0) {
+			this.newCount = count;
+			$(this.el).prepend("<div id=\"new-content\">" + this.newCount + " new items</div>");
+			$("#new-content").hide();
+			$("#new-content").slideDown("slow");
+			$("#new-content").click(function(event) {
+				$("#new-content").remove();
+				self.render();
+				self.newCount = 0;
+			});
+		} else {
+			$("#new-content").html((this.newCount + count) + " new items");
+		}
+	},
+	render : function() {
+		// Clear out previous content
+		$(this.el).empty();
+		$(this.el).html("<ol id='nothing'></ol>");
+
+		this.el = "#nothing";
+		this.displayed = false;
+
+		this.rendered = [];
+
+		// Display content header if a user is logged in
+		if(this.edit) {
+			this.displayEdit();
+		}
+		this.display();
+		this.checkFiltered();
+	},
+	displayEdit : function() {
+		$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"apr-all\" class=\"link\"><span class=\"icon-check\"></span>Approve</a></div>");
+
+		var self = this;
+
+		// Delete all approved items
+		$("#del-all").click(function() {
+
+			var i = self.rendered.length;
+			while(i--) {
+				var itm = self.rendered[i];
+				if(itm.html.find("#itm-check").is(':checked')) {
+					self.deleteItem(itm);
+				}
+			}
+		});
+		// Approve all selected items
+		$("#apr-all").click(function() {
+
+			var i = self.rendered.length;
+			while(i--) {
+				var itm = self.rendered[i];
+				if(itm.html.find("#itm-check").is(':checked')) {
+					self.approveItem(itm, true);
+				}
+			}
+		});
+		// Select all items
+		$("#group-select").click(function() {
+
+			var i = self.rendered.length;
+			var checked = $("#group-select").is(":checked");
+
+			while(i--) {
+				var itm = self.rendered[i];
+				itm.html.find("#itm-check").attr('checked', checked);
+				itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
+			}
+		});
+	},
+	// Filters temporal content
+	filter : function() {
+		this.displayed = false;
+
+		for(var i = 0; i < this.rendered.length; i++) {
+			this.showHide(this.rendered[i]);
+		}
+		this.checkFiltered();
+	},
+	// Shows / hides temporal elements
+	showHide : function(item) {
+		var timestamp = new Date(item.timestamp).getTime();
+
+		if(timestamp >= this.temporalModel.get("startRange").getTime() && timestamp <= this.temporalModel.get("endRange").getTime()) {
+			$(item.html).show();
+			this.displayed = true;
+		} else {
+			$(item.html).hide();
+		}
+	},
+	checkFiltered : function() {
+		if(!this.displayed) {
+			if($("#no-content").length <= 0) {
+				$(this.el).append("<div id=\"padding\"><p id=\"no-content\" style=\"text-align:center;\">No content in selected timespan.</p></div>");
+			}
+		} else {
+			$("#no-content").remove();
+		}
+	},
+	initItem : function(itm) {
+
+		var self = this;
+
+		if(itm !== null) {
+
+			// Initiate button clicks if a user is logged in and modify
+			// content template (add hover buttons and check box)
+			if(this.edit) {
+				itm.html.find("#content").prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>");
+				itm.html.find("#content").prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
+
+				itm.html.find("#del-itm").hide();
+				itm.html.find("#apr-itm").hide();
+
+				itm.html.hover(function(event) {
+					itm.html.find("#del-itm").show();
+					itm.html.find("#apr-itm").show();
+				}, function(event) {
+					itm.html.find("#del-itm").hide();
+					itm.html.find("#apr-itm").hide();
+				});
+
+				itm.html.click(function(event) {
+
+					var checked;
+
+					switch(event.target.id) {
+						case "apr-itm":
+							self.approveItem(itm);
+							break;
+
+						case "del-itm":
+							self.deleteItem(itm);
+							break;
+
+						default:
+							if(itm.html.find("#itm-check").length > 0) {
+								checked = itm.html.find("#itm-check").is(':checked');
+								itm.html.find("#itm-check").attr('checked', !checked);
+								itm.html.css("background-color", checked ? "#FFFFFF" : "#FFFFCC");
+							}
+					}
+					event.stopPropagation();
+				});
+
+				this.showHidePending(itm);
+			}
+
+			this.showHide(itm);
+			this.rendered.push(itm);
+			$(this.el).append(itm.html);
+		}
+	},
+	deleteItem : function(itm) {
+		itm.html.fadeOut();
+		this.model.remove(itm.model, {
+			silent : true
+		});
+	},
+	approveItem : function(itm, value) {
+
+		if(!value) {
+			value = itm.model.get("status") === 1 ? 0 : 1;
+		} else {
+			value = value === true ? 1 : 0;
+		}
+
+		// toggle status
+		itm.model.set({
+			status : value
+		});
+		this.showHidePending(itm);
+	},
+	showHidePending : function(itm) {
+		if(itm.model.get("status") === 1) {
+			itm.html.find("#pending-notice").hide();
+		} else {
+			itm.html.find("#pending-notice").show();
+		}
+
+	},
+	updateItem : function(itm) {
+		//update_item.json?id=00002&status=1
+		//delete_item.json?id=00002
+	}
+});
+
+/**
+ * Displays general content stream
+ */
+SIVVIT.AllView = SIVVIT.AbstractView.extend({
+
+	postView : null, // Instance of PostView
+	mediaView : null, // Instance of MediaView
+
+	initialize : function(options) {
+		this.edit = options.edit;
+		this.temporalModel = options.temporalModel;
+		this.postView = options.postView;
+		this.mediaView = options.mediaView;
+	},
+	// Renders the entire collection
+	display : function() {
+		this.model.each(function(itm) {
+			itm = this.buildTemplate(itm);
+			this.initItem(itm);
+		}, this);
+	},
+	// Builds each item, returns {timestamp, html} object
+	buildTemplate : function(itm) {
+		if(itm.get("type") == "media") {
+			html = $.tmpl(this.mediaView.template, {
+				content : itm.get("content"),
+				avatar : itm.get("avatar"),
+				timestamp : itm.get("timestamp"),
+				author : itm.get("author")
+			});
+		} else if(itm.get("type") == "post") {
+			html = $.tmpl(this.postView.template, {
+				content : itm.get("content"),
+				avatar : itm.get("avatar"),
+				timestamp : itm.get("timestamp"),
+				author : itm.get("author")
+			});
+		}
+		return {
+			timestamp : itm.get("timestamp"),
+			html : html,
+			model : itm
+		};
+	}
+});
+
+/**
+ * Displays posts.
+ */
+SIVVIT.PostView = SIVVIT.AbstractView.extend({
+
+	template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+
+	display : function() {
+
+		// Render collection
+		this.model.each(function(itm) {
+			itm = this.buildTemplate(itm);
+			this.initItem(itm);
+		}, this);
+	},
+	// Builds each item, returns {timestamp, html} object
+	buildTemplate : function(itm) {
+		if(itm.get("type") == "post") {
+			html = $.tmpl(this.template, {
+				content : itm.get("content"),
+				avatar : itm.get("avatar"),
+				timestamp : itm.get("timestamp"),
+				author : itm.get("author")
+			});
+			return {
+				timestamp : itm.get("timestamp"),
+				html : html,
+				model : itm
+			};
+		} else {
+			return null;
+		}
+	}
+});
+
+/**
+ * Displays media content.
+ */
+SIVVIT.MediaView = SIVVIT.AbstractView.extend({
+
+	template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
+
+	display : function() {
+		// Render collection
+		this.model.each(function(itm) {
+			itm = this.buildTemplate(itm);
+			this.initItem(itm);
+		}, this);
+	},
+	// Builds each item, returns {timestamp, html} object
+	buildTemplate : function(itm) {
+		if(itm.get("type") == "media") {
+			html = $.tmpl(this.template, {
+				content : itm.get("content"),
+				avatar : itm.get("avatar"),
+				timestamp : itm.get("timestamp"),
+				author : itm.get("author")
+			});
+			return {
+				timestamp : itm.get("timestamp"),
+				html : html,
+				model : itm
+			};
+		} else {
+			return null;
+		}
+	}
+});
+
+/**
+ * Display histogram control.
+ */
+SIVVIT.HistogramView = Backbone.View.extend({
+
+	el : '#timeline-container',
+
+	initialize : function(options) {
+		this.model = options.model;
+		this.model.bind("change:histogram", this.render, this);
+	},
+	bars : [],
+
+	render : function() {
+		this.drawHistogram();
+		this.drawSlider();
+	},
+	drawSlider : function() {
+		self = this;
+
+		$("#timeline-slider").slider({
+			range : true,
+			min : this.model.get("startDate").getTime(),
+			max : this.model.get("endDate").getTime(),
+			values : [this.model.get("startRange").getTime(), this.model.get("endRange").getTime()],
+			stop : function(event, ui) {
+				self.onSliderDragged(event, ui);
+			}
+		});
+
+		this.updateDateDisplay();
+	},
+	onSliderDragged : function(event, ui) {
+		this.model.set({
+			"startRange" : new Date(ui.values[0])
+		});
+		this.model.set({
+			"endRange" : new Date(ui.values[1])
+		});
+		this.updateHistogram();
+	},
+	// Updates histogram bars
+	updateHistogram : function() {
+		for(var i = 0; i < this.bars.length; i++) {
+			this.updateHistogramBar(this.bars[i]);
+		}
+
+		this.updateDateDisplay();
+	},
+	updateDateDisplay : function() {
+		function formatDate(date) {
+			return date.getMonth() + 1 + "/" + date.getDay() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+		}
+
+
+		$("#timeline-mintime").html(formatDate(this.model.get("startRange")));
+		$("#timeline-maxtime").html(formatDate(this.model.get("endRange")));
+	},
+	// Sets histogram bar colors based on the visible range
+	updateHistogramBar : function(bar) {
+		if(new Date(bar.timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(bar.timestamp).getTime() <= this.model.get("endRange").getTime()) {
+			bar.attr({
+				fill : "#333333"
+			});
+		} else {
+			bar.attr({
+				fill : "#CCCCCC"
+			});
+		}
+	},
+	// Draws histogram
+	drawHistogram : function() {
+		if(this.model.get("histogram")) {
+			var barFill, histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding;
+
+			// Total count of available slots
+			lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / 86400000);
+
+			// Acutal count of temporal slots
+			len = this.model.get("histogram").length;
+			maxVal = 10;
+			minVal = 1;
+			maxHeight = $(this.el).height();
+			barXPadding = 0;
+			histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
+			barW = ($(this.el).width() - (barXPadding * lenTotal)) / lenTotal;
+
+			for( i = 0; i < len; i += 1) {
+				var frame = this.model.get("histogram")[i];
+				percentY = (frame.count / maxVal) * 100;
+				percentX = (new Date(frame.timestamp).getTime() - this.model.get("startDate").getTime()) / (this.model.get("endDate").getTime() - this.model.get("startDate").getTime());
+				barH = Math.round(percentY * maxHeight / 100);
+				barX = barW * Math.round(percentX * (lenTotal - 1));
+				barY = Math.round($(this.el).height() - barH);
+
+				var bar = histogram.rect(barX, barY, barW, barH).attr({
+					fill : "#333333",
+					"stroke-width" : 0
+				});
+				bar.timestamp = frame.timestamp;
+				this.updateHistogramBar(bar);
+				this.bars.push(bar);
+			}
+		}
+	}
+});
+
+/**
+ * Display static map in the sidebar.
+ */
+SIVVIT.SidebarMapView = Backbone.View.extend({
+
+	el : '#mapCanvas',
+
+	render : function(lon, lat) {
+		$(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=" + lon + "," + lat + "&zoom=10&size=" + $(this.el).width() + "x" + $(this.el).height() + "&sensor=false\">");
+		$("#mapLabel").append("Red Rocks, Morrison CO");
+	}
 });

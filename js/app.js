@@ -6,7 +6,7 @@
 	$LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
 	$LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
 	
-	$LAB.script("js/bb_event.js").wait(function(){
-		SIVVIT.init("embed/json/event.json");
+	$LAB.script("js/event.js").wait(function(){
+		SIVVIT.Event.init("embed/json/event.json");
 	});
 })();
