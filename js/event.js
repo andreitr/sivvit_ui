@@ -56,7 +56,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.eventModel.fetch();
 
 			setInterval(function() {
-				this.eventModel.fetch();
+				self.eventModel.fetch();
 			}, 10000);
 
 			this.eventModel.bind("change", function() {
@@ -95,7 +95,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 				// Update location
 				if(self.eventModel.hasChanged("location")) {
-					self.sideMapView.render(self.eventModel.get("location").lon, self.eventModel.get("location").lat);
+					self.sideMapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lon, self.eventModel.get("location").lat);
 				}
 
 				self.appView.update();
@@ -117,7 +117,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		keywords : [],
 		location : {
 			lon : null,
-			lat : null
+			lat : null,
+			name : null
 		},
 		startDate : new Date(),
 		endDate : new Date(),
@@ -771,8 +772,8 @@ SIVVIT.SidebarMapView = Backbone.View.extend({
 
 	el : '#mapCanvas',
 
-	render : function(lon, lat) {
+	render : function(name, lon, lat) {
 		$(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=" + lon + "," + lat + "&zoom=10&size=" + $(this.el).width() + "x" + $(this.el).height() + "&sensor=false\">");
-		$("#mapLabel").append("Red Rocks, Morrison CO");
+		$("#mapLabel").append("<span class=\"icon-location\"></span>"+name);
 	}
 });

@@ -1,4 +1,4 @@
-{"id":"4e4fc2bb8efd97951a000008","title":"Hurricane Irene","author":"testuserid","description":"","keywords":["hurricane","irene"],"location":{"name": "Washington, DC", "lon":39.75, "lat":-104.87},"startDate":"Tue Aug 5 19:00:43 +0000 2011","endDate":"Tue Aug 29 20:03:43 +0000 2011","status":1,"stats":{"total":7660,"posts":702362,"images":22334,"videos":56},"histogram":{
+{"id":"4e4fc2bb8efd97951a000008","title":"Washington DC Earthquake","author":"testuserid","description":"","keywords":["hurricane","irene"],"location":{"name": "Washington, DC", "lon":39.75, "lat":-104.87},"startDate":"Tue Aug 5 19:00:43 +0000 2011","endDate":"Tue Aug 29 20:03:43 +0000 2011","status":1,"stats":{"total":7660,"posts":702362,"images":22334,"videos":56},"histogram":{
 "global":
 [{"timestamp":"Tue Aug 5 19:00:43 +0000 2011","count":1},
 {"timestamp":"Tue Aug 6 19:00:43 +0000 2011","count":1},
