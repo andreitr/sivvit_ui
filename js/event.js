@@ -1,6 +1,8 @@
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
-}(function(jQuery) {
+}
+
+(function(jQuery) {
 
 	SIVVIT.Event = {
 		eventModel : null, // instance of EventModel
@@ -675,6 +677,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 		this.drawHistogram();
 		this.drawSlider();
 	},
+	
 	drawSlider : function() {
 		self = this;
 
@@ -690,6 +693,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
 		this.updateDateDisplay();
 	},
+	
 	onSliderDragged : function(event, ui) {
 		this.model.set({
 			"startRange" : new Date(ui.values[0])
@@ -712,7 +716,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			return date.getMonth() + 1 + "/" + date.getDay() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 		}
 
-
 		$("#timeline-mintime").html(formatDate(this.model.get("startRange")));
 		$("#timeline-maxtime").html(formatDate(this.model.get("endRange")));
 	},
@@ -730,8 +733,8 @@ SIVVIT.HistogramView = Backbone.View.extend({
 	},
 	// Draws histogram
 	drawHistogram : function() {
-		if(this.model.get("histogram")) {
-			var barFill, histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding;
+		if(this.model.get("histogram")){
+			var histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding;
 
 			// Total count of available slots
 			lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / 86400000);
@@ -755,7 +758,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
 				var bar = histogram.rect(barX, barY, barW, barH).attr({
 					fill : "#333333",
-					"stroke-width" : 0
+					"stroke-width" : 1
 				});
 				bar.timestamp = frame.timestamp;
 				this.updateHistogramBar(bar);
@@ -773,20 +776,23 @@ SIVVIT.SidebarMapView = Backbone.View.extend({
 	el : '#map-container',
 
 	render : function(name, lon, lat) {
-		$(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=" + lon + "," + lat + "&zoom=10&size=280x130&sensor=false\">")
+		$(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=" + lon + "," + lat + "&zoom=10&size=280x130&sensor=false\">");
 		$("#map-label").html("<div id=\"map-label\"><span class=\"icon-location\"></span>" + name + "</div>");
 	}
 });
 
+/**
+ * Updates event header.
+ */
 SIVVIT.HeaderView = Backbone.View.extend({
 
 	render : function() {
-		// Cretate title
+	
 		$("#event-title").html(this.model.get("title"));
 		$("#event-meta").html("<span class=\"icon-location\"></span>" + this.model.get("location").name);
-		$("#event-meta").append("<span class=\"icon-user\"></span>by&nbsp;" + this.model.get("author"));
+		$("#event-meta").append("&nbsp<span class=\"icon-user\"></span>by&nbsp;" + this.model.get("author"));
 		if(this.model.get("status") === 1) {
-			$("#event-meta").prepend("<span class=\"live\">LIVE</span>")
+			$("#event-meta").prepend("<span class=\"live\">LIVE</span>&nbsp");
 		}
 	}
-})
+});
