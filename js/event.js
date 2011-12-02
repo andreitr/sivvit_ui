@@ -1,8 +1,6 @@
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
-}
-
-(function(jQuery) {
+}(function(jQuery) {
 
 	SIVVIT.Event = {
 		eventModel : null, // instance of EventModel
@@ -13,6 +11,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		mediaView : null,
 		allView : null,
 
+		headerView : null,
 		sideMapView : null,
 		sideHistView : null,
 
@@ -21,13 +20,19 @@ if( typeof (SIVVIT) == 'undefined') {
 		init : function(json) {
 			var self = this;
 
-			this.sideMapView = new SIVVIT.SidebarMapView();
 			this.temporalModel = new SIVVIT.TemporalModel();
+
+			this.eventModel = new SIVVIT.EventModel();
+
+			this.headerView = new SIVVIT.HeaderView({
+				model : this.eventModel
+			});
+
+			this.sideMapView = new SIVVIT.SidebarMapView();
+
 			this.sideHistView = new SIVVIT.HistogramView({
 				model : this.temporalModel
 			});
-
-			this.eventModel = new SIVVIT.EventModel();
 
 			this.postView = new SIVVIT.PostView({
 				edit : this.edit,
@@ -60,19 +65,14 @@ if( typeof (SIVVIT) == 'undefined') {
 			}, 10000);
 
 			this.eventModel.bind("change", function() {
-				
-				// Cretate title
-				$("#event-title").append(self.eventModel.get("title"));
-				$("#event-meta").append("<span class=\"icon-location\"></span>"+self.eventModel.get("location").name);
-				$("#event-meta").append("<span class=\"icon-user\"></span>by&nbsp;"+self.eventModel.get("author"));
-				if(self.eventModel.get("status") === 1){
-					$("#event-meta").prepend("<span class=\"live\">LIVE</span>")
-				}
-				
 
+				// Show main application
 				$("#event-application").show();
-				
-				
+
+				if(self.eventModel.hasChanged("status") || self.eventModel.hasChanged("title") || self.eventModel.hasChanged("author") || self.eventModel.hasChanged("location")){
+					self.headerView.render();
+				}
+
 				// Update histogram
 				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("endDate")) {
 					self.temporalModel.set({
@@ -770,10 +770,23 @@ SIVVIT.HistogramView = Backbone.View.extend({
  */
 SIVVIT.SidebarMapView = Backbone.View.extend({
 
-	el : '#mapCanvas',
+	el : '#map-container',
 
 	render : function(name, lon, lat) {
-		$(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=" + lon + "," + lat + "&zoom=10&size=" + $(this.el).width() + "x" + $(this.el).height() + "&sensor=false\">");
-		$("#mapLabel").append("<span class=\"icon-location\"></span>"+name);
+		$(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=" + lon + "," + lat + "&zoom=10&size=280x130&sensor=false\">")
+		$("#map-label").html("<div id=\"map-label\"><span class=\"icon-location\"></span>" + name + "</div>");
 	}
 });
+
+SIVVIT.HeaderView = Backbone.View.extend({
+
+	render : function() {
+		// Cretate title
+		$("#event-title").html(this.model.get("title"));
+		$("#event-meta").html("<span class=\"icon-location\"></span>" + this.model.get("location").name);
+		$("#event-meta").append("<span class=\"icon-user\"></span>by&nbsp;" + this.model.get("author"));
+		if(this.model.get("status") === 1) {
+			$("#event-meta").prepend("<span class=\"live\">LIVE</span>")
+		}
+	}
+})

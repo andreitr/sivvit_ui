@@ -29,7 +29,14 @@
 	background-color: #88D9ED;
 }
 
-
+#map-container
+{
+	height: 130px;
+}
+#map-label
+{
+	margin-top:10px;
+}
 #controls-container
 {
 	padding:10px;
