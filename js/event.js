@@ -1,8 +1,6 @@
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
-}
-
-(function(jQuery) {
+}(function(jQuery) {
 
 	SIVVIT.Event = {
 		eventModel : null, // instance of EventModel
@@ -71,7 +69,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				// Show main application
 				$("#event-application").show();
 
-				if(self.eventModel.hasChanged("status") || self.eventModel.hasChanged("title") || self.eventModel.hasChanged("author") || self.eventModel.hasChanged("location")){
+				if(self.eventModel.hasChanged("status") || self.eventModel.hasChanged("title") || self.eventModel.hasChanged("author") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
 				}
 
@@ -79,10 +77,10 @@ if( typeof (SIVVIT) == 'undefined') {
 				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("endDate")) {
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
-						endDate : new Date(self.eventModel.get("endDate")), 
-						min: self.eventModel.get("histogram").min,
-						max: self.eventModel.get("histogram").max,
-						resolution: self.eventModel.get("histogram").resolution
+						endDate : new Date(self.eventModel.get("endDate")),
+						min : self.eventModel.get("histogram").min,
+						max : self.eventModel.get("histogram").max,
+						resolution : self.eventModel.get("histogram").resolution
 					});
 				}
 
@@ -97,7 +95,6 @@ if( typeof (SIVVIT) == 'undefined') {
 						endRange : new Date(self.eventModel.get("endDate"))
 					});
 				}
-
 
 				// Update location
 				if(self.eventModel.hasChanged("location")) {
@@ -136,9 +133,9 @@ SIVVIT.EventModel = Backbone.Model.extend({
 			videos : 0
 		},
 		histogram : {
-			min: null, 
-			max: null, 
-			resolution: null,
+			min : null,
+			max : null,
+			resolution : null,
 			global : [],
 			media : [],
 			post : []
@@ -186,9 +183,9 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 		endDate : new Date(),
 		startRange : null,
 		endRange : null,
-		min: null, 
-		max: null, 
-		resolution: null,
+		min : null,
+		max : null,
+		resolution : null,
 		histogram : null
 	}
 });
@@ -323,8 +320,7 @@ SIVVIT.AppView = Backbone.View.extend({
 				this.activeView = this.mediaView;
 				break;
 		}
-		
-		
+
 		this.temporalModel.set({
 			min : this.eventModel.get("histogram").min,
 			max : this.eventModel.get("histogram").max,
@@ -689,12 +685,10 @@ SIVVIT.HistogramView = Backbone.View.extend({
 		this.model = options.model;
 		this.model.bind("change:histogram", this.render, this);
 	},
-
 	render : function() {
 		this.drawHistogram();
 		this.drawSlider();
 	},
-	
 	drawSlider : function() {
 		self = this;
 
@@ -710,7 +704,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
 		this.updateDateDisplay();
 	},
-	
 	onSliderDragged : function(event, ui) {
 		this.model.set({
 			"startRange" : new Date(ui.values[0])
@@ -722,7 +715,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 	},
 	// Updates histogram bars
 	updateHistogram : function() {
-		for(var i = 0; i < this.bars.length; i++) {
+		for(var i = this.bars.length; i--; ) {
 			this.updateHistogramBar(this.bars[i]);
 		}
 
@@ -732,6 +725,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 		function formatDate(date) {
 			return date.getMonth() + 1 + "/" + date.getDay() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 		}
+
 
 		$("#timeline-mintime").html(formatDate(this.model.get("startRange")));
 		$("#timeline-maxtime").html(formatDate(this.model.get("endRange")));
@@ -748,55 +742,57 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			});
 		}
 	},
-	
-	getResolution : function()
-	{
-		switch(this.model.get("resolution"))
-		{
-			case "day":		return 86400000;
-			case "hour": 	return 3600000;
-			case "minute": 	return 60000;
-			case "second": 	return 1000;
+	// Returns appropriate resolution.
+	getResolution : function() {
+		switch(this.model.get("resolution")) {
+			case "day":
+				return 86400000;
+			case "hour":
+				return 3600000;
+			case "minute":
+				return 60000;
+			case "second":
+				return 1000;
 		}
 	},
-	
-	// Draws histogram
-	drawHistogram : function(){
-		if(this.model.get("histogram")){
-			
+	// Draws histogram.
+	drawHistogram : function() {
+		if(this.model.get("histogram")) {
+
 			// Total count of available slots
 			var lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
 
 			// Acutal count of temporal slots
 			var len = this.model.get("histogram").length;
-			
+
 			var maxVal = this.model.get("max");
 			var minVal = this.model.get("min");
-			
+
 			var maxHeight = $(this.el).height();
-			
-			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
-			var barW = Math.round(($(this.el).width() - lenTotal) / lenTotal);
+
+			var barW = ($(this.el).width() - lenTotal) / lenTotal;
+			barW = barW < 0 ? Math.abs(barW) : Math.round(barW);
 			
 			var startTime = this.model.get("startDate").getTime();
 			var endTime = this.model.get("endDate").getTime();
 			
-			for(var i = len; i--;){
+			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
+
+			for(var i = len; i--; ) {
 				var frame = this.model.get("histogram")[i];
-				
+
 				var percentY = (frame.count / maxVal) * 100;
 				var percentX = (new Date(frame.timestamp).getTime() - startTime) / (endTime - startTime);
-				
+
 				var barH = Math.round(percentY * maxHeight / 100);
 				var barX = Math.round(barW * Math.round(percentX * (lenTotal - 1)));
 				var barY = Math.round(maxHeight - barH);
 
 				var bar = histogram.rect(barX, barY, barW, barH).attr({
 					fill : "#333333",
-					"stroke-width" : 0,
-					"stroke":"#FFFFFF"
-				}); 
-				
+					"stroke-width" : 0
+				});
+
 				bar.timestamp = frame.timestamp;
 				this.updateHistogramBar(bar);
 				this.bars.push(bar);
@@ -824,7 +820,7 @@ SIVVIT.SidebarMapView = Backbone.View.extend({
 SIVVIT.HeaderView = Backbone.View.extend({
 
 	render : function() {
-	
+
 		$("#event-title").html(this.model.get("title"));
 		$("#event-meta").html("<span class=\"icon-location\"></span>" + this.model.get("location").name);
 		$("#event-meta").append("&nbsp<span class=\"icon-user\"></span>by&nbsp;" + this.model.get("author"));
