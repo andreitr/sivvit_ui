@@ -419,15 +419,20 @@ SIVVIT.AbstractView = Backbone.View.extend({
 		});
 		// Approve all selected items
 		$("#apr-all").click(function() {
-
+			
 			var i = self.rendered.length;
 			while(i--) {
 				var itm = self.rendered[i];
-				if(itm.html.find("#itm-check").is(':checked')) {
+				var cb = itm.html.find("#itm-check");
+				if(cb.is(':checked')) {
 					self.approveItem(itm, true);
 				}
+				cb.attr('checked', false);
+				itm.html.css("background-color", "#FFFFFF");
 			}
+			$("#group-select").attr('checked', false);
 		});
+		
 		// Select all items
 		$("#group-select").click(function() {
 
@@ -441,6 +446,7 @@ SIVVIT.AbstractView = Backbone.View.extend({
 			}
 		});
 	},
+	
 	// Filters temporal content
 	filter : function() {
 		this.displayed = false;
@@ -450,6 +456,7 @@ SIVVIT.AbstractView = Backbone.View.extend({
 		}
 		this.checkFiltered();
 	},
+	
 	// Shows / hides temporal elements
 	showHide : function(item) {
 		var timestamp = new Date(item.timestamp).getTime();
