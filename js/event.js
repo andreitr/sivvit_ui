@@ -15,7 +15,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		sideMapView : null,
 		sideHistView : null,
 
-		edit : false,
+		edit : true,
 
 		init : function(json) {
 			var self = this;
@@ -249,7 +249,7 @@ SIVVIT.AppView = Backbone.View.extend({
 			newCount = 0;
 
 			for( i = 0; i < con.length; i++) {
-				model = new ContentModel(con[i]);
+				model = new SIVVIT.ContentModel(con[i]);
 				this.collection.add(model, {
 					at : len += 1,
 					silent : true
@@ -372,7 +372,7 @@ SIVVIT.AbstractView = Backbone.View.extend({
 
 		if($("#new-content").length <= 0) {
 			this.newCount = count;
-			$(this.el).prepend("<div id=\"new-content\">" + this.newCount + " new items</div>");
+			$(this.el).prepend("<div id=\"padding\"><div id=\"new-content\">" + this.newCount + " new items</div></div>");
 			$("#new-content").hide();
 			$("#new-content").slideDown("slow");
 			$("#new-content").click(function(event) {
