@@ -79,21 +79,25 @@ if( typeof (SIVVIT) == 'undefined') {
 				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("endDate")) {
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
-						endDate : new Date(self.eventModel.get("endDate"))
+						endDate : new Date(self.eventModel.get("endDate")), 
+						min: self.eventModel.get("histogram").min,
+						max: self.eventModel.get("histogram").max,
+						resolution: self.eventModel.get("histogram").resolution
 					});
-
-					// Set range only for the first time.
-					if(!self.temporalModel.get("startRange")) {
-						self.temporalModel.set({
-							startRange : new Date(self.eventModel.get("startDate"))
-						});
-					}
-					if(!self.temporalModel.get("endRange")) {
-						self.temporalModel.set({
-							endRange : new Date(self.eventModel.get("endDate"))
-						});
-					}
 				}
+
+				// Set histogram range for the first time.
+				if(!self.temporalModel.get("startRange")) {
+					self.temporalModel.set({
+						startRange : new Date(self.eventModel.get("startDate"))
+					});
+				}
+				if(!self.temporalModel.get("endRange")) {
+					self.temporalModel.set({
+						endRange : new Date(self.eventModel.get("endDate"))
+					});
+				}
+
 
 				// Update location
 				if(self.eventModel.hasChanged("location")) {
@@ -132,6 +136,9 @@ SIVVIT.EventModel = Backbone.Model.extend({
 			videos : 0
 		},
 		histogram : {
+			min: null, 
+			max: null, 
+			resolution: null,
 			global : [],
 			media : [],
 			post : []
@@ -179,6 +186,9 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 		endDate : new Date(),
 		startRange : null,
 		endRange : null,
+		min: null, 
+		max: null, 
+		resolution: null,
 		histogram : null
 	}
 });
@@ -313,6 +323,13 @@ SIVVIT.AppView = Backbone.View.extend({
 				this.activeView = this.mediaView;
 				break;
 		}
+		
+		
+		this.temporalModel.set({
+			min : this.eventModel.get("histogram").min,
+			max : this.eventModel.get("histogram").max,
+			resolution : this.eventModel.get("histogram").resolution
+		});
 
 		this.activeView.model = this.collection;
 		this.activeView.bind({
@@ -666,12 +683,12 @@ SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 SIVVIT.HistogramView = Backbone.View.extend({
 
 	el : '#timeline-container',
+	bars : [],
 
 	initialize : function(options) {
 		this.model = options.model;
 		this.model.bind("change:histogram", this.render, this);
 	},
-	bars : [],
 
 	render : function() {
 		this.drawHistogram();
@@ -731,35 +748,55 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			});
 		}
 	},
+	
+	getResolution : function()
+	{
+		switch(this.model.get("resolution"))
+		{
+			case "day":		return 86400000;
+			case "hour": 	return 3600000;
+			case "minute": 	return 60000;
+			case "second": 	return 1000;
+		}
+	},
+	
 	// Draws histogram
-	drawHistogram : function() {
+	drawHistogram : function(){
 		if(this.model.get("histogram")){
-			var histogram, i, len, lenTotal, maxVal, minVal, maxHeight, percentY, percentX, barW, barH, barX, barY, barXPadding;
-
+			
 			// Total count of available slots
-			lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / 86400000);
+			var lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
 
 			// Acutal count of temporal slots
-			len = this.model.get("histogram").length;
-			maxVal = 10;
-			minVal = 1;
-			maxHeight = $(this.el).height();
-			barXPadding = 0;
-			histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
-			barW = ($(this.el).width() - (barXPadding * lenTotal)) / lenTotal;
-
-			for( i = 0; i < len; i += 1) {
+			var len = this.model.get("histogram").length;
+			
+			var maxVal = this.model.get("max");
+			var minVal = this.model.get("min");
+			
+			var maxHeight = $(this.el).height();
+			
+			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
+			var barW = Math.round(($(this.el).width() - lenTotal) / lenTotal);
+			
+			var startTime = this.model.get("startDate").getTime();
+			var endTime = this.model.get("endDate").getTime();
+			
+			for(var i = len; i--;){
 				var frame = this.model.get("histogram")[i];
-				percentY = (frame.count / maxVal) * 100;
-				percentX = (new Date(frame.timestamp).getTime() - this.model.get("startDate").getTime()) / (this.model.get("endDate").getTime() - this.model.get("startDate").getTime());
-				barH = Math.round(percentY * maxHeight / 100);
-				barX = barW * Math.round(percentX * (lenTotal - 1));
-				barY = Math.round($(this.el).height() - barH);
+				
+				var percentY = (frame.count / maxVal) * 100;
+				var percentX = (new Date(frame.timestamp).getTime() - startTime) / (endTime - startTime);
+				
+				var barH = Math.round(percentY * maxHeight / 100);
+				var barX = Math.round(barW * Math.round(percentX * (lenTotal - 1)));
+				var barY = Math.round(maxHeight - barH);
 
 				var bar = histogram.rect(barX, barY, barW, barH).attr({
 					fill : "#333333",
-					"stroke-width" : 1
-				});
+					"stroke-width" : 0,
+					"stroke":"#FFFFFF"
+				}); 
+				
 				bar.timestamp = frame.timestamp;
 				this.updateHistogramBar(bar);
 				this.bars.push(bar);
