@@ -7,6 +7,6 @@
 	$LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
 	
 	$LAB.script("js/event.js").wait(function(){
-		SIVVIT.Event.init("election.json");
+		SIVVIT.Event.init("event.json");
 	});
 })();

@@ -3,20 +3,41 @@ if( typeof (SIVVIT) == 'undefined') {
 }(function(jQuery) {
 
 	SIVVIT.Event = {
-		eventModel : null, // instance of EventModel
-		temporalModel : null, // instance of TemporalModel
 
+		// SIVVIT.EventModel
+		// Main application model, contains all loaded JSON data
+		eventModel : null,
+
+		// SIVVIT.TemporalModel
+		// Temporal data for the histogram display and temporal data filtering
+		temporalModel : null,
+
+		// SIVVIT.AppView
+		// Main applicaition view. Controls switching of all other views.
 		appView : null,
+
+		// SIVVINT.PostView
 		postView : null,
+
+		// SIVVIT.Mediaiew
 		mediaView : null,
+
+		// SIVVIT.AllView
 		allView : null,
 
+		// SIVVIT.HeaderView
 		headerView : null,
-		sideMapView : null,
+
+		// SIVVIT.SideMapView
+		mapView : null,
+
+		// SIVVIT.HistogramView
 		sideHistView : null,
 
+		// Enables content editing when set to true
 		edit : true,
 
+		// Initiates the application and loads the main data.
 		init : function(json) {
 			var self = this;
 
@@ -28,7 +49,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				model : this.eventModel
 			});
 
-			this.sideMapView = new SIVVIT.SidebarMapView();
+			this.mapView = new SIVVIT.MapView();
 
 			this.sideHistView = new SIVVIT.HistogramView({
 				model : this.temporalModel
@@ -38,6 +59,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				edit : this.edit,
 				temporalModel : this.temporalModel
 			});
+
 			this.mediaView = new SIVVIT.MediaView({
 				edit : this.edit,
 				temporalModel : this.temporalModel
@@ -57,9 +79,11 @@ if( typeof (SIVVIT) == 'undefined') {
 				allView : this.allView
 			});
 
+			// Load content for the first time
 			this.eventModel.url = json;
 			this.eventModel.fetch();
 
+			// Initiate continous content loading
 			setInterval(function() {
 				self.eventModel.fetch();
 			}, 10000);
@@ -98,7 +122,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 				// Update location
 				if(self.eventModel.hasChanged("location")) {
-					self.sideMapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lon, self.eventModel.get("location").lat);
+					self.mapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lon, self.eventModel.get("location").lat);
 				}
 
 				self.appView.update();
@@ -163,7 +187,7 @@ SIVVIT.ContentModel = Backbone.Model.extend({
 });
 
 /**
- *
+ * Content collection used to display data
  */
 SIVVIT.ContentCollection = Backbone.Collection.extend({
 	model : SIVVIT.ContentModel,
@@ -200,18 +224,31 @@ SIVVIT.AppView = Backbone.View.extend({
 	prevButton : null,
 	activeButton : null,
 
-	activeView : null, // Implementation of the AbstractView
-	prevView : null, // Implementation of the AbstractView
+	// Instance of SIVVIT.AbstractView
+	activeView : null,
 
-	eventModel : null, // Instance of EventModel
-	temporalModel : null, // Instance of HistogramModel
+	// Instance of SIVVIT.AbstractView
+	prevView : null,
 
-	allView : null, // Instance of AllView
-	postView : null, // Instance of PostView
-	mediaView : null, // Instance of MediaView
+	// SIVVIT.EventModel
+	eventModel : null,
 
+	// SIVVIT.TemporalModel
+	temporalModel : null,
+
+	// SIVVIT.AllView
+	allView : null,
+
+	// SIVVIT.PostView
+	postView : null,
+
+	// SIVVIT.MediaView
+	mediaView : null,
+
+	// SIVVIT.ContentCollection
 	collection : null,
 
+	// Bind button events
 	events : {
 		"click #allBtn" : "render",
 		"click #postBtn" : "render",
@@ -419,7 +456,7 @@ SIVVIT.AbstractView = Backbone.View.extend({
 		});
 		// Approve all selected items
 		$("#apr-all").click(function() {
-			
+
 			var i = self.rendered.length;
 			while(i--) {
 				var itm = self.rendered[i];
@@ -432,7 +469,6 @@ SIVVIT.AbstractView = Backbone.View.extend({
 			}
 			$("#group-select").attr('checked', false);
 		});
-		
 		// Select all items
 		$("#group-select").click(function() {
 
@@ -446,7 +482,6 @@ SIVVIT.AbstractView = Backbone.View.extend({
 			}
 		});
 	},
-	
 	// Filters temporal content
 	filter : function() {
 		this.displayed = false;
@@ -456,7 +491,6 @@ SIVVIT.AbstractView = Backbone.View.extend({
 		}
 		this.checkFiltered();
 	},
-	
 	// Shows / hides temporal elements
 	showHide : function(item) {
 		var timestamp = new Date(item.timestamp).getTime();
@@ -779,10 +813,10 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
 			var barW = ($(this.el).width() - lenTotal) / lenTotal;
 			barW = barW < 0 ? Math.abs(barW) : Math.round(barW);
-			
+
 			var startTime = this.model.get("startDate").getTime();
 			var endTime = this.model.get("endDate").getTime();
-			
+
 			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
 			for(var i = len; i--; ) {
@@ -811,7 +845,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 /**
  * Display static map in the sidebar.
  */
-SIVVIT.SidebarMapView = Backbone.View.extend({
+SIVVIT.MapView = Backbone.View.extend({
 
 	el : '#map-container',
 
