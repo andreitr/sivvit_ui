@@ -7,6 +7,6 @@
 	$LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
 	
 	$LAB.script("js/account_main.js").wait(function(){
-		SIVVIT.Event.init("event.json");
+		SIVVIT.Event.init("account.json");
 	});
 })();

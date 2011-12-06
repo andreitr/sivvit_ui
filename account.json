@@ -1,0 +1,89 @@
+{
+	"id": "4e4fc2bb8efd97951a000008",
+	"title": "Washington DC Earthquake",
+	"author": "testuserid",
+	"description": "",
+	"keywords": ["hurricane", "irene"],
+	"location": {
+		"name": "Washington, DC",
+		"lon": 45,
+		"lat": 39
+	},
+	"startDate": "Tue Aug 5 19:00:43 +0000 2011",
+	"endDate": "Tue Aug 29 20:03:43 +0000 2011",
+	"status": 0,
+	"stats": {
+		"total": 7660,
+		"posts": 702362,
+		"images": 22334,
+		"videos": 56
+	},
+	"histogram": {
+		"min": 1,
+		"max": 10,
+		"resolution": "day",
+		"global": [
+			{
+				"timestamp": "Tue Aug 5 19:00:43 +0000 2011",
+				"count": 1
+			}, {
+				"timestamp": "Tue Aug 6 19:00:43 +0000 2011",
+				"count": 1
+			}, {
+				"timestamp": "Tue Aug 7 19:00:43 +0000 2011",
+				"count": 2
+			}, {
+				"timestamp": "Tue Aug 8 19:00:43 +0000 2011",
+				"count": 3
+			}, {
+				"timestamp": "Tue Aug 9 19:00:43 +0000 2011",
+				"count": 2
+			}, {
+				"timestamp": "Tue Aug 10 19:00:43 +0000 2011",
+				"count": 1
+			}, {
+				"timestamp": "Tue Aug 11 19:00:43 +0000 2011",
+				"count": 3
+			}, {
+				"timestamp": "Tue Aug 12 19:00:43 +0000 2011",
+				"count": 4
+			}, {
+				"timestamp": "Tue Aug 13 19:00:43 +0000 2011",
+				"count": 5
+			}, {
+				"timestamp": "Tue Aug 14 19:00:43 +0000 2011",
+				"count": 9
+			}, {
+				"timestamp": "Tue Aug 15 19:00:43 +0000 2011",
+				"count": 10
+			}, {
+				"timestamp": "Tue Aug 18 20:00:43 +0000 2011",
+				"count": 1
+			}, {
+				"timestamp": "Tue Aug 19 20:00:43 +0000 2011",
+				"count": 1
+			}, {
+				"timestamp": "Tue Aug 20 20:00:43 +0000 2011",
+				"count": 4
+			}, {
+				"timestamp": "Tue Aug 21 20:00:43 +0000 2011",
+				"count": 5
+			}, {
+				"timestamp": "Tue Aug 22 20:00:43 +0000 2011",
+				"count": 5
+			}, {
+				"timestamp": "Tue Aug 23 19:00:43 +0000 2011",
+				"count": 4
+			}, {
+				"timestamp": "Tue Aug 24 20:00:43 +0000 2011",
+				"count": 3
+			}, {
+				"timestamp": "Tue Aug 25 20:00:43 +0000 2011",
+				"count": 6
+			}, {
+				"timestamp": "Tue Aug 27 20:03:43 +0000 2011",
+				"count": 2
+			}
+		]
+	}
+}
