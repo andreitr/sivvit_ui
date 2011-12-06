@@ -1,73 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-        
-        <link rel="stylesheet" type="text/css" href="css/secondary.css" />
-        <link rel="stylesheet" type="text/css" href="css/global.css" />
-        <link rel="stylesheet" type="text/css" href="css/account.css" />
-        
-        <title>Project High Jump</title>
-    </head>
-<body>
-
-<div id="header">
-    <div id="content">
-        <div id="logo"></div>
-        <div id="nav">Track New Event</div>
-        <div id="nav">Explore</div>
-        <div id="nav" style="float:right; border: none; padding:0px">Log Out</div>
-        <div id="nav" style="float:right;">Welcome andreit</div>
-    </div>
-</div>
-
-
-     <div id="content">
-        <div id="contentBoxHeader">
-	           <div id="padding">
-	                <span style="display:block"><img src="https://secure.gravatar.com/avatar/ab7d912639eff90e958deaf7e851039b?s=50" width="50" heigh="50" /><h1>andreitr <span style="color: #999999">(Andrei Taraschuk)</span></h1></span><span title="where">Denver, CO</span><span title="when">Member since August 06, 2011</span>
-	           </div>
-        </div>
-    </div>
-
-
-<div id="content">
-    <div id="contentVSpacer"></div>
-    <div id="column-layout">
-        <div id="row">
-            
-            <!-- Left column -->
-            <div id="cell" style="width:100%; padding-right:20px">
-
-                <h2>My Events (17)</h2>
-                <div id="contentBox" style="height:400px">
-                    <div id="padding">
-                    	<p>Event</p>
-                    	<p>Event</p>
-                    	<p>Event</p>
-                    	<p>Event</p>
-                    </div>
-                </div>	
-            </div>
-            
-            <!-- Right column -->
-            <div id="cell">
-            
-                <h2>Account</h2>
-                <div id="contentBox" style="width:300px">
-                    <div id="padding">
-                    	Hello world
-                    </div>
-                </div>
-                
-                
-            </div>  
-        </div>
-    </div>
-</div>
-
-<div id="padding"></div>
-<div id="footer"></div>
-   
-</body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/secondary.css" />
+		<link rel="stylesheet" type="text/css" href="css/event.css" />
+		<link rel="stylesheet" type="text/css" href="css/global.css" />
+		<link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
+		<title>Project High Jump</title>
+	</head>
+	<body>
+		<div id="header">
+			<div id="content-container">
+				<div id="logo"></div>
+				<div id="nav">Track New Event</div>
+				<div id="nav">
+					Explore
+				</div>
+				<div id="nav" style="float:right; border: none; padding:0px">
+					Sign In with Facebook Twitter
+				</div>
+			</div>
+		</div>
+		<div id="event-application">
+			<div id="eventHeader">
+				<div id="contentBoxHeader">
+					<div id="content-container">
+						<div id="padding" style="padding: 10px 0 10px 0;">
+							<div id="column-layout">
+								<div id="row">
+									<div id="cell" style="width:50%">
+										<h1 id="event-title"></h1>
+										<div id="event-meta"></div>
+									</div>
+									<div id="cell">
+										<div id="social">
+											<div id="embed">
+												Embed Code
+												<input type="text" value="code" style="margin-left:10px; border:1px solid #CCCCCC; height:19px; width:150px; color: #CCCCCC"/>
+											</div>
+											<div class="addthis_toolbox addthis_default_style">
+												<a class="addthis_counter addthis_pill_style" style="margin-right:10px"></a>
+												<a class="addthis_button_tweet" ></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="contentVSpacer"></div>
+			<div id="content-container">
+				<div id="column-layout">
+					<div id="row">
+						<!-- Left column -->
+						<div id="cell" style="width:100%; padding-right:20px">
+							<div id="navigation-content">
+								<a id="allBtn" class="tabBtn">Everything</a>
+								<a id="postBtn" class="tabBtn">Posts</a>
+								<a id="mediaBtn" class="tabBtn">Media</a>
+							</div>
+							<div id="contentBox">
+								<!-- CONTENT HERE -->
+								<div id="dynamic-content"></div>
+							</div>
+						</div>
+						<!-- Right column -->
+						<div id="cell">
+							<h2>Timeline</h2>
+							<div id="contentSidebarBox">
+								<div id="padding">
+									<div id="timline-label">
+										<div id="timeline-maxtime"></div>
+										<div id="timeline-mintime"></div>
+									</div>
+									<div id="timeline-container"></div>
+									<div id="timeline-slider"></div>
+								</div>
+							</div>
+							<div id="contentVSpacer"></div>
+							<h2>Location</h2>
+							<div id="contentSidebarBox">
+								<div id="padding">
+									<div id="map-container"></div>
+									<div id="map-label"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="padding"></div>
+		<div id="footer"></div>
+		<script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+	</body>
 </html>
