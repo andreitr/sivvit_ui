@@ -49,9 +49,8 @@ if( typeof (SIVVIT) == 'undefined') {
 						this.collection.add(model);
 					}
 
-					this.view.render({
-						model : this.collection
-					});
+					this.view.model = this.collection;
+					this.view.render();
 				}
 			}, this);
 		}
@@ -101,6 +100,88 @@ if( typeof (SIVVIT) == 'undefined') {
 			}
 		}
 	});
+	
+	
+	SIVVIT.TemporalModel = Backbone.Model.extend({
+		defaults : {
+			startDate : new Date(),
+			endDate : new Date(),
+			startRange : null,
+			endRange : null,
+			min : null,
+			max : null,
+			resolution : null,
+			histogram : null
+		}
+	});
+
+
+	/**
+	 * Display histogram control.
+	 */
+	SIVVIT.Histogram = {
+
+		el:null, 
+		model:null,
+
+		// Draws histogram
+		render : function(options) {
+			
+			this.el = options.el;
+			this.model = options.model;
+			
+			// Total count of available slots
+			var lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
+
+			// Acutal count of temporal slots
+			var len = this.model.get("histogram").length;
+
+			var maxVal = this.model.get("max");
+			var minVal = this.model.get("min");
+
+			var maxHeight = $(this.el).height();
+
+			var barW = ($(this.el).width() - lenTotal) / lenTotal;
+			barW = barW < 0 ? Math.abs(barW) : Math.round(barW);
+
+			var startTime = this.model.get("startDate").getTime();
+			var endTime = this.model.get("endDate").getTime();
+
+			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
+
+			for(var i = len; i--; ) {
+				var frame = this.model.get("histogram")[i];
+
+				var percentY = (frame.count / maxVal) * 100;
+				var percentX = (new Date(frame.timestamp).getTime() - startTime) / (endTime - startTime);
+
+				var barH = Math.round(percentY * maxHeight / 100);
+				var barX = Math.round(barW * Math.round(percentX * (lenTotal - 1)));
+				var barY = Math.round(maxHeight - barH);
+
+				var bar = histogram.rect(barX, barY, barW, barH).attr({
+					fill : "#333333",
+					"stroke-width" : 0
+				});
+			}			
+		},
+		
+		// Returns appropriate resolution.
+		getResolution : function() {
+			switch(this.model.get("resolution")) {
+				case "day":
+					return 86400000;
+				case "hour":
+					return 3600000;
+				case "minute":
+					return 60000;
+				case "second":
+					return 1000;
+			}
+		}
+	};
+
+
 
 	// Core view
 	SIVVIT.AbstractView = Backbone.View.extend({
@@ -227,10 +308,8 @@ if( typeof (SIVVIT) == 'undefined') {
 						event.stopPropagation();
 					});
 
-					this.showHidePending(itm);
 				}
 
-				this.showHide(itm);
 				this.rendered.push(itm);
 				$(this.el).append(itm.html);
 			}
@@ -253,29 +332,61 @@ if( typeof (SIVVIT) == 'undefined') {
 			itm.model.set({
 				status : value
 			});
-			this.showHidePending(itm);
 		},
-		showHidePending : function(itm) {
-			if(itm.model.get("status") === 1) {
-				itm.html.find("#pending-notice").hide();
-			} else {
-				itm.html.find("#pending-notice").show();
-			}
 
-		},
-		updateItem : function(itm) {
-			//update_item.json?id=00002&status=1
-			//delete_item.json?id=00002
-		}
 	});
 
 	// Main view
 	SIVVIT.EventsView = SIVVIT.AbstractView.extend({
 
-		render : function(options) {
 
-			this.model = options.model;
+		template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div><div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+
+		display : function() {
+
+			// Render collection
+			this.model.each(function(itm) {
+				itm = this.buildTemplate(itm);
+				
+	
+				SIVVIT.Histogram.render({
+					el : $(itm.html).find("#histogram"),
+					
+					model : new SIVVIT.TemporalModel({
+						startDate : new Date(itm.model.get("startDate")),
+						endDate : new Date(itm.model.get("endDate")),
+						min : itm.model.get("histogram").min,
+						max : itm.model.get("histogram").max,
+						resolution : itm.model.get("histogram").resolution,
+						histogram : itm.model.get("histogram").global
+					})
+				});
+
+
+				
+				this.initItem(itm);
+			}, this);
+		},
+
+		
+		// Builds each item, returns {model, html} object
+		buildTemplate : function(itm) {
+			
+			html = $.tmpl(this.template, {
+				title : itm.get("title"),
+				posts: itm.get("stats").posts,
+				videos: itm.get("stats").videos,
+				images: itm.get("stats").images,
+				location: itm.get("location").name,
+				author : itm.get("author")
+			});
+			return {
+				html : html,
+				model : itm
+			};
 		}
 	});
+	
+	
 
 })($, SIVVIT);

@@ -129,6 +129,23 @@ li#post-list #avatar
 	display: inline-block;
 }
 
+/* Histogram container for the events / user pages.*/
+li#post-list #histogram
+{
+	float: left;
+	width: 100px;
+	height: 48px;
+	margin-right: 10px;
+	border:1px solid #CCCCCC;
+	display: inline-block;
+}
+li#post-list #title
+{
+	color:#002A3A;
+	font-weight: 500;
+	font-size: 18px;
+}
+
 li#post-list #media
 {
 	padding:5px;
