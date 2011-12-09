@@ -801,7 +801,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 		if(this.model.get("histogram")) {
 
 			// Total count of available slots
-			var lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
+			var lenTotal = Math.ceil((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
 
 			// Acutal count of temporal slots
 			var len = this.model.get("histogram").length;
@@ -811,7 +811,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
 			var maxHeight = $(this.el).height();
 
-			var barW = ($(this.el).width() - lenTotal) / lenTotal;
+			var barW = $(this.el).width() / lenTotal;
 			barW = barW < 0 ? Math.abs(barW) : Math.round(barW);
 
 			var startTime = this.model.get("startDate").getTime();

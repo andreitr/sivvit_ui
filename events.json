@@ -49,19 +49,7 @@
 					}, {
 						"timestamp": "Tue Aug 12 19:00:43 +0000 2011",
 						"count": 4
-					}, {
-						"timestamp": "Tue Aug 13 19:00:43 +0000 2011",
-						"count": 5
-					}, {
-						"timestamp": "Tue Aug 14 19:00:43 +0000 2011",
-						"count": 9
-					}, {
-						"timestamp": "Tue Aug 15 19:00:43 +0000 2011",
-						"count": 10
-					}, {
-						"timestamp": "Tue Aug 18 20:00:43 +0000 2011",
-						"count": 1
-					}, {
+					},{
 						"timestamp": "Tue Aug 19 20:00:43 +0000 2011",
 						"count": 1
 					}, {
@@ -99,8 +87,8 @@
 				"lon": 45,
 				"lat": 39
 			},
-			"startDate": "Tue Aug 5 19:00:43 +0000 2011",
-			"endDate": "Tue Aug 29 20:03:43 +0000 2011",
+			"startDate": "Fri Aug 5 19:00:43 +0000 2011",
+			"endDate": "Tue Aug 30 20:03:43 +0000 2011",
 			"status": 0,
 			"stats": {
 				"total": 7660,
@@ -114,80 +102,83 @@
 				"resolution": "day",
 				"global": [
 					{
-						"timestamp": "Tue Aug 5 19:00:43 +0000 2011",
+						"timestamp": "Fri Aug 5 19:00:43 +0000 2011",
 						"count": 9
 					}, {
-						"timestamp": "Tue Aug 6 19:00:43 +0000 2011",
+						"timestamp": "Sat Aug 6 19:00:43 +0000 2011",
 						"count": 8
 					}, {
-						"timestamp": "Tue Aug 7 19:00:43 +0000 2011",
+						"timestamp": "Sun Aug 7 19:00:43 +0000 2011",
 						"count": 7
 					}, {
-						"timestamp": "Tue Aug 8 19:00:43 +0000 2011",
+						"timestamp": "Mon Aug 8 19:00:43 +0000 2011",
 						"count": 8
 					}, {
 						"timestamp": "Tue Aug 9 19:00:43 +0000 2011",
 						"count": 9
 					}, {
-						"timestamp": "Tue Aug 10 19:00:43 +0000 2011",
+						"timestamp": "Wed Aug 10 19:00:43 +0000 2011",
 						"count": 10
 					}, {
-						"timestamp": "Tue Aug 11 19:00:43 +0000 2011",
+						"timestamp": "Thu Aug 11 19:00:43 +0000 2011",
 						"count": 9
 					}, {
-						"timestamp": "Tue Aug 12 19:00:43 +0000 2011",
+						"timestamp": "Fri Aug 12 19:00:43 +0000 2011",
 						"count": 8
 					}, {
-						"timestamp": "Tue Aug 13 19:00:43 +0000 2011",
+						"timestamp": "Sat Aug 13 19:00:43 +0000 2011",
 						"count": 7
 					}, {
-						"timestamp": "Tue Aug 14 19:00:43 +0000 2011",
+						"timestamp": "Sun Aug 14 19:00:43 +0000 2011",
 						"count": 6
 					}, {
-						"timestamp": "Tue Aug 15 19:00:43 +0000 2011",
+						"timestamp": "Mon Aug 15 19:00:43 +0000 2011",
 						"count": 5
 					}, {
 						"timestamp": "Tue Aug 16 19:00:43 +0000 2011",
 						"count": 4
 					}, {
-						"timestamp": "Tue Aug 17 19:00:43 +0000 2011",
+						"timestamp": "Wed Aug 17 19:00:43 +0000 2011",
 						"count": 3
 					},{
-						"timestamp": "Tue Aug 18 20:00:43 +0000 2011",
+						"timestamp": "Thu Aug 18 20:00:43 +0000 2011",
 						"count": 2
 					}, {
-						"timestamp": "Tue Aug 19 20:00:43 +0000 2011",
+						"timestamp": "Fri Aug 19 20:00:43 +0000 2011",
 						"count": 1
 					}, {
-						"timestamp": "Tue Aug 20 20:00:43 +0000 2011",
+						"timestamp": "Sat Aug 20 20:00:43 +0000 2011",
 						"count": 1
 					}, {
-						"timestamp": "Tue Aug 21 20:00:43 +0000 2011",
+						"timestamp": "Sun Aug 21 20:00:43 +0000 2011",
 						"count": 1
 					}, {
-						"timestamp": "Tue Aug 22 20:00:43 +0000 2011",
+						"timestamp": "Mon Aug 22 20:00:43 +0000 2011",
 						"count": 2
 					}, {
 						"timestamp": "Tue Aug 23 19:00:43 +0000 2011",
 						"count": 3
 					}, {
-						"timestamp": "Tue Aug 24 20:00:43 +0000 2011",
+						"timestamp": "Wed Aug 24 20:00:43 +0000 2011",
 						"count": 2
 					}, {
-						"timestamp": "Tue Aug 25 20:00:43 +0000 2011",
+						"timestamp": "Thu Aug 25 20:00:43 +0000 2011",
 						"count": 1
 					},{
-						"timestamp": "Tue Aug 26 20:03:43 +0000 2011",
+						"timestamp": "Fri Aug 26 20:03:43 +0000 2011",
 						"count": 1
 					},{
-						"timestamp": "Tue Aug 27 20:03:43 +0000 2011",
+						"timestamp": "Sat Aug 27 20:03:43 +0000 2011",
 						"count": 2
 					}, {
-						"timestamp": "Tue Aug 28 20:03:43 +0000 2011",
+						"timestamp": "Sun Aug 28 20:03:43 +0000 2011",
 						"count": 1
 					},{
-						"timestamp": "Tue Aug 29 20:03:43 +0000 2011",
+						"timestamp": "Mon Aug 29 20:03:43 +0000 2011",
 						"count": 1
+					},{
+						"timestamp": "Tue Aug 30 20:03:43 +0000 2011",
+						"count": 10
 					}
 				]
 			}

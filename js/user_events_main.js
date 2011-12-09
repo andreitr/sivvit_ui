@@ -23,7 +23,9 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			this.model = new SIVVIT.Model();
 			this.collection = new SIVVIT.EventsCollection();
-			this.view = new SIVVIT.EventsView({edit:this.edit});
+			this.view = new SIVVIT.EventsView({
+				edit : this.edit
+			});
 
 			this.model.url = json;
 			this.model.fetch();
@@ -100,8 +102,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			}
 		}
 	});
-	
-	
+
 	SIVVIT.TemporalModel = Backbone.Model.extend({
 		defaults : {
 			startDate : new Date(),
@@ -115,33 +116,32 @@ if( typeof (SIVVIT) == 'undefined') {
 		}
 	});
 
-
-	/**
-	 * Display histogram control.
-	 */
+	// Draws generic histogram.
 	SIVVIT.Histogram = {
 
-		el:null, 
-		model:null,
+		el : null,
+		model : null,
 
 		// Draws histogram
 		render : function(options) {
-			
+
 			this.el = options.el;
 			this.model = options.model;
-			
+
 			// Total count of available slots
-			var lenTotal = Math.round((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
+			var lenTotal = Math.ceil((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
 
 			// Acutal count of temporal slots
 			var len = this.model.get("histogram").length;
+
+			console.log(len +" "+lenTotal);
 
 			var maxVal = this.model.get("max");
 			var minVal = this.model.get("min");
 
 			var maxHeight = $(this.el).height();
 
-			var barW = ($(this.el).width() - lenTotal) / lenTotal;
+			var barW = $(this.el).width() / lenTotal;
 			barW = barW < 0 ? Math.abs(barW) : Math.round(barW);
 
 			var startTime = this.model.get("startDate").getTime();
@@ -154,7 +154,8 @@ if( typeof (SIVVIT) == 'undefined') {
 
 				var percentY = (frame.count / maxVal) * 100;
 				var percentX = (new Date(frame.timestamp).getTime() - startTime) / (endTime - startTime);
-
+				
+				
 				var barH = Math.round(percentY * maxHeight / 100);
 				var barX = Math.round(barW * Math.round(percentX * (lenTotal - 1)));
 				var barY = Math.round(maxHeight - barH);
@@ -163,7 +164,7 @@ if( typeof (SIVVIT) == 'undefined') {
 					fill : "#333333",
 					"stroke-width" : 0
 				});
-			}			
+			}
 		},
 		
 		// Returns appropriate resolution.
@@ -181,8 +182,6 @@ if( typeof (SIVVIT) == 'undefined') {
 		}
 	};
 
-
-
 	// Core view
 	SIVVIT.AbstractView = Backbone.View.extend({
 		el : '#dynamic-content',
@@ -199,8 +198,6 @@ if( typeof (SIVVIT) == 'undefined') {
 		initialize : function(options) {
 			this.edit = options.edit;
 		},
-		
-
 		render : function() {
 			// Clear out previous content
 			$(this.el).empty();
@@ -261,7 +258,6 @@ if( typeof (SIVVIT) == 'undefined') {
 				}
 			});
 		},
-		
 		initItem : function(itm) {
 
 			var self = this;
@@ -307,7 +303,6 @@ if( typeof (SIVVIT) == 'undefined') {
 						}
 						event.stopPropagation();
 					});
-
 				}
 
 				this.rendered.push(itm);
@@ -333,12 +328,10 @@ if( typeof (SIVVIT) == 'undefined') {
 				status : value
 			});
 		},
-
 	});
 
 	// Main view
 	SIVVIT.EventsView = SIVVIT.AbstractView.extend({
-
 
 		template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div><div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
@@ -347,11 +340,10 @@ if( typeof (SIVVIT) == 'undefined') {
 			// Render collection
 			this.model.each(function(itm) {
 				itm = this.buildTemplate(itm);
-				
-	
+
 				SIVVIT.Histogram.render({
 					el : $(itm.html).find("#histogram"),
-					
+
 					model : new SIVVIT.TemporalModel({
 						startDate : new Date(itm.model.get("startDate")),
 						endDate : new Date(itm.model.get("endDate")),
@@ -362,22 +354,17 @@ if( typeof (SIVVIT) == 'undefined') {
 					})
 				});
 
-
-				
 				this.initItem(itm);
 			}, this);
 		},
-
-		
 		// Builds each item, returns {model, html} object
 		buildTemplate : function(itm) {
-			
 			html = $.tmpl(this.template, {
 				title : itm.get("title"),
-				posts: itm.get("stats").posts,
-				videos: itm.get("stats").videos,
-				images: itm.get("stats").images,
-				location: itm.get("location").name,
+				posts : itm.get("stats").posts,
+				videos : itm.get("stats").videos,
+				images : itm.get("stats").images,
+				location : itm.get("location").name,
 				author : itm.get("author")
 			});
 			return {
@@ -386,7 +373,4 @@ if( typeof (SIVVIT) == 'undefined') {
 			};
 		}
 	});
-	
-	
-
 })($, SIVVIT);

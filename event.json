@@ -83,7 +83,16 @@
 			}, {
 				"timestamp": "Tue Aug 27 20:03:43 +0000 2011",
 				"count": 2
-			}
+			}, {
+				"timestamp": "Tue Aug 28 20:03:43 +0000 2011",
+				"count": 2
+			},{
+				"timestamp": "Tue Aug 29 20:03:43 +0000 2011",
+				"count": 2
+			}, {
+				"timestamp": "Tue Aug 30 20:03:43 +0000 2011",
+				"count": 2
+				}
 		],
 		"media": [
 			{

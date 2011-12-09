@@ -105,6 +105,18 @@ li#post-list
 	margin-left: -1px;
 }
 
+#active-notice
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -180px transparent;
+	width: 55px;
+	height: 18px;
+	display: block;
+	position: absolute;
+	top:20px;
+	margin-left: -1px;
+}
+
+
 li#post-list #content 
 {
 	position: relative;
