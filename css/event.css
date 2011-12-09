@@ -94,9 +94,9 @@ li#post-list
 	margin-left: 
 }
 
-#pending-notice
+.pending-notice
 {
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -158px transparent;
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -159px transparent;
 	width: 55px;
 	height: 18px;
 	display: block;
@@ -105,9 +105,9 @@ li#post-list
 	margin-left: -1px;
 }
 
-#active-notice
+.active-notice
 {
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -180px transparent;
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -179px transparent;
 	width: 55px;
 	height: 18px;
 	display: block;

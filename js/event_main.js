@@ -591,7 +591,6 @@ SIVVIT.AbstractView = Backbone.View.extend({
 		} else {
 			itm.html.find("#pending-notice").show();
 		}
-
 	},
 	updateItem : function(itm) {
 		//update_item.json?id=00002&status=1
