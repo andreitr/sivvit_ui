@@ -67,7 +67,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 		// Sort content by startDate
 		comparator : function(itm) {
-			return itm.get("startDate");
+			return -itm.get("startDate");
 		}
 	})
 
@@ -88,7 +88,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			startDate : new Date(),
 			endDate : new Date(),
 			status : 0,
-			pending: 0,
+			pending : 0,
 			stats : {
 				total : 0,
 				posts : 0,
@@ -153,8 +153,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 				var percentY = (frame.count / maxVal) * 100;
 				var percentX = (new Date(frame.timestamp).getTime() - startTime) / (endTime - startTime);
-				
-				
+
 				var barH = Math.round(percentY * maxHeight / 100);
 				var barX = Math.round(barW * Math.round(percentX * (lenTotal - 1)));
 				var barY = Math.round(maxHeight - barH);
@@ -165,7 +164,6 @@ if( typeof (SIVVIT) == 'undefined') {
 				});
 			}
 		},
-		
 		// Returns appropriate resolution.
 		getResolution : function() {
 			switch(this.model.get("resolution")) {
@@ -272,11 +270,11 @@ if( typeof (SIVVIT) == 'undefined') {
 					itm.html.find("#del-itm").hide();
 					itm.html.find("#apr-itm").hide();
 					itm.html.find("#edit-itm").hide();
-					
-					if(itm.model.get("pending") > 0){
-						itm.html.find("#title").append("<div id='pending'>pending "+itm.model.get("pending") +"</div>");
+
+					if(itm.model.get("pending") > 0) {
+						itm.html.find("#title").append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
 					}
-					
+
 					itm.html.hover(function(event) {
 						itm.html.find("#del-itm").show();
 						itm.html.find("#apr-itm").show();
@@ -299,11 +297,11 @@ if( typeof (SIVVIT) == 'undefined') {
 							case "del-itm":
 								self.deleteItem(itm);
 								break;
-							
+
 							case "edit-itm":
 								//Edit item
 								break;
-							
+
 							default:
 								if(itm.html.find("#itm-check").length > 0) {
 									checked = itm.html.find("#itm-check").is(':checked');
@@ -340,18 +338,17 @@ if( typeof (SIVVIT) == 'undefined') {
 			});
 			this.showHidePending(itm);
 		},
-		
 		showHidePending : function(itm) {
 			var icon = itm.html.find("#apr-itm");
-			var flag = itm.html.find("#pending-flag"); 
-				
+			var flag = itm.html.find("#pending-flag");
+
 			if(itm.model.get("status") === 1) {
-				
+
 				icon.toggleClass("icon-play", false);
 				icon.toggleClass("icon-pause", true);
 				flag.toggleClass("idle-notice", false);
 				flag.toggleClass("live-notice", true);
-				
+
 			} else {
 				icon.toggleClass("icon-play", true);
 				icon.toggleClass("icon-pause", false);
