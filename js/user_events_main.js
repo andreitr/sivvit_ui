@@ -49,6 +49,8 @@ if( typeof (SIVVIT) == 'undefined') {
 
 					for( i = len; i--; ) {
 						model = new SIVVIT.EventModel(con[i]);
+						// Add timestamp as date for collection sorting
+						model.set({timestamp:new Date(con[i])});
 						this.collection.add(model);
 					}
 
