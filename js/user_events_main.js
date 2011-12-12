@@ -67,7 +67,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 		// Sort content by startDate
 		comparator : function(itm) {
-			return -itm.get("startDate");
+			return itm.get("startDate");
 		}
 	})
 
@@ -212,7 +212,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.display();
 		},
 		displayEdit : function() {
-			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"apr-all\" class=\"link\"><span class=\"icon-check\"></span>Approve</a></div>");
+			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"pause-all\" class=\"link\"><span class=\"icon-pause\"></span>Pause Collections</a></div>");
 
 			var self = this;
 
@@ -228,14 +228,14 @@ if( typeof (SIVVIT) == 'undefined') {
 				}
 			});
 			// Approve all selected items
-			$("#apr-all").click(function() {
+			$("#pause-all").click(function() {
 
 				var i = self.rendered.length;
 				while(i--) {
 					var itm = self.rendered[i];
 					var cb = itm.html.find("#itm-check");
 					if(cb.is(':checked')) {
-						self.approveItem(itm, true);
+						self.toggleCollection(itm, false);
 					}
 					cb.attr('checked', false);
 					itm.html.css("background-color", "#FFFFFF");
@@ -291,7 +291,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 						switch(event.target.id) {
 							case "apr-itm":
-								self.approveItem(itm);
+								self.toggleCollection(itm);
 								break;
 
 							case "del-itm":
@@ -311,7 +311,7 @@ if( typeof (SIVVIT) == 'undefined') {
 						}
 						event.stopPropagation();
 					});
-					this.showHidePending(itm);
+					this.toggleLive(itm);
 				}
 
 				this.rendered.push(itm);
@@ -324,9 +324,10 @@ if( typeof (SIVVIT) == 'undefined') {
 				silent : true
 			});
 		},
-		approveItem : function(itm, value) {
-
-			if(!value) {
+		
+		toggleCollection : function(itm, value) {
+			
+			if(value === null) {
 				value = itm.model.get("status") === 1 ? 0 : 1;
 			} else {
 				value = value === true ? 1 : 0;
@@ -336,9 +337,10 @@ if( typeof (SIVVIT) == 'undefined') {
 			itm.model.set({
 				status : value
 			});
-			this.showHidePending(itm);
+			this.toggleLive(itm);
 		},
-		showHidePending : function(itm) {
+		
+		toggleLive : function(itm) {
 			var icon = itm.html.find("#apr-itm");
 			var flag = itm.html.find("#pending-flag");
 

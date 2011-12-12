@@ -573,7 +573,7 @@ SIVVIT.AbstractView = Backbone.View.extend({
 	},
 	approveItem : function(itm, value) {
 
-		if(!value) {
+		if(value === null) {
 			value = itm.model.get("status") === 1 ? 0 : 1;
 		} else {
 			value = value === true ? 1 : 0;
