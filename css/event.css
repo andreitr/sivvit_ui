@@ -87,14 +87,15 @@ li#post-list
 
 .item-edit
 {
+	left: 5px;
 	float: right;
-	width: 43px;
+	width: 50px;
 	height: 48px;
 	display: block;
-	margin-left: 
+	position:relative;
 }
 
-.pending-notice
+.active-notice
 {
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -159px transparent;
 	width: 55px;
@@ -102,10 +103,9 @@ li#post-list
 	display: block;
 	position: absolute;
 	top:20px;
-	margin-left: -1px;
 }
 
-.active-notice
+.pending-notice
 {
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -179px transparent;
 	width: 55px;
@@ -113,7 +113,7 @@ li#post-list
 	display: block;
 	position: absolute;
 	top:20px;
-	margin-left: -1px;
+	
 }
 
 

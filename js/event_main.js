@@ -520,7 +520,7 @@ SIVVIT.AbstractView = Backbone.View.extend({
 			// Initiate button clicks if a user is logged in and modify
 			// content template (add hover buttons and check box)
 			if(this.edit) {
-				itm.html.find("#content").prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-notice\"></div></span>");
+				itm.html.find("#content").prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-flag\"></div></span>");
 				itm.html.find("#content").prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
 
 				itm.html.find("#del-itm").hide();
@@ -585,13 +585,17 @@ SIVVIT.AbstractView = Backbone.View.extend({
 		});
 		this.showHidePending(itm);
 	},
+	
 	showHidePending : function(itm) {
 		if(itm.model.get("status") === 1) {
-			itm.html.find("#pending-notice").hide();
+			itm.html.find("#pending-flag").toggleClass("pending-notice", false);
+			itm.html.find("#pending-flag").toggleClass("active-notice", true);
 		} else {
-			itm.html.find("#pending-notice").show();
+			itm.html.find("#pending-flag").toggleClass("pending-notice", true);
+			itm.html.find("#pending-flag").toggleClass("active-notice", false);
 		}
 	},
+	
 	updateItem : function(itm) {
 		//update_item.json?id=00002&status=1
 		//delete_item.json?id=00002

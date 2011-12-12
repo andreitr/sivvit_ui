@@ -134,7 +134,7 @@ a:link
     background: #333333;
 }
 
-span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live
+span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog
 {
 	margin:0 5px 0 0;
     height: 11px;
@@ -184,6 +184,16 @@ span.icon-check
 span.icon-check:hover
 {
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -240px -143px transparent;
+}
+span.icon-cog
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -273px -143px transparent;
+	width: 12px;
+	height: 12px;
+}
+span.icon-cog:hover
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -290px -143px transparent;
 }
 
 span.loader
