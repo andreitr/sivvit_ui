@@ -127,12 +127,24 @@ a:link
 	min-height: 75px;
 }
 
+/* Displays user header*/
+#user-avatar
+{
+	width: 48px;
+	height:48px;
+	padding:2px;
+	border:1px solid #CCCCCC;
+	float:left;
+	margin-right: 10px
+}
+
 #footer
 {
     width: 100%;
     height:200px;
     background: #333333;
 }
+
 
 span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog, span.icon-pause, span.icon-play
 {

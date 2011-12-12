@@ -37,7 +37,7 @@
 				"count": 3
 			}, {
 				"timestamp": "Tue Aug 9 19:00:43 +0000 2011",
-				"count": 2
+				"count": 0
 			}, {
 				"timestamp": "Tue Aug 10 19:00:43 +0000 2011",
 				"count": 1
@@ -88,7 +88,7 @@
 				"count": 2
 			},{
 				"timestamp": "Tue Aug 29 20:03:43 +0000 2011",
-				"count": 2
+				"count": 3
 			}
 		],
 		"media": [
@@ -150,8 +150,8 @@
 	"content": [
 		{
 			"id": "00001",
-			"status": 1,
-			"rank": 10,
+			"status": 0,
+			"rank": 3,
 			"type": "media",
 			"location": [39, -104],
 			"author": "andreitr",
@@ -180,7 +180,7 @@
 			"content": "http://desmond.yfrog.com/Himg44/scaled.php?tn=0&server=44&filename=lkhsw.jpg&xsize=640&ysize=640"
 		}, {
 			"id": "00004",
-			"status": 0,
+			"status": 1,
 			"rank": 8,
 			"type": "media",
 			"location": [39, -104],
