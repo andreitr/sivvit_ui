@@ -88,6 +88,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			startDate : new Date(),
 			endDate : new Date(),
 			status : 0,
+			pending: 0,
 			stats : {
 				total : 0,
 				posts : 0,
@@ -271,7 +272,11 @@ if( typeof (SIVVIT) == 'undefined') {
 					itm.html.find("#del-itm").hide();
 					itm.html.find("#apr-itm").hide();
 					itm.html.find("#edit-itm").hide();
-
+					
+					if(itm.model.get("pending") > 0){
+						itm.html.find("#title").append("<div id='pending'>pending "+itm.model.get("pending") +"</div>");
+					}
+					
 					itm.html.hover(function(event) {
 						itm.html.find("#del-itm").show();
 						itm.html.find("#apr-itm").show();
@@ -337,17 +342,21 @@ if( typeof (SIVVIT) == 'undefined') {
 		},
 		
 		showHidePending : function(itm) {
-			if(itm.model.get("status") === 1) {
-				itm.html.find("#apr-itm").toggleClass("icon-play", false);
-				itm.html.find("#apr-itm").toggleClass("icon-pause", true);
-				itm.html.find("#pending-flag").toggleClass("pending-notice", false);
-				itm.html.find("#pending-flag").toggleClass("active-notice", true);
-			} else {
-				itm.html.find("#apr-itm").toggleClass("icon-play", true);
-				itm.html.find("#apr-itm").toggleClass("icon-pause", false);
+			var icon = itm.html.find("#apr-itm");
+			var flag = itm.html.find("#pending-flag"); 
 				
-				itm.html.find("#pending-flag").toggleClass("pending-notice", true);
-				itm.html.find("#pending-flag").toggleClass("active-notice", false);
+			if(itm.model.get("status") === 1) {
+				
+				icon.toggleClass("icon-play", false);
+				icon.toggleClass("icon-pause", true);
+				flag.toggleClass("idle-notice", false);
+				flag.toggleClass("live-notice", true);
+				
+			} else {
+				icon.toggleClass("icon-play", true);
+				icon.toggleClass("icon-pause", false);
+				flag.toggleClass("idle-notice", true);
+				flag.toggleClass("live-notice", false);
 			}
 		},
 	});
@@ -355,7 +364,7 @@ if( typeof (SIVVIT) == 'undefined') {
 	// Main view
 	SIVVIT.EventsView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div><div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div><div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
 
 		display : function() {
 

@@ -1,6 +1,5 @@
 .live { 
 	font-weight: bold;
-	/*background-color: #FFFBDE;*/
 	padding:2px 3px 1px 3px;
 }
 
@@ -112,8 +111,26 @@ li#post-list
 	height: 18px;
 	display: block;
 	position: absolute;
-	top:20px;
-	
+	top:20px;	
+}
+
+.live-notice
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -288px -159px transparent;
+	width: 55px;
+	height: 18px;
+	display: block;
+	position: absolute;
+	top:20px;	
+}
+.idle-notice
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -288px -179px transparent;
+	width: 55px;
+	height: 18px;
+	display: block;
+	position: absolute;
+	top:20px;	
 }
 
 
@@ -159,6 +176,23 @@ li#post-list #title
 	font-size: 18px;
 }
 
+li#post-list #pending
+{
+	top:-3px;
+	left:10px;
+	padding:3px 5px 2px 5px;
+	color:#FFFFFF;
+	background-color:#FF0000;
+	font-size: 9px;
+	position:relative;
+	display:inline-block;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius:5px;
+	cursor:pointer;
+	
+}
+
 li#post-list #media
 {
 	padding:5px;
@@ -184,14 +218,10 @@ li#post-list #meta
 }
 
 /** Override global icons */
-span.icon-delete
+span.icon-delete, span.icon-check, span.icon-cog, span.icon-play, span.icon-pause
 {
 	cursor: pointer;
 }
 
-span.icon-check
-{
-	cursor: pointer;
-}
 
 
