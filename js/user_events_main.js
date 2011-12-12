@@ -212,7 +212,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.display();
 		},
 		displayEdit : function() {
-			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"pause-all\" class=\"link\"><span class=\"icon-pause\"></span>Pause Collections</a></div>");
+			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"pause-all\" class=\"link\"><span class=\"icon-pause\"></span>Pause</a></div>");
 
 			var self = this;
 
@@ -264,11 +264,11 @@ if( typeof (SIVVIT) == 'undefined') {
 				// Initiate button clicks if a user is logged in and modify
 				// content template (add hover buttons and check box)
 				if(this.edit) {
-					itm.html.find("#content").prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-play\" id=\"apr-itm\"></span><span class=\"icon-cog\" id=\"edit-itm\"></span><div id=\"pending-flag\"></div></span>");
+					itm.html.find("#content").prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-play\" id=\"toggle-itm\"></span><span class=\"icon-cog\" id=\"edit-itm\"></span><div id=\"pending-flag\"></div></span>");
 					itm.html.find("#content").prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
 
 					itm.html.find("#del-itm").hide();
-					itm.html.find("#apr-itm").hide();
+					itm.html.find("#toggle-itm").hide();
 					itm.html.find("#edit-itm").hide();
 
 					if(itm.model.get("pending") > 0) {
@@ -277,11 +277,11 @@ if( typeof (SIVVIT) == 'undefined') {
 
 					itm.html.hover(function(event) {
 						itm.html.find("#del-itm").show();
-						itm.html.find("#apr-itm").show();
+						itm.html.find("#toggle-itm").show();
 						itm.html.find("#edit-itm").show();
 					}, function(event) {
 						itm.html.find("#del-itm").hide();
-						itm.html.find("#apr-itm").hide();
+						itm.html.find("#toggle-itm").hide();
 						itm.html.find("#edit-itm").hide();
 					});
 
@@ -290,7 +290,7 @@ if( typeof (SIVVIT) == 'undefined') {
 						var checked;
 
 						switch(event.target.id) {
-							case "apr-itm":
+							case "toggle-itm":
 								self.toggleCollection(itm);
 								break;
 
@@ -327,12 +327,12 @@ if( typeof (SIVVIT) == 'undefined') {
 		
 		toggleCollection : function(itm, value) {
 			
-			if(value === null) {
+			if(value == null) {
 				value = itm.model.get("status") === 1 ? 0 : 1;
 			} else {
 				value = value === true ? 1 : 0;
 			}
-
+			
 			// toggle status
 			itm.model.set({
 				status : value
@@ -341,7 +341,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		},
 		
 		toggleLive : function(itm) {
-			var icon = itm.html.find("#apr-itm");
+			var icon = itm.html.find("#toggle-itm");
 			var flag = itm.html.find("#pending-flag");
 
 			if(itm.model.get("status") === 1) {
