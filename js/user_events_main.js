@@ -32,6 +32,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			this.model.bind("change", function() {
 
+				// Move all this jazz into a separate view
 				$("#user-avatar").append("<img src='http://a0.twimg.com/profile_images/1169898172/01_normal.jpg' width='48' height='48'>");
 				$("#user-title").append("andreitr (Andrei Taraschuk)");
 
@@ -61,7 +62,7 @@ if( typeof (SIVVIT) == 'undefined') {
 	// Main model responsible for loading and mainaining data
 	SIVVIT.Model = Backbone.Model.extend({});
 
-	// Collection containing event models
+	// Collection containing event models,
 	SIVVIT.EventsCollection = Backbone.Collection.extend({
 		model : SIVVIT.EventModel,
 
@@ -71,7 +72,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		}
 	})
 
-	// Contains all
+	// Contains event data
 	SIVVIT.EventModel = Backbone.Model.extend({
 
 		defaults : {
@@ -104,6 +105,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		}
 	});
 
+	// Temporal model used to draw the histogram
 	SIVVIT.TemporalModel = Backbone.Model.extend({
 		defaults : {
 			startDate : new Date(),
@@ -117,10 +119,13 @@ if( typeof (SIVVIT) == 'undefined') {
 		}
 	});
 
-	// Draws generic histogram.
+	// Generic histogram object.
 	SIVVIT.Histogram = {
 
+		// Histogram container
 		el : null,
+
+		// SIVVIT.TemporalModel
 		model : null,
 
 		// Draws histogram
@@ -145,7 +150,6 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			var startTime = this.model.get("startDate").getTime();
 			var endTime = this.model.get("endDate").getTime();
-
 			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
 			for(var i = len; i--; ) {
@@ -179,7 +183,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		}
 	};
 
-	// Core view
+	// Core events view. Right now we only have a single implementation.
 	SIVVIT.AbstractView = Backbone.View.extend({
 		el : '#dynamic-content',
 
@@ -211,6 +215,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			}
 			this.display();
 		},
+		// Displays content editing options - enabled in the admin view.
 		displayEdit : function() {
 			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"pause-all\" class=\"link\"><span class=\"icon-pause\"></span>Pause</a></div>");
 
@@ -227,7 +232,7 @@ if( typeof (SIVVIT) == 'undefined') {
 					}
 				}
 			});
-			// Approve all selected items
+			// Stop running collections
 			$("#pause-all").click(function() {
 
 				var i = self.rendered.length;
@@ -255,6 +260,8 @@ if( typeof (SIVVIT) == 'undefined') {
 				}
 			});
 		},
+		// Initiates item functionality, displays appropriate
+		// dynamic content.
 		initItem : function(itm) {
 
 			var self = this;
@@ -318,28 +325,31 @@ if( typeof (SIVVIT) == 'undefined') {
 				$(this.el).append(itm.html);
 			}
 		},
+		// Deletes selected item.
+		// To-do: implement server call
 		deleteItem : function(itm) {
 			itm.html.fadeOut();
 			this.model.remove(itm.model, {
 				silent : true
 			});
 		},
-		
+		// Starts / stops collection.
+		// To-do: implement server call
 		toggleCollection : function(itm, value) {
-			
+
 			if(value == null) {
 				value = itm.model.get("status") === 1 ? 0 : 1;
 			} else {
 				value = value === true ? 1 : 0;
 			}
-			
+
 			// toggle status
 			itm.model.set({
 				status : value
 			});
 			this.toggleLive(itm);
 		},
-		
+		// Toggles display.
 		toggleLive : function(itm) {
 			var icon = itm.html.find("#toggle-itm");
 			var flag = itm.html.find("#pending-flag");
@@ -360,7 +370,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		},
 	});
 
-	// Main view
+	// Main view. Renders items, displays histogram.
 	SIVVIT.EventsView = SIVVIT.AbstractView.extend({
 
 		template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div><div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
@@ -371,6 +381,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.model.each(function(itm) {
 				itm = this.buildTemplate(itm);
 
+				// Render histogram
 				SIVVIT.Histogram.render({
 					el : $(itm.html).find("#histogram"),
 
