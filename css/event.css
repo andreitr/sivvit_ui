@@ -96,41 +96,45 @@ li#post-list
 
 .active-notice
 {
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -159px transparent;
-	width: 55px;
-	height: 18px;
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -156px transparent;
+	width: 61px;
+	height: 23px;
 	display: block;
 	position: absolute;
-	top:20px;
+	top:13px;
+	left:-1px;
 }
 
 .pending-notice
 {
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -179px transparent;
-	width: 55px;
-	height: 18px;
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -180px transparent;
+	width: 61px;
+	height: 23px;
 	display: block;
 	position: absolute;
-	top:20px;	
+	top:13px;
+	left:-1px;	
 }
 
 .live-notice
 {
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -288px -159px transparent;
-	width: 55px;
-	height: 18px;
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -290px -156px transparent;
+	width: 61px;
+	height: 23px;
 	display: block;
 	position: absolute;
-	top:20px;	
+	top:13px;
+	left:-1px;
 }
 .idle-notice
 {
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -288px -179px transparent;
-	width: 55px;
-	height: 18px;
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -290px -180px transparent;
+	width: 61px;
+	height: 23px;
 	display: block;
 	position: absolute;
-	top:20px;	
+	top:13px;
+	left:-1px;
 }
 
 
