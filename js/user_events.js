@@ -6,7 +6,10 @@
 	$LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
 	$LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
 	
+	$LAB.script("js/user_header.js").wait();
+	
 	$LAB.script("js/user_events_main.js").wait(function(){
 		SIVVIT.UserEvents.init("events.json");
+		SIVVIT.UserHeader.init("user.json");
 	});
 })();
