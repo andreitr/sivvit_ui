@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/secondary.css" />
+		<link rel="stylesheet" type="text/css" href="css/event.css" />
+		<link rel="stylesheet" type="text/css" href="css/global.css" />
+		<link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
+		<title>Edit Event</title>
+	</head>
+	<body>
+		<form>
+			<div style="display:block; height:380px; width:820px; background-color:#FFFFFF; padding:20px">
+				
+				<div style="display:block; height:350px;">
+						
+					<div style="width:380px; float:left;">
+						
+						<h3>Event Title</h3>
+						<input type="text"/>
+						<div id="helper" style="font-size:11px; margin-top: 5px; color:#999999">
+							Describe your event e.g. Angry Cat escapes from jail.
+						</div>
+						<div id="padding"></div>
+							<h3>Location</h3>
+						<input type="text"/>
+						<div id="helper" style="font-size:11px; margin-top: 5px; color:#999999">
+							Leave blank for global tracking.
+						</div>
+						<div id="padding"></div>
+						<h3>Keywords, hashtags</h3>
+						<input type="text"/>
+						<div id="helper" style="font-size:11px; margin-top: 5px; color:#999999">
+							Comma delimited list e.g. angry cats, #angrycats
+						</div>
+						
+						<div id="padding"></div>
+						
+						<div style="float:left">
+								<h3>Start Date</h3>
+							<input type="text"/>
+							<div id="helper" style="font-size:11px; margin-top: 5px; color:#999999">
+								Start collecting at
+							</div>
+						</div>
+						
+						<div style="float:right">
+							<h3>End Date</h3>
+							
+							<input type="text"/>
+							<div id="helper" style="font-size:11px; margin-top: 5px; color:#999999">
+								Runs continuesly if not specified
+							</div>
+						</div>
+					</div>
+					
+					
+					
+					<div style="width:380px; float:right">
+						<div style="display:block">
+							<h3>Curate content</h3>
+						</div>
+						<div style="height:20px; padding-top:5px;">
+							<input type="radio" name="curate" checked="true"/>Automatically
+							<input type="radio" name="curate"/>Manually
+							<input type="radio" name="curate" style="margin-left: 10px;"/>Don't curate 
+						</div>
+						
+						<div id="helper" style="font-size:11px; margin-top: 5px; color:#999999">
+								Please note that everything will be displayed if content is not curated.
+							</div>
+						
+						<div id="padding"></div>
+						<div style="display:block">
+							<h3>Notify about new content</h3>
+						</div>
+						<div style="height:20px; padding-top:5px;">
+							<input type="radio" name="notify" checked="true"/>Never
+							<input type="radio" name="notify" />Hourly
+							<input type="radio" name="notify" />Daily
+							<input type="radio" name="notify" />Weekly
+						</div>
+						<div id="helper" style="font-size:11px; margin-top: 5px; color:#999999">
+							Notification emails will be sent to your account email.
+						</div>
+							
+						<div id="padding"></div>
+						<h3>Collection status: RUNNING</h3>
+						<div class="tabBtn">Stop Collection</div>
+					</div>
+				</div>
+			
+				<div class="tabBtn">Cancel</div>
+				<div class="tabBtn">Save</div>
+					
+				
+			</div>
+		</form>
+		<script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
+	</body>
+</html>

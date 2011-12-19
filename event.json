@@ -11,7 +11,7 @@
 	},
 	"startDate": "Tue Aug 5 19:00:43 +0000 2011",
 	"endDate": "Tue Aug 29 20:03:43 +0000 2011",
-	"status": 0,
+	"status": 1,
 	"stats": {
 		"total": 7660,
 		"posts": 702362,
@@ -25,7 +25,7 @@
 		"global": [
 			{
 				"timestamp": "Tue Aug 5 19:00:43 +0000 2011",
-				"count": 1
+				"count": 0
 			}, {
 				"timestamp": "Tue Aug 6 19:00:43 +0000 2011",
 				"count": 1

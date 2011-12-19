@@ -256,7 +256,6 @@ img[src*="gravatar.com/avatar"]
 	margin-right: 10px;
 }
 
-
 /** Tab buttons, used on event page */
 .tabBtn, .tabBtnSelected, .tabBtnEdit
 {
@@ -286,4 +285,18 @@ img[src*="gravatar.com/avatar"]
 {
 	background-color: #333333;
 	cursor: default;
+}
+
+
+/** Form */
+input[type*="text"]{
+	border:1px solid #CCCCCC;
+	padding:5px;
+	width: 100%;
+}
+
+input[type*="radio"]{
+	border:1px solid #CCCCCC;
+	margin:0 10px 0 0;
+	padding:10px;
 }
