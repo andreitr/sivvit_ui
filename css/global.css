@@ -146,7 +146,7 @@ a:link
 }
 
 
-span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog, span.icon-pause, span.icon-play
+span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog, span.icon-pause, span.icon-play, span.icon-check-green, span.icon-check-red
 {
 	margin:0 5px 0 0;
     height: 11px;
@@ -226,6 +226,17 @@ span.icon-play:hover
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -338px -143px transparent;
 }
 
+span.icon-check-green
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -207px -143px transparent;
+	width: 15px;
+}
+span.icon-check-red
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -191px -143px transparent;
+	width: 15px;
+}
+
 
 span.loader
 {
@@ -288,7 +299,7 @@ img[src*="gravatar.com/avatar"]
 }
 
 
-/** Form */
+/** Form Styles*/
 input[type*="text"]{
 	border:1px solid #CCCCCC;
 	padding:5px;
@@ -301,8 +312,44 @@ input[type*="radio"]{
 	padding:10px;
 }
 
-.helper{
+
+#form-meta{
 	font-size:11px;
 	margin-top: 5px;
 	color:#999999;
+}
+
+#form-field{
+	height:20px;
+	padding-top:5px;	
+}
+
+#form-container{
+	display:block;
+	height:390px;
+	width:820px;
+	background-color:#FFFFFF;
+	padding:20px
+}
+
+#form-main{
+	display:block;
+	height:350px;
+}
+#form-footer{
+	border-top:1px solid #CCCCCC;
+	padding-top:15px;
+}
+
+#form-col, #form-col-left, #form-col-right
+{
+	width:380px;
+	display:block;
+}
+#form-col-left
+{
+	float:left;
+}
+#form-col-right{
+	float:right;
 }
