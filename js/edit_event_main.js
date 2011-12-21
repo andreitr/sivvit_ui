@@ -20,13 +20,10 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			this.model.url = json;
 			this.model.fetch();
-			
-		},
-		
-
-	
+		}
 	};
 
+	// Main edit event view
 	SIVVIT.EditEventView = Backbone.View.extend({
 		
 		el: "document",
@@ -48,21 +45,35 @@ if( typeof (SIVVIT) == 'undefined') {
 		
 		initialize: function(options){
 			
+			var self = this;
+			
 			this.model = options.model;
 			this.model.bind("change", this.update, this);
 			
 			$("input").change(function() {
 				self.checkFields();
 			});
+			
+		},
+		
+		
+		showCalendar: function(){
+			
 		},
 		
 		// Updates view
 		update: function(){
-
+			
+			$("input[name='title']").val(this.model.get("title"));
 			$("input[name='location']").val(this.model.get("location").name);
 			$("input[name='keywords']").val(this.model.get("keywords"));
 
+			// Start date
+			$("input[name='start-date']").datepicker({ defaultDate:new Date(this.model.get("startDate"))});
 			$("input[name='start-date']").val(this.model.get("startDate"));
+			
+			// End date
+			$("input[name='end-date']").datepicker({defaultDate: new Date(this.model.get("endDate")) });
 			$("input[name='end-date']").val(this.model.get("endDate"));
 
 			$('#collection-btn').html(this.model === 0 ? 'Start Collection' : 'Start Collection');
@@ -79,7 +90,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 				field = $(this.required_fields[i].field);
 				
-				valid = this.validateField(field.val(), this.required_fields[i].type)
+				valid = this.validateValue(field.val(), this.required_fields[i].type)
 				icon = $(this.required_fields[i].icon);
 				
 				field.css('background-color', valid ? "#FFFFCC" : "#FFFFFF");
@@ -88,7 +99,8 @@ if( typeof (SIVVIT) == 'undefined') {
 			}
 		},
 		
-		validateField: function(value, type)
+		// Validates specific value based on the type
+		validateValue: function(value, type)
 		{
 			switch(type){
 				case "string":

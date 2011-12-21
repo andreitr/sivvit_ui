@@ -5,8 +5,9 @@
 		<link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
 		<title>Edit Event</title>
 	</head>
+	
 	<body>
-		<form name="event-form">
+		<form>
 			<div id="form-container">
 				<div id="form-main">
 					<div id="form-col-left">
@@ -35,7 +36,7 @@
 						<div style="float:left">
 							
 							<h3><span id="icon-start-date"> </span>Start Date</h3>
-							<input type="text" name="start-date"/>
+							<input type="text" readonly="true" name="start-date"/>
 							
 							<div id="form-meta">
 								Start collecting data
@@ -43,7 +44,7 @@
 						</div>
 						<div style="float:right">
 							<h3>End Date</h3>
-							<input type="text" name="end-date"/>
+							<input type="text" readonly="true" name="end-date"/>
 							<div id="form-meta">
 								Runs continuesly if not specified
 							</div>
