@@ -51,18 +51,14 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.model.bind("change", this.update, this);
 			
 			$("input").change(function() {
-				self.checkFields();
+				self.validate();
 			});
-			
-		},
-		
-		
-		showCalendar: function(){
-			
 		},
 		
 		// Updates view
 		update: function(){
+			
+			var slef = this;
 			
 			$("input[name='title']").val(this.model.get("title"));
 			$("input[name='location']").val(this.model.get("location").name);
@@ -70,11 +66,11 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			// Start date
 			$("input[name='start-date']").datepicker({ defaultDate:new Date(this.model.get("startDate"))});
-			$("input[name='start-date']").val(this.model.get("startDate"));
+			$("input[name='start-date']").val(new Date(this.model.get("startDate")).toDateString());
 			
 			// End date
 			$("input[name='end-date']").datepicker({defaultDate: new Date(this.model.get("endDate")) });
-			$("input[name='end-date']").val(this.model.get("endDate"));
+			$("input[name='end-date']").val(new Date(this.model.get("endDate")).toDateString());
 
 			$('#collection-btn').html(this.model === 0 ? 'Start Collection' : 'Start Collection');
 			

@@ -5,9 +5,11 @@
 	$LAB.script("js/libs/backbone/backbone.js").wait();
 	$LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
 	$LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
-	
+
 	$LAB.script("js/libs/fancybox/jquery.fancybox-1.3.4.js").wait();
 	$LAB.script("js/libs/fancybox/jquery.fancybox-1.3.4.pack.js").wait();
+	
+	$LAB.script("js/header.js").wait();
 	
 	$LAB.script("js/event_main.js").wait(function(){
 		SIVVIT.Event.init("event.json");

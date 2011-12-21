@@ -88,17 +88,6 @@ if( typeof (SIVVIT) == 'undefined') {
 				self.eventModel.fetch();
 			}, 10000);
 
-			
-			$("#new-event").fancybox({
-				'width' : 860,
-				'height' : 430,
-				'autoScale' : true,
-				'scrolling' : false,
-				'transitionIn' : 'fade',
-				'transitionOut' : 'fade',
-				'type' : 'iframe'
-			});
-
 
 			this.eventModel.bind("change", function() {
 
