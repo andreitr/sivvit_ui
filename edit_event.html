@@ -6,38 +6,38 @@
 		<title>Edit Event</title>
 	</head>
 	<body>
-		<form>
+		<form name="event-form">
 			<div id="form-container">
 				<div id="form-main">
 					<div id="form-col-left">
 						<h3><span id="required-icon" class="icon-check-green"> </span>Event Title</h3>
-						<input type="text"/>
+						<input type="text" name="title"/>
 						<div id="form-meta">
 							Describe your event e.g. Angry Cat escapes from jail.
 						</div>
 						<div id="padding"></div>
 						<h3>Location</h3>
-						<input type="text"/>
+						<input type="text" name="location" />
 						<div id="form-meta">
 							Leave blank for global tracking.
 						</div>
 						<div id="padding"></div>
 						<h3><span id="required-icon" class="icon-check-green"> </span>Keywords, hashtags</h3>
-						<input type="text"/>
+						<input type="text" name="keywords"/>
 						<div id="form-meta">
 							Comma delimited list e.g. angry cats, #angrycats
 						</div>
 						<div id="padding"></div>
 						<div style="float:left">
 							<h3><span id="required-icon" class="icon-check-red"> </span>Start Date</h3>
-							<input type="text"/>
+							<input type="text" name="start-date"/>
 							<div id="form-meta">
 								Start collecting data
 							</div>
 						</div>
 						<div style="float:right">
 							<h3>End Date</h3>
-							<input type="text"/>
+							<input type="text" name="end-date"/>
 							<div id="form-meta">
 								Runs continuesly if not specified
 							</div>
