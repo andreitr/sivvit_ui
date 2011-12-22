@@ -207,6 +207,7 @@ li#post-list #media
   	border:1px solid #CCCCCC;
   	margin-bottom:10px;
   	text-align: center;
+  	cursor: pointer;
 }
 
 

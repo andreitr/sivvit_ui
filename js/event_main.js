@@ -558,12 +558,17 @@ if( typeof (SIVVIT) == 'undefined') {
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 			if(itm.get("type") == "media") {
+				
 				html = $.tmpl(this.mediaView.template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp"),
 					author : itm.get("author")
 				});
+				
+				// Initiate light box
+				this.mediaView.lightbox(html, itm);
+				
 			} else if(itm.get("type") == "post") {
 				html = $.tmpl(this.postView.template, {
 					content : itm.get("content"),
@@ -626,9 +631,24 @@ if( typeof (SIVVIT) == 'undefined') {
 			// Render collection
 			this.model.each(function(itm) {
 				itm = this.buildTemplate(itm);
-				this.initItem(itm);
+				if(itm){
+					this.lightbox(itm.html, itm.model);
+					this.initItem(itm);
+				}
 			}, this);
 		},
+		
+		// Open light box
+		lightbox: function(html, model) {
+			$(html).fancybox({
+				'autoScale' : true,
+				'transitionIn' : 'fade',
+				'transitionOut' : 'fade',
+				'type' : 'image',
+				'href' : model.get("content")
+			});
+		},
+		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 			if(itm.get("type") == "media") {
