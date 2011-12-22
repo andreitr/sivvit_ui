@@ -5,7 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 	SIVVIT.EditEvent = {
 
-		// SIVVIT.Model
+		// SIVVIT.EventModel
 		model : null,
 
 		//SIVVIT.EditEventView
@@ -15,7 +15,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		init : function(json) {
 			var self = this;
 
-			this.model = new SIVVIT.Model();
+			this.model = new SIVVIT.EventModel();
 			this.view = new SIVVIT.EditEventView({model:this.model});
 
 			this.model.url = json;
@@ -104,36 +104,4 @@ if( typeof (SIVVIT) == 'undefined') {
 		}	
 	});
 
-	// Contains event data
-	SIVVIT.Model = Backbone.Model.extend({
-
-		defaults : {
-			id : null,
-			title : null,
-			author : null,
-			description : null,
-			keywords : [],
-			location : {
-				lon : null,
-				lat : null,
-				name : null
-			},
-			startDate : new Date(),
-			endDate : new Date(),
-			status : 0,
-			pending : 0,
-			stats : {
-				total : 0,
-				posts : 0,
-				images : 0,
-				videos : 0
-			},
-			histogram : {
-				min : null,
-				max : null,
-				resolution : null,
-				global : []
-			}
-		}
-	});
 })($, SIVVIT);

@@ -134,24 +134,6 @@ if( typeof (SIVVIT) == 'undefined') {
 	};
 
 	/**
-	 * Generic conetnt model.
-	 */
-	SIVVIT.ContentModel = Backbone.Model.extend({
-		defaults : {
-			id : null,
-			status : null,
-			type : null,
-			location : [],
-			content : null,
-			source : null,
-			timestamp : "",
-			rank : 0,
-			author : null,
-			avatar : null
-		}
-	});
-
-	/**
 	 * Content collection used to display data
 	 */
 	SIVVIT.ContentCollection = Backbone.Collection.extend({

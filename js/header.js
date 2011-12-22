@@ -1,5 +1,4 @@
 (function() {
-
 	// New event or edit existing one. 
 	$("#new-event").fancybox({
 		'width' : 860,
