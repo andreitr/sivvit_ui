@@ -50,7 +50,7 @@ a:link
 }
 
 
-#header #nav
+#header .nav
 {
     cursor: pointer;
     display: inline-block;
