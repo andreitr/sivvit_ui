@@ -1,17 +1,13 @@
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
-}
-
-(function(jQuery) {
+}(function(jQuery) {
 
 	SIVVIT.Event = {
 
-		// SIVVIT.EventModel
-		// Main application model, contains all loaded JSON data
+		// SIVVIT.EventModel app/models/model.event.js
 		eventModel : null,
 
-		// SIVVIT.TemporalModel
-		// Temporal data for the histogram display and temporal data filtering
+		// SIVVIT.TemporalModel /app/models/model.temporal.js
 		temporalModel : null,
 
 		// SIVVIT.AppView
@@ -89,7 +85,6 @@ if( typeof (SIVVIT) == 'undefined') {
 			setInterval(function() {
 				self.eventModel.fetch();
 			}, 10000);
-
 
 			this.eventModel.bind("change", function() {
 
@@ -207,7 +202,9 @@ if( typeof (SIVVIT) == 'undefined') {
 				for( i = 0; i < con.length; i++) {
 					model = new SIVVIT.ContentModel(con[i]);
 					// Add timestamp as Date object for sorting purposes
-					model.set({timestamp:new Date(con[i].timestamp)});
+					model.set({
+						timestamp : new Date(con[i].timestamp)
+					});
 					tmp.push(model);
 				}
 				this.collection = new SIVVIT.ContentCollection(tmp);
@@ -221,7 +218,9 @@ if( typeof (SIVVIT) == 'undefined') {
 				for( i = 0; i < con.length; i++) {
 					model = new SIVVIT.ContentModel(con[i]);
 					// Add timestamp as Date object for sorting purposes
-					model.set({timestamp:new Date(con[i].timestamp)});
+					model.set({
+						timestamp : new Date(con[i].timestamp)
+					});
 					this.collection.add(model, {
 						silent : true
 					});
@@ -231,7 +230,7 @@ if( typeof (SIVVIT) == 'undefined') {
 						newCount++;
 					}
 				}
-				
+
 				if(newCount > 0) {
 					this.activeView.update(newCount);
 				}
@@ -373,6 +372,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.checkFiltered();
 		},
 		displayEdit : function() {
+			
 			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"apr-all\" class=\"link\"><span class=\"icon-check\"></span>Approve</a></div>");
 
 			var self = this;
