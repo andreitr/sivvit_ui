@@ -5,11 +5,17 @@
 	$LAB.script("js/libs/backbone/backbone.js").wait();
 	$LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
 	$LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
+	$LAB.script("js/libs/require/require.js").wait();
 	
 	$LAB.script("js/user_header.js").wait();
 	
 	$LAB.script("js/user_events_main.js").wait(function(){
-		SIVVIT.UserEvents.init("events.json");
-		SIVVIT.UserHeader.init("user.json");
+		
+		// Load backbone dependencies
+		require(["js/app/models/model.event", "js/app/models/model.temporal"], function(){
+		
+			SIVVIT.UserEvents.init("events.json");
+			SIVVIT.UserHeader.init("user.json");
+		});
 	});
 })();

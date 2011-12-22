@@ -1,6 +1,8 @@
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
-}(function(jQuery) {
+}
+
+(function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -132,43 +134,6 @@ if( typeof (SIVVIT) == 'undefined') {
 	};
 
 	/**
-	 * Main container for the loaded JSON data.
-	 */
-	SIVVIT.EventModel = Backbone.Model.extend({
-
-		defaults : {
-			id : null,
-			title : null,
-			author : null,
-			description : null,
-			keywords : [],
-			location : {
-				lon : null,
-				lat : null,
-				name : null
-			},
-			startDate : new Date(),
-			endDate : new Date(),
-			status : 0,
-			stats : {
-				total : 0,
-				posts : 0,
-				images : 0,
-				videos : 0
-			},
-			histogram : {
-				min : null,
-				max : null,
-				resolution : null,
-				global : [],
-				media : [],
-				post : []
-			},
-			content : []
-		}
-	});
-
-	/**
 	 * Generic conetnt model.
 	 */
 	SIVVIT.ContentModel = Backbone.Model.extend({
@@ -195,22 +160,6 @@ if( typeof (SIVVIT) == 'undefined') {
 		// Sort content by timestamp
 		comparator : function(itm) {
 			return -itm.get("timestamp");
-		}
-	});
-
-	/**
-	 * Histogram data.
-	 */
-	SIVVIT.TemporalModel = Backbone.Model.extend({
-		defaults : {
-			startDate : new Date(),
-			endDate : new Date(),
-			startRange : null,
-			endRange : null,
-			min : null,
-			max : null,
-			resolution : null,
-			histogram : null
 		}
 	});
 
