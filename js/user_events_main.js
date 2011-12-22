@@ -67,7 +67,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		comparator : function(itm) {
 			return itm.get("startDate");
 		}
-	})
+	});
 
 	// Contains event data
 	SIVVIT.EventModel = Backbone.Model.extend({
@@ -334,7 +334,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		// To-do: implement server call
 		toggleCollection : function(itm, value) {
 
-			if(value == null) {
+			if(value === null) {
 				value = itm.model.get("status") === 1 ? 0 : 1;
 			} else {
 				value = value === true ? 1 : 0;
@@ -364,7 +364,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				flag.toggleClass("idle-notice", true);
 				flag.toggleClass("live-notice", false);
 			}
-		},
+		}
 	});
 
 	// Main view. Renders items, displays histogram.

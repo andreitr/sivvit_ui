@@ -26,7 +26,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			}, this);
 		}
-	}
+	};
 
 	// Main model responsible for loading and mainaining data
 	SIVVIT.Model = Backbone.Model.extend({

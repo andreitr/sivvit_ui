@@ -86,7 +86,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 				field = $(this.required_fields[i].field);
 				
-				valid = this.validateValue(field.val(), this.required_fields[i].type)
+				valid = this.validateValue(field.val(), this.required_fields[i].type);
 				icon = $(this.required_fields[i].icon);
 				
 				field.css('background-color', valid ? "#FFFFCC" : "#FFFFFF");
@@ -98,9 +98,8 @@ if( typeof (SIVVIT) == 'undefined') {
 		// Validates specific value based on the type
 		validateValue: function(value, type)
 		{
-			switch(type){
-				case "string":
-					return value.match('^$');
+			if(type === "string"){
+				return value.match('^$');
 			}
 		}	
 	});

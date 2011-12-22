@@ -1,5 +1,6 @@
 (function() {
 
+	// New event or edit existing one. 
 	$("#new-event").fancybox({
 		'width' : 860,
 		'height' : 430,
@@ -9,5 +10,4 @@
 		'transitionOut' : 'fade',
 		'type' : 'iframe'
 	});
-
 })();
