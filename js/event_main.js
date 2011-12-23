@@ -818,11 +818,15 @@ if( typeof (SIVVIT) == 'undefined') {
 		render : function() {
 
 			$("#event-title").html(this.model.get("title"));
+			$("#event-description").html(this.model.get("description"));
+			
+			/*
 			$("#event-meta").html("<span class=\"icon-location\"></span>" + this.model.get("location").name);
 			$("#event-meta").append("&nbsp<span class=\"icon-user\"></span>by&nbsp;" + this.model.get("author"));
 			if(this.model.get("status") === 1) {
 				$("#event-meta").prepend("<span class=\"live\">LIVE</span>&nbsp");
 			}
+			*/
 		}
 	});
 })();
