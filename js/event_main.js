@@ -718,6 +718,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.updateDateDisplay();
 		},
 		updateDateDisplay : function() {
+			
 			function formatDate(date) {
 				return date.getMonth() + 1 + "/" + date.getDay() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 			}
@@ -818,6 +819,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			$("#event-title").html(this.model.get("title"));
 			$("#event-description").html(this.model.get("description"));
+			$("#event-user").html("Created by <span class='icon-user'></span>"+this.model.get("author")+" on "+new Date(this.model.get("startDate")).toDateString());
 			
 			// Live timeline label
 			if(this.model.get("status") === 1) {
@@ -827,6 +829,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			}
 			
 			$("#map-label").html("<div id='map-label'><span class='icon-location'></span>" + this.model.get("location").name + "</div>");
+			
 			
 			/*
 			$("#event-meta").append("&nbsp<span class=\"icon-user\"></span>by&nbsp;" + this.model.get("author"));
