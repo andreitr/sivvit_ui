@@ -176,10 +176,9 @@ if( typeof (SIVVIT) == 'undefined') {
 
 		// Bind button events
 		events : {
-			"click #allBtn" : "render",
-			"click #postBtn" : "render",
-			"click #mediaBtn" : "render",
-			"click #mapBtn" : "render"
+			"click #all-btn" : "render",
+			"click #post-btn" : "render",
+			"click #media-btn" : "render"
 		},
 
 		initialize : function(options) {
@@ -239,7 +238,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		render : function(event) {
 			this.renderView( event ? event : {
 				target : {
-					id : "allBtn"
+					id : "all-btn"
 				}
 			});
 		},
@@ -253,12 +252,12 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.prevButton = this.activeButton;
 			this.activeButton = "#" + event.target.id;
 
-			$(this.activeButton).toggleClass('tabBtn', false);
-			$(this.activeButton).toggleClass('tabBtnSelected', true);
+			$(this.activeButton).toggleClass('text-btn', false);
+			$(this.activeButton).toggleClass('text-btn-selected', true);
 
 			if(this.prevButton != this.activeButton) {
-				$(this.prevButton).toggleClass('tabBtn', true);
-				$(this.prevButton).toggleClass('tabBtnSelected', false);
+				$(this.prevButton).toggleClass('text-btn', true);
+				$(this.prevButton).toggleClass('text-btn-selected', false);
 			}
 
 			if(this.activeView) {
@@ -269,24 +268,27 @@ if( typeof (SIVVIT) == 'undefined') {
 			}
 
 			switch(event.target.id) {
-				case "allBtn":
+				case "all-btn":
 					this.temporalModel.set({
 						histogram : this.eventModel.get("histogram").global
 					});
+					$("#content-stats").html("Total: "+this.eventModel.get("stats").total);
 					this.activeView = this.allView;
 					break;
 
-				case "postBtn":
+				case "post-btn":
 					this.temporalModel.set({
 						histogram : this.eventModel.get("histogram").post
 					});
+					$("#content-stats").html("Posts: "+this.eventModel.get("stats").posts);
 					this.activeView = this.postView;
 					break;
 
-				case "mediaBtn":
+				case "media-btn":
 					this.temporalModel.set({
 						histogram : this.eventModel.get("histogram").media
 					});
+					$("#content-stats").html("Media: "+this.eventModel.get("stats").images);
 					this.activeView = this.mediaView;
 					break;
 			}

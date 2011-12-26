@@ -12,13 +12,13 @@ body
 h1
 {
     color: #464646;
-    text-shadow: 1px 1px 1px hsla(0,0%,100%,.8);
     font-size:23px;
-    margin: 0px 0 5px 0;
     font-weight: 100;
+    text-shadow: 1px 1px 1px hsla(0,0%,100%,.8);
+    margin: 0px 0 5px 0;
 }
 
-h2, h3
+h2, h3, .h2-inline
 {
     color: #333333;
     font-size: 17px;
@@ -26,12 +26,17 @@ h2, h3
     text-shadow: 1px 1px 1px hsla(0,0%,100%,.8);
     margin: 0 0 10px 0;
 }
-
+	
 h3
 {
     font-size: 16px;
     font-weight: 200;
     margin: 0 0 5px 0;
+}
+
+.h2-inline
+{
+	display:inline-block;	
 }
 
 a:link
@@ -142,14 +147,13 @@ a:link
 }
 
 
-span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog, span.icon-pause, span.icon-play, span.icon-check-green, span.icon-check-red
+span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog, span.icon-pause, span.icon-play, span.icon-check-green, span.icon-check-red, span.icon-media, span.icon-comment, span.icon-page
 {
 	margin:0 5px 0 0;
     height: 11px;
     width: 11px;
     display: inline-block;
 }
-
 span.icon-location
 {
 	 background: url("../img/css/sprite-icons.png") no-repeat scroll -224px -64px transparent;
@@ -234,6 +238,25 @@ span.icon-check-red
 	background: url("../img/css/sprite-icons.png") no-repeat scroll -191px -143px transparent;
 	width: 15px;
 }
+span.icon-media
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll 0px -96px transparent;
+	width: 15px;
+	height: 15px;
+}
+span.icon-comment
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -32px -96px transparent;
+	width: 12px;
+	height: 14px;	
+}
+span.icon-page
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -47px -96px transparent;
+	width: 11px;
+	height: 13px;	
+}
+
 
 
 span.loader
@@ -264,6 +287,28 @@ img[src*="gravatar.com/avatar"]
 	float: left;
 	margin-right: 10px;
 }
+
+/** */
+.text-btn, .text-btn-selected
+{
+	width:auto;
+	padding:5px;
+	display:inline;
+	cursor:pointer;
+	margin-left:5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius:5px;
+}
+.text-btn-selected
+{
+	background-color:#FFFFFF	
+}
+.text-btn:hover
+{
+	background-color:#EDEDED;
+}
+
 
 /** Tab buttons, used on event page */
 .tabBtn, .tabBtnSelected, .tabBtnEdit
