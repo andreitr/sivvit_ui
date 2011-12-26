@@ -33,7 +33,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : false,
+		edit : true,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -569,7 +569,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				});
 				
 				// Initiate light box
-				this.mediaView.lightbox(html, itm);
+				this.mediaView.lightbox(html.find("#media"), itm);
 				
 			} else if(itm.get("type") == "post") {
 				html = $.tmpl(this.postView.template, {
@@ -634,7 +634,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.model.each(function(itm) {
 				itm = this.buildTemplate(itm);
 				if(itm){
-					this.lightbox(itm.html, itm.model);
+					this.lightbox(itm.html.find("#media"), itm.model);
 					this.initItem(itm);
 				}
 			}, this);
@@ -643,7 +643,6 @@ if( typeof (SIVVIT) == 'undefined') {
 		// Open light box
 		lightbox: function(html, model) {
 			$(html).fancybox({
-				'autoScale' : true,
 				'transitionIn' : 'fade',
 				'transitionOut' : 'fade',
 				'type' : 'image',
