@@ -12,8 +12,8 @@
 /** Secondary title for content boxes */
 .seconrady-title
 {
-	float:right;
-	margin-top:4px;
+	margin-left:10px;
+	display:inline;
 }
 
 #content-stats

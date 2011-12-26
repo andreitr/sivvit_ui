@@ -830,7 +830,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				$("#timeline-label").html("<span class='icon-time'></span>Archived event.");
 			}
 			
-			$("#map-label").html("<div id='map-label'><span class='icon-location'></span>" + this.model.get("location").name + "</div>");
+			$("#map-label").html("<span class='icon-location'></span>" + this.model.get("location").name);
 			
 			
 			/*
