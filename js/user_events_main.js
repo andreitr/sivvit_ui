@@ -287,7 +287,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		// To-do: implement server call
 		toggleCollection : function(itm, value) {
 
-			if(value === null) {
+			if(value === undefined) {
 				value = itm.model.get("status") === 1 ? 0 : 1;
 			} else {
 				value = value === true ? 1 : 0;
