@@ -274,8 +274,9 @@ Date.prototype.format = function(){
 				});
 			}
 			
+			console.log(event);
+			
 			switch(event.target.id) {
-				
 				
 				case "all-btn":
 					this.temporalModel.set({

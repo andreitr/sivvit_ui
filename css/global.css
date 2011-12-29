@@ -7,6 +7,7 @@ body
     font-size: 13px;
     font-weight: 100;
     color: #585858;
+     background: url("../img/css/background.png"); 
 }
 
 .gray-text{
@@ -57,6 +58,7 @@ a:link
     height: 30px;
     border-bottom: 1px solid #FFFFFF;
     background: #464646;
+    display:block;
  }
 
 
@@ -313,7 +315,7 @@ img[src*="gravatar.com/avatar"]
 }
 .text-btn:hover
 {
-	background-color:#EDEDED;
+	background-color:#E1E1E1;
 }
 
 
