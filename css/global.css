@@ -9,6 +9,13 @@ body
     color: #585858;
 }
 
+.gray-text{
+	font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 100;
+    color: #CCCCCC;
+}
+
 h1
 {
     color: #464646;

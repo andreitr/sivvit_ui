@@ -823,7 +823,7 @@ Date.prototype.format = function(){
 
 			$("#event-title").html(this.model.get("title"));
 			$("#event-description").html(this.model.get("description"));
-			$("#event-user").html("Created by <span class='icon-user'></span>"+this.model.get("author")+" on "+new Date(this.model.get("startDate")).toDateString());
+			$("#event-user").html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>"+this.model.get("author")+"</a> <span class='gray-text'>on</span> "+new Date(this.model.get("startDate")).toDateString());
 			
 			// Live timeline label
 			if(this.model.get("status") === 1) {
@@ -833,11 +833,6 @@ Date.prototype.format = function(){
 			}
 			
 			$("#map-label").html("<span class='icon-location'></span>" + this.model.get("location").name);
-			
-			
-			/*
-			$("#event-meta").append("&nbsp<span class=\"icon-user\"></span>by&nbsp;" + this.model.get("author"));
-			*/
 		}
 	});
 })();
