@@ -40,7 +40,7 @@ Date.prototype.format = function(){
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : true,
+		edit : false,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -601,7 +601,7 @@ Date.prototype.format = function(){
 	 */
 	SIVVIT.PostView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function() {
 
@@ -636,7 +636,7 @@ Date.prototype.format = function(){
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div>Twitter: <span class='icon-time'></span>${timestamp}<span class='icon-user'></span><a href='#'>${author}</a></content></li>",
+		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div><div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function() {
 			// Render collection
