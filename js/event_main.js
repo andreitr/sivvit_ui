@@ -1,6 +1,13 @@
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
-}(function(jQuery) {
+}
+
+// Formats date
+Date.prototype.format = function(){
+	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
+};
+
+(function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -266,8 +273,10 @@ if( typeof (SIVVIT) == 'undefined') {
 					temporal : this.temporalModel
 				});
 			}
-
+			
 			switch(event.target.id) {
+				
+				
 				case "all-btn":
 					this.temporalModel.set({
 						histogram : this.eventModel.get("histogram").global
@@ -508,10 +517,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			});
 		},
 		approveItem : function(itm, value) {
-
-			console.log(value);
-			console.log(value === null);
-			
+		
 			if(value === undefined) {
 				value = itm.model.get("status") === 1 ? 0 : 1;
 			} else {
@@ -567,7 +573,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				html = $.tmpl(this.mediaView.template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp"),
+					timestamp : itm.get("timestamp").format(),
 					author : itm.get("author")
 				});
 				
@@ -578,7 +584,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				html = $.tmpl(this.postView.template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp"),
+					timestamp : itm.get("timestamp").format(),
 					author : itm.get("author")
 				});
 			}
@@ -611,7 +617,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				html = $.tmpl(this.template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp"),
+					timestamp : itm.get("timestamp").format(),
 					author : itm.get("author")
 				});
 				return {
@@ -659,7 +665,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				html = $.tmpl(this.template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp"),
+					timestamp : itm.get("timestamp").format(),
 					author : itm.get("author")
 				});
 				return {
@@ -722,14 +728,8 @@ if( typeof (SIVVIT) == 'undefined') {
 			this.updateDateDisplay();
 		},
 		updateDateDisplay : function() {
-			
-			function formatDate(date) {
-				return date.getMonth() + 1 + "/" + date.getDay() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-			}
-
-
-			$("#timeline-mintime").html(formatDate(this.model.get("startRange")));
-			$("#timeline-maxtime").html(formatDate(this.model.get("endRange")));
+			$("#timeline-mintime").html((this.model.get("startRange")).format());
+			$("#timeline-maxtime").html((this.model.get("endRange")).format());
 		},
 		// Sets histogram bar colors based on the visible range
 		updateHistogramBar : function(bar) {
