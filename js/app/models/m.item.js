@@ -1,7 +1,7 @@
 /**
  * Generic conetnt model.
  */
-SIVVIT.ContentModel = Backbone.Model.extend({
+SIVVIT.ItemModel = Backbone.Model.extend({
 	defaults : {
 		id : null,
 		status : null,

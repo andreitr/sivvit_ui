@@ -139,7 +139,7 @@ Date.prototype.format = function(){
 	 * Content collection used to display data
 	 */
 	SIVVIT.ContentCollection = Backbone.Collection.extend({
-		model : SIVVIT.ContentModel,
+		model : SIVVIT.ItemModel,
 
 		// Sort content by timestamp
 		comparator : function(itm) {
@@ -206,7 +206,7 @@ Date.prototype.format = function(){
 
 				// Create new collection
 				for( i = 0; i < con.length; i++) {
-					model = new SIVVIT.ContentModel(con[i]);
+					model = new SIVVIT.ItemModel(con[i]);
 					// Add timestamp as Date object for sorting purposes
 					model.set({
 						timestamp : new Date(con[i].timestamp)
@@ -222,7 +222,7 @@ Date.prototype.format = function(){
 				newCount = 0;
 
 				for( i = 0; i < con.length; i++) {
-					model = new SIVVIT.ContentModel(con[i]);
+					model = new SIVVIT.ItemModel(con[i]);
 					// Add timestamp as Date object for sorting purposes
 					model.set({
 						timestamp : new Date(con[i].timestamp)
@@ -828,7 +828,7 @@ Date.prototype.format = function(){
 			
 			// Live timeline label
 			if(this.model.get("status") === 1) {
-				$("#timeline-label").html("<span class='icon-time'></span>This event is live!");
+				$("#timeline-label").html("<span class='icon-time'></span>LIVE - updated 1m ago");
 			}else{
 				$("#timeline-label").html("<span class='icon-time'></span>Archived event.");
 			}

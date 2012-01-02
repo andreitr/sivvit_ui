@@ -16,7 +16,7 @@
 	$LAB.script("js/event_main.js").wait(function() {
 
 		// Load backbone dependencies
-		require(["js/app/models/model.event", "js/app/models/model.temporal", "js/app/models/model.content"], function() {
+		require(["js/app/models/model.event", "js/app/models/model.temporal", "js/app/models/m.item", "js/app/models/m.bucket"], function() {
 			SIVVIT.Event.init("event.json");
 		});
 	});
