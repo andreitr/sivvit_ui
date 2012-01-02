@@ -3,8 +3,8 @@
  */
 SIVVIT.ItemGroupModel = Backbone.Model.extend({
 	defaults : {
-		count : null,
-		content : null, // Collection of items
+		count : 30,
 		timestamp : null,
+		items : null // Collection of items - ItemCollection
 	}
 });

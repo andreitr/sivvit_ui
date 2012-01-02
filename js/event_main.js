@@ -135,7 +135,8 @@ Date.prototype.format = function(){
 		}
 	};
 
-	SIVVIT.BucketCollection = Backbone.Collection.extend({
+	// Collection of item groups
+	SIVVIT.ItemGroupCollection = Backbone.Collection.extend({
 		
 		model : SIVVIT.ItemGroupModel,
 		
@@ -146,7 +147,8 @@ Date.prototype.format = function(){
 	});
 	
 	
-	SIVVIT.ContentCollection = Backbone.Collection.extend({
+	// Collection of items
+	SIVVIT.ItemCollection = Backbone.Collection.extend({
 		model : SIVVIT.ItemModel,
 
 		// Sort content by timestamp
@@ -156,8 +158,6 @@ Date.prototype.format = function(){
 	});
 	
 	
-	
-
 	/**
 	 * Main application view. Acts like a controller of sorts.
 	 */
@@ -189,7 +189,7 @@ Date.prototype.format = function(){
 		// SIVVIT.MediaView
 		mediaView : null,
 
-		// SIVVIT.ContentCollection
+		// SIVVIT.ItemGroupCollection
 		collection : null,
 
 		// Bind button events
@@ -211,21 +211,42 @@ Date.prototype.format = function(){
 			var tmp = [];
 			var con = this.eventModel.get("content");
 			var len = this.collection ? this.collection.length : 0;
-			var i, itm, newCount, model;
+			var i, itm, newCount, group_model;
 
 			if(!this.collection) {
 
 				// Create new collection
 				for( i = 0; i < con.length; i++) {
-					model = new SIVVIT.ItemModel(con[i]);
-					// Add timestamp as Date object for sorting purposes
-					model.set({
-						timestamp : new Date(con[i].timestamp)
-					});
-					tmp.push(model);
+					
+					
+					// REMOVE ONCE CONTENT GROUPS ARE IMPLEMENTED -----------------------------------------------
+					if(con[i].items)
+					{
+						group_model = new SIVVIT.ItemGroupModel();
+						console.log(con[i]);
+						
+						var items = [];
+						
+						for(var j = 0; j < con[i].items.length; j++){
+							var itm_model = new SIVVIT.ItemModel(con[i].items[j]);
+							itm_model.set({timestamp:new Date(con[i].items[j].timestamp)});
+							items.push(itm_model);
+						}
+						
+						group_model.items = new SIVVIT.ItemCollection(items);
+						group_model.count = con[i].count;
+						group_model.timestamp = new Date(con[i].timestamp);
+						
+						// Add timestamp as Date object for sorting purposes
+						group_model.set({
+							timestamp : new Date(con[i].timestamp)
+						});
+						tmp.push(group_model);
+					}
 				}
-				this.collection = new SIVVIT.ContentCollection(tmp);
+				this.collection = new SIVVIT.ItemGroupCollection(tmp);
 				this.render();
+				
 
 			} else {
 
@@ -233,7 +254,7 @@ Date.prototype.format = function(){
 				newCount = 0;
 
 				for( i = 0; i < con.length; i++) {
-					model = new SIVVIT.ItemModel(con[i]);
+					model = new SIVVIT.ItemGroupModel(con[i]);
 					// Add timestamp as Date object for sorting purposes
 					model.set({
 						timestamp : new Date(con[i].timestamp)
@@ -284,8 +305,6 @@ Date.prototype.format = function(){
 					temporal : this.temporalModel
 				});
 			}
-			
-			console.log(event);
 			
 			switch(event.target.id) {
 				
@@ -468,6 +487,13 @@ Date.prototype.format = function(){
 				$("#no-content").remove();
 			}
 		},
+		
+		
+		// Displays header of the item group
+		initHeader: function(group){
+			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>"+group.count+" items this "+this.temporalModel.get("resolution")+" - "+group.timestamp.format()+"</div>");
+		},
+		
 		initItem : function(itm) {
 
 			var self = this;
@@ -573,11 +599,22 @@ Date.prototype.format = function(){
 		},
 		// Renders the entire collection
 		display : function() {
-			this.model.each(function(itm) {
-				itm = this.buildTemplate(itm);
-				this.initItem(itm);
+			
+			// Loop through all available groups - ItemGroupCollection
+			this.model.each(function(group) {
+				
+				// Display group header
+				this.initHeader(group);
+				
+				// Loop through each available item - ItemCollection
+				group.items.each(function(itm) {
+					itm = this.buildTemplate(itm);
+					this.initItem(itm);
+
+				}, this);
 			}, this);
 		},
+		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 			if(itm.get("type") == "media") {
