@@ -1,10 +1,10 @@
 /**
  * Temporal bucket containing content
  */
-SIVVIT.ContentBucket = Backbone.Model.extend({
+SIVVIT.ItemGroupModel = Backbone.Model.extend({
 	defaults : {
 		count : null,
-		content : null,
+		content : null, // Collection of items
 		timestamp : null,
 	}
 });

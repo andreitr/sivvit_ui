@@ -135,9 +135,17 @@ Date.prototype.format = function(){
 		}
 	};
 
-	/**
-	 * Content collection used to display data
-	 */
+	SIVVIT.BucketCollection = Backbone.Collection.extend({
+		
+		model : SIVVIT.ItemGroupModel,
+		
+		// Sort item groups by timestamp
+		comparator: function(itm){
+			return -itm.get("timestamp");
+		}
+	});
+	
+	
 	SIVVIT.ContentCollection = Backbone.Collection.extend({
 		model : SIVVIT.ItemModel,
 
@@ -146,6 +154,9 @@ Date.prototype.format = function(){
 			return -itm.get("timestamp");
 		}
 	});
+	
+	
+	
 
 	/**
 	 * Main application view. Acts like a controller of sorts.
