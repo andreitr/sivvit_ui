@@ -3,10 +3,9 @@ if( typeof (SIVVIT) == 'undefined') {
 }
 
 // Formats date
-Date.prototype.format = function(){
+Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
 };
-
 (function(jQuery) {
 
 	SIVVIT.Event = {
@@ -137,16 +136,15 @@ Date.prototype.format = function(){
 
 	// Collection of item groups
 	SIVVIT.ItemGroupCollection = Backbone.Collection.extend({
-		
+
 		model : SIVVIT.ItemGroupModel,
-		
+
 		// Sort item groups by timestamp
-		comparator: function(itm){
+		comparator : function(itm) {
 			return -itm.get("timestamp");
 		}
 	});
-	
-	
+
 	// Collection of items
 	SIVVIT.ItemCollection = Backbone.Collection.extend({
 		model : SIVVIT.ItemModel,
@@ -156,8 +154,7 @@ Date.prototype.format = function(){
 			return -itm.get("timestamp");
 		}
 	});
-	
-	
+
 	/**
 	 * Main application view. Acts like a controller of sorts.
 	 */
@@ -217,35 +214,32 @@ Date.prototype.format = function(){
 
 				// Create new collection
 				for( i = 0; i < con.length; i++) {
-					
-					
-					// REMOVE ONCE CONTENT GROUPS ARE IMPLEMENTED -----------------------------------------------
-					if(con[i].items)
-					{
-						group_model = new SIVVIT.ItemGroupModel(con[i]);
-						
-						var items = [];
-						
-						for(var j = 0; j < con[i].items.length; j++){
-							var itm_model = new SIVVIT.ItemModel(con[i].items[j]);
-							itm_model.set({timestamp:new Date(con[i].items[j].timestamp)});
-							items.push(itm_model);
-						}
-						// INVESTIGATE WHY I CANT PASS MODEL DATA IN CONSTRUCTOR ----------------------------------
-						group_model.items = new SIVVIT.ItemCollection(items);
-						group_model.count = con[i].count;
-						group_model.timestamp = new Date(con[i].timestamp);
-						
-						// Add timestamp as Date object for sorting purposes
-						group_model.set({
-							timestamp : new Date(con[i].timestamp)
+					group_model = new SIVVIT.ItemGroupModel(con[i]);
+
+					var items = [];
+
+					for(var j = 0; j < con[i].items.length; j++) {
+						var itm_model = new SIVVIT.ItemModel(con[i].items[j]);
+						itm_model.set({
+							timestamp : new Date(con[i].items[j].timestamp)
 						});
-						tmp.push(group_model);
+						items.push(itm_model);
 					}
+
+					// INVESTIGATE WHY I CANT PASS MODEL DATA IN CONSTRUCTOR ------------------------------------------
+					group_model.items = new SIVVIT.ItemCollection(items);
+					group_model.count = con[i].count;
+					group_model.timestamp = new Date(con[i].timestamp);
+
+					// Add timestamp as Date object for sorting purposes
+					group_model.set({
+						timestamp : new Date(con[i].timestamp)
+					});
+					tmp.push(group_model);
+
 				}
 				this.collection = new SIVVIT.ItemGroupCollection(tmp);
 				this.render();
-				
 
 			} else {
 
@@ -304,14 +298,14 @@ Date.prototype.format = function(){
 					temporal : this.temporalModel
 				});
 			}
-			
+
 			switch(event.target.id) {
-				
+
 				case "all-btn":
 					this.temporalModel.set({
 						histogram : this.eventModel.get("histogram").global
 					});
-					$("#content-stats").html("Total: "+this.eventModel.get("stats").total);
+					$("#content-stats").html("Total: " + this.eventModel.get("stats").total);
 					this.activeView = this.allView;
 					break;
 
@@ -319,7 +313,7 @@ Date.prototype.format = function(){
 					this.temporalModel.set({
 						histogram : this.eventModel.get("histogram").post
 					});
-					$("#content-stats").html("Posts: "+this.eventModel.get("stats").posts);
+					$("#content-stats").html("Posts: " + this.eventModel.get("stats").posts);
 					this.activeView = this.postView;
 					break;
 
@@ -327,7 +321,7 @@ Date.prototype.format = function(){
 					this.temporalModel.set({
 						histogram : this.eventModel.get("histogram").media
 					});
-					$("#content-stats").html("Media: "+this.eventModel.get("stats").images);
+					$("#content-stats").html("Media: " + this.eventModel.get("stats").images);
 					this.activeView = this.mediaView;
 					break;
 			}
@@ -413,7 +407,7 @@ Date.prototype.format = function(){
 			this.checkFiltered();
 		},
 		displayEdit : function() {
-			
+
 			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"apr-all\" class=\"link\"><span class=\"icon-check\"></span>Approve</a></div>");
 
 			var self = this;
@@ -486,13 +480,10 @@ Date.prototype.format = function(){
 				$("#no-content").remove();
 			}
 		},
-		
-		
 		// Displays header of the item group
-		initHeader: function(group){
-			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>"+group.count+" items this "+this.temporalModel.get("resolution")+" - "+group.timestamp.format()+"</div>");
+		initHeader : function(group) {
+			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>" + group.count + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
 		},
-		
 		initItem : function(itm) {
 
 			var self = this;
@@ -554,7 +545,7 @@ Date.prototype.format = function(){
 			});
 		},
 		approveItem : function(itm, value) {
-		
+
 			if(value === undefined) {
 				value = itm.model.get("status") === 1 ? 0 : 1;
 			} else {
@@ -598,13 +589,13 @@ Date.prototype.format = function(){
 		},
 		// Renders the entire collection
 		display : function() {
-			
+
 			// Loop through all available groups - ItemGroupCollection
 			this.model.each(function(group) {
-				
+
 				// Display group header
 				this.initHeader(group);
-				
+
 				// Loop through each available item - ItemCollection
 				group.items.each(function(itm) {
 					itm = this.buildTemplate(itm);
@@ -613,21 +604,19 @@ Date.prototype.format = function(){
 				}, this);
 			}, this);
 		},
-		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 			if(itm.get("type") == "media") {
-				
 				html = $.tmpl(this.mediaView.template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp").format(),
 					author : itm.get("author")
 				});
-				
+
 				// Initiate light box
 				this.mediaView.lightbox(html.find("#media"), itm);
-				
+
 			} else if(itm.get("type") == "post") {
 				html = $.tmpl(this.postView.template, {
 					content : itm.get("content"),
@@ -653,10 +642,18 @@ Date.prototype.format = function(){
 
 		display : function() {
 
-			// Render collection
-			this.model.each(function(itm) {
-				itm = this.buildTemplate(itm);
-				this.initItem(itm);
+			// Loop through all available groups - ItemGroupCollection
+			this.model.each(function(group) {
+
+				// Display group header
+				this.initHeader(group);
+
+				// Loop through each available item - ItemCollection
+				group.items.each(function(itm) {
+					itm = this.buildTemplate(itm);
+					this.initItem(itm);
+
+				}, this);
 			}, this);
 		},
 		// Builds each item, returns {timestamp, html} object
@@ -687,18 +684,26 @@ Date.prototype.format = function(){
 		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div><div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function() {
-			// Render collection
-			this.model.each(function(itm) {
-				itm = this.buildTemplate(itm);
-				if(itm){
-					this.lightbox(itm.html.find("#media"), itm.model);
-					this.initItem(itm);
-				}
+
+			// Loop through all available groups - ItemGroupCollection
+			this.model.each(function(group) {
+
+				// Display group header
+				this.initHeader(group);
+
+				// Loop through each available item - ItemCollection
+				group.items.each(function(itm) {
+					itm = this.buildTemplate(itm);
+					if(itm) {
+						this.lightbox(itm.html.find("#media"), itm.model);
+						this.initItem(itm);
+					}
+
+				}, this);
 			}, this);
 		},
-		
 		// Open light box
-		lightbox: function(html, model) {
+		lightbox : function(html, model) {
 			$(html).fancybox({
 				'transitionIn' : 'fade',
 				'transitionOut' : 'fade',
@@ -706,7 +711,6 @@ Date.prototype.format = function(){
 				'href' : model.get("content")
 			});
 		},
-		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 			if(itm.get("type") == "media") {
@@ -871,15 +875,15 @@ Date.prototype.format = function(){
 
 			$("#event-title").html(this.model.get("title"));
 			$("#event-description").html(this.model.get("description"));
-			$("#event-user").html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>"+this.model.get("author")+"</a> <span class='gray-text'>on</span> "+new Date(this.model.get("startDate")).toDateString());
-			
+			$("#event-user").html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + new Date(this.model.get("startDate")).toDateString());
+
 			// Live timeline label
 			if(this.model.get("status") === 1) {
 				$("#timeline-label").html("<span class='icon-time'></span>LIVE - updated 1m ago");
-			}else{
+			} else {
 				$("#timeline-label").html("<span class='icon-time'></span>Archived event.");
 			}
-			
+
 			$("#map-label").html("<span class='icon-location'></span>" + this.model.get("location").name);
 		}
 	});
