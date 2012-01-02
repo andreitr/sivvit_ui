@@ -222,8 +222,7 @@ Date.prototype.format = function(){
 					// REMOVE ONCE CONTENT GROUPS ARE IMPLEMENTED -----------------------------------------------
 					if(con[i].items)
 					{
-						group_model = new SIVVIT.ItemGroupModel();
-						console.log(con[i]);
+						group_model = new SIVVIT.ItemGroupModel(con[i]);
 						
 						var items = [];
 						
@@ -232,7 +231,7 @@ Date.prototype.format = function(){
 							itm_model.set({timestamp:new Date(con[i].items[j].timestamp)});
 							items.push(itm_model);
 						}
-						
+						// INVESTIGATE WHY I CANT PASS MODEL DATA IN CONSTRUCTOR ----------------------------------
 						group_model.items = new SIVVIT.ItemCollection(items);
 						group_model.count = con[i].count;
 						group_model.timestamp = new Date(con[i].timestamp);
