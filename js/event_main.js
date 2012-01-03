@@ -345,8 +345,6 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.AbstractView = Backbone.View.extend({
 		
-		el:"#dynamic-content",
-		
 		// Rendered elements
 		rendered : [],
 		
@@ -395,6 +393,8 @@ Date.prototype.format = function() {
 			}
 		},
 		render : function() {
+			
+			this.el = "#dynamic-content";
 			
 			// Clear out previous content
 			$(this.el).empty();
