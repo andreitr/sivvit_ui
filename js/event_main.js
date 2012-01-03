@@ -228,7 +228,7 @@ Date.prototype.format = function() {
 
 					// INVESTIGATE WHY I CANT PASS MODEL DATA IN CONSTRUCTOR ------------------------------------------
 					group_model.items = new SIVVIT.ItemCollection(items);
-					group_model.count = con[i].count;
+					group_model.stats = con[i].stats;
 					group_model.timestamp = new Date(con[i].timestamp);
 
 					// Add timestamp as Date object for sorting purposes
@@ -480,10 +480,7 @@ Date.prototype.format = function() {
 				$("#no-content").remove();
 			}
 		},
-		// Displays header of the item group
-		initHeader : function(group) {
-			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>" + group.count + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
-		},
+		
 		initItem : function(itm) {
 
 			var self = this;
@@ -594,7 +591,7 @@ Date.prototype.format = function() {
 			this.model.each(function(group) {
 
 				// Display group header
-				this.initHeader(group);
+				this.buildHeader(group);
 
 				// Loop through each available item - ItemCollection
 				group.items.each(function(itm) {
@@ -630,6 +627,11 @@ Date.prototype.format = function() {
 				html : html,
 				model : itm
 			};
+		},
+		
+		// Displays header of the item group
+		buildHeader : function(group) {
+			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>" + group.get("stats").total + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
 		}
 	});
 
@@ -647,7 +649,7 @@ Date.prototype.format = function() {
 
 				if(group.get("type") == "post" || group.get("type") == "mixed") {
 					// Display group header
-					this.initHeader(group);
+					this.buildHeader(group);
 
 					// Loop through each available item - ItemCollection
 					group.items.each(function(itm) {
@@ -676,6 +678,11 @@ Date.prototype.format = function() {
 			} else {
 				return null;
 			}
+		},
+		
+		// Displays header of the item group
+		buildHeader : function(group) {
+			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>" + group.get("stats").post + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
 		}
 	});
 
@@ -693,7 +700,7 @@ Date.prototype.format = function() {
 
 				if(group.get("type") == "media" || group.get("type") == "mixed") {
 					// Display group header
-					this.initHeader(group);
+					this.buildHeader(group);
 
 					// Loop through each available item - ItemCollection
 					group.items.each(function(itm) {
@@ -734,6 +741,11 @@ Date.prototype.format = function() {
 			} else {
 				return null;
 			}
+		},
+		
+		// Displays header of the item group
+		buildHeader : function(group) {
+			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>" + group.get("stats").media + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
 		}
 	});
 

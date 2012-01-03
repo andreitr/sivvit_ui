@@ -149,9 +149,13 @@
 
 	"content": [
 		{
-			"count": 20,
 			"timestamp": "Tue Aug 24 01:02:43 +0000 2011",
 			"type": "media",
+			"stats": {
+				"total": 12,
+				"post": 0,
+				"media": 12
+			},
 			"items": [
 				{
 					"id": "00001",
@@ -176,9 +180,13 @@
 				}
 			]
 		}, {
-			"count": 3,
 			"timestamp": "Tue Aug 24 18:00:00 +0000 2011",
 			"type": "media",
+			"stats": {
+				"total": 5,
+				"post": 0,
+				"media": 5
+			},
 			"items": [
 				{
 					"id": "00003",
@@ -213,9 +221,13 @@
 				}
 			]
 		}, {
-			"count": 5,
 			"timestamp": "Tue Aug 25 20:30:43 +0000 2011",
 			"type": "media",
+			"stats": {
+				"total": 3,
+				"post": 0,
+				"media": 3
+			},
 			"items": [
 				{
 					"id": "00006",
@@ -250,9 +262,13 @@
 				}
 			]
 		}, {
-			"count": 5,
 			"timestamp": "Tue Aug 25 20:45:43 +0000 2011",
 			"type": "mixed",
+			"stats": {
+				"total": 9,
+				"post": 6,
+				"media": 3
+			},
 			"items": [
 				{
 					"id": "00009",
@@ -288,9 +304,13 @@
 				}
 			]
 		}, {
-			"count": 5,
 			"timestamp": "Tue Aug 23 19:20:43 +0000 2011",
 			"type": "post",
+			"stats": {
+				"total": 10,
+				"post": 10,
+				"media": 0
+			},
 			"items": [
 				{
 					"id": "00012",
@@ -328,9 +348,13 @@
 				}
 			]
 		}, {
-			"count": 12,
 			"timestamp": "Tue Aug 24 01:02:43 +0000 2011",
 			"type": "post",
+			"stats": {
+				"total": 12,
+				"post": 12,
+				"media": 0
+			},
 			"items": [
 				{
 					"id": "00015",
@@ -368,9 +392,13 @@
 				}
 			]
 		}, {
-			"count": 8,
 			"timestamp": "Tue Aug 25 20:10:43 +0000 2011",
 			"type": "post",
+			"stats": {
+				"total": 8,
+				"post": 8,
+				"media": 0
+			},
 			"items": [
 				{
 					"id": "00018",
@@ -408,9 +436,13 @@
 				}
 			]
 		}, {
-			"count": 7,
 			"timestamp": "Tue Aug 25 20:35:43 +0000 2011",
 			"type": "post",
+			"stats": {
+				"total": 3,
+				"post": 3,
+				"media": 0
+			},
 			"items": [
 				{
 					"id": "00021",
@@ -449,8 +481,12 @@
 			]
 		}, {
 			"type": "post",
-			"count": 2,
 			"timestamp": "Tue Aug 27 20:02:43 +0000 2011",
+			"stats": {
+				"total": 2,
+				"post": 2,
+				"media": 0
+			},
 			"items": [
 				{
 					"id": "00024",
