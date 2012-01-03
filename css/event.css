@@ -98,6 +98,12 @@ li#post-list
 	border-bottom: 1px solid #CCCCCC;
 	position: relative;
 	background-color: #FFFFFF;
+	border-left: solid #EDEDED 5px;
+}
+
+li#post-list:hover
+{
+	border-left: solid #CCCCCC 5px;
 }
 
 

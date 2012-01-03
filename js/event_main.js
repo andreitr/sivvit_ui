@@ -421,20 +421,22 @@ Date.prototype.format = function() {
 		buildGroup : function(group, type) {
 
 			this.el = "#dynamic-content";
-			var count, gid = "group-" + group.get("id");
+			var total, displayed, gid = "group-" + group.get("id");
 			
 			// Display appropriate feature count based on the type		
 			switch(type) {
 				case "post":
-					count = group.get("stats").post;
+					total = group.get("stats").post;
 					break;
 				case "media":
-					count = group.get("stats").media;
+					total = group.get("stats").media;
 					break;
 				case "mixed":
-					count = group.get("stats").total;
+					total = group.get("stats").total;
 					break;
 			}
+			
+			dipslayed = total > 3 ? 3 : total;
 			
 			// Create group element which will contain all items
 			$(this.el).append("<ol id='"+ gid + "'></ol>");
@@ -450,7 +452,8 @@ Date.prototype.format = function() {
 			// Show hide latest group
 			this.showHide(this.groups[this.groups.length -1]);
 			
-			$(this.el).append("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + count + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
+			$(this.el).append("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + dipslayed + " of "+total+" items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format());
+			
 		},
 		
 		displayEdit : function() {
@@ -654,8 +657,10 @@ Date.prototype.format = function() {
 					this.initItem(itm);
 
 				}, this);
+				
 			}, this);
 		},
+		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 			if(itm.get("type") == "media") {
