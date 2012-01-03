@@ -441,11 +441,15 @@ Date.prototype.format = function() {
 
 			this.el = "#" + gid;
 			
+			
 			this.groups.push({
 				model : group,
 				html : $(this.el)
 			});
-
+			
+			// Show hide latest group
+			this.showHide(this.groups[this.groups.length -1]);
+			
 			$(this.el).append("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + count + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
 		},
 		
@@ -516,10 +520,16 @@ Date.prototype.format = function() {
 				$(group.html).hide();
 			}
 		},
+		
 		// Checks whether there any items are displayed
 		checkFiltered : function() {
+			
 			if(!this.displayed) {
 				if($("#no-content").length <= 0) {
+					
+					// Make sure that the top element is reset
+					this.el = "#dynamic-content";
+					
 					$(this.el).append("<div id=\"padding\"><p id=\"no-content\" style=\"text-align:center;\">No content in selected timespan.</p></div>");
 				}
 			} else {
@@ -574,8 +584,6 @@ Date.prototype.format = function() {
 
 					this.showHidePending(itm);
 				}
-
-				this.showHide(itm);
 				this.rendered.push(itm);
 				$(this.el).append(itm.html);
 			}
