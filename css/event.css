@@ -85,6 +85,11 @@ ol {
 
 
 
+#group-header
+{
+	padding:10px;
+	border-bottom:1px solid #CCCCCC;
+}
 
 li#post-list
 {
