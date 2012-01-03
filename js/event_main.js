@@ -645,15 +645,18 @@ Date.prototype.format = function() {
 			// Loop through all available groups - ItemGroupCollection
 			this.model.each(function(group) {
 
-				// Display group header
-				this.initHeader(group);
+				if(group.get("type") == "post" || group.get("type") == "mixed") {
+					// Display group header
+					this.initHeader(group);
 
-				// Loop through each available item - ItemCollection
-				group.items.each(function(itm) {
-					itm = this.buildTemplate(itm);
-					this.initItem(itm);
+					// Loop through each available item - ItemCollection
+					group.items.each(function(itm) {
+						itm = this.buildTemplate(itm);
+						this.initItem(itm);
 
-				}, this);
+					}, this);
+				}
+
 			}, this);
 		},
 		// Builds each item, returns {timestamp, html} object
@@ -688,18 +691,21 @@ Date.prototype.format = function() {
 			// Loop through all available groups - ItemGroupCollection
 			this.model.each(function(group) {
 
-				// Display group header
-				this.initHeader(group);
+				if(group.get("type") == "media" || group.get("type") == "mixed") {
+					// Display group header
+					this.initHeader(group);
 
-				// Loop through each available item - ItemCollection
-				group.items.each(function(itm) {
-					itm = this.buildTemplate(itm);
-					if(itm) {
-						this.lightbox(itm.html.find("#media"), itm.model);
-						this.initItem(itm);
-					}
+					// Loop through each available item - ItemCollection
+					group.items.each(function(itm) {
+						itm = this.buildTemplate(itm);
+						if(itm) {
+							this.lightbox(itm.html.find("#media"), itm.model);
+							this.initItem(itm);
+						}
 
-				}, this);
+					}, this);
+				}
+
 			}, this);
 		},
 		// Open light box

@@ -151,6 +151,7 @@
 		{
 			"count": 20,
 			"timestamp": "Tue Aug 24 01:02:43 +0000 2011",
+			"type": "media",
 			"items": [
 				{
 					"id": "00001",
@@ -177,6 +178,7 @@
 		}, {
 			"count": 3,
 			"timestamp": "Tue Aug 24 18:00:00 +0000 2011",
+			"type": "media",
 			"items": [
 				{
 					"id": "00003",
@@ -213,6 +215,7 @@
 		}, {
 			"count": 5,
 			"timestamp": "Tue Aug 25 20:30:43 +0000 2011",
+			"type": "media",
 			"items": [
 				{
 					"id": "00006",
@@ -249,6 +252,7 @@
 		}, {
 			"count": 5,
 			"timestamp": "Tue Aug 25 20:45:43 +0000 2011",
+			"type": "mixed",
 			"items": [
 				{
 					"id": "00009",
@@ -286,6 +290,7 @@
 		}, {
 			"count": 5,
 			"timestamp": "Tue Aug 23 19:20:43 +0000 2011",
+			"type": "post",
 			"items": [
 				{
 					"id": "00012",
@@ -325,6 +330,7 @@
 		}, {
 			"count": 12,
 			"timestamp": "Tue Aug 24 01:02:43 +0000 2011",
+			"type": "post",
 			"items": [
 				{
 					"id": "00015",
@@ -364,6 +370,7 @@
 		}, {
 			"count": 8,
 			"timestamp": "Tue Aug 25 20:10:43 +0000 2011",
+			"type": "post",
 			"items": [
 				{
 					"id": "00018",
@@ -403,6 +410,7 @@
 		}, {
 			"count": 7,
 			"timestamp": "Tue Aug 25 20:35:43 +0000 2011",
+			"type": "post",
 			"items": [
 				{
 					"id": "00021",
@@ -440,6 +448,7 @@
 				}
 			]
 		}, {
+			"type": "post",
 			"count": 2,
 			"timestamp": "Tue Aug 27 20:02:43 +0000 2011",
 			"items": [
