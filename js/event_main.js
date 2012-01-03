@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery) {
+}; (function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -226,7 +225,8 @@ Date.prototype.format = function() {
 						items.push(itm_model);
 					}
 
-					// INVESTIGATE WHY I CANT PASS MODEL DATA IN CONSTRUCTOR ------------------------------------------
+					// INVESTIGATE WHY I CANT PASS MODEL DATA IN CONSTRUCTOR -----------------------------------------------
+					group_model.set({id:i});
 					group_model.items = new SIVVIT.ItemCollection(items);
 					group_model.stats = con[i].stats;
 					group_model.timestamp = new Date(con[i].timestamp);
@@ -344,10 +344,15 @@ Date.prototype.format = function() {
 	 * Abstract core class for all content views.
 	 */
 	SIVVIT.AbstractView = Backbone.View.extend({
-		el : '#dynamic-content',
-
+		
+		el:"#dynamic-content",
+		
 		// Rendered elements
 		rendered : [],
+		
+		// Rendered groups 
+		groups: [],
+		
 		newCount : 0,
 
 		temporalModel : null, // Instance of TemporalModel
@@ -390,11 +395,13 @@ Date.prototype.format = function() {
 			}
 		},
 		render : function() {
+			
 			// Clear out previous content
 			$(this.el).empty();
-			$(this.el).html("<ol id='nothing'></ol>");
-
-			this.el = "#nothing";
+			
+			// $(this.el).html("<ol id='nothing'></ol>");
+			// this.el = "#nothing";
+			
 			this.displayed = false;
 
 			this.rendered = [];
@@ -480,7 +487,6 @@ Date.prototype.format = function() {
 				$("#no-content").remove();
 			}
 		},
-		
 		initItem : function(itm) {
 
 			var self = this;
@@ -587,11 +593,13 @@ Date.prototype.format = function() {
 		// Renders the entire collection
 		display : function() {
 
+			var count = 0;
+			
 			// Loop through all available groups - ItemGroupCollection
 			this.model.each(function(group) {
-
-				// Display group header
-				this.buildHeader(group);
+				
+				// Create group element and display group header
+				this.buildGroup(group);
 
 				// Loop through each available item - ItemCollection
 				group.items.each(function(itm) {
@@ -628,9 +636,17 @@ Date.prototype.format = function() {
 				model : itm
 			};
 		},
-		
 		// Displays header of the item group
-		buildHeader : function(group) {
+		buildGroup : function(group) {
+			
+			this.el = "#dynamic-content";
+			var gid = "group-"+group.get("id");
+			
+			// Create group element which will contain all items
+			$(this.el).append("<ol id='"+gid+"'></ol>");
+			
+			this.el = "#"+gid;
+			
 			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>" + group.get("stats").total + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
 		}
 	});
@@ -648,8 +664,9 @@ Date.prototype.format = function() {
 			this.model.each(function(group) {
 
 				if(group.get("type") == "post" || group.get("type") == "mixed") {
-					// Display group header
-					this.buildHeader(group);
+					
+					// Create group container and display header
+					this.buildGroup(group);
 
 					// Loop through each available item - ItemCollection
 					group.items.each(function(itm) {
@@ -679,9 +696,17 @@ Date.prototype.format = function() {
 				return null;
 			}
 		},
-		
 		// Displays header of the item group
-		buildHeader : function(group) {
+		buildGroup : function(group) {
+			
+			this.el = "#dynamic-content";
+			var gid = "group-"+group.get("id");
+			
+			// Create group element which will contain all items
+			$(this.el).append("<ol id='"+gid+"'></ol>");
+			
+			this.el = "#"+gid;
+			
 			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>" + group.get("stats").post + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
 		}
 	});
@@ -699,8 +724,8 @@ Date.prototype.format = function() {
 			this.model.each(function(group) {
 
 				if(group.get("type") == "media" || group.get("type") == "mixed") {
-					// Display group header
-					this.buildHeader(group);
+
+					this.buildGroup(group);
 
 					// Loop through each available item - ItemCollection
 					group.items.each(function(itm) {
@@ -742,9 +767,17 @@ Date.prototype.format = function() {
 				return null;
 			}
 		},
-		
-		// Displays header of the item group
-		buildHeader : function(group) {
+		// Creates group container and dispalys group hedader
+		buildGroup : function(group) {
+			
+			this.el = "#dynamic-content";
+			var gid = "group-"+group.get("id");
+			
+			// Create group element which will contain all items
+			$(this.el).append("<ol id='"+gid+"'></ol>");
+			
+			this.el = "#"+gid;
+			
 			$(this.el).append("<div style='padding:10px; border-bottom:1px solid #CCCCCC'><span class='icon-time'>&nbsp;</span>" + group.get("stats").media + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format() + "</div>");
 		}
 	});
