@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery) {
+};
+(function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -210,28 +211,27 @@ Date.prototype.format = function() {
 			var tmp_group = [];
 			var con = this.eventModel.get("content");
 			var len = this.collection ? this.collection.length : 0;
-			var i, itm, newCount, group_model;
+			var i, j, itm, tmp_items, newCount, group_model, itm_model;
 
 			if(!this.collection) {
 
 				// Create new collection -------------------------------------------------------------
 				for( i = 0; i < con.length; i++) {
 					group_model = new SIVVIT.ItemGroupModel(con[i]);
+					tmp_items = [];
 
-					var tmp_item = [];
-
-					for(var j = 0; j < con[i].items.length; j++) {
-						var itm_model = new SIVVIT.ItemModel(con[i].items[j]);
+					for( j = 0; j < con[i].items.length; j++) {
+						itm_model = new SIVVIT.ItemModel(con[i].items[j]);
 						itm_model.set({
 							timestamp : new Date(con[i].items[j].timestamp)
 						});
-						tmp_item.push(itm_model);
+						tmp_items.push(itm_model);
 					}
 
 					group_model.set({
 						id : i,
-						items : new SIVVIT.ItemCollection(tmp_item),
-						items_new: new SIVVIT.ItemCollection(tmp_item),
+						items : new SIVVIT.ItemCollection(tmp_items),
+						items_new : new SIVVIT.ItemCollection(tmp_items),
 						stats : con[i].stats,
 						timestamp : new Date(con[i].timestamp)
 					});
@@ -243,23 +243,41 @@ Date.prototype.format = function() {
 
 			} else {
 
+				// NOTE ----------------------------------------------------------------------------------
+				// DON"T REPLACE RENDERED CONTENT
 				// Add new items to the exisiting collection
 				newCount = 0;
 
 				for( i = 0; i < con.length; i++) {
-					model = new SIVVIT.ItemGroupModel(con[i]);
-					// Add timestamp as Date object for sorting purposes
-					model.set({
+					group_model = new SIVVIT.ItemGroupModel(con[i]);
+					tmp_items = [];
+
+					for( j = 0; j < con[i].items.length; j++) {
+						itm_model = new SIVVIT.ItemModel(con[i].items[j]);
+
+						itm_model.set({
+							timestamp : new Date(con[i].items[j].timestamp)
+						});
+
+						// Show pending content only for the specific type
+						if(this.activeView.buildTemplate(itm_model)) {
+							newCount++;
+						}
+
+						tmp_items.push(itm_model);
+					}
+
+					group_model.set({
+						id : i,
+						items : new SIVVIT.ItemCollection(tmp_items),
+						items_new : new SIVVIT.ItemCollection(tmp_items),
+						stats : con[i].stats,
 						timestamp : new Date(con[i].timestamp)
 					});
-					this.collection.add(model, {
+
+					this.collection.add(group_model, {
 						silent : true
 					});
-
-					// Show pending content only for the specific type
-					if(this.activeView.buildTemplate(model)) {
-						newCount++;
-					}
 				}
 
 				if(newCount > 0) {
@@ -449,8 +467,9 @@ Date.prototype.format = function() {
 			$(group.html).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.model.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format() + "<span id='load-btn' class='icon-delete'>&nbsp</span>");
 
 			$(group.html).find("#load-btn").click(function() {
-				
-				group.model.url = "items.json"; //Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
+
+				group.model.url = "items.json";
+				//Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
 
 				var collection = group.model.get("items");
 
@@ -459,7 +478,7 @@ Date.prototype.format = function() {
 					var tmp = [], i;
 					var len = group.model.get("items").length;
 					var items = group.model.get("items");
-					
+
 					for( i = 0; i < len; i++) {
 
 						var itm_model = new SIVVIT.ItemModel(items[i]);
@@ -467,22 +486,22 @@ Date.prototype.format = function() {
 						itm_model.set({
 							timestamp : new Date(items[i].timestamp)
 						});
-						
+
 						tmp.push(itm_model);
 						collection.add(itm_model);
 					}
 
 					// Reassign existing collection and add new one
 					group.model.set({
-						items: collection,
+						items : collection,
 						items_new : new SIVVIT.ItemGroupCollection(tmp)
 					});
-					
+
 					// Display only new items
 					self.buildGroupItems(group, true);
 
 				}, self);
-				
+
 				group.model.fetch();
 
 			});
@@ -494,7 +513,7 @@ Date.prototype.format = function() {
 			var dsp = is_new ? group.model.get("displayed") : 0;
 
 			// Loop through each available item - ItemCollection
-			group.model.get(is_new ? "items_new" : "items" ).each(function(itm) {
+			group.model.get( is_new ? "items_new" : "items").each(function(itm) {
 				itm = this.buildTemplate(itm);
 				if(itm) {
 					this.initItem(itm, group);
@@ -696,7 +715,7 @@ Date.prototype.format = function() {
 
 				// Create group element
 				group = this.buildGroup(group);
-				
+
 				// Display all available items
 				this.buildGroupItems(group, false);
 
@@ -750,7 +769,7 @@ Date.prototype.format = function() {
 
 					// Create group element
 					group = this.buildGroup(group);
-					
+
 					// Display all avialable items
 					this.buildGroupItems(group, false);
 
@@ -802,7 +821,6 @@ Date.prototype.format = function() {
 					// Call this once items are added
 					this.buildGroupHeader(group, "media");
 				}
-
 			}, this);
 		},
 		// Displays new content loaded into groups
@@ -811,7 +829,7 @@ Date.prototype.format = function() {
 			var dsp = is_new ? group.model.get("displayed") : 0;
 
 			// Loop through each available item - ItemCollection
-			group.model.get(is_new ? "items_new" : "items").each(function(itm) {
+			group.model.get( is_new ? "items_new" : "items").each(function(itm) {
 				itm = this.buildTemplate(itm);
 				if(itm) {
 					this.lightbox(itm.html.find("#media"), itm.model);
