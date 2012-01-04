@@ -9,11 +9,13 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 
 		// Collection of items - ItemCollection
 		items : null,
+		// Items already displayed
+		displayed : 0,
 
 		stats : {
 			total : 0,
-			post : 3,
-			media : 0
+			post : 0,
+			media : 0,
 		}
 	}
 });

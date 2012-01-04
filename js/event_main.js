@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery) {
+};
+(function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -416,14 +417,27 @@ Date.prototype.format = function() {
 			this.display();
 			this.checkFiltered();
 		},
-		
 		// Builds out item group and displays its header
-		buildGroup : function(group, type) {
+		buildGroup : function(group) {
 
 			this.el = "#dynamic-content";
 			var total, displayed, gid = "group-" + group.get("id");
-			
-			// Display appropriate feature count based on the type		
+
+			// Create group element which will contain all items
+			$(this.el).append("<ol id='" + gid + "'></ol>");
+			this.el = "#" + gid;
+
+			this.groups.push({
+				model : group,
+				html : $(this.el)
+			});
+
+			// Show hide latest group
+			this.showHide(this.groups[this.groups.length - 1]);
+		},
+		// Builds group header
+		buildGroupHeader : function(group, type) {
+			// Display appropriate feature count based on the type
 			switch(type) {
 				case "post":
 					total = group.get("stats").post;
@@ -435,27 +449,9 @@ Date.prototype.format = function() {
 					total = group.get("stats").total;
 					break;
 			}
-			
-			dipslayed = total > 3 ? 3 : total;
-			
-			// Create group element which will contain all items
-			$(this.el).append("<ol id='"+ gid + "'></ol>");
 
-			this.el = "#" + gid;
-			
-			
-			this.groups.push({
-				model : group,
-				html : $(this.el)
-			});
-			
-			// Show hide latest group
-			this.showHide(this.groups[this.groups.length -1]);
-			
-			$(this.el).append("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + dipslayed + " of "+total+" items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format());
-			
+			$(this.el).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format());
 		},
-		
 		displayEdit : function() {
 
 			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"apr-all\" class=\"link\"><span class=\"icon-check\"></span>Approve</a></div>");
@@ -523,16 +519,15 @@ Date.prototype.format = function() {
 				$(group.html).hide();
 			}
 		},
-		
 		// Checks whether there any items are displayed
 		checkFiltered : function() {
-			
+
 			if(!this.displayed) {
 				if($("#no-content").length <= 0) {
-					
+
 					// Make sure that the top element is reset
 					this.el = "#dynamic-content";
-					
+
 					$(this.el).append("<div id=\"padding\"><p id=\"no-content\" style=\"text-align:center;\">No content in selected timespan.</p></div>");
 				}
 			} else {
@@ -643,24 +638,27 @@ Date.prototype.format = function() {
 		// Renders the entire collection
 		display : function() {
 
-			var count = 0;
-
 			// Loop through all available groups - ItemGroupCollection
 			this.model.each(function(group) {
 
-				// Create group element and display group header
-				this.buildGroup(group, "mixed");
+				var dsp = 0;
+
+				// Create group element
+				this.buildGroup(group);
 
 				// Loop through each available item - ItemCollection
 				group.items.each(function(itm) {
 					itm = this.buildTemplate(itm);
 					this.initItem(itm);
-
+					group.set({
+						displayed : dsp += 1
+					});
 				}, this);
-				
+				// Call this once items are added
+				this.buildGroupHeader(group, "mixed");
+
 			}, this);
 		},
-		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 			if(itm.get("type") == "media") {
@@ -704,15 +702,22 @@ Date.prototype.format = function() {
 
 				if(group.get("type") == "post" || group.get("type") == "mixed") {
 
-					// Create group container and display header
-					this.buildGroup(group, "post");
+					var dsp = 0;
+
+					// Create group container
+					this.buildGroup(group);
 
 					// Loop through each available item - ItemCollection
 					group.items.each(function(itm) {
 						itm = this.buildTemplate(itm);
 						this.initItem(itm);
+						group.set({
+							displayed : dsp += 1
+						});
 
 					}, this);
+					// Displayed group header
+					this.buildGroupHeader(group, "post");
 				}
 
 			}, this);
@@ -751,7 +756,10 @@ Date.prototype.format = function() {
 
 				if(group.get("type") == "media" || group.get("type") == "mixed") {
 
-					this.buildGroup(group, "media");
+					var dsp = 0;
+
+					// Build group container
+					this.buildGroup(group);
 
 					// Loop through each available item - ItemCollection
 					group.items.each(function(itm) {
@@ -759,9 +767,13 @@ Date.prototype.format = function() {
 						if(itm) {
 							this.lightbox(itm.html.find("#media"), itm.model);
 							this.initItem(itm);
+							group.set({
+								displayed : dsp += 1
+							});
 						}
-
 					}, this);
+
+					this.buildGroupHeader(group, "media");
 				}
 
 			}, this);
