@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery) {
+}; (function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -61,19 +60,19 @@ Date.prototype.format = function() {
 
 			this.postView = new SIVVIT.PostView({
 				edit : this.edit,
-				eventModel: this.eventModel,
+				eventModel : this.eventModel,
 				temporalModel : this.temporalModel
 			});
 
 			this.mediaView = new SIVVIT.MediaView({
 				edit : this.edit,
-				eventModel: this.eventModel,
+				eventModel : this.eventModel,
 				temporalModel : this.temporalModel
 			});
 			this.allView = new SIVVIT.AllView({
 				edit : this.edit,
 				temporalModel : this.temporalModel,
-				eventModel: this.eventModel,
+				eventModel : this.eventModel,
 				mediaView : this.mediaView,
 				postView : this.postView
 			});
@@ -208,7 +207,7 @@ Date.prototype.format = function() {
 		},
 		update : function() {
 
-			var tmp = [];
+			var tmp_group = [];
 			var con = this.eventModel.get("content");
 			var len = this.collection ? this.collection.length : 0;
 			var i, itm, newCount, group_model;
@@ -219,31 +218,26 @@ Date.prototype.format = function() {
 				for( i = 0; i < con.length; i++) {
 					group_model = new SIVVIT.ItemGroupModel(con[i]);
 
-					var items = [];
+					var tmp_item = [];
 
 					for(var j = 0; j < con[i].items.length; j++) {
 						var itm_model = new SIVVIT.ItemModel(con[i].items[j]);
 						itm_model.set({
 							timestamp : new Date(con[i].items[j].timestamp)
 						});
-						items.push(itm_model);
+						tmp_item.push(itm_model);
 					}
 
-					// INVESTIGATE WHY I CANT PASS MODEL DATA IN CONSTRUCTOR ---------------------------------------------------
 					group_model.set({
-						id : i
-					});
-					group_model.items = new SIVVIT.ItemCollection(items);
-					group_model.stats = con[i].stats;
-					
-					// Add timestamp as Date object for sorting purposes
-					group_model.set({
+						id : i,
+						items : new SIVVIT.ItemCollection(tmp_item),
+						stats : con[i].stats,
 						timestamp : new Date(con[i].timestamp)
 					});
-					tmp.push(group_model);
 
+					tmp_group.push(group_model);
 				}
-				this.collection = new SIVVIT.ItemGroupCollection(tmp);
+				this.collection = new SIVVIT.ItemGroupCollection(tmp_group);
 				this.render();
 
 			} else {
@@ -361,8 +355,8 @@ Date.prototype.format = function() {
 		newCount : 0,
 
 		temporalModel : null, // Instance of TemporalModel
-		eventModel: null, 	// Instance of EventModel
-		
+		eventModel : null, // Instance of EventModel
+
 		edit : false, // Enable content editing. Assumes that user is logged in
 
 		// Set to true when al least of content is displayed
@@ -400,10 +394,7 @@ Date.prototype.format = function() {
 			}
 		},
 		render : function() {
-
-			// Make sure that the top element is reset
-			this.el = "#dynamic-content";
-
+			
 			// Clear out previous content
 			$(this.el).empty();
 
@@ -421,45 +412,71 @@ Date.prototype.format = function() {
 		},
 		// Builds out item group and displays its header
 		buildGroup : function(group) {
-
-			this.el = "#dynamic-content";
 			var total, displayed, gid = "group-" + group.get("id");
 
 			// Create group element which will contain all items
 			$(this.el).append("<ol id='" + gid + "'></ol>");
-			this.el = "#" + gid;
-
+			
 			this.groups.push({
 				model : group,
-				html : $(this.el)
+				html : $("#" + gid)
 			});
 
 			// Show hide latest group
 			this.showHide(this.groups[this.groups.length - 1]);
+			
+			return this.groups[this.groups.length - 1];
 		},
 		// Builds group header
 		buildGroupHeader : function(group, type) {
-			
+
 			var self = this;
-			
+
 			// Display appropriate feature count based on the type
 			switch(type) {
 				case "post":
-					total = group.get("stats").post;
+					total = group.model.get("stats").post;
 					break;
 				case "media":
-					total = group.get("stats").media;
+					total = group.model.get("stats").media;
 					break;
 				case "mixed":
-					total = group.get("stats").total;
+					total = group.model.get("stats").total;
 					break;
 			}
 
-			$(this.el).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.get("timestamp").format()+"<span id='load-btn' class='icon-delete'>&nbsp</span>");
-			
-			$(this.el).find("#load-btn").click(function() {
-				
-				console.log("sivvit.com/events/"+self.eventModel.get("id")+".json?"+group.get("timestamp"));
+			$(group.html).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.model.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format() + "<span id='load-btn' class='icon-delete'>&nbsp</span>");
+
+			$(group.html).find("#load-btn").click(function() {
+
+				group.model.url = "items.json";
+				group.model.bind("change", function() {
+
+					var tmp = [], i;
+					var len = group.model.get("items").length;
+					var items = group.model.get("items");
+
+					for( i = 0; i < len; i++) {
+
+						var itm_model = new SIVVIT.ItemModel(items[i]);
+
+						itm_model.set({
+							timestamp : new Date(items[i].timestamp)
+						});
+
+					 	tmp.push(itm_model);
+					}
+
+					group.model.set({
+						items : new SIVVIT.ItemGroupCollection(tmp)
+					});
+					
+					self.buildGroupItems(group);
+
+				}, self);
+				//Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
+				group.model.fetch();
+
 			});
 		},
 		displayEdit : function() {
@@ -534,17 +551,13 @@ Date.prototype.format = function() {
 
 			if(!this.displayed) {
 				if($("#no-content").length <= 0) {
-
-					// Make sure that the top element is reset
-					this.el = "#dynamic-content";
-
 					$(this.el).append("<div id=\"padding\"><p id=\"no-content\" style=\"text-align:center;\">No content in selected timespan.</p></div>");
 				}
 			} else {
 				$("#no-content").remove();
 			}
 		},
-		initItem : function(itm) {
+		initItem : function(itm, group) {
 
 			var self = this;
 
@@ -593,7 +606,7 @@ Date.prototype.format = function() {
 					this.showHidePending(itm);
 				}
 				this.rendered.push(itm);
-				$(this.el).append(itm.html);
+				$(group.html).append(itm.html);
 			}
 		},
 		deleteItem : function(itm) {
@@ -655,19 +668,30 @@ Date.prototype.format = function() {
 				var dsp = 0;
 
 				// Create group element
-				this.buildGroup(group);
+				group = this.buildGroup(group);
 
-				// Loop through each available item - ItemCollection
-				group.items.each(function(itm) {
-					itm = this.buildTemplate(itm);
-					this.initItem(itm);
-					group.set({
-						displayed : dsp += 1
-					});
-				}, this);
+				this.buildGroupItems(group);
+
 				// Call this once items are added
 				this.buildGroupHeader(group, "mixed");
 
+			}, this);
+		},
+		// Displays new content loaded into groups
+		buildGroupItems : function(group) {
+
+			var dsp = 0;
+			//group.get("displayed");
+
+			// Loop through each available item - ItemCollection
+			group.model.get("items").each(function(itm) {
+				itm = this.buildTemplate(itm);
+				this.initItem(itm, group);
+				/**
+				 group.set({
+				 displayed : dsp += 1
+				 }, {silent:true});
+				 **/
 			}, this);
 		},
 		// Builds each item, returns {timestamp, html} object
