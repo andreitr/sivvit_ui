@@ -9,8 +9,12 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 
 		// Collection of items - ItemCollection
 		items : null,
-		// Items already displayed
-		displayed : 0,
+		
+		// Collection of newly loaded items - instance of ItemCollection
+		items_new: null,
+		
+		// Count of the displayed items
+		displayed: 0,
 
 		stats : {
 			total : 0,

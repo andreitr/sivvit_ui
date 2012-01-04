@@ -214,7 +214,7 @@ Date.prototype.format = function() {
 
 			if(!this.collection) {
 
-				// Create new collection
+				// Create new collection -------------------------------------------------------------
 				for( i = 0; i < con.length; i++) {
 					group_model = new SIVVIT.ItemGroupModel(con[i]);
 
@@ -231,6 +231,7 @@ Date.prototype.format = function() {
 					group_model.set({
 						id : i,
 						items : new SIVVIT.ItemCollection(tmp_item),
+						items_new: new SIVVIT.ItemCollection(tmp_item),
 						stats : con[i].stats,
 						timestamp : new Date(con[i].timestamp)
 					});
@@ -394,7 +395,7 @@ Date.prototype.format = function() {
 			}
 		},
 		render : function() {
-			
+
 			// Clear out previous content
 			$(this.el).empty();
 
@@ -416,7 +417,7 @@ Date.prototype.format = function() {
 
 			// Create group element which will contain all items
 			$(this.el).append("<ol id='" + gid + "'></ol>");
-			
+
 			this.groups.push({
 				model : group,
 				html : $("#" + gid)
@@ -424,7 +425,7 @@ Date.prototype.format = function() {
 
 			// Show hide latest group
 			this.showHide(this.groups[this.groups.length - 1]);
-			
+
 			return this.groups[this.groups.length - 1];
 		},
 		// Builds group header
@@ -448,14 +449,17 @@ Date.prototype.format = function() {
 			$(group.html).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.model.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format() + "<span id='load-btn' class='icon-delete'>&nbsp</span>");
 
 			$(group.html).find("#load-btn").click(function() {
+				
+				group.model.url = "items.json"; //Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
 
-				group.model.url = "items.json";
+				var collection = group.model.get("items");
+
 				group.model.bind("change", function() {
 
 					var tmp = [], i;
 					var len = group.model.get("items").length;
 					var items = group.model.get("items");
-
+					
 					for( i = 0; i < len; i++) {
 
 						var itm_model = new SIVVIT.ItemModel(items[i]);
@@ -463,21 +467,46 @@ Date.prototype.format = function() {
 						itm_model.set({
 							timestamp : new Date(items[i].timestamp)
 						});
-
-					 	tmp.push(itm_model);
+						
+						tmp.push(itm_model);
+						collection.add(itm_model);
 					}
 
+					// Reassign existing collection and add new one
 					group.model.set({
-						items : new SIVVIT.ItemGroupCollection(tmp)
+						items: collection,
+						items_new : new SIVVIT.ItemGroupCollection(tmp)
 					});
 					
-					self.buildGroupItems(group);
+					// Display only new items
+					self.buildGroupItems(group, true);
 
 				}, self);
-				//Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
+				
 				group.model.fetch();
 
 			});
+		},
+		// Renders group contents.
+		// If is_new is true, then only display new content, otherwise everything
+		buildGroupItems : function(group, is_new) {
+
+			var dsp = is_new ? group.model.get("displayed") : 0;
+
+			// Loop through each available item - ItemCollection
+			group.model.get(is_new ? "items_new" : "items" ).each(function(itm) {
+				itm = this.buildTemplate(itm);
+				if(itm) {
+					this.initItem(itm, group);
+
+					group.model.set({
+						displayed : dsp += 1
+					}, {
+						silent : true
+					});
+				}
+
+			}, this);
 		},
 		displayEdit : function() {
 
@@ -665,33 +694,15 @@ Date.prototype.format = function() {
 			// Loop through all available groups - ItemGroupCollection
 			this.model.each(function(group) {
 
-				var dsp = 0;
-
 				// Create group element
 				group = this.buildGroup(group);
-
-				this.buildGroupItems(group);
+				
+				// Display all available items
+				this.buildGroupItems(group, false);
 
 				// Call this once items are added
 				this.buildGroupHeader(group, "mixed");
 
-			}, this);
-		},
-		// Displays new content loaded into groups
-		buildGroupItems : function(group) {
-
-			var dsp = 0;
-			//group.get("displayed");
-
-			// Loop through each available item - ItemCollection
-			group.model.get("items").each(function(itm) {
-				itm = this.buildTemplate(itm);
-				this.initItem(itm, group);
-				/**
-				 group.set({
-				 displayed : dsp += 1
-				 }, {silent:true});
-				 **/
 			}, this);
 		},
 		// Builds each item, returns {timestamp, html} object
@@ -737,21 +748,13 @@ Date.prototype.format = function() {
 
 				if(group.get("type") == "post" || group.get("type") == "mixed") {
 
-					var dsp = 0;
+					// Create group element
+					group = this.buildGroup(group);
+					
+					// Display all avialable items
+					this.buildGroupItems(group, false);
 
-					// Create group container
-					this.buildGroup(group);
-
-					// Loop through each available item - ItemCollection
-					group.items.each(function(itm) {
-						itm = this.buildTemplate(itm);
-						this.initItem(itm);
-						group.set({
-							displayed : dsp += 1
-						});
-
-					}, this);
-					// Displayed group header
+					// Call this once items are added
 					this.buildGroupHeader(group, "post");
 				}
 
@@ -791,26 +794,35 @@ Date.prototype.format = function() {
 
 				if(group.get("type") == "media" || group.get("type") == "mixed") {
 
-					var dsp = 0;
+					// Create group element
+					group = this.buildGroup(group);
 
-					// Build group container
-					this.buildGroup(group);
+					this.buildGroupItems(group, false);
 
-					// Loop through each available item - ItemCollection
-					group.items.each(function(itm) {
-						itm = this.buildTemplate(itm);
-						if(itm) {
-							this.lightbox(itm.html.find("#media"), itm.model);
-							this.initItem(itm);
-							group.set({
-								displayed : dsp += 1
-							});
-						}
-					}, this);
-
+					// Call this once items are added
 					this.buildGroupHeader(group, "media");
 				}
 
+			}, this);
+		},
+		// Displays new content loaded into groups
+		buildGroupItems : function(group, is_new) {
+
+			var dsp = is_new ? group.model.get("displayed") : 0;
+
+			// Loop through each available item - ItemCollection
+			group.model.get(is_new ? "items_new" : "items").each(function(itm) {
+				itm = this.buildTemplate(itm);
+				if(itm) {
+					this.lightbox(itm.html.find("#media"), itm.model);
+					this.initItem(itm, group);
+
+					group.model.set({
+						displayed : dsp += 1
+					}, {
+						silent : true
+					});
+				}
 			}, this);
 		},
 		// Open light box
