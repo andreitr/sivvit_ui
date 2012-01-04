@@ -61,16 +61,19 @@ Date.prototype.format = function() {
 
 			this.postView = new SIVVIT.PostView({
 				edit : this.edit,
+				eventModel: this.eventModel,
 				temporalModel : this.temporalModel
 			});
 
 			this.mediaView = new SIVVIT.MediaView({
 				edit : this.edit,
+				eventModel: this.eventModel,
 				temporalModel : this.temporalModel
 			});
 			this.allView = new SIVVIT.AllView({
 				edit : this.edit,
 				temporalModel : this.temporalModel,
+				eventModel: this.eventModel,
 				mediaView : this.mediaView,
 				postView : this.postView
 			});
@@ -226,14 +229,13 @@ Date.prototype.format = function() {
 						items.push(itm_model);
 					}
 
-					// INVESTIGATE WHY I CANT PASS MODEL DATA IN CONSTRUCTOR -----------------------------------------------
+					// INVESTIGATE WHY I CANT PASS MODEL DATA IN CONSTRUCTOR ---------------------------------------------------
 					group_model.set({
 						id : i
 					});
 					group_model.items = new SIVVIT.ItemCollection(items);
 					group_model.stats = con[i].stats;
-					group_model.timestamp = new Date(con[i].timestamp);
-
+					
 					// Add timestamp as Date object for sorting purposes
 					group_model.set({
 						timestamp : new Date(con[i].timestamp)
@@ -359,9 +361,9 @@ Date.prototype.format = function() {
 		newCount : 0,
 
 		temporalModel : null, // Instance of TemporalModel
-
-		// Enable content editing. Assumes that user is logged in
-		edit : false,
+		eventModel: null, 	// Instance of EventModel
+		
+		edit : false, // Enable content editing. Assumes that user is logged in
 
 		// Set to true when al least of content is displayed
 		displayed : false,
@@ -369,7 +371,7 @@ Date.prototype.format = function() {
 		initialize : function(options) {
 			this.edit = options.edit;
 			this.temporalModel = options.temporalModel;
-
+			this.eventModel = options.eventModel;
 		},
 		bind : function(options) {
 			options.temporal.bind("change:startRange", this.filter, this);
@@ -437,6 +439,9 @@ Date.prototype.format = function() {
 		},
 		// Builds group header
 		buildGroupHeader : function(group, type) {
+			
+			var self = this;
+			
 			// Display appropriate feature count based on the type
 			switch(type) {
 				case "post":
@@ -450,7 +455,12 @@ Date.prototype.format = function() {
 					break;
 			}
 
-			$(this.el).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.timestamp.format());
+			$(this.el).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.get("timestamp").format()+"<span id='load-btn' class='icon-delete'>&nbsp</span>");
+			
+			$(this.el).find("#load-btn").click(function() {
+				
+				console.log("sivvit.com/events/"+self.eventModel.get("id")+".json?"+group.get("timestamp"));
+			});
 		},
 		displayEdit : function() {
 
@@ -632,6 +642,7 @@ Date.prototype.format = function() {
 		initialize : function(options) {
 			this.edit = options.edit;
 			this.temporalModel = options.temporalModel;
+			this.eventModel = options.eventModel;
 			this.postView = options.postView;
 			this.mediaView = options.mediaView;
 		},
