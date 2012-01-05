@@ -369,13 +369,21 @@ Date.prototype.format = function() {
 
 		// Rendered groups
 		groups : [],
-
+			
 		newCount : 0,
-
-		temporalModel : null, // Instance of TemporalModel
-		eventModel : null, // Instance of EventModel
-
-		edit : false, // Enable content editing. Assumes that user is logged in
+		
+		// Content type - post, media, mixed.
+		// Defined in subclasses
+		type: null, 
+		
+		// Instance of TemporalModel
+		temporalModel : null, 
+		
+		// Instance of EventModel
+		eventModel : null, 
+		
+		// Enable content editing. Assumes that user is logged in
+		edit : false, 
 
 		// Set to true when al least of content is displayed
 		displayed : false,
@@ -445,6 +453,14 @@ Date.prototype.format = function() {
 
 			return this.groups[this.groups.length - 1];
 		},
+		
+		// Renders updated group
+		updateGroup: function(group){
+			this.buildGroupItems(group, true);
+			this.buildGroupHeader(group, this.type);
+			this.buildGroupFooter(group, this.type);
+		},
+		
 		// Builds group header
 		buildGroupHeader : function(group, type) {
 
@@ -729,7 +745,9 @@ Date.prototype.format = function() {
 	 * Displays general content stream
 	 */
 	SIVVIT.AllView = SIVVIT.AbstractView.extend({
-
+		
+		type : "mixed",
+		
 		postView : null, // Instance of PostView
 		mediaView : null, // Instance of MediaView
 
@@ -753,21 +771,11 @@ Date.prototype.format = function() {
 				this.buildGroupItems(group, false);
 
 				// Call this once items are added
-				this.buildGroupHeader(group, "mixed");
+				this.buildGroupHeader(group, this.type);
 
-				this.buildGroupFooter(group, "mixed");
+				this.buildGroupFooter(group, this.type);
 
 			}, this);
-		},
-		
-		// Renders update group
-		updateGroup: function(group){
-			
-			// Display only new items
-			this.buildGroupItems(group, true);
-			
-			this.buildGroupHeader(group, "mixed");
-			this.buildGroupFooter(group, "mixed");
 		},
 		
 		// Builds each item, returns {timestamp, html} object
@@ -804,6 +812,8 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.PostView = SIVVIT.AbstractView.extend({
 
+		type : "post",
+		
 		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function() {
@@ -820,7 +830,9 @@ Date.prototype.format = function() {
 					this.buildGroupItems(group, false);
 
 					// Call this once items are added
-					this.buildGroupHeader(group, "post");
+					this.buildGroupHeader(group, this.type);
+					
+					this.buildGroupFooter(group, this.type);
 				}
 
 			}, this);
@@ -849,7 +861,9 @@ Date.prototype.format = function() {
 	 * Displays media content.
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
-
+		
+		type : "media",
+		
 		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div><div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function() {
@@ -865,7 +879,7 @@ Date.prototype.format = function() {
 					this.buildGroupItems(group, false);
 
 					// Call this once items are added
-					this.buildGroupHeader(group, "media");
+					this.buildGroupHeader(group, this.type);
 				}
 			}, this);
 		},
