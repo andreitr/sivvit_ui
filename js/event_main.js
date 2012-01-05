@@ -430,7 +430,7 @@ Date.prototype.format = function() {
 		},
 		// Builds out item group and displays its header
 		buildGroup : function(group) {
-			var total, displayed, gid = "group-" + group.get("id");
+			var gid = "group-" + group.get("id");
 
 			// Create group element which will contain all items
 			$(this.el).append("<ol id='" + gid + "'></ol>");
@@ -448,6 +448,8 @@ Date.prototype.format = function() {
 		// Builds group header
 		buildGroupHeader : function(group, type) {
 
+			var total;
+			
 			// Display appropriate feature count based on the type
 			switch(type) {
 				case "post":
@@ -460,66 +462,83 @@ Date.prototype.format = function() {
 					total = group.model.get("stats").total;
 					break;
 			}
-
-			$(group.html).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.model.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format());
-		},
-		
-		buildGroupFooter: function(group){
-			
-			var self = this;
 			
 			// Remove existing footer
-			if($(group.html).find("#group-footer").length > 0){
+			if($(group.html).find("#group-header").length > 0) {
+				$(group.html).find("#group-header").remove();
+			}
+			
+			$(group.html).prepend("<div id='group-header'>Showing " + group.model.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format());
+		},
+		buildGroupFooter : function(group, type) {
+
+			var self = this, total;
+
+			// Remove existing footer
+			if($(group.html).find("#group-footer").length > 0) {
 				$(group.html).find("#group-footer").remove();
 			}
 			
-			$(group.html).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this "+this.temporalModel.get("resolution")+"&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+			// Display appropriate feature count based on the type
+			switch(type) {
+				case "post":
+					total = group.model.get("stats").post;
+					break;
+				case "media":
+					total = group.model.get("stats").media;
+					break;
+				case "mixed":
+					total = group.model.get("stats").total;
+					break;
+			}			
 			
-			$(group.html).find("#load-group-btn").click(function(event) {
-				
-				// Displayloader graphics
-				$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
+			// Check whether we need to load more items 
+			if(group.model.get("displayed") < total) {
 
-				group.model.url = "items.json";
-				//Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
+				$(group.html).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.temporalModel.get("resolution") + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
 
-				var collection = group.model.get("items");
+				$(group.html).find("#load-group-btn").click(function(event) {
 
-				group.model.bind("change", function() {
+					// Displayloader graphics
+					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 
-					var tmp = [], i;
-					var len = group.model.get("items").length;
-					var items = group.model.get("items");
+					group.model.url = "items.json";
+					//Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
 
-					for( i = 0; i < len; i++) {
+					var collection = group.model.get("items");
 
-						var itm_model = new SIVVIT.ItemModel(items[i]);
+					group.model.bind("change", function() {
 
-						itm_model.set({
-							timestamp : new Date(items[i].timestamp)
+						var tmp = [], i;
+						var len = group.model.get("items").length;
+						var items = group.model.get("items");
+
+						for( i = 0; i < len; i++) {
+
+							var itm_model = new SIVVIT.ItemModel(items[i]);
+
+							itm_model.set({
+								timestamp : new Date(items[i].timestamp)
+							});
+
+							tmp.push(itm_model);
+							collection.add(itm_model);
+						}
+
+						// Reassign existing collection and add new one
+						group.model.set({
+							items : collection,
+							items_new : new SIVVIT.ItemGroupCollection(tmp)
 						});
+						
+						self.updateGroup(group);
 
-						tmp.push(itm_model);
-						collection.add(itm_model);
-					}
+					}, self);
 
-					// Reassign existing collection and add new one
-					group.model.set({
-						items : collection,
-						items_new : new SIVVIT.ItemGroupCollection(tmp)
-					});
-
-					// Display only new items
-					self.buildGroupItems(group, true);
-					self.buildGroupFooter(group);
-					
-				}, self);
-
-				group.model.fetch();
-			});
-			
+					group.model.fetch();
+				});
+			}
 		},
-		
 		// Renders group contents.
 		// If is_new is true, then only display new content, otherwise everything
 		buildGroupItems : function(group, is_new) {
@@ -735,11 +754,22 @@ Date.prototype.format = function() {
 
 				// Call this once items are added
 				this.buildGroupHeader(group, "mixed");
-				
-				this.buildGroupFooter(group);
+
+				this.buildGroupFooter(group, "mixed");
 
 			}, this);
 		},
+		
+		// Renders update group
+		updateGroup: function(group){
+			
+			// Display only new items
+			this.buildGroupItems(group, true);
+			
+			this.buildGroupHeader(group, "mixed");
+			this.buildGroupFooter(group, "mixed");
+		},
+		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 			if(itm.get("type") == "media") {
