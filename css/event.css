@@ -81,12 +81,11 @@ ol {
 	margin-top: 10px
 }
 
-
-
 #group-header
 {
 	padding:10px;
 	border-bottom:1px solid #CCCCCC;
+	border-left:10px solid #CCCCCC;
 }
 
 #group-footer

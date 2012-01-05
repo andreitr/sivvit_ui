@@ -372,10 +372,6 @@ Date.prototype.format = function() {
 			
 		newCount : 0,
 		
-		// Content type - post, media, mixed.
-		// Defined in subclasses
-		type: null, 
-		
 		// Instance of TemporalModel
 		temporalModel : null, 
 		
@@ -453,14 +449,6 @@ Date.prototype.format = function() {
 
 			return this.groups[this.groups.length - 1];
 		},
-		
-		// Renders updated group
-		updateGroup: function(group){
-			this.buildGroupItems(group, true);
-			this.buildGroupHeader(group, this.type);
-			this.buildGroupFooter(group, this.type);
-		},
-		
 		// Builds group header
 		buildGroupHeader : function(group, type) {
 
@@ -479,14 +467,9 @@ Date.prototype.format = function() {
 					break;
 			}
 			
-			// Remove existing footer
-			if($(group.html).find("#group-header").length > 0) {
-				$(group.html).find("#group-header").remove();
-			}
-			
-			$(group.html).prepend("<div id='group-header'>Showing " + group.model.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format());
+			$(group.html).prepend("<div id='group-header'>" +total+ " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format());
 		},
-		buildGroupFooter : function(group, type) {
+		buildGroupFooter : function(group) {
 
 			var self = this, total;
 
@@ -495,21 +478,8 @@ Date.prototype.format = function() {
 				$(group.html).find("#group-footer").remove();
 			}
 			
-			// Display appropriate feature count based on the type
-			switch(type) {
-				case "post":
-					total = group.model.get("stats").post;
-					break;
-				case "media":
-					total = group.model.get("stats").media;
-					break;
-				case "mixed":
-					total = group.model.get("stats").total;
-					break;
-			}			
-			
 			// Check whether we need to load more items 
-			if(group.model.get("displayed") < total) {
+			if(group.model.get("displayed") < group.model.get("stats").total) {
 
 				$(group.html).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.temporalModel.get("resolution") + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
 
@@ -547,7 +517,8 @@ Date.prototype.format = function() {
 							items_new : new SIVVIT.ItemGroupCollection(tmp)
 						});
 						
-						self.updateGroup(group);
+						self.buildGroupItems(group, true);
+						self.buildGroupFooter(group);
 
 					}, self);
 
@@ -746,8 +717,6 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.AllView = SIVVIT.AbstractView.extend({
 		
-		type : "mixed",
-		
 		postView : null, // Instance of PostView
 		mediaView : null, // Instance of MediaView
 
@@ -771,9 +740,9 @@ Date.prototype.format = function() {
 				this.buildGroupItems(group, false);
 
 				// Call this once items are added
-				this.buildGroupHeader(group, this.type);
+				this.buildGroupHeader(group, "mixed");
 
-				this.buildGroupFooter(group, this.type);
+				this.buildGroupFooter(group);
 
 			}, this);
 		},
@@ -811,8 +780,6 @@ Date.prototype.format = function() {
 	 * Displays posts.
 	 */
 	SIVVIT.PostView = SIVVIT.AbstractView.extend({
-
-		type : "post",
 		
 		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
@@ -830,9 +797,9 @@ Date.prototype.format = function() {
 					this.buildGroupItems(group, false);
 
 					// Call this once items are added
-					this.buildGroupHeader(group, this.type);
+					this.buildGroupHeader(group, "post");
 					
-					this.buildGroupFooter(group, this.type);
+					this.buildGroupFooter(group);
 				}
 
 			}, this);
@@ -862,8 +829,6 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 		
-		type : "media",
-		
 		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div><div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function() {
@@ -879,7 +844,7 @@ Date.prototype.format = function() {
 					this.buildGroupItems(group, false);
 
 					// Call this once items are added
-					this.buildGroupHeader(group, this.type);
+					this.buildGroupHeader(group, "media");
 				}
 			}, this);
 		},
