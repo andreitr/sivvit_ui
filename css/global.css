@@ -156,7 +156,7 @@ a:link
 }
 
 
-span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog, span.icon-pause, span.icon-play, span.icon-check-green, span.icon-check-red, span.icon-media, span.icon-comment, span.icon-page
+span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog, span.icon-pause, span.icon-play, span.icon-check-green, span.icon-check-red, span.icon-media, span.icon-comment, span.icon-page, span.icon-download
 {
 	margin:0 5px 0 0;
     height: 11px;
@@ -265,7 +265,12 @@ span.icon-page
 	width: 11px;
 	height: 13px;	
 }
-
+span.icon-download
+{
+	background: url("../img/css/sprite-icons.png") no-repeat scroll -192px -82px transparent;
+	width:10px;
+	height:7px;
+}
 
 
 span.loader

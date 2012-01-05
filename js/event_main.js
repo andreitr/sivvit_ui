@@ -215,7 +215,6 @@ Date.prototype.format = function() {
 
 			if(!this.collection) {
 
-				// Create new collection -------------------------------------------------------------
 				for( i = 0; i < con.length; i++) {
 					group_model = new SIVVIT.ItemGroupModel(con[i]);
 					tmp_items = [];
@@ -449,8 +448,6 @@ Date.prototype.format = function() {
 		// Builds group header
 		buildGroupHeader : function(group, type) {
 
-			var self = this;
-
 			// Display appropriate feature count based on the type
 			switch(type) {
 				case "post":
@@ -464,9 +461,24 @@ Date.prototype.format = function() {
 					break;
 			}
 
-			$(group.html).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.model.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format() + "<span id='load-btn' class='icon-delete'>&nbsp</span>");
-
-			$(group.html).find("#load-btn").click(function() {
+			$(group.html).prepend("<div id='group-header'><span class='icon-time'>&nbsp;</span>" + group.model.get("displayed") + " of " + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format());
+		},
+		
+		buildGroupFooter: function(group){
+			
+			var self = this;
+			
+			// Remove existing footer
+			if($(group.html).find("#group-footer").length > 0){
+				$(group.html).find("#group-footer").remove();
+			}
+			
+			$(group.html).append("<div id='group-footer'><div id='new-content'>More from this "+this.temporalModel.get("resolution")+"&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+			
+			$(group.html).find("#new-content").click(function(event) {
+				
+				// Displayloader graphics
+				$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 
 				group.model.url = "items.json";
 				//Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
@@ -499,13 +511,15 @@ Date.prototype.format = function() {
 
 					// Display only new items
 					self.buildGroupItems(group, true);
-
+					self.buildGroupFooter(group);
+					
 				}, self);
 
 				group.model.fetch();
-
 			});
+			
 		},
+		
 		// Renders group contents.
 		// If is_new is true, then only display new content, otherwise everything
 		buildGroupItems : function(group, is_new) {
@@ -721,6 +735,8 @@ Date.prototype.format = function() {
 
 				// Call this once items are added
 				this.buildGroupHeader(group, "mixed");
+				
+				this.buildGroupFooter(group);
 
 			}, this);
 		},

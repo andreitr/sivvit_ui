@@ -23,14 +23,12 @@
 
 /** Show the number of newly-loaded items. */
 #new-content {
- 	font-weight: 400;
 	text-align: center;
-	font-size: 16px;
+	font-size: 13px;
 	color: #333333;
 	padding: 5px;
 	border: 1px solid #69D4ED;
-	background-color: #AEE1ED;
-	margin:0 10px 20px 10px;
+	background-color: #E1EFF5;
 	cursor: pointer;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -39,7 +37,7 @@
 }
 
 #new-content:hover {
-	background-color: #88D9ED;
+	text-decoration:underline;
 }
 
 #map-container
@@ -91,6 +89,14 @@ ol {
 	border-bottom:1px solid #CCCCCC;
 }
 
+#group-footer
+{
+	border-bottom: 1px solid #CCCCCC;
+	border-left: solid #EDEDED 5px;
+	padding: 10px;
+}
+
+
 li#post-list
 {
 	padding:10px;
@@ -100,12 +106,6 @@ li#post-list
 	background-color: #FFFFFF;
 	border-left: solid #EDEDED 5px;
 }
-
-li#post-list:hover
-{
-	border-left: solid #CCCCCC 5px;
-}
-
 
 .item-edit
 {
