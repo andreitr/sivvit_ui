@@ -397,18 +397,18 @@ Date.prototype.format = function() {
 		update : function(count) {
 			var self = this;
 
-			if($("#new-content").length <= 0) {
+			if($("#load-content-btn").length <= 0) {
 				this.newCount = count;
-				$(this.el).prepend("<div id=\"padding\"><div id=\"new-content\">" + this.newCount + " new items</div></div>");
-				$("#new-content").hide();
-				$("#new-content").slideDown("slow");
-				$("#new-content").click(function(event) {
-					$("#new-content").remove();
+				$(this.el).prepend("<div id=\"padding\"><div id='load-content-btn' class=\"content-loader\">" + this.newCount + " new items&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+				$("#load-content-btn").hide();
+				$("#load-content-btn").slideDown("slow");
+				$("#load-content-btn").click(function(event) {
+					$(event.currentTarget).parent().remove();
 					self.render();
 					self.newCount = 0;
 				});
 			} else {
-				$("#new-content").html((this.newCount + count) + " new items");
+				$("#load-content-btn").html((this.newCount + count) + " new items&nbsp;&nbsp;<span class='icon-download'></span>");
 			}
 		},
 		render : function() {
@@ -473,9 +473,9 @@ Date.prototype.format = function() {
 				$(group.html).find("#group-footer").remove();
 			}
 			
-			$(group.html).append("<div id='group-footer'><div id='new-content'>More from this "+this.temporalModel.get("resolution")+"&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+			$(group.html).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this "+this.temporalModel.get("resolution")+"&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
 			
-			$(group.html).find("#new-content").click(function(event) {
+			$(group.html).find("#load-group-btn").click(function(event) {
 				
 				// Displayloader graphics
 				$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
@@ -616,7 +616,7 @@ Date.prototype.format = function() {
 					$(this.el).append("<div id=\"padding\"><p id=\"no-content\" style=\"text-align:center;\">No content in selected timespan.</p></div>");
 				}
 			} else {
-				$("#no-content").remove();
+				$("#no-content").parent().remove();
 			}
 		},
 		initItem : function(itm, group) {
