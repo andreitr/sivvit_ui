@@ -104,7 +104,7 @@ Date.prototype.format = function() {
 					self.headerView.render();
 				}
 
-				// Update histogram
+				// Update histogram values
 				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("endDate") || self.eventModel.hasChanged("histogram")) {
 
 					self.temporalModel.set({
@@ -115,6 +115,7 @@ Date.prototype.format = function() {
 						resolution : self.eventModel.get("histogram").resolution
 					});
 
+					// Redraw temporal histogram
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
 							case "global":

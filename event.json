@@ -25,7 +25,7 @@
 		"global": [
 			{
 				"timestamp": "Tue Aug 5 19:00:43 +0000 2011",
-				"count": 0
+				"count": 1
 			}, {
 				"timestamp": "Tue Aug 6 19:00:43 +0000 2011",
 				"count": 1
@@ -273,7 +273,7 @@
 				{
 					"id": "00009",
 					"status": 0,
-					"rank": 15,
+					"rank": 12,
 					"type": "media",
 					"location": [39, -104],
 					"author": "andreitr",
