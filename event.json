@@ -9,7 +9,7 @@
 		"lon": 45,
 		"lat": 39
 	},
-	"startDate": "Tue Aug 5 19:00:43 +0000 2011",
+	"startDate": "Tue Aug 5 19:00:41 +0000 2011",
 	"endDate": "Tue Aug 29 20:03:43 +0000 2011",
 	"status": 1,
 	"stats": {
@@ -88,7 +88,7 @@
 				"count": 2
 			}, {
 				"timestamp": "Tue Aug 29 20:03:43 +0000 2011",
-				"count": 3
+				"count": 4
 			}
 		],
 		"media": [

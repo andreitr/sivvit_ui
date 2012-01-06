@@ -9,6 +9,8 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 		min : null,
 		max : null,
 		resolution : null,
-		histogram : null
+		histogram : null,
+		// Type of the displayed content - global, media, post
+		type: null,
 	}
 });

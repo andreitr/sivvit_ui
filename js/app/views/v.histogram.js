@@ -23,7 +23,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			}
 		});
 
-		this.updateDateDisplay();
+		this.updateTime();
 	},
 	onSliderDragged : function(event, ui) {
 		this.model.set({
@@ -32,22 +32,22 @@ SIVVIT.HistogramView = Backbone.View.extend({
 		this.model.set({
 			"endRange" : new Date(ui.values[1])
 		});
-		this.updateHistogram();
+		this.updateBars();
 	},
-	// Updates histogram bars
-	updateHistogram : function() {
+	// Updates histogram bar colors
+	updateBars : function() {
 		for(var i = this.bars.length; i--; ) {
-			this.updateHistogramBar(this.bars[i]);
+			this.updateBarColor(this.bars[i]);
 		}
-
-		this.updateDateDisplay();
+		this.updateTime();
 	},
-	updateDateDisplay : function() {
+	// Updates min and max time displays
+	updateTime : function() {
 		$("#timeline-mintime").html((this.model.get("startRange")).format());
 		$("#timeline-maxtime").html((this.model.get("endRange")).format());
 	},
 	// Sets histogram bar colors based on the visible range
-	updateHistogramBar : function(bar) {
+	updateBarColor : function(bar) {
 		if(new Date(bar.timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(bar.timestamp).getTime() <= this.model.get("endRange").getTime()) {
 			bar.attr({
 				fill : "#333333"
@@ -110,7 +110,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 				});
 
 				bar.timestamp = frame.timestamp;
-				this.updateHistogramBar(bar);
+				this.updateBarColor(bar);
 				this.bars.push(bar);
 			}
 		}

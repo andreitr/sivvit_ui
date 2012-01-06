@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery) {
+}; (function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -56,7 +55,7 @@ Date.prototype.format = function() {
 			this.mapView = new SIVVIT.MapView();
 
 			this.sideHistView = new SIVVIT.HistogramView({
-				el: '#timeline-container',
+				el : '#timeline-container',
 				model : this.temporalModel
 			});
 
@@ -106,7 +105,8 @@ Date.prototype.format = function() {
 				}
 
 				// Update histogram
-				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("endDate")) {
+				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("endDate") || self.eventModel.hasChanged("histogram")) {
+
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
 						endDate : new Date(self.eventModel.get("endDate")),
@@ -114,6 +114,29 @@ Date.prototype.format = function() {
 						max : self.eventModel.get("histogram").max,
 						resolution : self.eventModel.get("histogram").resolution
 					});
+
+					if(self.temporalModel.get("type") !== null) {
+						switch(self.temporalModel.get("type")) {
+							case "global":
+								
+								self.temporalModel.set({
+									histogram : self.eventModel.get("histogram").global
+								});
+								break;
+								
+							case "media":
+								self.temporalModel.set({
+									histogram : self.eventModel.get("histogram").media
+								});
+								break;
+
+							case "post":
+								self.temporalModel.set({
+									histogram : self.eventModel.get("histogram").post
+								});
+								break;
+						}
+					}
 				}
 
 				// Set histogram range for the first time.
@@ -243,8 +266,6 @@ Date.prototype.format = function() {
 
 			} else {
 
-				// NOTE ----------------------------------------------------------------------------------
-				// DON"T REPLACE RENDERED CONTENT
 				// Add new items to the exisiting collection
 				newCount = 0;
 
@@ -321,7 +342,9 @@ Date.prototype.format = function() {
 
 				case "all-btn":
 					this.temporalModel.set({
-						histogram : this.eventModel.get("histogram").global
+						histogram : this.eventModel.get("histogram").global,
+						type : "global"
+
 					});
 					$("#content-stats").html("Total: " + this.eventModel.get("stats").total);
 					this.activeView = this.allView;
@@ -329,7 +352,8 @@ Date.prototype.format = function() {
 
 				case "post-btn":
 					this.temporalModel.set({
-						histogram : this.eventModel.get("histogram").post
+						histogram : this.eventModel.get("histogram").post,
+						type : "post"
 					});
 					$("#content-stats").html("Posts: " + this.eventModel.get("stats").posts);
 					this.activeView = this.postView;
@@ -337,7 +361,8 @@ Date.prototype.format = function() {
 
 				case "media-btn":
 					this.temporalModel.set({
-						histogram : this.eventModel.get("histogram").media
+						histogram : this.eventModel.get("histogram").media,
+						type : "media"
 					});
 					$("#content-stats").html("Media: " + this.eventModel.get("stats").images);
 					this.activeView = this.mediaView;
@@ -370,17 +395,17 @@ Date.prototype.format = function() {
 
 		// Rendered groups
 		groups : [],
-			
+
 		newCount : 0,
-		
+
 		// Instance of TemporalModel
-		temporalModel : null, 
-		
+		temporalModel : null,
+
 		// Instance of EventModel
-		eventModel : null, 
-		
+		eventModel : null,
+
 		// Enable content editing. Assumes that user is logged in
-		edit : false, 
+		edit : false,
 
 		// Set to true when al least of content is displayed
 		displayed : false,
@@ -454,7 +479,7 @@ Date.prototype.format = function() {
 		buildGroupHeader : function(group, type) {
 
 			var total;
-			
+
 			// Display appropriate feature count based on the type
 			switch(type) {
 				case "post":
@@ -467,8 +492,8 @@ Date.prototype.format = function() {
 					total = group.model.get("stats").total;
 					break;
 			}
-			
-			$(group.html).prepend("<div id='group-header'>" +total+ " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format());
+
+			$(group.html).prepend("<div id='group-header'>" + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format());
 		},
 		buildGroupFooter : function(group) {
 
@@ -478,8 +503,8 @@ Date.prototype.format = function() {
 			if($(group.html).find("#group-footer").length > 0) {
 				$(group.html).find("#group-footer").remove();
 			}
-			
-			// Check whether we need to load more items 
+
+			// Check whether we need to load more items
 			if(group.model.get("displayed") < group.model.get("stats").total) {
 
 				$(group.html).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.temporalModel.get("resolution") + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
@@ -517,7 +542,7 @@ Date.prototype.format = function() {
 							items : collection,
 							items_new : new SIVVIT.ItemGroupCollection(tmp)
 						});
-						
+
 						self.buildGroupItems(group, true);
 						self.buildGroupFooter(group);
 
@@ -717,7 +742,7 @@ Date.prototype.format = function() {
 	 * Displays general content stream
 	 */
 	SIVVIT.AllView = SIVVIT.AbstractView.extend({
-		
+
 		postView : null, // Instance of PostView
 		mediaView : null, // Instance of MediaView
 
@@ -747,7 +772,6 @@ Date.prototype.format = function() {
 
 			}, this);
 		},
-		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 			if(itm.get("type") == "media") {
@@ -781,7 +805,7 @@ Date.prototype.format = function() {
 	 * Displays posts.
 	 */
 	SIVVIT.PostView = SIVVIT.AbstractView.extend({
-		
+
 		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function() {
@@ -799,7 +823,7 @@ Date.prototype.format = function() {
 
 					// Call this once items are added
 					this.buildGroupHeader(group, "post");
-					
+
 					this.buildGroupFooter(group);
 				}
 
@@ -829,7 +853,7 @@ Date.prototype.format = function() {
 	 * Displays media content.
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
-		
+
 		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div><div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function() {
