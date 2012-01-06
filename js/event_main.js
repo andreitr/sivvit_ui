@@ -56,6 +56,7 @@ Date.prototype.format = function() {
 			this.mapView = new SIVVIT.MapView();
 
 			this.sideHistView = new SIVVIT.HistogramView({
+				el: '#timeline-container',
 				model : this.temporalModel
 			});
 
@@ -893,129 +894,6 @@ Date.prototype.format = function() {
 				};
 			} else {
 				return null;
-			}
-		}
-	});
-
-	/**
-	 * Display histogram control.
-	 */
-	SIVVIT.HistogramView = Backbone.View.extend({
-
-		el : '#timeline-container',
-		bars : [],
-
-		initialize : function(options) {
-			this.model = options.model;
-			this.model.bind("change:histogram", this.render, this);
-		},
-		render : function() {
-			this.drawHistogram();
-			this.drawSlider();
-		},
-		drawSlider : function() {
-			self = this;
-
-			$("#timeline-slider").slider({
-				range : true,
-				min : this.model.get("startDate").getTime(),
-				max : this.model.get("endDate").getTime(),
-				values : [this.model.get("startRange").getTime(), this.model.get("endRange").getTime()],
-				stop : function(event, ui) {
-					self.onSliderDragged(event, ui);
-				}
-			});
-
-			this.updateDateDisplay();
-		},
-		onSliderDragged : function(event, ui) {
-			this.model.set({
-				"startRange" : new Date(ui.values[0])
-			});
-			this.model.set({
-				"endRange" : new Date(ui.values[1])
-			});
-			this.updateHistogram();
-		},
-		// Updates histogram bars
-		updateHistogram : function() {
-			for(var i = this.bars.length; i--; ) {
-				this.updateHistogramBar(this.bars[i]);
-			}
-
-			this.updateDateDisplay();
-		},
-		updateDateDisplay : function() {
-			$("#timeline-mintime").html((this.model.get("startRange")).format());
-			$("#timeline-maxtime").html((this.model.get("endRange")).format());
-		},
-		// Sets histogram bar colors based on the visible range
-		updateHistogramBar : function(bar) {
-			if(new Date(bar.timestamp).getTime() >= this.model.get("startRange").getTime() && new Date(bar.timestamp).getTime() <= this.model.get("endRange").getTime()) {
-				bar.attr({
-					fill : "#333333"
-				});
-			} else {
-				bar.attr({
-					fill : "#CCCCCC"
-				});
-			}
-		},
-		// Returns appropriate resolution.
-		getResolution : function() {
-			switch(this.model.get("resolution")) {
-				case "day":
-					return 86400000;
-				case "hour":
-					return 3600000;
-				case "minute":
-					return 60000;
-				case "second":
-					return 1000;
-			}
-		},
-		// Draws histogram.
-		drawHistogram : function() {
-			if(this.model.get("histogram")) {
-
-				// Total count of available slots
-				var lenTotal = Math.ceil((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
-
-				// Acutal count of temporal slots
-				var len = this.model.get("histogram").length;
-
-				var maxVal = this.model.get("max");
-				var minVal = this.model.get("min");
-
-				var maxHeight = $(this.el).height();
-
-				var barW = $(this.el).width() / lenTotal;
-				barW = barW < 0 ? Math.abs(barW) : Math.round(barW);
-
-				var startTime = this.model.get("startDate").getTime();
-				var endTime = this.model.get("endDate").getTime();
-
-				var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
-
-				for(var i = len; i--; ) {
-					var frame = this.model.get("histogram")[i];
-
-					var percentY = (frame.count / maxVal) * 100;
-					var percentX = (new Date(frame.timestamp).getTime() - startTime) / (endTime - startTime);
-
-					var barH = Math.round(percentY * maxHeight / 100);
-					var barX = Math.round(barW * Math.round(percentX * (lenTotal - 1)));
-					var barY = Math.round(maxHeight - barH);
-
-					var bar = histogram.rect(barX, barY, barW, barH).attr({
-						fill : "#333333",
-						"stroke-width" : 0
-					});
-
-					bar.timestamp = frame.timestamp;
-					this.updateHistogramBar(bar);
-					this.bars.push(bar);
-				}
 			}
 		}
 	});
