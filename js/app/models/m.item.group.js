@@ -15,7 +15,7 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 		
 		// Count of the displayed items
 		displayed: 0,
-
+		
 		stats : {
 			total : 0,
 			post : 0,

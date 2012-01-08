@@ -169,8 +169,8 @@
 					"content": "http://s1-04.twitpicproxy.com/photos/large/437235468.jpg"
 				}, {
 					"id": "00002",
-					"status": 1,
-					"rank": 9,
+					"status": 0,
+					"rank": 8,
 					"type": "media",
 					"location": [39, -104],
 					"author": "andreitr",

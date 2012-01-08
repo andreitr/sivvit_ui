@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery) {
+};
+(function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -119,12 +120,12 @@ Date.prototype.format = function() {
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
 							case "global":
-								
+
 								self.temporalModel.set({
 									histogram : self.eventModel.get("histogram").global
 								});
 								break;
-								
+
 							case "media":
 								self.temporalModel.set({
 									histogram : self.eventModel.get("histogram").media
@@ -271,35 +272,47 @@ Date.prototype.format = function() {
 				newCount = 0;
 
 				for( i = 0; i < con.length; i++) {
-					group_model = new SIVVIT.ItemGroupModel(con[i]);
-					tmp_items = [];
 
-					for( j = 0; j < con[i].items.length; j++) {
-						itm_model = new SIVVIT.ItemModel(con[i].items[j]);
+					group_model = this.activeView.groups_key[new Date(con[i].timestamp)];
+						
+					// Check if a group already exists
+					if(group_model) {
 
-						itm_model.set({
-							timestamp : new Date(con[i].items[j].timestamp)
+						// Update stats
+						group_model.set({
+							stats : con[i].stats
 						});
 
-						// Show pending content only for the specific type
-						if(this.activeView.buildTemplate(itm_model)) {
-							newCount++;
+						for( j = 0; j < con[i].items.length; j++) {
+							itm_model = new SIVVIT.ItemModel(con[i].items[j]);
+							itm_model.set({
+								timestamp : new Date(con[i].items[j].timestamp)
+							});
+
+							// Show pending content only for the specific type
+							if(this.activeView.buildTemplate(itm_model)) {
+								newCount++;
+							}
+
+							group_model.get("items").add(itm_model);
 						}
 
-						tmp_items.push(itm_model);
+					} else {
+						group_model = new SIVVIT.ItemGroupModel(con[i]);
+						tmp_items = [];
+
+						group_model.set({
+							id : i,
+							items : new SIVVIT.ItemCollection(tmp_items),
+							items_new : new SIVVIT.ItemCollection(tmp_items),
+							stats : con[i].stats,
+							timestamp : new Date(con[i].timestamp)
+						});
+
+						this.collection.add(group_model, {
+							silent : true
+						});
 					}
-
-					group_model.set({
-						id : i,
-						items : new SIVVIT.ItemCollection(tmp_items),
-						items_new : new SIVVIT.ItemCollection(tmp_items),
-						stats : con[i].stats,
-						timestamp : new Date(con[i].timestamp)
-					});
-
-					this.collection.add(group_model, {
-						silent : true
-					});
 				}
 
 				if(newCount > 0) {
@@ -397,6 +410,8 @@ Date.prototype.format = function() {
 		// Rendered groups
 		groups : [],
 
+		groups_key : {},
+
 		newCount : 0,
 
 		// Instance of TemporalModel
@@ -451,6 +466,7 @@ Date.prototype.format = function() {
 
 			this.rendered = [];
 			this.groups = [];
+			this.groups_key = {};
 
 			// Display content header if a user is logged in
 			if(this.edit) {
@@ -471,10 +487,12 @@ Date.prototype.format = function() {
 				html : $("#" + gid)
 			});
 
-			// Show hide latest group
-			this.showHide(this.groups[this.groups.length - 1]);
+			this.groups_key[group.get("timestamp")] = group;
 
-			return this.groups[this.groups.length - 1];
+			// Show hide latest group
+			this.showHide(this.groups[this.groups.length -1]);
+
+			return this.groups[this.groups.length -1];
 		},
 		// Builds group header
 		buildGroupHeader : function(group, type) {
