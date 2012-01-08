@@ -281,7 +281,7 @@ Date.prototype.format = function() {
 							stats : con[i].stats
 						});
 						// Update the count of new content
-						newCount = this.activeView.getItemCount(group_model);
+						newCount += this.activeView.getItemCount(group_model);
 
 						for( j = 0; j < con[i].items.length; j++) {
 							itm_model = new SIVVIT.ItemModel(con[i].items[j]);
@@ -474,13 +474,14 @@ Date.prototype.format = function() {
 		},
 		// Builds out item group and displays its header
 		buildGroup : function(group) {
+			
 			var gid = "group-" + group.get("id");
 
 			// Create group element which will contain all items
 			$(this.el).append("<ol id='" + gid + "'></ol>");
-
+			
 			group.set({
-				html : $("#" + gid)
+				div_id : "#" + gid
 			});
 			this.groups.push(group);
 
@@ -494,14 +495,14 @@ Date.prototype.format = function() {
 		// Builds group header
 		buildGroupHeader : function(group) {
 			var total = this.getItemCount(group);
-			group.get("html").prepend("<div id='group-header'>" + total + " items this " + this.temporalModel.get("resolution") + " - " + group.get("timestamp").format());
+			$(group.get("div_id")).prepend("<div id='group-header'>" + total + " items this " + this.temporalModel.get("resolution") + " - " + group.get("timestamp").format());
 		},
 		buildGroupFooter : function(group) {
 
 			var self = this, total;
 
 			// Remove existing footer
-			var footer = group.get("html").find("#group-footer");
+			var footer = $(group.get("div_id")).find("#group-footer");
 			if(footer.length > 0) {
 				footer.remove();
 			}
@@ -509,9 +510,9 @@ Date.prototype.format = function() {
 			// Check whether we need to load more items
 			if(group.get("displayed") < group.get("stats").total) {
 
-				group.get("html").append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.temporalModel.get("resolution") + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+				$(group.get("div_id")).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.temporalModel.get("resolution") + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
 
-				group.get("html").find("#load-group-btn").click(function(event) {
+				$(group.get("div_id")).find("#load-group-btn").click(function(event) {
 
 					// Displayloader graphics
 					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
@@ -634,12 +635,12 @@ Date.prototype.format = function() {
 		showHide : function(group) {
 
 			var timestamp = group.get("timestamp").getTime();
-
+			
 			if(timestamp >= this.temporalModel.get("startRange").getTime() && timestamp <= this.temporalModel.get("endRange").getTime()) {
-				group.get("html").show();
+				$(group.get("div_id")).show();
 				this.displayed = true;
 			} else {
-				group.get("html").hide();
+				$(group.get("div_id")).hide();
 			}
 		},
 		// Checks whether there any items are displayed
@@ -702,7 +703,8 @@ Date.prototype.format = function() {
 					this.showHidePending(itm);
 				}
 				this.rendered.push(itm);
-				group.get("html").append(itm.html);
+				
+				$(group.get("div_id")).append(itm.html);
 			}
 		},
 		deleteItem : function(itm) {
@@ -823,7 +825,7 @@ Date.prototype.format = function() {
 
 					// Create group element
 					group = this.buildGroup(group);
-
+					
 					// Display all avialable items
 					this.buildGroupItems(group, false);
 

@@ -14,7 +14,7 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 		items_new: null,
 		
 		// HTML container for this group
-		html: null,
+		div_id: null,
 		
 		// Count of the displayed items
 		displayed: 0,
