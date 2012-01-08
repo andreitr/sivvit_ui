@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery) {
+}; (function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -272,9 +271,8 @@ Date.prototype.format = function() {
 				newCount = 0;
 
 				for( i = 0; i < con.length; i++) {
-
 					group_model = this.activeView.groups_key[new Date(con[i].timestamp)];
-						
+
 					// Check if a group already exists
 					if(group_model) {
 
@@ -282,17 +280,14 @@ Date.prototype.format = function() {
 						group_model.set({
 							stats : con[i].stats
 						});
+						// Update the count of new content
+						newCount = this.activeView.getItemCount(group_model);
 
 						for( j = 0; j < con[i].items.length; j++) {
 							itm_model = new SIVVIT.ItemModel(con[i].items[j]);
 							itm_model.set({
 								timestamp : new Date(con[i].items[j].timestamp)
 							});
-
-							// Show pending content only for the specific type
-							if(this.activeView.buildTemplate(itm_model)) {
-								newCount++;
-							}
 
 							group_model.get("items").add(itm_model);
 						}
@@ -360,7 +355,7 @@ Date.prototype.format = function() {
 						type : "global"
 
 					});
-					$("#content-stats").html("Total: " + this.eventModel.get("stats").total);
+					$("#content-stats").html("Total: " + this.eventModel.get("stats").total); /// ----- Move this out into the HeaderView
 					this.activeView = this.allView;
 					break;
 
@@ -369,7 +364,7 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").post,
 						type : "post"
 					});
-					$("#content-stats").html("Posts: " + this.eventModel.get("stats").posts);
+					$("#content-stats").html("Posts: " + this.eventModel.get("stats").posts); /// ----- Move this out into the HeaderView
 					this.activeView = this.postView;
 					break;
 
@@ -378,7 +373,7 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").media,
 						type : "media"
 					});
-					$("#content-stats").html("Media: " + this.eventModel.get("stats").images);
+					$("#content-stats").html("Media: " + this.eventModel.get("stats").images); /// ----- Move this out into the HeaderView
 					this.activeView = this.mediaView;
 					break;
 			}
@@ -410,8 +405,10 @@ Date.prototype.format = function() {
 		// Rendered groups
 		groups : [],
 
+		// Dictionary of existing groups
 		groups_key : {},
 
+		// Count of new items - displayed when new data is loaded
 		newCount : 0,
 
 		// Instance of TemporalModel
@@ -482,67 +479,53 @@ Date.prototype.format = function() {
 			// Create group element which will contain all items
 			$(this.el).append("<ol id='" + gid + "'></ol>");
 
-			this.groups.push({
-				model : group,
+			group.set({
 				html : $("#" + gid)
 			});
+			this.groups.push(group);
 
 			this.groups_key[group.get("timestamp")] = group;
 
 			// Show hide latest group
-			this.showHide(this.groups[this.groups.length -1]);
+			this.showHide(group);
 
-			return this.groups[this.groups.length -1];
+			return group;
 		},
 		// Builds group header
-		buildGroupHeader : function(group, type) {
-
-			var total;
-
-			// Display appropriate feature count based on the type
-			switch(type) {
-				case "post":
-					total = group.model.get("stats").post;
-					break;
-				case "media":
-					total = group.model.get("stats").media;
-					break;
-				case "mixed":
-					total = group.model.get("stats").total;
-					break;
-			}
-
-			$(group.html).prepend("<div id='group-header'>" + total + " items this " + this.temporalModel.get("resolution") + " - " + group.model.get("timestamp").format());
+		buildGroupHeader : function(group) {
+			var total = this.getItemCount(group);
+			group.get("html").prepend("<div id='group-header'>" + total + " items this " + this.temporalModel.get("resolution") + " - " + group.get("timestamp").format());
 		},
 		buildGroupFooter : function(group) {
 
 			var self = this, total;
 
 			// Remove existing footer
-			if($(group.html).find("#group-footer").length > 0) {
-				$(group.html).find("#group-footer").remove();
+			var footer = group.get("html").find("#group-footer");
+			if(footer.length > 0) {
+				footer.remove();
 			}
 
 			// Check whether we need to load more items
-			if(group.model.get("displayed") < group.model.get("stats").total) {
+			if(group.get("displayed") < group.get("stats").total) {
 
-				$(group.html).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.temporalModel.get("resolution") + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+				group.get("html").append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.temporalModel.get("resolution") + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
 
-				$(group.html).find("#load-group-btn").click(function(event) {
+				group.get("html").find("#load-group-btn").click(function(event) {
 
 					// Displayloader graphics
 					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 
-					group.model.url = "items.json";
+					group.url = "items.json";
 					//Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
 
-					var collection = group.model.get("items");
+					var collection = group.get("items");
 
-					group.model.bind("change", function() {
+					group.bind("change", function() {
 
 						var tmp = [], i;
-						var len = group.model.get("items").length;
-						var items = group.model.get("items");
+						var len = group.get("items").length;
+						var items = group.get("items");
 
 						for( i = 0; i < len; i++) {
 
@@ -557,7 +540,7 @@ Date.prototype.format = function() {
 						}
 
 						// Reassign existing collection and add new one
-						group.model.set({
+						group.set({
 							items : collection,
 							items_new : new SIVVIT.ItemGroupCollection(tmp)
 						});
@@ -567,7 +550,7 @@ Date.prototype.format = function() {
 
 					}, self);
 
-					group.model.fetch();
+					group.fetch();
 				});
 			}
 		},
@@ -575,15 +558,15 @@ Date.prototype.format = function() {
 		// If is_new is true, then only display new content, otherwise everything
 		buildGroupItems : function(group, is_new) {
 
-			var dsp = is_new ? group.model.get("displayed") : 0;
+			var dsp = is_new ? group.get("displayed") : 0;
 
 			// Loop through each available item - ItemCollection
-			group.model.get( is_new ? "items_new" : "items").each(function(itm) {
+			group.get( is_new ? "items_new" : "items").each(function(itm) {
 				itm = this.buildTemplate(itm);
 				if(itm) {
 					this.initItem(itm, group);
 
-					group.model.set({
+					group.set({
 						displayed : dsp += 1
 					}, {
 						silent : true
@@ -650,13 +633,13 @@ Date.prototype.format = function() {
 		// Shows / hides content groups
 		showHide : function(group) {
 
-			var timestamp = group.model.get("timestamp").getTime();
+			var timestamp = group.get("timestamp").getTime();
 
 			if(timestamp >= this.temporalModel.get("startRange").getTime() && timestamp <= this.temporalModel.get("endRange").getTime()) {
-				$(group.html).show();
+				group.get("html").show();
 				this.displayed = true;
 			} else {
-				$(group.html).hide();
+				group.get("html").hide();
 			}
 		},
 		// Checks whether there any items are displayed
@@ -719,7 +702,7 @@ Date.prototype.format = function() {
 					this.showHidePending(itm);
 				}
 				this.rendered.push(itm);
-				$(group.html).append(itm.html);
+				group.get("html").append(itm.html);
 			}
 		},
 		deleteItem : function(itm) {
@@ -785,7 +768,7 @@ Date.prototype.format = function() {
 				this.buildGroupItems(group, false);
 
 				// Call this once items are added
-				this.buildGroupHeader(group, "mixed");
+				this.buildGroupHeader(group);
 
 				this.buildGroupFooter(group);
 
@@ -817,6 +800,10 @@ Date.prototype.format = function() {
 				html : html,
 				model : itm
 			};
+		},
+		// Returns count of items to be displayed in this view
+		getItemCount : function(group) {
+			return group.get("stats").total;
 		}
 	});
 
@@ -841,7 +828,7 @@ Date.prototype.format = function() {
 					this.buildGroupItems(group, false);
 
 					// Call this once items are added
-					this.buildGroupHeader(group, "post");
+					this.buildGroupHeader(group);
 
 					this.buildGroupFooter(group);
 				}
@@ -865,6 +852,10 @@ Date.prototype.format = function() {
 			} else {
 				return null;
 			}
+		},
+		// Returns count of items to be displayed in this view
+		getItemCount : function(group) {
+			return group.get("stats").post;
 		}
 	});
 
@@ -888,23 +879,23 @@ Date.prototype.format = function() {
 					this.buildGroupItems(group, false);
 
 					// Call this once items are added
-					this.buildGroupHeader(group, "media");
+					this.buildGroupHeader(group);
 				}
 			}, this);
 		},
 		// Displays new content loaded into groups
 		buildGroupItems : function(group, is_new) {
 
-			var dsp = is_new ? group.model.get("displayed") : 0;
+			var dsp = is_new ? group.get("displayed") : 0;
 
 			// Loop through each available item - ItemCollection
-			group.model.get( is_new ? "items_new" : "items").each(function(itm) {
+			group.get( is_new ? "items_new" : "items").each(function(itm) {
 				itm = this.buildTemplate(itm);
 				if(itm) {
 					this.lightbox(itm.html.find("#media"), itm.model);
 					this.initItem(itm, group);
 
-					group.model.set({
+					group.set({
 						displayed : dsp += 1
 					}, {
 						silent : true
@@ -938,6 +929,10 @@ Date.prototype.format = function() {
 			} else {
 				return null;
 			}
+		},
+		// Returns count of items to be displayed in this view
+		getItemCount : function(group) {
+			return group.get("stats").media;
 		}
 	});
 
