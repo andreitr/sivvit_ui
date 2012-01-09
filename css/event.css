@@ -52,9 +52,14 @@
 }
 
 ol {
-	margin: 0;
+	margin-top:0px;
+	margin-bottom:10px;
 	padding: 0;
 	list-style: none;
+	background: #FFFFFF;
+    -moz-box-shadow: 0px 0px 3px hsla(0,0%,0%,.3);
+    -webkit-box-shadow: 0px 0px 3px hsla(0,0%,0%,.3);
+    -box-shadow: 0px 0px 3px hsla(0,0%,0%,.3); /* Opera, IE 9 */    
 }
 
 #timeline-container {

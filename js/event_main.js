@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery) {
+};
+(function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -355,7 +356,8 @@ Date.prototype.format = function() {
 						type : "global"
 
 					});
-					$("#content-stats").html("Total: " + this.eventModel.get("stats").total); /// ----- Move this out into the HeaderView
+					$("#content-stats").html("Total: " + this.eventModel.get("stats").total);
+					/// ----- Move this out into the HeaderView
 					this.activeView = this.allView;
 					break;
 
@@ -364,7 +366,8 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").post,
 						type : "post"
 					});
-					$("#content-stats").html("Posts: " + this.eventModel.get("stats").posts); /// ----- Move this out into the HeaderView
+					$("#content-stats").html("Posts: " + this.eventModel.get("stats").posts);
+					/// ----- Move this out into the HeaderView
 					this.activeView = this.postView;
 					break;
 
@@ -373,7 +376,8 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").media,
 						type : "media"
 					});
-					$("#content-stats").html("Media: " + this.eventModel.get("stats").images); /// ----- Move this out into the HeaderView
+					$("#content-stats").html("Media: " + this.eventModel.get("stats").images);
+					/// ----- Move this out into the HeaderView
 					this.activeView = this.mediaView;
 					break;
 			}
@@ -474,12 +478,12 @@ Date.prototype.format = function() {
 		},
 		// Builds out item group and displays its header
 		buildGroup : function(group) {
-			
+
 			var gid = "group-" + group.get("id");
 
 			// Create group element which will contain all items
 			$(this.el).append("<ol id='" + gid + "'></ol>");
-			
+
 			group.set({
 				div_id : "#" + gid
 			});
@@ -635,7 +639,7 @@ Date.prototype.format = function() {
 		showHide : function(group) {
 
 			var timestamp = group.get("timestamp").getTime();
-			
+
 			if(timestamp >= this.temporalModel.get("startRange").getTime() && timestamp <= this.temporalModel.get("endRange").getTime()) {
 				$(group.get("div_id")).show();
 				this.displayed = true;
@@ -703,7 +707,7 @@ Date.prototype.format = function() {
 					this.showHidePending(itm);
 				}
 				this.rendered.push(itm);
-				
+
 				$(group.get("div_id")).append(itm.html);
 			}
 		},
@@ -825,7 +829,7 @@ Date.prototype.format = function() {
 
 					// Create group element
 					group = this.buildGroup(group);
-					
+
 					// Display all avialable items
 					this.buildGroupItems(group, false);
 
