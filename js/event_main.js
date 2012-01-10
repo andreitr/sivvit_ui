@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery) {
+}; (function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -532,16 +531,18 @@ Date.prototype.format = function() {
 						var len = group.get("items").length;
 						var items = group.get("items");
 
-						for( i = 0; i < len; i++) {
+						for( i = len; i--; ) {
+							var itm = items[i];
+							if(itm) {
+								var itm_model = new SIVVIT.ItemModel(itm);
 
-							var itm_model = new SIVVIT.ItemModel(items[i]);
+								itm_model.set({
+									timestamp : new Date(itm.timestamp)
+								});
 
-							itm_model.set({
-								timestamp : new Date(items[i].timestamp)
-							});
-
-							tmp.push(itm_model);
-							collection.add(itm_model);
+								tmp.push(itm_model);
+								collection.add(itm_model);
+							}
 						}
 
 						// Reassign existing collection and add new one
