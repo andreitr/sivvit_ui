@@ -478,6 +478,7 @@ Date.prototype.format = function() {
 		// Builds out item group and displays its header
 		buildGroup : function(group) {
 
+			var self = this;
 			var gid = "group-" + group.get("id");
 
 			// Create group element which will contain all items
@@ -485,9 +486,14 @@ Date.prototype.format = function() {
 
 			group.set({
 				div_id : "#" + gid
+			}, {
+				silent : true
 			});
-			this.groups.push(group);
 
+			// Triggered when additional data is loaded into the group
+			group.bind("change", self.updateGroup, self);
+
+			this.groups.push(group);
 			this.groups_key[group.get("timestamp")] = group;
 
 			// Show hide latest group
@@ -523,38 +529,12 @@ Date.prototype.format = function() {
 					group.url = "items.json";
 					//Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
 
-					var collection = group.get("items");
-
-					group.bind("change", function() {
-
-						var tmp = [], i;
-						var len = group.get("items").length;
-						var items = group.get("items");
-
-						for( i = len; i--; ) {
-							var itm = items[i];
-							if(itm) {
-								var itm_model = new SIVVIT.ItemModel(itm);
-
-								itm_model.set({
-									timestamp : new Date(itm.timestamp)
-								});
-
-								tmp.push(itm_model);
-								collection.add(itm_model);
-							}
-						}
-
-						// Reassign existing collection and add new one
-						group.set({
-							items : collection,
-							items_new : new SIVVIT.ItemGroupCollection(tmp)
-						});
-
-						self.buildGroupItems(group, true);
-						self.buildGroupFooter(group);
-
-					}, self);
+					// Save already-parsed items in the temporaray old_itms array
+					group.set({
+						old_items : group.get("items")
+					}, {
+						silent : true
+					});
 
 					group.fetch();
 				});
@@ -580,6 +560,41 @@ Date.prototype.format = function() {
 				}
 
 			}, this);
+		},
+		// Called once additional group data is loaded
+		updateGroup : function(event) {
+
+			var tmp = [], i;
+			var len = event.get("items").length;
+			var items = event.get("items");
+
+			for( i = len; i--; ) {
+
+				var itm = items[i];
+				if(itm) {
+
+					var itm_model = new SIVVIT.ItemModel(itm);
+
+					itm_model.set({
+						timestamp : new Date(itm.timestamp)
+					});
+
+					tmp.push(itm_model);
+					event.get("old_items").add(itm_model);
+				}
+			}
+
+			// Reassign existing collection and add new one
+			event.set({
+				// Assing augmented old_items back to the items collection
+				items : event.get("old_items"),
+				items_new : new SIVVIT.ItemGroupCollection(tmp)
+			}, {
+				silent : true
+			});
+
+			this.buildGroupItems(event, true);
+			this.buildGroupFooter(event);
 		},
 		displayEdit : function() {
 
