@@ -818,13 +818,22 @@ Date.prototype.format = function() {
 			this.mediaView = options.mediaView;
 		},
 		// Renders the entire collection
-		display : function() {
+		display : function(source) {
+
+			var is_update;
+
+			if(source === undefined) {
+				source = this.model;
+				is_update = false;
+			} else {
+				is_update = true;
+			}
 
 			// Loop through all available groups - ItemGroupCollection
 			this.model.each(function(group) {
 
 				// Create group element
-				group = this.buildGroup(group);
+				group = this.buildGroup(group, is_update);
 
 				// Display all available items
 				this.buildGroupItems(group, false);
@@ -938,15 +947,24 @@ Date.prototype.format = function() {
 
 		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div><div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
-		display : function() {
+		display : function(source) {
+
+			var is_update;
+
+			if(source === undefined) {
+				source = this.model;
+				is_update = false;
+			} else {
+				is_update = true;
+			}
 
 			// Loop through all available groups - ItemGroupCollection
-			this.model.each(function(group) {
+			source.each(function(group) {
 
 				if(group.get("type") == "media" || group.get("type") == "mixed") {
 
 					// Create group element
-					group = this.buildGroup(group);
+					group = this.buildGroup(group, is_update);
 
 					this.buildGroupItems(group, false);
 
