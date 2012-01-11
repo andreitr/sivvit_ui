@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery) {
+};
+(function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -503,6 +504,7 @@ Date.prototype.format = function() {
 		},
 		// Builds group header
 		buildGroupHeader : function(group) {
+			
 			var total = this.getItemCount(group);
 			$(group.get("div_id")).prepend("<div id='group-header'>" + total + " items this " + this.temporalModel.get("resolution") + " - " + group.get("timestamp").format());
 		},
@@ -562,11 +564,11 @@ Date.prototype.format = function() {
 			}, this);
 		},
 		// Called once additional group data is loaded
-		updateGroup : function(event) {
+		updateGroup : function(group) {
 
 			var tmp = [], i;
-			var len = event.get("items").length;
-			var items = event.get("items");
+			var len = group.get("items").length;
+			var items = group.get("items");
 
 			for( i = len; i--; ) {
 
@@ -580,21 +582,22 @@ Date.prototype.format = function() {
 					});
 
 					tmp.push(itm_model);
-					event.get("old_items").add(itm_model);
+					group.get("old_items").add(itm_model);
 				}
 			}
 
 			// Reassign existing collection and add new one
-			event.set({
+			group.set({
 				// Assing augmented old_items back to the items collection
-				items : event.get("old_items"),
+				items : group.get("old_items"),
 				items_new : new SIVVIT.ItemGroupCollection(tmp)
 			}, {
 				silent : true
 			});
 
-			this.buildGroupItems(event, true);
-			this.buildGroupFooter(event);
+			this.buildGroupHeader(group);
+			this.buildGroupItems(group, true);
+			this.buildGroupFooter(group);
 		},
 		displayEdit : function() {
 
