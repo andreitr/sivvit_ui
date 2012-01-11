@@ -98,6 +98,8 @@ Date.prototype.format = function() {
 			this.eventModel.bind("change", function() {
 
 				// Show main application
+				
+				$("#content-loader").remove();
 				$("#event-application").show();
 
 				if(self.eventModel.hasChanged("status") || self.eventModel.hasChanged("title") || self.eventModel.hasChanged("author") || self.eventModel.hasChanged("location")) {

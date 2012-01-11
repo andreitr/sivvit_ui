@@ -108,6 +108,15 @@ a:link
 }
 
 
+#content-loader
+{
+	width:auto;
+	text-align: center;
+	padding: 200px;
+	background:url("../img/css/loader.gif") no-repeat;
+	background-position: center;
+}
+
 #content-container
 {
     display: block;
