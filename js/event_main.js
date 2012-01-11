@@ -98,7 +98,6 @@ Date.prototype.format = function() {
 			this.eventModel.bind("change", function() {
 
 				// Show main application
-				
 				$("#content-loader").remove();
 				$("#event-application").show();
 
