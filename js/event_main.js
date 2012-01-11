@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery) {
+}; (function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -237,15 +236,15 @@ Date.prototype.format = function() {
 			var tmp_group = [];
 			var con = this.eventModel.get("content");
 			var len = this.collection ? this.collection.length : 0;
-			var i, j, itm, tmp_items, newCount, group_model, itm_model;
+			var i, j, itm, tmp_items, new_count, new_groups, group_model, itm_model;
 
 			if(!this.collection) {
 
-				for( i = 0; i < con.length; i++) {
+				for( i = con.length; i--; ) {
 					group_model = new SIVVIT.ItemGroupModel(con[i]);
 					tmp_items = [];
 
-					for( j = 0; j < con[i].items.length; j++) {
+					for( j = con[i].items.length; j--; ) {
 						itm_model = new SIVVIT.ItemModel(con[i].items[j]);
 						itm_model.set({
 							timestamp : new Date(con[i].items[j].timestamp)
@@ -269,9 +268,10 @@ Date.prototype.format = function() {
 			} else {
 
 				// Add new items to the exisiting collection -------------------------------------------------------------------------
-				newCount = 0;
+				new_count = 0;
 
-				for( i = 0; i < con.length; i++) {
+				for( i = con.length; i--; ) {
+					
 					group_model = this.activeView.groups_key[new Date(con[i].timestamp)];
 
 					// Check if a group already exists
@@ -284,7 +284,7 @@ Date.prototype.format = function() {
 							silent : true
 						});
 
-						for( j = 0; j < con[i].items.length; j++) {
+						for( j = con[i].items.length; j--; ) {
 							itm_model = new SIVVIT.ItemModel(con[i].items[j]);
 							itm_model.set({
 								timestamp : new Date(con[i].items[j].timestamp)
@@ -292,24 +292,37 @@ Date.prototype.format = function() {
 
 							group_model.get("items").add(itm_model);
 						}
-						
+
 						this.activeView.buildGroupHeader(group_model);
 						this.activeView.buildGroupFooter(group_model);
 
 					} else {
+						
+						new_goups = new SIVVIT.ItemGroupCollection();
 						group_model = new SIVVIT.ItemGroupModel(con[i]);
 						tmp_items = [];
-						
-						// Update the count of new content
-						newCount += this.activeView.getItemCount(group_model);
+
+						for( j = con[i].items.length; j--; ) {
+							itm_model = new SIVVIT.ItemModel(con[i].items[j]);
+							itm_model.set({
+								timestamp : new Date(con[i].items[j].timestamp)
+							});
+
+							tmp_items.push(itm_model);
+						}
 
 						group_model.set({
 							id : i,
 							items : new SIVVIT.ItemCollection(tmp_items),
 							items_new : new SIVVIT.ItemCollection(tmp_items),
 							stats : con[i].stats,
-							timestamp : new Date(con[i].timestamp)
+							timestamp : new Date(group_model.get("timestamp"))
 						});
+
+						// Update the count of new content
+						new_count += this.activeView.getItemCount(group_model);
+						new_goups.add(group_model);
+						
 
 						this.collection.add(group_model, {
 							silent : true
@@ -317,8 +330,8 @@ Date.prototype.format = function() {
 					}
 				}
 
-				if(newCount > 0) {
-					this.activeView.update(newCount);
+				if(new_count > 0) {
+					this.activeView.update(new_count, new_goups);
 				}
 			}
 		},
@@ -419,7 +432,10 @@ Date.prototype.format = function() {
 		groups_key : {},
 
 		// Count of new items - displayed when new data is loaded
-		newCount : 0,
+		new_count : 0,
+
+		// Collection (ItemGroupCollection) of goups that have been loaded but not rendered
+		new_groups : null,
 
 		// Instance of TemporalModel
 		temporalModel : null,
@@ -447,21 +463,23 @@ Date.prototype.format = function() {
 			options.temporal.unbind("change:endRange", this.filter, this);
 		},
 		// Adds new items to the pending queue
-		update : function(count) {
+		update : function(count, groups) {
 			var self = this;
+			this.new_groups = groups;
 
 			if($("#load-content-btn").length <= 0) {
-				this.newCount = count;
-				$(this.el).prepend("<div id=\"padding\"><div id='load-content-btn' class=\"content-loader\">" + this.newCount + " new items&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+				this.new_count = count;
+
+				$(this.el).prepend("<div id=\"padding\"><div id='load-content-btn' class=\"content-loader\">" + this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
 				$("#load-content-btn").hide();
 				$("#load-content-btn").slideDown("slow");
 				$("#load-content-btn").click(function(event) {
 					$(event.currentTarget).parent().remove();
-					self.render();
-					self.newCount = 0;
+					self.display(self.new_groups);
+					self.new_count = 0;
 				});
 			} else {
-				$("#load-content-btn").html((this.newCount + count) + " new items&nbsp;&nbsp;<span class='icon-download'></span>");
+				$("#load-content-btn").html((this.new_count + count) + " new items&nbsp;&nbsp;<span class='icon-download'></span>");
 			}
 		},
 		render : function() {
@@ -483,13 +501,20 @@ Date.prototype.format = function() {
 			this.checkFiltered();
 		},
 		// Builds out item group and displays its header
-		buildGroup : function(group) {
+		// If prepend is set to true the group is prepended to the list, otherwise appended
+		buildGroup : function(group, prepend) {
 
 			var self = this;
 			var gid = "group-" + group.get("id");
 
 			// Create group element which will contain all items
-			$(this.el).append("<ol id='" + gid + "'></ol>");
+			var el = "<ol id='" + gid + "'></ol>";
+
+			if(prepend) {
+				$(this.el).prepend(el);
+			} else {
+				$(this.el).append(el);
+			}
 
 			group.set({
 				div_id : "#" + gid
@@ -562,6 +587,7 @@ Date.prototype.format = function() {
 
 			// Loop through each available item - ItemCollection
 			group.get( is_new ? "items_new" : "items").each(function(itm) {
+				
 				itm = this.buildTemplate(itm);
 				if(itm) {
 					this.initItem(itm, group);
@@ -850,16 +876,26 @@ Date.prototype.format = function() {
 
 		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
-		display : function() {
+		display : function(source) {
+
+			var is_update;
+
+			if(source === undefined) {
+				source = this.model;
+				is_update = false;
+			} else {
+				is_update = true;
+			}
 
 			// Loop through all available groups - ItemGroupCollection
-			this.model.each(function(group) {
-
+			source.each(function(group) {
+					
 				if(group.get("type") == "post" || group.get("type") == "mixed") {
 
-					// Create group element
-					group = this.buildGroup(group);
 
+					// Create group element
+					group = this.buildGroup(group, is_update);
+					
 					// Display all avialable items
 					this.buildGroupItems(group, false);
 
