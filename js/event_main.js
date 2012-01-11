@@ -39,7 +39,7 @@ Date.prototype.format = function() {
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : true,
+		edit : false,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -102,8 +102,12 @@ Date.prototype.format = function() {
 				$("#content-loader").remove();
 				$("#event-application").show();
 
-				if(self.eventModel.hasChanged("status") || self.eventModel.hasChanged("title") || self.eventModel.hasChanged("author") || self.eventModel.hasChanged("location")) {
+				if(self.eventModel.hasChanged("status") || self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
+				}
+
+				if(self.eventModel.hasChanged("stats")) {
+					self.appView.renderStats();
 				}
 
 				// Update histogram values
@@ -374,8 +378,6 @@ Date.prototype.format = function() {
 						type : "global"
 
 					});
-					$("#content-stats").html("Total: " + this.eventModel.get("stats").total);
-					/// ----- Move this out into the HeaderView
 					this.activeView = this.allView;
 					break;
 
@@ -384,8 +386,6 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").post,
 						type : "post"
 					});
-					$("#content-stats").html("Posts: " + this.eventModel.get("stats").posts);
-					/// ----- Move this out into the HeaderView
 					this.activeView = this.postView;
 					break;
 
@@ -394,11 +394,11 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").media,
 						type : "media"
 					});
-					$("#content-stats").html("Media: " + this.eventModel.get("stats").images);
-					/// ----- Move this out into the HeaderView
 					this.activeView = this.mediaView;
 					break;
 			}
+
+			this.renderStats();
 
 			this.temporalModel.set({
 				min : this.eventModel.get("histogram").min,
@@ -411,6 +411,23 @@ Date.prototype.format = function() {
 				temporal : this.temporalModel
 			});
 			this.activeView.render();
+		},
+		// Displays stats for the currently-selected view
+		renderStats : function() {
+			switch(this.activeButton) {
+
+				case "#all-btn":
+					$("#content-stats").html("Total: " + this.eventModel.get("stats").total);
+					break;
+
+				case "#post-btn":
+					$("#content-stats").html("Posts: " + this.eventModel.get("stats").posts);
+					break;
+
+				case "#media-btn":
+					$("#content-stats").html("Media: " + this.eventModel.get("stats").images);
+					break;
+			}
 		}
 	});
 
@@ -1051,7 +1068,7 @@ Date.prototype.format = function() {
 			if(this.model.get("status") === 1) {
 				$("#timeline-label").html("<span class='icon-time'></span>LIVE - updated 1m ago");
 			} else {
-				$("#timeline-label").html("<span class='icon-time'></span>Archived event.");
+				$("#timeline-label").empty();
 			}
 
 			$("#map-label").html("<span class='icon-location'></span>" + this.model.get("location").name);
