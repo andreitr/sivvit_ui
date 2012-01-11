@@ -268,7 +268,7 @@ Date.prototype.format = function() {
 
 			} else {
 
-				// Add new items to the exisiting collection
+				// Add new items to the exisiting collection -------------------------------------------------------------------------
 				newCount = 0;
 
 				for( i = 0; i < con.length; i++) {
@@ -280,9 +280,9 @@ Date.prototype.format = function() {
 						// Update stats
 						group_model.set({
 							stats : con[i].stats
+						}, {
+							silent : true
 						});
-						// Update the count of new content
-						newCount += this.activeView.getItemCount(group_model);
 
 						for( j = 0; j < con[i].items.length; j++) {
 							itm_model = new SIVVIT.ItemModel(con[i].items[j]);
@@ -292,10 +292,16 @@ Date.prototype.format = function() {
 
 							group_model.get("items").add(itm_model);
 						}
+						
+						this.activeView.buildGroupHeader(group_model);
+						this.activeView.buildGroupFooter(group_model);
 
 					} else {
 						group_model = new SIVVIT.ItemGroupModel(con[i]);
 						tmp_items = [];
+						
+						// Update the count of new content
+						newCount += this.activeView.getItemCount(group_model);
 
 						group_model.set({
 							id : i,
@@ -504,8 +510,14 @@ Date.prototype.format = function() {
 		},
 		// Builds group header
 		buildGroupHeader : function(group) {
-			
+
 			var total = this.getItemCount(group);
+
+			// Remove existing heder
+			var header = $(group.get("div_id")).find("#group-header");
+			if(header.length > 0) {
+				header.remove();
+			}
 			$(group.get("div_id")).prepend("<div id='group-header'>" + total + " items this " + this.temporalModel.get("resolution") + " - " + group.get("timestamp").format());
 		},
 		buildGroupFooter : function(group) {
@@ -595,7 +607,6 @@ Date.prototype.format = function() {
 				silent : true
 			});
 
-			this.buildGroupHeader(group);
 			this.buildGroupItems(group, true);
 			this.buildGroupFooter(group);
 		},

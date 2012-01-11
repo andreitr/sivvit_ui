@@ -483,7 +483,7 @@
 			"type": "post",
 			"timestamp": "Tue Aug 27 20:02:43 +0000 2011",
 			"stats": {
-				"total": 2,
+				"total": 3,
 				"post": 8,
 				"media": 0
 			},
@@ -501,6 +501,61 @@
 					"content": "Romney surge on Intrade. Now considered almost twice as likely (45%) as Perry (27%) to win GOP nom. http://bit.ly/dNIXBW"
 				}, {
 					"id": "00025",
+					"status": 1,
+					"rank": 1,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 27 20:03:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a3.twimg.com/profile_images/887595705/5852_133740086352_699416352_2855091_851129_n_normal.jpg",
+					"content": "Tweetspot map of #misabc geotweets http://flic.kr/p/apLNJw"
+				}
+			]
+		},{
+			"type": "post",
+			"timestamp": "Tue Aug 28 20:02:43 +0000 2011",
+			"stats": {
+				"total": 4,
+				"post": 4,
+				"media": 0
+			},
+			"items": [
+				{
+					"id": "00024",
+					"status": 1,
+					"rank": 11,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 27 20:02:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a2.twimg.com/profile_images/821329112/IMG_0016_normal.JPG",
+					"content": "Romney surge on Intrade. Now considered almost twice as likely (45%) as Perry (27%) to win GOP nom. http://bit.ly/dNIXBW"
+				}, {
+					"id": "00025",
+					"status": 1,
+					"rank": 1,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 27 20:03:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a3.twimg.com/profile_images/887595705/5852_133740086352_699416352_2855091_851129_n_normal.jpg",
+					"content": "Tweetspot map of #misabc geotweets http://flic.kr/p/apLNJw"
+				}, {
+					"id": "00026",
+					"status": 1,
+					"rank": 1,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 27 20:03:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a3.twimg.com/profile_images/887595705/5852_133740086352_699416352_2855091_851129_n_normal.jpg",
+					"content": "Tweetspot map of #misabc geotweets http://flic.kr/p/apLNJw"
+				}, {
+					"id": "00027",
 					"status": 1,
 					"rank": 1,
 					"type": "post",
