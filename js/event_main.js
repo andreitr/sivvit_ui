@@ -39,7 +39,7 @@ Date.prototype.format = function() {
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : false,
+		edit : true,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -708,10 +708,10 @@ Date.prototype.format = function() {
 
 			if(!this.displayed) {
 				if($("#no-content").length <= 0) {
-					$(this.el).append("<div id=\"padding\"><p id=\"no-content\" style=\"text-align:center;\">No content in selected timespan.</p></div>");
+					$(this.el).append("<div id='no-content' class='notification'>No content in selected timespan.</div>");
 				}
 			} else {
-				$("#no-content").parent().remove();
+				$("#no-content").remove();
 			}
 		},
 		initItem : function(itm, group) {

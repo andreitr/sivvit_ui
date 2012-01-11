@@ -48,7 +48,9 @@
 #controls-container
 {
 	padding:15px;
-	border-bottom:1px solid #CCCCCC;
+	border:1px solid #CCCCCC;
+	background:#FFFFFF;
+	margin-bottom:15px;
 }
 
 ol {
