@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery) {
+};
+(function(jQuery) {
 
 	SIVVIT.Event = {
 
@@ -272,7 +273,6 @@ Date.prototype.format = function() {
 				new_count = 0;
 
 				for( i = con.length; i--; ) {
-					
 					group_model = this.activeView.groups_key[new Date(con[i].timestamp)];
 
 					// Check if a group already exists
@@ -298,7 +298,6 @@ Date.prototype.format = function() {
 						this.activeView.buildGroupFooter(group_model);
 
 					} else {
-						
 						new_goups = new SIVVIT.ItemGroupCollection();
 						group_model = new SIVVIT.ItemGroupModel(con[i]);
 						tmp_items = [];
@@ -323,7 +322,6 @@ Date.prototype.format = function() {
 						// Update the count of new content
 						new_count += this.activeView.getItemCount(group_model);
 						new_goups.add(group_model);
-						
 
 						this.collection.add(group_model, {
 							silent : true
@@ -505,7 +503,6 @@ Date.prototype.format = function() {
 		// If prepend is set to true the group is prepended to the list, otherwise appended
 		buildGroup : function(group, prepend) {
 
-			var self = this;
 			var gid = "group-" + group.get("id");
 
 			// Create group element which will contain all items
@@ -523,8 +520,11 @@ Date.prototype.format = function() {
 				silent : true
 			});
 
+			// Unbind events from previous views
+			group.unbind();
+
 			// Triggered when additional data is loaded into the group
-			group.bind("change", self.updateGroup, self);
+			group.bind("change", this.updateGroup, this);
 
 			this.groups.push(group);
 			this.groups_key[group.get("timestamp")] = group;
@@ -588,7 +588,6 @@ Date.prototype.format = function() {
 
 			// Loop through each available item - ItemCollection
 			group.get( is_new ? "items_new" : "items").each(function(itm) {
-				
 				itm = this.buildTemplate(itm);
 				if(itm) {
 					this.initItem(itm, group);
@@ -899,22 +898,19 @@ Date.prototype.format = function() {
 
 			// Loop through all available groups - ItemGroupCollection
 			source.each(function(group) {
-					
-				if(group.get("type") == "post" || group.get("type") == "mixed") {
 
+				if(group.get("type") == "post" || group.get("type") == "mixed") {
 
 					// Create group element
 					group = this.buildGroup(group, is_update);
-					
+
 					// Display all avialable items
 					this.buildGroupItems(group, false);
 
 					// Call this once items are added
 					this.buildGroupHeader(group);
-
 					this.buildGroupFooter(group);
 				}
-
 			}, this);
 		},
 		// Builds each item, returns {timestamp, html} object
@@ -1005,6 +1001,7 @@ Date.prototype.format = function() {
 		},
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
+
 			if(itm.get("type") == "media") {
 				html = $.tmpl(this.template, {
 					content : itm.get("content"),
