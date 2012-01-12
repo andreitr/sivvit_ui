@@ -109,10 +109,7 @@ Date.prototype.format = function() {
 
 				// Reset updated timer
 				if(self.eventModel.hasChanged("updated")) {
-					self.eventModel.set({
-						updated : new Date(self.eventModel.get("updated"))
-					}, {silent:true});
-					self.headerView.reset(self.eventModel.get("updated"));
+					self.headerView.reset(new Date(self.eventModel.get("updated")));
 				}
 
 				if(self.eventModel.hasChanged("stats")) {
@@ -1097,7 +1094,7 @@ Date.prototype.format = function() {
 			var minutes = Math.floor(milliseconds / 60000);
 			var hours = Math.floor(milliseconds / 3600000);
 			var days = Math.floor(milliseconds / 86400000);
-
+	
 			if(days > 0) {
 				return "updated " + days + "d ago";
 			}
