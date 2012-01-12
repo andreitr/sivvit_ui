@@ -21,6 +21,12 @@
 	min-width:120px;
 }
 
+#share-container
+{
+	display:inline;
+}
+
+
 /** Show the number of newly-loaded items. */
 .content-loader {
 	text-align: center;

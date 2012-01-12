@@ -233,7 +233,8 @@ Date.prototype.format = function() {
 		events : {
 			"click #all-btn" : "render",
 			"click #post-btn" : "render",
-			"click #media-btn" : "render"
+			"click #media-btn" : "render",
+			"click #share-btn" : "share"
 		},
 
 		initialize : function(options) {
@@ -242,6 +243,8 @@ Date.prototype.format = function() {
 			this.allView = options.allView;
 			this.postView = options.postView;
 			this.mediaView = options.mediaView;
+			
+			$("#share-container").hide();
 		},
 		update : function() {
 
@@ -279,7 +282,7 @@ Date.prototype.format = function() {
 
 			} else {
 
-				// Add new items to the exisiting collection -------------------------------------------------------------------------
+				// Add new items to the exisiting group
 				new_count = 0;
 
 				for( i = con.length; i--; ) {
@@ -308,6 +311,8 @@ Date.prototype.format = function() {
 						this.activeView.buildGroupFooter(group_model);
 
 					} else {
+						
+						// Create new groups
 						new_goups = new SIVVIT.ItemGroupCollection();
 						group_model = new SIVVIT.ItemGroupModel(con[i]);
 						tmp_items = [];
@@ -434,6 +439,10 @@ Date.prototype.format = function() {
 					$("#content-stats").html("Media: " + this.eventModel.get("stats").images);
 					break;
 			}
+		},
+		
+		share: function(){
+			$("#share-container").toggle();
 		}
 	});
 
