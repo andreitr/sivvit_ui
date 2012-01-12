@@ -94,6 +94,7 @@ Date.prototype.format = function() {
 			// Initiate continous content loading
 			setInterval(function() {
 				self.eventModel.fetch();
+				self.headerView.update();
 			}, 10000);
 
 			this.eventModel.bind("change", function() {
@@ -104,6 +105,14 @@ Date.prototype.format = function() {
 
 				if(self.eventModel.hasChanged("status") || self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
+				}
+
+				// Reset updated timer
+				if(self.eventModel.hasChanged("updated")) {
+					self.eventModel.set({
+						updated : new Date(self.eventModel.get("updated"))
+					}, {silent:true});
+					self.headerView.reset(self.eventModel.get("updated"));
 				}
 
 				if(self.eventModel.hasChanged("stats")) {
@@ -1058,20 +1067,52 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.HeaderView = Backbone.View.extend({
 
+		timestamp : null,
+
 		render : function() {
 
 			$("#event-title").html(this.model.get("title"));
 			$("#event-description").html(this.model.get("description"));
 			$("#event-user").html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + new Date(this.model.get("startDate")).toDateString());
+			$("#map-label").html("<span class='icon-location'></span>" + this.model.get("location").name);
+		},
+		// Reset timer
+		reset : function(date) {
+			this.timestamp = date;
+			this.update();
+		},
+		// Updates timer
+		update : function() {
 
 			// Live timeline label
 			if(this.model.get("status") === 1) {
-				$("#timeline-label").html("<span class='icon-time'></span>LIVE - updated 1m ago");
+				$("#timeline-label").html("<span class='icon-time'></span>LIVE, " + this.formatTime(new Date() - this.timestamp));
 			} else {
 				$("#timeline-label").empty();
 			}
+		},
+		formatTime : function(milliseconds) {
 
-			$("#map-label").html("<span class='icon-location'></span>" + this.model.get("location").name);
+			var seconds = Math.floor(milliseconds / 1000);
+			var minutes = Math.floor(milliseconds / 60000);
+			var hours = Math.floor(milliseconds / 3600000);
+			var days = Math.floor(milliseconds / 86400000);
+
+			if(days > 0) {
+				return "updated " + days + "d ago";
+			}
+			if(hours > 0) {
+				return "updated " + hours + "h ago";
+			}
+			if(minutes > 0) {
+				return "updated " + minutes + "m ago";
+			}
+			if(seconds > 0) {
+				return "updated " + seconds + "s ago";
+			}
+
+			return "updated just now";
+
 		}
 	});
 })();

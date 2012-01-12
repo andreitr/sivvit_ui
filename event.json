@@ -11,9 +11,10 @@
 	},
 	"startDate": "Tue Aug 5 19:00:41 +0000 2011",
 	"endDate": "Tue Aug 29 20:03:43 +0000 2011",
+	"updated": "Wed Jan 11 20:40:00 +0000 2012",
 	"status": 1,
 	"stats": {
-		"total": 1260,
+		"total": 5260,
 		"posts": 702362,
 		"images": 22334,
 		"videos": 56
