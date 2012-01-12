@@ -108,8 +108,8 @@ Date.prototype.format = function() {
 				}
 
 				// Reset updated timer
-				if(self.eventModel.hasChanged("updated")) {
-					self.headerView.reset(new Date(self.eventModel.get("updated")));
+				if(self.eventModel.hasChanged("since")) {
+					self.headerView.reset(new Date(self.eventModel.get("since")));
 				}
 
 				if(self.eventModel.hasChanged("stats")) {
