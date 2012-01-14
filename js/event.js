@@ -1,4 +1,6 @@
 (function() {
+	
+	$LAB.script("http://s7.addthis.com/js/250/addthis_widget.js").wait();
 
 	$LAB.script("js/libs/graphael/raphael-min.js").wait();
 	$LAB.script("js/libs/jquery/jquery-1.6.4.min.js").wait();
@@ -12,7 +14,7 @@
 	$LAB.script("js/libs/fancybox/jquery.fancybox-1.3.4.pack.js").wait();
 
 	$LAB.script("js/header.js").wait();
-
+	
 	$LAB.script("js/event_main.js").wait(function() {
 
 		// Load backbone dependencies

@@ -233,8 +233,7 @@ Date.prototype.format = function() {
 		events : {
 			"click #all-btn" : "render",
 			"click #post-btn" : "render",
-			"click #media-btn" : "render",
-			"click #share-btn" : "share"
+			"click #media-btn" : "render"
 		},
 
 		initialize : function(options) {
@@ -243,8 +242,6 @@ Date.prototype.format = function() {
 			this.allView = options.allView;
 			this.postView = options.postView;
 			this.mediaView = options.mediaView;
-			
-			$("#share-container").hide();
 		},
 		update : function() {
 
@@ -439,10 +436,6 @@ Date.prototype.format = function() {
 					$("#content-stats").html("Media: " + this.eventModel.get("stats").images);
 					break;
 			}
-		},
-		
-		share: function(){
-			$("#share-container").toggle();
 		}
 	});
 
