@@ -872,6 +872,9 @@ Date.prototype.format = function() {
 		},
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
+			
+			var html;
+			
 			if(itm.get("type") == "media") {
 				html = $.tmpl(this.mediaView.template, {
 					content : itm.get("content"),
