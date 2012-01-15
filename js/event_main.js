@@ -6,7 +6,7 @@ if( typeof (SIVVIT) == 'undefined') {
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
 };
-(function(jQuery) {
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -1117,4 +1117,4 @@ Date.prototype.format = function() {
 
 		}
 	});
-})();
+})(jQuery, SIVVIT);
