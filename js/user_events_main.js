@@ -15,7 +15,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		view : null,
 
 		// Enables content editing when set to true
-		edit : true,
+		edit : false,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -32,8 +32,10 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			this.model.bind("change", function() {
 
-				// Move all this jazz into a separate view
+				// Show main application
+				$("#content-loader").remove();
 
+				// Move all this jazz into a separate view
 				$("#event-application").show();
 
 				if(this.model.hasChanged("events")) {
@@ -45,7 +47,9 @@ if( typeof (SIVVIT) == 'undefined') {
 					for( i = len; i--; ) {
 						model = new SIVVIT.EventModel(con[i]);
 						// Add timestamp as date for collection sorting
-						model.set({timestamp:new Date(con[i])});
+						model.set({
+							timestamp : new Date(con[i])
+						});
 						this.collection.add(model);
 					}
 

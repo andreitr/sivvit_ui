@@ -136,8 +136,8 @@ a:link
 /* Displays user header*/
 #user-avatar
 {
-	width: 48px;
-	height:48px;
+	width: 36px;
+	height:36px;
 	padding:2px;
 	border:1px solid #CCCCCC;
 	float:left;
