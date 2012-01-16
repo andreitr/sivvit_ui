@@ -4,7 +4,7 @@
 			"id": "00001",
 			"title": "Washington DC Earthquake and another super log event name goes here and forgive your for the rest",
 			"author": "testuserid",
-			"description": "",
+			"description": "Description here",
 			"keywords": ["hurricane", "irene"],
 			"location": {
 				"name": "Washington, DC",
@@ -81,7 +81,7 @@
 			"id": "00001",
 			"title": "Black Friday Tweets",
 			"author": "andreitr",
-			"description": "",
+			"description": "Too many crazy people went shopping on back friday.",
 			"keywords": ["hurricane", "irene"],
 			"location": {
 				"name": "Denver, Co",
@@ -188,7 +188,7 @@
 			"id": "00003",
 			"title": "Russian Election Fraud",
 			"author": "andreitr",
-			"description": "",
+			"description": "Yes, there was fraud.",
 			"keywords": ["hurricane", "irene"],
 			"location": {
 				"name": "Moscow, Russia",
