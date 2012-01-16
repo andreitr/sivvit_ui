@@ -11,7 +11,7 @@
 	$LAB.script("js/user_events_main.js").wait(function(){
 		
 		// Load backbone dependencies
-		require(["js/app/models/model.event", "js/app/models/m.user", "js/app/models/model.temporal"], function(){
+		require(["js/app/models/model.event", "js/app/models/m.user", "js/app/models/model.temporal", "js/app/views/v.histogram"], function(){
 		
 			SIVVIT.UserEvents.init("events.json");
 			SIVVIT.UserHeader.init("user.json");

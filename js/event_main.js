@@ -57,7 +57,8 @@ Date.prototype.format = function() {
 
 			this.sideHistView = new SIVVIT.HistogramView({
 				el : '#timeline-container',
-				model : this.temporalModel
+				model : this.temporalModel, 
+				slider: true
 			});
 
 			this.postView = new SIVVIT.PostView({

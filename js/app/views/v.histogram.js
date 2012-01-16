@@ -1,14 +1,18 @@
 SIVVIT.HistogramView = Backbone.View.extend({
 
 	bars : [],
+	slider : false,
 
 	initialize : function(options) {
+		this.slider = options.slider;
 		this.model = options.model;
 		this.model.bind("change:histogram", this.render, this);
 	},
 	render : function() {
 		this.drawHistogram();
-		this.drawSlider();
+		if(this.slider) {
+			this.drawSlider();
+		}
 	},
 	drawSlider : function() {
 		self = this;
@@ -109,9 +113,11 @@ SIVVIT.HistogramView = Backbone.View.extend({
 					"stroke-width" : 0
 				});
 
-				bar.timestamp = frame.timestamp;
-				this.updateBarColor(bar);
-				this.bars.push(bar);
+				if(this.slider) {
+					bar.timestamp = frame.timestamp;
+					this.updateBarColor(bar);
+					this.bars.push(bar);
+				}
 			}
 		}
 	}

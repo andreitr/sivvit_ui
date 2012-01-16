@@ -16,8 +16,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 		// Enables content editing when set to true
 		edit : false,
-		
-		
+
 		// Initiates the application and loads the main data.
 		init : function(json) {
 			var self = this;
@@ -73,70 +72,6 @@ if( typeof (SIVVIT) == 'undefined') {
 			return itm.get("startDate");
 		}
 	});
-
-	// Generic histogram object.
-	SIVVIT.Histogram = {
-
-		// Histogram container
-		el : null,
-
-		// SIVVIT.TemporalModel
-		model : null,
-
-		// Draws histogram
-		render : function(options) {
-
-			this.el = options.el;
-			this.model = options.model;
-
-			// Total count of available slots
-			var lenTotal = Math.ceil((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
-
-			// Acutal count of temporal slots
-			var len = this.model.get("histogram").length;
-
-			var maxVal = this.model.get("max");
-			var minVal = this.model.get("min");
-
-			var maxHeight = $(this.el).height();
-
-			var barW = $(this.el).width() / lenTotal;
-			barW = barW < 0 ? Math.abs(barW) : Math.round(barW);
-
-			var startTime = this.model.get("startDate").getTime();
-			var endTime = this.model.get("endDate").getTime();
-			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
-
-			for(var i = len; i--; ) {
-				var frame = this.model.get("histogram")[i];
-
-				var percentY = (frame.count / maxVal) * 100;
-				var percentX = (new Date(frame.timestamp).getTime() - startTime) / (endTime - startTime);
-
-				var barH = Math.round(percentY * maxHeight / 100);
-				var barX = Math.round(barW * Math.round(percentX * (lenTotal - 1)));
-				var barY = Math.round(maxHeight - barH);
-
-				var bar = histogram.rect(barX, barY, barW, barH).attr({
-					fill : "#333333",
-					"stroke-width" : 0
-				});
-			}
-		},
-		// Returns appropriate resolution.
-		getResolution : function() {
-			switch(this.model.get("resolution")) {
-				case "day":
-					return 86400000;
-				case "hour":
-					return 3600000;
-				case "minute":
-					return 60000;
-				case "second":
-					return 1000;
-			}
-		}
-	};
 
 	// Core events view. Right now we only have a single implementation.
 	SIVVIT.AbstractView = Backbone.View.extend({
@@ -337,9 +272,10 @@ if( typeof (SIVVIT) == 'undefined') {
 				itm = this.buildTemplate(itm);
 
 				// Render histogram
-				SIVVIT.Histogram.render({
-					el : $(itm.html).find("#histogram"),
+				var histogram = new SIVVIT.HistogramView({
 
+					el : $(itm.html).find("#histogram"),
+					slider : false,
 					model : new SIVVIT.TemporalModel({
 						startDate : new Date(itm.model.get("startDate")),
 						endDate : new Date(itm.model.get("endDate")),
@@ -348,7 +284,7 @@ if( typeof (SIVVIT) == 'undefined') {
 						resolution : itm.model.get("histogram").resolution,
 						histogram : itm.model.get("histogram").global
 					})
-				});
+				}).render();
 
 				this.initItem(itm);
 			}, this);
