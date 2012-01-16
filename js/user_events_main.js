@@ -16,7 +16,6 @@ if( typeof (SIVVIT) == 'undefined') {
 
 		// Enables content editing when set to true
 		edit : false,
-
 		
 		
 		// Initiates the application and loads the main data.
