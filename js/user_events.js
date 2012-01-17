@@ -8,6 +8,11 @@
 	$LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
 	$LAB.script("js/libs/require/require.js").wait();
 
+	$LAB.script("js/libs/fancybox/jquery.fancybox-1.3.4.js").wait();
+	$LAB.script("js/libs/fancybox/jquery.fancybox-1.3.4.pack.js").wait();
+
+	$LAB.script("js/header.js").wait();
+
 	$LAB.script("js/user_events_main.js").wait(function() {
 
 		require(["js/app/models/model.event", "js/app/models/m.user", "js/app/models/model.temporal", "js/app/views/v.histogram", "js/app/views/v.user.header"], function() {

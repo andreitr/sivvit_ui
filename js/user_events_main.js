@@ -28,7 +28,17 @@ if( typeof (SIVVIT) == 'undefined') {
 			});
 
 			this.model.url = json;
-			this.model.fetch();
+
+			if(this.edit) {
+				// Load additional libraries required for the edit screen
+				$LAB.script("js/libs/bootstrap/bootstrap-twipsy.js").wait();
+				$LAB.script("js/libs/bootstrap/bootstrap-alerts.js").wait();
+				$LAB.script("js/libs/bootstrap/bootstrap-popover.js").wait(function() {
+					self.model.fetch();
+				});
+			} else {
+				this.model.fetch();
+			}
 
 			this.model.bind("change", function() {
 
@@ -105,8 +115,9 @@ if( typeof (SIVVIT) == 'undefined') {
 		},
 		// Displays content editing options - enabled in the admin view.
 		displayEdit : function() {
+
 			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"pause-all\" class=\"link\"></div>");
-			
+
 			var self = this;
 
 			// Delete all approved items
@@ -120,7 +131,6 @@ if( typeof (SIVVIT) == 'undefined') {
 					}
 				}
 			});
-			
 			// Select all items
 			$("#group-select").click(function() {
 
@@ -145,7 +155,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				// Initiate button clicks if a user is logged in and modify
 				// content template (add hover buttons and check box)
 				if(this.edit) {
-					itm.html.find("#content").prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-cog\" id=\"edit-itm\"></span><div id=\"pending-flag\"></div></span>");
+					itm.html.find("#content").prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class='icon-cog' id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
 					itm.html.find("#content").prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
 
 					itm.html.find("#del-itm").hide();
@@ -174,7 +184,13 @@ if( typeof (SIVVIT) == 'undefined') {
 								break;
 
 							case "edit-itm":
-								//Edit item
+								/*
+								$(html).fancybox({
+									'transitionIn' : 'fade',
+									'transitionOut' : 'fade',
+									'type' : 'image',
+									'href' : model.get("content")
+								})*/
 								break;
 
 							default:
@@ -225,8 +241,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		display : function() {
 
 			$(this.el).append("<ol id='event-list'></ol>");
-			
-			
+
 			// Render collection
 			this.model.each(function(itm) {
 				itm = this.buildTemplate(itm);
@@ -248,13 +263,12 @@ if( typeof (SIVVIT) == 'undefined') {
 
 				this.initItem(itm, "#event-list");
 			}, this);
-			
 		},
 		// Builds each item, returns {model, html} object
 		buildTemplate : function(itm) {
 			html = $.tmpl(this.template, {
 				title : itm.get("title"),
-				description: itm.get("description"),
+				description : itm.get("description"),
 				posts : itm.get("stats").posts,
 				videos : itm.get("stats").videos,
 				images : itm.get("stats").images,
