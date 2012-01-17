@@ -161,6 +161,13 @@ if( typeof (SIVVIT) == 'undefined') {
 					itm.html.find("#del-itm").hide();
 					itm.html.find("#edit-itm").hide();
 
+					// Open light box with event information etc
+					itm.html.find("#edit-itm").fancybox({
+						'transitionIn' : 'fade',
+						'transitionOut' : 'fade',
+						'href' : 'edit_event.html'
+					});
+
 					if(itm.model.get("pending") > 0) {
 						itm.html.find("#title").append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
 					}
@@ -184,13 +191,6 @@ if( typeof (SIVVIT) == 'undefined') {
 								break;
 
 							case "edit-itm":
-								/*
-								$(html).fancybox({
-									'transitionIn' : 'fade',
-									'transitionOut' : 'fade',
-									'type' : 'image',
-									'href' : model.get("content")
-								})*/
 								break;
 
 							default:
@@ -275,10 +275,12 @@ if( typeof (SIVVIT) == 'undefined') {
 				location : itm.get("location").name,
 				author : itm.get("author")
 			});
+
 			return {
 				html : html,
 				model : itm
 			};
+
 		}
 	});
 })($, SIVVIT);
