@@ -194,7 +194,9 @@ if( typeof (SIVVIT) == 'undefined') {
 						switch(event.target.id) {
 
 							case "del-itm":
-								self.deleteItem(itm);
+								if(confirm("Delete this event?") === true){
+									self.deleteItem(itm);
+								}
 								break;
 
 							case "edit-itm":
