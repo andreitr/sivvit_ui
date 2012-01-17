@@ -122,13 +122,18 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			// Delete all approved items
 			$("#del-all").click(function() {
-
+				
 				var i = self.rendered.length;
+				var result = [];
 				while(i--) {
 					var itm = self.rendered[i];
 					if(itm.html.find("#itm-check").is(':checked')) {
-						self.deleteItem(itm);
+						result.push(itm);
 					}
+				}
+				
+				if(confirm("Delete "+result.length+" events?") === true){
+					self.deleteItems(result);
 				}
 			});
 			// Select all items
@@ -144,6 +149,8 @@ if( typeof (SIVVIT) == 'undefined') {
 				}
 			});
 		},
+		
+		
 		// Initiates item functionality, displays appropriate
 		// dynamic content.
 		initItem : function(itm, parent) {
@@ -167,7 +174,7 @@ if( typeof (SIVVIT) == 'undefined') {
 						'transitionOut' : 'fade',
 						'href' : 'edit_event.html'
 					});
-
+					
 					if(itm.model.get("pending") > 0) {
 						itm.html.find("#title").append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
 					}
@@ -217,6 +224,13 @@ if( typeof (SIVVIT) == 'undefined') {
 				silent : true
 			});
 		},
+		
+		deleteItems: function(itms){
+			for(var i=itms.length; i--;){
+				this.deleteItem(itms[i]);	
+			}
+		},
+		
 		// Toggles display.
 		toggleLive : function(itm) {
 			var flag = itm.html.find("#pending-flag");

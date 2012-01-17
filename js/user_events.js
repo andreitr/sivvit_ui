@@ -13,6 +13,7 @@
 
 	$LAB.script("js/header.js").wait();
 
+
 	$LAB.script("js/user_events_main.js").wait(function() {
 
 		require(["js/app/models/model.event", "js/app/models/m.user", "js/app/models/model.temporal", "js/app/views/v.histogram", "js/app/views/v.user.header"], function() {
