@@ -6,7 +6,9 @@ if( typeof (SIVVIT) == 'undefined') {
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
 };
-(function(jQuery, SIVVIT) {
+
+
+ (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -57,8 +59,8 @@ Date.prototype.format = function() {
 
 			this.sideHistView = new SIVVIT.HistogramView({
 				el : '#timeline-container',
-				model : this.temporalModel, 
-				slider: true
+				model : this.temporalModel,
+				slider : true
 			});
 
 			this.postView = new SIVVIT.PostView({
@@ -98,6 +100,7 @@ Date.prototype.format = function() {
 				self.headerView.update();
 			}, 10000);
 
+			
 			this.eventModel.bind("change", function() {
 
 				// Show main application
@@ -309,7 +312,7 @@ Date.prototype.format = function() {
 						this.activeView.buildGroupFooter(group_model);
 
 					} else {
-						
+
 						// Create new groups
 						new_goups = new SIVVIT.ItemGroupCollection();
 						group_model = new SIVVIT.ItemGroupModel(con[i]);
@@ -873,9 +876,9 @@ Date.prototype.format = function() {
 		},
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
-			
+
 			var html;
-			
+
 			if(itm.get("type") == "media") {
 				html = $.tmpl(this.mediaView.template, {
 					content : itm.get("content"),
@@ -1100,7 +1103,7 @@ Date.prototype.format = function() {
 			var minutes = Math.floor(milliseconds / 60000);
 			var hours = Math.floor(milliseconds / 3600000);
 			var days = Math.floor(milliseconds / 86400000);
-	
+
 			if(days > 0) {
 				return "updated " + days + "d ago";
 			}

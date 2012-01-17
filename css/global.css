@@ -147,8 +147,16 @@ a:link
 #footer
 {
     width: 100%;
-    height:200px;
+    height:50px;
     background: #333333;
+}
+
+#footer .notice{
+	text-align:right;
+	padding-top:20px;
+	color:#999999;
+	display:block;
+	
 }
 
 /** Notification message - gray background*/
