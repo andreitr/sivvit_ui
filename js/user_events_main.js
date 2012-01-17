@@ -28,17 +28,7 @@ if( typeof (SIVVIT) == 'undefined') {
 			});
 
 			this.model.url = json;
-
-			if(this.edit) {
-				// Load additional libraries required for the edit screen
-				$LAB.script("js/libs/bootstrap/bootstrap-twipsy.js").wait();
-				$LAB.script("js/libs/bootstrap/bootstrap-alerts.js").wait();
-				$LAB.script("js/libs/bootstrap/bootstrap-popover.js").wait(function() {
-					self.model.fetch();
-				});
-			} else {
-				this.model.fetch();
-			}
+			this.model.fetch();
 
 			this.model.bind("change", function() {
 
@@ -62,7 +52,6 @@ if( typeof (SIVVIT) == 'undefined') {
 						});
 						this.collection.add(model);
 					}
-
 					this.view.model = this.collection;
 					this.view.render();
 				}
@@ -122,7 +111,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			// Delete all approved items
 			$("#del-all").click(function() {
-				
+
 				var i = self.rendered.length;
 				var result = [];
 				while(i--) {
@@ -131,9 +120,11 @@ if( typeof (SIVVIT) == 'undefined') {
 						result.push(itm);
 					}
 				}
-				
-				if(confirm("Delete "+result.length+" events?") === true){
-					self.deleteItems(result);
+
+				if(result.length > 0) {
+					if(confirm("Delete " + result.length + " events?") === true) {
+						self.deleteItems(result);
+					}
 				}
 			});
 			// Select all items
@@ -149,8 +140,6 @@ if( typeof (SIVVIT) == 'undefined') {
 				}
 			});
 		},
-		
-		
 		// Initiates item functionality, displays appropriate
 		// dynamic content.
 		initItem : function(itm, parent) {
@@ -174,7 +163,7 @@ if( typeof (SIVVIT) == 'undefined') {
 						'transitionOut' : 'fade',
 						'href' : 'edit_event.html'
 					});
-					
+
 					if(itm.model.get("pending") > 0) {
 						itm.html.find("#title").append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
 					}
@@ -194,7 +183,7 @@ if( typeof (SIVVIT) == 'undefined') {
 						switch(event.target.id) {
 
 							case "del-itm":
-								if(confirm("Delete this event?") === true){
+								if(confirm("Delete this event?") === true) {
 									self.deleteItem(itm);
 								}
 								break;
@@ -226,13 +215,11 @@ if( typeof (SIVVIT) == 'undefined') {
 				silent : true
 			});
 		},
-		
-		deleteItems: function(itms){
-			for(var i=itms.length; i--;){
-				this.deleteItem(itms[i]);	
+		deleteItems : function(itms) {
+			for(var i = itms.length; i--; ) {
+				this.deleteItem(itms[i]);
 			}
 		},
-		
 		// Toggles display.
 		toggleLive : function(itm) {
 			var flag = itm.html.find("#pending-flag");
