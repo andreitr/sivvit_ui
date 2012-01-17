@@ -15,7 +15,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		view : null,
 
 		// Enables content editing when set to true
-		edit : false,
+		edit : true,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -92,9 +92,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		render : function() {
 			// Clear out previous content
 			$(this.el).empty();
-			$(this.el).html("<ol id='nothing'></ol>");
 
-			this.el = "#nothing";
 			this.displayed = false;
 
 			this.rendered = [];
@@ -108,7 +106,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		// Displays content editing options - enabled in the admin view.
 		displayEdit : function() {
 			$(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"pause-all\" class=\"link\"><span class=\"icon-pause\"></span>Pause</a></div>");
-
+			
 			var self = this;
 
 			// Delete all approved items
@@ -152,7 +150,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		},
 		// Initiates item functionality, displays appropriate
 		// dynamic content.
-		initItem : function(itm) {
+		initItem : function(itm, parent) {
 
 			var self = this;
 
@@ -212,7 +210,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				}
 
 				this.rendered.push(itm);
-				$(this.el).append(itm.html);
+				$(parent).append(itm.html);
 			}
 		},
 		// Deletes selected item.
@@ -267,6 +265,9 @@ if( typeof (SIVVIT) == 'undefined') {
 
 		display : function() {
 
+			$(this.el).append("<ol id='event-list'></ol>");
+			
+			
 			// Render collection
 			this.model.each(function(itm) {
 				itm = this.buildTemplate(itm);
@@ -286,8 +287,9 @@ if( typeof (SIVVIT) == 'undefined') {
 					})
 				}).render();
 
-				this.initItem(itm);
+				this.initItem(itm, "#event-list");
 			}, this);
+			
 		},
 		// Builds each item, returns {model, html} object
 		buildTemplate : function(itm) {
