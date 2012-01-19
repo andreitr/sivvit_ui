@@ -5,10 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-
-
- (function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -41,7 +38,7 @@ Date.prototype.format = function() {
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : true,
+		edit : false,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -100,7 +97,6 @@ Date.prototype.format = function() {
 				self.headerView.update();
 			}, 10000);
 
-			
 			this.eventModel.bind("change", function() {
 
 				// Show main application
@@ -167,6 +163,8 @@ Date.prototype.format = function() {
 						endRange : new Date(self.eventModel.get("endDate"))
 					});
 				}
+				
+				self.temporalModel.set({endDate:new Date()});
 
 				// Update location
 				if(self.eventModel.hasChanged("location")) {
@@ -879,7 +877,7 @@ Date.prototype.format = function() {
 
 			var html;
 
-			if(itm.get("type") == "media") {
+			if(itm.get("type") == "media" || itm.get("type") == "photo") {
 				html = $.tmpl(this.mediaView.template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
@@ -990,7 +988,7 @@ Date.prototype.format = function() {
 			// Loop through all available groups - ItemGroupCollection
 			source.each(function(group) {
 
-				if(group.get("type") == "media" || group.get("type") == "mixed") {
+				if(group.get("type") == "media" || group.get("type") == "mixed" || group.get("type") == "photo" ) {
 
 					// Create group element
 					group = this.buildGroup(group, is_update);
@@ -1034,7 +1032,7 @@ Date.prototype.format = function() {
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 
-			if(itm.get("type") == "media") {
+			if(itm.get("type") == "media" || itm.get("type") == "photo") {
 				html = $.tmpl(this.template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
