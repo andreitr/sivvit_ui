@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDay() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+};
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -163,8 +164,10 @@ Date.prototype.format = function() {
 						endRange : new Date(self.eventModel.get("endDate"))
 					});
 				}
-				
-				self.temporalModel.set({endDate:new Date()});
+
+				self.temporalModel.set({
+					endDate : new Date()
+				});
 
 				// Update location
 				if(self.eventModel.hasChanged("location")) {
@@ -882,7 +885,9 @@ Date.prototype.format = function() {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author")
+					author : itm.get("author"),
+					source : itm.get("source")
+
 				});
 
 				// Initiate light box
@@ -893,7 +898,8 @@ Date.prototype.format = function() {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author")
+					author : itm.get("author"),
+					source : itm.get("source")
 				});
 			}
 			return {
@@ -913,7 +919,7 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.PostView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function(source) {
 
@@ -950,7 +956,8 @@ Date.prototype.format = function() {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author")
+					author : itm.get("author"),
+					source : itm.get("source")
 				});
 				return {
 					timestamp : itm.get("timestamp"),
@@ -972,7 +979,7 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div><div id='meta'>Twitter: <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function(source) {
 
@@ -988,7 +995,7 @@ Date.prototype.format = function() {
 			// Loop through all available groups - ItemGroupCollection
 			source.each(function(group) {
 
-				if(group.get("type") == "media" || group.get("type") == "mixed" || group.get("type") == "photo" ) {
+				if(group.get("type") == "media" || group.get("type") == "mixed" || group.get("type") == "photo") {
 
 					// Create group element
 					group = this.buildGroup(group, is_update);
@@ -1037,7 +1044,8 @@ Date.prototype.format = function() {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author")
+					author : itm.get("author"),
+					source : itm.get("source")
 				});
 				return {
 					timestamp : itm.get("timestamp"),
