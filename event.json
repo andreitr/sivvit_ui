@@ -1,186 +1,518 @@
 {
-	"id": "04465c3b",
-	"title": "Denver Weather",
-	"author": "andreitr",
-	"keywords": ["denver weather", " weather"],
-	"description": "Really, this is all you got for Denver weather?",
+	"id": "4e4fc2bb8efd97951a000008",
+	"title": "Washington DC Earthquake",
+	"author": "testuserid",
+	"description": "A 5.8 magnitude earthquake hit near Christchurch at 1.58pm local time Friday afternoon.",
+	"keywords": ["hurricane", "irene"],
 	"location": {
-		"lat": "0",
-		"lon": "0",
-		"name": "Denver, Co"
+		"name": "Washington, DC",
+		"lon": 45,
+		"lat": 39
 	},
-	"startDate": "Thu Jan 12 00:00:00 -0700 2012",
-	"endDate": "Fri Jan 13 00:00:00 -0700 2012",
-	"status": "1",
+	"startDate": "Tue Aug 5 19:00:41 +0000 2011",
+	"endDate": "Tue Aug 29 20:03:43 +0000 2011",
+	"since": "Wed Jan 11 20:40:00 +0000 2012",
+	"status": 1,
 	"stats": {
-		"images": 0,
-		"posts": 4,
-		"videos": 2,
-		"total": 6
+		"total": 5260,
+		"posts": 702362,
+		"images": 22334,
+		"videos": 56
 	},
-	"pending": 6,
-	"content": [
-		{
-			"timestamp": "Wed Jan 11 11:22:00 -0700 2012",
-			"stats": {
-				"post": "0",
-				"image": "0",
-				"media": "1",
-				"total": "1"
-			},
-			"items": [
-				{
-					"id": "4f0f04b0665bc",
-					"status": "0",
-					"rank": "0",
-					"type": "media",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "KDVRDenver",
-					"timestamp": "Wed Jan 11 11:22:18 -0700 2012",
-					"source": "youtube",
-					"avatar": "http:\/\/i.ytimg.com\/vi\/BuVFU2Lgwgw\/0.jpg",
-					"content": "http:\/\/www.youtube.com\/watch?v=BuVFU2Lgwgw&feature=youtube_gdata",
-					"image": "Object",
-					"image_thumbnail": null
-				}
-			]
-		}, {
-			"timestamp": "Wed Jan 11 13:43:00 -0700 2012",
-			"stats": {
-				"post": "0",
-				"image": "0",
-				"media": "1",
-				"total": "1"
-			},
-			"items": [
-				{
-					"id": "4f0f04b05a4f6",
-					"status": "0",
-					"rank": "0",
-					"type": "media",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "truckee40",
-					"timestamp": "Wed Jan 11 13:43:37 -0700 2012",
-					"source": "youtube",
-					"avatar": "http:\/\/i.ytimg.com\/vi\/bFWfInfUmmo\/0.jpg",
-					"content": "http:\/\/www.youtube.com\/watch?v=bFWfInfUmmo&feature=youtube_gdata",
-					"image": "Object",
-					"image_thumbnail": null
-				}
-			]
-		}, {
-			"timestamp": "Thu Jan 12 09:04:00 -0700 2012",
-			"stats": {
-				"post": "3",
-				"image": "0",
-				"media": "0",
-				"total": "3"
-			},
-			"items": [
-				{
-					"id": "4f0f04b526803",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Ontario"
-					},
-					"author": "womanofdesign",
-					"timestamp": "Thu Jan 12 09:04:37 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1453634867\/AngelaDeMontigny_revised5_6_normal.jpg",
-					"content": "Arrived in Denver last night to cold & snowy weather...it's bright & sunny this morning...perfect weather for my furs ;-)"
-				}, {
-					"id": "4f0f04b53396e",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "39.5017",
-						"lon": "-104.761",
-						"name": ""
-					},
-					"author": "SirCasio",
-					"timestamp": "Thu Jan 12 09:04:45 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/303865872\/ls_8348_n1152774719_30225046_7984_normal.jpg",
-					"content": "Drop off (@ Parker United Methodist Church) http:\/\/t.co\/YoYtAgMt"
-				}
-			]
-		}, {
-			"timestamp": "Thu Jan 12 09:05:00 -0700 2012",
-			"stats": {
-				"post": "1",
-				"image": "0",
-				"media": "0",
-				"total": "1"
-			},
-			"items": [
-				{
-					"id": "4f0f04b547f00",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "39.7825",
-						"lon": "-104.813",
-						"name": ""
-					},
-					"author": "AC2SPACEY",
-					"timestamp": "Thu Jan 12 09:05:10 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1606524529\/securedownloadace2_normal.jpg",
-					"content": "Woke up thinking about dude.... it's crazy cause its been quite a while since i woke up and the first thing on my mind was not food lol"
-				}
-			]
-		}
-	],
 	"histogram": {
-		"media": [
-			{
-				"timestamp": "Wed Jan 11 11:22:18 -0700 2012",
-				"count": "1"
-			}, {
-				"timestamp": "Wed Jan 11 13:43:37 -0700 2012",
-				"count": "1"
-			}
-		],
+		"min": 1,
+		"max": 10,
+		"resolution": "day",
 		"global": [
 			{
-				"timestamp": "Wed Jan 11 11:22:18 -0700 2012",
-				"count": "1"
+				"timestamp": "Tue Aug 5 19:01:43 +0000 2011",
+				"count": 1
 			}, {
-				"timestamp": "Wed Jan 11 13:43:37 -0700 2012",
-				"count": "1"
+				"timestamp": "Tue Aug 6 19:02:44 +0000 2011",
+				"count": 1
 			}, {
-				"timestamp": "Thu Jan 12 09:04:37 -0700 2012",
-				"count": "3"
+				"timestamp": "Tue Aug 7 19:03:45 +0000 2011",
+				"count": 2
 			}, {
-				"timestamp": "Thu Jan 12 09:05:10 -0700 2012",
-				"count": "1"
+				"timestamp": "Tue Aug 8 19:04:46 +0000 2011",
+				"count": 3
+			}, {
+				"timestamp": "Tue Aug 9 19:05:47 +0000 2011",
+				"count": 0
+			}, {
+				"timestamp": "Tue Aug 10 19:06:48 +0000 2011",
+				"count": 1
+			}, {
+				"timestamp": "Tue Aug 11 19:07:49 +0000 2011",
+				"count": 3
+			}, {
+				"timestamp": "Tue Aug 12 19:08:50 +0000 2011",
+				"count": 4
+			}, {
+				"timestamp": "Tue Aug 13 19:09:43 +0000 2011",
+				"count": 5
+			}, {
+				"timestamp": "Tue Aug 14 19:10:43 +0000 2011",
+				"count": 9
+			}, {
+				"timestamp": "Tue Aug 15 19:11:43 +0000 2011",
+				"count": 10
+			}, {
+				"timestamp": "Tue Aug 18 20:12:43 +0000 2011",
+				"count": 1
+			}, {
+				"timestamp": "Tue Aug 19 20:13:43 +0000 2011",
+				"count": 1
+			}, {
+				"timestamp": "Tue Aug 20 20:14:43 +0000 2011",
+				"count": 4
+			}, {
+				"timestamp": "Tue Aug 21 20:15:43 +0000 2011",
+				"count": 5
+			}, {
+				"timestamp": "Tue Aug 22 20:16:43 +0000 2011",
+				"count": 5
+			}, {
+				"timestamp": "Tue Aug 23 19:17:43 +0000 2011",
+				"count": 4
+			}, {
+				"timestamp": "Tue Aug 24 20:18:43 +0000 2011",
+				"count": 3
+			}, {
+				"timestamp": "Tue Aug 25 20:19:43 +0000 2011",
+				"count": 6
+			}, {
+				"timestamp": "Tue Aug 27 20:03:43 +0000 2011",
+				"count": 2
+			}, {
+				"timestamp": "Tue Aug 28 20:04:43 +0000 2011",
+				"count": 2
+			}, {
+				"timestamp": "Tue Aug 29 20:05:43 +0000 2011",
+				"count": 4
+			}
+		],
+		"media": [
+			{
+				"timestamp": "Tue Aug 23 19:01:43 +0000 2011",
+				"count": 4
+			}, {
+				"timestamp": "Tue Aug 24 20:01:43 +0000 2011",
+				"count": 3
+			}, {
+				"timestamp": "Tue Aug 25 20:03:43 +0000 2011",
+				"count": 6
+			}, {
+				"timestamp": "Tue Aug 27 20:03:43 +0000 2011",
+				"count": 2
 			}
 		],
 		"post": [
 			{
-				"timestamp": "Thu Jan 12 09:04:37 -0700 2012",
-				"count": "3"
+				"timestamp": "Tue Aug 5 19:21:43 +0000 2011",
+				"count": 1
 			}, {
-				"timestamp": "Thu Jan 12 09:05:10 -0700 2012",
-				"count": "1"
+				"timestamp": "Tue Aug 6 19:22:43 +0000 2011",
+				"count": 2
+			}, {
+				"timestamp": "Tue Aug 7 19:23:43 +0000 2011",
+				"count": 3
+			}, {
+				"timestamp": "Tue Aug 8 19:24:43 +0000 2011",
+				"count": 4
+			}, {
+				"timestamp": "Tue Aug 9 19:25:43 +0000 2011",
+				"count": 5
+			}, {
+				"timestamp": "Tue Aug 10 19:26:43 +0000 2011",
+				"count": 6
+			}, {
+				"timestamp": "Tue Aug 11 19:27:43 +0000 2011",
+				"count": 7
+			}, {
+				"timestamp": "Tue Aug 12 19:28:43 +0000 2011",
+				"count": 7
+			}, {
+				"timestamp": "Tue Aug 13 19:29:43 +0000 2011",
+				"count": 8
+			}, {
+				"timestamp": "Tue Aug 14 19:30:43 +0000 2011",
+				"count": 9
+			}, {
+				"timestamp": "Tue Aug 15 19:31:43 +0000 2011",
+				"count": 10
+			}, {
+				"timestamp": "Tue Aug 16 20:32:43 +0000 2011",
+				"count": 3
 			}
-		],
-		"min": "1",
-		"max": "3",
-		"resolution": "minute"
-	}
+		]
+	},
+
+	"content": [
+		{
+			"timestamp": "Tue Aug 24 01:02:43 +0000 2011",
+			"type": "media",
+			"stats": {
+				"total": 12,
+				"post": 0,
+				"media": 12
+			},
+			"items": [
+				{
+					"id": "00001",
+					"status": 0,
+					"rank": 4,
+					"type": "media",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 24 01:02:43 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://s1-04.twitpicproxy.com/photos/large/437235468.jpg"
+				}, {
+					"id": "00002",
+					"status": 0,
+					"rank": 9,
+					"type": "media" ,
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 24 02:18:00 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://desmond.yfrog.com/Himg610/scaled.php?tn=0&server=610&filename=oftam.jpg&xsize=640&ysize=640"
+				}
+			]
+		}, {
+			"timestamp": "Tue Aug 24 18:00:00 +0000 2011",
+			"type": "media",
+			"stats": {
+				"total": 5,
+				"post": 0,
+				"media": 5
+			},
+			"items": [
+				{
+					"id": "00003",
+					"status": 1,
+					"rank": 9,
+					"type": "media",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 24 18:00:00 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://desmond.yfrog.com/Himg44/scaled.php?tn=0&server=44&filename=lkhsw.jpg&xsize=640&ysize=640"
+				}, {
+					"id": "00004",
+					"status": 1,
+					"rank": 8,
+					"type": "media",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:10:43 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://desmond.yfrog.com/Himg861/scaled.php?tn=0&server=861&filename=o3uol.jpg&xsize=640&ysize=640"
+				}, {
+					"id": "00005",
+					"status": 1,
+					"rank": 7,
+					"type": "media",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:15:43 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://desmond.yfrog.com/Himg576/scaled.php?tn=0&server=576&filename=6fjrv.jpg&xsize=640&ysize=640"
+				}
+			]
+		}, {
+			"timestamp": "Tue Aug 25 20:30:43 +0000 2011",
+			"type": "media",
+			"stats": {
+				"total": 3,
+				"post": 0,
+				"media": 3
+			},
+			"items": [
+				{
+					"id": "00006",
+					"status": 0,
+					"rank": 6,
+					"type": "media",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:30:43 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://desmond.yfrog.com/Himg736/scaled.php?tn=0&server=736&filename=fkrwa.jpg&xsize=640&ysize=640"
+				}, {
+					"id": "00007",
+					"status": 0,
+					"rank": 5,
+					"type": "media",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:35:43 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://desmond.yfrog.com/Himg864/scaled.php?tn=0&server=864&filename=7wxh.jpg&xsize=640&ysize=640"
+				}, {
+					"id": "00008",
+					"status": 1,
+					"rank": 13,
+					"type": "media",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:40:43 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://desmond.yfrog.com/Himg735/scaled.php?tn=0&server=735&filename=qrzoc.jpg&xsize=640&ysize=640"
+				}
+			]
+		}, {
+			"timestamp": "Tue Aug 25 20:45:43 +0000 2011",
+			"type": "mixed",
+			"stats": {
+				"total": 9,
+				"post": 6,
+				"media": 3
+			},
+			"items": [
+				{
+					"id": "00009",
+					"status": 0,
+					"rank": 12,
+					"type": "media",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:45:43 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://farm3.static.flickr.com/2493/3964714112_1868b7c53a_z.jpg"
+				}, {
+					"id": "00010",
+					"status": 1,
+					"rank": 11,
+					"type": "media",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 27 20:02:43 +0000 2011",
+					"source": "http://www.flickr.com",
+					"content": "http://a.yfrog.com/img863/3048/xrld.jpg"
+				}, {
+					"id": "00011",
+					"status": 1,
+					"rank": 10,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 23 19:00:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a2.twimg.com/profile_images/1607128319/Andrei4_normal.jpg",
+					"content": "Get ready to sell your creative works on The Bazaar this weekend! http://ow.ly/6D0Kr"
+				}
+			]
+		}, {
+			"timestamp": "Tue Aug 23 19:20:43 +0000 2011",
+			"type": "post",
+			"stats": {
+				"total": 10,
+				"post": 10,
+				"media": 0
+			},
+			"items": [
+				{
+					"id": "00012",
+					"status": 0,
+					"rank": 10,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 23 19:20:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a0.twimg.com/profile_images/1206276999/picside_normal.PNG",
+					"content": "Here's What Spotify's New Facebook Integration Looks Like http://rww.to/nmITVB"
+				}, {
+					"id": "00013",
+					"status": 0,
+					"rank": 10,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 23 21:12:55 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a0.twimg.com/profile_images/1169898172/01_normal.jpg",
+					"content": "Daily Deals Proliferating: What's in Your Digital Wallet? [INFOGRAPHIC] - http://on.mash.to/q6KpWP"
+				}, {
+					"id": "00014",
+					"status": 0,
+					"rank": 10,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 23 22:15:10 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a1.twimg.com/profile_images/709169345/n1264870987_4971_normal.jpg",
+					"content": "@DonMeltz learn it before postgis 2 ships. It effectively deprecates every currently shipping esri product."
+				}
+			]
+		}, {
+			"timestamp": "Tue Aug 24 01:02:43 +0000 2011",
+			"type": "post",
+			"stats": {
+				"total": 12,
+				"post": 12,
+				"media": 0
+			},
+			"items": [
+				{
+					"id": "00015",
+					"status": 1,
+					"rank": 10,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 24 01:02:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a3.twimg.com/profile_images/1174335036/James-Avatar_normal.jpg",
+					"content": "Seeing @laurarich @virtuallybing @jlongtine @dannynewman all in one day? Spectacular. #luckygirl"
+				}, {
+					"id": "00016",
+					"status": 1,
+					"rank": 10,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 24 02:18:00 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a1.twimg.com/profile_images/1440079154/-5_normal.jpg",
+					"content": "@sbixel may be time to invest. Recommendations? #travelrods"
+				}, {
+					"id": "00017",
+					"status": 0,
+					"rank": 9,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 24 18:00:00 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a1.twimg.com/profile_images/859623205/10064515_normal.jpg",
+					"content": "@cili007 you son of a bitch! I can't believe you Fat Boothed my daughter! yfrog.com/kkgi0qlj"
+				}
+			]
+		}, {
+			"timestamp": "Tue Aug 25 20:10:43 +0000 2011",
+			"type": "post",
+			"stats": {
+				"total": 8,
+				"post": 8,
+				"media": 0
+			},
+			"items": [
+				{
+					"id": "00018",
+					"status": 0,
+					"rank": 8,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:10:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a1.twimg.com/profile_images/1278192471/glrock75_normal.jpg",
+					"content": "@cageyjames I only send email to selfdeprecation@safe.com"
+				}, {
+					"id": "00019",
+					"status": 0,
+					"rank": 7,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:15:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a2.twimg.com/profile_images/1112101815/rwwlogo_twitter_normal.png",
+					"content": "ok, time to start calling in favors and asking friends for a bit of help. extortion is on for later."
+				}, {
+					"id": "00020",
+					"status": 0,
+					"rank": 9,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:30:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a0.twimg.com/profile_images/1119291068/lidzonbradcrop_normal.jpg",
+					"content": "It�s a celebration, bitches! New Let�s Make Mistakes is up! Part 2 of the @Sacca interview: http://5by5.tv/mistakes/19"
+				}
+			]
+		}, {
+			"timestamp": "Tue Aug 25 20:35:43 +0000 2011",
+			"type": "post",
+			"stats": {
+				"total": 3,
+				"post": 3,
+				"media": 0
+			},
+			"items": [
+				{
+					"id": "00021",
+					"status": 1,
+					"rank": 5,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:35:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a3.twimg.com/profile_images/1238916480/HughPic_normal.png",
+					"content": "My brain pain is subsiding! This a good thing #MigranesSuck"
+				}, {
+					"id": "00022",
+					"status": 1,
+					"rank": 13,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:40:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a2.twimg.com/profile_images/830465867/4475788424_ab48545f66_normal.jpg",
+					"content": "The Latin Grammys were just announced. I can�t believe I was overlooked for my solo album, El Hombre Muy Blanco."
+				}, {
+					"id": "00023",
+					"status": 0,
+					"rank": 15,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 25 20:45:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a0.twimg.com/profile_images/1307458892/Profile_normal.png",
+					"content": "A Petition I can get behind - Direct the Patent Office to Cease Issuing Software Patents http://wh.gov/gEm"
+				}
+			]
+		}, {
+			"type": "post",
+			"timestamp": "Tue Aug 27 20:02:43 +0000 2011",
+			"stats": {
+				"total": 2,
+				"post": 2,
+				"media": 0
+			},
+			"items": [
+				{
+					"id": "00024",
+					"status": 1,
+					"rank": 11,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 27 20:02:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a2.twimg.com/profile_images/821329112/IMG_0016_normal.JPG",
+					"content": "Romney surge on Intrade. Now considered almost twice as likely (45%) as Perry (27%) to win GOP nom. http://bit.ly/dNIXBW"
+				}, {
+					"id": "00025",
+					"status": 1,
+					"rank": 1,
+					"type": "post",
+					"location": [39, -104],
+					"author": "andreitr",
+					"timestamp": "Tue Aug 27 20:03:43 +0000 2011",
+					"source": "http://twitter.com",
+					"avatar": "http://a3.twimg.com/profile_images/887595705/5852_133740086352_699416352_2855091_851129_n_normal.jpg",
+					"content": "Tweetspot map of #misabc geotweets http://flic.kr/p/apLNJw"
+				}
+			]
+		}
+	]
 }
