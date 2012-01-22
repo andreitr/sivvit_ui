@@ -7,8 +7,8 @@
 	$LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
 	$LAB.script("js/libs/require/require.js").wait();
 
-	$LAB.script("js/libs/fancybox/jquery.fancybox-1.3.4.js").wait();
-	$LAB.script("js/libs/fancybox/jquery.fancybox-1.3.4.pack.js").wait();
+	$LAB.script("js/libs/fancybox/jquery.fancybox.js").wait();
+	$LAB.script("js/libs/fancybox/jquery.fancybox.pack.js").wait();
 
 	$LAB.script("js/header.js").wait();
 
@@ -16,7 +16,7 @@
 
 		// Load backbone dependencies
 		require(["js/app/models/model.event", "js/app/models/model.temporal", "js/app/models/m.item", "js/app/models/m.item.group", "js/app/views/v.histogram"], function() {
-			SIVVIT.Event.init("http://sivvit.com/event/712a1d64.json?callback=?");
+			SIVVIT.Event.init("event.json");
 
 		});
 	});

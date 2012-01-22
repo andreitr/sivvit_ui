@@ -91,7 +91,7 @@ Date.prototype.format = function() {
 			// Load content for the first time
 			this.eventModel.url = json;
 			this.eventModel.fetch();
-
+			
 			// Initiate continous content loading
 			setInterval(function() {
 				self.eventModel.fetch();
