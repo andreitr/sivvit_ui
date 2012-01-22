@@ -47,8 +47,11 @@ SIVVIT.HistogramView = Backbone.View.extend({
 	},
 	// Updates min and max time displays
 	updateTime : function() {
-		$("#timeline-mintime").html((this.model.get("startRange")).format());
-		$("#timeline-maxtime").html((this.model.get("endRange")).format());
+		$("#timeline-mintime").html(this.model.get("startRange").format());
+		$("#timeline-maxtime").html(this.model.get("endRange").format());
+		
+		console.log(this.model.get("startRange"));
+		console.log(this.model.get("endRange"));
 	},
 	// Sets histogram bar colors based on the visible range
 	updateBarColor : function(bar) {
@@ -75,6 +78,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 				return 1000;
 		}
 	},
+	
 	// Draws histogram.
 	drawHistogram : function() {
 		if(this.model.get("histogram")) {
@@ -92,10 +96,9 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			var maxWidth = $(this.el).width();
 
 			var barW = $(this.el).width() / lenTotal;
+			// Anything less than 0.5 displays as a very thin bar
 			barW = barW < 0.5 ? 0.5 : barW;
-			//barW = barW < 0 ? Math.abs(barW) : Math.round(barW);
-			
-			
+
 			var startTime = this.model.get("startDate").getTime();
 			var endTime = this.model.get("endDate").getTime();
 
@@ -108,7 +111,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
 				var percentX = (new Date(frame.timestamp).getTime() - startTime) / (endTime - startTime);
 
 				var barH = Math.round(percentY * maxHeight / 100);
-				//working -- var barX = Math.round(barW * Math.round(percentX * (lenTotal - 1)));
 				var barX = Math.round(Math.round(percentX * maxWidth));
 				var barY = Math.round(maxHeight - barH);
 
