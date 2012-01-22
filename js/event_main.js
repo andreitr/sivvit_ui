@@ -127,7 +127,7 @@ Date.prototype.format = function() {
 						max : self.eventModel.get("histogram").max,
 						resolution : self.eventModel.get("histogram").resolution
 					});
-
+					
 					// Redraw temporal histogram
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
@@ -165,9 +165,6 @@ Date.prototype.format = function() {
 					});
 				}
 
-				self.temporalModel.set({
-					endDate : new Date()
-				});
 
 				// Update location
 				if(self.eventModel.hasChanged("location")) {
@@ -389,7 +386,6 @@ Date.prototype.format = function() {
 					this.temporalModel.set({
 						histogram : this.eventModel.get("histogram").global,
 						type : "global"
-
 					});
 					this.activeView = this.allView;
 					break;
@@ -410,7 +406,6 @@ Date.prototype.format = function() {
 					this.activeView = this.mediaView;
 					break;
 			}
-
 			this.renderStats();
 
 			this.temporalModel.set({
@@ -420,6 +415,8 @@ Date.prototype.format = function() {
 			});
 
 			this.activeView.model = this.collection;
+
+
 			this.activeView.bind({
 				temporal : this.temporalModel
 			});
@@ -931,7 +928,7 @@ Date.prototype.format = function() {
 			} else {
 				is_update = true;
 			}
-
+			
 			// Loop through all available groups - ItemGroupCollection
 			source.each(function(group) {
 

@@ -3,7 +3,8 @@
  */
 SIVVIT.ItemGroupModel = Backbone.Model.extend({
 	defaults : {
-
+		
+		type:null,
 		id : null,
 		timestamp : null,
 
