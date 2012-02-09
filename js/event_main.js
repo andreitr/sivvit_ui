@@ -99,8 +99,6 @@ Date.prototype.format = function() {
 			this.fetch_interval = setInterval(function() {
 				//self.eventModel.url += "&since="+self.eventModel.get("last_update");
 				self.eventModel.fetch();
-				self.headerView.update();
-				console.log("Request");
 			}, 10000);
 
 			this.eventModel.bind("change", function() {
@@ -109,12 +107,14 @@ Date.prototype.format = function() {
 				$("#content-loader").remove();
 				$("#event-application").show();
 				
+				self.headerView.update();
+				
 				// Stop requesting data if event is archived
 				if(self.eventModel.get('status') === 0){
 					clearInterval(self.fetch_interval);
 				}
 				
-				if(self.eventModel.hasChanged("status") || self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
+				if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
 				}
 
@@ -1102,7 +1102,8 @@ Date.prototype.format = function() {
 		},
 		// Updates timer
 		update : function() {
-			if(this.model.get("status") === 0) {
+			
+			if(this.model.get("status") === 1) {
 				$("#timeline-label").html("<span class='icon-time'></span>LIVE, " + this.formatTime(new Date() - this.timestamp));
 			} else {
 				$("#timeline-label").html("<span class='icon-time'></span>This event archived.");
