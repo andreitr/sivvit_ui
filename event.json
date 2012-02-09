@@ -1,6 +1,6 @@
 {
 	"id": "4e4fc2bb8efd97951a000008",
-	"title": "Washington DC Earthquake",
+	"title": "Washington DC Earthquake SS",
 	"author": "testuserid",
 	"description": "A 5.8 magnitude earthquake hit near Christchurch at 1.58pm local time Friday afternoon.",
 	"keywords": ["hurricane", "irene"],
@@ -458,7 +458,7 @@
 					"content": "My brain pain is subsiding! This a good thing #MigranesSuck"
 				}, {
 					"id": "00022",
-					"status": 1,
+					"status": 2,
 					"rank": 13,
 					"type": "post",
 					"location": [39, -104],
@@ -491,7 +491,7 @@
 			"items": [
 				{
 					"id": "00024",
-					"status": 1,
+					"status": 2,
 					"rank": 11,
 					"type": "post",
 					"location": [39, -104],

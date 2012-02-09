@@ -14,8 +14,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		},
 		startDate : new Date(),
 		endDate : new Date(),
-		since: new Date(),
 		status : 0,
+		last_update: null,
 		pending : 0,
 		stats : {
 			total : 0,

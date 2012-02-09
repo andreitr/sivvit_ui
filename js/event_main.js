@@ -40,6 +40,9 @@ Date.prototype.format = function() {
 
 		// Enables content editing when set to true
 		edit : false,
+		
+		// Fetch interval id
+		fetch_interval: null,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -93,9 +96,11 @@ Date.prototype.format = function() {
 			this.eventModel.fetch();
 			
 			// Initiate continous content loading
-			setInterval(function() {
+			this.fetch_interval = setInterval(function() {
+				//self.eventModel.url += "&since="+self.eventModel.get("last_update");
 				self.eventModel.fetch();
 				self.headerView.update();
+				console.log("Request");
 			}, 10000);
 
 			this.eventModel.bind("change", function() {
@@ -103,14 +108,19 @@ Date.prototype.format = function() {
 				// Show main application
 				$("#content-loader").remove();
 				$("#event-application").show();
-
+				
+				// Stop requesting data if event is archived
+				if(self.eventModel.get('status') === 0){
+					clearInterval(self.fetch_interval);
+				}
+				
 				if(self.eventModel.hasChanged("status") || self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
 				}
 
 				// Reset updated timer
-				if(self.eventModel.hasChanged("since")) {
-					self.headerView.reset(new Date(self.eventModel.get("since")));
+				if(self.eventModel.hasChanged("last_update")) {
+					self.headerView.reset(new Date(self.eventModel.get("last_update")));
 				}
 
 				if(self.eventModel.hasChanged("stats")) {
@@ -1092,12 +1102,10 @@ Date.prototype.format = function() {
 		},
 		// Updates timer
 		update : function() {
-
-			// Live timeline label
-			if(this.model.get("status") === 1) {
+			if(this.model.get("status") === 0) {
 				$("#timeline-label").html("<span class='icon-time'></span>LIVE, " + this.formatTime(new Date() - this.timestamp));
 			} else {
-				$("#timeline-label").empty();
+				$("#timeline-label").html("<span class='icon-time'></span>This event archived.");
 			}
 		},
 		formatTime : function(milliseconds) {
