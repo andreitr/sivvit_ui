@@ -97,12 +97,12 @@ Date.prototype.format = function() {
 			
 			// Initiate continous content loading
 			this.fetch_interval = setInterval(function() {
-				//self.eventModel.url += "&since="+self.eventModel.get("last_update");
+				self.eventModel.url += "&since="+self.eventModel.get("last_update");
 				self.eventModel.fetch();
 			}, 10000);
 
 			this.eventModel.bind("change", function() {
-
+			
 				// Show main application
 				$("#content-loader").remove();
 				$("#event-application").show();
@@ -110,7 +110,7 @@ Date.prototype.format = function() {
 				self.headerView.update();
 				
 				// Stop requesting data if event is archived
-				if(self.eventModel.get('status') === 0){
+				if(self.eventModel.get('status') < 1){
 					clearInterval(self.fetch_interval);
 				}
 				
@@ -344,7 +344,7 @@ Date.prototype.format = function() {
 						});
 
 						// Update the count of new content
-						new_count += this.activeView.getItemCount(group_model);
+						new_count += Number(this.activeView.getItemCount(group_model));
 						new_goups.add(group_model);
 
 						this.collection.add(group_model, {
@@ -1103,7 +1103,7 @@ Date.prototype.format = function() {
 		// Updates timer
 		update : function() {
 			
-			if(this.model.get("status") === 1) {
+			if(this.model.get("status") > 0) {
 				$("#timeline-label").html("<span class='icon-time'></span>LIVE, " + this.formatTime(new Date() - this.timestamp));
 			} else {
 				$("#timeline-label").html("<span class='icon-time'></span>This event archived.");
@@ -1117,16 +1117,16 @@ Date.prototype.format = function() {
 			var days = Math.floor(milliseconds / 86400000);
 
 			if(days > 0) {
-				return "updated " + days + "d ago";
+				return "updated " + days + " days ago";
 			}
 			if(hours > 0) {
-				return "updated " + hours + "h ago";
+				return "updated " + hours + " hrs ago";
 			}
 			if(minutes > 0) {
-				return "updated " + minutes + "m ago";
+				return "updated " + minutes + " min ago";
 			}
 			if(seconds > 0) {
-				return "updated " + seconds + "s ago";
+				return "updated " + seconds + " sec ago";
 			}
 
 			return "updated just now";
