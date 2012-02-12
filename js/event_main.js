@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -40,9 +39,9 @@ Date.prototype.format = function() {
 
 		// Enables content editing when set to true
 		edit : false,
-		
+
 		// Fetch interval id
-		fetch_interval: null,
+		fetch_interval : null,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -94,26 +93,26 @@ Date.prototype.format = function() {
 			// Load content for the first time
 			this.eventModel.url = json;
 			this.eventModel.fetch();
-			
+
 			// Initiate continous content loading
 			this.fetch_interval = setInterval(function() {
-				self.eventModel.url += "&since="+self.eventModel.get("last_update");
+				self.eventModel.url += "&since=" + self.eventModel.get("last_update");
 				self.eventModel.fetch();
 			}, 10000);
 
 			this.eventModel.bind("change", function() {
-			
+
 				// Show main application
 				$("#content-loader").remove();
 				$("#event-application").show();
-				
+
 				self.headerView.update();
-				
+
 				// Stop requesting data if event is archived
-				if(self.eventModel.get('status') < 1){
+				if(self.eventModel.get('status') < 1) {
 					clearInterval(self.fetch_interval);
 				}
-				
+
 				if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
 				}
@@ -137,7 +136,7 @@ Date.prototype.format = function() {
 						max : self.eventModel.get("histogram").max,
 						resolution : self.eventModel.get("histogram").resolution
 					});
-					
+
 					// Redraw temporal histogram
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
@@ -175,7 +174,6 @@ Date.prototype.format = function() {
 					});
 				}
 
-
 				// Update location
 				if(self.eventModel.hasChanged("location")) {
 					self.mapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lon, self.eventModel.get("location").lat);
@@ -206,6 +204,19 @@ Date.prototype.format = function() {
 			return -itm.get("timestamp");
 		}
 	});
+
+	SIVVIT.Lightbox = {
+
+		// Initiates global lightbox methods.
+		init : function() {
+			$('#photo-box').fancybox({
+				'transitionIn' : 'fade',
+				'transitionOut' : 'fade',
+				'type' : 'image'
+			});
+
+		}
+	};
 
 	/**
 	 * Main application view. Acts like a controller of sorts.
@@ -254,6 +265,8 @@ Date.prototype.format = function() {
 			this.allView = options.allView;
 			this.postView = options.postView;
 			this.mediaView = options.mediaView;
+			
+			SIVVIT.Lightbox.init();
 		},
 		update : function() {
 
@@ -425,7 +438,6 @@ Date.prototype.format = function() {
 			});
 
 			this.activeView.model = this.collection;
-
 
 			this.activeView.bind({
 				temporal : this.temporalModel
@@ -897,9 +909,6 @@ Date.prototype.format = function() {
 
 				});
 
-				// Initiate light box
-				this.mediaView.lightbox(html.find("#media"), itm);
-
 			} else if(itm.get("type") == "post") {
 				html = $.tmpl(this.postView.template, {
 					content : itm.get("content"),
@@ -938,7 +947,7 @@ Date.prototype.format = function() {
 			} else {
 				is_update = true;
 			}
-			
+
 			// Loop through all available groups - ItemGroupCollection
 			source.each(function(group) {
 
@@ -986,7 +995,7 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}'></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id='content'><div id=\"media\"><a id='photo-box' href='${content}'><img height='160' src='${content}'></a></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function(source) {
 
@@ -1023,7 +1032,6 @@ Date.prototype.format = function() {
 			group.get( is_new ? "items_new" : "items").each(function(itm) {
 				itm = this.buildTemplate(itm);
 				if(itm) {
-					this.lightbox(itm.html.find("#media"), itm.model);
 					this.initItem(itm, group);
 
 					group.set({
@@ -1033,15 +1041,6 @@ Date.prototype.format = function() {
 					});
 				}
 			}, this);
-		},
-		// Open light box
-		lightbox : function(html, model) {
-			$(html).fancybox({
-				'transitionIn' : 'fade',
-				'transitionOut' : 'fade',
-				'type' : 'image',
-				'href' : model.get("content")
-			});
 		},
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
@@ -1102,9 +1101,9 @@ Date.prototype.format = function() {
 		},
 		// Updates timer
 		update : function() {
-			
+
 			if(this.model.get("status") > 0) {
-				$("#timeline-label").html("<span class='icon-time'></span>LIVE, " + this.formatTime(new Date() - this.timestamp));
+				$("#timeline-label").html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
 			} else {
 				$("#timeline-label").html("<span class='icon-time'></span>This event archived.");
 			}
