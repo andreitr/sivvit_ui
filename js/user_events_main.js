@@ -15,7 +15,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		view : null,
 
 		// Enables content editing when set to true
-		edit : false,
+		edit : true,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {

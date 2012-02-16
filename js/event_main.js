@@ -789,7 +789,7 @@ Date.prototype.format = function() {
 					itm.html.click(function(event) {
 
 						var checked;
-
+						
 						switch(event.target.id) {
 							case "apr-itm":
 								self.approveItem(itm);
@@ -798,7 +798,7 @@ Date.prototype.format = function() {
 							case "del-itm":
 								self.deleteItem(itm);
 								break;
-
+							
 							default:
 								if(itm.html.find("#itm-check").length > 0) {
 									checked = itm.html.find("#itm-check").is(':checked');
@@ -806,7 +806,8 @@ Date.prototype.format = function() {
 									itm.html.css("background-color", checked ? "#FFFFFF" : "#FFFFCC");
 								}
 						}
-						event.stopPropagation();
+						// New 
+						//event.stopPropagation();
 					});
 
 					this.showHidePending(itm);
@@ -995,7 +996,7 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id='content'><div id=\"media\"><a id='photo-box' href='${content}'><img height='160' src='${content}'></a></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}' id='photo-box' href='${content}'/><div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function(source) {
 
@@ -1053,6 +1054,7 @@ Date.prototype.format = function() {
 					author : itm.get("author"),
 					source : itm.get("source")
 				});
+				
 				return {
 					timestamp : itm.get("timestamp"),
 					html : html,
