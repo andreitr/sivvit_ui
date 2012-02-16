@@ -91,14 +91,8 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
-			this.eventModel.url = json;
+			this.eventModel.url = json + "&resolution=day";
 			this.eventModel.fetch();
-
-			// Initiate continous content loading
-			this.fetch_interval = setInterval(function() {
-				self.eventModel.url += "&since=" + self.eventModel.get("last_update");
-				self.eventModel.fetch();
-			}, 10000);
 
 			this.eventModel.bind("change", function() {
 
@@ -108,9 +102,15 @@ Date.prototype.format = function() {
 
 				self.headerView.update();
 
-				// Stop requesting data if event is archived
 				if(self.eventModel.get('status') < 1) {
+					// Stop requesting data if event is archived
 					clearInterval(self.fetch_interval);
+				} else {
+					// Initiate continues data loading
+					if(self.fetch_interval === null) {
+						self.fetch();
+					}
+
 				}
 
 				if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
@@ -181,6 +181,17 @@ Date.prototype.format = function() {
 
 				self.appView.update();
 			});
+		},
+		// Initiate continues data requests
+		fetch : function() {
+			
+			var self = this;
+			
+			// Initiate continous content loading
+			this.fetch_interval = setInterval(function() {
+				self.eventModel.url += "&resolution=day&since=" + self.eventModel.get("last_update");
+				self.eventModel.fetch();
+			}, 10000);
 		}
 	};
 
@@ -265,7 +276,7 @@ Date.prototype.format = function() {
 			this.allView = options.allView;
 			this.postView = options.postView;
 			this.mediaView = options.mediaView;
-			
+
 			SIVVIT.Lightbox.init();
 		},
 		update : function() {
@@ -789,7 +800,7 @@ Date.prototype.format = function() {
 					itm.html.click(function(event) {
 
 						var checked;
-						
+
 						switch(event.target.id) {
 							case "apr-itm":
 								self.approveItem(itm);
@@ -798,7 +809,7 @@ Date.prototype.format = function() {
 							case "del-itm":
 								self.deleteItem(itm);
 								break;
-							
+
 							default:
 								if(itm.html.find("#itm-check").length > 0) {
 									checked = itm.html.find("#itm-check").is(':checked');
@@ -806,7 +817,7 @@ Date.prototype.format = function() {
 									itm.html.css("background-color", checked ? "#FFFFFF" : "#FFFFCC");
 								}
 						}
-						// New 
+						// New
 						//event.stopPropagation();
 					});
 
@@ -996,7 +1007,7 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}' id='photo-box' href='${content}'/><div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}' id='photo-box' href='${content}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function(source) {
 
@@ -1054,7 +1065,7 @@ Date.prototype.format = function() {
 					author : itm.get("author"),
 					source : itm.get("source")
 				});
-				
+
 				return {
 					timestamp : itm.get("timestamp"),
 					html : html,
