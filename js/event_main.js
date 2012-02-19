@@ -926,15 +926,8 @@ Date.prototype.format = function() {
 					timestamp : itm.get("timestamp").format(),
 					author : itm.get("author"),
 					source : itm.get("source")
-
 				});
 
-				if(itm.get("source") === "youtube") {
-					$(html).find("#photo-box").addClass("fancybox.iframe");
-				}else{
-					$(html).find("#photo-box").addClass("fancybox.image");
-					
-				}
 
 			} else if(itm.get("type") == "post") {
 				html = $.tmpl(this.postView.template, {
