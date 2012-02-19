@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+};
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -91,7 +92,7 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
-			this.eventModel.url = json + "&resolution=day";
+			this.eventModel.url = json;
 			this.eventModel.fetch();
 
 			this.eventModel.bind("change", function() {
@@ -184,12 +185,12 @@ Date.prototype.format = function() {
 		},
 		// Initiate continues data requests
 		fetch : function() {
-			
+
 			var self = this;
-			
+
 			// Initiate continous content loading
 			this.fetch_interval = setInterval(function() {
-				self.eventModel.url += "&resolution=day&since=" + self.eventModel.get("last_update");
+				self.eventModel.url += "&since=" + self.eventModel.get("last_update");
 				self.eventModel.fetch();
 			}, 10000);
 		}
@@ -221,9 +222,15 @@ Date.prototype.format = function() {
 		// Initiates global lightbox methods.
 		init : function() {
 			$('#photo-box').fancybox({
-				'transitionIn' : 'fade',
-				'transitionOut' : 'fade',
-				'type' : 'image'
+				maxWidth : 800,
+				maxHeight : 600,
+				fitToView : true,
+				autoSize : true,
+				width : '70%',
+				height : '70%',
+				closeClick : false,
+				transitionIn : 'fade',
+				transitionOut : 'fade'
 			});
 
 		}
@@ -913,13 +920,21 @@ Date.prototype.format = function() {
 
 			if(itm.get("type") == "media" || itm.get("type") == "photo") {
 				html = $.tmpl(this.mediaView.template, {
-					content : itm.get("content"),
+					thumbnail : itm.get("thumbnail"),
+					media : itm.get("media"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp").format(),
 					author : itm.get("author"),
 					source : itm.get("source")
 
 				});
+
+				if(itm.get("source") === "youtube") {
+					$(html).find("#photo-box").addClass("fancybox.iframe");
+				}else{
+					$(html).find("#photo-box").addClass("fancybox.image");
+					
+				}
 
 			} else if(itm.get("type") == "post") {
 				html = $.tmpl(this.postView.template, {
@@ -1007,7 +1022,7 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${content}' id='photo-box' href='${content}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' class='fancybox.iframe' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function(source) {
 
@@ -1059,6 +1074,8 @@ Date.prototype.format = function() {
 
 			if(itm.get("type") == "media" || itm.get("type") == "photo") {
 				html = $.tmpl(this.template, {
+					thumbnail: itm.get("thumbnail"),
+					media: itm.get("media"),
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp").format(),
