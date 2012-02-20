@@ -49,9 +49,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
 	updateTime : function() {
 		$("#timeline-mintime").html(this.model.get("startRange").format());
 		$("#timeline-maxtime").html(this.model.get("endRange").format());
-		
-		console.log(this.model.get("startRange"));
-		console.log(this.model.get("endRange"));
 	},
 	// Sets histogram bar colors based on the visible range
 	updateBarColor : function(bar) {
@@ -86,7 +83,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			// Total count of available slots
 			var lenTotal = Math.ceil((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
 
-			// Acutal count of temporal slots
+			// Actual count of temporal slots
 			var len = this.model.get("histogram").length;
 
 			var maxVal = this.model.get("max");

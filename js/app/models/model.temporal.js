@@ -1,4 +1,4 @@
-// Contains valus for the histogram
+// Contains values for the histogram
 
 SIVVIT.TemporalModel = Backbone.Model.extend({
 	defaults : {
@@ -7,6 +7,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
 		startRange : null,
 		endRange : null,
+		
 		// Maximum number of elements in bucket 
 		min : null,
 		// Minimum number of elements in a bucket

@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -92,7 +91,7 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
-			this.eventModel.url = json;
+			this.eventModel.url = json+"&resolution=hour&meta=1";
 			this.eventModel.fetch();
 
 			this.eventModel.bind("change", function() {
@@ -126,15 +125,16 @@ Date.prototype.format = function() {
 				if(self.eventModel.hasChanged("stats")) {
 					self.appView.renderStats();
 				}
-
+					
+				
 				// Update histogram values
-				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("endDate") || self.eventModel.hasChanged("histogram")) {
-
+				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("last_update") || self.eventModel.hasChanged("histogram")) {
+					
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
-						endDate : new Date(self.eventModel.get("endDate")),
-						min : self.eventModel.get("histogram").min,
-						max : self.eventModel.get("histogram").max,
+						endDate : new Date(self.eventModel.get("last_update")),
+						min : Math.min(self.temporalModel.get("min"), self.eventModel.get("histogram").min),
+						max : Math.max(self.temporalModel.get("max"), self.eventModel.get("histogram").max),
 						resolution : self.eventModel.get("histogram").resolution
 					});
 
@@ -142,21 +142,25 @@ Date.prototype.format = function() {
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
 							case "global":
-
+								
 								self.temporalModel.set({
-									histogram : self.eventModel.get("histogram").global
+									
+									// !--------- 
+									// Instead of adding histogram values I need to determine whether those are unique.
+									
+									histogram : self.temporalModel.get("histogram").concat(self.temporalModel.get("histogram"), self.eventModel.get("histogram").global)
 								});
 								break;
 
 							case "media":
 								self.temporalModel.set({
-									histogram : self.eventModel.get("histogram").media
+									histogram : self.temporalModel.get("histogram").concat(self.temporalModel.get("histogram"), self.eventModel.get("histogram").media)
 								});
 								break;
 
 							case "post":
 								self.temporalModel.set({
-									histogram : self.eventModel.get("histogram").post
+									histogram : self.temporalModel.get("histogram").concat(self.temporalModel.get("histogram"), self.eventModel.get("histogram").post)
 								});
 								break;
 						}
@@ -171,7 +175,7 @@ Date.prototype.format = function() {
 				}
 				if(!self.temporalModel.get("endRange")) {
 					self.temporalModel.set({
-						endRange : new Date(self.eventModel.get("endDate"))
+						endRange : new Date(self.eventModel.get("last_update"))
 					});
 				}
 
@@ -188,9 +192,9 @@ Date.prototype.format = function() {
 
 			var self = this;
 
-			// Initiate continous content loading
+			// Initiate continues content loading
 			this.fetch_interval = setInterval(function() {
-				self.eventModel.url += "&since=" + self.eventModel.get("last_update");
+				self.eventModel.url += "&resolution=hour&meta=1&since=" + self.eventModel.get("last_update");
 				self.eventModel.fetch();
 			}, 10000);
 		}
@@ -928,7 +932,6 @@ Date.prototype.format = function() {
 					source : itm.get("source")
 				});
 
-
 			} else if(itm.get("type") == "post") {
 				html = $.tmpl(this.postView.template, {
 					content : itm.get("content"),
@@ -1067,8 +1070,8 @@ Date.prototype.format = function() {
 
 			if(itm.get("type") == "media" || itm.get("type") == "photo") {
 				html = $.tmpl(this.template, {
-					thumbnail: itm.get("thumbnail"),
-					media: itm.get("media"),
+					thumbnail : itm.get("thumbnail"),
+					media : itm.get("media"),
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp").format(),
@@ -1131,6 +1134,7 @@ Date.prototype.format = function() {
 				$("#timeline-label").html("<span class='icon-time'></span>This event archived.");
 			}
 		},
+		
 		formatTime : function(milliseconds) {
 
 			var seconds = Math.floor(milliseconds / 1000);

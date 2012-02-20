@@ -16,8 +16,8 @@
 
 		// Load backbone dependencies
 		require(["js/app/models/model.event", "js/app/models/model.temporal", "js/app/models/m.item", "js/app/models/m.item.group", "js/app/views/v.histogram"], function() {
-			// SIVVIT.Event.init("http://sivvit.com/event/8c652621.json?callback=?");
-			 SIVVIT.Event.init("test.json");
+			SIVVIT.Event.init("http://sivvit.com/event/4ace4125.json?callback=?");
+			 // SIVVIT.Event.init("test.json");
 		});
 	});
 })();
