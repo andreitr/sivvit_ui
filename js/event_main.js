@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+};
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -42,6 +43,9 @@ Date.prototype.format = function() {
 
 		// Fetch interval id
 		fetch_interval : null,
+
+		// Fetch resolution
+		fetch_resolution : null,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -91,7 +95,12 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
-			this.eventModel.url = json+"&meta=1";
+			this.eventModel.url = json + "&meta=1";
+
+			// Append resolution if specified
+			if(this.fetch_resolution !== null) {
+				this.eventModel.url += "&resolution=" + this.fetch_resolution;
+			}
 			this.eventModel.fetch();
 
 			this.eventModel.bind("change", function() {
@@ -125,11 +134,10 @@ Date.prototype.format = function() {
 				if(self.eventModel.hasChanged("stats")) {
 					self.appView.renderStats();
 				}
-					
-				
+
 				// Update histogram values
 				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("last_update") || self.eventModel.hasChanged("histogram")) {
-					
+
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
 						endDate : new Date(self.eventModel.get("last_update")),
@@ -142,7 +150,7 @@ Date.prototype.format = function() {
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
 							case "global":
-								
+
 								self.temporalModel.set({
 									histogram : self.temporalModel.get("histogram").concat(self.temporalModel.get("histogram"), self.eventModel.get("histogram").global)
 								});
@@ -191,6 +199,10 @@ Date.prototype.format = function() {
 			// Initiate continues content loading
 			this.fetch_interval = setInterval(function() {
 				self.eventModel.url += "&meta=1&since=" + self.eventModel.get("last_update");
+				// Append resolution if specified
+				if(this.fetch_resolution !== null) {
+					this.eventModel.url += "&resolution=" + this.fetch_resolution;
+				}
 				self.eventModel.fetch();
 			}, 10000);
 		}
@@ -1130,7 +1142,6 @@ Date.prototype.format = function() {
 				$("#timeline-label").html("<span class='icon-time'></span>This event archived.");
 			}
 		},
-		
 		formatTime : function(milliseconds) {
 
 			var seconds = Math.floor(milliseconds / 1000);

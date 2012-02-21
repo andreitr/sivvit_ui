@@ -82,7 +82,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
 			// Total count of available slots
 			var lenTotal = Math.ceil((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
-
+			
 			// Actual count of temporal slots
 			var len = this.model.get("histogram").length;
 
