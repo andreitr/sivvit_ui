@@ -17,7 +17,7 @@ Date.prototype.format = function() {
 		temporalModel : null,
 
 		// SIVVIT.AppView
-		// Main applicaition view. Controls switching of all other views.
+		// Main application view. Controls switching of all other views.
 		appView : null,
 
 		// SIVVINT.PostView
@@ -95,7 +95,7 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
-			this.eventModel.url = json + "&meta=1";
+			this.eventModel.url = json;// + "&meta=1";
 
 			// Append resolution if specified
 			if(this.fetch_resolution !== null) {
@@ -198,7 +198,7 @@ Date.prototype.format = function() {
 
 			// Initiate continues content loading
 			this.fetch_interval = setInterval(function() {
-				self.eventModel.url += "&meta=1&since=" + self.eventModel.get("last_update");
+				//self.eventModel.url += "&meta=1&since=" + self.eventModel.get("last_update");
 				// Append resolution if specified
 				if(this.fetch_resolution !== null) {
 					this.eventModel.url += "&resolution=" + this.fetch_resolution;

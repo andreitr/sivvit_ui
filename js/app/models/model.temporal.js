@@ -32,7 +32,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 			this.histogram_hash = {}
 			var len = attributes.histogram.length;
 			for(var i = len; i--; ) {
-
+				attributes.histogram[i].timestamp = this.formatResolution(new Date(attributes.histogram[i].timestamp));
 			}
 		}
 
@@ -50,7 +50,6 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 				var date = this.formatResolution(new Date(value[i].timestamp));
 
 				if(this.histogram_hash.hasOwnProperty(value[i].timestamp)) {
-
 					this.histogram_hash[value[i].timestamp].count += value[i].count;
 				} else {
 					this.histogram_hash[value[i].timestamp] = value[i];
@@ -58,19 +57,19 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 			}
 		}
 	},
-	// Formats date object to match event resolution. 
+	// Formats date object to match event resolution.
 	// This is necessary when appending new items to a temporal bucket
 	formatResolution : function(date) {
 
 		switch(this.get("resolution")) {
 			case "day":
-				return new Date(date.getYear(), date.getMonth(), date.getDate());
+				return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 			case "hour":
-				return new Date(date.getYear(), date.getMonth(), date.getDate(), date.getHours());
+				return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours());
 			case "minute":
-				return new Date(date.getYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
+				return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
 			case "second":
-				return new Date(date.getYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+				return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
 		}
 	}
 });

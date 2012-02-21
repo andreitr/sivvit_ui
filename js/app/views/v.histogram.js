@@ -75,14 +75,13 @@ SIVVIT.HistogramView = Backbone.View.extend({
 				return 1000;
 		}
 	},
-	
 	// Draws histogram.
 	drawHistogram : function() {
 		if(this.model.get("histogram")) {
 
 			// Total count of available slots
 			var lenTotal = Math.ceil((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
-			
+
 			// Actual count of temporal slots
 			var len = this.model.get("histogram").length;
 
@@ -105,7 +104,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 				var frame = this.model.get("histogram")[i];
 
 				var percentY = (frame.count / maxVal) * 100;
-				var percentX = (new Date(frame.timestamp).getTime() - startTime) / (endTime - startTime);
+				var percentX = (frame.timestamp.getTime() - startTime) / (endTime - startTime);
 
 				var barH = Math.round(percentY * maxHeight / 100);
 				var barX = Math.round(percentX * maxWidth);
