@@ -91,7 +91,7 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
-			this.eventModel.url = json+"&resolution=hour&meta=1";
+			this.eventModel.url = json+"&meta=1";
 			this.eventModel.fetch();
 
 			this.eventModel.bind("change", function() {
@@ -144,10 +144,6 @@ Date.prototype.format = function() {
 							case "global":
 								
 								self.temporalModel.set({
-									
-									// !--------- 
-									// Instead of adding histogram values I need to determine whether those are unique.
-									
 									histogram : self.temporalModel.get("histogram").concat(self.temporalModel.get("histogram"), self.eventModel.get("histogram").global)
 								});
 								break;
@@ -194,7 +190,7 @@ Date.prototype.format = function() {
 
 			// Initiate continues content loading
 			this.fetch_interval = setInterval(function() {
-				self.eventModel.url += "&resolution=hour&meta=1&since=" + self.eventModel.get("last_update");
+				self.eventModel.url += "&meta=1&since=" + self.eventModel.get("last_update");
 				self.eventModel.fetch();
 			}, 10000);
 		}
