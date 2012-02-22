@@ -124,10 +124,13 @@ Date.prototype.format = function() {
 				if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
 				}
-
+				
 				// Reset updated timer
 				if(self.eventModel.hasChanged("last_update")) {
 					self.headerView.reset(new Date(self.eventModel.get("last_update")));
+					
+					self.eventModel.url += "&since=" + self.eventModel.get("last_update");
+
 				}
 
 				if(self.eventModel.hasChanged("stats")) {
@@ -194,8 +197,6 @@ Date.prototype.format = function() {
 		fetch : function() {
 
 			var self = this;
-
-			this.eventModel.url += "since=" + self.eventModel.get("last_update");
 			
 			// Initiate continues content loading
 			this.fetch_interval = setInterval(function() {
@@ -329,11 +330,12 @@ Date.prototype.format = function() {
 				this.render();
 
 			} else {
-
-				// Add new items to the exisiting group
+			
+				// Add new items to the existing group
 				new_count = 0;
 
 				for( i = con.length; i--; ) {
+					
 					group_model = this.activeView.groups_key[new Date(con[i].timestamp)];
 
 					// Check if a group already exists
@@ -1137,8 +1139,6 @@ Date.prototype.format = function() {
 
 			if(this.model.get("status") > 0) {
 				$("#timeline-label").html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
-
-				console.log(new Date(), this.timestamp);
 			} else {
 				$("#timeline-label").html("<span class='icon-time'></span>This event archived.");
 			}
