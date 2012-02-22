@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -45,7 +44,7 @@ Date.prototype.format = function() {
 		fetch_interval : null,
 
 		// Fetch resolution
-		fetch_resolution : null,
+		fetch_resolution : "hour",
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -95,7 +94,7 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
-			this.eventModel.url = json;// + "&meta=1";
+			this.eventModel.url = json + "&meta=1";
 
 			// Append resolution if specified
 			if(this.fetch_resolution !== null) {
@@ -196,13 +195,10 @@ Date.prototype.format = function() {
 
 			var self = this;
 
+			this.eventModel.url += "since=" + self.eventModel.get("last_update");
+			
 			// Initiate continues content loading
 			this.fetch_interval = setInterval(function() {
-				//self.eventModel.url += "&meta=1&since=" + self.eventModel.get("last_update");
-				// Append resolution if specified
-				if(self.fetch_resolution !== null) {
-					self.eventModel.url += "&resolution=" + self.fetch_resolution;
-				}
 				self.eventModel.fetch();
 			}, 10000);
 		}
@@ -669,6 +665,7 @@ Date.prototype.format = function() {
 			group.get( is_new ? "items_new" : "items").each(function(itm) {
 				itm = this.buildTemplate(itm);
 				if(itm) {
+
 					this.initItem(itm, group);
 
 					group.set({
@@ -930,7 +927,7 @@ Date.prototype.format = function() {
 
 			var html;
 
-			if(itm.get("type") == "media" || itm.get("type") == "photo") {
+			if(itm.get("type") === "media" || itm.get("type") === "photo") {
 				html = $.tmpl(this.mediaView.template, {
 					thumbnail : itm.get("thumbnail"),
 					media : itm.get("media"),
@@ -940,7 +937,7 @@ Date.prototype.format = function() {
 					source : itm.get("source")
 				});
 
-			} else if(itm.get("type") == "post") {
+			} else if(itm.get("type") === "post") {
 				html = $.tmpl(this.postView.template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
@@ -949,6 +946,7 @@ Date.prototype.format = function() {
 					source : itm.get("source")
 				});
 			}
+
 			return {
 				timestamp : itm.get("timestamp"),
 				html : html,
@@ -1026,7 +1024,7 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' class='fancybox.iframe' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function(source) {
 
@@ -1063,6 +1061,7 @@ Date.prototype.format = function() {
 			group.get( is_new ? "items_new" : "items").each(function(itm) {
 				itm = this.buildTemplate(itm);
 				if(itm) {
+
 					this.initItem(itm, group);
 
 					group.set({
@@ -1138,6 +1137,8 @@ Date.prototype.format = function() {
 
 			if(this.model.get("status") > 0) {
 				$("#timeline-label").html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
+
+				console.log(new Date(), this.timestamp);
 			} else {
 				$("#timeline-label").html("<span class='icon-time'></span>This event archived.");
 			}

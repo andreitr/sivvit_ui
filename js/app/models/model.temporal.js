@@ -27,7 +27,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 	set : function(attributes, options) {
 
 		// Create histogram hash table
-		if(attributes.hasOwnProperty("histogram") && attributes.histogram !== null) {
+		if(attributes.hasOwnProperty("histogram") && attributes.histogram !== undefined && attributes.histogram !== null) {
 
 			this.histogram_hash = {}
 			var len = attributes.histogram.length;
