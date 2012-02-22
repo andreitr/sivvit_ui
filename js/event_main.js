@@ -129,8 +129,8 @@ Date.prototype.format = function() {
 				if(self.eventModel.hasChanged("last_update")) {
 					self.headerView.reset(new Date(self.eventModel.get("last_update")));
 					
+					// Update request time
 					self.eventModel.url += "&since=" + self.eventModel.get("last_update");
-
 				}
 
 				if(self.eventModel.hasChanged("stats")) {
@@ -340,10 +340,19 @@ Date.prototype.format = function() {
 
 					// Check if a group already exists
 					if(group_model) {
-
-						// Update stats
+						
+						// Increment stats
+						var stats = group_model.get("stats");
+						
+						console.log(typeof stats.total, typeof con[i].stats.total);
+						
+						stats.total = Number(stats.total) + Number(con[i].stats.total);
+						stats.media = Number(stats.media) + Number(con[i].stats.media);
+						stats.post = Number(stats.post) + Number(con[i].stats.post);
+						
+						// Update stats of the existing group
 						group_model.set({
-							stats : con[i].stats
+							stats : stats
 						}, {
 							silent : true
 						});
