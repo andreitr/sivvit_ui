@@ -152,19 +152,19 @@ Date.prototype.format = function() {
 							case "global":
 
 								self.temporalModel.set({
-									histogram : self.temporalModel.get("histogram").concat(self.temporalModel.get("histogram"), self.eventModel.get("histogram").global)
+									histogram : self.eventModel.get("histogram").global
 								});
 								break;
 
 							case "media":
 								self.temporalModel.set({
-									histogram : self.temporalModel.get("histogram").concat(self.temporalModel.get("histogram"), self.eventModel.get("histogram").media)
+									histogram : self.eventModel.get("histogram").media
 								});
 								break;
 
 							case "post":
 								self.temporalModel.set({
-									histogram : self.temporalModel.get("histogram").concat(self.temporalModel.get("histogram"), self.eventModel.get("histogram").post)
+									histogram : self.eventModel.get("histogram").post
 								});
 								break;
 						}
@@ -200,8 +200,8 @@ Date.prototype.format = function() {
 			this.fetch_interval = setInterval(function() {
 				//self.eventModel.url += "&meta=1&since=" + self.eventModel.get("last_update");
 				// Append resolution if specified
-				if(this.fetch_resolution !== null) {
-					this.eventModel.url += "&resolution=" + this.fetch_resolution;
+				if(self.fetch_resolution !== null) {
+					self.eventModel.url += "&resolution=" + self.fetch_resolution;
 				}
 				self.eventModel.fetch();
 			}, 10000);

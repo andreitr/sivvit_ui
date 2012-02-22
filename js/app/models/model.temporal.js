@@ -32,7 +32,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 			this.histogram_hash = {}
 			var len = attributes.histogram.length;
 			for(var i = len; i--; ) {
-				attributes.histogram[i].timestamp = this.formatResolution(new Date(attributes.histogram[i].timestamp));
+				attributes.histogram[i].timestamp = this.adjustResolution(new Date(attributes.histogram[i].timestamp));
 			}
 		}
 
@@ -47,7 +47,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
 			for(var i = len; i--; ) {
 
-				var date = this.formatResolution(new Date(value[i].timestamp));
+				var date = this.adjustResolution(new Date(value[i].timestamp));
 
 				if(this.histogram_hash.hasOwnProperty(value[i].timestamp)) {
 					this.histogram_hash[value[i].timestamp].count += value[i].count;
@@ -58,8 +58,8 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 		}
 	},
 	// Formats date object to match event resolution.
-	// This is necessary when appending new items to a temporal bucket
-	formatResolution : function(date) {
+	// Standardised buckets for histogram count aggregation.
+	adjustResolution : function(date) {
 
 		switch(this.get("resolution")) {
 			case "day":

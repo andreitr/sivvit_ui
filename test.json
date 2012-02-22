@@ -1,1020 +1,1289 @@
 {
-	"id": "4ace4125",
-	"title": "Testing live collection",
+	"id": "07674c21",
+	"title": "It is coffee time",
 	"author": "andreitr",
 	"keywords": ["coffee"],
 	"description": "",
 	"location": {
 		"lat": "0",
 		"lon": "0",
-		"name": ""
+		"name": "USA"
 	},
-	"startDate": "Sat Feb 18 20:54:51 -0700 2012",
-	"endDate": "Sat Feb 25 20:54:51 -0700 2012",
-	"status": "0",
+	"startDate": "Tue Feb 21 20:38:00 -0700 2012",
+	"endDate": "Tue Feb 28 20:38:00 -0700 2012",
+	"status": "1",
 	"stats": {
-		"images": 0,
-		"posts": 1338,
-		"videos": 0,
-		"total": 1338,
-		"timestamp": 1329624804
+		"images": 75,
+		"posts": 652,
+		"videos": 61,
+		"total": 788,
+		"timestamp": 1329882427
 	},
-	"pending": 1338,
-	"last_update": "Sat Feb 18 21:13:15 -0700 2012",
+	"pending": 788,
+	"last_update": "Wed Feb 22 02:25:38 -0700 2012",
 	"content": [
 		{
-			"timestamp": "Sat Feb 18 20:55:00 -0700 2012",
+			"timestamp": "Sun Feb 19 09:11:00 -0700 2012",
 			"stats": {
-				"post": "72",
-				"photo": "0",
+				"post": "0",
+				"photo": "3",
 				"media": "0",
-				"total": "72"
+				"total": "3"
 			},
-			"type": "post",
+			"type": "photo",
 			"items": [
 				{
-					"id": "p4f40729baadeb0.49893225",
+					"id": "p4f4463742be837.05623179",
 					"status": "0",
 					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "\u00e5\u00af\u0152\u00e5\u00a3\u00ab\u00e5\u00b1\u00b1"
-					},
-					"author": "tougensui",
-					"timestamp": "Sat Feb 18 20:55:04 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1342484434\/icon13047628842176_normal.jpg",
-					"content": "\u00e8\u00a1\u20ac\u00e7\u00b3\u2013\u00e5\u20ac\u00a4\u00e3\u0081\u00ae\u00e4\u00b8\u0160\u00e6\u02dc\u2021\u00e3\u201a\u2019\u00e7\u00a9\u008f\u00e3\u201a\u201e\u00e3\u0081\u2039\u00e3\u0081\u00ab\u00e3\u0081\u2122\u00e3\u201a\u2039\u00e3\u201a\u00b3\u00e3\u0192\u00bc\u00e3\u0192\u2019\u00e3\u0192\u00bchttp:\/\/t.co\/bGM1PTns",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f4072a626a169.58062701",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "in the moment "
-					},
-					"author": "Mia_GAC",
-					"timestamp": "Sat Feb 18 20:55:16 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1729245334\/nuLPe_normal.jpg",
-					"content": "It's 9pm I want coffee!",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 20:56:00 -0700 2012",
-			"stats": {
-				"post": "100",
-				"photo": "0",
-				"media": "0",
-				"total": "100"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f4072d5f413c9.81561062",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Dundalk, Ireland"
-					},
-					"author": "Jordan_Gartland",
-					"timestamp": "Sat Feb 18 20:56:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1834554520\/Me_normal.jpg",
-					"content": "4 o'Clock and I feel like I'm only after drinking 5 cups of Coffee...",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f4072d6145792.96429942",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Dundalk, Ireland"
-					},
-					"author": "Jordan_Gartland",
-					"timestamp": "Sat Feb 18 20:56:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1834554520\/Me_normal.jpg",
-					"content": "4 o'Clock and I feel like I'm only after drinking 5 cups of Coffee...",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 20:57:00 -0700 2012",
-			"stats": {
-				"post": "83",
-				"photo": "0",
-				"media": "0",
-				"total": "83"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f40731a3e48c3.33420362",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "33.5488",
-						"lon": "133.551",
-						"name": ""
-					},
-					"author": "asakuramk",
-					"timestamp": "Sat Feb 18 20:57:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/370676532\/WS000000_normal.JPG",
-					"content": "I'm at Starbucks Coffee \u00e9\u00ab\u02dc\u00e7\u0178\u00a5\u00e6\u00bd\u00ae\u00e6\u00b1\u0178\u00e5\u00ba\u2014 (\u00e6\u00bd\u00ae\u00e6\u2013\u00b0\u00e7\u201d\u00ba2-13-28, \u00e9\u00ab\u02dc\u00e7\u0178\u00a5\u00e5\u00b8\u201a) http:\/\/t.co\/n5cu9Nb7",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f40731a4cbdc9.59421820",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Atascadero, CA United States"
-					},
-					"author": "gbautista72",
-					"timestamp": "Sat Feb 18 20:57:05 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1327530744\/IMG_0261_normal.JPG",
-					"content": "I checked in at Coffee Bean & Tea Leaf (2180 N Rose Ave) on #Yelp http:\/\/t.co\/g5PMoNO6",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 20:58:00 -0700 2012",
-			"stats": {
-				"post": "106",
-				"photo": "0",
-				"media": "0",
-				"total": "106"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f40734d48b888.75961155",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "in your head"
-					},
-					"author": "Mgn6",
-					"timestamp": "Sat Feb 18 20:58:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1643112080\/image_normal.jpg",
-					"content": "Coffee with melissa!  http:\/\/t.co\/mzWcELAJ",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f40734d5d2111.14885837",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "in your head"
-					},
-					"author": "Mgn6",
-					"timestamp": "Sat Feb 18 20:58:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1643112080\/image_normal.jpg",
-					"content": "Coffee with melissa!  http:\/\/t.co\/mzWcELAJ",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 20:59:00 -0700 2012",
-			"stats": {
-				"post": "126",
-				"photo": "0",
-				"media": "0",
-				"total": "126"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f40738ec0afd6.55036146",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
+					"type": "photo",
 					"location": {
 						"lat": "0",
 						"lon": "0",
 						"name": ""
 					},
-					"author": "froggyman222",
-					"timestamp": "Sat Feb 18 20:59:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1497537151\/ju_normal.jpg",
-					"content": "I liked a @YouTube video from @crazylogie http:\/\/t.co\/eNYGobTy Keurig Coffee \/ world of tanks \/ POWERPIG \/ fatal",
-					"media": "",
-					"thumbnail": ""
+					"author": "sunshine7892",
+					"timestamp": "Sun Feb 19 09:11:51 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a2.twimg.com\/profile_images\/1794346471\/phpNYvHO6_normal",
+					"content": "",
+					"media": "http:\/\/twitpic.com\/show\/large\/8lwl8w.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8lwl8w.jpg"
 				}, {
-					"id": "p4f40738f1e27a5.52937145",
+					"id": "p4f446376644491.80374898",
 					"status": "0",
 					"rank": "0",
-					"type": "post",
+					"type": "photo",
 					"location": {
 						"lat": "0",
 						"lon": "0",
 						"name": ""
 					},
-					"author": "froggyman222",
-					"timestamp": "Sat Feb 18 20:59:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1497537151\/ju_normal.jpg",
-					"content": "I liked a @YouTube video from @crazylogie http:\/\/t.co\/eNYGobTy Keurig Coffee \/ world of tanks \/ POWERPIG \/ fatal",
-					"media": "",
-					"thumbnail": ""
+					"author": "sunshine7892",
+					"timestamp": "Sun Feb 19 09:11:51 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a2.twimg.com\/profile_images\/1794346471\/phpNYvHO6_normal",
+					"content": "",
+					"media": "http:\/\/twitpic.com\/show\/large\/8lwl8w.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8lwl8w.jpg"
 				}
 			]
 		}, {
-			"timestamp": "Sat Feb 18 21:00:00 -0700 2012",
+			"timestamp": "Tue Feb 21 00:44:00 -0700 2012",
 			"stats": {
-				"post": "115",
-				"photo": "0",
+				"post": "0",
+				"photo": "3",
 				"media": "0",
-				"total": "115"
+				"total": "3"
 			},
-			"type": "post",
+			"type": "photo",
 			"items": [
 				{
-					"id": "p4f4073c9d89270.01682572",
+					"id": "p4f4463745acae3.00180556",
 					"status": "0",
 					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "In your head"
-					},
-					"author": "TheAgentSweet",
-					"timestamp": "Sat Feb 18 21:00:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1823516945\/image_normal.jpg",
-					"content": "@BAU_PrettyBoy *hands you your coffee* Drink it. Stay awake for just five more minutes.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f4073c9ecfc05.52469337",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "In your head"
-					},
-					"author": "TheAgentSweet",
-					"timestamp": "Sat Feb 18 21:00:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1823516945\/image_normal.jpg",
-					"content": "@BAU_PrettyBoy *hands you your coffee* Drink it. Stay awake for just five more minutes.",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:01:00 -0700 2012",
-			"stats": {
-				"post": "39",
-				"photo": "0",
-				"media": "0",
-				"total": "39"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f4074026b65b2.91465635",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "CollegeMaterial "
-					},
-					"author": "JustThewayIt_Is",
-					"timestamp": "Sat Feb 18 21:01:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1833400943\/4Ah6G51s_normal",
-					"content": "I want some coffee.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f40740279a5c2.05358522",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "San Bernardino, Ca"
-					},
-					"author": "newginafets",
-					"timestamp": "Sat Feb 18 21:01:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1219675874\/cna_normal.jpg",
-					"content": "I checked in at IOTA Coffee & Bakery (528 S Western Ave) on #Yelp http:\/\/t.co\/Yr44WOkA",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:02:00 -0700 2012",
-			"stats": {
-				"post": "63",
-				"photo": "0",
-				"media": "0",
-				"total": "63"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f40743d7def50.28776786",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Auckland, Nezzleland"
-					},
-					"author": "nezzle",
-					"timestamp": "Sat Feb 18 21:02:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1508382612\/image_normal.jpg",
-					"content": "A found it! A decent, yummy coffee! And it's a ristretto! http:\/\/t.co\/HKTbLrXd",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f40743d8a2bf1.90309336",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Indonesia"
-					},
-					"author": "ExcelsoCoffee",
-					"timestamp": "Sat Feb 18 21:02:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1782388083\/logo_fbtw_26012012_normal.jpg",
-					"content": "#EXCELSOBlend Coffee\/Dingin ; \nCappuccino yang disajikan dingin.",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:03:00 -0700 2012",
-			"stats": {
-				"post": "54",
-				"photo": "0",
-				"media": "0",
-				"total": "54"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f40747b6ac6b8.75197692",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "New Mexico"
-					},
-					"author": "TerilynnS",
-					"timestamp": "Sat Feb 18 21:03:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1339845326\/BOOTZ1_normal.jpg",
-					"content": "RT @Cryptic_Kestrel: Weclome to Coffee Talk. Tholians are neither an animal nor a mineral. Discuss.&lt;They're another crystalline entity. :o",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f40747b7908f6.05450545",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Sao Paulo"
-					},
-					"author": "IamTHEmarkos",
-					"timestamp": "Sat Feb 18 21:03:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1789092560\/image_normal.jpg",
-					"content": "RT @WorldFactBoook: Heavy coffee drinkers are more likely to have hallucinations or feel \"the presence of dead people.\"",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:04:00 -0700 2012",
-			"stats": {
-				"post": "58",
-				"photo": "0",
-				"media": "0",
-				"total": "58"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f4074b5e18134.56755966",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Tyler, TX"
-					},
-					"author": "calebc",
-					"timestamp": "Sat Feb 18 21:04:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1809591850\/FAA208F5-410E-4830-9C28-47E81D552E69_normal",
-					"content": "#IMPRESSED 4hrs & my coffee's still hot. Thermos \"King\" tumblr. Just can't imagine any circumstance it would http:\/\/t.co\/ivmC1H8y",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f4074b5efc4d9.73387158",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
+					"type": "photo",
 					"location": {
 						"lat": "0",
 						"lon": "0",
 						"name": ""
 					},
-					"author": "VoiciVivian",
-					"timestamp": "Sat Feb 18 21:04:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1755118237\/Photo_on_2012-01-05_at_05.09_normal.jpg",
-					"content": "I turned into one of those people who hang out in coffee shops. Not cool.",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:05:00 -0700 2012",
-			"stats": {
-				"post": "67",
-				"photo": "0",
-				"media": "0",
-				"total": "67"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f4074ef2fb3c6.28502021",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Toronto"
-					},
-					"author": "acoupleofchicks",
-					"timestamp": "Sat Feb 18 21:05:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/525962627\/acoupleofchicksontwitter_normal.jpg",
-					"content": "Just posted a photo  @ Little Bean Coffee Bar http:\/\/t.co\/kvGEYJOv",
-					"media": "",
-					"thumbnail": ""
+					"author": "Battlemouth",
+					"timestamp": "Tue Feb 21 00:44:04 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1412566704\/B_normal.png",
+					"content": " finally splurged #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mls2z.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mls2z.jpg"
 				}, {
-					"id": "p4f4074f90ac281.11037879",
+					"id": "p4f4463769d5bf5.32224177",
 					"status": "0",
 					"rank": "0",
-					"type": "post",
+					"type": "photo",
 					"location": {
 						"lat": "0",
 						"lon": "0",
 						"name": ""
 					},
-					"author": "ArdenHolderby",
-					"timestamp": "Sat Feb 18 21:05:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1816578295\/Photo_on_2012-02-09_at_15.37_normal.jpg",
-					"content": "9000 cups of coffee, made me think of @LukeDavis93, anyways won't be wasting my fifth of life (: http:\/\/t.co\/XiyoPRT9",
-					"media": "",
-					"thumbnail": ""
+					"author": "Battlemouth",
+					"timestamp": "Tue Feb 21 00:44:04 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1412566704\/B_normal.png",
+					"content": " finally splurged #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mls2z.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mls2z.jpg"
 				}
 			]
 		}, {
-			"timestamp": "Sat Feb 18 21:06:00 -0700 2012",
+			"timestamp": "Tue Feb 21 06:20:00 -0700 2012",
 			"stats": {
-				"post": "61",
-				"photo": "0",
+				"post": "0",
+				"photo": "3",
 				"media": "0",
-				"total": "61"
+				"total": "3"
 			},
-			"type": "post",
+			"type": "photo",
 			"items": [
 				{
-					"id": "p4f407531559560.07656668",
+					"id": "p4f446374445c55.14545051",
 					"status": "0",
 					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Indonesia"
-					},
-					"author": "ExcelsoCoffee",
-					"timestamp": "Sat Feb 18 21:06:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1782388083\/logo_fbtw_26012012_normal.jpg",
-					"content": "#EXCELSOBlend Coffee\/Dingin ; Iced Coffee, kopi campuran yang spesial, disajikan dingin.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f407531601167.09159190",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Maine"
-					},
-					"author": "JeffreyJKingman",
-					"timestamp": "Sat Feb 18 21:06:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1167860783\/jeffgnome1_normal.jpg",
-					"content": "@charynpfeuffer Would love to get coffee and ask you about Global Citizen Sun morning if you have time. Fly out at 10am.",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:07:00 -0700 2012",
-			"stats": {
-				"post": "63",
-				"photo": "0",
-				"media": "0",
-				"total": "63"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f40756b017c47.57530507",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "somewhere."
-					},
-					"author": "gabesguerra",
-					"timestamp": "Sat Feb 18 21:07:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1770426625\/image_normal.jpg",
-					"content": "If you scream for 8 years, 7 months and 6 days, you would have produced enough sound energy to heat one cup of coffee. Hardly seems worth it",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f40756b0db782.35985580",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
+					"type": "photo",
 					"location": {
 						"lat": "0",
 						"lon": "0",
 						"name": ""
 					},
-					"author": "alyssamartinnn",
-					"timestamp": "Sat Feb 18 21:07:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1793479775\/E7BCS9kz_normal",
-					"content": "I want coffee. But, I already napped today, so any chance of me sleeping is out of the question. Decisions, decisions.",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:08:00 -0700 2012",
-			"stats": {
-				"post": "56",
-				"photo": "0",
-				"media": "0",
-				"total": "56"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f4075a5ce46b6.68119052",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "13.7627",
-						"lon": "100.495",
-						"name": ""
-					},
-					"author": "p_puan",
-					"timestamp": "Sat Feb 18 21:08:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1812467530\/386245_194409983984754_100002472618208_375514_181620987_n_normal.jpg",
-					"content": "\u00f0\u0178\u008d\u00b0  @ \u00e0\u00b8\u0161\u00e0\u00b9\u2030\u00e0\u00b8\u00b2\u00e0\u00b8\u2122\u00e0\u00b8\u017e\u00e0\u00b8\u00a3\u00e0\u00b8\u00b0\u00e0\u00b8\u00ad\u00e0\u00b8\u00b2\u00e0\u00b8\u2014\u00e0\u00b8\u00b4\u00e0\u00b8\u2022\u00e0\u00b8\u00a2\u00e0\u00b9\u0152 Coffee&more http:\/\/t.co\/z2w5cyuS",
-					"media": "",
-					"thumbnail": ""
+					"author": "_wax_and_wane_",
+					"timestamp": "Tue Feb 21 06:20:41 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1184514708\/DVC00380_ed_normal.jpg",
+					"content": "\u00e3\u0081\u00ad\u00e3\u0081\u2021\u00e3\u20ac\u0081\u00e7\u008f\u02c6\u00e7\u0090\u00b2\u00e3\u0081\u00ab\u00e3\u0081\u2014\u00e3\u0081\u00be\u00e3\u0081\u2014\u00e3\u201a\u2021\u00e3\u20ac\u201a\u00e3\u0081\u0160\u00e3\u201a\u201e\u00e3\u0081\u00a4\u00e3\u0192\u0081\u00e3\u0192\u00a7\u00e3\u201a\u00b3\u00e3\u0192\u0178\u00e3\u0192\u00b3\u00e3\u0192\u02c6\u00e3\u0192\u201c\u00e3\u201a\u00b9\u00e3\u201a\u00b1\u00e3\u0192\u0192\u00e3\u0192\u02c6\u00e3\u0081\u00a0\u00e3\u201a\u02c6\u00e2\u2122\u00aa #coffee #oyatu\n",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mp3cq.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mp3cq.jpg"
 				}, {
-					"id": "p4f4075a5d876f4.27901477",
+					"id": "p4f44637682dbf3.08018790",
 					"status": "0",
 					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Philadelphia"
-					},
-					"author": "Jonemvc",
-					"timestamp": "Sat Feb 18 21:08:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1817457365\/2w1byuefec_133047186-2_normal.jpg",
-					"content": "Londons Times Funny Cow Cartoons - Atilla The Holstein - Coffee Gift Baskets - Coffee Gift Basket: Atilla The Ho... http:\/\/t.co\/ZFT00jce",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:09:00 -0700 2012",
-			"stats": {
-				"post": "70",
-				"photo": "0",
-				"media": "0",
-				"total": "70"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f4075e0b08a76.26176836",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
+					"type": "photo",
 					"location": {
 						"lat": "0",
 						"lon": "0",
 						"name": ""
 					},
-					"author": "ebrooklynw",
-					"timestamp": "Sat Feb 18 21:09:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1804419551\/Photo_31_normal.jpg",
-					"content": "Making AvantGuard Art at the coffee shop. Dad is unimpressed  @ Tallyrand http:\/\/t.co\/dzVIFfyS",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f4075e0babc75.45330184",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Wise, VA"
-					},
-					"author": "xoM0RGAN",
-					"timestamp": "Sat Feb 18 21:09:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1742935344\/short2_normal.jpg",
-					"content": "drinkin out of my mossy oak coffee cup. #dontjudgeme #youloveme",
-					"media": "",
-					"thumbnail": ""
+					"author": "_wax_and_wane_",
+					"timestamp": "Tue Feb 21 06:20:41 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1184514708\/DVC00380_ed_normal.jpg",
+					"content": "\u00e3\u0081\u00ad\u00e3\u0081\u2021\u00e3\u20ac\u0081\u00e7\u008f\u02c6\u00e7\u0090\u00b2\u00e3\u0081\u00ab\u00e3\u0081\u2014\u00e3\u0081\u00be\u00e3\u0081\u2014\u00e3\u201a\u2021\u00e3\u20ac\u201a\u00e3\u0081\u0160\u00e3\u201a\u201e\u00e3\u0081\u00a4\u00e3\u0192\u0081\u00e3\u0192\u00a7\u00e3\u201a\u00b3\u00e3\u0192\u0178\u00e3\u0192\u00b3\u00e3\u0192\u02c6\u00e3\u0192\u201c\u00e3\u201a\u00b9\u00e3\u201a\u00b1\u00e3\u0192\u0192\u00e3\u0192\u02c6\u00e3\u0081\u00a0\u00e3\u201a\u02c6\u00e2\u2122\u00aa #coffee #oyatu\n",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mp3cq.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mp3cq.jpg"
 				}
 			]
 		}, {
-			"timestamp": "Sat Feb 18 21:10:00 -0700 2012",
+			"timestamp": "Tue Feb 21 07:07:00 -0700 2012",
 			"stats": {
-				"post": "62",
-				"photo": "0",
+				"post": "0",
+				"photo": "3",
 				"media": "0",
-				"total": "62"
+				"total": "3"
 			},
-			"type": "post",
+			"type": "photo",
 			"items": [
 				{
-					"id": "p4f40761c895122.50084962",
+					"id": "p4f4463741373f0.70771253",
 					"status": "0",
 					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Brooklyn"
-					},
-					"author": "mrtazz",
-					"timestamp": "Sat Feb 18 21:10:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1791218384\/mii6_normal.png",
-					"content": "Finally have sensu chef'ed for FreeBSD and running. That calls for coffee and donuts.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f40761c959345.38619665",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Mauritius"
-					},
-					"author": "royjn",
-					"timestamp": "Sat Feb 18 21:10:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/737605233\/me_normal.JPG",
-					"content": "RT @WorldFactBoook: Heavy coffee drinkers are more likely to have hallucinations or feel \"the presence of dead people.\"",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:11:00 -0700 2012",
-			"stats": {
-				"post": "56",
-				"photo": "0",
-				"media": "0",
-				"total": "56"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f40765a595452.44195338",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Bangkok"
-					},
-					"author": "GiantRobot7",
-					"timestamp": "Sat Feb 18 21:11:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1821716892\/nJDpY_normal.jpg",
-					"content": "Dante Coffee shops in Taipei are like mini Denny\"s from the US (with mini food too)",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f40765a638eb5.45184488",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "South Wales King. "
-					},
-					"author": "iam_zakk",
-					"timestamp": "Sat Feb 18 21:11:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1794456856\/333874090_normal.jpg",
-					"content": "RT @olliebarenoize: Dont you just love breaking the foil on a new coffee jar",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Sat Feb 18 21:12:00 -0700 2012",
-			"stats": {
-				"post": "73",
-				"photo": "0",
-				"media": "0",
-				"total": "73"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "p4f4076948126a1.96119718",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "San Antonio"
-					},
-					"author": "Frederickahwt",
-					"timestamp": "Sat Feb 18 21:12:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1815446111\/large_AZRYEYNALVMV_normal.jpg",
-					"content": "Set Of Six (6) PADILLA & PRADO STONEWARE - 10 Oz Coffee\/Tea Cup Dinnerware Octagonal Designed Mugs & Mug Tree: T... http:\/\/t.co\/1JSE54Xb",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "p4f4076948b5b65.21181484",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
+					"type": "photo",
 					"location": {
 						"lat": "0",
 						"lon": "0",
 						"name": ""
 					},
-					"author": "suck_A_COX",
-					"timestamp": "Sat Feb 18 21:12:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1765206598\/7tfo5k8W_normal",
-					"content": "Some guy just brought a bed to our hotel room, watched our tv, and asked for two dollars or coffee tomorrow...we didnt order a bed?",
-					"media": "",
-					"thumbnail": ""
+					"author": "leetjuuuuh",
+					"timestamp": "Tue Feb 21 07:07:27 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a0.twimg.com\/profile_images\/1811472600\/small_normal.jpg",
+					"content": "time for #coffee ",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mpg31.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mpg31.jpg"
+				}, {
+					"id": "p4f44637647c096.47454885",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "leetjuuuuh",
+					"timestamp": "Tue Feb 21 07:07:27 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a0.twimg.com\/profile_images\/1811472600\/small_normal.jpg",
+					"content": "time for #coffee ",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mpg31.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mpg31.jpg"
 				}
 			]
 		}, {
-			"timestamp": "Sat Feb 18 21:13:00 -0700 2012",
+			"timestamp": "Tue Feb 21 08:33:00 -0700 2012",
 			"stats": {
-				"post": "14",
-				"photo": "0",
+				"post": "0",
+				"photo": "3",
 				"media": "0",
-				"total": "14"
+				"total": "3"
 			},
-			"type": "post",
+			"type": "photo",
 			"items": [
 				{
-					"id": "p4f4076cfad96d5.74905760",
+					"id": "p4f446373ef22d3.66043702",
 					"status": "0",
 					"rank": "0",
-					"type": "post",
+					"type": "photo",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "New York"
+						"name": ""
 					},
-					"author": "Zorajky",
-					"timestamp": "Sat Feb 18 21:13:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1784614933\/5r2qvb55xq_130685588-2_normal.jpg",
-					"content": "New York Coffee Espresso SWP Decaf 5 Lb Bag: New York Coffee Espresso SWP Decaf 5 Lb Bag - Our Espresso is a per... http:\/\/t.co\/2kQSkjR6",
-					"media": "",
-					"thumbnail": ""
+					"author": "AKhaliQm",
+					"timestamp": "Tue Feb 21 08:33:40 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a2.twimg.com\/profile_images\/1841930101\/image_normal.jpg",
+					"content": "#Nassr #ittihad #alhilal #AhliSa #saudi #ksa #kawasaki #fork #riyadh #time #coffee #turkish ",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mq25y.png",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mq25y.png"
 				}, {
-					"id": "p4f4076cfb7d675.06162969",
+					"id": "p4f446376271424.45039374",
 					"status": "0",
 					"rank": "0",
-					"type": "post",
+					"type": "photo",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "Perth, Australia"
+						"name": ""
 					},
-					"author": "some_ciara_kid",
-					"timestamp": "Sat Feb 18 21:13:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1789959848\/Picture_71_normal.jpg",
-					"content": "RT @ashsmith28: Coffee with @lukeshuey and kobes before the game today! Getting close.. #nervous #carboload #goeagles #AFL",
-					"media": "",
-					"thumbnail": ""
+					"author": "AKhaliQm",
+					"timestamp": "Tue Feb 21 08:33:40 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a2.twimg.com\/profile_images\/1841930101\/image_normal.jpg",
+					"content": "#Nassr #ittihad #alhilal #AhliSa #saudi #ksa #kawasaki #fork #riyadh #time #coffee #turkish ",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mq25y.png",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mq25y.png"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 08:47:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446373d6afb0.96328926",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "futoshijapanese",
+					"timestamp": "Tue Feb 21 08:47:02 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1230599106\/FJWL_normal.gif",
+					"content": "Coffee #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mq5qf.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mq5qf.jpg"
+				}, {
+					"id": "p4f44637610a807.86867713",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "futoshijapanese",
+					"timestamp": "Tue Feb 21 08:47:02 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1230599106\/FJWL_normal.gif",
+					"content": "Coffee #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mq5qf.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mq5qf.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 09:11:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446373be3982.35876561",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "fabricechan",
+					"timestamp": "Tue Feb 21 09:11:22 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1789938212\/rabbit_normal.jpg",
+					"content": "I see coffee in my coffee #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mqcbz.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mqcbz.jpg"
+				}, {
+					"id": "p4f446375ee6591.05756679",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "fabricechan",
+					"timestamp": "Tue Feb 21 09:11:22 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1789938212\/rabbit_normal.jpg",
+					"content": "I see coffee in my coffee #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mqcbz.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mqcbz.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 09:39:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446373a5c243.01843645",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "Commander1024",
+					"timestamp": "Tue Feb 21 09:39:19 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a0.twimg.com\/profile_images\/1782389005\/maScholz_normal.jpg",
+					"content": " Drinking #Coffee just got #style #LensCup",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mqjvz.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mqjvz.jpg"
+				}, {
+					"id": "p4f446375d7f889.44270441",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "Commander1024",
+					"timestamp": "Tue Feb 21 09:39:19 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a0.twimg.com\/profile_images\/1782389005\/maScholz_normal.jpg",
+					"content": " Drinking #Coffee just got #style #LensCup",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mqjvz.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mqjvz.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 10:27:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f4463738d4f14.08322947",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "Lukeisvenom",
+					"timestamp": "Tue Feb 21 10:27:37 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1759523463\/nipstwitter_normal",
+					"content": "MORNING WORLD! #Coffee #Bad\/Bedhair ",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mqxvc.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mqxvc.jpg"
+				}, {
+					"id": "p4f446375c393f4.01621022",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "Lukeisvenom",
+					"timestamp": "Tue Feb 21 10:27:37 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1759523463\/nipstwitter_normal",
+					"content": "MORNING WORLD! #Coffee #Bad\/Bedhair ",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mqxvc.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mqxvc.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 12:50:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f44637370c561.19548229",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "StepStoneTile",
+					"timestamp": "Tue Feb 21 12:50:50 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1307933870\/new_normal.jpg",
+					"content": "A customer who brings #coffee is my kind of customer!! :) #lovemycustomers #lovemycoffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mscc4.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mscc4.jpg"
+				}, {
+					"id": "p4f446375af2fe6.21852202",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "StepStoneTile",
+					"timestamp": "Tue Feb 21 12:50:50 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1307933870\/new_normal.jpg",
+					"content": "A customer who brings #coffee is my kind of customer!! :) #lovemycustomers #lovemycoffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mscc4.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mscc4.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 13:09:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446373460048.22422739",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "mattpeight",
+					"timestamp": "Tue Feb 21 13:09:22 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1283185169\/io_normal.JPG",
+					"content": "#Smiling at #coffee...#Happiness is made up of small #pleasures...#foodphotography #food #cake #sweet",
+					"media": "http:\/\/twitpic.com\/show\/large\/8msjxi.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8msjxi.jpg"
+				}, {
+					"id": "p4f4463759acd07.03395428",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "mattpeight",
+					"timestamp": "Tue Feb 21 13:09:22 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1283185169\/io_normal.JPG",
+					"content": "#Smiling at #coffee...#Happiness is made up of small #pleasures...#foodphotography #food #cake #sweet",
+					"media": "http:\/\/twitpic.com\/show\/large\/8msjxi.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8msjxi.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 13:22:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446372499200.13040145",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "chrisarchitect",
+					"timestamp": "Tue Feb 21 13:22:31 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a0.twimg.com\/profile_images\/1667972233\/chrisarchitect_at_work_2011_007-harris3d-sqr-500x_normal.jpg",
+					"content": "Ontarians productivity slated to rise as @timhortons Roll Up The Rim causes coffee intake spike. #rollup #whatthehash",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mspe7.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mspe7.jpg"
+				}, {
+					"id": "p4f446374e9cca2.63867690",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "chrisarchitect",
+					"timestamp": "Tue Feb 21 13:22:31 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a0.twimg.com\/profile_images\/1667972233\/chrisarchitect_at_work_2011_007-harris3d-sqr-500x_normal.jpg",
+					"content": "Ontarians productivity slated to rise as @timhortons Roll Up The Rim causes coffee intake spike. #rollup #whatthehash",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mspe7.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mspe7.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 13:33:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446373150645.02448683",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "DanVader_",
+					"timestamp": "Tue Feb 21 13:33:07 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1760831038\/io_normal.jpg",
+					"content": "DeathStarbucks #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mstuh.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mstuh.jpg"
+				}, {
+					"id": "p4f4463758668b9.79171456",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "DanVader_",
+					"timestamp": "Tue Feb 21 13:33:07 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1760831038\/io_normal.jpg",
+					"content": "DeathStarbucks #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mstuh.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mstuh.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 14:17:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446372f0b514.22119341",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "mrhardin89",
+					"timestamp": "Tue Feb 21 14:17:31 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a2.twimg.com\/profile_images\/1834901095\/owM0825t_normal",
+					"content": "At work, drinking coffee and reading. Tunes in the background. #lifeisgood #coffee #music",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mtd6r.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mtd6r.jpg"
+				}, {
+					"id": "p4f446375720642.30354627",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "mrhardin89",
+					"timestamp": "Tue Feb 21 14:17:31 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a2.twimg.com\/profile_images\/1834901095\/owM0825t_normal",
+					"content": "At work, drinking coffee and reading. Tunes in the background. #lifeisgood #coffee #music",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mtd6r.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mtd6r.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 14:25:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446372c7f522.19904062",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "astroeycee",
+					"timestamp": "Tue Feb 21 14:25:51 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1831402404\/BP2pTGqg_normal",
+					"content": "Kopiccino... #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mtgvv.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mtgvv.jpg"
+				}, {
+					"id": "p4f4463755dc839.92607028",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "astroeycee",
+					"timestamp": "Tue Feb 21 14:25:51 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a3.twimg.com\/profile_images\/1831402404\/BP2pTGqg_normal",
+					"content": "Kopiccino... #coffee",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mtgvv.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mtgvv.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 15:00:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446372a13d53.25713096",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "TheGavaldo",
+					"timestamp": "Tue Feb 21 15:00:50 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1728386643\/nuDd3_normal.jpg",
+					"content": "This is how I roll on an avo #rocknrolla #cafitierre #coffee #Mansman #Ponce",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mtwz9.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mtwz9.jpg"
+				}, {
+					"id": "p4f446375494008.11834329",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "TheGavaldo",
+					"timestamp": "Tue Feb 21 15:00:50 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1728386643\/nuDd3_normal.jpg",
+					"content": "This is how I roll on an avo #rocknrolla #cafitierre #coffee #Mansman #Ponce",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mtwz9.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mtwz9.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 15:17:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f44637288c437.28924371",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "BettyBakeBlog",
+					"timestamp": "Tue Feb 21 15:17:14 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1335962496\/COPYRIGHT_april_2011_250pix_normal.jpg",
+					"content": "Now for last #coffee of  day &amp; then assemble my #supper  =a scrumptious salad w an egg on the side",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mu4qj.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mu4qj.jpg"
+				}, {
+					"id": "p4f44637534dcd1.64728140",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "BettyBakeBlog",
+					"timestamp": "Tue Feb 21 15:17:14 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1335962496\/COPYRIGHT_april_2011_250pix_normal.jpg",
+					"content": "Now for last #coffee of  day &amp; then assemble my #supper  =a scrumptious salad w an egg on the side",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mu4qj.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mu4qj.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 15:40:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f446372725822.38329150",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "drkim352",
+					"timestamp": "Tue Feb 21 15:40:03 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a2.twimg.com\/profile_images\/1661762685\/image_normal.jpg",
+					"content": "Damn! ripoff! #coffee  ",
+					"media": "http:\/\/twitpic.com\/show\/large\/8muffc.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8muffc.jpg"
+				}, {
+					"id": "p4f4463751e6db2.91707224",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "drkim352",
+					"timestamp": "Tue Feb 21 15:40:03 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a2.twimg.com\/profile_images\/1661762685\/image_normal.jpg",
+					"content": "Damn! ripoff! #coffee  ",
+					"media": "http:\/\/twitpic.com\/show\/large\/8muffc.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8muffc.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 16:05:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "3",
+				"media": "0",
+				"total": "3"
+			},
+			"type": "photo",
+			"items": [
+				{
+					"id": "p4f4463725df5c0.46179619",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "BGuePek",
+					"timestamp": "Tue Feb 21 16:05:05 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1841436113\/kurt_cobain_normal.jpeg",
+					"content": "#Coffee e si studia! See u soon :)",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mur5s.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mur5s.jpg"
+				}, {
+					"id": "p4f4463750a0d64.74919269",
+					"status": "0",
+					"rank": "0",
+					"type": "photo",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "BGuePek",
+					"timestamp": "Tue Feb 21 16:05:05 -0700 2012",
+					"source": "twitpic",
+					"avatar": "http:\/\/a1.twimg.com\/profile_images\/1841436113\/kurt_cobain_normal.jpeg",
+					"content": "#Coffee e si studia! See u soon :)",
+					"media": "http:\/\/twitpic.com\/show\/large\/8mur5s.jpg",
+					"thumbnail": "http:\/\/twitpic.com\/show\/thumb\/8mur5s.jpg"
+				}
+			]
+		}, {
+			"timestamp": "Tue Feb 21 19:43:00 -0700 2012",
+			"stats": {
+				"post": "0",
+				"photo": "0",
+				"media": "4",
+				"total": "4"
+			},
+			"type": "media",
+			"items": [
+				{
+					"id": "p4f446372d440e6.22111346",
+					"status": "0",
+					"rank": "0",
+					"type": "media",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "danrowen198",
+					"timestamp": "Tue Feb 21 19:43:05 -0700 2012",
+					"source": "youtube",
+					"avatar": "http:\/\/i.ytimg.com\/vi\/5hn6xnA9nkc\/0.jpg",
+					"content": "",
+					"media": "http:\/\/youtube.com\/embed\/5hn6xnA9nkc?autoplay=1",
+					"thumbnail": "http:\/\/i.ytimg.com\/vi\/5hn6xnA9nkc\/0.jpg"
+				}, {
+					"id": "p4f446374cb47c7.87030929",
+					"status": "0",
+					"rank": "0",
+					"type": "media",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "danrowen198",
+					"timestamp": "Tue Feb 21 19:43:05 -0700 2012",
+					"source": "youtube",
+					"avatar": "http:\/\/i.ytimg.com\/vi\/5hn6xnA9nkc\/0.jpg",
+					"content": "",
+					"media": "http:\/\/youtube.com\/embed\/5hn6xnA9nkc?autoplay=1",
+					"thumbnail": "http:\/\/i.ytimg.com\/vi\/5hn6xnA9nkc\/0.jpg"
 				}
 			]
 		}
 	],
 	"histogram": {
-		"post": [
+		"photo": [
 			{
-				"timestamp": "Sat Feb 18 20:55:04 -0700 2012",
-				"count": "72"
+				"timestamp": "Thu Sep 29 20:40:00 -0600 2011",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 20:56:00 -0700 2012",
-				"count": "100"
+				"timestamp": "Sun Feb 19 09:11:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 20:57:03 -0700 2012",
-				"count": "83"
+				"timestamp": "Tue Feb 21 00:44:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 20:58:00 -0700 2012",
-				"count": "106"
+				"timestamp": "Tue Feb 21 06:20:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 20:59:00 -0700 2012",
-				"count": "126"
+				"timestamp": "Tue Feb 21 07:07:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:00:01 -0700 2012",
-				"count": "115"
+				"timestamp": "Tue Feb 21 08:33:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:01:00 -0700 2012",
-				"count": "39"
+				"timestamp": "Tue Feb 21 08:47:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:02:00 -0700 2012",
-				"count": "63"
+				"timestamp": "Tue Feb 21 09:11:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:03:02 -0700 2012",
-				"count": "54"
+				"timestamp": "Tue Feb 21 09:39:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:04:01 -0700 2012",
-				"count": "58"
+				"timestamp": "Tue Feb 21 10:27:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:05:00 -0700 2012",
-				"count": "67"
+				"timestamp": "Tue Feb 21 12:50:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:06:00 -0700 2012",
-				"count": "61"
+				"timestamp": "Tue Feb 21 13:09:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:07:00 -0700 2012",
-				"count": "63"
+				"timestamp": "Tue Feb 21 13:22:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:08:01 -0700 2012",
-				"count": "56"
+				"timestamp": "Tue Feb 21 13:33:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:09:01 -0700 2012",
-				"count": "70"
+				"timestamp": "Tue Feb 21 14:17:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:10:00 -0700 2012",
-				"count": "62"
+				"timestamp": "Tue Feb 21 14:25:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:11:01 -0700 2012",
-				"count": "56"
+				"timestamp": "Tue Feb 21 15:00:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:12:00 -0700 2012",
-				"count": "35"
+				"timestamp": "Tue Feb 21 15:17:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 15:40:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 16:05:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 21:13:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 22:45:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 23:25:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Wed Feb 22 00:01:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Wed Feb 22 02:25:00 -0700 2012",
+				"count": "3"
 			}
 		],
 		"global": [
 			{
-				"timestamp": "Sat Feb 18 20:55:04 -0700 2012",
-				"count": "72"
+				"timestamp": "Thu Sep 29 20:40:00 -0600 2011",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 20:56:00 -0700 2012",
-				"count": "100"
+				"timestamp": "Sun Feb 19 09:11:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 20:57:03 -0700 2012",
-				"count": "83"
+				"timestamp": "Tue Feb 21 00:44:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 20:58:00 -0700 2012",
-				"count": "106"
+				"timestamp": "Tue Feb 21 06:20:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 20:59:00 -0700 2012",
-				"count": "126"
+				"timestamp": "Tue Feb 21 07:07:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:00:01 -0700 2012",
-				"count": "115"
+				"timestamp": "Tue Feb 21 08:33:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:01:00 -0700 2012",
-				"count": "39"
+				"timestamp": "Tue Feb 21 08:47:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:02:00 -0700 2012",
-				"count": "63"
+				"timestamp": "Tue Feb 21 09:11:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:03:02 -0700 2012",
-				"count": "54"
+				"timestamp": "Tue Feb 21 09:39:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:04:01 -0700 2012",
-				"count": "58"
+				"timestamp": "Tue Feb 21 10:27:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:05:00 -0700 2012",
-				"count": "67"
+				"timestamp": "Tue Feb 21 12:50:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:06:00 -0700 2012",
-				"count": "61"
+				"timestamp": "Tue Feb 21 13:09:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:07:00 -0700 2012",
-				"count": "63"
+				"timestamp": "Tue Feb 21 13:22:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:08:01 -0700 2012",
-				"count": "56"
+				"timestamp": "Tue Feb 21 13:33:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:09:01 -0700 2012",
-				"count": "70"
+				"timestamp": "Tue Feb 21 14:17:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:10:00 -0700 2012",
-				"count": "62"
+				"timestamp": "Tue Feb 21 14:25:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:11:01 -0700 2012",
-				"count": "56"
+				"timestamp": "Tue Feb 21 15:00:00 -0700 2012",
+				"count": "3"
 			}, {
-				"timestamp": "Sat Feb 18 21:12:00 -0700 2012",
-				"count": "35"
+				"timestamp": "Tue Feb 21 15:17:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 15:40:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 16:05:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 19:43:00 -0700 2012",
+				"count": "4"
+			}, {
+				"timestamp": "Tue Feb 21 19:44:00 -0700 2012",
+				"count": "8"
+			}, {
+				"timestamp": "Tue Feb 21 19:45:00 -0700 2012",
+				"count": "8"
+			}, {
+				"timestamp": "Tue Feb 21 19:47:00 -0700 2012",
+				"count": "1"
+			}, {
+				"timestamp": "Tue Feb 21 19:49:00 -0700 2012",
+				"count": "6"
+			}, {
+				"timestamp": "Tue Feb 21 19:50:00 -0700 2012",
+				"count": "2"
+			}, {
+				"timestamp": "Tue Feb 21 20:00:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:02:00 -0700 2012",
+				"count": "6"
+			}, {
+				"timestamp": "Tue Feb 21 20:03:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:04:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:07:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:09:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:12:00 -0700 2012",
+				"count": "1"
+			}, {
+				"timestamp": "Tue Feb 21 20:16:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:18:00 -0700 2012",
+				"count": "1"
+			}, {
+				"timestamp": "Tue Feb 21 20:25:00 -0700 2012",
+				"count": "2"
+			}, {
+				"timestamp": "Tue Feb 21 20:28:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:31:00 -0700 2012",
+				"count": "8"
+			}, {
+				"timestamp": "Tue Feb 21 20:33:00 -0700 2012",
+				"count": "1"
+			}, {
+				"timestamp": "Tue Feb 21 20:38:00 -0700 2012",
+				"count": "1"
+			}, {
+				"timestamp": "Tue Feb 21 20:39:00 -0700 2012",
+				"count": "88"
+			}, {
+				"timestamp": "Tue Feb 21 20:40:00 -0700 2012",
+				"count": "64"
+			}, {
+				"timestamp": "Tue Feb 21 20:41:00 -0700 2012",
+				"count": "64"
+			}, {
+				"timestamp": "Tue Feb 21 20:42:00 -0700 2012",
+				"count": "80"
+			}, {
+				"timestamp": "Tue Feb 21 20:43:00 -0700 2012",
+				"count": "88"
+			}, {
+				"timestamp": "Tue Feb 21 20:44:00 -0700 2012",
+				"count": "98"
+			}, {
+				"timestamp": "Tue Feb 21 20:45:00 -0700 2012",
+				"count": "95"
+			}, {
+				"timestamp": "Tue Feb 21 20:46:00 -0700 2012",
+				"count": "68"
+			}, {
+				"timestamp": "Tue Feb 21 20:47:00 -0700 2012",
+				"count": "11"
+			}, {
+				"timestamp": "Tue Feb 21 21:13:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 22:45:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 23:25:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Wed Feb 22 00:01:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Wed Feb 22 02:25:00 -0700 2012",
+				"count": "3"
 			}
 		],
-		"min": "35",
-		"max": "126",
-		"resolution": "minute"
+		"media": [
+			{
+				"timestamp": "Tue Feb 21 19:43:00 -0700 2012",
+				"count": "4"
+			}, {
+				"timestamp": "Tue Feb 21 19:44:00 -0700 2012",
+				"count": "8"
+			}, {
+				"timestamp": "Tue Feb 21 19:45:00 -0700 2012",
+				"count": "8"
+			}, {
+				"timestamp": "Tue Feb 21 19:47:00 -0700 2012",
+				"count": "1"
+			}, {
+				"timestamp": "Tue Feb 21 19:49:00 -0700 2012",
+				"count": "6"
+			}, {
+				"timestamp": "Tue Feb 21 19:50:00 -0700 2012",
+				"count": "2"
+			}, {
+				"timestamp": "Tue Feb 21 20:00:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:02:00 -0700 2012",
+				"count": "6"
+			}, {
+				"timestamp": "Tue Feb 21 20:03:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:04:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:07:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:09:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:12:00 -0700 2012",
+				"count": "1"
+			}, {
+				"timestamp": "Tue Feb 21 20:16:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:18:00 -0700 2012",
+				"count": "1"
+			}, {
+				"timestamp": "Tue Feb 21 20:25:00 -0700 2012",
+				"count": "2"
+			}, {
+				"timestamp": "Tue Feb 21 20:28:00 -0700 2012",
+				"count": "3"
+			}, {
+				"timestamp": "Tue Feb 21 20:33:00 -0700 2012",
+				"count": "1"
+			}
+		],
+		"post": [
+			{
+				"timestamp": "Tue Feb 21 20:31:00 -0700 2012",
+				"count": "8"
+			}, {
+				"timestamp": "Tue Feb 21 20:38:00 -0700 2012",
+				"count": "1"
+			}, {
+				"timestamp": "Tue Feb 21 20:39:00 -0700 2012",
+				"count": "88"
+			}, {
+				"timestamp": "Tue Feb 21 20:40:00 -0700 2012",
+				"count": "64"
+			}, {
+				"timestamp": "Tue Feb 21 20:41:00 -0700 2012",
+				"count": "64"
+			}, {
+				"timestamp": "Tue Feb 21 20:42:00 -0700 2012",
+				"count": "80"
+			}, {
+				"timestamp": "Tue Feb 21 20:43:00 -0700 2012",
+				"count": "88"
+			}, {
+				"timestamp": "Tue Feb 21 20:44:00 -0700 2012",
+				"count": "98"
+			}, {
+				"timestamp": "Tue Feb 21 20:45:00 -0700 2012",
+				"count": "95"
+			}, {
+				"timestamp": "Tue Feb 21 20:46:00 -0700 2012",
+				"count": "68"
+			}, {
+				"timestamp": "Tue Feb 21 20:47:00 -0700 2012",
+				"count": "11"
+			}
+		],
+		"min": "1",
+		"max": "98",
+		"resolution": "minute",
+		"timestamp": 1329882434
 	}
 }
