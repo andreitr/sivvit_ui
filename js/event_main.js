@@ -153,15 +153,15 @@ Date.prototype.format = function() {
 						switch(self.temporalModel.get("type")) {
 							case "global":
 								
-								self.temporalModel.appendBuckets(self.eventModel.get("histogram").global)
+								self.temporalModel.appendBuckets(self.eventModel.get("histogram").global);
 								break;
 
 							case "media":
-								self.temporalModel.appendBuckets(self.eventModel.get("histogram").media)
+								self.temporalModel.appendBuckets(self.eventModel.get("histogram").media);
 								break;
 
 							case "post":
-								self.temporalModel.appendBuckets(self.eventModel.get("histogram").post)
+								self.temporalModel.appendBuckets(self.eventModel.get("histogram").post);
 								break;
 						}
 					}

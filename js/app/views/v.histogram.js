@@ -19,8 +19,8 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
 		$("#timeline-slider").slider({
 			range : true,
-			min : this.model.get("startDate").getTime(),
-			max : this.model.get("endDate").getTime(),
+			min : this.model.get("histogramStartDate"),
+			max : this.model.get("histogramEndDate"),
 			values : [this.model.get("startRange").getTime(), this.model.get("endRange").getTime()],
 			stop : function(event, ui) {
 				self.onSliderDragged(event, ui);
@@ -75,16 +75,17 @@ SIVVIT.HistogramView = Backbone.View.extend({
 				return 1000;
 		}
 	},
+	
 	// Draws histogram.
 	drawHistogram : function() {
 		if(this.model.get("histogram")) {
 
 			// Total count of available slots
-			var lenTotal = Math.ceil((this.model.get("endDate").getTime() - this.model.get("startDate").getTime()) / this.getResolution());
+			var lenTotal = Math.ceil((this.model.get("histogramEndDate") - this.model.get("histogramStartDate")) / this.getResolution());
 
 			// Actual count of temporal slots
 			var len = this.model.get("histogram").length;
-
+						
 			var maxVal = this.model.get("max");
 			var minVal = this.model.get("min");
 
@@ -92,11 +93,12 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			var maxWidth = $(this.el).width();
 
 			var barW = $(this.el).width() / lenTotal;
+			
 			// Anything less than 0.5 displays as a very thin bar
 			barW = barW < 0.5 ? 0.5 : barW;
 
-			var startTime = this.model.get("startDate").getTime();
-			var endTime = this.model.get("endDate").getTime();
+			var startTime = this.model.get("histogramStartDate");
+			var endTime = this.model.get("histogramEndDate");
 
 			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
