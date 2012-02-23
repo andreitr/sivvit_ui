@@ -22,41 +22,50 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 		// Type of the displayed content - global, media, post
 		type : null,
 	},
-
+	
+	bucket_hash:null,
+	
 	// Override set method to keep track on
 	set : function(attributes, options) {
-
-		// Create histogram hash table
+		
+		// Adjust timestamp
 		if(attributes.hasOwnProperty("histogram") && attributes.histogram !== undefined && attributes.histogram !== null) {
-
-			this.histogram_hash = {}
+			
+			this.bucket_hash = {};
 			var len = attributes.histogram.length;
 			for(var i = len; i--; ) {
 				attributes.histogram[i].timestamp = this.adjustResolution(new Date(attributes.histogram[i].timestamp));
+				this.bucket_hash[attributes.histogram[i].timestamp] = attributes.histogram[i]; 
 			}
 		}
 
 		Backbone.Model.prototype.set.call(this, attributes, options);
 		return this;
 	},
-	// Appends new values to the existing histogram
-	updateHistogram : function(value) {
-
-		if(value && value.length > 0) {
-			var len = value.length;
-
-			for(var i = len; i--; ) {
-
-				var date = this.adjustResolution(new Date(value[i].timestamp));
-
-				if(this.histogram_hash.hasOwnProperty(value[i].timestamp)) {
-					this.histogram_hash[value[i].timestamp].count += value[i].count;
-				} else {
-					this.histogram_hash[value[i].timestamp] = value[i];
-				}
+	
+	appendBuckets: function(value){
+		
+		var len = value.length, bucket;
+		var result =  [];
+		
+		for(var i = len; i--; ){
+			
+			value[i].timestamp = this.adjustResolution(new Date(value[i].timestamp));
+			
+			if(this.bucket_hash[value[i].timestamp]){
+				this.bucket_hash[value[i].timestamp].count = Number(this.bucket_hash[value[i].timestamp].count) + Number(value[i].count);
+			}else{
+				this.bucket_hash[value[i].timestamp] = value[i]; 
 			}
 		}
+		
+		for(var bucket in this.bucket_hash){
+			result.push(this.bucket_hash[bucket]);	
+		}
+		
+		this.set({histogram : result});
 	},
+
 	// Formats date object to match event resolution.
 	// Standardised buckets for histogram count aggregation.
 	adjustResolution : function(date) {

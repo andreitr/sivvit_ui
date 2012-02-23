@@ -124,11 +124,11 @@ Date.prototype.format = function() {
 				if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
 				}
-				
+
 				// Reset updated timer
 				if(self.eventModel.hasChanged("last_update")) {
 					self.headerView.reset(new Date(self.eventModel.get("last_update")));
-					
+
 					// Update request time
 					self.eventModel.url += "&since=" + self.eventModel.get("last_update");
 				}
@@ -152,22 +152,16 @@ Date.prototype.format = function() {
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
 							case "global":
-
-								self.temporalModel.set({
-									histogram : self.eventModel.get("histogram").global
-								});
+								
+								self.temporalModel.appendBuckets(self.eventModel.get("histogram").global)
 								break;
 
 							case "media":
-								self.temporalModel.set({
-									histogram : self.eventModel.get("histogram").media
-								});
+								self.temporalModel.appendBuckets(self.eventModel.get("histogram").media)
 								break;
 
 							case "post":
-								self.temporalModel.set({
-									histogram : self.eventModel.get("histogram").post
-								});
+								self.temporalModel.appendBuckets(self.eventModel.get("histogram").post)
 								break;
 						}
 					}
@@ -197,7 +191,7 @@ Date.prototype.format = function() {
 		fetch : function() {
 
 			var self = this;
-			
+
 			// Initiate continues content loading
 			this.fetch_interval = setInterval(function() {
 				self.eventModel.fetch();
@@ -330,26 +324,23 @@ Date.prototype.format = function() {
 				this.render();
 
 			} else {
-			
+
 				// Add new items to the existing group
 				new_count = 0;
 
 				for( i = con.length; i--; ) {
-					
 					group_model = this.activeView.groups_key[new Date(con[i].timestamp)];
 
 					// Check if a group already exists
 					if(group_model) {
-						
+
 						// Increment stats
 						var stats = group_model.get("stats");
-						
-						console.log(typeof stats.total, typeof con[i].stats.total);
-						
+
 						stats.total = Number(stats.total) + Number(con[i].stats.total);
 						stats.media = Number(stats.media) + Number(con[i].stats.media);
 						stats.post = Number(stats.post) + Number(con[i].stats.post);
-						
+
 						// Update stats of the existing group
 						group_model.set({
 							stats : stats
@@ -357,14 +348,14 @@ Date.prototype.format = function() {
 							silent : true
 						});
 
-						for( j = con[i].items.length; j--; ) {
-							itm_model = new SIVVIT.ItemModel(con[i].items[j]);
-							itm_model.set({
-								timestamp : new Date(con[i].items[j].timestamp)
-							});
-
-							group_model.get("items").add(itm_model);
-						}
+						// Create all new items for rendering
+						// for( j = con[i].items.length; j--; ) {
+						// itm_model = new SIVVIT.ItemModel(con[i].items[j]);
+						// itm_model.set({
+						// timestamp : new Date(con[i].items[j].timestamp)
+						// });
+						// group_model.get("items").add(itm_model);
+						// }
 
 						this.activeView.buildGroupHeader(group_model);
 						this.activeView.buildGroupFooter(group_model);
