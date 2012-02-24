@@ -2,6 +2,9 @@
 SIVVIT.EventModel = Backbone.Model.extend({
 
 	defaults : {
+		// JSON URL
+		json: null,
+		
 		id : null,
 		title : null,
 		author : null,

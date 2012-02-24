@@ -78,7 +78,11 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 	},
 	// Append new buckets to an existing histogram
 	appendBuckets : function(value) {
-
+		
+		if(value === undefined){
+			return;
+		}
+		
 		var len = value.length, bucket;
 		var result = [];
 
@@ -116,8 +120,24 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 				return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
 		}
 	},
+	
+	// Returns milliseconds for the appropriate resolution
+	getResolution : function() {
+		switch(this.get("resolution")) {
+			case "day":
+				return 86400000;
+			case "hour":
+				return 3600000;
+			case "minute":
+				return 60000;
+			case "second":
+				return 1000;
+		}
+	},
+	
 	// Checks the bounds of
 	checkDateBounds : function(date) {
+		
 		return date >= this.get("startDate") && date <= this.get("endDate") ? true : false;
 	}
 });

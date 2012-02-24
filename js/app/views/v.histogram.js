@@ -62,30 +62,17 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			});
 		}
 	},
-	// Returns appropriate resolution.
-	getResolution : function() {
-		switch(this.model.get("resolution")) {
-			case "day":
-				return 86400000;
-			case "hour":
-				return 3600000;
-			case "minute":
-				return 60000;
-			case "second":
-				return 1000;
-		}
-	},
-	
+
 	// Draws histogram.
 	drawHistogram : function() {
 		if(this.model.get("histogram")) {
 
 			// Total count of available slots
-			var lenTotal = Math.ceil((this.model.get("histogramEndDate") - this.model.get("histogramStartDate")) / this.getResolution());
-
+			var lenTotal = Math.ceil((this.model.get("histogramEndDate") - this.model.get("histogramStartDate")) / this.model.getResolution());
+			
 			// Actual count of temporal slots
 			var len = this.model.get("histogram").length;
-						
+			
 			var maxVal = this.model.get("max");
 			var minVal = this.model.get("min");
 
@@ -103,8 +90,9 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
 			for(var i = len; i--; ) {
+				
 				var frame = this.model.get("histogram")[i];
-
+				
 				var percentY = (frame.count / maxVal) * 100;
 				var percentX = (frame.timestamp.getTime() - startTime) / (endTime - startTime);
 

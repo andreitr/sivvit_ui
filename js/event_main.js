@@ -94,6 +94,7 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
+			this.eventModel.json = json;
 			this.eventModel.url = json + "&meta=1";
 
 			// Append resolution if specified
