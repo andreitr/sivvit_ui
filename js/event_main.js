@@ -9,10 +9,10 @@ Date.prototype.format = function() {
 
 	SIVVIT.Event = {
 
-		// SIVVIT.EventModel app/models/model.event.js
+		// SIVVIT.EventModel app/models/m.event.js
 		eventModel : null,
 
-		// SIVVIT.TemporalModel /app/models/model.temporal.js
+		// SIVVIT.TemporalModel /app/models/m.temporal.js
 		temporalModel : null,
 
 		// SIVVIT.AppView
