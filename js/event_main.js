@@ -94,13 +94,8 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
-			this.eventModel.json = json;
-			this.eventModel.url = json + "&meta=1";
-
-			// Append resolution if specified
-			if(this.fetch_resolution !== null) {
-				this.eventModel.url += "&resolution=" + this.fetch_resolution;
-			}
+			this.eventModel.set({json:json});
+			this.eventModel.updateUrlPath();
 			this.eventModel.fetch();
 
 			this.eventModel.bind("change", function() {
@@ -130,8 +125,8 @@ Date.prototype.format = function() {
 				if(self.eventModel.hasChanged("last_update")) {
 					self.headerView.reset(new Date(self.eventModel.get("last_update")));
 
-					// Update request time
-					self.eventModel.url += "&since=" + self.eventModel.get("last_update");
+					// Update url path to load the latest data
+					self.eventModel.updateUrlPath();
 				}
 
 				if(self.eventModel.hasChanged("stats")) {
