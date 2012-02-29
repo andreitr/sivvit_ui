@@ -1112,7 +1112,8 @@ Date.prototype.format = function() {
 	SIVVIT.HeaderView = Backbone.View.extend({
 
 		timestamp : null,
-
+		update_interval: null,
+		
 		render : function() {
 
 			$("#event-title").html(this.model.get("title"));
@@ -1120,11 +1121,23 @@ Date.prototype.format = function() {
 			$("#event-user").html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + new Date(this.model.get("startDate")).toDateString());
 			$("#map-label").html("<span class='icon-location'></span>" + this.model.get("location").name);
 		},
+		
 		// Reset timer
 		reset : function(date) {
+			
+			var self = this;
+			
 			this.timestamp = date;
-			this.update();
+			
+			if(this.model.get("status") > 0){
+				this.update_interval = setInterval(function(){
+					self.update();
+				}, 6000);
+			}else{
+				clearInterval(this.update_interval);
+			}
 		},
+		
 		// Updates timer
 		update : function() {
 

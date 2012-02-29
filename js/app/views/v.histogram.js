@@ -76,8 +76,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			// Actual count of temporal slots
 			var len = this.model.get("histogram").length;
 			
-			console.log(lenTotal, len);
-			
 			var maxVal = this.model.get("max");
 			var minVal = this.model.get("min");
 
