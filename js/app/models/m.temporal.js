@@ -78,11 +78,11 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 	},
 	// Append new buckets to an existing histogram
 	appendBuckets : function(value) {
-		
-		if(value === undefined){
+
+		if(value === undefined) {
 			return;
 		}
-		
+
 		var len = value.length, bucket;
 		var result = [];
 
@@ -96,7 +96,6 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 				this.bucket_hash[value[i].timestamp] = value[i];
 			}
 		}
-
 		for(var bucket in this.bucket_hash) {
 			result.push(this.bucket_hash[bucket]);
 		}
@@ -120,7 +119,36 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 				return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
 		}
 	},
-	
+	// Adjusts the date object to the next available bucket
+	// NOTE!!! This function is not adjusted for leap year nor for upper limit of the date obj
+	adjustToNextBucket : function(date, resolution) {
+		var new_date;
+		
+		resolution = resolution === undefined ? this.get("resolution") : resolution;
+		
+		switch(resolution) {
+			case "day":
+				new_date = this.adjustResolution(date);
+				new_date.setDate(new_date.getDate() + 1);
+				return new_date;
+
+			case "hour":
+				new_date = this.adjustResolution(date);
+				new_date.setHours(new_date.getHours() + 1);
+				return new_date;
+
+			case "minute":
+				new_date = this.adjustResolution(date);
+				new_date.setMinutes(new_date.getMinutes() + 1);
+				return new_date;
+
+			case "second":
+				new_date = this.adjustResolution(date);
+				new_date.setSeconds(new_date.getSeconds() + 1);
+				return new_date;
+		}
+
+	},
 	// Returns milliseconds for the appropriate resolution
 	getResolution : function() {
 		switch(this.get("resolution")) {
@@ -134,10 +162,8 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 				return 1000;
 		}
 	},
-	
 	// Checks the bounds of
 	checkDateBounds : function(date) {
-		
 		return date >= this.get("startDate") && date <= this.get("endDate") ? true : false;
 	}
 });

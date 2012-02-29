@@ -67,11 +67,16 @@ SIVVIT.HistogramView = Backbone.View.extend({
 	drawHistogram : function() {
 		if(this.model.get("histogram")) {
 
+			
+			var adjusted_end_date =  this.model.adjustToNextBucket(new Date(this.model.get("histogramEndDate"))).getTime();
+
 			// Total count of available slots
-			var lenTotal = Math.ceil((this.model.get("histogramEndDate") - this.model.get("histogramStartDate")) / this.model.getResolution());
+			var lenTotal = Math.ceil((adjusted_end_date - this.model.get("histogramStartDate")) / this.model.getResolution());
 			
 			// Actual count of temporal slots
 			var len = this.model.get("histogram").length;
+			
+			console.log(lenTotal, len);
 			
 			var maxVal = this.model.get("max");
 			var minVal = this.model.get("min");
@@ -85,7 +90,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			barW = barW < 0.5 ? 0.5 : barW;
 
 			var startTime = this.model.get("histogramStartDate");
-			var endTime = this.model.get("histogramEndDate");
+			var endTime = adjusted_end_date;
 
 			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 

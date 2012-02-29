@@ -51,7 +51,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 			path += "&since=" + this.attributes.last_update;
 		}
 		if(this.attributes.histogram.resolution !== null) {
-			path += "&resolution=hour";// + this.attributes.histogram.resolution;
+			path += "&resolution="+this.attributes.histogram.resolution;
 		}
 		this.url = path;
 	}

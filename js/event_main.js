@@ -43,9 +43,6 @@ Date.prototype.format = function() {
 		// Fetch interval id
 		fetch_interval : null,
 
-		// Fetch resolution
-		fetch_resolution : "hour",
-
 		// Initiates the application and loads the main data.
 		init : function(json) {
 			var self = this;
@@ -114,7 +111,6 @@ Date.prototype.format = function() {
 					if(self.fetch_interval === null) {
 						self.fetch();
 					}
-
 				}
 
 				if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
@@ -124,7 +120,7 @@ Date.prototype.format = function() {
 				// Reset updated timer
 				if(self.eventModel.hasChanged("last_update")) {
 					self.headerView.reset(new Date(self.eventModel.get("last_update")));
-
+					
 					// Update url path to load the latest data
 					self.eventModel.updateUrlPath();
 				}
@@ -640,7 +636,6 @@ Date.prototype.format = function() {
 					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 
 					group.url = "items.json";
-					//Structure request self.eventModel.get("id")+".json?"+group.get("timestamp");
 
 					// Save already-parsed items in the temporaray old_itms array
 					group.set({
