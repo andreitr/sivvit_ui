@@ -144,16 +144,15 @@ Date.prototype.format = function() {
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
 							case "global":
-								
-								self.temporalModel.appendBuckets(self.eventModel.get("histogram").global);
+								self.temporalModel.set({histogram:self.eventModel.get("histogram").global});
 								break;
 
 							case "media":
-								self.temporalModel.appendBuckets(self.eventModel.get("histogram").media);
+								self.temporalModel.set({histogram:self.eventModel.get("histogram").media});
 								break;
 
 							case "post":
-								self.temporalModel.appendBuckets(self.eventModel.get("histogram").post);
+								self.temporalModel.set({histogram:self.eventModel.get("histogram").post});
 								break;
 						}
 					}
@@ -340,7 +339,9 @@ Date.prototype.format = function() {
 							silent : true
 						});
 
-						// Create all new items for rendering
+						// Create all new items for rendering. Maybe check whether bucket 
+						// already has items etc. 
+						
 						// for( j = con[i].items.length; j--; ) {
 						// itm_model = new SIVVIT.ItemModel(con[i].items[j]);
 						// itm_model.set({

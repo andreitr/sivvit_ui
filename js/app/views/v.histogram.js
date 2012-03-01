@@ -62,20 +62,18 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			});
 		}
 	},
-
 	// Draws histogram.
 	drawHistogram : function() {
 		if(this.model.get("histogram")) {
 
-			
-			var adjusted_end_date =  this.model.adjustToNextBucket(new Date(this.model.get("histogramEndDate"))).getTime();
+			var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get("histogramEndDate"))).getTime();
 
 			// Total count of available slots
 			var lenTotal = Math.ceil((adjusted_end_date - this.model.get("histogramStartDate")) / this.model.getResolution());
-			
+
 			// Actual count of temporal slots
 			var len = this.model.get("histogram").length;
-			
+
 			var maxVal = this.model.get("max");
 			var minVal = this.model.get("min");
 
@@ -83,7 +81,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			var maxWidth = $(this.el).width();
 
 			var barW = $(this.el).width() / lenTotal;
-			
+
 			// Anything less than 0.5 displays as a very thin bar
 			barW = barW < 0.5 ? 0.5 : barW;
 
@@ -93,9 +91,9 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
 			for(var i = len; i--; ) {
-				
+
 				var frame = this.model.get("histogram")[i];
-				
+
 				var percentY = (frame.count / maxVal) * 100;
 				var percentX = (frame.timestamp.getTime() - startTime) / (endTime - startTime);
 
