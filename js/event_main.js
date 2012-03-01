@@ -638,8 +638,6 @@ Date.prototype.format = function() {
 					var start_date = group.get("timestamp");
 					var end_date = self.temporalModel.adjustToNextBucket(start_date);
 					
-					console.log(start_date.getTime(), end_date.toUTCString());
-					
 					//group.url = "http://sivvit.com/event/bcf63272.json?fromDate=Thu%20Mar%201%2008:00:00%20-0700%202012&toDate=Thu%20Mar%201%2013:00:00%20-0700%202012&limit=10&page=1";
 					 group.url = "items.json";
 
@@ -649,7 +647,6 @@ Date.prototype.format = function() {
 					}, {
 						silent : true
 					});
-
 					group.fetch();
 				});
 			}
@@ -1048,6 +1045,7 @@ Date.prototype.format = function() {
 
 					// Call this once items are added
 					this.buildGroupHeader(group);
+					this.buildGroupFooter(group);
 				}
 			}, this);
 		},
@@ -1071,6 +1069,7 @@ Date.prototype.format = function() {
 				}
 			}, this);
 		},
+		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 
