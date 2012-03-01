@@ -40,7 +40,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 			post : []
 		}
 	},
-	
+
 	// Hash tables for histogram data
 	post_hash : {},
 	media_hash : {},
@@ -56,7 +56,6 @@ SIVVIT.EventModel = Backbone.Model.extend({
 				attributes.histogram.max = Math.max(attributes.histogram.max, this.get("histogram").max);
 				attributes.histogram.min = Math.min(attributes.histogram.min, this.get("histogram").min);
 			}
-
 			if(attributes.histogram.post !== undefined) {
 				attributes.histogram.post = this.appendHistogram(this.post_hash, attributes.histogram.post);
 			}

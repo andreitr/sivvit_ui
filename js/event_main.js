@@ -38,7 +38,7 @@ Date.prototype.format = function() {
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : false,
+		edit : true,
 
 		// Fetch interval id
 		fetch_interval : null,
@@ -101,7 +101,6 @@ Date.prototype.format = function() {
 				$("#content-loader").remove();
 				$("#event-application").show();
 
-				self.headerView.update();
 
 				if(self.eventModel.get('status') < 1) {
 					// Stop requesting data if event is archived
@@ -112,7 +111,7 @@ Date.prototype.format = function() {
 						self.fetch();
 					}
 				}
-
+				
 				if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
 				}
@@ -636,6 +635,7 @@ Date.prototype.format = function() {
 					// Displayloader graphics
 					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 
+					//http://sivvit.com/event/80d91792.json?fromDate=Sun%20Feb%2026%2013:37:00%20-0700%202012&toDate=Sun%20Feb%2026%2013:38:00%20-0700%202012&limit=10&page=1
 					group.url = "items.json";
 
 					// Save already-parsed items in the temporaray old_itms array
@@ -1113,7 +1113,6 @@ Date.prototype.format = function() {
 	SIVVIT.HeaderView = Backbone.View.extend({
 
 		timestamp : null,
-		update_interval: null,
 		
 		render : function() {
 
@@ -1129,14 +1128,7 @@ Date.prototype.format = function() {
 			var self = this;
 			
 			this.timestamp = date;
-			
-			if(this.model.get("status") > 0){
-				this.update_interval = setInterval(function(){
-					self.update();
-				}, 6000);
-			}else{
-				clearInterval(this.update_interval);
-			}
+			this.update();
 		},
 		
 		// Updates timer
