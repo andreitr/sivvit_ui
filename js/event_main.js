@@ -38,7 +38,7 @@ Date.prototype.format = function() {
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : true,
+		edit : false,
 
 		// Fetch interval id
 		fetch_interval : null,
@@ -100,8 +100,7 @@ Date.prototype.format = function() {
 				// Show main application
 				$("#content-loader").remove();
 				$("#event-application").show();
-
-
+						
 				if(self.eventModel.get('status') < 1) {
 					// Stop requesting data if event is archived
 					clearInterval(self.fetch_interval);
@@ -477,7 +476,7 @@ Date.prototype.format = function() {
 					break;
 
 				case "#media-btn":
-					$("#content-stats").html("Media: " + this.eventModel.get("stats").images);
+					$("#content-stats").html("Media: " + (this.eventModel.get("stats").images+this.eventModel.get("stats").videos));
 					break;
 			}
 		}
@@ -634,9 +633,15 @@ Date.prototype.format = function() {
 
 					// Displayloader graphics
 					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
-
-					//http://sivvit.com/event/80d91792.json?fromDate=Sun%20Feb%2026%2013:37:00%20-0700%202012&toDate=Sun%20Feb%2026%2013:38:00%20-0700%202012&limit=10&page=1
-					group.url = "items.json";
+					
+					
+					var start_date = group.get("timestamp");
+					var end_date = self.temporalModel.adjustToNextBucket(start_date);
+					
+					console.log(start_date.getTime(), end_date.toUTCString());
+					
+					//group.url = "http://sivvit.com/event/bcf63272.json?fromDate=Thu%20Mar%201%2008:00:00%20-0700%202012&toDate=Thu%20Mar%201%2013:00:00%20-0700%202012&limit=10&page=1";
+					 group.url = "items.json";
 
 					// Save already-parsed items in the temporaray old_itms array
 					group.set({
