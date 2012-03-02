@@ -7,6 +7,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
 		// Used in the data request, load meta data if specified
 		meta : 1,
+		// Used in data request to determine the number of displayed items
+		limit:5,
 
 		id : null,
 		title : null,
@@ -100,6 +102,9 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
 		if(this.attributes.meta !== null) {
 			path += "&meta=" + this.attributes.meta;
+		}
+		if(this.attributes.limit !== null) {
+			path += "&limit=" + this.attributes.limit;
 		}
 		if(this.attributes.last_update !== null) {
 			path += "&since=" + this.attributes.last_update;

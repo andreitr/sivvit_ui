@@ -289,6 +289,8 @@ Date.prototype.format = function() {
 
 				for( i = con.length; i--; ) {
 					group_model = new SIVVIT.ItemGroupModel(con[i]);
+					group_model.set({json: this.eventModel.get("json")});
+					
 					tmp_items = [];
 
 					for( j = con[i].items.length; j--; ) {
@@ -356,6 +358,7 @@ Date.prototype.format = function() {
 						// Create new groups
 						new_goups = new SIVVIT.ItemGroupCollection();
 						group_model = new SIVVIT.ItemGroupModel(con[i]);
+						group_model.set({json: this.eventModel.get("json")});
 						tmp_items = [];
 
 						for( j = con[i].items.length; j--; ) {
@@ -631,15 +634,13 @@ Date.prototype.format = function() {
 
 				$(group.get("div_id")).find("#load-group-btn").click(function(event) {
 
-					// Displayloader graphics
+					// Display loader graphics
 					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 					
+					group.setRequestPath(group.get("timestamp"), self.temporalModel.adjustToNextBucket(group.get("timestamp")));
 					
-					var start_date = group.get("timestamp");
-					var end_date = self.temporalModel.adjustToNextBucket(start_date);
-					
-					//group.url = "http://sivvit.com/event/bcf63272.json?fromDate=Thu%20Mar%201%2008:00:00%20-0700%202012&toDate=Thu%20Mar%201%2013:00:00%20-0700%202012&limit=10&page=1";
-					 group.url = "items.json";
+					group.url = "http://sivvit.com/event/bcf63272.json?callback=?&fromDate=Thu%20Mar%201%2008:00:00%20-0700%202012&toDate=Thu%20Mar%201%2013:00:00%20-0700%202012&limit=10&page=1";
+					 // group.url = "items.json";
 
 					// Save already-parsed items in the temporaray old_itms array
 					group.set({

@@ -4,6 +4,9 @@
 SIVVIT.ItemGroupModel = Backbone.Model.extend({
 	defaults : {
 		
+		// Data url
+		json: null,
+		
 		type:null,
 		id : null,
 		timestamp : null,
@@ -25,5 +28,18 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 			post : 0,
 			media : 0,
 		}
-	}
+	},
+	
+	
+	setRequestPath: function(startDate, endDate){
+		
+		console.log(this.get("json")+"startDate="+startDate.toUTCString()+"&endDate="+endDate.toUTCString()+"&limit=10");
+		
+		console.log(this.get("displayed"), this.get("stats").total);
+		
+		//this.set({url:})
+	},
+	
+	
+	
 });
