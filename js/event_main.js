@@ -338,16 +338,12 @@ Date.prototype.format = function() {
 						// Increment stats
 						var stats = group_model.get("stats");
 
+						// Please note that model stats are updated bypassing the setter method. 
+						// Group model does not allow secondary stats updates 
 						stats.total = Number(stats.total) + Number(con[i].stats.total);
 						stats.media = Number(stats.media) + Number(con[i].stats.media);
 						stats.post = Number(stats.post) + Number(con[i].stats.post);
 
-						// Update stats of the existing group
-						group_model.set({
-							stats : stats
-						}, {
-							silent : true
-						});
 
 						// Create all new items for rendering. Maybe check whether bucket
 						// already has items etc.
