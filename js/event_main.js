@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+};
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -91,7 +92,9 @@ Date.prototype.format = function() {
 			});
 
 			// Load content for the first time
-			this.eventModel.set({json:json});
+			this.eventModel.set({
+				json : json
+			});
 			this.eventModel.updateUrlPath();
 			this.eventModel.fetch();
 
@@ -100,7 +103,7 @@ Date.prototype.format = function() {
 				// Show main application
 				$("#content-loader").remove();
 				$("#event-application").show();
-						
+
 				if(self.eventModel.get('status') < 1) {
 					// Stop requesting data if event is archived
 					clearInterval(self.fetch_interval);
@@ -110,7 +113,7 @@ Date.prototype.format = function() {
 						self.fetch();
 					}
 				}
-				
+
 				if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
 				}
@@ -118,7 +121,7 @@ Date.prototype.format = function() {
 				// Reset updated timer
 				if(self.eventModel.hasChanged("last_update")) {
 					self.headerView.reset(new Date(self.eventModel.get("last_update")));
-					
+
 					// Update url path to load the latest data
 					self.eventModel.updateUrlPath();
 				}
@@ -142,15 +145,21 @@ Date.prototype.format = function() {
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
 							case "global":
-								self.temporalModel.set({histogram:self.eventModel.get("histogram").global});
+								self.temporalModel.set({
+									histogram : self.eventModel.get("histogram").global
+								});
 								break;
 
 							case "media":
-								self.temporalModel.set({histogram:self.eventModel.get("histogram").media});
+								self.temporalModel.set({
+									histogram : self.eventModel.get("histogram").media
+								});
 								break;
 
 							case "post":
-								self.temporalModel.set({histogram:self.eventModel.get("histogram").post});
+								self.temporalModel.set({
+									histogram : self.eventModel.get("histogram").post
+								});
 								break;
 						}
 					}
@@ -289,8 +298,9 @@ Date.prototype.format = function() {
 
 				for( i = con.length; i--; ) {
 					group_model = new SIVVIT.ItemGroupModel(con[i]);
-					group_model.set({json: this.eventModel.get("json")});
-					
+					group_model.set({
+						json : this.eventModel.get("json")
+					});
 					tmp_items = [];
 
 					for( j = con[i].items.length; j--; ) {
@@ -339,9 +349,9 @@ Date.prototype.format = function() {
 							silent : true
 						});
 
-						// Create all new items for rendering. Maybe check whether bucket 
-						// already has items etc. 
-						
+						// Create all new items for rendering. Maybe check whether bucket
+						// already has items etc.
+
 						// for( j = con[i].items.length; j--; ) {
 						// itm_model = new SIVVIT.ItemModel(con[i].items[j]);
 						// itm_model.set({
@@ -358,7 +368,9 @@ Date.prototype.format = function() {
 						// Create new groups
 						new_goups = new SIVVIT.ItemGroupCollection();
 						group_model = new SIVVIT.ItemGroupModel(con[i]);
-						group_model.set({json: this.eventModel.get("json")});
+						group_model.set({
+							json : this.eventModel.get("json")
+						});
 						tmp_items = [];
 
 						for( j = con[i].items.length; j--; ) {
@@ -479,7 +491,7 @@ Date.prototype.format = function() {
 					break;
 
 				case "#media-btn":
-					$("#content-stats").html("Media: " + (this.eventModel.get("stats").images+this.eventModel.get("stats").videos));
+					$("#content-stats").html("Media: " + (this.eventModel.get("stats").images + this.eventModel.get("stats").videos));
 					break;
 			}
 		}
@@ -636,13 +648,10 @@ Date.prototype.format = function() {
 
 					// Display loader graphics
 					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
-					
-					group.setRequestPath(group.get("timestamp"), self.temporalModel.adjustToNextBucket(group.get("timestamp")));
-					
-					group.url = "http://sivvit.com/event/bcf63272.json?callback=?&fromDate=Thu%20Mar%201%2008:00:00%20-0700%202012&toDate=Thu%20Mar%201%2013:00:00%20-0700%202012&limit=10&page=1";
-					 // group.url = "items.json";
 
-					// Save already-parsed items in the temporaray old_itms array
+					group.setRequestPath(group.get("timestamp"), self.temporalModel.adjustToNextBucket(group.get("timestamp")), self.eventModel.get("limit"), self.eventModel.get("histogram").resolution);
+
+					// Save already-parsed items in the temporal old_itms array
 					group.set({
 						old_items : group.get("items")
 					}, {
@@ -674,40 +683,52 @@ Date.prototype.format = function() {
 
 			}, this);
 		},
-		// Called once additional group data is loaded
+		// Called once additional group data is loaded.
 		updateGroup : function(group) {
 
-			var tmp = [], i;
-			var len = group.get("items").length;
-			var items = group.get("items");
-
+			var tmp = [], i, len, items;
+			var content = group.get("content");
+			len = content.length;
+			
+			// It is possible to have more than one bucket, loop through all of them to 
+			// find the appropriate one
 			for( i = len; i--; ) {
-
-				var itm = items[i];
-				if(itm) {
-
-					var itm_model = new SIVVIT.ItemModel(itm);
-
-					itm_model.set({
-						timestamp : new Date(itm.timestamp)
-					});
-
-					tmp.push(itm_model);
-					group.get("old_items").add(itm_model);
+				if(new Date(content[i].timestamp).getTime() === group.get("timestamp").getTime()) {
+					items = content[i].items;
 				}
 			}
+			
+			if(items.length > 0) {
+				len = group.get("items").length;
 
-			// Reassign existing collection and add new one
-			group.set({
-				// Assing augmented old_items back to the items collection
-				items : group.get("old_items"),
-				items_new : new SIVVIT.ItemGroupCollection(tmp)
-			}, {
-				silent : true
-			});
+				for( i = len; i--; ) {
 
-			this.buildGroupItems(group, true);
-			this.buildGroupFooter(group);
+					var itm = items[i];
+					if(itm) {
+
+						var itm_model = new SIVVIT.ItemModel(itm);
+
+						itm_model.set({
+							timestamp : new Date(itm.timestamp)
+						});
+
+						tmp.push(itm_model);
+						group.get("old_items").add(itm_model);
+					}
+				}
+
+				// Reassign existing collection and add new one
+				group.set({
+					// Assing augmented old_items back to the items collection
+					items : group.get("old_items"),
+					items_new : new SIVVIT.ItemGroupCollection(tmp)
+				}, {
+					silent : true
+				});
+
+				this.buildGroupItems(group, true);
+				this.buildGroupFooter(group);
+			}
 		},
 		displayEdit : function() {
 
@@ -1070,7 +1091,6 @@ Date.prototype.format = function() {
 				}
 			}, this);
 		},
-		
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 
@@ -1118,7 +1138,7 @@ Date.prototype.format = function() {
 	SIVVIT.HeaderView = Backbone.View.extend({
 
 		timestamp : null,
-		
+
 		render : function() {
 
 			$("#event-title").html(this.model.get("title"));
@@ -1126,16 +1146,14 @@ Date.prototype.format = function() {
 			$("#event-user").html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + new Date(this.model.get("startDate")).toDateString());
 			$("#map-label").html("<span class='icon-location'></span>" + this.model.get("location").name);
 		},
-		
 		// Reset timer
 		reset : function(date) {
-			
+
 			var self = this;
-			
+
 			this.timestamp = date;
 			this.update();
 		},
-		
 		// Updates timer
 		update : function() {
 

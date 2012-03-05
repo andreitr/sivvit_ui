@@ -1,45 +1,35 @@
-/**
- * Temporal bucket containing content
- */
+// Model for the temporal bucket
 SIVVIT.ItemGroupModel = Backbone.Model.extend({
 	defaults : {
-		
+
 		// Data url
-		json: null,
-		
-		type:null,
+		json : null,
+
+		type : null,
 		id : null,
 		timestamp : null,
 
 		// Collection of items - ItemCollection
 		items : null,
-		
+
 		// Collection of newly loaded items - instance of ItemCollection
-		items_new: null,
-		
+		items_new : null,
+
 		// HTML container for this group
-		div_id: null,
-		
+		div_id : null,
+
 		// Count of the displayed items
-		displayed: 0,
-		
+		displayed : 0,
+
 		stats : {
 			total : 0,
 			post : 0,
 			media : 0,
 		}
 	},
-	
-	
-	setRequestPath: function(startDate, endDate){
-		
-		console.log(this.get("json")+"startDate="+startDate.toUTCString()+"&endDate="+endDate.toUTCString()+"&limit=10");
-		
-		console.log(this.get("displayed"), this.get("stats").total);
-		
-		//this.set({url:})
+	// Sets url path with all necessary parameters
+	setRequestPath : function(startDate, endDate, limit, resolution) {
+		var page = Math.round(this.get("displayed") / limit) + 1;
+		this.url = this.get("json") + "&meta=0&fromDate=" + (startDate.getTime()/1000) + "&toDate=" + (endDate.getTime()/1000) + "&limit=" + limit + "&page=" + page+"&resolution="+resolution;
 	},
-	
-	
-	
 });
