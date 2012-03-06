@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -136,7 +135,7 @@ Date.prototype.format = function() {
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
 						endDate : new Date(self.eventModel.get("last_update")),
-						endRange: new Date(self.eventModel.get("last_update")),
+						endRange : new Date(self.eventModel.get("last_update")),
 						min : Math.min(self.temporalModel.get("min"), self.eventModel.get("histogram").min),
 						max : Math.max(self.temporalModel.get("max"), self.eventModel.get("histogram").max),
 						resolution : self.eventModel.get("histogram").resolution
@@ -339,8 +338,8 @@ Date.prototype.format = function() {
 						// Increment stats
 						var stats = group_model.get("stats");
 
-						// Please note that model stats are updated bypassing the setter method. 
-						// Group model does not allow secondary stats updates 
+						// Please note that model stats are updated bypassing the setter method.
+						// Group model does not allow secondary stats updates
 						stats.total = Number(stats.total) + Number(con[i].stats.total);
 						stats.media = Number(stats.media) + Number(con[i].stats.media);
 						stats.post = Number(stats.post) + Number(con[i].stats.post);
@@ -349,14 +348,13 @@ Date.prototype.format = function() {
 						this.activeView.buildGroupFooter(group_model);
 
 					} else {
-						
+
 						// Create new groups
 						new_goups = new SIVVIT.ItemGroupCollection();
 						group_model = new SIVVIT.ItemGroupModel(con[i]);
 						group_model.set({
 							json : this.eventModel.get("json")
 						});
-						
 						tmp_items = [];
 
 						for( j = con[i].items.length; j--; ) {
@@ -674,15 +672,15 @@ Date.prototype.format = function() {
 			var tmp = [], i, len, items;
 			var content = group.get("content");
 			len = content.length;
-			
-			// It is possible to have more than one bucket, loop through all of them to 
+
+			// It is possible to have more than one bucket, loop through all of them to
 			// find the appropriate one
 			for( i = len; i--; ) {
 				if(new Date(content[i].timestamp).getTime() === group.get("timestamp").getTime()) {
 					items = content[i].items;
 				}
 			}
-			
+
 			if(items.length > 0) {
 				len = group.get("items").length;
 
@@ -911,7 +909,7 @@ Date.prototype.format = function() {
 
 			// Loop through all available groups - ItemGroupCollection
 			source.each(function(group) {
-				
+
 				// Create group element
 				group = this.buildGroup(group, is_update);
 
@@ -967,7 +965,7 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.PostView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		display : function(source) {
 
@@ -982,7 +980,7 @@ Date.prototype.format = function() {
 
 			// Loop through all available groups - ItemGroupCollection
 			source.each(function(group) {
-				
+
 				if(group.get("type") == "post" || group.get("type") == "mixed") {
 
 					// Create group element
