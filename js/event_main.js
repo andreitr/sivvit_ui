@@ -344,29 +344,18 @@ Date.prototype.format = function() {
 						stats.media = Number(stats.media) + Number(con[i].stats.media);
 						stats.post = Number(stats.post) + Number(con[i].stats.post);
 
-
-						// Create all new items for rendering. Maybe check whether bucket
-						// already has items etc.
-
-						// for( j = con[i].items.length; j--; ) {
-						// itm_model = new SIVVIT.ItemModel(con[i].items[j]);
-						// itm_model.set({
-						// timestamp : new Date(con[i].items[j].timestamp)
-						// });
-						// group_model.get("items").add(itm_model);
-						// }
-
 						this.activeView.buildGroupHeader(group_model);
 						this.activeView.buildGroupFooter(group_model);
 
 					} else {
-
+						
 						// Create new groups
 						new_goups = new SIVVIT.ItemGroupCollection();
 						group_model = new SIVVIT.ItemGroupModel(con[i]);
 						group_model.set({
 							json : this.eventModel.get("json")
 						});
+						
 						tmp_items = [];
 
 						for( j = con[i].items.length; j--; ) {
@@ -374,7 +363,6 @@ Date.prototype.format = function() {
 							itm_model.set({
 								timestamp : new Date(con[i].items[j].timestamp)
 							});
-
 							tmp_items.push(itm_model);
 						}
 
@@ -921,8 +909,8 @@ Date.prototype.format = function() {
 			}
 
 			// Loop through all available groups - ItemGroupCollection
-			this.model.each(function(group) {
-
+			source.each(function(group) {
+				
 				// Create group element
 				group = this.buildGroup(group, is_update);
 
@@ -993,7 +981,7 @@ Date.prototype.format = function() {
 
 			// Loop through all available groups - ItemGroupCollection
 			source.each(function(group) {
-
+				
 				if(group.get("type") == "post" || group.get("type") == "mixed") {
 
 					// Create group element

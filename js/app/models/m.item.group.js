@@ -40,14 +40,12 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 		
 		// Update stats only for the fist time
 		if(attributes.hasOwnProperty("stats")) {
-
 			if(!this.lock_stats) {
 				this.lock_stats = true;
 			} else {
 				delete attributes.stats;
 			}
 		}
-
 		Backbone.Model.prototype.set.call(this, attributes, options);
 		return this;
 	},

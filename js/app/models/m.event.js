@@ -7,9 +7,11 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		// Used in the data request, load meta data if specified
 		meta : 1,
 		// Used in data request to determine the number of displayed items
-		limit:3,
+		limit: 3,
 		// The number of initially loaded buckets
 		bucket_limit: 10, 
+		// Loaded buckets
+		bucket_page: 1,
 		
 		
 		id : null,
@@ -114,12 +116,13 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		if(this.attributes.bucket_limit !== null) {
 			path += "&bucket_limit=" + this.attributes.bucket_limit;
 		}
-		if(this.attributes.histogram.resolution !== null) {
-			path += "&resolution=hour";
-			//+this.attributes.histogram.resolution;
-		} else {
-			path += "&resolution=hour";
+		if(this.attributes.bucket_page !== null) {
+			path += "&bucket_page=" + this.attributes.bucket_page;
 		}
+		if(this.attributes.histogram.resolution !== null) {
+			path += "&resolution="+this.attributes.histogram.resolution;
+		}
+		
 		this.url = path;
 	}
 });
