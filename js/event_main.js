@@ -136,6 +136,7 @@ Date.prototype.format = function() {
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
 						endDate : new Date(self.eventModel.get("last_update")),
+						endRange: new Date(self.eventModel.get("last_update")),
 						min : Math.min(self.temporalModel.get("min"), self.eventModel.get("histogram").min),
 						max : Math.max(self.temporalModel.get("max"), self.eventModel.get("histogram").max),
 						resolution : self.eventModel.get("histogram").resolution
