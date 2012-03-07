@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -40,9 +39,6 @@ Date.prototype.format = function() {
 
 		// Enables content editing when set to true
 		edit : false,
-
-		// Fetch interval id
-		fetch_interval : null,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -103,16 +99,6 @@ Date.prototype.format = function() {
 				// Show main application
 				$("#content-loader").remove();
 				$("#event-application").show();
-
-				if(self.eventModel.get('status') < 1) {
-					// Stop requesting data if event is archived
-					clearInterval(self.fetch_interval);
-				} else {
-					// Initiate continues data loading
-					if(self.fetch_interval === null) {
-						self.fetch();
-					}
-				}
 
 				if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
 					self.headerView.render();
@@ -182,19 +168,8 @@ Date.prototype.format = function() {
 				if(self.eventModel.hasChanged("location")) {
 					self.mapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lon, self.eventModel.get("location").lat);
 				}
-
 				self.appView.update();
 			});
-		},
-		// Initiate continues data requests
-		fetch : function() {
-
-			var self = this;
-
-			// Initiate continues content loading
-			this.fetch_interval = setInterval(function() {
-				self.eventModel.fetch();
-			}, 10000);
 		}
 	};
 
@@ -425,7 +400,7 @@ Date.prototype.format = function() {
 					temporal : this.temporalModel
 				});
 			}
-
+			
 			switch(event.target.id) {
 
 				case "all-btn":
@@ -452,6 +427,7 @@ Date.prototype.format = function() {
 					this.activeView = this.mediaView;
 					break;
 			}
+			
 			this.renderStats();
 
 			this.temporalModel.set({
@@ -572,11 +548,8 @@ Date.prototype.format = function() {
 			this.footer();
 			this.checkFiltered();
 		},
-		// Displays footer
+		// Displays footer if there are more buckets to be loaded.
 		footer : function() {
-
-			console.log(this.eventModel.hasMoreContent());
-
 			if(this.eventModel.hasMoreContent()) {
 				if($("#load-groups-btn").length <= 0) {
 					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More content<span class='icon-download'></span></div>");

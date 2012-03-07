@@ -9,7 +9,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		// Used in data request to determine the number of displayed items
 		limit : 3,
 		// The number of initially loaded buckets
-		bucket_limit : 10,
+		bucket_limit : 5,
 		// Loaded buckets
 		bucket_page : 1,
 
@@ -59,6 +59,9 @@ SIVVIT.EventModel = Backbone.Model.extend({
 	media_hash : {},
 	global_hash : {},
 
+	// Fetch interval id
+	fetch_interval : null,
+
 	// Override set method to keep track of the original
 	set : function(attributes, options) {
 
@@ -77,6 +80,15 @@ SIVVIT.EventModel = Backbone.Model.extend({
 			}
 			if(attributes.histogram.global !== undefined) {
 				attributes.histogram.global = this.appendHistogram(this.global_hash, attributes.histogram.global);
+			}
+			
+			// Start continues data loading if event is live
+			if(attributes.hasOwnProperty('status')) {
+				if(attributes.status < 1) {
+					this.stopLiveData();
+				} else {
+					this.startLiveData();
+				}
 			}
 		}
 
@@ -107,25 +119,23 @@ SIVVIT.EventModel = Backbone.Model.extend({
 	},
 	// Updates temporal range of loaded content.
 	updateContentRange : function(date) {
-		
+
 		// Set default values
-		if(this.attributes.content_bounds.min === null){
+		if(this.attributes.content_bounds.min === null) {
 			this.attributes.content_bounds.min = new Date(this.get("endDate"));
 			this.attributes.content_bounds.max = new Date(this.get("startDate"));
 		}
 		this.attributes.content_bounds.min = Math.min(date, this.attributes.content_bounds.min);
 		this.attributes.content_bounds.max = Math.max(date, this.attributes.content_bounds.max);
 	},
-	// Returns true when earlier buckets can be loaded. 
-	hasMoreContent: function(){
-		
-		if(this.get("content_bounds").min > new Date(this.get("startDate"))){
+	// Returns true when earlier buckets can be loaded.
+	hasMoreContent : function() {
+		if(this.get("content_bounds").min > new Date(this.get("startDate"))) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	},
-	
 	// Updates url path of the model. Used primarily to update the since attribute
 	// when loading additional data.
 	updateUrlPath : function() {
@@ -152,7 +162,21 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		} else {
 			path += "&resolution=hour";
 		}
-
 		this.url = path;
+	},
+	// Start continues data loading
+	startLiveData : function() {
+		var self = this;
+		
+		this.stopLiveData();
+
+		// Initiate continues content loading
+		this.fetch_interval = setInterval(function() {
+			self.fetch();
+		}, 10000);
+	},
+	// Stop continues data requests
+	stopLiveData : function() {
+		clearInterval(this.fetch_interval);
 	}
 });
