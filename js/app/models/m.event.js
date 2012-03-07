@@ -15,8 +15,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
 		// Temporal bounds of loaded content
 		content_bounds : {
-			min : 0,
-			max : 0
+			min : null,
+			max : null
 		},
 
 		// Properties loaded from the server
@@ -107,9 +107,25 @@ SIVVIT.EventModel = Backbone.Model.extend({
 	},
 	// Updates temporal range of loaded content.
 	updateContentRange : function(date) {
+		
+		// Set default values
+		if(this.attributes.content_bounds.min === null){
+			this.attributes.content_bounds.min = new Date(this.get("endDate"));
+			this.attributes.content_bounds.max = new Date(this.get("startDate"));
+		}
 		this.attributes.content_bounds.min = Math.min(date, this.attributes.content_bounds.min);
 		this.attributes.content_bounds.max = Math.max(date, this.attributes.content_bounds.max);
 	},
+	// Returns true when earlier buckets can be loaded. 
+	hasMoreContent: function(){
+		
+		if(this.get("content_bounds").min > new Date(this.get("startDate"))){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	
 	// Updates url path of the model. Used primarily to update the since attribute
 	// when loading additional data.
 	updateUrlPath : function() {

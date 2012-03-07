@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+};
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -318,12 +319,12 @@ Date.prototype.format = function() {
 						stats : con[i].stats,
 						timestamp : new Date(con[i].timestamp)
 					});
-					
+
 					this.eventModel.updateContentRange(group_model.get("timestamp"));
-					
+
 					tmp_group.push(group_model);
 				}
-				
+
 				this.collection = new SIVVIT.ItemGroupCollection(tmp_group);
 				this.render();
 
@@ -375,7 +376,7 @@ Date.prototype.format = function() {
 							stats : con[i].stats,
 							timestamp : new Date(group_model.get("timestamp"))
 						});
-						
+
 						this.eventModel.updateContentRange(group_model.get("timestamp"));
 
 						// Update the count of new content
@@ -568,7 +569,19 @@ Date.prototype.format = function() {
 				this.displayEdit();
 			}
 			this.display();
+			this.footer();
 			this.checkFiltered();
+		},
+		// Displays footer
+		footer : function() {
+
+			console.log(this.eventModel.hasMoreContent());
+
+			if(this.eventModel.hasMoreContent()) {
+				if($("#load-groups-btn").length <= 0) {
+					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More content<span class='icon-download'></span></div>");
+				}
+			}
 		},
 		// Builds out item group and displays its header
 		// If prepend is set to true the group is prepended to the list, otherwise appended
@@ -923,7 +936,6 @@ Date.prototype.format = function() {
 
 				// Call this once items are added
 				this.buildGroupHeader(group);
-
 				this.buildGroupFooter(group);
 
 			}, this);
