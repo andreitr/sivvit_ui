@@ -270,6 +270,7 @@ Date.prototype.format = function() {
 			var len = this.collection ? this.collection.length : 0;
 			var i, j, itm, tmp_items, new_count, new_groups, group_model, itm_model;
 
+			// First time view is loaded
 			if(!this.collection) {
 
 				for( i = con.length; i--; ) {
@@ -296,13 +297,19 @@ Date.prototype.format = function() {
 					});
 
 					this.eventModel.updateContentRange(group_model.get("timestamp"));
-
 					tmp_group.push(group_model);
 				}
 
 				this.collection = new SIVVIT.ItemGroupCollection(tmp_group);
-				this.render();
 
+				if(this.activeView !== null) {
+					this.activeView.model = this.collection;
+					this.activeView.render();
+				} else {
+					this.render();
+				}
+
+				// Update existing view
 			} else {
 
 				// Add new items to the existing group
@@ -370,6 +377,34 @@ Date.prototype.format = function() {
 			}
 		},
 		render : function(event) {
+
+			if(event && this.activeView) {
+				this.activeView.reset();
+				this.activeView.showLoader();
+				this.collection = null;
+
+				this.eventModel.unset(["content"], {
+					silent : true
+				});
+
+				switch(event.target.id) {
+					case "all-btn":
+						this.eventModel.updateType('all');
+						break;
+					case "post-btn":
+						this.eventModel.updateType('post');
+						break;
+					case "media-btn":
+						this.eventModel.updateType('media');
+						break;
+				}
+
+				this.eventModel.requestPath();
+				this.eventModel.fetch();
+
+				return;
+			}
+
 			this.renderView( event ? event : {
 				target : {
 					id : "all-btn"
@@ -394,13 +429,14 @@ Date.prototype.format = function() {
 				$(this.prevButton).toggleClass('text-btn-selected', false);
 			}
 
-			if(this.activeView) {
-				this.prevView = this.activeView;
-				this.prevView.unbind({
-					temporal : this.temporalModel
-				});
-			}
-			
+			// if(this.activeView) {
+			// this.prevView = this.activeView;
+			// this.prevView.unbind({
+			// temporal : this.temporalModel
+			// });
+			// }
+
+			this.activeView = this.allView;
 			switch(event.target.id) {
 
 				case "all-btn":
@@ -408,7 +444,7 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").global,
 						type : "global"
 					});
-					this.activeView = this.allView;
+					// this.activeView = this.allView;
 					break;
 
 				case "post-btn":
@@ -416,7 +452,7 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").post,
 						type : "post"
 					});
-					this.activeView = this.postView;
+					// this.activeView = this.postView;
 					break;
 
 				case "media-btn":
@@ -424,10 +460,10 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").media,
 						type : "media"
 					});
-					this.activeView = this.mediaView;
+					// this.activeView = this.mediaView;
 					break;
 			}
-			
+
 			this.renderStats();
 
 			this.temporalModel.set({
@@ -437,10 +473,10 @@ Date.prototype.format = function() {
 			});
 
 			this.activeView.model = this.collection;
+			// this.activeView.bind({
+			// temporal : this.temporalModel
+			// });
 
-			this.activeView.bind({
-				temporal : this.temporalModel
-			});
 			this.activeView.render();
 		},
 		// Displays stats for the currently-selected view
@@ -529,6 +565,12 @@ Date.prototype.format = function() {
 				$("#load-content-btn").html((this.new_count + count) + " new items&nbsp;&nbsp;<span class='icon-download'></span>");
 			}
 		},
+		// Resets all properties of the group.
+		reset : function() {
+			this.groups_key = {};
+			this.groups = [];
+			this.rendered = [];
+		},
 		render : function() {
 
 			// Clear out previous content
@@ -555,6 +597,11 @@ Date.prototype.format = function() {
 					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More content<span class='icon-download'></span></div>");
 				}
 			}
+		},
+		// Displays content loader
+		showLoader : function() {
+			$(this.el).empty();
+			$(this.el).html("<div id='content-loader'></div>");
 		},
 		// Builds out item group and displays its header
 		// If prepend is set to true the group is prepended to the list, otherwise appended
@@ -913,6 +960,10 @@ Date.prototype.format = function() {
 
 			}, this);
 		},
+		// Loads content for this specific view
+		loadContent : function() {
+
+		},
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
 
@@ -957,6 +1008,9 @@ Date.prototype.format = function() {
 
 		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
+		load : function() {
+			this.showLoader();
+		},
 		display : function(source) {
 
 			var is_update;

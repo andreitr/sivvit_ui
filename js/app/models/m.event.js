@@ -12,6 +12,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		bucket_limit : 5,
 		// Loaded buckets
 		bucket_page : 1,
+		// Data type
+		type : "post",
 
 		// Temporal bounds of loaded content
 		content_bounds : {
@@ -81,7 +83,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 			if(attributes.histogram.global !== undefined) {
 				attributes.histogram.global = this.appendHistogram(this.global_hash, attributes.histogram.global);
 			}
-			
+
 			// Start continues data loading if event is live
 			if(attributes.hasOwnProperty('status')) {
 				if(attributes.status < 1) {
@@ -119,7 +121,6 @@ SIVVIT.EventModel = Backbone.Model.extend({
 	},
 	// Updates temporal range of loaded content.
 	updateContentRange : function(date) {
-
 		// Set default values
 		if(this.attributes.content_bounds.min === null) {
 			this.attributes.content_bounds.min = new Date(this.get("endDate"));
@@ -157,6 +158,9 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		if(this.attributes.bucket_page !== null) {
 			path += "&bucket_page=" + this.attributes.bucket_page;
 		}
+		if(this.attributes.type !== null) {
+			path += "&type[]=" + this.attributes.type;
+		}
 		if(this.attributes.histogram.resolution !== null) {
 			path += "&resolution=" + this.attributes.histogram.resolution;
 		} else {
@@ -164,10 +168,51 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		}
 		this.url = path;
 	},
+	requestPath : function() {
+		var path = this.attributes.json;
+
+		if(this.attributes.meta !== null) {
+			path += "&meta=0";
+		}
+		if(this.attributes.limit !== null) {
+			path += "&limit=" + this.attributes.limit;
+		}
+		if(this.attributes.bucket_limit !== null) {
+			path += "&bucket_limit=" + this.attributes.bucket_limit;
+		}
+		if(this.attributes.bucket_page !== null) {
+			path += "&bucket_page=" + this.attributes.bucket_page;
+		}
+		if(this.attributes.type !== null) {
+			path += "&type[]=" + this.attributes.type;
+		}
+		if(this.attributes.histogram.resolution !== null) {
+			path += "&resolution=" + this.attributes.histogram.resolution;
+		}
+		this.url = path;
+	},
+	// Updates requested data type
+	updateType : function(type) {
+
+		switch(type) {
+			case 'all':
+				this.attributes.type = 'photo&type[]=media&type[]=post';
+				break;
+			case 'media':
+				this.attributes.type = 'photo&type[]=media';
+				break;
+			case 'photo':
+				this.attributes.type = 'photo';
+				break;
+			case 'post':
+				this.attributes.type = 'post';
+				break;
+		}
+	},
 	// Start continues data loading
 	startLiveData : function() {
 		var self = this;
-		
+
 		this.stopLiveData();
 
 		// Initiate continues content loading
