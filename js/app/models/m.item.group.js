@@ -50,8 +50,8 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 		return this;
 	},
 	// Sets url path with all necessary parameters
-	setRequestPath : function(startDate, endDate, limit, resolution) {
+	setRequestPath : function(startDate, endDate, limit, resolution, type) {
 		var page = Math.round(this.get("displayed") / limit) + 1;
-		this.url = this.get("json") + "&meta=0&fromDate=" + (startDate.getTime() / 1000) + "&toDate=" + (endDate.getTime() / 1000) + "&limit=" + limit + "&page=" + page + "&resolution=" + resolution;
+		this.url = this.get("json") + "&meta=0&fromDate=" + (startDate.getTime() / 1000) + "&toDate=" + (endDate.getTime() / 1000) + "&limit=" + limit + "&page=" + page + "&resolution=" + resolution+"&type[]="+type;
 	},
 });

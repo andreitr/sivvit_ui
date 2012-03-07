@@ -166,6 +166,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		} else {
 			path += "&resolution=hour";
 		}
+		
 		this.url = path;
 	},
 	requestPath : function() {
@@ -199,7 +200,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 				this.attributes.type = 'photo&type[]=media&type[]=post';
 				break;
 			case 'media':
-				this.attributes.type = 'photo&type[]=media';
+				this.attributes.type = 'media&type[]=photo';
 				break;
 			case 'photo':
 				this.attributes.type = 'photo';

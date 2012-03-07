@@ -670,7 +670,7 @@ Date.prototype.format = function() {
 					// Display loader graphics
 					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 
-					group.setRequestPath(group.get("timestamp"), self.temporalModel.adjustToNextBucket(group.get("timestamp")), self.eventModel.get("limit"), self.eventModel.get("histogram").resolution);
+					group.setRequestPath(group.get("timestamp"), self.temporalModel.adjustToNextBucket(group.get("timestamp")), self.eventModel.get("limit"), self.eventModel.get("histogram").resolution,  self.eventModel.get("type"));
 
 					// Save already-parsed items in the temporal old_itms array
 					group.set({
