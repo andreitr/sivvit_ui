@@ -318,9 +318,15 @@ Date.prototype.format = function() {
 						stats : con[i].stats,
 						timestamp : new Date(con[i].timestamp)
 					});
-
+					
+					this.eventModel.updateContentRange(group_model.get("timestamp"));
+					
 					tmp_group.push(group_model);
 				}
+				
+				console.log(this.eventModel.get("content_bounds"));
+				
+				
 				this.collection = new SIVVIT.ItemGroupCollection(tmp_group);
 				this.render();
 

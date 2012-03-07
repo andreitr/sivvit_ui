@@ -7,18 +7,25 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		// Used in the data request, load meta data if specified
 		meta : 1,
 		// Used in data request to determine the number of displayed items
-		limit: 3,
+		limit : 3,
 		// The number of initially loaded buckets
-		bucket_limit: 10, 
+		bucket_limit : 10,
 		// Loaded buckets
-		bucket_page: 1,
-		
-		
+		bucket_page : 1,
+
+		// Temporal bounds of loaded content
+		content_bounds : {
+			min : 0,
+			max : 0
+		},
+
+		// Properties loaded from the server
 		id : null,
 		title : null,
 		author : null,
 		description : null,
 		keywords : [],
+		content : [],
 		location : {
 			lon : null,
 			lat : null,
@@ -98,6 +105,11 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		}
 		return result;
 	},
+	// Updates temporal range of loaded content.
+	updateContentRange : function(date) {
+		this.attributes.content_bounds.min = Math.min(date, this.attributes.content_bounds.min);
+		this.attributes.content_bounds.max = Math.max(date, this.attributes.content_bounds.max);
+	},
 	// Updates url path of the model. Used primarily to update the since attribute
 	// when loading additional data.
 	updateUrlPath : function() {
@@ -120,9 +132,11 @@ SIVVIT.EventModel = Backbone.Model.extend({
 			path += "&bucket_page=" + this.attributes.bucket_page;
 		}
 		if(this.attributes.histogram.resolution !== null) {
-			path += "&resolution="+this.attributes.histogram.resolution;
+			path += "&resolution=" + this.attributes.histogram.resolution;
+		} else {
+			path += "&resolution=hour";
 		}
-		
+
 		this.url = path;
 	}
 });
