@@ -324,9 +324,6 @@ Date.prototype.format = function() {
 					tmp_group.push(group_model);
 				}
 				
-				console.log(this.eventModel.get("content_bounds"));
-				
-				
 				this.collection = new SIVVIT.ItemGroupCollection(tmp_group);
 				this.render();
 
@@ -378,6 +375,8 @@ Date.prototype.format = function() {
 							stats : con[i].stats,
 							timestamp : new Date(group_model.get("timestamp"))
 						});
+						
+						this.eventModel.updateContentRange(group_model.get("timestamp"));
 
 						// Update the count of new content
 						new_count += Number(this.activeView.getItemCount(group_model));
