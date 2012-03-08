@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -454,10 +453,10 @@ Date.prototype.format = function() {
 	SIVVIT.AbstractView = Backbone.View.extend({
 
 		el : "#dynamic-content",
-		
+
 		post_template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 		media_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
-		
+
 		// Rendered elements
 		rendered : [],
 
@@ -482,7 +481,7 @@ Date.prototype.format = function() {
 		// Enable content editing. Assumes that user is logged in
 		edit : false,
 
-		// Set to true when al least of content is displayed
+		// Set to true when at least one content bucket is displayed
 		displayed : false,
 
 		initialize : function(options) {
@@ -688,7 +687,6 @@ Date.prototype.format = function() {
 				}, {
 					silent : true
 				});
-
 				this.buildGroupItems(group, true);
 				this.buildGroupFooter(group);
 			}
@@ -872,6 +870,9 @@ Date.prototype.format = function() {
 				// Call this once items are added
 				this.buildGroupHeader(group);
 				this.buildGroupFooter(group);
+				
+				// 			
+				this.displayed = true;
 
 			}, this);
 		},
@@ -915,7 +916,6 @@ Date.prototype.format = function() {
 			return group.get("stats").total;
 		}
 	});
-
 
 	/**
 	 * Display static map in the sidebar.
