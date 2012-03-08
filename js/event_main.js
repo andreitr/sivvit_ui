@@ -226,41 +226,27 @@ Date.prototype.format = function() {
 		// Instance of SIVVIT.AbstractView
 		activeView : null,
 
-		// Instance of SIVVIT.AbstractView
-		prevView : null,
-
 		// SIVVIT.EventModel
 		eventModel : null,
 
 		// SIVVIT.TemporalModel
 		temporalModel : null,
 
-		// SIVVIT.AllView
-		allView : null,
-
-		// SIVVIT.PostView
-		postView : null,
-
-		// SIVVIT.MediaView
-		mediaView : null,
-
 		// SIVVIT.ItemGroupCollection
 		collection : null,
 
 		// Bind button events
 		events : {
-			"click #all-btn" : "render",
-			"click #post-btn" : "render",
-			"click #media-btn" : "render"
+			"click #all-btn" : "loadView",
+			"click #post-btn" : "loadView",
+			"click #media-btn" : "loadView"
 		},
 
 		initialize : function(options) {
 			this.eventModel = options.eventModel;
 			this.temporalModel = options.temporalModel;
-			this.allView = options.allView;
-			this.postView = options.postView;
-			this.mediaView = options.mediaView;
-
+			this.activeView = options.allView;
+			this.activeButton = "#all-btn";
 			SIVVIT.Lightbox.init();
 		},
 		update : function() {
@@ -299,17 +285,8 @@ Date.prototype.format = function() {
 					this.eventModel.updateContentRange(group_model.get("timestamp"));
 					tmp_group.push(group_model);
 				}
-
 				this.collection = new SIVVIT.ItemGroupCollection(tmp_group);
-
-				if(this.activeView !== null) {
-					this.activeView.model = this.collection;
-					this.activeView.render();
-				} else {
-					this.render();
-				}
-
-				// Update existing view
+				this.renderView();
 			} else {
 
 				// Add new items to the existing group
@@ -370,15 +347,14 @@ Date.prototype.format = function() {
 						});
 					}
 				}
-
 				if(new_count > 0) {
-					this.activeView.update(new_count, new_goups);
+					this.updateView(new_count, new_goups);
 				}
 			}
 		},
-		render : function(event) {
-
-			if(event && this.activeView) {
+		// Loads data for a newly selected view
+		loadView : function(event) {
+			if(this.updateButtons(event.target.id)) {
 				this.activeView.reset();
 				this.activeView.showLoader();
 				this.collection = null;
@@ -387,6 +363,9 @@ Date.prototype.format = function() {
 					silent : true
 				});
 
+				this.updateTemporal();
+
+				// Update type in data request
 				switch(event.target.id) {
 					case "all-btn":
 						this.eventModel.updateType('all');
@@ -398,86 +377,21 @@ Date.prototype.format = function() {
 						this.eventModel.updateType('media');
 						break;
 				}
-
 				this.eventModel.requestPath();
 				this.eventModel.fetch();
-
-				return;
 			}
-
-			this.renderView( event ? event : {
-				target : {
-					id : "all-btn"
-				}
-			});
 		},
-		// Renders view when a user clicks on one of the buttons.
-		renderView : function(event) {
-			// Don't do anything if a view is already rendered
-			if(this.activeButton == "#" + event.target.id) {
-				return;
-			}
-
-			this.prevButton = this.activeButton;
-			this.activeButton = "#" + event.target.id;
-
-			$(this.activeButton).toggleClass('text-btn', false);
-			$(this.activeButton).toggleClass('text-btn-selected', true);
-
-			if(this.prevButton != this.activeButton) {
-				$(this.prevButton).toggleClass('text-btn', true);
-				$(this.prevButton).toggleClass('text-btn-selected', false);
-			}
-
-			// if(this.activeView) {
-			// this.prevView = this.activeView;
-			// this.prevView.unbind({
-			// temporal : this.temporalModel
-			// });
-			// }
-
-			this.activeView = this.allView;
-			switch(event.target.id) {
-
-				case "all-btn":
-					this.temporalModel.set({
-						histogram : this.eventModel.get("histogram").global,
-						type : "global"
-					});
-					// this.activeView = this.allView;
-					break;
-
-				case "post-btn":
-					this.temporalModel.set({
-						histogram : this.eventModel.get("histogram").post,
-						type : "post"
-					});
-					// this.activeView = this.postView;
-					break;
-
-				case "media-btn":
-					this.temporalModel.set({
-						histogram : this.eventModel.get("histogram").media,
-						type : "media"
-					});
-					// this.activeView = this.mediaView;
-					break;
-			}
-
+		// Renders new view
+		renderView : function() {
 			this.renderStats();
-
-			this.temporalModel.set({
-				min : this.eventModel.get("histogram").min,
-				max : this.eventModel.get("histogram").max,
-				resolution : this.eventModel.get("histogram").resolution
-			});
-
+			this.updateTemporal();
 			this.activeView.model = this.collection;
-			// this.activeView.bind({
-			// temporal : this.temporalModel
-			// });
-
 			this.activeView.render();
+
+		},
+		// Updates already rendered view
+		updateView : function(count, groups) {
+			this.activeView.update(count, groups);
 		},
 		// Displays stats for the currently-selected view
 		renderStats : function() {
@@ -495,6 +409,58 @@ Date.prototype.format = function() {
 					$("#content-stats").html("Media: " + (this.eventModel.get("stats").images + this.eventModel.get("stats").videos));
 					break;
 			}
+		},
+		// Updates navigation buttons. Returns false if the view is already
+		// rendered.
+		updateButtons : function(button) {
+
+			if(this.activeButton == "#" + button) {
+				return false;
+			}
+
+			this.prevButton = this.activeButton;
+			this.activeButton = "#" + button;
+
+			$(this.activeButton).toggleClass('text-btn', false);
+			$(this.activeButton).toggleClass('text-btn-selected', true);
+
+			if(this.prevButton != this.activeButton) {
+				$(this.prevButton).toggleClass('text-btn', true);
+				$(this.prevButton).toggleClass('text-btn-selected', false);
+			}
+			return true;
+		},
+		// Update temporal model and set the correct histogram
+		updateTemporal : function() {
+			switch(this.activeButton) {
+
+				case "#all-btn":
+					this.temporalModel.set({
+						histogram : this.eventModel.get("histogram").global,
+						type : "global"
+					});
+					break;
+
+				case "#post-btn":
+					this.temporalModel.set({
+						histogram : this.eventModel.get("histogram").post,
+						type : "post"
+					});
+					break;
+
+				case "#media-btn":
+					this.temporalModel.set({
+						histogram : this.eventModel.get("histogram").media,
+						type : "media"
+					});
+					break;
+			}
+
+			this.temporalModel.set({
+				min : this.eventModel.get("histogram").min,
+				max : this.eventModel.get("histogram").max,
+				resolution : this.eventModel.get("histogram").resolution
+			});
 		}
 	});
 
@@ -670,7 +636,7 @@ Date.prototype.format = function() {
 					// Display loader graphics
 					$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 
-					group.setRequestPath(group.get("timestamp"), self.temporalModel.adjustToNextBucket(group.get("timestamp")), self.eventModel.get("limit"), self.eventModel.get("histogram").resolution,  self.eventModel.get("type"));
+					group.setRequestPath(group.get("timestamp"), self.temporalModel.adjustToNextBucket(group.get("timestamp")), self.eventModel.get("limit"), self.eventModel.get("histogram").resolution, self.eventModel.get("type"));
 
 					// Save already-parsed items in the temporal old_itms array
 					group.set({
@@ -1006,62 +972,64 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.PostView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>"
 
-		load : function() {
-			this.showLoader();
-		},
-		display : function(source) {
+		/**
+		 load : function() {
+		 this.showLoader();
+		 },
+		 display : function(source) {
 
-			var is_update;
+		 var is_update;
 
-			if(source === undefined) {
-				source = this.model;
-				is_update = false;
-			} else {
-				is_update = true;
-			}
+		 if(source === undefined) {
+		 source = this.model;
+		 is_update = false;
+		 } else {
+		 is_update = true;
+		 }
 
-			// Loop through all available groups - ItemGroupCollection
-			source.each(function(group) {
+		 // Loop through all available groups - ItemGroupCollection
+		 source.each(function(group) {
 
-				if(group.get("type") == "post" || group.get("type") == "mixed") {
+		 if(group.get("type") == "post" || group.get("type") == "mixed") {
 
-					// Create group element
-					group = this.buildGroup(group, is_update);
+		 // Create group element
+		 group = this.buildGroup(group, is_update);
 
-					// Display all avialable items
-					this.buildGroupItems(group, false);
+		 // Display all avialable items
+		 this.buildGroupItems(group, false);
 
-					// Call this once items are added
-					this.buildGroupHeader(group);
-					this.buildGroupFooter(group);
-				}
-			}, this);
-		},
-		// Builds each item, returns {timestamp, html} object
-		buildTemplate : function(itm) {
-			if(itm.get("type") == "post") {
-				html = $.tmpl(this.template, {
-					content : itm.get("content"),
-					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author"),
-					source : itm.get("source")
-				});
-				return {
-					timestamp : itm.get("timestamp"),
-					html : html,
-					model : itm
-				};
-			} else {
-				return null;
-			}
-		},
-		// Returns count of items to be displayed in this view
-		getItemCount : function(group) {
-			return group.get("stats").post;
-		}
+		 // Call this once items are added
+		 this.buildGroupHeader(group);
+		 this.buildGroupFooter(group);
+		 }
+		 }, this);
+		 },
+		 // Builds each item, returns {timestamp, html} object
+		 buildTemplate : function(itm) {
+		 if(itm.get("type") == "post") {
+		 html = $.tmpl(this.template, {
+		 content : itm.get("content"),
+		 avatar : itm.get("avatar"),
+		 timestamp : itm.get("timestamp").format(),
+		 author : itm.get("author"),
+		 source : itm.get("source")
+		 });
+		 return {
+		 timestamp : itm.get("timestamp"),
+		 html : html,
+		 model : itm
+		 };
+		 } else {
+		 return null;
+		 }
+		 },
+		 // Returns count of items to be displayed in this view
+		 getItemCount : function(group) {
+		 return group.get("stats").post;
+		 }
+		 */
 	});
 
 	/**
@@ -1069,82 +1037,84 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
 
-		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>"
 
-		display : function(source) {
+		/**
+		 display : function(source) {
 
-			var is_update;
+		 var is_update;
 
-			if(source === undefined) {
-				source = this.model;
-				is_update = false;
-			} else {
-				is_update = true;
-			}
+		 if(source === undefined) {
+		 source = this.model;
+		 is_update = false;
+		 } else {
+		 is_update = true;
+		 }
 
-			// Loop through all available groups - ItemGroupCollection
-			source.each(function(group) {
+		 // Loop through all available groups - ItemGroupCollection
+		 source.each(function(group) {
 
-				if(group.get("type") == "media" || group.get("type") == "mixed" || group.get("type") == "photo") {
+		 if(group.get("type") == "media" || group.get("type") == "mixed" || group.get("type") == "photo") {
 
-					// Create group element
-					group = this.buildGroup(group, is_update);
+		 // Create group element
+		 group = this.buildGroup(group, is_update);
 
-					this.buildGroupItems(group, false);
+		 this.buildGroupItems(group, false);
 
-					// Call this once items are added
-					this.buildGroupHeader(group);
-					this.buildGroupFooter(group);
-				}
-			}, this);
-		},
-		// Displays new content loaded into groups
-		buildGroupItems : function(group, is_new) {
+		 // Call this once items are added
+		 this.buildGroupHeader(group);
+		 this.buildGroupFooter(group);
+		 }
+		 }, this);
+		 },
+		 // Displays new content loaded into groups
+		 buildGroupItems : function(group, is_new) {
 
-			var dsp = is_new ? group.get("displayed") : 0;
+		 var dsp = is_new ? group.get("displayed") : 0;
 
-			// Loop through each available item - ItemCollection
-			group.get( is_new ? "items_new" : "items").each(function(itm) {
-				itm = this.buildTemplate(itm);
-				if(itm) {
+		 // Loop through each available item - ItemCollection
+		 group.get( is_new ? "items_new" : "items").each(function(itm) {
+		 itm = this.buildTemplate(itm);
+		 if(itm) {
 
-					this.initItem(itm, group);
+		 this.initItem(itm, group);
 
-					group.set({
-						displayed : dsp += 1
-					}, {
-						silent : true
-					});
-				}
-			}, this);
-		},
-		// Builds each item, returns {timestamp, html} object
-		buildTemplate : function(itm) {
+		 group.set({
+		 displayed : dsp += 1
+		 }, {
+		 silent : true
+		 });
+		 }
+		 }, this);
+		 },
+		 // Builds each item, returns {timestamp, html} object
+		 buildTemplate : function(itm) {
 
-			if(itm.get("type") == "media" || itm.get("type") == "photo") {
-				html = $.tmpl(this.template, {
-					thumbnail : itm.get("thumbnail"),
-					media : itm.get("media"),
-					content : itm.get("content"),
-					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author"),
-					source : itm.get("source")
-				});
+		 if(itm.get("type") == "media" || itm.get("type") == "photo") {
+		 html = $.tmpl(this.template, {
+		 thumbnail : itm.get("thumbnail"),
+		 media : itm.get("media"),
+		 content : itm.get("content"),
+		 avatar : itm.get("avatar"),
+		 timestamp : itm.get("timestamp").format(),
+		 author : itm.get("author"),
+		 source : itm.get("source")
+		 });
 
-				return {
-					timestamp : itm.get("timestamp"),
-					html : html,
-					model : itm
-				};
-			} else {
-				return null;
-			}
-		},
-		// Returns count of items to be displayed in this view
-		getItemCount : function(group) {
-			return group.get("stats").media;
-		}
+		 return {
+		 timestamp : itm.get("timestamp"),
+		 html : html,
+		 model : itm
+		 };
+		 } else {
+		 return null;
+		 }
+		 },
+		 // Returns count of items to be displayed in this view
+		 getItemCount : function(group) {
+		 return group.get("stats").media;
+		 }
+		 */
 	});
 
 	/**
