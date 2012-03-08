@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+};
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -18,12 +19,6 @@ Date.prototype.format = function() {
 		// SIVVIT.AppView
 		// Main application view. Controls switching of all other views.
 		appView : null,
-
-		// SIVVINT.PostView
-		postView : null,
-
-		// SIVVIT.Mediaiew
-		mediaView : null,
 
 		// SIVVIT.AllView
 		allView : null,
@@ -60,30 +55,15 @@ Date.prototype.format = function() {
 				slider : true
 			});
 
-			this.postView = new SIVVIT.PostView({
-				edit : this.edit,
-				eventModel : this.eventModel,
-				temporalModel : this.temporalModel
-			});
-
-			this.mediaView = new SIVVIT.MediaView({
-				edit : this.edit,
-				eventModel : this.eventModel,
-				temporalModel : this.temporalModel
-			});
 			this.allView = new SIVVIT.AllView({
 				edit : this.edit,
 				temporalModel : this.temporalModel,
-				eventModel : this.eventModel,
-				mediaView : this.mediaView,
-				postView : this.postView
+				eventModel : this.eventModel
 			});
 
 			this.appView = new SIVVIT.AppView({
 				eventModel : this.eventModel,
 				temporalModel : this.temporalModel,
-				postView : this.postView,
-				mediaView : this.mediaView,
 				allView : this.allView
 			});
 
@@ -128,7 +108,7 @@ Date.prototype.format = function() {
 						resolution : self.eventModel.get("histogram").resolution
 					});
 
-					// Redraw temporal histogram
+					// Redraw currently-active histogram
 					if(self.temporalModel.get("type") !== null) {
 						switch(self.temporalModel.get("type")) {
 							case "global":
@@ -246,7 +226,11 @@ Date.prototype.format = function() {
 			this.eventModel = options.eventModel;
 			this.temporalModel = options.temporalModel;
 			this.activeView = options.allView;
+
 			this.activeButton = "#all-btn";
+			$(this.activeButton).toggleClass('text-btn', false);
+			$(this.activeButton).toggleClass('text-btn-selected', true);
+
 			SIVVIT.Lightbox.init();
 		},
 		update : function() {
@@ -287,6 +271,7 @@ Date.prototype.format = function() {
 				}
 				this.collection = new SIVVIT.ItemGroupCollection(tmp_group);
 				this.renderView();
+
 			} else {
 
 				// Add new items to the existing group
@@ -362,8 +347,6 @@ Date.prototype.format = function() {
 				this.eventModel.unset(["content"], {
 					silent : true
 				});
-
-				this.updateTemporal();
 
 				// Update type in data request
 				switch(event.target.id) {
@@ -453,6 +436,7 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").media,
 						type : "media"
 					});
+
 					break;
 			}
 
@@ -470,7 +454,10 @@ Date.prototype.format = function() {
 	SIVVIT.AbstractView = Backbone.View.extend({
 
 		el : "#dynamic-content",
-
+		
+		post_template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		media_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		
 		// Rendered elements
 		rendered : [],
 
@@ -889,15 +876,10 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.AllView = SIVVIT.AbstractView.extend({
 
-		postView : null, // Instance of PostView
-		mediaView : null, // Instance of MediaView
-
 		initialize : function(options) {
 			this.edit = options.edit;
 			this.temporalModel = options.temporalModel;
 			this.eventModel = options.eventModel;
-			this.postView = options.postView;
-			this.mediaView = options.mediaView;
 		},
 		// Renders the entire collection
 		display : function(source) {
@@ -936,7 +918,7 @@ Date.prototype.format = function() {
 			var html;
 
 			if(itm.get("type") === "media" || itm.get("type") === "photo") {
-				html = $.tmpl(this.mediaView.template, {
+				html = $.tmpl(this.media_template, {
 					thumbnail : itm.get("thumbnail"),
 					media : itm.get("media"),
 					avatar : itm.get("avatar"),
@@ -946,7 +928,7 @@ Date.prototype.format = function() {
 				});
 
 			} else if(itm.get("type") === "post") {
-				html = $.tmpl(this.postView.template, {
+				html = $.tmpl(this.post_template, {
 					content : itm.get("content"),
 					avatar : itm.get("avatar"),
 					timestamp : itm.get("timestamp").format(),
@@ -967,155 +949,6 @@ Date.prototype.format = function() {
 		}
 	});
 
-	/**
-	 * Displays posts.
-	 */
-	SIVVIT.PostView = SIVVIT.AbstractView.extend({
-
-		template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>"
-
-		/**
-		 load : function() {
-		 this.showLoader();
-		 },
-		 display : function(source) {
-
-		 var is_update;
-
-		 if(source === undefined) {
-		 source = this.model;
-		 is_update = false;
-		 } else {
-		 is_update = true;
-		 }
-
-		 // Loop through all available groups - ItemGroupCollection
-		 source.each(function(group) {
-
-		 if(group.get("type") == "post" || group.get("type") == "mixed") {
-
-		 // Create group element
-		 group = this.buildGroup(group, is_update);
-
-		 // Display all avialable items
-		 this.buildGroupItems(group, false);
-
-		 // Call this once items are added
-		 this.buildGroupHeader(group);
-		 this.buildGroupFooter(group);
-		 }
-		 }, this);
-		 },
-		 // Builds each item, returns {timestamp, html} object
-		 buildTemplate : function(itm) {
-		 if(itm.get("type") == "post") {
-		 html = $.tmpl(this.template, {
-		 content : itm.get("content"),
-		 avatar : itm.get("avatar"),
-		 timestamp : itm.get("timestamp").format(),
-		 author : itm.get("author"),
-		 source : itm.get("source")
-		 });
-		 return {
-		 timestamp : itm.get("timestamp"),
-		 html : html,
-		 model : itm
-		 };
-		 } else {
-		 return null;
-		 }
-		 },
-		 // Returns count of items to be displayed in this view
-		 getItemCount : function(group) {
-		 return group.get("stats").post;
-		 }
-		 */
-	});
-
-	/**
-	 * Displays media content.
-	 */
-	SIVVIT.MediaView = SIVVIT.AbstractView.extend({
-
-		template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>"
-
-		/**
-		 display : function(source) {
-
-		 var is_update;
-
-		 if(source === undefined) {
-		 source = this.model;
-		 is_update = false;
-		 } else {
-		 is_update = true;
-		 }
-
-		 // Loop through all available groups - ItemGroupCollection
-		 source.each(function(group) {
-
-		 if(group.get("type") == "media" || group.get("type") == "mixed" || group.get("type") == "photo") {
-
-		 // Create group element
-		 group = this.buildGroup(group, is_update);
-
-		 this.buildGroupItems(group, false);
-
-		 // Call this once items are added
-		 this.buildGroupHeader(group);
-		 this.buildGroupFooter(group);
-		 }
-		 }, this);
-		 },
-		 // Displays new content loaded into groups
-		 buildGroupItems : function(group, is_new) {
-
-		 var dsp = is_new ? group.get("displayed") : 0;
-
-		 // Loop through each available item - ItemCollection
-		 group.get( is_new ? "items_new" : "items").each(function(itm) {
-		 itm = this.buildTemplate(itm);
-		 if(itm) {
-
-		 this.initItem(itm, group);
-
-		 group.set({
-		 displayed : dsp += 1
-		 }, {
-		 silent : true
-		 });
-		 }
-		 }, this);
-		 },
-		 // Builds each item, returns {timestamp, html} object
-		 buildTemplate : function(itm) {
-
-		 if(itm.get("type") == "media" || itm.get("type") == "photo") {
-		 html = $.tmpl(this.template, {
-		 thumbnail : itm.get("thumbnail"),
-		 media : itm.get("media"),
-		 content : itm.get("content"),
-		 avatar : itm.get("avatar"),
-		 timestamp : itm.get("timestamp").format(),
-		 author : itm.get("author"),
-		 source : itm.get("source")
-		 });
-
-		 return {
-		 timestamp : itm.get("timestamp"),
-		 html : html,
-		 model : itm
-		 };
-		 } else {
-		 return null;
-		 }
-		 },
-		 // Returns count of items to be displayed in this view
-		 getItemCount : function(group) {
-		 return group.get("stats").media;
-		 }
-		 */
-	});
 
 	/**
 	 * Display static map in the sidebar.
@@ -1181,7 +1014,6 @@ Date.prototype.format = function() {
 			}
 
 			return "updated just now";
-
 		}
 	});
 })(jQuery, SIVVIT);

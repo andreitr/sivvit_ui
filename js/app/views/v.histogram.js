@@ -9,6 +9,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 		this.model.bind("change:histogram", this.render, this);
 	},
 	render : function() {
+		
 		this.drawHistogram();
 		if(this.slider) {
 			this.drawSlider();

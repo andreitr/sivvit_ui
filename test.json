@@ -1,192 +1,39 @@
 {
-	"id": "bcf63272",
-	"title": "Drinking coffee ",
+	"id": "598cb469",
+	"title": "Internet about putin",
 	"author": "andreitr",
-	"keywords": ["coffee"],
+	"keywords": ["putin "],
 	"description": "",
 	"location": {
 		"lat": "0",
 		"lon": "0",
 		"name": "USA"
 	},
-	"startDate": "Wed Feb 29 10:29:56 -0700 2012",
-	"endDate": "Sat Mar 03 00:00:00 -0700 2012",
+	"startDate": "Tue Mar 06 09:47:36 -0700 2012",
+	"endDate": "Thu Mar 08 00:00:00 -0700 2012",
 	"status": "1",
 	"stats": {
-		"images": 10,
-		"posts": 326060,
-		"videos": 308,
-		"total": 326378,
-		"timestamp": 1330742882
+		"images": 4,
+		"posts": 41883,
+		"videos": 63,
+		"total": 41950,
+		"timestamp": 1331241141
 	},
-	"pending": 326378,
-	"last_update": "Fri Mar 02 19:48:01 -0700 2012",
+	"pending": 41950,
+	"last_update": "Thu Mar 08 14:13:02 -0700 2012",
 	"content": [
 		{
-			"timestamp": "Thu Mar 01 08:00:00 -0700 2012",
+			"timestamp": "Thu Mar 08 14:00:00 -0700 2012",
 			"stats": {
-				"post": "164",
+				"post": "134",
 				"photo": "0",
 				"media": "0",
-				"total": "164"
+				"total": "134"
 			},
 			"type": "post",
 			"items": [
 				{
-					"id": "4f4f8ef3e7712",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Here.. usually. "
-					},
-					"author": "Deidra23",
-					"timestamp": "Thu Mar 01 08:00:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1792333212\/tat_normal.jpg",
-					"content": "@CabaFashions nice! I'll let you know, we can make a coffee\/shopping day of it! I have some time left",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8ef3f3a7f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Auburn, AL"
-					},
-					"author": "LL_SNELL_J",
-					"timestamp": "Thu Mar 01 08:00:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1834732132\/fRAE7G8L_normal",
-					"content": "\" IN SEARCH OF A GRANDE, BIG, HUGE, MEGA, JUMBO, ENORMOUS, FAT....SIZED COFFEE",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8ef417ff4",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Den Haag"
-					},
-					"author": "stagemanagers",
-					"timestamp": "Thu Mar 01 08:00:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/sticky\/default_profile_images\/default_profile_4_normal.png",
-					"content": "Veel inschrijvingen voor Open Coffee @Igluu Den Haag! Thema: betalingen ontvangen via je website! Kom je ook? http:\/\/t.co\/NSF8SU3U",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8ef430728",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Las Vegas\/AZ"
-					},
-					"author": "KOLBIJEAN",
-					"timestamp": "Thu Mar 01 08:00:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1736714049\/383747_10150561287701639_116452406638_10553358_1628154136_n_normal.jpg",
-					"content": "Someone, bring me coffee!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8ef43caca",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Milwaukee, Wis."
-					},
-					"author": "AmyMPS",
-					"timestamp": "Thu Mar 01 08:00:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1563946014\/317856_114614368643786_100002856711214_71266_981860516_n_normal.jpg",
-					"content": "French pressed coffee changed my life.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8ef448ecd",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "London\/Devon- Geneva- Rome"
-					},
-					"author": "Ramon_7788",
-					"timestamp": "Thu Mar 01 08:00:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1862207981\/OWAiBFPq_normal",
-					"content": "@frodobaui @Angelicdemigod. Yes. Having coffee now and work hard...jobs to be done...lol...",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8ef455237",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Clinton, IA"
-					},
-					"author": "abbYEgail",
-					"timestamp": "Thu Mar 01 08:00:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1841055315\/417190_2899230477205_1153680033_32267543_1401480364_n_normal.jpg",
-					"content": "Coffee in hand...and yes, I'm not afraid to tell you what I'm thinking.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8ef46160e",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Den Haag"
-					},
-					"author": "MijnWebservice",
-					"timestamp": "Thu Mar 01 08:00:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1843054702\/logo_normal.jpg",
-					"content": "Veel inschrijvingen voor Open Coffee @Igluu Den Haag! Thema: betalingen ontvangen via je website! Kom je ook? http:\/\/t.co\/dpjl9G7K",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8ef46da10",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Toronto"
-					},
-					"author": "kimbelina79",
-					"timestamp": "Thu Mar 01 08:00:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1432131893\/avatar_normal.jpg",
-					"content": "Day 6 of No Caffeine: I never realized how much of a habit coffee-drinking was until I stopped. At least the headache is mostly gone.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8ef479d75",
+					"id": "4f5920dbabdec",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
@@ -195,27 +42,44 @@
 						"lon": "0",
 						"name": ""
 					},
-					"author": "jimola2011",
-					"timestamp": "Thu Mar 01 08:00:01 -0700 2012",
+					"author": "Maxime_78",
+					"timestamp": "Thu Mar 08 14:13:02 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1858663973\/image_normal.jpg",
-					"content": "Coffee ordered. Happy #lavazza",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1325396885\/bahamas_normal.png",
+					"content": "@f_s78 mec j'en ai marre des rematchs avec lui putin mais bon heureusement ses combats sont jolis meme si faut se taper 5 rounds",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f5920db9fa59",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Kent, England"
+					},
+					"author": "zacksabrejr",
+					"timestamp": "Thu Mar 08 14:12:57 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1241077203\/233479434_normal.jpg",
+					"content": "This is brilliant: Russian election satire takes Putin's manhood away http:\/\/t.co\/sbcWaEwB via @reuters",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}, {
-			"timestamp": "Thu Mar 01 08:01:00 -0700 2012",
+			"timestamp": "Thu Mar 08 13:00:00 -0700 2012",
 			"stats": {
-				"post": "172",
+				"post": "657",
 				"photo": "0",
 				"media": "0",
-				"total": "172"
+				"total": "657"
 			},
 			"type": "post",
 			"items": [
 				{
-					"id": "4f4f8f2d92376",
+					"id": "4f591dca2bfcb",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
@@ -224,726 +88,136 @@
 						"lon": "0",
 						"name": ""
 					},
-					"author": "hbsk99",
-					"timestamp": "Thu Mar 01 08:01:00 -0700 2012",
+					"author": "salah577",
+					"timestamp": "Thu Mar 08 13:59:57 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1753429288\/fb_normal.jpg",
-					"content": "This disgusting coffee is not helping me at all this morning. Who ever said coffee gives people energy is a liar.",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1827922056\/image_normal.jpg",
+					"content": "Putin le dinosaur vien de bouffer la chevre",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f8f36089c2",
+					"id": "4f591dca21d52",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "Springfield, Il"
+						"name": "Santiago Quer\u00c3\u00a9taro"
 					},
-					"author": "Neptunez_Finest",
-					"timestamp": "Thu Mar 01 08:01:01 -0700 2012",
+					"author": "cyp_deportes",
+					"timestamp": "Thu Mar 08 13:59:52 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1834361750\/fc493V4W_normal",
-					"content": "@TasteMy_Lotus finishing up my coffee and hoping this day doesn't drag.lol",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f3612491",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "miami"
-					},
-					"author": "laura_dazzledme",
-					"timestamp": "Thu Mar 01 08:01:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1731220706\/smiles_normal.jpg",
-					"content": "I need some coffee before I knock out at work. #thrusday",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f361c78f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "empress_kerri",
-					"timestamp": "Thu Mar 01 08:01:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1748425533\/image_normal.jpg",
-					"content": "i think imma tr pull an all nighter tonight n see how much of this paper i can get done but imma nee coffee n alot of snacks lol",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f3626ab4",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Wales"
-					},
-					"author": "mistadrong",
-					"timestamp": "Thu Mar 01 08:01:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1251446564\/PICT0049_normal.jpg",
-					"content": "Very twin peaks I know but damn, this is mighty fine coffee.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f3630e0b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "CPT , New York, Milan, Paris."
-					},
-					"author": "BoyIn_PR",
-					"timestamp": "Thu Mar 01 08:01:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1847566142\/05693081fb074e7b76182b0fc1__1__normal.jpg",
-					"content": "No but I would love too RT @CapeTown: do you ever drink coffee at @SeattleCoffeeCo followers? negotiating a ... http:\/\/t.co\/e9fcHlZM",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f363b135",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Oregon"
-					},
-					"author": "ThrowingItBack",
-					"timestamp": "Thu Mar 01 08:01:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1387959819\/1.1245343353.grand-canyon-visit_normal.jpg",
-					"content": "This question! Entrepreneur Black coffee nd his kids zakes nd zahara... Haha! Classic!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f3645457",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Brooklyn, NYC"
-					},
-					"author": "hirokoft",
-					"timestamp": "Thu Mar 01 08:01:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1350200793\/183227_10150113192596865_752586864_6429754_2306193_n_normal.jpg",
-					"content": "Could use another cup of #coffee...",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f364f782",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "thanet kent"
-					},
-					"author": "fionadogwalker",
-					"timestamp": "Thu Mar 01 08:01:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1819655521\/image_normal.jpg",
-					"content": "As soon as I sat down with my coffee the dogs decide that its time to play",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f3659acb",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "westbury,new york"
-					},
-					"author": "m_abbatiello",
-					"timestamp": "Thu Mar 01 08:01:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1727535519\/mike_normal.jpg",
-					"content": "Thats how I make my morning coffee #macchinetta http:\/\/t.co\/afikirYt",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1880600360\/logo_verdeagua_normal.png",
+					"content": "#Rusia El secretario general de la #OTAN, Anders Fogh #Rasmussen, felicit\u00c3\u00b3 hoy a Vladimir #Putin por su victoria http:\/\/t.co\/1NLmVx87",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}, {
-			"timestamp": "Thu Mar 01 08:02:00 -0700 2012",
+			"timestamp": "Thu Mar 08 12:00:00 -0700 2012",
 			"stats": {
-				"post": "194",
-				"photo": "1",
-				"media": "0",
-				"total": "195"
-			},
-			"type": "mixed",
-			"items": [
-				{
-					"id": "4f4f8f6e84975",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "dublin"
-					},
-					"author": "Tweetyclarke",
-					"timestamp": "Thu Mar 01 08:02:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1495524500\/image_normal.jpg",
-					"content": "I know things are tight . But I just seen a coffee house in drogheda re-using the coffee grinds after making an espresso #coffee #gross",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f6e8ec76",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Denver, CO"
-					},
-					"author": "sammichusocrazy",
-					"timestamp": "Thu Mar 01 08:02:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1431514843\/tumblr_lg5gsqrfiw1qdspz3o1_500_large_normal.jpg",
-					"content": "Tea &gt; coffee #factsthataretrue",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f6e98fb3",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Recife\/PE"
-					},
-					"author": "maricarrilho",
-					"timestamp": "Thu Mar 01 08:02:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1780322892\/391030_321894031159637_100000171283319_1478571_1975896389_n_normal.jpg",
-					"content": "Need my starbucks fix... http:\/\/t.co\/xjEyAikh @GetGlue #Coffee",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f6ea32d5",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "bubblevillefan",
-					"timestamp": "Thu Mar 01 08:02:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1857015189\/linclonbird_normal.png",
-					"content": "After that: write a report to Jen about how much coffee I drank and how many words I wrote.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f6ead616",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Waterbury, CT"
-					},
-					"author": "Chris_Rinaldi",
-					"timestamp": "Thu Mar 01 08:02:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1472661856\/photo_normal.jpg",
-					"content": "This 'Kenyan AA' coffee blend makes me feel like I can run a marathon.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f6eb7978",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "XiaMen, China \u00e5\u017d\u00a6\u00e9\u2014\u00a8"
-					},
-					"author": "AngryRobot32",
-					"timestamp": "Thu Mar 01 08:02:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1562478426\/angry_robot_eye_with_red_normal.jpg",
-					"content": "SALE! BUY ONE BAG OF our Seattle COFFEE BEANS, GET A SECOND FREE! http:\/\/t.co\/AXK6B28e http:\/\/t.co\/oZYGfnSR",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f6ec1c64",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "XiaMen \u00e5\u017d\u00a6\u00e9\u2014\u00a8, China"
-					},
-					"author": "LancerKind",
-					"timestamp": "Thu Mar 01 08:02:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1680850860\/neon_me_in_angry_robot_normal.jpg",
-					"content": "SALE! BUY ONE BAG OF our Seattle COFFEE BEANS, GET A SECOND FREE! http:\/\/t.co\/q7sl3u3l http:\/\/t.co\/2ACsFUh2",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f6ecbf8c",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "30.4481",
-						"lon": "-91.1893",
-						"name": ""
-					},
-					"author": "folkslinger",
-					"timestamp": "Thu Mar 01 08:02:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/243723191\/shirt0278_normal.JPG",
-					"content": "I'm at PJ's Coffee (Lafayette St, Baton Rouge) http:\/\/t.co\/PYaTePFf",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f6ed6296",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Thornhill, Ontario"
-					},
-					"author": "BrownieBerry",
-					"timestamp": "Thu Mar 01 08:02:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1861895612\/IMG-20111005-00277_normal.jpg",
-					"content": "I broke down & bought a Tims hot chocolate, 1st time this year (I can't stomach their nasty coffee) & I won nothing haha #RollUpTheRimToLose",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8f6ee05c2",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "VerrryGood",
-					"timestamp": "Thu Mar 01 08:02:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1864399966\/MN9EeGOx_normal",
-					"content": "Costa Concordia - sank \nCosta Allegrac- burnt out\n \nMaybe the stupid twats should stick to making coffee!",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:03:00 -0700 2012",
-			"stats": {
-				"post": "169",
+				"post": "618",
 				"photo": "0",
 				"media": "0",
-				"total": "169"
+				"total": "618"
 			},
 			"type": "post",
 			"items": [
 				{
-					"id": "4f4f8fa517888",
+					"id": "4f590fc39f23f",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": ""
+						"name": "Cihangir,\u00c4\u00b0stanbul"
 					},
-					"author": "royalJLR329",
-					"timestamp": "Thu Mar 01 08:03:00 -0700 2012",
+					"author": "ezgerarslan",
+					"timestamp": "Thu Mar 08 12:59:49 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1696906174\/IMG00125-20111203-1853_normal.jpg",
-					"content": "This shitty morning calls for a bowl, coffee, blazing saddles and cuddling with lolozozo",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1522806166\/dwita_normal.jpg",
+					"content": "RT @friendsinhell: arkadaslar kony nedir? benim bildigim tek koni putin'in akil hocasi. pic related http:\/\/t.co\/i9RAbqAs",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f8fa5304db",
+					"id": "4f590faa0e629",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "2nd star to the right."
+						"name": "Milan, Italy"
 					},
-					"author": "BiqMeechIndee",
-					"timestamp": "Thu Mar 01 08:03:00 -0700 2012",
+					"author": "andreariscassi",
+					"timestamp": "Thu Mar 08 12:59:40 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1827538673\/2JdadQP2_normal",
-					"content": "Ice vanilla coffee",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fa548c26",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "flava_ava",
-					"timestamp": "Thu Mar 01 08:03:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1855406634\/image_normal.jpg",
-					"content": "French vanilla coffee &gt;&gt;&gt;",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fa554fa8",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "London, England"
-					},
-					"author": "LondonXLove",
-					"timestamp": "Thu Mar 01 08:03:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1857836059\/image_normal.jpg",
-					"content": "I want and need a coffee coolatta w| whip cream, to wake me up!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fa56135b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "haleyleverton",
-					"timestamp": "Thu Mar 01 08:03:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1759636520\/image_normal.jpg",
-					"content": "Chugging coffee just to feel alive... Needless to say #thekooks were AMAZING!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fa56b691",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Fredericton, NB"
-					},
-					"author": "NatashaDube",
-					"timestamp": "Thu Mar 01 08:03:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1784085387\/n120405714_32736907_9635_normal.jpg",
-					"content": "@ptheriault That being said, if they would add London Fogs to the drink menu, I'd run across the parking lot in a second, but coffee, NO.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8faf6ebc4",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Newark, De"
-					},
-					"author": "Mollisonn",
-					"timestamp": "Thu Mar 01 08:03:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1846492855\/J5kYEamM_normal",
-					"content": "RT @Sammy_Smallls: \"@JoseCuervoo92: I tweet about coffee every morning!\"bring me & @Mollisonn some coffee!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8faf7bf2f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "41.0658",
-						"lon": "28.995",
-						"name": ""
-					},
-					"author": "oytnkrkn",
-					"timestamp": "Thu Mar 01 08:03:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1784416382\/394561_10150484463084123_599019122_8720326_633110319_n_normal.jpg",
-					"content": "I'm at Robert's Coffee (Ortaklar Cd. No:2\/B Mecidiyek\u00c3\u00b6y, \u00c4\u00b0stanbul) w\/ 3 others http:\/\/t.co\/bCSAEC9b",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8faf861f8",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Chicago, IL"
-					},
-					"author": "reopentainment",
-					"timestamp": "Thu Mar 01 08:03:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1345740188\/cheery_normal.JPG",
-					"content": "gets up, showers, sips morning coffee... lets check up on the market again.... psstchttt *spits up coffee* wtf...",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8faf9053e",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Cape Winelands, South Africa"
-					},
-					"author": "Tania_Tamaleki",
-					"timestamp": "Thu Mar 01 08:03:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1792090277\/Meroe_pyramids_normal.jpg",
-					"content": "RT @tourdafrique: Juices, hills, coffee & rocks - Goodbye Ethiopia\nhttp:\/\/t.co\/INza1pRl http:\/\/t.co\/HDzULS0h",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/252143046\/riscassibn_normal.jpg",
+					"content": "Se #striscialanotizia si occupasse delle elezioni russe, come fa sulle primarie di Palermo, Putin non starebbe festeggiando con Silvio.",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}, {
-			"timestamp": "Thu Mar 01 08:04:00 -0700 2012",
+			"timestamp": "Thu Mar 08 11:00:00 -0700 2012",
 			"stats": {
-				"post": "171",
+				"post": "662",
 				"photo": "0",
 				"media": "0",
-				"total": "171"
+				"total": "662"
 			},
 			"type": "post",
 			"items": [
 				{
-					"id": "4f4f8fe624064",
+					"id": "4f5901a7b975c",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "\u00c3\u0153T: 40.649246,-73.597506"
-					},
-					"author": "RayRay515",
-					"timestamp": "Thu Mar 01 08:04:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1782472609\/285590_10150740298325725_596800724_20286683_252353_n_normal.jpg",
-					"content": "@AubzKelly fine.  You cook.  I will bring the wine and make the coffee",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fe62e3a8",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
+						"lat": "41.5008",
+						"lon": "-99.6809",
 						"name": ""
 					},
-					"author": "Rblackey",
-					"timestamp": "Thu Mar 01 08:04:00 -0700 2012",
+					"author": "kelsmca13",
+					"timestamp": "Thu Mar 08 11:59:54 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1859330095\/Photo_on_2011-09-10_at_16.44__3_normal.jpg",
-					"content": "you drink coffee in the morning I drink cocacola",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1839122504\/427215_10151290606310408_542360407_22514707_1670895799_n_normal.jpg",
+					"content": "@MarcusAK @ashleydshaffer @JordanParr1987 sorry to ruin the day but no experimenting w\/ the buick. #sorrybros  it would be entertaining tho",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f8fe63876e",
+					"id": "4f590195e59d8",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "T.O"
+						"name": "Milano"
 					},
-					"author": "Divin0_L",
-					"timestamp": "Thu Mar 01 08:04:00 -0700 2012",
+					"author": "a_onagio",
+					"timestamp": "Thu Mar 08 11:59:37 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1844753146\/36103_1365697861447_1201653347_30870184_1820196_n_normal.jpg",
-					"content": "Just spilled coffee around my crotch area #nbd #fuck",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fe642a36",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "\u00c3\u0153T: 42.415369,-71.045552"
-					},
-					"author": "JohannaVRodas",
-					"timestamp": "Thu Mar 01 08:04:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1826251546\/image_normal.jpg",
-					"content": "I have a serious obsession with coffee\u00e2\u02dc\u2022 A sign that I am getting old #wah",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fe64d1e4",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Toronto"
-					},
-					"author": "IamMattMeli",
-					"timestamp": "Thu Mar 01 08:04:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1704489127\/n293000469_1299595_2504_normal.jpg",
-					"content": "Won a free coffee two days in a row :) #timhortons",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fe657522",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Central Florida"
-					},
-					"author": "smilesregrets",
-					"timestamp": "Thu Mar 01 08:04:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1848118544\/408427_267882523273963_100001566536056_768220_685188355_n_normal.jpg",
-					"content": "#storyofmylife  RT @Angelx1976: I need a coffee fix. #addiction ...XOXOXO",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fe661863",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "FROM GR TO WERE U R! "
-					},
-					"author": "HOOPHIGH74",
-					"timestamp": "Thu Mar 01 08:04:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1814839947\/Cdot2886_normal.jpg",
-					"content": "I need coffee.....",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fe66bb3e",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Philippines"
-					},
-					"author": "FX777222999",
-					"timestamp": "Thu Mar 01 08:04:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1322945746\/FX12_normal.jpg",
-					"content": "7 Tricks so You Can Drink Coffee and Tea and Still Change Habits | FX777 CoffeeWorld http:\/\/t.co\/CQF1c37F",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fe675e6a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "\u00c3\u0153T: 33.848368,-118.179954"
-					},
-					"author": "mswonderwoman1",
-					"timestamp": "Thu Mar 01 08:04:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1341852845\/meee_normal.jpg",
-					"content": "Yea mine too!! Haha RT @iamroro562: I think someone put Viagra on my coffee this morning \\355\\240\\275\\355\\270\\232\\355\\240\\275\\355\\270\\234\\355\\240\\275\\355\\262\\252RT @mswonderwoman1: Good moaning!!! \u00e2\u02dc\u00ba",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f8fe680181",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Engerland"
-					},
-					"author": "gazaztron",
-					"timestamp": "Thu Mar 01 08:04:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1380245682\/248857_10150320252138677_501638676_10024213_5913655_n_normal.jpg",
-					"content": "@foreverbubbles7 love shipping in the pints mayte. I'm bloody good at coffee. Day off today. #HangingOutWithMyWangOut",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1203358038\/01-italian-man-casual-062509-lg_normal.jpg",
+					"content": "Berlusconi skips TV show to congratulate Putin - Huffington Post: MOSCOW \u00e2\u20ac\u201d Former Italian premier Si... http:\/\/t.co\/ukpjy5IG #berlusconi",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}, {
-			"timestamp": "Thu Mar 01 08:05:00 -0700 2012",
+			"timestamp": "Thu Mar 08 10:00:00 -0700 2012",
 			"stats": {
-				"post": "174",
+				"post": "610",
 				"photo": "0",
 				"media": "0",
-				"total": "174"
+				"total": "610"
 			},
 			"type": "post",
 			"items": [
 				{
-					"id": "4f4f901e77b8b",
+					"id": "4f58f3a0cdac4",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
@@ -952,942 +226,182 @@
 						"lon": "0",
 						"name": ""
 					},
-					"author": "dtecmire",
-					"timestamp": "Thu Mar 01 08:05:00 -0700 2012",
+					"author": "AntoinePattaya",
+					"timestamp": "Thu Mar 08 10:59:55 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1205990160\/COON_normal.png",
-					"content": "Coffee is for the birds",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1875929813\/image_normal.jpg",
+					"content": "@TheoBezzi oh putin frisson extrem &lt;3",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f901e81ed4",
+					"id": "4f58f3a0ba24d",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "In yo pockets "
+						"name": "Tuxtla Gutierrez, Chiapas"
 					},
-					"author": "Mr_KP216",
-					"timestamp": "Thu Mar 01 08:05:00 -0700 2012",
+					"author": "Chinowiener",
+					"timestamp": "Thu Mar 08 10:59:54 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1810648645\/Mr_KP216_normal.jpg",
-					"content": "Me 2! RT @_Sweet_Assassin I want some coffee",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f901e96515",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "MeganHayes11",
-					"timestamp": "Thu Mar 01 08:05:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1853746395\/image_normal.jpg",
-					"content": "Today is not Monday so what is up with all the crap and drama? Geez. I need something stronger than coffee today #badmood #grrrrrr",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f901ea083d",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Vancouver, BC Canada"
-					},
-					"author": "Blueprintevents",
-					"timestamp": "Thu Mar 01 08:05:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1860660050\/seasons2012_poster_normal.jpg",
-					"content": "Coffee ..",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f901eaab67",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Where Fashion Is."
-					},
-					"author": "KenshyDelva",
-					"timestamp": "Thu Mar 01 08:05:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1856114133\/image_normal.jpg",
-					"content": "I hate when ny coffee gets cold. Ugh. i guess I need to drink faster lol",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f901eb4edd",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "brynsummerson",
-					"timestamp": "Thu Mar 01 08:05:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1757235893\/QM0l0swx_normal",
-					"content": "Teacher: lets have a coffee talk.. mike myers:  no lets have a dube talk...lmfao",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f901ebf1c7",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Bath, UK"
-					},
-					"author": "FerndaleKitchen",
-					"timestamp": "Thu Mar 01 08:05:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1518799026\/fernkit_logo_normal.jpg",
-					"content": "\u00e2\u20ac\u0153@sooomuchstuff: what an amazing coffee @metheunArms this morning. Best for AGES what do you use for your americanos?\u00e2\u20ac\u009d @NOWBath @WeLoveBath",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f901ec94fa",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Good ol' Lynchburg, VA"
-					},
-					"author": "LibertyUProbs",
-					"timestamp": "Thu Mar 01 08:05:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1786704813\/image_normal.jpg",
-					"content": "I often settle for Jazzman's coffee instead of Starbucks coffee because the bookstore is too far away. @FirstWorldLife #LibertyUProbs",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f901ed381b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Auburn, Alabama"
-					},
-					"author": "RainWizard",
-					"timestamp": "Thu Mar 01 08:05:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1193004301\/Photo_00011_normal.jpg",
-					"content": "2nd day of drinking black coffee. Not feeling sick to my stomach like I did Teusday. Good sign!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f901ede03b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "RiggDaGame2",
-					"timestamp": "Thu Mar 01 08:05:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1588110749\/summer_normal.jpg",
-					"content": "Craving dunkin donuts iced coffee....someone bring me some #prettyplease #willloveyouforever",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1784483340\/image_normal.jpg",
+					"content": "RT @Milosz_Boban: Berlusconi, Putin y Medv\u00c3\u00a9dev\u00e2\u20ac\u00a6 no quisiera o\u00c3\u00adr el final de este chiste.",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}, {
-			"timestamp": "Thu Mar 01 08:06:00 -0700 2012",
+			"timestamp": "Thu Mar 08 09:00:00 -0700 2012",
 			"stats": {
-				"post": "155",
+				"post": "625",
 				"photo": "0",
 				"media": "0",
-				"total": "155"
+				"total": "625"
 			},
 			"type": "post",
 			"items": [
 				{
-					"id": "4f4f905ff05ad",
+					"id": "4f58e591e847c",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "Maple"
+						"name": "Jo\u00c3\u00a3o Pessoa \/\/ PB"
 					},
-					"author": "alessiamoc",
-					"timestamp": "Thu Mar 01 08:06:00 -0700 2012",
+					"author": "OBEDlENTE",
+					"timestamp": "Thu Mar 08 09:59:53 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1744205448\/image_normal.jpg",
-					"content": "@FrancisMocella you owe me a mickey of vodka and a coffee, you ass.",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1799370409\/other_normal.png",
+					"content": "Berlusconi, Putin y Medvedev renuevan su alianza: Los rusos agasajan al italiano en un estaci\u00c3\u00b3n ... http:\/\/t.co\/4cVbjFlp #TeamFollowBack",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f906014f5c",
+					"id": "4f58e5920057c",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "Lumberport town, WV, USA"
+						"name": "Santiago"
 					},
-					"author": "TarjeiGluc9934",
-					"timestamp": "Thu Mar 01 08:06:01 -0700 2012",
+					"author": "__goyo",
+					"timestamp": "Thu Mar 08 09:59:53 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1864536362\/821865695P1003974_normal.jpg",
-					"content": "And so begins the run for coffee",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f906021306",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "dp_7891_",
-					"timestamp": "Thu Mar 01 08:06:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1782974074\/twitpic_normal.png",
-					"content": "only 2 cups of coffee and home and one large starbucks coffee. then i gotta stop so hopefully my blood will be thick. ew.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90602d69f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Verona, Italy "
-					},
-					"author": "TweetKebin",
-					"timestamp": "Thu Mar 01 08:06:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1863933185\/image_normal.jpg",
-					"content": "On my 4th cup of coffee...I think I'm shaking x)",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f906039a42",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "Superchickylol5",
-					"timestamp": "Thu Mar 01 08:06:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1657944075\/image_normal.jpg",
-					"content": "@Hannahconrad12 no they don't give you a lid! :\/ but it was some good coffee!! :)",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f906045ddc",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Louis' Birdcage"
-					},
-					"author": "KevThePigeon",
-					"timestamp": "Thu Mar 01 08:06:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1815936190\/kevin_normal.jpg",
-					"content": "Going for a coffee. Hopefully lots of people have dropped pastry crumbs 8&gt;",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90605217f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Manchester"
-					},
-					"author": "rachael_burns",
-					"timestamp": "Thu Mar 01 08:06:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1668073072\/CIRCLE_LOGO_TRANSPARENCY_normal.png",
-					"content": "@Fatoy i know, it took me a while. but i'm all over it. black coffee, no sugar. i'm doing it properly.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90605e550",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "elnakhutcheson",
-					"timestamp": "Thu Mar 01 08:06:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1838383748\/Coffee_Machine_Review_normal.jpg",
-					"content": ":) Cuisinart GTF-B Gold Tone Coffee  http:\/\/t.co\/62izLAyj",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9060688ce",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "the windy city"
-					},
-					"author": "Jen_Schoeph",
-					"timestamp": "Thu Mar 01 08:06:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1098361892\/emshades2_normal.jpg",
-					"content": "#marchphotoaday \/\/ up - paying bills & drinking coffee http:\/\/t.co\/UfzGKo1E",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f906072bf5",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "In a Right and a Good Place"
-					},
-					"author": "Arumzky",
-					"timestamp": "Thu Mar 01 08:06:04 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1854938599\/335202807_normal.jpg",
-					"content": "still at my work,doin my paper work for tommorow..seat alone at lounge listening my i tunes..hot coffee and canape.. #perfect",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1778647507\/001_normal.jpg",
+					"content": "Berlusconi, Putin y Medvedev renuevan su alianza http:\/\/t.co\/0zLzs7JV",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}, {
-			"timestamp": "Thu Mar 01 08:07:00 -0700 2012",
+			"timestamp": "Thu Mar 08 08:00:00 -0700 2012",
 			"stats": {
-				"post": "160",
+				"post": "575",
 				"photo": "0",
 				"media": "0",
-				"total": "160"
+				"total": "575"
 			},
 			"type": "post",
 			"items": [
 				{
-					"id": "4f4f90973f1a2",
+					"id": "4f58d77fc766e",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "Teesside"
+						"name": "Metz"
 					},
-					"author": "davelozman",
-					"timestamp": "Thu Mar 01 08:07:00 -0700 2012",
+					"author": "RomainDelDegan",
+					"timestamp": "Thu Mar 08 08:59:52 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1687546282\/297033_10150427731392785_742672784_10592576_1480305_n_normal.jpg",
-					"content": "@BeerReviewsAndy just in saltburn in the sitting room enjoying soon monsoon coffee",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1845925182\/2i3dnyL7_normal",
+					"content": "Putin fait chier personne chez moi j'dois rentrer a pied --'",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f90974b576",
+					"id": "4f58d76d6f41a",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "Pittsburgh"
+						"name": "Essonne Ile De france"
 					},
-					"author": "FACeres",
-					"timestamp": "Thu Mar 01 08:07:00 -0700 2012",
+					"author": "BraziMelancia",
+					"timestamp": "Thu Mar 08 08:59:44 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1788729338\/h2p_normal.jpg",
-					"content": "Up...Coffee then the mall I'm thinkin....wish I didn have to work.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90975790a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "mabfire",
-					"timestamp": "Thu Mar 01 08:07:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/93304260\/test_normal.jpg",
-					"content": "green juice &gt; coffee",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f909763cd3",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Chicago"
-					},
-					"author": "ColonelTribune",
-					"timestamp": "Thu Mar 01 08:07:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1730374276\/Colonel_Tribune_001_normal.PNG",
-					"content": "Great Scott, if I don't get more coffee, this day will never achieve liftoff.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90977009b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Coventry"
-					},
-					"author": "HCantelo",
-					"timestamp": "Thu Mar 01 08:07:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1763781590\/313805_10150327115888578_753438577_8203823_946188066_n_normal.jpg",
-					"content": "Discover tips for when love gets serious by @TiffanyAndCo: #whatmakeslovetrue  http:\/\/t.co\/UUc07Agy well my coffee always tastes good!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90977c453",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Honduras"
-					},
-					"author": "anitaLanza",
-					"timestamp": "Thu Mar 01 08:07:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1839703410\/annie_normal.jpg",
-					"content": "@SaOrabi perfect! I'm on my way to the coffee shop :)",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9097887b9",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "in KyuMin's closet"
-					},
-					"author": "pumpkinnic_sab",
-					"timestamp": "Thu Mar 01 08:07:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1782297154\/dpsungjinsungmin_normal.JPG",
-					"content": "@ELFRachel @Barbie_Joyce10 It was during our F&B class, we had to make coffee and I was kinda curious about the taste ;A; worst idea",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f909794bab",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "palm beach Florida\/worldwide"
-					},
-					"author": "susanbsbi",
-					"timestamp": "Thu Mar 01 08:07:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1434278484\/head_2_normal.jpg",
-					"content": "RT @MyCoffeePro: Coffee Brews is out! http:\/\/t.co\/9f1WWMa3 \u00e2\u2013\u00b8 Top stories today via @lattewars @feistyfeaster",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9097a0fb1",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "42.592",
-						"lon": "-88.4364",
-						"name": ""
-					},
-					"author": "pontiacdan45",
-					"timestamp": "Thu Mar 01 08:07:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1848276609\/IMG_0320_normal.jpg",
-					"content": "Strider at the groomer, Deb at work, here I sit at the Boatyard in Lake Geneva WI with wifi, coffee and the Tribune. http:\/\/t.co\/LI7qm5zI",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9097ad2c6",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "INTL but BR is home.."
-					},
-					"author": "INTL_Stone",
-					"timestamp": "Thu Mar 01 08:07:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1858649869\/image_normal.jpg",
-					"content": "I'm thinking some coffee might get me right...",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1871010390\/49729108_normal.jpg",
+					"content": "Quand j'ai dit \" grave \" c'etait pour exprimer la quantit\u00c3\u00a9 pas la tonalit\u00c3\u00a9 . (Putin jsuis fi\u00c3\u00a8re de ma phrase)",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}, {
-			"timestamp": "Thu Mar 01 08:08:00 -0700 2012",
+			"timestamp": "Thu Mar 08 07:00:00 -0700 2012",
 			"stats": {
-				"post": "186",
-				"photo": "0",
-				"media": "0",
-				"total": "186"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "4f4f90d86e127",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "53.5919",
-						"lon": "-2.29408",
-						"name": ""
-					},
-					"author": "damienandem",
-					"timestamp": "Thu Mar 01 08:08:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1850601970\/image_normal.jpg",
-					"content": "I'm at Costa Coffee (31 Princess Parade, Mill Gate Shopping Centre, Bury) http:\/\/t.co\/dWmvtdSB",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90d878490",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Maryland (PG County-AA County)"
-					},
-					"author": "MaleniaDior",
-					"timestamp": "Thu Mar 01 08:08:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1853427671\/uLCK6nHH_normal",
-					"content": "@ENiGMATiC_J I just choked on my coffee Lmaooooo",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90d882795",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "elnakhutcheson",
-					"timestamp": "Thu Mar 01 08:08:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1838383748\/Coffee_Machine_Review_normal.jpg",
-					"content": ":) Frieling USA C1049 http:\/\/t.co\/DJHNTdOa",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90d88caaa",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "KaylaSoup",
-					"timestamp": "Thu Mar 01 08:08:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1798435489\/image_normal.jpg",
-					"content": "Hmm, tastes like there's liquor in my iced coffee. #wishfulthinking",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90d896df0",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Canterbury, UK"
-					},
-					"author": "sukiek88",
-					"timestamp": "Thu Mar 01 08:08:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1736858492\/PA088143_normal.jpg",
-					"content": "@HannyiNefMor am not a fan of orange-flavoured coffee but how was it?",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90d8a1106",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "cozycoffeecuff",
-					"timestamp": "Thu Mar 01 08:08:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1612401962\/shop_rack1_normal.jpg",
-					"content": "The giveaway is officially on at Kinsley River Designs, up for grabs are two spring edition cozy coffee cuffs!... http:\/\/t.co\/y8gebPv9",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90d8ab42a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Aledo, IL\/Ames, IA"
-					},
-					"author": "IanMac_11",
-					"timestamp": "Thu Mar 01 08:08:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1830473177\/1_normal.jpg",
-					"content": "Forgot my coffee, dammit worst way to start the day!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90d8b5761",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Murcia (Espa\u00c3\u00b1a)"
-					},
-					"author": "Ramcartes",
-					"timestamp": "Thu Mar 01 08:08:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1828610720\/180_hipercubo_normal_normal.gif",
-					"content": "Coffee time!!!!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90d8bfac5",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Charlotte Olympia, Heels"
-					},
-					"author": "Ayee_List",
-					"timestamp": "Thu Mar 01 08:08:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1836788172\/image_normal.jpg",
-					"content": "If youre coffee doesnt taste like hot chocolate, youre not making it right.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f90d8c9dac",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "MarcinhaS_",
-					"timestamp": "Thu Mar 01 08:08:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1671677054\/SAM_2055_normal.JPG",
-					"content": "Photo: music-with-coffee: http:\/\/t.co\/4jVO19Hs",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:09:00 -0700 2012",
-			"stats": {
-				"post": "155",
+				"post": "548",
 				"photo": "0",
 				"media": "1",
-				"total": "156"
+				"total": "549"
 			},
 			"type": "mixed",
 			"items": [
 				{
-					"id": "4f4f9111cf17e",
+					"id": "4f58c95c6589e",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "Seattle"
+						"name": "\u00c3\u0153T: -6.226943,106.825729"
 					},
-					"author": "Synergy3k",
-					"timestamp": "Thu Mar 01 08:09:00 -0700 2012",
+					"author": "christbiond",
+					"timestamp": "Thu Mar 08 07:59:43 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1251970888\/keva_twitter_avatar_normal.jpg",
-					"content": "I've got coffee if you need it. Good morning",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1829357581\/134935_luis-suarez-mengacungkan-jari-tengah-ke-fans-fulham_641_452_normal.jpg",
+					"content": "Prince harry RT @dodouw: PUTIN #WOW RT @christbiond: George bush RT @dodouw: Kim jong un #eh RT @punyadee: Who's ... http:\/\/t.co\/oZTYp9xs",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f9111db59b",
+					"id": "4f58c94ad0f71",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": ""
+						"name": "New York, NY"
 					},
-					"author": "djdani_ray21_0",
-					"timestamp": "Thu Mar 01 08:09:00 -0700 2012",
+					"author": "AllTheBestNews",
+					"timestamp": "Thu Mar 08 07:59:25 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1840009360\/80B59A80-5F2F-4A29-AA92-5B04159AB84C_normal",
-					"content": "That coffee was exactly what I needed this morning",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9111e7ea3",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "37.3625",
-						"lon": "-89.6345",
-						"name": ""
-					},
-					"author": "vernondennis",
-					"timestamp": "Thu Mar 01 08:09:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1757847977\/IMG_3772_normal.JPG",
-					"content": "RT @davidcarlson1: I don't always drink coffee, but when I do, I prefer to consume an energy drink immediately after #jitters",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9111f20fe",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "_jasminne",
-					"timestamp": "Thu Mar 01 08:09:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1788592409\/SU1HMDAyOTEtMjAxMTAzMjAtMTIzMS5qcGc-1_normal.jpg",
-					"content": "I should've stopped for some coffee. I'm like 15mins early to class.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91120821f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "32.964",
-						"lon": "-96.691",
-						"name": ""
-					},
-					"author": "arun0788",
-					"timestamp": "Thu Mar 01 08:09:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1834795938\/207869_10150207873635660_739455659_8974880_8366599_n_normal.jpg",
-					"content": "nothing better than coffee, sandwich and The Beatles early in the morning....!!!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f911212509",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "the Netherlands"
-					},
-					"author": "analons",
-					"timestamp": "Thu Mar 01 08:09:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1157584164\/MiekePasen_normal.jpg",
-					"content": "@AirAriel777 I must admit I drink lots of black coffee, but now drinking herbal tea in the afternoon...:) makes me sleep better",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91121c836",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "BeccaAllen2",
-					"timestamp": "Thu Mar 01 08:09:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1820082841\/120210-185330_normal.jpg",
-					"content": "I need a medium caramel iced coffee with extra cream and sugar with a glazed donut #ASAP",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f911226b3a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "MaiaShamir",
-					"timestamp": "Thu Mar 01 08:09:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1850009087\/AmZ8IW9CMAAMn0-_normal.jpg",
-					"content": "@TerryJerome24 well...... I still don't think that stuff is good just drink coffee or something.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f911230ec8",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "That__One_Bitch",
-					"timestamp": "Thu Mar 01 08:09:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1712795272\/image_normal.jpg",
-					"content": "RT @WorldFactBoook: Before coffee became popular, beer was often served for breakfast in the United States.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91123b1aa",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "41.2636",
-						"lon": "-96.0352",
-						"name": ""
-					},
-					"author": "christahillmer",
-					"timestamp": "Thu Mar 01 08:09:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1525502317\/6fbc5283-e104-434e-ba04-2155ad757a93_normal.png",
-					"content": "I'm at Crane Coffee (7772 Cass Street, 77th & Cass, Omaha) http:\/\/t.co\/2CwFJB1R",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1477811756\/logo_comp_normal.jpg",
+					"content": "NATO chief, Russia's Putin to meet to mend ties http:\/\/t.co\/8iKmFot5",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}, {
-			"timestamp": "Thu Mar 01 08:10:00 -0700 2012",
+			"timestamp": "Thu Mar 08 06:00:00 -0700 2012",
 			"stats": {
-				"post": "174",
+				"post": "550",
 				"photo": "0",
 				"media": "0",
-				"total": "174"
+				"total": "550"
 			},
 			"type": "post",
 			"items": [
 				{
-					"id": "4f4f914946449",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "44.9709",
-						"lon": "-93.2615",
-						"name": ""
-					},
-					"author": "AndreaSanow",
-					"timestamp": "Thu Mar 01 08:10:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1642787884\/twitter_normal.jpg",
-					"content": "Coffee pot broken. (STILL)  Printer on the fritz. #wut",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f914952815",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Markham"
-					},
-					"author": "davVviO",
-					"timestamp": "Thu Mar 01 08:10:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1676436216\/IMG_0124_normal.png",
-					"content": "Why you drinking your coffee with a straw though?",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f915303511",
+					"id": "4f58bb4bc5451",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
@@ -1896,1619 +410,383 @@
 						"lon": "0",
 						"name": ""
 					},
-					"author": "AnnaDan3",
-					"timestamp": "Thu Mar 01 08:10:01 -0700 2012",
+					"author": "yicosthi",
+					"timestamp": "Thu Mar 08 06:59:42 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/sticky\/default_profile_images\/default_profile_0_normal.png",
+					"content": "\u00d0\u00b5\u00d1\u0081\u00d1\u201a\u00d1\u0152 \u00d0\u00bb\u00d0\u00b8 \u00d1\u0192 \u00d0\u00bf\u00d1\u0192\u00d1\u201a\u00d0\u00b8\u00d0\u00bd\u00d0\u00b0 \u00d1\u0081\u00d1\u201a\u00d1\u20ac\u00d0\u00b0\u00d0\u00bd\u00d0\u00b8\u00d1\u2020\u00d0\u00b0 \u00d0\u00b2 \u00d0\u00ba\u00d0\u00be\u00d0\u00bd\u00d1\u201a\u00d0\u00b0\u00d0\u00ba\u00d1\u201a\u00d0\u00b5 http:\/\/t.co\/ibT5NIp6",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f58bb3d6d640",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Tomsk"
+					},
+					"author": "MADgine",
+					"timestamp": "Thu Mar 08 06:59:28 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1712193370\/tw_13569858_1324759807_normal.jpg",
+					"content": "RT @GolosAmeriki: \u00d0\u0153\u00d0\u00b0\u00d1\u02c6\u00d0\u00b0 \u00d0\u201c\u00d0\u00b5\u00d1\u0081\u00d1\u0081\u00d0\u00b5\u00d0\u00bd \u00d0\u00be \u00d0\u0178\u00d1\u0192\u00d1\u201a\u00d0\u00b8\u00d0\u00bd\u00d0\u00b5: \u00c2\u00ab\u00d0\u00a7\u00d0\u00b5\u00d0\u00bb\u00d0\u00be\u00d0\u00b2\u00d0\u00b5\u00d0\u00ba \u00d0\u00b1\u00d0\u00b5\u00d0\u00b7 \u00d0\u00bb\u00d0\u00b8\u00d1\u2020\u00d0\u00b0\u00c2\u00bb   http:\/\/t.co\/KaNKSjpa \u00d0\u2019 \u00d0\u00a1\u00d0\u00a8\u00d0\u0090 \u00d0\u00b2\u00d1\u2039\u00d1\u02c6\u00d0\u00bb\u00d0\u00b0 \u00d0\u00ba\u00d0\u00bd\u00d0\u00b8\u00d0\u00b3\u00d0\u00b0 \u00d0\u00be \u00c2\u00ab\u00d0\u00bd\u00d0\u00b5\u00d0\u00b2\u00d0\u00b5\u00d1\u20ac\u00d0\u00be\u00d1\u008f\u00d1\u201a\u00d0\u00bd\u00d0\u00be\u00d0\u00bc \u00d0\u00b2\u00d0\u00be\u00d1\u0081\u00d1\u2026\u00d0\u00be\u00d0\u00b6\u00d0\u00b4\u00d0\u00b5\u00d0\u00bd\u00d0\u00b8\u00d0\u00b8 \u00d0\u0178\u00d1\u0192\u00d1\u201a\u00d0\u00b8\u00d0\u00bd\u00d0\u00b0\u00c2\u00bb \u00d0\u00b8 ...",
+					"media": "",
+					"thumbnail": ""
+				}
+			]
+		}, {
+			"timestamp": "Thu Mar 08 05:00:00 -0700 2012",
+			"stats": {
+				"post": "718",
+				"photo": "0",
+				"media": "0",
+				"total": "718"
+			},
+			"type": "post",
+			"items": [
+				{
+					"id": "4f58ad4536ab5",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Korolev"
+					},
+					"author": "yasnopen",
+					"timestamp": "Thu Mar 08 05:59:52 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1183123644\/me-kiev_normal.JPG",
+					"content": "RT @IsraeliPM: I invited Russian president-elect Putin to visit Israel and received an invitation to visit Moscow #israel #Russia",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f58ad3619cad",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "North Carolina"
+					},
+					"author": "TBradleyNC",
+					"timestamp": "Thu Mar 08 05:59:37 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1370522395\/TeresaSM_normal.JPG",
+					"content": "RT @IsraeliPM: I called the president-elect of Russia Putin and congratulated him on his election. We discussed regional issues & Irania ...",
+					"media": "",
+					"thumbnail": ""
+				}
+			]
+		}, {
+			"timestamp": "Thu Mar 08 04:00:00 -0700 2012",
+			"stats": {
+				"post": "761",
+				"photo": "0",
+				"media": "1",
+				"total": "762"
+			},
+			"type": "mixed",
+			"items": [
+				{
+					"id": "4f589f3d490ac",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "GastyCabj",
+					"timestamp": "Thu Mar 08 04:59:58 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1838475052\/IMG00122-20120215-1816_normal.jpg",
+					"content": "@Joacodelfrate ajjaajajajaj mal ah\u00c3\u00ad yo me quede en mi casa kb putin ajaa",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f589f3d40086",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Wanstead, London, UK"
+					},
+					"author": "timrodie",
+					"timestamp": "Thu Mar 08 04:59:54 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1737137417\/374191_823953251782_286100007_10880325_2049678326_n_normal.jpeg",
+					"content": "@KatharineIsabel But they have Putin. And hairy armpits.",
+					"media": "",
+					"thumbnail": ""
+				}
+			]
+		}, {
+			"timestamp": "Thu Mar 08 03:00:00 -0700 2012",
+			"stats": {
+				"post": "474",
+				"photo": "0",
+				"media": "0",
+				"total": "474"
+			},
+			"type": "post",
+			"items": [
+				{
+					"id": "4f58912d3fb8d",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Berlin, Moskau, Piter, Hamburg"
+					},
+					"author": "Russland_Forum",
+					"timestamp": "Thu Mar 08 03:59:49 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1826539384\/RusslandForum_normal.gif",
+					"content": "Wobei er wie ein typischer Politiker zum Teil \u00c3\u00bcberhaupt nicht konkret auf die gestellten Fragen... http:\/\/t.co\/acTsJvgS #Russland #Putin",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f58912d49eaa",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Berlin, Moskau, Piter, Hamburg"
+					},
+					"author": "Russland_Forum",
+					"timestamp": "Thu Mar 08 03:59:49 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1826539384\/RusslandForum_normal.gif",
+					"content": "Da war zwar schon einer schneller (siehe Kaliningrad), aber trotzdem auch an dich vielen Dank! ... http:\/\/t.co\/tSIOQ1JB #Russland #Putin",
+					"media": "",
+					"thumbnail": ""
+				}
+			]
+		}, {
+			"timestamp": "Thu Mar 08 02:00:00 -0700 2012",
+			"stats": {
+				"post": "404",
+				"photo": "0",
+				"media": "0",
+				"total": "404"
+			},
+			"type": "post",
+			"items": [
+				{
+					"id": "4f58832138343",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Leipzig"
+					},
+					"author": "DerSchmand",
+					"timestamp": "Thu Mar 08 02:59:30 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1797671650\/DSCF1281_normal.JPG",
+					"content": "Da ist mal wieder Zeit f\u00c3\u00bcr ein #Facepalm http:\/\/t.co\/M5CS4dgq #schr\u00c3\u00b6der #putin #tagesschau",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f5883212a806",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "IFAXnews",
+					"timestamp": "Thu Mar 08 02:59:26 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1553325639\/favicon_reasonably_small_normal.jpg",
+					"content": "Medvedev congratulates Putin on being elected Russian president http:\/\/t.co\/IYVSdguA",
+					"media": "",
+					"thumbnail": ""
+				}
+			]
+		}, {
+			"timestamp": "Thu Mar 08 01:00:00 -0700 2012",
+			"stats": {
+				"post": "302",
+				"photo": "0",
+				"media": "0",
+				"total": "302"
+			},
+			"type": "post",
+			"items": [
+				{
+					"id": "4f58750dd36f9",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Nigeria Borno state"
+					},
+					"author": "hasy56",
+					"timestamp": "Thu Mar 08 01:59:41 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1863095564\/Mariama_Amnah_normal.jpg",
+					"content": "If u r a mins late she complain its hard 2 wait,if she is late she sayx datx a grl's way.if u vsit anoda man u're not putin in quality tym",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f58750dcaa16",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Downtown - Beirut - Lebanon"
+					},
+					"author": "Annahar",
+					"timestamp": "Thu Mar 08 01:59:36 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1692710433\/Logo_Annahar_twitter_normal.jpg",
+					"content": "\u00d8\u00b1\u00d9\u02c6\u00d8\u00b3\u00d9\u0160\u00d8\u00a7 \u00d9\u2026\u00d8\u00aa\u00d9\u2026\u00d8\u00b3\u00d9\u0192\u00d8\u00a9 \u00d8\u00a8\u00d9\u2026\u00d9\u02c6\u00d9\u201a\u00d9\u0081\u00d9\u2021\u00d8\u00a7 \u00d8\u00ad\u00d9\u0160\u00d8\u00a7\u00d9\u201e \u00d8\u00b3\u00d9\u02c6\u00d8\u00b1\u00d9\u0160\u00d8\u00a7 \u00d8\u00a8\u00d8\u00b9\u00d8\u00af \u00d8\u00a7\u00d9\u2020\u00d8\u00aa\u00d8\u00ae\u00d8\u00a7\u00d8\u00a8 \u00d8\u00a8\u00d9\u02c6\u00d8\u00aa\u00d9\u0160\u00d9\u2020 #Russia #Syria #Putin #Annahar",
+					"media": "",
+					"thumbnail": ""
+				}
+			]
+		}, {
+			"timestamp": "Thu Mar 08 00:00:00 -0700 2012",
+			"stats": {
+				"post": "327",
+				"photo": "0",
+				"media": "1",
+				"total": "328"
+			},
+			"type": "mixed",
+			"items": [
+				{
+					"id": "4f5866eca1369",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "San Sebasti\u00c3\u00a1n"
+					},
+					"author": "NicodeMig",
+					"timestamp": "Thu Mar 08 00:59:43 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1424520553\/Cabo_de_Gata_004-peque_a_normal.jpg",
+					"content": "La victoria de Putin y Europa, por Llu\u00c3\u00ads Foix: http:\/\/t.co\/fr1YpYNJ v\u00c3\u00ada @LaVanguardia",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f5866ec94f3e",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": ""
+					},
+					"author": "avkfiserre1971",
+					"timestamp": "Thu Mar 08 00:59:29 -0700 2012",
 					"source": "twitter",
 					"avatar": "https:\/\/si0.twimg.com\/sticky\/default_profile_images\/default_profile_6_normal.png",
-					"content": "Shared via @echoerapp from Friday Coffee: Friday Cafe !",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91530f892",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "\u00c3\u0153T: 38.925323,-77.035363"
-					},
-					"author": "changurisphoto",
-					"timestamp": "Thu Mar 01 08:10:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1791839310\/image_normal.jpg",
-					"content": "This Friday & Saturday, bring any non-perishable food item to Baltimore Coffee #Frederick and get a FREE coffee or tea or $1 off any latte.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91531bc7f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Nazareth"
-					},
-					"author": "itsstefdur",
-					"timestamp": "Thu Mar 01 08:10:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1829488103\/image_normal.jpg",
-					"content": "RT @BeccaAllen2: I need a medium caramel iced coffee with extra cream and sugar with a glazed donut #ASAP",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f915327fd0",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "East Greenwich, RI"
-					},
-					"author": "amzngrace11",
-					"timestamp": "Thu Mar 01 08:10:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1853993888\/IMG-20120224-00172_normal.jpg",
-					"content": "I don't get why every day I try to work without coffee for like 2 horrible hours before I give in ... #INeedToRealize haha",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f915334366",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Wisco"
-					},
-					"author": "AngN_N",
-					"timestamp": "Thu Mar 01 08:10:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1830262763\/402528_614171768207_51602990_32753656_671007762_n_normal.jpg",
-					"content": "RT @Jor_Du: \"@UberFacts: Before coffee became popular, beer was often served for breakfast in the United States.\" Let's bring this back.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9153406ce",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "41.8346",
-						"lon": "-71.4021",
-						"name": ""
-					},
-					"author": "shallowthinking",
-					"timestamp": "Thu Mar 01 08:10:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1576110778\/snap_normal.jpg",
-					"content": "I could use some ice coffee.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91534ca7d",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Seattle, WA"
-					},
-					"author": "EggDropSeattle",
-					"timestamp": "Thu Mar 01 08:10:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1429685197\/Icon_2x_normal.png",
-					"content": "\"Mr Coffee Enc20\" for sale #localsale FREE  http:\/\/t.co\/BQOd39ie \/cc: @EggDropSeattle",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f915358e08",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "catheyllvbuell",
-					"timestamp": "Thu Mar 01 08:10:04 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1838373723\/Pot_Coffee_Store_normal.jpg",
-					"content": "New post: Green Mountain Coffee Breakfast Blend, 24-Count K-Cups for Keurig Brewers (Pack of 2) Save Price Shopping Online http:\/\/dunkindon",
+					"content": "Hot blonde Gabina is wearing a cute denim skirt  http:\/\/t.co\/tAu8r3GE #Putin #SongsThatWillAlwaysBump #qanda",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}, {
-			"timestamp": "Thu Mar 01 08:11:00 -0700 2012",
+			"timestamp": "Wed Mar 07 23:00:00 -0700 2012",
 			"stats": {
-				"post": "180",
-				"photo": "0",
-				"media": "0",
-				"total": "180"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "4f4f918b72c1c",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "MaiaShamir",
-					"timestamp": "Thu Mar 01 08:11:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1850009087\/AmZ8IW9CMAAMn0-_normal.jpg",
-					"content": "@TerryJerome24 omg it's not much to it just need a coffee pot.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f918b7efd1",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Kentucky Mtns"
-					},
-					"author": "SocialPoetics",
-					"timestamp": "Thu Mar 01 08:11:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1829007148\/rl_rg_normal.jpg",
-					"content": "just listening to Bob Marley w Eric Clapton http:\/\/t.co\/NkdEzJlI sippin coffee, waiting for you ;-)",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f918b8b373",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "New York"
-					},
-					"author": "Mabellegge",
-					"timestamp": "Thu Mar 01 08:11:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1815422442\/0lpqub55cx_112547976-2_normal.jpg",
-					"content": "Cars - Black Chevy 57 - Coffee Gift Baskets - Coffee Gift Basket: Black Chevy 57 Coffee Gift Basket is measuring... http:\/\/t.co\/rXA315IT",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f918b9779c",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "dakar"
-					},
-					"author": "rokiya0",
-					"timestamp": "Thu Mar 01 08:11:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1843474518\/tumblr_lz5bj4vlcW1rpp9h3o1_1280_normal.jpg",
-					"content": "RT @abdoulayems: Vu le nombre de fumeur de weed a dakar pourquoi ne pas installer des coffee shop comme aux pays bas ? Idee a proposer a ...",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f918ba3b4a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "new orleans"
-					},
-					"author": "mccreabarney11",
-					"timestamp": "Thu Mar 01 08:11:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1573798377\/4s1d99TC_normal",
-					"content": "RT @UberFacts: Before coffee became popular, beer was often served for breakfast in the United States.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f918bafe22",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Guelph"
-					},
-					"author": "bkelly19",
-					"timestamp": "Thu Mar 01 08:11:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1477500790\/FacebookHomescreenImage_normal.jpg",
-					"content": "This will be the coffee that gets me a win #markmywords",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f918bbc1bd",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "kat021171",
-					"timestamp": "Thu Mar 01 08:11:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1495700255\/9fe98b75-f760-4ce1-8f23-dd0ba6e97254_normal.png",
-					"content": "@frickindannie *drinking an extra-large coffee*  Mmmmmm.  ;)",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f918bc8574",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Republic of Korea"
-					},
-					"author": "jungrancho",
-					"timestamp": "Thu Mar 01 08:11:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1856152478\/image_normal.jpg",
-					"content": "\"une tasse de cappuccino s'il vous pla\u00c3\u00aet\" (@ Stumptown Coffee Roasters w\/ 8 others) [pic]: http:\/\/t.co\/XwZrrspD",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f918bd4975",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "33.7873",
-						"lon": "-84.3555",
-						"name": ""
-					},
-					"author": "lewisperkins",
-					"timestamp": "Thu Mar 01 08:11:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1823731461\/Picture_5_normal.png",
-					"content": "Mid-morning break and always a meeting of masterminds... (@ San Francisco Coffee Roasting Co.) http:\/\/t.co\/IFtPvPxw",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f918be0d1a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "West Bend, WI"
-					},
-					"author": "queenshari",
-					"timestamp": "Thu Mar 01 08:11:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1819714874\/madmen_icon_normal.jpg",
-					"content": "My mind went straight to the gutter with that one. Need More Coffee! @JvilleGrilling Truth! RT  You can't beat a nice sausage!",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:12:00 -0700 2012",
-			"stats": {
-				"post": "150",
-				"photo": "0",
-				"media": "0",
-				"total": "150"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "4f4f91c3da058",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Ontario"
-					},
-					"author": "dealmeida_f",
-					"timestamp": "Thu Mar 01 08:12:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1863582049\/madmen_icon_normal.jpg",
-					"content": "I almost grabbed a coffee.  But I remembered.  #lentproblems",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91c3f275d",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Middle Earth"
-					},
-					"author": "Dylan_Hooker",
-					"timestamp": "Thu Mar 01 08:12:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1310541265\/Photo_on_2011-03-28_at_16.33_normal.jpg",
-					"content": "Coffee is a must",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91c40a8ae",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Manila, Philippines."
-					},
-					"author": "ISF_KidsArmy_PH",
-					"timestamp": "Thu Mar 01 08:12:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1586150267\/isf_normal.png",
-					"content": "we're going on a field trip tomorrow and we're gonna learn about how to make coffee beans and such",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91c416c76",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Cape Town"
-					},
-					"author": "philmagomes23",
-					"timestamp": "Thu Mar 01 08:12:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1789881402\/pg_20black_20en_20wit_normal.jpg",
-					"content": "\"@CapeTown: do you ever drink coffee at @SeattleCoffeeCo followers? negotiating a giveaway for one or more of you ;) cc @capeMahala\" My best",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91c42304d",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Chicago"
-					},
-					"author": "mpsever",
-					"timestamp": "Thu Mar 01 08:12:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/771839532\/8YqS2Hfgc0OJQc7cp4OugQjdaauJNWoZWHtf-gqCMSWw577aloCnqI-GauO127qL_normal.jpg",
-					"content": "RT @mjcharleston: My goal is to come up with convo topics for the elevator that don\u00e2\u20ac\u2122t involve the weather, being tired, being busy or ne ...",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91c42f3c7",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": " wuthering heights "
-					},
-					"author": "RamziaSaadi",
-					"timestamp": "Thu Mar 01 08:12:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1858264848\/image_normal.jpg",
-					"content": "\u00e2\u20ac\u0153@JMothana: My day seems much more better, after I've had my coffee #CoffeeAddict\u00e2\u20ac\u009dI feel ya! \u00e2\u02dc\u2022\u00e2\u02dc\u2022",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91c43b767",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "\u00c3\u0153T: -7.9719681,112.6268294"
-					},
-					"author": "ayuprmyury",
-					"timestamp": "Thu Mar 01 08:12:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1850053697\/425972_2642218385832_1566767516_31912229_1039763448_n_normal.jpg",
-					"content": "Get well soon sissy:* kangen coffee corner, le'goub, bakso bakar RT @cakramalinda: Seharian dirumah ditemani dgn sinusitis  \u00ee\u0090\u008f\u00ee\u0090\u02c6",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91c447b2c",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "43.7785",
-						"lon": "-79.3437",
-						"name": ""
-					},
-					"author": "KevinGThaRealMC",
-					"timestamp": "Thu Mar 01 08:12:04 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1737344918\/image_normal.jpg",
-					"content": "#ThatAwesomeMomentWhen you get that awkward jolt\/twitch after drinking the last bit of your coffee",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91c453f1f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "MorganWilson97",
-					"timestamp": "Thu Mar 01 08:12:04 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1657689769\/image_normal.jpg",
-					"content": "Morning coffee (: #makesmyday",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91ce73a2d",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Jakarta, Indonesia"
-					},
-					"author": "Ed_tj182",
-					"timestamp": "Thu Mar 01 08:12:04 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1708363542\/image_normal.jpg",
-					"content": "I'm at J.Co Donuts & Coffee (Senayan City, LG 62-65, Jalan Asia Afrika Lot 19, Jakarta Pusat) http:\/\/t.co\/0u9OVnxL",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:13:00 -0700 2012",
-			"stats": {
-				"post": "171",
-				"photo": "0",
-				"media": "0",
-				"total": "171"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "4f4f91fc282d5",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "29.2675",
-						"lon": "47.9925",
-						"name": ""
-					},
-					"author": "BAD_223",
-					"timestamp": "Thu Mar 01 08:13:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1836184575\/image_normal.jpg",
-					"content": "I'm at Coffee Republic (360 Mall, 6th Ring Rd., Zahra) w\/ 5 others http:\/\/t.co\/4NeXCPrv",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f91fc325cf",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "San Diego, California"
-					},
-					"author": "TheSpicyRD",
-					"timestamp": "Thu Mar 01 08:13:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1211450490\/eablogpic3_normal.jpg",
-					"content": "Good morning! Caught up on sleep last night-all I want to do is relax in bed w\/ a cup of coffee, but, BIG sigh, need 2 get kids 2 school...",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92072cda8",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "NYC"
-					},
-					"author": "KMackBrand",
-					"timestamp": "Thu Mar 01 08:13:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1810104099\/softkm_normal.jpg",
-					"content": "French toast and French Vanilla coffee... #winning",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92073cc36",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "San Antonio"
-					},
-					"author": "Vernitakcf",
-					"timestamp": "Thu Mar 01 08:13:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1817093080\/3iuli0ysaf_130279461-2_normal.jpg",
-					"content": "Rich Diesslins Funny General Cartoons - Bald Eagle Wig - Youre not Fooling Anybody - Coffee Gift Baskets - Coffe... http:\/\/t.co\/Fis1imvo",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f920746f27",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Bronx"
-					},
-					"author": "whiplash_effect",
-					"timestamp": "Thu Mar 01 08:13:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1620540373\/cuz_pic_normal.jpg",
-					"content": "and coffee ..... saves the morning #knightinshinningarmor",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f920751248",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "i'm here."
-					},
-					"author": "theblackgreek",
-					"timestamp": "Thu Mar 01 08:13:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1210669091\/lupechucks_normal.jpg",
-					"content": "homie @iAmPoeticJ killed the UrbanGrind coffee house last night. follow him!!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92076589f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Saudi Arabia"
-					},
-					"author": "6alaaaal",
-					"timestamp": "Thu Mar 01 08:13:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1815321562\/9968f62a-f43d-42c0-bdd0-13a3a0e6d50f_normal.png",
-					"content": "@SaraBahis ee the coffee made it taste bearable",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f920779f1a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "somewhere over the rainbow."
-					},
-					"author": "Jasmine_skyy",
-					"timestamp": "Thu Mar 01 08:13:04 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1809808456\/image_normal.jpg",
-					"content": "No coffee for me today......",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f920784226",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "In a mans world... "
-					},
-					"author": "TashMonash",
-					"timestamp": "Thu Mar 01 08:13:04 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1829201059\/old_shoot_normal.jpg",
-					"content": "yall heard about the 5th graders that put Rat poison in their teachers coffee? they said she was too strict o_O",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92078e50c",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Florida"
-					},
-					"author": "Feliciaah23",
-					"timestamp": "Thu Mar 01 08:13:04 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1580568029\/PPK-4170_normal.jpg",
-					"content": "http:\/\/t.co\/HPFIMNp5 Saeco MC2002 Burr Coffee Espresso Grinder in Black Saeco",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:14:00 -0700 2012",
-			"stats": {
-				"post": "180",
-				"photo": "0",
-				"media": "0",
-				"total": "180"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "4f4f923e5a833",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "HarrisPena",
-					"timestamp": "Thu Mar 01 08:14:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1839876891\/8n7Tgwjz_normal",
-					"content": "@ROSCOE_BOI440 o wow. Your system is going into shock lol....your body will adjust coffee is a frig when I don't have it I jitter",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f923e64c25",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Chicago, IL"
-					},
-					"author": "FrugalBeautiful",
-					"timestamp": "Thu Mar 01 08:14:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1367816557\/IMG_7543_normal.JPG",
-					"content": "You know you're busy when breakfast is coffee & leftover pizza.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f923e6eedd",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Chicago"
-					},
-					"author": "SuburbanKidd",
-					"timestamp": "Thu Mar 01 08:14:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1837024287\/2012-02-18_17-30-01_100_normal.jpg",
-					"content": "Got my coffee, glasses, and me electronic playing as i work on this site 8) #TheLife",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f923e791d9",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "In da Jungle,da Mighty Jungle"
-					},
-					"author": "DatBlue",
-					"timestamp": "Thu Mar 01 08:14:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1791538237\/4448168D-0A20-43AD-99F7-A5068DDD8484_normal",
-					"content": "!!!!! RT @phazecbs: coffee burned they lips now they swinging  RT @DatBlue 2 grown men beefin on the Internet before 10am? Just chilllllll",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f923e8dc94",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Palangka Raya, Indonesia"
-					},
-					"author": "aristyamayendra",
-					"timestamp": "Thu Mar 01 08:14:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1741207990\/IMG_0182_normal.JPG",
-					"content": "I'm at J Coffee w\/ @putubagus http:\/\/t.co\/eYJhgtFp",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f923e97fd8",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "allen texas"
-					},
-					"author": "kaygyarms",
-					"timestamp": "Thu Mar 01 08:14:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1863492074\/Photo_on_2-24-12_at_6.55_PM__2_normal.jpg",
-					"content": "I either like my coffee really hot or ice cold. There's really no middle line. \u00e2\u02dc\u2022",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f923ea22bf",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Between two lungs ..."
-					},
-					"author": "shiwashiwaohooh",
-					"timestamp": "Thu Mar 01 08:14:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1756990419\/Screen_20120115_174044_normal.jpg",
-					"content": "Al rico coffee de por la tarde",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f923eac625",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Lee's Summit"
-					},
-					"author": "DatKidBlake",
-					"timestamp": "Thu Mar 01 08:14:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1710211014\/DSC08993_normal.JPG",
-					"content": "McIntosh is gettin heated in class today, he must not have had his coffee this morning",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f923eb6916",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Pampanga, Philippines"
-					},
-					"author": "iamTjYumul",
-					"timestamp": "Thu Mar 01 08:14:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1835951139\/image_normal.jpg",
-					"content": "Coffee Jelly! :)",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f923ec0c4f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "MTL"
-					},
-					"author": "1nOnly_JoeG",
-					"timestamp": "Thu Mar 01 08:14:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1843402942\/image_normal.jpg",
-					"content": "That annoying moment when someone makes that irritating noise everytime they take a sip of their coffee. #SMH",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:15:00 -0700 2012",
-			"stats": {
-				"post": "159",
-				"photo": "0",
-				"media": "0",
-				"total": "159"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "4f4f92761331c",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Grand Rapids, MI"
-					},
-					"author": "larissayansak",
-					"timestamp": "Thu Mar 01 08:15:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1551142546\/image_normal.jpg",
-					"content": "Who needs sleep when you can drink a pot of coffee instead? #midtermsonmidterms",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92761d61a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "42.6238",
-						"lon": "-83.9285",
-						"name": ""
-					},
-					"author": "apllc",
-					"timestamp": "Thu Mar 01 08:15:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1860527075\/image_normal.jpg",
-					"content": "I'm at Howelling Coffee (120 W. Highland Rd, Suite 200, Michigan Ave, Howell) http:\/\/t.co\/kuAwOYkK",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92762793e",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "CatieKry",
-					"timestamp": "Thu Mar 01 08:15:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1532416007\/cute_normal.jpg",
-					"content": "NEED COFFEE...or sleep, but coffee is more realistic",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f927631c77",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Erlanger, KY"
-					},
-					"author": "rob_j58",
-					"timestamp": "Thu Mar 01 08:15:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1808393816\/IMG-20110822-00022_normal.jpg",
-					"content": "@Savannah_Woods two hours is way worse then none, at that point get coffee and don't sleep. Haha trust me the army proved that for me",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92763bf82",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Charlotte, N.C."
-					},
-					"author": "shellytackett",
-					"timestamp": "Thu Mar 01 08:15:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1813522977\/small_normal.jpg",
-					"content": "RT @zoog_meister: first iced coffee of the year #swagu",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f927646298",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "gotofreestuff",
-					"timestamp": "Thu Mar 01 08:15:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/sticky\/default_profile_images\/default_profile_4_normal.png",
-					"content": "New post: Free coffee at Xtra Mart today",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9280012c4",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Lichfield"
-					},
-					"author": "WCPenn",
-					"timestamp": "Thu Mar 01 08:15:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1803926139\/image_normal.jpg",
-					"content": "I'm hoping by this time tomorrow I will have a new coffee grinder and new bike and a new petrol controlled car! #funweekendahead",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9280138e0",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "The M-Town"
-					},
-					"author": "ElChosenJuan",
-					"timestamp": "Thu Mar 01 08:15:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1807848530\/image_normal.jpg",
-					"content": "Can't wait for some coffee!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92801dbb3",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Central MN"
-					},
-					"author": "JalapenoMama",
-					"timestamp": "Thu Mar 01 08:15:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1424143915\/Annie_in_the_Sink_normal.jpg",
-					"content": "Win 2 Bags of Ground #Coffee from Eight O\u00e2\u20ac\u2122Clock Coffee on @TwoClassyChics Blog! http:\/\/t.co\/m8A7afjS Ends 3-08 #Giveaways",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f928027ece",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Atlanta \u00e2\u0153\u02c6 Boston"
-					},
-					"author": "OK_Kool",
-					"timestamp": "Thu Mar 01 08:15:05 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1818546334\/e7yrg1U7_normal",
-					"content": "Coffee and a blunt....to start my day off",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:16:00 -0700 2012",
-			"stats": {
-				"post": "152",
-				"photo": "0",
-				"media": "0",
-				"total": "152"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "4f4f92b7b3886",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "JenntheJew",
-					"timestamp": "Thu Mar 01 08:16:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1612272853\/306357_2327789067757_1040584406_2747011_1677548794_n_normal.jpg",
-					"content": "RTTT @PaayalSood Idk what id do without tea or coffee \u00e2\u009d\u00a4",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92b7bdb9e",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "hogwarts!"
-					},
-					"author": "aryvee",
-					"timestamp": "Thu Mar 01 08:16:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1454169749\/image_normal.jpg",
-					"content": "I bet I look ultra pissed if I havent had my morning coffee yet..... #lolwut",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92b7c7e9a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "dinaaboo",
-					"timestamp": "Thu Mar 01 08:16:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1827573317\/334609517_normal.jpg",
-					"content": "dunkin coffee &lt;3",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92b7d220a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "catheyllvbuell",
-					"timestamp": "Thu Mar 01 08:16:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1838373723\/Pot_Coffee_Store_normal.jpg",
-					"content": "New post: Turkish http:\/\/t.co\/6phNeBjM",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92b7dc53b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Omaha."
-					},
-					"author": "fuckitimkelsey",
-					"timestamp": "Thu Mar 01 08:16:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1858407547\/image_normal.jpg",
-					"content": "Yessssss. Dentist apt at 10. Boutta go get some coffee!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92b7e6832",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Texas"
-					},
-					"author": "SparklySnarkery",
-					"timestamp": "Thu Mar 01 08:16:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1724354441\/baby-girl-kids-clothes-tutu-ball-dress-skirt-pettiskirt-2712d_-_sm_normal.jpg",
-					"content": "@comeundone haven't done cereal in a long time (simple carbs in morning is not a great idea, esp w ADD), but I do like stuff in coffee",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92b7f0b3b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "New York"
-					},
-					"author": "Jeniferpjl",
-					"timestamp": "Thu Mar 01 08:16:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1785407834\/laiycwrs5x_122053926-2_normal.jpg",
-					"content": "Drawing Conclusions Valentine - Dino Valentine - Coffee Gift Baskets - Coffee Gift Basket: Dino Valentine Coffee... http:\/\/t.co\/6UgTSp2l",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92b806cf0",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Houston"
-					},
-					"author": "BrianRooney",
-					"timestamp": "Thu Mar 01 08:16:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/415789105\/brianrooney_normal.jpg",
-					"content": "RT @CCSleeves: The Coffee House is out! http:\/\/t.co\/FnaSC0QJ \u00e2\u2013\u00b8 Top stories today via @sarcomical @addisonroad @brianrooney @drinkupny @k ...",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92b810f67",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Brussels, Belgium"
-					},
-					"author": "PtitBen",
-					"timestamp": "Thu Mar 01 08:16:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1530399242\/deepInTheWoods_151_normal.jpg",
-					"content": "Stumpy Iced Coffee by Dieline http:\/\/t.co\/bTfQDhxI",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92b81b240",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Montreal, QC"
-					},
-					"author": "jeyflores",
-					"timestamp": "Thu Mar 01 08:16:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/685389294\/single_normal.jpg",
-					"content": "@CafeCocoaLatte how i miss cafe cocoa latte! I moved back to Montreal, but i cant forget the great coffee and food!",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:17:00 -0700 2012",
-			"stats": {
-				"post": "156",
-				"photo": "0",
-				"media": "0",
-				"total": "156"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "4f4f92f23a796",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "\u00ee\u02c6\u201cstate NY"
-					},
-					"author": "FRREESSHH86",
-					"timestamp": "Thu Mar 01 08:17:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1863836514\/image_normal.jpg",
-					"content": "RT @CANARYELLAA: I want a BIG iced coffee from Starbucks !! \u00f0\u0178\u02dc\u0081 GM \u00e2\u009d\u00a4",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92f246b15",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "West Chester, PA"
-					},
-					"author": "BurrellCannon",
-					"timestamp": "Thu Mar 01 08:17:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1097975052\/affff_normal.jpg",
-					"content": "Just dropped a five hour energy into my coffee and chugged it. I'm getting so fcking productive. #greenworkday",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92f252e94",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Columbia, Missouri"
-					},
-					"author": "mpnye",
-					"timestamp": "Thu Mar 01 08:17:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1013910322\/nye_normal.jpg",
-					"content": "We're jumping at #AWP12 : free back issues, snazzy notepads, general happiness. Also if you bring us coffee...",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92f25f248",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "maryland"
-					},
-					"author": "LondonBridges4",
-					"timestamp": "Thu Mar 01 08:17:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1841750691\/4mpFBKU7_normal",
-					"content": "Dumb sleeepy and tired!!! Smh. Boutta make me some coffee",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92f26b6d7",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "RM_Alkraida",
-					"timestamp": "Thu Mar 01 08:17:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1847990801\/335047809_normal.jpg",
-					"content": "RT @Anoud_sf: My blood type is COFFEE!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92f2779d6",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "Hollisxx56",
-					"timestamp": "Thu Mar 01 08:17:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/sticky\/default_profile_images\/default_profile_5_normal.png",
-					"content": "Jamaica Blue Mountain Wallenford Estate Coffee, 8-oz Whole Beans, Burlap Gift Packaging http:\/\/t.co\/7cQSNx1u",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92f283d60",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "fakhriFN",
-					"timestamp": "Thu Mar 01 08:17:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1862345748\/IMG-20120229-00201_normal.jpg",
-					"content": "#np Ku Cinta Kau Lebih dari Kemarin - Abdul & Coffee Theory",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92f290123",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Ktown"
-					},
-					"author": "tatjanavukalo",
-					"timestamp": "Thu Mar 01 08:17:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1808509167\/ert_normal.jpg",
-					"content": "I had a dream I dropped my phone in coffee lol",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92f29c4cd",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "gmoniq",
-					"timestamp": "Thu Mar 01 08:17:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1359924097\/image_normal.jpg",
-					"content": "at home,drinking coffee, staring at the sun.. #lucky_march",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f92f2a885c",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "magicityblues",
-					"timestamp": "Thu Mar 01 08:17:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1598315230\/image_normal.jpg",
-					"content": "@robkrug1 haha man I haven't even had coffee yet, this won't go well",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:18:00 -0700 2012",
-			"stats": {
-				"post": "170",
-				"photo": "0",
-				"media": "0",
-				"total": "170"
-			},
-			"type": "post",
-			"items": [
-				{
-					"id": "4f4f932a31b5e",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "DrinkTheBlock",
-					"timestamp": "Thu Mar 01 08:18:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1765493445\/block_single_normal.jpg",
-					"content": "Can't start the morning without some free coffee! #DrinkTheBlock #TheBlock http:\/\/t.co\/aleLBEV9",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f932a3be77",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "30.2887",
-						"lon": "-97.7361",
-						"name": ""
-					},
-					"author": "dalbarran93",
-					"timestamp": "Thu Mar 01 08:18:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1743725557\/image_normal.jpg",
-					"content": "Am I really this tired? I resorted to enjoying a coffee drink... And its delicious. :,( And I hate coffee!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f932a481b5",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "iphone:-6.295667,106.926513"
-					},
-					"author": "gentasat",
-					"timestamp": "Thu Mar 01 08:18:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1852714663\/ProfilePhoto_normal.png",
-					"content": "Soda, wine, mineral, coffee. Who says we can't blend together? http:\/\/t.co\/QucTzf6t",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f932a5461f",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "London, Ontario"
-					},
-					"author": "corisamiller",
-					"timestamp": "Thu Mar 01 08:18:00 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1740306277\/Georgina-20120106-00369_normal.jpg",
-					"content": "RT @alexasteele: I am 98% sure the caf in my school uses dirt as coffee grounds.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f932a6096b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Tuscaloosa,AL\/Denver,CO"
-					},
-					"author": "DeeJayTopshelf",
-					"timestamp": "Thu Mar 01 08:18:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1823683367\/IMG2164-M_normal.jpg",
-					"content": "\"@Colorado_Allo: Man I am at the office still loaded from last night! *pops collar & sips coffee*\" &lt;- nig just hit me and said #JigUpToreUp",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f932a6cd0b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Bermeo, (Bizkaia)"
-					},
-					"author": "bermeoweb",
-					"timestamp": "Thu Mar 01 08:18:01 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1846250645\/2_normal.jpg",
-					"content": "#dise\u00c3\u00b1o TR @crisgilpor : Jacu Coffee Roastery, identidad visual para caf\u00c3\u00a9, por Tom Emil Olsen http:\/\/t.co\/GwGyKx2a",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f93340b4e4",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "The SF Bay Area, CA"
-					},
-					"author": "middlemusician",
-					"timestamp": "Thu Mar 01 08:18:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1766545396\/middle-class-musician_normal.jpg",
-					"content": "tired. bed is so warm. can't get out, but i need some coffee. COFFEE!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f93341797c",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "DominguesRyan",
-					"timestamp": "Thu Mar 01 08:18:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1795855460\/image_normal.jpg",
-					"content": "Coffee hit the spot now time for some stokers",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f933423cbe",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Jersey"
-					},
-					"author": "linseedcurls",
-					"timestamp": "Thu Mar 01 08:18:02 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1863889001\/Untitled_normal.jpg",
-					"content": "At my desk like -_-...Coffee break!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f9334300a4",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": ""
-					},
-					"author": "jodmentum",
-					"timestamp": "Thu Mar 01 08:18:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1547094696\/jody_normal.jpg",
-					"content": "RT @RawStory: Coffee drinking not linked to chronic illness: study http:\/\/t.co\/IzGRGRhd",
-					"media": "",
-					"thumbnail": ""
-				}
-			]
-		}, {
-			"timestamp": "Thu Mar 01 08:19:00 -0700 2012",
-			"stats": {
-				"post": "153",
+				"post": "342",
 				"photo": "0",
 				"media": "1",
-				"total": "154"
+				"total": "343"
 			},
 			"type": "mixed",
 			"items": [
 				{
-					"id": "4f4f936d2784f",
+					"id": "4f5858f0a4ed1",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "St. Louis"
+						"name": "Nelspriut"
 					},
-					"author": "kmh322",
-					"timestamp": "Thu Mar 01 08:19:00 -0700 2012",
+					"author": "SrGenaro",
+					"timestamp": "Wed Mar 07 23:59:31 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1839819233\/388426_2612019190156_1545311403_32675516_294891876_n_normal.jpg",
-					"content": "come on @brettepstein fess up! why no coffee for @taylorstrecker",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1803159137\/D_J_franc_normal.gif",
+					"content": "Putin a Smile on ur Face evryday it a symbol Of #HOPE N #STRENGH GDMRNG CHINAS....",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f936d33bd9",
+					"id": "4f5858cd85c23",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "--here-- IN"
+					},
+					"author": "hA_leiGh_LyNn",
+					"timestamp": "Wed Mar 07 23:59:28 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1856453705\/sexxxy_normal.jpg",
+					"content": "#MyFavoriteText  &lt;Sorry, i'm in a meeting&gt; hell naw...thats the default...wat meeting you have no job Not Cute...is but not putin up wit it",
+					"media": "",
+					"thumbnail": ""
+				}
+			]
+		}, {
+			"timestamp": "Wed Mar 07 22:00:00 -0700 2012",
+			"stats": {
+				"post": "353",
+				"photo": "0",
+				"media": "0",
+				"total": "353"
+			},
+			"type": "post",
+			"items": [
+				{
+					"id": "4f584ae08959d",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "0",
+						"lon": "0",
+						"name": "Kent, Ohio"
+					},
+					"author": "autopilotgo",
+					"timestamp": "Wed Mar 07 22:59:33 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1276248300\/autopilot_entertainment_normal.jpeg",
+					"content": "RT @rainnwilson: Putin won, you guys!  Well, he ran a great campaign & really got his message out there. Plus he had the army.",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f584abc5ae1f",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
@@ -3517,32 +795,44 @@
 						"lon": "0",
 						"name": ""
 					},
-					"author": "peterlsmall",
-					"timestamp": "Thu Mar 01 08:19:01 -0700 2012",
+					"author": "fegentfu",
+					"timestamp": "Wed Mar 07 22:59:27 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1807423199\/SmallPatriot_normal.jpg",
-					"content": "@rockblogsterbdn is Tim hortons coffee different between the two states?",
+					"avatar": "https:\/\/si0.twimg.com\/sticky\/default_profile_images\/default_profile_0_normal.png",
+					"content": "\u00d1\u0081\u00d1\u201a\u00d1\u20ac\u00d0\u00b0\u00d0\u00bd\u00d0\u00b8\u00d1\u2020\u00d0\u00b0 \u00d0\u00bf\u00d1\u0192\u00d1\u201a\u00d0\u00b8\u00d0\u00bd\u00d0\u00b0 \u00d0\u00b2 \u00d0\u00ba\u00d0\u00be\u00d0\u00bd\u00d1\u201a\u00d0\u00b0\u00d0\u00ba\u00d1\u201a\u00d0\u00b5 http:\/\/t.co\/O9OrahsW",
 					"media": "",
 					"thumbnail": ""
-				}, {
-					"id": "4f4f936d3ff95",
+				}
+			]
+		}, {
+			"timestamp": "Wed Mar 07 21:00:00 -0700 2012",
+			"stats": {
+				"post": "384",
+				"photo": "0",
+				"media": "0",
+				"total": "384"
+			},
+			"type": "post",
+			"items": [
+				{
+					"id": "4f583cc779a43",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "Nebraska"
+						"name": "World Wide, Russia"
 					},
-					"author": "DirtyMaltini",
-					"timestamp": "Thu Mar 01 08:19:03 -0700 2012",
+					"author": "RussiaTweets",
+					"timestamp": "Wed Mar 07 21:59:54 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1858570080\/image_normal.jpg",
-					"content": "@burton86_jack hey my new coffee isn't flavored it's CUSTOM ROAST. Customly made awesome. #GetItRight",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/675957614\/800px-Russia_Flag_Map.svg_normal.png",
+					"content": "Clinton: Putin \u00e2\u20ac\u02dcclear winner\u00e2\u20ac\u2122:  US Secretary of State Hillary Clinton has acknowledged that Vladimir Putin is th... http:\/\/t.co\/JLwK1eZx",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f936d4c321",
+					"id": "4f583cd42459d",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
@@ -3551,117 +841,443 @@
 						"lon": "0",
 						"name": ""
 					},
-					"author": "wikafbtzw1",
-					"timestamp": "Thu Mar 01 08:19:05 -0700 2012",
+					"author": "Carlos_RH11",
+					"timestamp": "Wed Mar 07 21:59:54 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1654932479\/imagesCAYJYXB6_normal.jpg",
-					"content": "Alright TV off, MsEstimates 'out the door' coffee on and the day begins in earnest.Yu5",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1880667962\/417659_346756572029767_100000862811490_897337_315956052_n_normal.jpg",
+					"content": "RT @ygAddie: I keeps computers putin",
+					"media": "",
+					"thumbnail": ""
+				}
+			]
+		}, {
+			"timestamp": "Wed Mar 07 20:00:00 -0700 2012",
+			"stats": {
+				"post": "372",
+				"photo": "0",
+				"media": "0",
+				"total": "372"
+			},
+			"type": "post",
+			"items": [
+				{
+					"id": "4f582ea422850",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "41.5008",
+						"lon": "-99.6809",
+						"name": ""
+					},
+					"author": "PartyKingWatson",
+					"timestamp": "Wed Mar 07 20:59:35 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1792715979\/snapshot__5__normal.jpg",
+					"content": "@BreaktoBuild5 Room 106 Berkhardt ! party!!",
 					"media": "",
 					"thumbnail": ""
 				}, {
-					"id": "4f4f936d58695",
+					"id": "4f582e980fe27",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "41.5008",
+						"lon": "-99.6809",
+						"name": ""
+					},
+					"author": "PartyKingWatson",
+					"timestamp": "Wed Mar 07 20:59:23 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1792715979\/snapshot__5__normal.jpg",
+					"content": "@Peyton2215 @tooner16 #swag :)",
+					"media": "",
+					"thumbnail": ""
+				}
+			]
+		}, {
+			"timestamp": "Wed Mar 07 19:00:00 -0700 2012",
+			"stats": {
+				"post": "394",
+				"photo": "0",
+				"media": "0",
+				"total": "394"
+			},
+			"type": "post",
+			"items": [
+				{
+					"id": "4f5820bd04251",
+					"status": "0",
+					"rank": "0",
+					"type": "post",
+					"location": {
+						"lat": "39.6219",
+						"lon": "-95.7312",
+						"name": ""
+					},
+					"author": "Jopari",
+					"timestamp": "Wed Mar 07 19:59:56 -0700 2012",
+					"source": "twitter",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1770426273\/image1327136244_normal.png",
+					"content": "@TheMode101 I got GA tickets for the two shows on this tour, I'm gonna be on the rail for both",
+					"media": "",
+					"thumbnail": ""
+				}, {
+					"id": "4f5820a81cfea",
 					"status": "0",
 					"rank": "0",
 					"type": "post",
 					"location": {
 						"lat": "0",
 						"lon": "0",
-						"name": "Heaven"
+						"name": ""
 					},
-					"author": "Claudia213",
-					"timestamp": "Thu Mar 01 08:19:03 -0700 2012",
+					"author": "AmericanConser1",
+					"timestamp": "Wed Mar 07 19:59:54 -0700 2012",
 					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1826457889\/282489_2189184579402_1540731313_2312469_8078473_n_normal.jpg",
-					"content": "Cup of coffee #3 and still nothing.. #sotired!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f936d64a38",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "on the noosphere"
-					},
-					"author": "GreenMedInfo",
-					"timestamp": "Thu Mar 01 08:19:05 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1696610347\/header_open_palms_normal.gif",
-					"content": "Why Natural Medicine Is Illegal, Coffee As A Drug, And More... - http:\/\/t.co\/eiGfQurO",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f936d70e1b",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Botetourt County, Virginia"
-					},
-					"author": "botetourtview",
-					"timestamp": "Thu Mar 01 08:19:05 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/77414902\/botetourtview_normal.jpg",
-					"content": "Who's got the best coffee in Botetourt? You tell us in thethe 4th annual Best of Botetourt reader awards:... http:\/\/t.co\/EN5J8K9c",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f936d7d1e1",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Heaven"
-					},
-					"author": "Claudia213",
-					"timestamp": "Thu Mar 01 08:19:03 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1826457889\/282489_2189184579402_1540731313_2312469_8078473_n_normal.jpg",
-					"content": "Cup of coffee #3 and still nothing.. #sotired!",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f936d8952a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Burlington, Ont "
-					},
-					"author": "KrystalFerguson",
-					"timestamp": "Thu Mar 01 08:19:05 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1702368773\/FacebookHomescreenImage_normal.jpg",
-					"content": "Coffee. Stat.",
-					"media": "",
-					"thumbnail": ""
-				}, {
-					"id": "4f4f936d9593a",
-					"status": "0",
-					"rank": "0",
-					"type": "post",
-					"location": {
-						"lat": "0",
-						"lon": "0",
-						"name": "Texas"
-					},
-					"author": "MENEFEE",
-					"timestamp": "Thu Mar 01 08:19:05 -0700 2012",
-					"source": "twitter",
-					"avatar": "https:\/\/si0.twimg.com\/profile_images\/119345756\/headshot_normal.jpg",
-					"content": "Oh Coffee, you magical potion of awesome! I would totally bathe in you if I was't quite sure that it would kill me.",
+					"avatar": "https:\/\/si0.twimg.com\/profile_images\/1784063221\/tmp3F40_normal.jpg",
+					"content": "RT @JoeWMiller: BO, appeasing the wrong folk: 1st, Rev Wright & his ilk http:\/\/t.co\/13vWCJGl Now, Putin http:\/\/t.co\/GXjmOqNG #WTP",
 					"media": "",
 					"thumbnail": ""
 				}
 			]
 		}
-	]
+	],
+	"histogram": {
+		"post": [
+			{
+				"timestamp": "Tue Mar 06 09:00:00 -0700 2012",
+				"count": "89"
+			}, {
+				"timestamp": "Tue Mar 06 10:00:00 -0700 2012",
+				"count": "1951"
+			}, {
+				"timestamp": "Tue Mar 06 11:00:00 -0700 2012",
+				"count": "1997"
+			}, {
+				"timestamp": "Tue Mar 06 12:00:00 -0700 2012",
+				"count": "1676"
+			}, {
+				"timestamp": "Tue Mar 06 13:00:00 -0700 2012",
+				"count": "1757"
+			}, {
+				"timestamp": "Tue Mar 06 14:00:00 -0700 2012",
+				"count": "1637"
+			}, {
+				"timestamp": "Tue Mar 06 15:00:00 -0700 2012",
+				"count": "1581"
+			}, {
+				"timestamp": "Tue Mar 06 16:00:00 -0700 2012",
+				"count": "1283"
+			}, {
+				"timestamp": "Tue Mar 06 17:00:00 -0700 2012",
+				"count": "767"
+			}, {
+				"timestamp": "Tue Mar 06 18:00:00 -0700 2012",
+				"count": "802"
+			}, {
+				"timestamp": "Tue Mar 06 19:00:00 -0700 2012",
+				"count": "736"
+			}, {
+				"timestamp": "Tue Mar 06 20:00:00 -0700 2012",
+				"count": "671"
+			}, {
+				"timestamp": "Tue Mar 06 21:00:00 -0700 2012",
+				"count": "659"
+			}, {
+				"timestamp": "Tue Mar 06 22:00:00 -0700 2012",
+				"count": "552"
+			}, {
+				"timestamp": "Tue Mar 06 23:00:00 -0700 2012",
+				"count": "587"
+			}, {
+				"timestamp": "Wed Mar 07 00:00:00 -0700 2012",
+				"count": "553"
+			}, {
+				"timestamp": "Wed Mar 07 01:00:00 -0700 2012",
+				"count": "588"
+			}, {
+				"timestamp": "Wed Mar 07 02:00:00 -0700 2012",
+				"count": "605"
+			}, {
+				"timestamp": "Wed Mar 07 03:00:00 -0700 2012",
+				"count": "846"
+			}, {
+				"timestamp": "Wed Mar 07 04:00:00 -0700 2012",
+				"count": "803"
+			}, {
+				"timestamp": "Wed Mar 07 05:00:00 -0700 2012",
+				"count": "815"
+			}, {
+				"timestamp": "Wed Mar 07 06:00:00 -0700 2012",
+				"count": "936"
+			}, {
+				"timestamp": "Wed Mar 07 07:00:00 -0700 2012",
+				"count": "1065"
+			}, {
+				"timestamp": "Wed Mar 07 08:00:00 -0700 2012",
+				"count": "1058"
+			}, {
+				"timestamp": "Wed Mar 07 09:00:00 -0700 2012",
+				"count": "1038"
+			}, {
+				"timestamp": "Wed Mar 07 10:00:00 -0700 2012",
+				"count": "1027"
+			}, {
+				"timestamp": "Wed Mar 07 11:00:00 -0700 2012",
+				"count": "897"
+			}, {
+				"timestamp": "Wed Mar 07 12:00:00 -0700 2012",
+				"count": "1053"
+			}, {
+				"timestamp": "Wed Mar 07 13:00:00 -0700 2012",
+				"count": "1063"
+			}, {
+				"timestamp": "Wed Mar 07 14:00:00 -0700 2012",
+				"count": "857"
+			}, {
+				"timestamp": "Wed Mar 07 15:00:00 -0700 2012",
+				"count": "837"
+			}, {
+				"timestamp": "Wed Mar 07 16:00:00 -0700 2012",
+				"count": "590"
+			}, {
+				"timestamp": "Wed Mar 07 17:00:00 -0700 2012",
+				"count": "411"
+			}, {
+				"timestamp": "Wed Mar 07 18:00:00 -0700 2012",
+				"count": "356"
+			}, {
+				"timestamp": "Wed Mar 07 19:00:00 -0700 2012",
+				"count": "394"
+			}, {
+				"timestamp": "Wed Mar 07 20:00:00 -0700 2012",
+				"count": "372"
+			}, {
+				"timestamp": "Wed Mar 07 21:00:00 -0700 2012",
+				"count": "384"
+			}, {
+				"timestamp": "Wed Mar 07 22:00:00 -0700 2012",
+				"count": "353"
+			}, {
+				"timestamp": "Wed Mar 07 23:00:00 -0700 2012",
+				"count": "343"
+			}, {
+				"timestamp": "Thu Mar 08 00:00:00 -0700 2012",
+				"count": "328"
+			}, {
+				"timestamp": "Thu Mar 08 01:00:00 -0700 2012",
+				"count": "302"
+			}, {
+				"timestamp": "Thu Mar 08 02:00:00 -0700 2012",
+				"count": "404"
+			}, {
+				"timestamp": "Thu Mar 08 03:00:00 -0700 2012",
+				"count": "474"
+			}, {
+				"timestamp": "Thu Mar 08 04:00:00 -0700 2012",
+				"count": "762"
+			}, {
+				"timestamp": "Thu Mar 08 05:00:00 -0700 2012",
+				"count": "718"
+			}, {
+				"timestamp": "Thu Mar 08 06:00:00 -0700 2012",
+				"count": "550"
+			}, {
+				"timestamp": "Thu Mar 08 07:00:00 -0700 2012",
+				"count": "549"
+			}, {
+				"timestamp": "Thu Mar 08 08:00:00 -0700 2012",
+				"count": "575"
+			}, {
+				"timestamp": "Thu Mar 08 09:00:00 -0700 2012",
+				"count": "625"
+			}, {
+				"timestamp": "Thu Mar 08 10:00:00 -0700 2012",
+				"count": "610"
+			}, {
+				"timestamp": "Thu Mar 08 11:00:00 -0700 2012",
+				"count": "662"
+			}, {
+				"timestamp": "Thu Mar 08 12:00:00 -0700 2012",
+				"count": "618"
+			}, {
+				"timestamp": "Thu Mar 08 13:00:00 -0700 2012",
+				"count": "657"
+			}, {
+				"timestamp": "Thu Mar 08 14:00:00 -0700 2012",
+				"count": "134"
+			}
+		],
+		"global": [
+			{
+				"timestamp": "Tue Mar 06 09:00:00 -0700 2012",
+				"count": "89"
+			}, {
+				"timestamp": "Tue Mar 06 10:00:00 -0700 2012",
+				"count": "1951"
+			}, {
+				"timestamp": "Tue Mar 06 11:00:00 -0700 2012",
+				"count": "1997"
+			}, {
+				"timestamp": "Tue Mar 06 12:00:00 -0700 2012",
+				"count": "1676"
+			}, {
+				"timestamp": "Tue Mar 06 13:00:00 -0700 2012",
+				"count": "1757"
+			}, {
+				"timestamp": "Tue Mar 06 14:00:00 -0700 2012",
+				"count": "1637"
+			}, {
+				"timestamp": "Tue Mar 06 15:00:00 -0700 2012",
+				"count": "1581"
+			}, {
+				"timestamp": "Tue Mar 06 16:00:00 -0700 2012",
+				"count": "1283"
+			}, {
+				"timestamp": "Tue Mar 06 17:00:00 -0700 2012",
+				"count": "767"
+			}, {
+				"timestamp": "Tue Mar 06 18:00:00 -0700 2012",
+				"count": "802"
+			}, {
+				"timestamp": "Tue Mar 06 19:00:00 -0700 2012",
+				"count": "736"
+			}, {
+				"timestamp": "Tue Mar 06 20:00:00 -0700 2012",
+				"count": "671"
+			}, {
+				"timestamp": "Tue Mar 06 21:00:00 -0700 2012",
+				"count": "659"
+			}, {
+				"timestamp": "Tue Mar 06 22:00:00 -0700 2012",
+				"count": "552"
+			}, {
+				"timestamp": "Tue Mar 06 23:00:00 -0700 2012",
+				"count": "587"
+			}, {
+				"timestamp": "Wed Mar 07 00:00:00 -0700 2012",
+				"count": "553"
+			}, {
+				"timestamp": "Wed Mar 07 01:00:00 -0700 2012",
+				"count": "588"
+			}, {
+				"timestamp": "Wed Mar 07 02:00:00 -0700 2012",
+				"count": "605"
+			}, {
+				"timestamp": "Wed Mar 07 03:00:00 -0700 2012",
+				"count": "846"
+			}, {
+				"timestamp": "Wed Mar 07 04:00:00 -0700 2012",
+				"count": "803"
+			}, {
+				"timestamp": "Wed Mar 07 05:00:00 -0700 2012",
+				"count": "815"
+			}, {
+				"timestamp": "Wed Mar 07 06:00:00 -0700 2012",
+				"count": "936"
+			}, {
+				"timestamp": "Wed Mar 07 07:00:00 -0700 2012",
+				"count": "1065"
+			}, {
+				"timestamp": "Wed Mar 07 08:00:00 -0700 2012",
+				"count": "1058"
+			}, {
+				"timestamp": "Wed Mar 07 09:00:00 -0700 2012",
+				"count": "1038"
+			}, {
+				"timestamp": "Wed Mar 07 10:00:00 -0700 2012",
+				"count": "1027"
+			}, {
+				"timestamp": "Wed Mar 07 11:00:00 -0700 2012",
+				"count": "897"
+			}, {
+				"timestamp": "Wed Mar 07 12:00:00 -0700 2012",
+				"count": "1053"
+			}, {
+				"timestamp": "Wed Mar 07 13:00:00 -0700 2012",
+				"count": "1063"
+			}, {
+				"timestamp": "Wed Mar 07 14:00:00 -0700 2012",
+				"count": "857"
+			}, {
+				"timestamp": "Wed Mar 07 15:00:00 -0700 2012",
+				"count": "837"
+			}, {
+				"timestamp": "Wed Mar 07 16:00:00 -0700 2012",
+				"count": "590"
+			}, {
+				"timestamp": "Wed Mar 07 17:00:00 -0700 2012",
+				"count": "411"
+			}, {
+				"timestamp": "Wed Mar 07 18:00:00 -0700 2012",
+				"count": "356"
+			}, {
+				"timestamp": "Wed Mar 07 19:00:00 -0700 2012",
+				"count": "394"
+			}, {
+				"timestamp": "Wed Mar 07 20:00:00 -0700 2012",
+				"count": "372"
+			}, {
+				"timestamp": "Wed Mar 07 21:00:00 -0700 2012",
+				"count": "384"
+			}, {
+				"timestamp": "Wed Mar 07 22:00:00 -0700 2012",
+				"count": "353"
+			}, {
+				"timestamp": "Wed Mar 07 23:00:00 -0700 2012",
+				"count": "343"
+			}, {
+				"timestamp": "Thu Mar 08 00:00:00 -0700 2012",
+				"count": "328"
+			}, {
+				"timestamp": "Thu Mar 08 01:00:00 -0700 2012",
+				"count": "302"
+			}, {
+				"timestamp": "Thu Mar 08 02:00:00 -0700 2012",
+				"count": "404"
+			}, {
+				"timestamp": "Thu Mar 08 03:00:00 -0700 2012",
+				"count": "474"
+			}, {
+				"timestamp": "Thu Mar 08 04:00:00 -0700 2012",
+				"count": "762"
+			}, {
+				"timestamp": "Thu Mar 08 05:00:00 -0700 2012",
+				"count": "718"
+			}, {
+				"timestamp": "Thu Mar 08 06:00:00 -0700 2012",
+				"count": "550"
+			}, {
+				"timestamp": "Thu Mar 08 07:00:00 -0700 2012",
+				"count": "549"
+			}, {
+				"timestamp": "Thu Mar 08 08:00:00 -0700 2012",
+				"count": "575"
+			}, {
+				"timestamp": "Thu Mar 08 09:00:00 -0700 2012",
+				"count": "625"
+			}, {
+				"timestamp": "Thu Mar 08 10:00:00 -0700 2012",
+				"count": "610"
+			}, {
+				"timestamp": "Thu Mar 08 11:00:00 -0700 2012",
+				"count": "662"
+			}, {
+				"timestamp": "Thu Mar 08 12:00:00 -0700 2012",
+				"count": "618"
+			}, {
+				"timestamp": "Thu Mar 08 13:00:00 -0700 2012",
+				"count": "657"
+			}, {
+				"timestamp": "Thu Mar 08 14:00:00 -0700 2012",
+				"count": "134"
+			}
+		],
+		"min": "89",
+		"max": "1997",
+		"resolution": "hour",
+		"timestamp": 1331241183
+	}
 }
