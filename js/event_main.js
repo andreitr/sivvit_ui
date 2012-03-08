@@ -490,14 +490,6 @@ Date.prototype.format = function() {
 			this.temporalModel = options.temporalModel;
 			this.eventModel = options.eventModel;
 		},
-		bind : function(options) {
-			options.temporal.bind("change:startRange", this.filter, this);
-			options.temporal.bind("change:endRange", this.filter, this);
-		},
-		unbind : function(options) {
-			options.temporal.unbind("change:startRange", this.filter, this);
-			options.temporal.unbind("change:endRange", this.filter, this);
-		},
 		// Adds new items to the pending queue
 		update : function(count, groups) {
 			var self = this;
@@ -585,9 +577,6 @@ Date.prototype.format = function() {
 
 			this.groups.push(group);
 			this.groups_key[group.get("timestamp")] = group;
-
-			// Show hide latest group
-			this.showHide(group);
 
 			return group;
 		},
@@ -748,28 +737,6 @@ Date.prototype.format = function() {
 					itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
 				}
 			});
-		},
-		// Filters temporal content
-		filter : function() {
-			this.displayed = false;
-
-			var i, len = this.groups.length;
-			for( i = 0; i < len; i++) {
-				this.showHide(this.groups[i]);
-			}
-			this.checkFiltered();
-		},
-		// Shows / hides content groups
-		showHide : function(group) {
-
-			var timestamp = group.get("timestamp").getTime();
-
-			if(timestamp >= this.temporalModel.get("startRange").getTime() && timestamp <= this.temporalModel.get("endRange").getTime()) {
-				$(group.get("div_id")).show();
-				this.displayed = true;
-			} else {
-				$(group.get("div_id")).hide();
-			}
 		},
 		// Checks whether there any items are displayed
 		checkFiltered : function() {
