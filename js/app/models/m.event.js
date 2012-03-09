@@ -137,9 +137,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
 			return false;
 		}
 	},
-	// Updates url path of the model. Used primarily to update the since attribute
-	// when loading additional data.
-	updateUrlPath : function() {
+	// Sets URL path for since requests, loads new live data.
+	setSinceRequestURL : function() {
 
 		var path = this.attributes.json;
 
@@ -166,10 +165,10 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		} else {
 			path += "&resolution=hour";
 		}
-		
 		this.url = path;
 	},
-	requestPath : function() {
+	// Set's URL path to load the view
+	setRequestURL : function() {
 		var path = this.attributes.json;
 
 		if(this.attributes.meta !== null) {
@@ -192,9 +191,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		}
 		this.url = path;
 	},
-	// Updates requested data type
-	updateType : function(type) {
-
+	// Updates type for URL data requests
+	setRequestType : function(type) {
 		switch(type) {
 			case 'all':
 				this.attributes.type = 'photo&type[]=media&type[]=post';

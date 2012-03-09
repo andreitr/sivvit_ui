@@ -70,7 +70,7 @@ Date.prototype.format = function() {
 			this.eventModel.set({
 				json : json
 			});
-			this.eventModel.updateUrlPath();
+			this.eventModel.setSinceRequestURL();
 			this.eventModel.fetch();
 
 			this.eventModel.bind("change", function() {
@@ -88,7 +88,7 @@ Date.prototype.format = function() {
 					self.headerView.reset(new Date(self.eventModel.get("last_update")));
 
 					// Update url path to load the latest data
-					self.eventModel.updateUrlPath();
+					self.eventModel.setSinceRequestURL();
 				}
 
 				if(self.eventModel.hasChanged("stats")) {
@@ -350,16 +350,16 @@ Date.prototype.format = function() {
 				// Update type in data request
 				switch(event.target.id) {
 					case "all-btn":
-						this.eventModel.updateType('all');
+						this.eventModel.setRequestType('all');
 						break;
 					case "post-btn":
-						this.eventModel.updateType('post');
+						this.eventModel.setRequestType('post');
 						break;
 					case "media-btn":
-						this.eventModel.updateType('media');
+						this.eventModel.setRequestType('media');
 						break;
 				}
-				this.eventModel.requestPath();
+				this.eventModel.setRequestURL();
 				this.eventModel.fetch();
 			}
 		},
