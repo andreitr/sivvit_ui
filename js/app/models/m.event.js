@@ -208,6 +208,13 @@ SIVVIT.EventModel = Backbone.Model.extend({
 				break;
 		}
 	},
+	// Increments the page count and loads more content buckets
+	loadMoreContent: function(){
+		this.attributes.bucket_page = this.get("bucket_page") +1;
+		this.setRequestURL();
+		this.fetch();
+	},
+	
 	// Start continues data loading
 	startLiveData : function() {
 		var self = this;

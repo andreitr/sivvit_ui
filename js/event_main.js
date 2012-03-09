@@ -147,6 +147,7 @@ Date.prototype.format = function() {
 				if(self.eventModel.hasChanged("location")) {
 					self.mapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lon, self.eventModel.get("location").lat);
 				}
+
 				self.appView.update();
 			});
 		}
@@ -192,6 +193,44 @@ Date.prototype.format = function() {
 		}
 	};
 
+	SIVVIT.Parser = {
+
+		parse : function(model) {
+
+			var tmp_group = [];
+			var content = model.get("content"), i, j, tmp_items, group_model, itm_model;
+			var len = content.length;
+
+			for( i = len; i--; ) {
+				group_model = new SIVVIT.ItemGroupModel(content[i]);
+				group_model.set({
+					json : model.get("json")
+				});
+				tmp_items = [];
+
+				for( j = content[i].items.length; j--; ) {
+					itm_model = new SIVVIT.ItemModel(content[i].items[j]);
+					itm_model.set({
+						timestamp : new Date(content[i].items[j].timestamp)
+					});
+					tmp_items.push(itm_model);
+				}
+
+				group_model.set({
+					id : i,
+					items : new SIVVIT.ItemCollection(tmp_items),
+					items_new : new SIVVIT.ItemCollection(tmp_items),
+					stats : content[i].stats,
+					timestamp : new Date(content[i].timestamp)
+				});
+
+				model.updateContentRange(group_model.get("timestamp"));
+				tmp_group.push(group_model);
+			}
+			return new SIVVIT.ItemGroupCollection(tmp_group);
+		}
+	};
+
 	/**
 	 * Main application view. Acts like a controller of sorts.
 	 */
@@ -233,111 +272,8 @@ Date.prototype.format = function() {
 			SIVVIT.Lightbox.init();
 		},
 		update : function() {
-
-			//
-			// This should not be in the view. Move this code into a separate helper object.
-			//
-			var tmp_group = [];
-			var con = this.eventModel.get("content");
-			var len = this.collection ? this.collection.length : 0;
-			var i, j, itm, tmp_items, new_count, new_groups, group_model, itm_model;
-
-			// First time view is loaded
-			if(!this.collection) {
-
-				for( i = con.length; i--; ) {
-					group_model = new SIVVIT.ItemGroupModel(con[i]);
-					group_model.set({
-						json : this.eventModel.get("json")
-					});
-					tmp_items = [];
-
-					for( j = con[i].items.length; j--; ) {
-						itm_model = new SIVVIT.ItemModel(con[i].items[j]);
-						itm_model.set({
-							timestamp : new Date(con[i].items[j].timestamp)
-						});
-						tmp_items.push(itm_model);
-					}
-
-					group_model.set({
-						id : i,
-						items : new SIVVIT.ItemCollection(tmp_items),
-						items_new : new SIVVIT.ItemCollection(tmp_items),
-						stats : con[i].stats,
-						timestamp : new Date(con[i].timestamp)
-					});
-
-					this.eventModel.updateContentRange(group_model.get("timestamp"));
-					tmp_group.push(group_model);
-				}
-				this.collection = new SIVVIT.ItemGroupCollection(tmp_group);
-				this.renderView();
-
-			} else {
-
-				// Add new items to the existing group
-				new_count = 0;
-
-				for( i = con.length; i--; ) {
-					group_model = this.activeView.groups_key[new Date(con[i].timestamp)];
-
-					// Check if a group already exists
-					if(group_model) {
-
-						// Increment stats
-						var stats = group_model.get("stats");
-
-						// Please note that model stats are updated bypassing the setter method.
-						// Group model does not allow secondary stats updates
-						stats.total = Number(stats.total) + Number(con[i].stats.total);
-						stats.media = Number(stats.media) + Number(con[i].stats.media);
-						stats.post = Number(stats.post) + Number(con[i].stats.post);
-
-						this.activeView.buildGroupHeader(group_model);
-						this.activeView.buildGroupFooter(group_model);
-
-					} else {
-
-						// Create new groups
-						new_goups = new SIVVIT.ItemGroupCollection();
-						group_model = new SIVVIT.ItemGroupModel(con[i]);
-						group_model.set({
-							json : this.eventModel.get("json")
-						});
-						tmp_items = [];
-
-						for( j = con[i].items.length; j--; ) {
-							itm_model = new SIVVIT.ItemModel(con[i].items[j]);
-							itm_model.set({
-								timestamp : new Date(con[i].items[j].timestamp)
-							});
-							tmp_items.push(itm_model);
-						}
-
-						group_model.set({
-							id : i,
-							items : new SIVVIT.ItemCollection(tmp_items),
-							items_new : new SIVVIT.ItemCollection(tmp_items),
-							stats : con[i].stats,
-							timestamp : new Date(group_model.get("timestamp"))
-						});
-
-						this.eventModel.updateContentRange(group_model.get("timestamp"));
-
-						// Update the count of new content
-						new_count += Number(this.activeView.getItemCount(group_model));
-						new_goups.add(group_model);
-
-						this.collection.add(group_model, {
-							silent : true
-						});
-					}
-				}
-				if(new_count > 0) {
-					this.updateView(new_count, new_goups);
-				}
-			}
+			this.renderStats();
+			this.updateTemporal();
 		},
 		// Loads data for a newly selected view
 		loadView : function(event) {
@@ -370,7 +306,6 @@ Date.prototype.format = function() {
 		renderView : function() {
 			this.renderStats();
 			this.updateTemporal();
-			this.activeView.model = this.collection;
 			this.activeView.render();
 
 		},
@@ -473,7 +408,7 @@ Date.prototype.format = function() {
 		new_count : 0,
 
 		// Collection (ItemGroupCollection) of goups that have been loaded but not rendered
-		new_groups : null,
+		new_groups : [],
 
 		// Instance of TemporalModel
 		temporalModel : null,
@@ -486,11 +421,65 @@ Date.prototype.format = function() {
 
 		// Set to true when at least one content bucket is displayed
 		displayed : false,
+		
+		display_buckets: false,
 
 		initialize : function(options) {
 			this.edit = options.edit;
 			this.temporalModel = options.temporalModel;
 			this.eventModel = options.eventModel;
+			this.eventModel.bind("change:content", this.onModelContentUpdate, this);
+		},
+		
+		// We need to handle three states of updates here:
+		// 1. New content
+		// 2. Update with the latest content
+		// 3. Previous buckets
+		onModelContentUpdate : function(event) {
+			
+			var collection = SIVVIT.Parser.parse(this.eventModel);
+			
+			if(this.display_buckets){
+				this.display_buckets = false;
+				
+				console.log("Append buckets!");
+				return;
+			}
+			
+			
+			// Assume that 
+			if(this.rendered.length <= 0){
+				this.model = collection;
+				this.render();
+				
+				return;
+			}
+			
+			// Loop through all available groups - ItemGroupCollection
+			collection.each(function(group) {
+
+				var old_group = this.groups_key[group.get("timestamp")];
+				
+				if(old_group) {
+					// Update stats for the existing model
+					var stats = old_group.get("stats");
+
+					// Please note that model stats are updated bypassing the setter method.
+					// Group model does not allow secondary stats updates
+					stats.total = Number(stats.total) + Number(group.get("stats").total);
+					stats.media = Number(stats.media) + Number(group.get("stats").media);
+					stats.post = Number(stats.post) + Number(group.get("stats").post);
+
+					this.buildGroupHeader(old_group);
+					this.buildGroupFooter(old_group);
+
+				} else {
+					this.new_count += 1;
+					this.new_groups.push(group);
+					this.update(this.new_count, this.new_groups);
+				}
+
+			}, this);
 		},
 		// Adds new items to the pending queue
 		update : function(count, groups) {
@@ -539,9 +528,15 @@ Date.prototype.format = function() {
 		},
 		// Displays footer if there are more buckets to be loaded.
 		footer : function() {
+			var self = this;
 			if(this.eventModel.hasMoreContent()) {
 				if($("#load-groups-btn").length <= 0) {
 					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More content<span class='icon-download'></span></div>");
+					$("#load-groups-btn").click(function(event) {
+						$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
+						self.display_buckets = true;
+						self.eventModel.loadMoreContent();
+					});
 				}
 			}
 		},
@@ -670,7 +665,6 @@ Date.prototype.format = function() {
 
 					var itm = items[i];
 					if(itm) {
-
 						var itm_model = new SIVVIT.ItemModel(itm);
 
 						itm_model.set({
@@ -844,11 +838,6 @@ Date.prototype.format = function() {
 	 */
 	SIVVIT.AllView = SIVVIT.AbstractView.extend({
 
-		initialize : function(options) {
-			this.edit = options.edit;
-			this.temporalModel = options.temporalModel;
-			this.eventModel = options.eventModel;
-		},
 		// Renders the entire collection
 		display : function(source) {
 
