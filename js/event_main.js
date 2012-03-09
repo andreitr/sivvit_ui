@@ -234,6 +234,9 @@ Date.prototype.format = function() {
 		},
 		update : function() {
 
+			//
+			// This should not be in the view. Move this code into a separate helper object.
+			//
 			var tmp_group = [];
 			var con = this.eventModel.get("content");
 			var len = this.collection ? this.collection.length : 0;
@@ -870,8 +873,8 @@ Date.prototype.format = function() {
 				// Call this once items are added
 				this.buildGroupHeader(group);
 				this.buildGroupFooter(group);
-				
-				// 			
+
+				//
 				this.displayed = true;
 
 			}, this);
