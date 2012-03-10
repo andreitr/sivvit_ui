@@ -15,12 +15,12 @@ Date.prototype.format = function() {
 		// SIVVIT.TemporalModel /app/models/m.temporal.js
 		temporalModel : null,
 
-		// SIVVIT.AppView
-		// Main application view. Controls switching of all other views.
-		appView : null,
+		// SIVVIT.ContentController
+		// Controls switching of all other views.
+		contentController : null,
 
-		// SIVVIT.AllView
-		allView : null,
+		// SIVVIT.ContentView
+		contentView : null,
 
 		// SIVVIT.HeaderView
 		headerView : null,
@@ -38,10 +38,10 @@ Date.prototype.format = function() {
 		init : function(json) {
 			var self = this;
 
+			SIVVIT.Lightbox.init();
+
 			this.temporalModel = new SIVVIT.TemporalModel();
-
 			this.eventModel = new SIVVIT.EventModel();
-
 			this.headerView = new SIVVIT.HeaderView({
 				model : this.eventModel
 			});
@@ -54,16 +54,16 @@ Date.prototype.format = function() {
 				slider : true
 			});
 
-			this.allView = new SIVVIT.AllView({
+			this.contentView = new SIVVIT.ContentView({
 				edit : this.edit,
 				temporalModel : this.temporalModel,
 				eventModel : this.eventModel
 			});
 
-			this.appView = new SIVVIT.AppView({
+			this.contentController = new SIVVIT.ContentController({
 				eventModel : this.eventModel,
 				temporalModel : this.temporalModel,
-				allView : this.allView
+				view : this.contentView
 			});
 
 			// Load content for the first time
@@ -91,64 +91,26 @@ Date.prototype.format = function() {
 					self.eventModel.setSinceRequestURL();
 				}
 
-				if(self.eventModel.hasChanged("stats")) {
-					self.appView.renderStats();
-				}
-
 				// Update histogram values
-				if(self.eventModel.hasChanged("startDate") || self.eventModel.hasChanged("last_update") || self.eventModel.hasChanged("histogram")) {
+				if(self.eventModel.hasChanged("last_update") || self.eventModel.hasChanged("histogram")) {
 
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
 						endDate : new Date(self.eventModel.get("last_update")),
+						startRange : new Date(self.eventModel.get("startDate")),
 						endRange : new Date(self.eventModel.get("last_update")),
 						min : Math.min(self.temporalModel.get("min"), self.eventModel.get("histogram").min),
 						max : Math.max(self.temporalModel.get("max"), self.eventModel.get("histogram").max),
 						resolution : self.eventModel.get("histogram").resolution
 					});
-
-					// Redraw currently-active histogram
-					if(self.temporalModel.get("type") !== null) {
-						switch(self.temporalModel.get("type")) {
-							case "global":
-								self.temporalModel.set({
-									histogram : self.eventModel.get("histogram").global
-								});
-								break;
-
-							case "media":
-								self.temporalModel.set({
-									histogram : self.eventModel.get("histogram").media
-								});
-								break;
-
-							case "post":
-								self.temporalModel.set({
-									histogram : self.eventModel.get("histogram").post
-								});
-								break;
-						}
-					}
-				}
-
-				// Set histogram range for the first time.
-				if(!self.temporalModel.get("startRange")) {
-					self.temporalModel.set({
-						startRange : new Date(self.eventModel.get("startDate"))
-					});
-				}
-				if(!self.temporalModel.get("endRange")) {
-					self.temporalModel.set({
-						endRange : new Date(self.eventModel.get("last_update"))
-					});
+					// Updates general statistics and histogram
+					self.contentController.update();
 				}
 
 				// Update location
 				if(self.eventModel.hasChanged("location")) {
 					self.mapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lon, self.eventModel.get("location").lat);
 				}
-
-				self.appView.update();
 			});
 		}
 	};
@@ -189,7 +151,6 @@ Date.prototype.format = function() {
 				transitionIn : 'fade',
 				transitionOut : 'fade'
 			});
-
 		}
 	};
 
@@ -231,18 +192,16 @@ Date.prototype.format = function() {
 		}
 	};
 
-	/**
-	 * Main application view. Acts like a controller of sorts.
-	 */
-	SIVVIT.AppView = Backbone.View.extend({
+	// Main application controller and a view at the same time
+	SIVVIT.ContentController = Backbone.View.extend({
 
 		el : "#navigation-content",
 
 		prevButton : null,
 		activeButton : null,
 
-		// Instance of SIVVIT.AbstractView
-		activeView : null,
+		// Instance of SIVVIT.ContentView
+		view : null,
 
 		// SIVVIT.EventModel
 		eventModel : null,
@@ -250,37 +209,32 @@ Date.prototype.format = function() {
 		// SIVVIT.TemporalModel
 		temporalModel : null,
 
-		// SIVVIT.ItemGroupCollection
-		collection : null,
-
 		// Bind button events
 		events : {
-			"click #all-btn" : "loadView",
-			"click #post-btn" : "loadView",
-			"click #media-btn" : "loadView"
+			"click #all-btn" : "updateView",
+			"click #post-btn" : "updateView",
+			"click #media-btn" : "updateView"
 		},
-
 		initialize : function(options) {
 			this.eventModel = options.eventModel;
 			this.temporalModel = options.temporalModel;
-			this.activeView = options.allView;
+
+			this.view = options.view;
 
 			this.activeButton = "#all-btn";
 			$(this.activeButton).toggleClass('text-btn', false);
 			$(this.activeButton).toggleClass('text-btn-selected', true);
-
-			SIVVIT.Lightbox.init();
 		},
+		// Triggered every time eventModel is updated
+		// updates main UI elements
 		update : function() {
 			this.renderStats();
-			this.updateTemporal();
+			this.renderHistogram();
 		},
 		// Loads data for a newly selected view
-		loadView : function(event) {
-			if(this.updateButtons(event.target.id)) {
-				this.activeView.reset();
-				this.activeView.showLoader();
-				this.collection = null;
+		updateView : function(event) {
+			if(this.renderButtons(event.target.id)) {
+				this.view.reset();
 
 				this.eventModel.unset(["content"], {
 					silent : true
@@ -302,17 +256,6 @@ Date.prototype.format = function() {
 				this.eventModel.fetch();
 			}
 		},
-		// Renders new view
-		renderView : function() {
-			this.renderStats();
-			this.updateTemporal();
-			this.activeView.render();
-
-		},
-		// Updates already rendered view
-		updateView : function(count, groups) {
-			this.activeView.update(count, groups);
-		},
 		// Displays stats for the currently-selected view
 		renderStats : function() {
 			switch(this.activeButton) {
@@ -332,7 +275,7 @@ Date.prototype.format = function() {
 		},
 		// Updates navigation buttons. Returns false if the view is already
 		// rendered.
-		updateButtons : function(button) {
+		renderButtons : function(button) {
 
 			if(this.activeButton == "#" + button) {
 				return false;
@@ -351,9 +294,9 @@ Date.prototype.format = function() {
 			return true;
 		},
 		// Update temporal model and set the correct histogram
-		updateTemporal : function() {
-			switch(this.activeButton) {
+		renderHistogram : function() {
 
+			switch(this.activeButton) {
 				case "#all-btn":
 					this.temporalModel.set({
 						histogram : this.eventModel.get("histogram").global,
@@ -373,22 +316,13 @@ Date.prototype.format = function() {
 						histogram : this.eventModel.get("histogram").media,
 						type : "media"
 					});
-
 					break;
 			}
-
-			this.temporalModel.set({
-				min : this.eventModel.get("histogram").min,
-				max : this.eventModel.get("histogram").max,
-				resolution : this.eventModel.get("histogram").resolution
-			});
 		}
 	});
-
-	/**
-	 * Abstract core class for all content views.
-	 */
-	SIVVIT.AbstractView = Backbone.View.extend({
+	// Main content view. 
+	// Displays content buckets etc.
+	SIVVIT.ContentView = Backbone.View.extend({
 
 		el : "#dynamic-content",
 
@@ -421,8 +355,8 @@ Date.prototype.format = function() {
 
 		// Set to true when at least one content bucket is displayed
 		displayed : false,
-		
-		display_buckets: false,
+
+		display_buckets : false,
 
 		initialize : function(options) {
 			this.edit = options.edit;
@@ -430,36 +364,31 @@ Date.prototype.format = function() {
 			this.eventModel = options.eventModel;
 			this.eventModel.bind("change:content", this.onModelContentUpdate, this);
 		},
-		
-		// We need to handle three states of updates here:
-		// 1. New content
-		// 2. Update with the latest content
-		// 3. Previous buckets
+		// Updates view when model is changed
 		onModelContentUpdate : function(event) {
-			
+
 			var collection = SIVVIT.Parser.parse(this.eventModel);
+
+			// Render immediately when 
+			if(this.rendered.length <= 0) {
+				this.model = collection;
+				this.render();
+				return;
+			}
 			
-			if(this.display_buckets){
+			
+			if(this.display_buckets) {
 				this.display_buckets = false;
-				
+
 				console.log("Append buckets!");
 				return;
 			}
-			
-			
-			// Assume that 
-			if(this.rendered.length <= 0){
-				this.model = collection;
-				this.render();
-				
-				return;
-			}
-			
+
 			// Loop through all available groups - ItemGroupCollection
 			collection.each(function(group) {
 
 				var old_group = this.groups_key[group.get("timestamp")];
-				
+
 				if(old_group) {
 					// Update stats for the existing model
 					var stats = old_group.get("stats");
@@ -506,6 +435,38 @@ Date.prototype.format = function() {
 			this.groups_key = {};
 			this.groups = [];
 			this.rendered = [];
+
+			this.showLoader();
+		},
+		// Renders the entire collection
+		display : function(source) {
+
+			var is_update;
+
+			if(source === undefined) {
+				source = this.model;
+				is_update = false;
+			} else {
+				is_update = true;
+			}
+
+			// Loop through all available groups - ItemGroupCollection
+			source.each(function(group) {
+
+				// Create group element
+				group = this.buildGroup(group, is_update);
+
+				// Display all available items
+				this.buildGroupItems(group, false);
+
+				// Call this once items are added
+				this.buildGroupHeader(group);
+				this.buildGroupFooter(group);
+
+				//
+				this.displayed = true;
+
+			}, this);
 		},
 		render : function() {
 
@@ -544,6 +505,37 @@ Date.prototype.format = function() {
 		showLoader : function() {
 			$(this.el).empty();
 			$(this.el).html("<div id='content-loader'></div>");
+		},
+		// Builds each item, returns {timestamp, html} object
+		buildTemplate : function(itm) {
+
+			var html;
+
+			if(itm.get("type") === "media" || itm.get("type") === "photo") {
+				html = $.tmpl(this.media_template, {
+					thumbnail : itm.get("thumbnail"),
+					media : itm.get("media"),
+					avatar : itm.get("avatar"),
+					timestamp : itm.get("timestamp").format(),
+					author : itm.get("author"),
+					source : itm.get("source")
+				});
+
+			} else if(itm.get("type") === "post") {
+				html = $.tmpl(this.post_template, {
+					content : itm.get("content"),
+					avatar : itm.get("avatar"),
+					timestamp : itm.get("timestamp").format(),
+					author : itm.get("author"),
+					source : itm.get("source")
+				});
+			}
+
+			return {
+				timestamp : itm.get("timestamp"),
+				html : html,
+				model : itm
+			};
 		},
 		// Builds out item group and displays its header
 		// If prepend is set to true the group is prepended to the list, otherwise appended
@@ -830,78 +822,6 @@ Date.prototype.format = function() {
 		updateItem : function(itm) {
 			//update_item.json?id=00002&status=1
 			//delete_item.json?id=00002
-		}
-	});
-
-	/**
-	 * Displays general content stream
-	 */
-	SIVVIT.AllView = SIVVIT.AbstractView.extend({
-
-		// Renders the entire collection
-		display : function(source) {
-
-			var is_update;
-
-			if(source === undefined) {
-				source = this.model;
-				is_update = false;
-			} else {
-				is_update = true;
-			}
-
-			// Loop through all available groups - ItemGroupCollection
-			source.each(function(group) {
-
-				// Create group element
-				group = this.buildGroup(group, is_update);
-
-				// Display all available items
-				this.buildGroupItems(group, false);
-
-				// Call this once items are added
-				this.buildGroupHeader(group);
-				this.buildGroupFooter(group);
-
-				//
-				this.displayed = true;
-
-			}, this);
-		},
-		// Loads content for this specific view
-		loadContent : function() {
-
-		},
-		// Builds each item, returns {timestamp, html} object
-		buildTemplate : function(itm) {
-
-			var html;
-
-			if(itm.get("type") === "media" || itm.get("type") === "photo") {
-				html = $.tmpl(this.media_template, {
-					thumbnail : itm.get("thumbnail"),
-					media : itm.get("media"),
-					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author"),
-					source : itm.get("source")
-				});
-
-			} else if(itm.get("type") === "post") {
-				html = $.tmpl(this.post_template, {
-					content : itm.get("content"),
-					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author"),
-					source : itm.get("source")
-				});
-			}
-
-			return {
-				timestamp : itm.get("timestamp"),
-				html : html,
-				model : itm
-			};
 		},
 		// Returns count of items to be displayed in this view
 		getItemCount : function(group) {
@@ -971,7 +891,6 @@ Date.prototype.format = function() {
 			if(seconds > 0) {
 				return "updated " + seconds + " sec ago";
 			}
-
 			return "updated just now";
 		}
 	});
