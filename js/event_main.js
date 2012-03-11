@@ -342,7 +342,7 @@ Date.prototype.format = function() {
 		new_count : 0,
 
 		// Collection (ItemGroupCollection) of goups that have been loaded but not rendered
-		new_groups : [],
+		new_groups : new SIVVIT.ItemCollection(),
 
 		// Instance of TemporalModel
 		temporalModel : null,
@@ -404,19 +404,17 @@ Date.prototype.format = function() {
 
 				} else {
 					this.new_count += 1;
-					this.new_groups.push(group);
-					this.update(this.new_count, this.new_groups);
+					this.new_groups.add(group);
+					this.update();
 				}
 
 			}, this);
 		},
 		// Adds new items to the pending queue
-		update : function(count, groups) {
+		update : function() {
 			var self = this;
-			this.new_groups = groups;
-
+			
 			if($("#load-content-btn").length <= 0) {
-				this.new_count = count;
 
 				$(this.el).prepend("<div id=\"padding\"><div id='load-content-btn' class=\"content-loader\">" + this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
 				$("#load-content-btn").hide();
@@ -425,9 +423,11 @@ Date.prototype.format = function() {
 					$(event.currentTarget).parent().remove();
 					self.display(self.new_groups, true);
 					self.new_count = 0;
+					// Reset the entire collection
+					self.new_groups.reset();
 				});
 			} else {
-				$("#load-content-btn").html((this.new_count + count) + " new items&nbsp;&nbsp;<span class='icon-download'></span>");
+				$("#load-content-btn").html(this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span>");
 			}
 		},
 		// Resets all properties of the group.
@@ -549,8 +549,6 @@ Date.prototype.format = function() {
 
 			// Create group element which will contain all items
 			var el = "<ol id='" + gid + "'></ol>";
-
-			console.log(gid);
 
 			if(prepend) {
 				$(this.el).prepend(el);
