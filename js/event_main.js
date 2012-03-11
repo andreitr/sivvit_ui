@@ -179,7 +179,7 @@ Date.prototype.format = function() {
 					tmp_items.push(itm_model);
 				}
 				group_model.set({
-					id : new Date().getTime(),
+					id : new Date().getTime()+"-"+i,
 					items : new SIVVIT.ItemCollection(tmp_items),
 					items_new : new SIVVIT.ItemCollection(tmp_items),
 					stats : content[i].stats,
@@ -552,7 +552,9 @@ Date.prototype.format = function() {
 		buildGroup : function(group, prepend) {
 
 			var gid = "group-" + group.get("id");
-
+			
+			console.log(group.get("id"));	
+			
 			// Create group element which will contain all items
 			var el = "<ol id='" + gid + "'></ol>";
 
