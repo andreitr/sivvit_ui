@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -424,7 +423,7 @@ Date.prototype.format = function() {
 				$("#load-content-btn").hide();
 				$("#load-content-btn").slideDown("slow");
 				$("#load-content-btn").click(function(event) {
-					$(event.currentTarget).parent().remove();
+					$(event.currentTarget).remove();
 
 					self.display(self.new_groups, true);
 					self.new_count = 0;
