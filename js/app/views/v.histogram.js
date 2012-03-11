@@ -69,8 +69,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
 		
 		if(this.model.get("histogram")) {
 			
-			console.log("DRW HISTOGRAM");
-			
 			var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get("histogramEndDate"))).getTime();
 
 			// Total count of available slots

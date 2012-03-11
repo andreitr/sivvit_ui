@@ -131,6 +131,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 	},
 	// Returns true when earlier buckets can be loaded.
 	hasMoreContent : function() {
+		
 		if(this.get("content_bounds").min > new Date(this.get("startDate"))) {
 			return true;
 		} else {
@@ -163,7 +164,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		if(this.attributes.histogram.resolution !== null) {
 			path += "&resolution=" + this.attributes.histogram.resolution;
 		} else {
-			path += "&resolution=minute";
+			path += "&resolution=hour";
 		}
 		this.url = path;
 	},

@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+};
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -93,7 +94,7 @@ Date.prototype.format = function() {
 
 				// Update histogram values
 				if(self.eventModel.hasChanged("last_update") || self.eventModel.hasChanged("histogram")) {
-
+					
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
 						endDate : new Date(self.eventModel.get("last_update")),
@@ -103,6 +104,7 @@ Date.prototype.format = function() {
 						max : Math.max(self.temporalModel.get("max"), self.eventModel.get("histogram").max),
 						resolution : self.eventModel.get("histogram").resolution
 					});
+					
 					// Updates general statistics and histogram
 					self.contentController.update();
 				}
