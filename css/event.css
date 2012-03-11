@@ -43,6 +43,7 @@
 	-webkit-border-radius: 5px;
 	border-radius:5px;
 	text-shadow: 1px 1px 1px hsla(0,0%,100%,1);
+	margin-bottom:10px;
 }
 
 .content-loader:hover {
