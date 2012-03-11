@@ -403,24 +403,29 @@ Date.prototype.format = function() {
 					this.buildGroupFooter(old_group);
 
 				} else {
+					// Add pending group to the groups key
+					this.groups_key[group.get("timestamp")] = group;
 					this.new_count += 1;
 					this.new_groups.add(group);
-					this.update();
 				}
 
 			}, this);
+			if(this.new_count > 0) {
+				this.update();
+			}
 		},
 		// Adds new items to the pending queue
 		update : function() {
 			var self = this;
-			
+
 			if($("#load-content-btn").length <= 0) {
 
-				$(this.el).prepend("<div id=\"padding\"><div id='load-content-btn' class=\"content-loader\">" + this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+				$(this.el).prepend("<div id='load-content-btn' class=\"content-loader\">" + this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span></div>");
 				$("#load-content-btn").hide();
 				$("#load-content-btn").slideDown("slow");
 				$("#load-content-btn").click(function(event) {
 					$(event.currentTarget).parent().remove();
+
 					self.display(self.new_groups, true);
 					self.new_count = 0;
 					// Reset the entire collection
@@ -486,13 +491,13 @@ Date.prototype.format = function() {
 		// Displays footer if there are more buckets to be loaded.
 		footer : function() {
 			var self = this;
-			
+
 			// Remove existing loader button
 			var btn = $(this.el).find('#load-groups-btn');
 			if(btn.length > 0) {
 				btn.remove();
 			}
-			
+
 			if(this.eventModel.hasMoreContent()) {
 				if($("#load-groups-btn").length <= 0) {
 					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More content<span class='icon-download'></span></div>");
