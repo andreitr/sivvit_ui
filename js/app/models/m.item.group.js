@@ -6,7 +6,9 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 		json : null,
 
 		type : null,
+		
 		id : null,
+		
 		timestamp : null,
 
 		// Collection of items - ItemCollection

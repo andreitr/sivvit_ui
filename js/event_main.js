@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+};
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -176,9 +177,8 @@ Date.prototype.format = function() {
 					});
 					tmp_items.push(itm_model);
 				}
-
 				group_model.set({
-					id : i,
+					id : new Date().getTime(),
 					items : new SIVVIT.ItemCollection(tmp_items),
 					items_new : new SIVVIT.ItemCollection(tmp_items),
 					stats : content[i].stats,
@@ -320,7 +320,7 @@ Date.prototype.format = function() {
 			}
 		}
 	});
-	// Main content view. 
+	// Main content view.
 	// Displays content buckets etc.
 	SIVVIT.ContentView = Backbone.View.extend({
 
@@ -361,6 +361,7 @@ Date.prototype.format = function() {
 		initialize : function(options) {
 			this.edit = options.edit;
 			this.temporalModel = options.temporalModel;
+
 			this.eventModel = options.eventModel;
 			this.eventModel.bind("change:content", this.onModelContentUpdate, this);
 		},
@@ -369,18 +370,17 @@ Date.prototype.format = function() {
 
 			var collection = SIVVIT.Parser.parse(this.eventModel);
 
-			// Render immediately when 
+			// Render view for the first time
 			if(this.rendered.length <= 0) {
 				this.model = collection;
 				this.render();
 				return;
 			}
-			
-			
+
 			if(this.display_buckets) {
 				this.display_buckets = false;
-
-				console.log("Append buckets!");
+				this.display(collection, false);
+				this.footer();
 				return;
 			}
 
@@ -423,7 +423,7 @@ Date.prototype.format = function() {
 				$("#load-content-btn").slideDown("slow");
 				$("#load-content-btn").click(function(event) {
 					$(event.currentTarget).parent().remove();
-					self.display(self.new_groups);
+					self.display(self.new_groups, true);
 					self.new_count = 0;
 				});
 			} else {
@@ -439,22 +439,19 @@ Date.prototype.format = function() {
 			this.showLoader();
 		},
 		// Renders the entire collection
-		display : function(source) {
+		display : function(source, prepend) {
 
 			var is_update;
 
 			if(source === undefined) {
 				source = this.model;
-				is_update = false;
-			} else {
-				is_update = true;
 			}
 
 			// Loop through all available groups - ItemGroupCollection
 			source.each(function(group) {
 
 				// Create group element
-				group = this.buildGroup(group, is_update);
+				group = this.buildGroup(group, prepend);
 
 				// Display all available items
 				this.buildGroupItems(group, false);
@@ -463,7 +460,6 @@ Date.prototype.format = function() {
 				this.buildGroupHeader(group);
 				this.buildGroupFooter(group);
 
-				//
 				this.displayed = true;
 
 			}, this);
@@ -490,6 +486,13 @@ Date.prototype.format = function() {
 		// Displays footer if there are more buckets to be loaded.
 		footer : function() {
 			var self = this;
+			
+			// Remove existing loader button
+			var btn = $(this.el).find('#load-groups-btn');
+			if(btn.length > 0) {
+				btn.remove();
+			}
+			
 			if(this.eventModel.hasMoreContent()) {
 				if($("#load-groups-btn").length <= 0) {
 					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More content<span class='icon-download'></span></div>");
@@ -502,9 +505,10 @@ Date.prototype.format = function() {
 			}
 		},
 		// Displays content loader
-		showLoader : function() {
+		showLoader : function(show) {
 			$(this.el).empty();
 			$(this.el).html("<div id='content-loader'></div>");
+
 		},
 		// Builds each item, returns {timestamp, html} object
 		buildTemplate : function(itm) {
@@ -546,6 +550,8 @@ Date.prototype.format = function() {
 			// Create group element which will contain all items
 			var el = "<ol id='" + gid + "'></ol>";
 
+			console.log(gid);
+
 			if(prepend) {
 				$(this.el).prepend(el);
 			} else {
@@ -559,7 +565,7 @@ Date.prototype.format = function() {
 			});
 
 			// Unbind events from previous views
-			group.unbind();
+			//group.unbind();
 
 			// Triggered when additional data is loaded into the group
 			group.bind("change", this.updateGroup, this);
