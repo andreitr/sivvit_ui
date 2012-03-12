@@ -164,7 +164,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		if(this.attributes.histogram.resolution !== null) {
 			path += "&resolution=" + this.attributes.histogram.resolution;
 		} else {
-			path += "&resolution=minute";
+			path += "&resolution=hour";
 		}
 		this.url = path;
 	},

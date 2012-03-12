@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -94,7 +93,7 @@ Date.prototype.format = function() {
 
 				// Update histogram values
 				if(self.eventModel.hasChanged("last_update") || self.eventModel.hasChanged("histogram")) {
-					
+
 					self.temporalModel.set({
 						startDate : new Date(self.eventModel.get("startDate")),
 						endDate : new Date(self.eventModel.get("last_update")),
@@ -104,7 +103,6 @@ Date.prototype.format = function() {
 						max : Math.max(self.temporalModel.get("max"), self.eventModel.get("histogram").max),
 						resolution : self.eventModel.get("histogram").resolution
 					});
-					
 					// Updates general statistics and histogram
 					self.contentController.update();
 				}
@@ -179,7 +177,7 @@ Date.prototype.format = function() {
 					tmp_items.push(itm_model);
 				}
 				group_model.set({
-					id : new Date().getTime()+"-"+i,
+					id : new Date().getTime() + "-" + i,
 					items : new SIVVIT.ItemCollection(tmp_items),
 					items_new : new SIVVIT.ItemCollection(tmp_items),
 					stats : content[i].stats,
@@ -364,55 +362,59 @@ Date.prototype.format = function() {
 			this.temporalModel = options.temporalModel;
 
 			this.eventModel = options.eventModel;
-			this.eventModel.bind("change:content", this.onModelContentUpdate, this);
+			// Bind to general change event to make sure the entire model is updated
+			this.eventModel.bind("change", this.onModelContentUpdate, this);
 		},
 		// Updates view when model is changed
 		onModelContentUpdate : function(event) {
+		
+			if(this.eventModel.hasChanged("content")) {
+				
+				var collection = SIVVIT.Parser.parse(this.eventModel);
 
-			var collection = SIVVIT.Parser.parse(this.eventModel);
-
-			// Render view for the first time
-			if(this.rendered.length <= 0) {
-				this.model = collection;
-				this.render();
-				return;
-			}
-
-			if(this.display_buckets) {
-				this.display_buckets = false;
-				this.display(collection, false);
-				this.footer();
-				return;
-			}
-
-			// Loop through all available groups - ItemGroupCollection
-			collection.each(function(group) {
-
-				var old_group = this.groups_key[group.get("timestamp")];
-
-				if(old_group) {
-					// Update stats for the existing model
-					var stats = old_group.get("stats");
-
-					// Please note that model stats are updated bypassing the setter method.
-					// Group model does not allow secondary stats updates
-					stats.total = Number(stats.total) + Number(group.get("stats").total);
-					stats.media = Number(stats.media) + Number(group.get("stats").media);
-					stats.post = Number(stats.post) + Number(group.get("stats").post);
-
-					this.buildGroupHeader(old_group);
-					this.buildGroupFooter(old_group);
-
-				} else {
-					// Add pending group to the groups key
-					this.groups_key[group.get("timestamp")] = group;
-					this.new_count += 1;
-					this.new_groups.add(group);
+				// Render view for the first time
+				if(this.rendered.length <= 0) {
+					this.model = collection;
+					this.render();
+					return;
 				}
 
-			}, this);
-			if(this.new_count > 0) {
-				this.update();
+				if(this.display_buckets) {
+					this.display_buckets = false;
+					this.display(collection, false);
+					this.footer();
+					return;
+				}
+
+				// Loop through all available groups - ItemGroupCollection
+				collection.each(function(group) {
+
+					var old_group = this.groups_key[group.get("timestamp")];
+
+					if(old_group) {
+						// Update stats for the existing model
+						var stats = old_group.get("stats");
+
+						// Please note that model stats are updated bypassing the setter method.
+						// Group model does not allow secondary stats updates
+						stats.total = Number(stats.total) + Number(group.get("stats").total);
+						stats.media = Number(stats.media) + Number(group.get("stats").media);
+						stats.post = Number(stats.post) + Number(group.get("stats").post);
+
+						this.buildGroupHeader(old_group);
+						this.buildGroupFooter(old_group);
+
+					} else {
+						// Add pending group to the groups key
+						this.groups_key[group.get("timestamp")] = group;
+						this.new_count += 1;
+						this.new_groups.add(group);
+					}
+
+				}, this);
+				if(this.new_count > 0) {
+					this.update();
+				}
 			}
 		},
 		// Adds new items to the pending queue
@@ -501,7 +503,7 @@ Date.prototype.format = function() {
 
 			if(this.eventModel.hasMoreContent()) {
 				if($("#load-groups-btn").length <= 0) {
-					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More content<span class='icon-download'></span></div>");
+					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More "+this.eventModel.get('histogram').resolution+"s<span class='icon-download'></span></div>");
 					$("#load-groups-btn").click(function(event) {
 						$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 						self.display_buckets = true;
@@ -552,9 +554,7 @@ Date.prototype.format = function() {
 		buildGroup : function(group, prepend) {
 
 			var gid = "group-" + group.get("id");
-			
-			console.log(group.get("id"));	
-			
+
 			// Create group element which will contain all items
 			var el = "<ol id='" + gid + "'></ol>";
 
@@ -569,9 +569,6 @@ Date.prototype.format = function() {
 			}, {
 				silent : true
 			});
-
-			// Unbind events from previous views
-			//group.unbind();
 
 			// Triggered when additional data is loaded into the group
 			group.bind("change", this.updateGroup, this);
@@ -591,7 +588,8 @@ Date.prototype.format = function() {
 			if(header.length > 0) {
 				header.remove();
 			}
-			$(group.get("div_id")).prepend("<div id='group-header'>" + total + " items this " + this.temporalModel.get("resolution") + " - " + group.get("timestamp").format());
+
+			$(group.get("div_id")).prepend("<div id='group-header'>" + total + " items this " + this.eventModel.get('histogram').resolution + " - " + group.get("timestamp").format());
 		},
 		buildGroupFooter : function(group) {
 
@@ -606,7 +604,7 @@ Date.prototype.format = function() {
 			// Check whether we need to load more items
 			if(group.get("displayed") < group.get("stats").total) {
 
-				$(group.get("div_id")).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.temporalModel.get("resolution") + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+				$(group.get("div_id")).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.eventModel.get("histogram").resolution + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
 
 				$(group.get("div_id")).find("#load-group-btn").click(function(event) {
 
