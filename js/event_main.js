@@ -233,7 +233,7 @@ Date.prototype.format = function() {
 		// Loads data for a newly selected view
 		updateView : function(event) {
 			if(this.renderButtons(event.target.id)) {
-				
+
 				this.update();
 				this.view.reset();
 
@@ -255,8 +255,7 @@ Date.prototype.format = function() {
 				}
 				this.eventModel.setRequestURL();
 				this.eventModel.fetch();
-				
-				
+
 			}
 		},
 		// Displays stats for the currently-selected view
@@ -330,7 +329,8 @@ Date.prototype.format = function() {
 		el : "#dynamic-content",
 
 		post_template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
-		media_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		photo_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+		media_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' class='fancybox.iframe' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
 
 		// Rendered elements
 		rendered : [],
@@ -527,24 +527,41 @@ Date.prototype.format = function() {
 
 			var html;
 
-			if(itm.get("type") === "media" || itm.get("type") === "photo") {
-				html = $.tmpl(this.media_template, {
-					thumbnail : itm.get("thumbnail"),
-					media : itm.get("media"),
-					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author"),
-					source : itm.get("source")
-				});
+			switch(itm.get("type")) {
 
-			} else if(itm.get("type") === "post") {
-				html = $.tmpl(this.post_template, {
-					content : itm.get("content"),
-					avatar : itm.get("avatar"),
-					timestamp : itm.get("timestamp").format(),
-					author : itm.get("author"),
-					source : itm.get("source")
-				});
+				case 'photo':
+					html = $.tmpl(this.photo_template, {
+						thumbnail : itm.get("thumbnail"),
+						media : itm.get("media"),
+						avatar : itm.get("avatar"),
+						timestamp : itm.get("timestamp").format(),
+						author : itm.get("author"),
+						source : itm.get("source")
+					});
+					break;
+
+				case 'media':
+					html = $.tmpl(this.media_template, {
+						thumbnail : itm.get("thumbnail"),
+						media : itm.get("media"),
+						avatar : itm.get("avatar"),
+						timestamp : itm.get("timestamp").format(),
+						author : itm.get("author"),
+						source : itm.get("source")
+					});
+				
+					
+					break;
+
+				case 'post':
+					html = $.tmpl(this.post_template, {
+						content : itm.get("content"),
+						avatar : itm.get("avatar"),
+						timestamp : itm.get("timestamp").format(),
+						author : itm.get("author"),
+						source : itm.get("source")
+					});
+					break;
 			}
 
 			return {
