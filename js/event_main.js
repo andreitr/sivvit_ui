@@ -233,6 +233,8 @@ Date.prototype.format = function() {
 		// Loads data for a newly selected view
 		updateView : function(event) {
 			if(this.renderButtons(event.target.id)) {
+				
+				this.update();
 				this.view.reset();
 
 				this.eventModel.unset(["content"], {
@@ -253,6 +255,8 @@ Date.prototype.format = function() {
 				}
 				this.eventModel.setRequestURL();
 				this.eventModel.fetch();
+				
+				
 			}
 		},
 		// Displays stats for the currently-selected view
@@ -367,9 +371,9 @@ Date.prototype.format = function() {
 		},
 		// Updates view when model is changed
 		onModelContentUpdate : function(event) {
-		
+
 			if(this.eventModel.hasChanged("content")) {
-				
+
 				var collection = SIVVIT.Parser.parse(this.eventModel);
 
 				// Render view for the first time
@@ -503,7 +507,7 @@ Date.prototype.format = function() {
 
 			if(this.eventModel.hasMoreContent()) {
 				if($("#load-groups-btn").length <= 0) {
-					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More "+this.eventModel.get('histogram').resolution+"s<span class='icon-download'></span></div>");
+					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More " + this.eventModel.get('histogram').resolution + "s<span class='icon-download'></span></div>");
 					$("#load-groups-btn").click(function(event) {
 						$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 						self.display_buckets = true;

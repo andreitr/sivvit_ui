@@ -64,6 +64,21 @@ SIVVIT.EventModel = Backbone.Model.extend({
 	// Fetch interval id
 	fetch_interval : null,
 
+	// Add change event listener to restart live pulling with each data update
+	initialize : function() {
+		this.bind("change", function() {
+			if(this.get('status') < 1) {
+				this.stopLiveData();
+			} else {
+				this.startLiveData();
+			}
+		}, this);
+	},
+	// Override fetch method to stop live data timer at every request
+	fetch : function(options) {
+		this.stopLiveData();
+		Backbone.Model.prototype.fetch.call(this, options);
+	},
 	// Override set method to keep track of the original
 	set : function(attributes, options) {
 
@@ -82,15 +97,6 @@ SIVVIT.EventModel = Backbone.Model.extend({
 			}
 			if(attributes.histogram.global !== undefined) {
 				attributes.histogram.global = this.appendHistogram(this.global_hash, attributes.histogram.global);
-			}
-
-			// Start continues data loading if event is live
-			if(attributes.hasOwnProperty('status')) {
-				if(attributes.status < 1) {
-					this.stopLiveData();
-				} else {
-					this.startLiveData();
-				}
 			}
 		}
 
@@ -131,7 +137,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 	},
 	// Returns true when earlier buckets can be loaded.
 	hasMoreContent : function() {
-		
+
 		if(this.get("content_bounds").min > new Date(this.get("startDate"))) {
 			return true;
 		} else {
@@ -210,12 +216,11 @@ SIVVIT.EventModel = Backbone.Model.extend({
 		}
 	},
 	// Increments the page count and loads more content buckets
-	loadMoreContent: function(){
-		this.attributes.bucket_page = this.get("bucket_page") +1;
+	loadMoreContent : function() {
+		this.attributes.bucket_page = this.get("bucket_page") + 1;
 		this.setRequestURL();
 		this.fetch();
 	},
-	
 	// Start continues data loading
 	startLiveData : function() {
 		var self = this;
