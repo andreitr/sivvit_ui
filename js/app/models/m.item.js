@@ -13,5 +13,9 @@ SIVVIT.ItemModel = Backbone.Model.extend({
 		rank : 0,
 		author : null,
 		avatar : null
-	}
+	},
+	// Initialized 
+	initialize : function() {
+		this.url = "http://sivvit.com/e/post/" + this.get("id");
+	},
 });

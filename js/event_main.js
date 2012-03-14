@@ -5,7 +5,8 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+};
+(function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -32,7 +33,7 @@ Date.prototype.format = function() {
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : false,
+		edit : true,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
@@ -549,8 +550,7 @@ Date.prototype.format = function() {
 						author : itm.get("author"),
 						source : itm.get("source")
 					});
-				
-					
+
 					break;
 
 				case 'post':
@@ -828,18 +828,29 @@ Date.prototype.format = function() {
 			});
 		},
 		approveItem : function(itm, value) {
-
+			
+			var self = this;
+			
 			if(value === undefined) {
 				value = itm.model.get("status") === 1 ? 0 : 1;
 			} else {
 				value = value === true ? 1 : 0;
 			}
-
-			// toggle status
 			itm.model.set({
 				status : value
 			});
-			this.showHidePending(itm);
+			
+			itm.model.save({
+				status : value
+			}, {
+				error : function() {
+					console.log("Error updating model");
+				},
+				success : function() {
+					self.showHidePending(itm);
+					console.log("Successfully saved");
+				}
+			});
 		},
 		showHidePending : function(itm) {
 			if(itm.model.get("status") === 1) {
@@ -849,10 +860,6 @@ Date.prototype.format = function() {
 				itm.html.find("#pending-flag").toggleClass("pending-notice", true);
 				itm.html.find("#pending-flag").toggleClass("active-notice", false);
 			}
-		},
-		updateItem : function(itm) {
-			//update_item.json?id=00002&status=1
-			//delete_item.json?id=00002
 		},
 		// Returns count of items to be displayed in this view
 		getItemCount : function(group) {
