@@ -5,8 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-};
-(function(jQuery, SIVVIT) {
+}; (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
 
@@ -769,57 +768,70 @@ Date.prototype.format = function() {
 		},
 		initItem : function(itm, group) {
 
-			var self = this;
-
 			if(itm !== null) {
 
 				// Initiate button clicks if a user is logged in and modify
 				// content template (add hover buttons and check box)
 				if(this.edit) {
-					itm.html.find("#content").prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-flag\"></div></span>");
+					itm.html.find("#content").prepend("<span class=\"item-edit\"><span id='load-itm' class='loader'></span><span class=\"icon-delete\" id=\"del-itm\"></span><span class=\"icon-check\" id=\"apr-itm\"></span><div id=\"pending-flag\"></div></span>");
 					itm.html.find("#content").prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
 
-					itm.html.find("#del-itm").hide();
-					itm.html.find("#apr-itm").hide();
+					itm.html.find('#del-itm').hide();
+					itm.html.find('#apr-itm').hide();
+					itm.html.find('#load-itm').hide();
 
-					itm.html.hover(function(event) {
-						itm.html.find("#del-itm").show();
-						itm.html.find("#apr-itm").show();
-					}, function(event) {
-						itm.html.find("#del-itm").hide();
-						itm.html.find("#apr-itm").hide();
-					});
-
-					itm.html.click(function(event) {
-
-						var checked;
-
-						switch(event.target.id) {
-							case "apr-itm":
-								self.approveItem(itm);
-								break;
-
-							case "del-itm":
-								self.deleteItem(itm);
-								break;
-
-							default:
-								if(itm.html.find("#itm-check").length > 0) {
-									checked = itm.html.find("#itm-check").is(':checked');
-									itm.html.find("#itm-check").attr('checked', !checked);
-									itm.html.css("background-color", checked ? "#FFFFFF" : "#FFFFCC");
-								}
-						}
-						// New
-						//event.stopPropagation();
-					});
-
+					this.enableItem(itm);
 					this.showHidePending(itm);
 				}
 				this.rendered.push(itm);
 
 				$(group.get("div_id")).append(itm.html);
 			}
+		},
+		// Enables item button events
+		enableItem : function(itm) {
+
+			var self = this;
+
+			itm.html.find('#load-itm').hide();
+
+			itm.html.hover(function(event) {
+				itm.html.find("#del-itm").show();
+				itm.html.find("#apr-itm").show();
+			}, function(event) {
+				itm.html.find("#del-itm").hide();
+				itm.html.find("#apr-itm").hide();
+			});
+
+			itm.html.click(function(event) {
+
+				var checked;
+
+				switch(event.target.id) {
+					case "apr-itm":
+						self.approveItem(itm);
+						break;
+
+					case "del-itm":
+						self.deleteItem(itm);
+						break;
+
+					default:
+						if(itm.html.find("#itm-check").length > 0) {
+							checked = itm.html.find("#itm-check").is(':checked');
+							itm.html.find("#itm-check").attr('checked', !checked);
+							itm.html.css("background-color", checked ? "#FFFFFF" : "#FFFFCC");
+						}
+				}
+				event.stopPropagation();
+			});
+		},
+		// Disables button clicks for this item
+		disableItem : function(itm) {
+			itm.html.unbind();
+			itm.html.find('#del-itm').hide();
+			itm.html.find('#apr-itm').hide();
+			itm.html.find('#load-itm').show();
 		},
 		deleteItem : function(itm) {
 			itm.html.fadeOut();
@@ -828,9 +840,10 @@ Date.prototype.format = function() {
 			});
 		},
 		approveItem : function(itm, value) {
-			
+
+			this.disableItem(itm);
 			var self = this;
-			
+
 			if(value === undefined) {
 				value = itm.model.get("status") === 1 ? 0 : 1;
 			} else {
@@ -839,15 +852,17 @@ Date.prototype.format = function() {
 			itm.model.set({
 				status : value
 			});
-			
+
 			itm.model.save({
 				status : value
 			}, {
 				error : function() {
 					console.log("Error updating model");
+					self.enableItem(itm);
 				},
 				success : function() {
 					self.showHidePending(itm);
+					self.enableItem(itm);
 					console.log("Successfully saved");
 				}
 			});
