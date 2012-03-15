@@ -6,90 +6,98 @@
 		<title>Edit Event</title>
 	</head>
 	<body>
-			<div id="form-container">
-				<div id="form-main">
-					<div id="form-col-left">
-						<h3><span id="icon-title" class="icon-check-green"></span>Event Title</h3>
-						<input type="text" name="title"/>
+		<div id="content-loader" style="height:'390px'; width:'820px';"></div>
+		<div id="form-container">
+			<div id="form-main">
+				<div id="form-col-left">
+					<h3><span id="icon-title" class="icon-check-green"></span>Event Title</h3>
+					<input type="text" name="title"/>
+					<div id="form-meta">
+						Describe your event e.g. Angry Cat escapes from jail.
+					</div>
+					<div id="padding"></div>
+					<h3>Location</h3>
+					<input type="text" name="location" />
+					<div id="form-meta">
+						Leave blank for global tracking.
+					</div>
+					<div id="padding"></div>
+					<h3><span id="icon-keywords" class="icon-check-green"> </span>Keywords, hashtags</h3>
+					<input type="text" name="keywords"/>
+					<div id="form-meta">
+						Comma delimited list e.g. angry cats, #angrycats
+					</div>
+					<div id="padding"></div>
+					<div style="float:left">
+						<h3><span id="icon-start-date" class="icon-check-green"> </span>Start Date</h3>
+						<input type="text" readonly="true" name="start-date"/>
 						<div id="form-meta">
-							Describe your event e.g. Angry Cat escapes from jail.
-						</div>
-						<div id="padding"></div>
-						<h3>Location</h3>
-						<input type="text" name="location" />
-						<div id="form-meta">
-							Leave blank for global tracking.
-						</div>
-						<div id="padding"></div>
-						<h3><span id="icon-keywords" class="icon-check-green"> </span>Keywords, hashtags</h3>
-						<input type="text" name="keywords"/>
-						<div id="form-meta">
-							Comma delimited list e.g. angry cats, #angrycats
-						</div>
-						<div id="padding"></div>
-						<div style="float:left">
-							<h3><span id="icon-start-date" class="icon-check-green"> </span>Start Date</h3>
-							<input type="text" readonly="true" name="start-date"/>
-							<div id="form-meta">
-								Start collecting data
-							</div>
-						</div>
-						<div style="float:right">
-							<h3>End Date</h3>
-							<input type="text" readonly="true" name="end-date"/>
-							<div id="form-meta">
-								Runs continuesly if not specified
-							</div>
+							Start collecting data
 						</div>
 					</div>
-					<div id="form-col-right">
-						<div style="display:block">
-							<h3>Curate content</h3>
-						</div>
-						<div id="form-field">
-							<input type="radio" name="curate" checked="true"/>
-							Automatically
-							<input type="radio" name="curate"/>
-							Manually
-							<input type="radio" name="curate"/>
-							Don't curate
-						</div>
+					<div style="float:right">
+						<h3>End Date</h3>
+						<input type="text" readonly="true" name="end-date"/>
 						<div id="form-meta">
-							Please note that everything will be displayed if content is not curated.
-						</div>
-						<div id="padding"></div>
-						<div style="display:block">
-							<h3>Notify about new content</h3>
-						</div>
-						<div id="form-field">
-							<input type="radio" name="notify" checked="true"/>
-							Never
-							<input type="radio" name="notify" />
-							Hourly
-							<input type="radio" name="notify" />
-							Daily
-							<input type="radio" name="notify" />
-							Weekly
-						</div>
-						<div id="form-meta">
-							Notification emails will be sent to your account email.
-						</div>
-						<div id="padding"></div>
-						<h3>Collection status: RUNNING</h3>
-						<div class="tabBtn" id='collection-btn'>
-							Stop Collection
+							Runs continuesly if not specified
 						</div>
 					</div>
 				</div>
-				
-				<div id="form-footer">
-					<div style="float:right">
-						<div class="tabBtn">Delete Event</div>
-						<div class="tabBtn">Save</div>
+				<div id="form-col-right">
+					<div style="display:block">
+						<h3>Curate content</h3>
+					</div>
+					<div id="form-field">
+						<input type="radio" name="curate" checked="true"/>
+						Automatically
+						<input type="radio" name="curate"/>
+						Manually
+						<input type="radio" name="curate"/>
+						Don't curate
+					</div>
+					<div id="form-meta">
+						Please note that everything will be displayed if content is not curated.
+					</div>
+					<div id="padding"></div>
+					<div style="display:block">
+						<h3>Notify about new content</h3>
+					</div>
+					<div id="form-field">
+						<input type="radio" name="notify" checked="true"/>
+						Never
+						<input type="radio" name="notify" />
+						Hourly
+						<input type="radio" name="notify" />
+						Daily
+						<input type="radio" name="notify" />
+						Weekly
+					</div>
+					<div id="form-meta">
+						Notification emails will be sent to your account email.
+					</div>
+					<div id="padding"></div>
+					<h3>Collection status: RUNNING</h3>
+					<div class="tabBtn" id='collection-btn'>
+						Stop Collection
 					</div>
 				</div>
 			</div>
+			<div id="form-footer">
+				<div style="float:right">
+					<div class="tabBtn">
+						Delete Event
+					</div>
+					<div class="tabBtn">
+						Save
+					</div>
+				</div>
+			</div>
+		</div>
 		<script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
-		<script type="text/javascript" src="js/edit_event.js"></script>
+		<script type="text/javascript" src="js/edit_event_wrapper.js"></script>
+		<script type="text/javascript">
+			SIVVIT.Wrapper.init('598cb469');
+
+		</script>
 	</body>
 </html>

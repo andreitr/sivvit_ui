@@ -65,7 +65,6 @@ Date.prototype.format = function() {
 				view : this.contentView
 			});
 			
-			
 			// Load content for the first time.
 			this.eventModel.set({
 				json : 'http://sivvit.com/event/'+id+'.json?callback=?'

@@ -400,7 +400,7 @@ input[type*="radio"]{
 }
 
 #form-container{
-	display:block;
+	display:none;
 	height:390px;
 	width:820px;
 	background-color:#FFFFFF;
