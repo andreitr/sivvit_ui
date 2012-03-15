@@ -283,7 +283,6 @@ if( typeof (SIVVIT) == 'undefined') {
 				html : html,
 				model : itm
 			};
-
 		}
 	});
 })($, SIVVIT);
