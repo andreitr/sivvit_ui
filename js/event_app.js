@@ -1,7 +1,3 @@
-if( typeof (SIVVIT) == 'undefined') {
-	SIVVIT = {};
-}
-
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
@@ -10,7 +6,7 @@ Date.prototype.format = function() {
 (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
-
+ 
 		// SIVVIT.EventModel app/models/m.event.js
 		eventModel : null,
 
@@ -18,7 +14,7 @@ Date.prototype.format = function() {
 		temporalModel : null,
 
 		// SIVVIT.ContentController
-		// Controls switching of all other views.
+		// Controls switching of all other views
 		contentController : null,
 
 		// SIVVIT.ContentView
@@ -27,7 +23,7 @@ Date.prototype.format = function() {
 		// SIVVIT.HeaderView
 		headerView : null,
 
-		// SIVVIT.SideMapView
+		// SIVVIT.SideMapVie w
 		mapView : null,
 
 		// SIVVIT.HistogramView
