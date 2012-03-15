@@ -35,11 +35,10 @@ Date.prototype.format = function() {
 
 		// Enables content editing when set to true
 		edit : true,
-
-		host: 'http://sivvit.com/event/"+id+".json?callback=?',
-
+		
 		// Initiates the application and loads the main data.
-		init : function(json) {
+		init : function(id) {
+			
 			var self = this;
 
 			SIVVIT.Lightbox.init();
@@ -51,7 +50,7 @@ Date.prototype.format = function() {
 			});
 
 			this.mapView = new SIVVIT.MapView();
-
+			
 			this.sideHistView = new SIVVIT.HistogramView({
 				el : '#timeline-container',
 				model : this.temporalModel,
@@ -69,12 +68,12 @@ Date.prototype.format = function() {
 				temporalModel : this.temporalModel,
 				view : this.contentView
 			});
-
+			
 			// Load content for the first time
 			this.eventModel.set({
-				json : json
+				json : 'http://sivvit.com/event/'+id+'.json?callback=?'
 			});
-			this.eventModel.setSinceRequestURL();
+			this.eventModel.setSinceRequestURL(); 
 			this.eventModel.fetch();
 
 			this.eventModel.bind("change", function() {
