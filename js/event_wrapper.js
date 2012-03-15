@@ -17,7 +17,7 @@ SIVVIT.Wrapper = {
 		$LAB.script("js/libs/fancybox/jquery.fancybox.pack.js").wait();
 
 		$LAB.script("js/event.js").wait(function() {
-			SIVVIT.Event.init("http://sivvit.com/event/"+id+".json?callback=?");
+			SIVVIT.Event.init(id);
 		});
 	}
 }

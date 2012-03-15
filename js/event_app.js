@@ -36,6 +36,8 @@ Date.prototype.format = function() {
 		// Enables content editing when set to true
 		edit : true,
 
+		host: 'http://sivvit.com/event/"+id+".json?callback=?',
+
 		// Initiates the application and loads the main data.
 		init : function(json) {
 			var self = this;
