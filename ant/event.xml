@@ -1,22 +1,26 @@
 <?xml version="1.0"?>
 <project basedir="../" default="compile">
 
-	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
-	classpath="/Users/andreitaraschuk/Documents/code/closure-compiler/compiler.jar"/>
-
+	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="/Users/andreitaraschuk/Documents/code/closure-compiler/compiler.jar" />
 
 	<target name="compile">
-		<jscomp compilationLevel="simple" warning="verbose"	debug="false" output="compiled/file.js">
-
-			<externs dir="${basedir}/js/libs/">
-				<file name="jquery/jquery-1.7.1.min.js" />
-			</externs>
-
+		<jscomp compilationLevel="whitespace" warning="verbose" debug="false" output="js/event.js">
 
 			<sources dir="${basedir}/js">
-				<file name="compiled_test.js" />
+
+				<file name="header.js" />
+				<file name="event_app.js" />
+
+				<file name="app/models/m.event.js" />
+				<file name="app/models/m.temporal.js" />
+				<file name="app/models/m.item.js" />
+				<file name="app/models/m.item.group.js" />
+				<file name="app/views/v.histogram.js" />
+
 			</sources>
 
 		</jscomp>
 	</target>
 </project>
+
+

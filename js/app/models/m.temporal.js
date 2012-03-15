@@ -2,7 +2,6 @@
 SIVVIT.TemporalModel = Backbone.Model.extend({
 
 	defaults : {
-
 		// Min, max date
 		startDate : new Date(),
 		endDate : new Date(),
@@ -25,7 +24,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 		// Minute, second, hour, day
 		resolution : null,
 		// Type of the displayed content - global, media, post
-		type : null,
+		type : null
 	},
 
 	// Override set method to keep track on

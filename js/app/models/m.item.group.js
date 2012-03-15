@@ -6,9 +6,9 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 		json : null,
 
 		type : null,
-		
+
 		id : null,
-		
+
 		timestamp : null,
 
 		// Collection of items - ItemCollection
@@ -26,7 +26,7 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 		stats : {
 			total : 0,
 			post : 0,
-			media : 0,
+			media : 0
 		}
 	},
 
@@ -39,7 +39,7 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 
 	// Override set method to regulate updating of the stats object
 	set : function(attributes, options) {
-		
+
 		// Update stats only for the fist time
 		if(attributes.hasOwnProperty("stats")) {
 			if(!this.lock_stats) {
@@ -54,6 +54,6 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 	// Sets url path with all necessary parameters
 	setRequestPath : function(startDate, endDate, limit, resolution, type) {
 		var page = Math.round(this.get("displayed") / limit) + 1;
-		this.url = this.get("json") + "&meta=0&fromDate=" + (startDate.getTime() / 1000) + "&toDate=" + (endDate.getTime() / 1000) + "&limit=" + limit + "&page=" + page + "&resolution=" + resolution+"&type[]="+type;
-	},
+		this.url = this.get("json") + "&meta=0&fromDate=" + (startDate.getTime() / 1000) + "&toDate=" + (endDate.getTime() / 1000) + "&limit=" + limit + "&page=" + page + "&resolution=" + resolution + "&type[]=" + type;
+	}
 });
