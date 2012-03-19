@@ -132,7 +132,7 @@
 					'location' : {
 						'lat' : place.geometry.location.lat(),
 						'lon' : place.geometry.location.lng(),
-						'name': place.name
+						'name' : place.name
 					}
 				}, {
 					silent : true

@@ -5,7 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
 SIVVIT.Wrapper = {
 
 	init : function(id) {
-
+		
 		$LAB.script("js/libs/jquery/jquery-1.6.4.min.js").wait();
 		$LAB.script("js/libs/underscore/underscore-min.js").wait();
 		$LAB.script("js/libs/backbone/backbone.js").wait();
