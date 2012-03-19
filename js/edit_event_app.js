@@ -112,7 +112,7 @@
 				return value.match('^$');
 			}
 		},
-		// Initializes google map display and
+		// Initializes map display and auto-complete location field
 		initMap : function() {
 
 			var self = this;
