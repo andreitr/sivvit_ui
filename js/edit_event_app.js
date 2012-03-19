@@ -12,6 +12,7 @@
 		init : function(id) {
 			var self = this;
 
+			// Make sure that the histogram is not requested with the data
 			this.model = new SIVVIT.EventModel({
 				json : 'http://sivvit.com/event/' + id + '.json?callback=?',
 				meta : 0,
@@ -30,6 +31,11 @@
 	SIVVIT.EditEventView = Backbone.View.extend({
 
 		el : "document",
+
+		// Google map instance
+		map : null,
+		// Auto complete
+		map_complete : null,
 
 		required_fields : [{
 			field : "input[name='title']",
@@ -51,6 +57,7 @@
 
 			this.model = options.model;
 			this.model.bind("change", this.update, this);
+			this.model.bind("change:location", this.initMap, this);
 
 			$("input").change(function() {
 				self.validate();
@@ -104,7 +111,33 @@
 			if(type === "string") {
 				return value.match('^$');
 			}
+		},
+		// Initializes google map display and
+		initMap : function() {
+
+			var self = this;
+			this.map = new google.maps.Map($("#form-map")[0], {
+				center : new google.maps.LatLng(45, 39),
+				zoom : 8,
+				disableDefaultUI : true,
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+			});
+
+			this.map_complete = new google.maps.places.Autocomplete($("input[name='location']")[0]);
+			google.maps.event.addListener(this.map_complete, 'place_changed', function() {
+				var place = self.map_complete.getPlace();
+				self.map.setCenter(place.geometry.location);
+
+				self.model.set({
+					'location' : {
+						'lat' : place.geometry.location.lat(),
+						'lon' : place.geometry.location.lng(),
+						'name': place.name
+					}
+				}, {
+					silent : true
+				});
+			});
 		}
 	});
-
 })($, SIVVIT);

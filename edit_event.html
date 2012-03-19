@@ -16,12 +16,6 @@
 						Describe your event e.g. Angry Cat escapes from jail.
 					</div>
 					<div id="padding"></div>
-					<h3>Location</h3>
-					<input type="text" name="location" />
-					<div id="form-meta">
-						Leave blank for global tracking.
-					</div>
-					<div id="padding"></div>
 					<h3><span id="icon-keywords" class="icon-check-green"> </span>Keywords, hashtags</h3>
 					<input type="text" name="keywords"/>
 					<div id="form-meta">
@@ -44,37 +38,13 @@
 					</div>
 				</div>
 				<div id="form-col-right">
-					<div style="display:block">
-						<h3>Curate content</h3>
-					</div>
-					<div id="form-field">
-						<input type="radio" name="curate" checked="true"/>
-						Automatically
-						<input type="radio" name="curate"/>
-						Manually
-						<input type="radio" name="curate"/>
-						Don't curate
-					</div>
+					<h3>Location</h3>
+					<input type="text" name="location" />
 					<div id="form-meta">
-						Please note that everything will be displayed if content is not curated.
+						Leave blank for global tracking.
 					</div>
 					<div id="padding"></div>
-					<div style="display:block">
-						<h3>Notify about new content</h3>
-					</div>
-					<div id="form-field">
-						<input type="radio" name="notify" checked="true"/>
-						Never
-						<input type="radio" name="notify" />
-						Hourly
-						<input type="radio" name="notify" />
-						Daily
-						<input type="radio" name="notify" />
-						Weekly
-					</div>
-					<div id="form-meta">
-						Notification emails will be sent to your account email.
-					</div>
+					<div id="form-map" style="width:auto; height:200px;"></div>
 					<div id="padding"></div>
 					<h3>Collection status: RUNNING</h3>
 					<div class="tabBtn" id='collection-btn'>
@@ -93,6 +63,7 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
 		<script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
 		<script type="text/javascript" src="js/edit_event_wrapper.js"></script>
 		<script type="text/javascript">
