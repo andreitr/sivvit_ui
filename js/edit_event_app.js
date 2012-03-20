@@ -74,6 +74,7 @@
 			$("input[name='title']").val(this.model.get("title"));
 			$("input[name='location']").val(this.model.get("location").name);
 			$("input[name='keywords']").val(this.model.get("keywords"));
+			$("input[name='description']").val(this.model.get("description"));
 
 			// Start date
 			$("input[name='start-date']").datepicker({
@@ -87,9 +88,10 @@
 			});
 			$("input[name='end-date']").val(new Date(this.model.get("endDate")).toDateString());
 
+			// Time
 			$("input[name='end-time']").val(new Date(this.model.get("endDate")).toTimeString().substring(0, 8));
 			$("input[name='start-time']").val(new Date(this.model.get("startDate")).toTimeString().substring(0, 8));
-
+			
 			$('#collection-btn').html(this.model === 0 ? 'Start Collection' : 'Start Collection');
 
 			this.validate();
