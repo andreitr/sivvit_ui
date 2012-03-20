@@ -87,6 +87,9 @@
 			});
 			$("input[name='end-date']").val(new Date(this.model.get("endDate")).toDateString());
 
+			$("input[name='end-time']").val(new Date(this.model.get("endDate")).toTimeString().substring(0, 8));
+			$("input[name='start-time']").val(new Date(this.model.get("startDate")).toTimeString().substring(0, 8));
+
 			$('#collection-btn').html(this.model === 0 ? 'Start Collection' : 'Start Collection');
 
 			this.validate();
@@ -105,12 +108,26 @@
 				icon.toggleClass('icon-check-green', valid ? false : true);
 				icon.toggleClass('icon-check-red', valid ? true : false);
 			}
+			field = $("input[name='start-time']");
+			valid = this.validateTime(field.val());
+			field.css('background-color', valid ? "#FFFFFF" : "#FFFFCC");
+			$('#icon-start-time').toggleClass('icon-check-red', valid ? false : true);
+			
+			field = $("input[name='end-time']");
+			valid = this.validateTime(field.val());
+			field.css('background-color', valid ? "#FFFFFF" : "#FFFFCC");
+			$('#icon-end-time').toggleClass('icon-check-red', valid ? false : true);
+
 		},
 		// Validates specific value based on the type
 		validateValue : function(value, type) {
 			if(type === "string") {
 				return value.match('^$');
 			}
+		},
+		//Validates time format
+		validateTime : function(value) {
+			return value.match(/^(?:(?:(\d+):)?(\d+):)?(\d+)$/);
 		},
 		// Initializes map display and auto-complete location field
 		initMap : function() {
