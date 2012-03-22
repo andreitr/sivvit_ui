@@ -10,22 +10,49 @@
 
 		// Initiates the application and loads the main data.
 		init : function(id) {
-			
+
 			var self = this;
-			
-			// Make sure that the histogram is not requested with the data
-			this.model = new SIVVIT.EventModel({
-				json : 'http://sivvit.com/event/' + id + '.json?callback=?',
-				meta : 0,
-				limit : 0,
-				bucket_limit : 0
-			});
-			
+
+			if(id === null || id === undefined) {
+				// New event is being created
+
+				this.model = new SIVVIT.EventModel({
+
+					location : {
+						name : "Denver, CO",
+						lat : -104.984722,
+						lon : 39.739167
+					},
+
+					startDate : new Date(),
+					// Add 24 hours to the existing date
+					endDate : new Date(new Date().getTime() + 86400000)
+				})
+
+			} else {
+
+				// Load data for existing event
+				this.model = new SIVVIT.EventModel({
+					json : 'http://sivvit.com/event/' + id + '.json?callback=?',
+					meta : 0,
+					limit : 0,
+					bucket_limit : 0
+				});
+			}
+
 			this.view = new SIVVIT.EditEventView({
 				model : this.model
 			});
-			this.model.setRequestURL();
-			this.model.fetch();
+
+			// If the event is new render event right away
+			if(id === null || id === undefined) {
+				this.view.update();
+				this.view.initMap();
+			} else {
+				this.model.setRequestURL();
+				this.model.fetch();
+			}
+
 		}
 	};
 
@@ -93,7 +120,7 @@
 			// Time
 			$("input[name='end-time']").val(new Date(this.model.get("endDate")).toTimeString().substring(0, 8));
 			$("input[name='start-time']").val(new Date(this.model.get("startDate")).toTimeString().substring(0, 8));
-			
+
 			$('#collection-btn').html(this.model === 0 ? 'Start Collection' : 'Start Collection');
 
 			this.validate();
@@ -112,12 +139,10 @@
 				icon.toggleClass('icon-check-green', valid ? false : true);
 				icon.toggleClass('icon-check-red', valid ? true : false);
 			}
-			
 			field = $("input[name='start-time']");
 			valid = this.validateTime(field.val());
 			field.css('background-color', valid ? "#FFFFFF" : "#FFFFCC");
 			$('#icon-start-time').toggleClass('icon-check-red', valid ? false : true);
-			
 			field = $("input[name='end-time']");
 			valid = this.validateTime(field.val());
 			field.css('background-color', valid ? "#FFFFFF" : "#FFFFCC");
@@ -138,13 +163,14 @@
 		initMap : function() {
 
 			var self = this;
+
 			this.map = new google.maps.Map($("#form-map")[0], {
-				center : new google.maps.LatLng(45, 39),
+				center : new google.maps.LatLng(self.model.get("location").lon, self.model.get("location").lat),
 				zoom : 8,
 				disableDefaultUI : true,
 				mapTypeId : google.maps.MapTypeId.ROADMAP
 			});
-			
+
 			// Auto complete field
 			this.map_complete = new google.maps.places.Autocomplete($("input[name='location']")[0]);
 			google.maps.event.addListener(this.map_complete, 'place_changed', function() {
