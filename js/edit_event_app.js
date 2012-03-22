@@ -10,9 +10,11 @@
 
 		// Initiates the application and loads the main data.
 		init : function(id) {
+			
 			var self = this;
 
 			// Make sure that the histogram is not requested with the data
+			//
 			this.model = new SIVVIT.EventModel({
 				json : 'http://sivvit.com/event/' + id + '.json?callback=?',
 				meta : 0,
