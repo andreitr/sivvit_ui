@@ -343,7 +343,7 @@ Date.prototype.format = function() {
 		// Count of new items - displayed when new data is loaded
 		new_count : 0,
 
-		// Collection (ItemGroupCollection) of goups that have been loaded but not rendered
+		// Collection (ItemGroupCollection) of groups that have been loaded but not rendered
 		new_groups : new SIVVIT.ItemCollection(),
 
 		// Instance of TemporalModel
@@ -848,12 +848,10 @@ Date.prototype.format = function() {
 				value = value === true ? 1 : 0;
 			}
 			itm.model.set({
-				status : value
+				status : value.toString()
 			});
-
+	
 			itm.model.save({
-				status : value
-			}, {
 				error : function() {
 					console.log("Error updating model");
 					self.enableItem(itm);

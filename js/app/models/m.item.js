@@ -11,8 +11,29 @@ SIVVIT.ItemModel = Backbone.Model.extend({
 		author : null,
 		avatar : null
 	},
-	// Initialized 
+	// Initialized
 	initialize : function() {
-		this.url = "http://sivvit.com/e/post/" + this.get("id");
+		this.url = "http://sivvit.com/e/post/" + this.get("id") + ".json";
+	},
+	save : function() {
+
+
+		var self = this;
+		
+		self.fetch();
+
+		$.ajax({
+			url : self.url,
+			type : "PUT",
+			contentType : 'application/json',
+			processData : false,
+			data : self.toJSON(),
+			success: function(){
+				console.log("success");
+			},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log(jqXHR);
+			}
+		});
 	}
 });

@@ -110,6 +110,7 @@
 				icon.toggleClass('icon-check-green', valid ? false : true);
 				icon.toggleClass('icon-check-red', valid ? true : false);
 			}
+			
 			field = $("input[name='start-time']");
 			valid = this.validateTime(field.val());
 			field.css('background-color', valid ? "#FFFFFF" : "#FFFFCC");
@@ -127,7 +128,7 @@
 				return value.match('^$');
 			}
 		},
-		//Validates time format
+		// Validates time format
 		validateTime : function(value) {
 			return value.match(/^(?:(?:(\d+):)?(\d+):)?(\d+)$/);
 		},
@@ -141,7 +142,8 @@
 				disableDefaultUI : true,
 				mapTypeId : google.maps.MapTypeId.ROADMAP
 			});
-
+			
+			// Auto complete field
 			this.map_complete = new google.maps.places.Autocomplete($("input[name='location']")[0]);
 			google.maps.event.addListener(this.map_complete, 'place_changed', function() {
 				var place = self.map_complete.getPlace();
