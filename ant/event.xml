@@ -7,7 +7,7 @@
 		<jscomp compilationLevel="whitespace" warning="verbose" debug="false" output="js/event.js">
 							
 			<sources dir="${basedir}/js">
-
+				
 				<file name="header.js" />
 				<file name="event_app.js" />
 

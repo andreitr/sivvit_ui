@@ -12,15 +12,15 @@
 		init : function(id) {
 			
 			var self = this;
-
+			
 			// Make sure that the histogram is not requested with the data
-			//
 			this.model = new SIVVIT.EventModel({
 				json : 'http://sivvit.com/event/' + id + '.json?callback=?',
 				meta : 0,
 				limit : 0,
 				bucket_limit : 0
 			});
+			
 			this.view = new SIVVIT.EditEventView({
 				model : this.model
 			});

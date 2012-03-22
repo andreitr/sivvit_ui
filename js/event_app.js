@@ -6,7 +6,7 @@ Date.prototype.format = function() {
 (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
- 
+ 		///////////
 		// SIVVIT.EventModel app/models/m.event.js
 		eventModel : null,
 
@@ -16,7 +16,7 @@ Date.prototype.format = function() {
 		// SIVVIT.ContentController
 		// Controls switching of all other views
 		contentController : null,
-
+		
 		// SIVVIT.ContentView
 		contentView : null,
 

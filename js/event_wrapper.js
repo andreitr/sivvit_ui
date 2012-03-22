@@ -15,8 +15,10 @@ SIVVIT.Wrapper = {
 
 		$LAB.script("js/libs/fancybox/jquery.fancybox.js").wait();
 		$LAB.script("js/libs/fancybox/jquery.fancybox.pack.js").wait();
-
+		
 		$LAB.script("js/event.js").wait(function() {
+			
+			// Initiate the entire application once the last file is loaded
 			SIVVIT.Event.init(id);
 		});
 	}
