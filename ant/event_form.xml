@@ -7,7 +7,7 @@
 		<jscomp compilationLevel="whitespace" warning="verbose" debug="false" output="js/event_form.js">
 
 			<sources dir="${basedir}/js">
-				<file name="edit_event_app.js" />
+				<file name="event_form_app.js" />
 				<file name="app/models/m.event.js" />
 			</sources>
 
