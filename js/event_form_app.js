@@ -1,3 +1,7 @@
+if( typeof (SIVVIT) == 'undefined') {
+	SIVVIT = {};
+}
+
 (function(jQuery, SIVVIT) {
 
 	SIVVIT.EditEvent = {
