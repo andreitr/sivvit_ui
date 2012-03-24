@@ -9,8 +9,7 @@
 	$LAB.script("js/libs/require/require.js").wait();
 
 	$LAB.script("js/libs/fancybox/jquery.fancybox.js").wait();
-	$LAB.script("js/libs/fancybox/jquery.fancybox.js").wait();
-
+	
 	$LAB.script("js/header.js").wait();
 
 
