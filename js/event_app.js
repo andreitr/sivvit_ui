@@ -1,3 +1,7 @@
+if( typeof (SIVVIT) == 'undefined') {
+	SIVVIT = {};
+}
+
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
@@ -6,8 +10,7 @@ Date.prototype.format = function() {
 (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
- 		///////////
-		// SIVVIT.EventModel app/models/m.event.js
+ 		// SIVVIT.EventModel app/models/m.event.js
 		eventModel : null,
 
 		// SIVVIT.TemporalModel /app/models/m.temporal.js
@@ -30,7 +33,7 @@ Date.prototype.format = function() {
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : true,
+		edit : false,
 		
 		// Initiates the application and loads the main data.
 		init : function(id) {
