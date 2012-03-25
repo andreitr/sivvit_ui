@@ -72,7 +72,10 @@ if( typeof (SIVVIT) == 'undefined') {
 	});
 
 	// Core events view. Right now we only have a single implementation.
-	SIVVIT.AbstractView = Backbone.View.extend({
+	SIVVIT.EventsView = Backbone.View.extend({
+		
+		template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div>${description}<div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
+		
 		el : '#dynamic-content',
 
 		// Rendered elements
@@ -101,6 +104,51 @@ if( typeof (SIVVIT) == 'undefined') {
 			}
 			this.display();
 		},
+		
+		display : function() {
+
+			$(this.el).append("<ol id='event-list'></ol>");
+
+			// Render collection
+			this.model.each(function(itm) {
+				itm = this.buildTemplate(itm);
+
+				// Render histogram
+				var histogram = new SIVVIT.HistogramView({
+
+					el : $(itm.html).find("#histogram"),
+					slider : false,
+					model : new SIVVIT.TemporalModel({
+						startDate : new Date(itm.model.get("startDate")),
+						endDate : new Date(itm.model.get("endDate")),
+						min : itm.model.get("histogram").min,
+						max : itm.model.get("histogram").max,
+						resolution : itm.model.get("histogram").resolution,
+						histogram : itm.model.get("histogram").global
+					})
+				}).render();
+
+				this.initItem(itm, "#event-list");
+			}, this);
+		},
+		// Builds each item, returns {model, html} object
+		buildTemplate : function(itm) {
+			html = $.tmpl(this.template, {
+				title : itm.get("title"),
+				description : itm.get("description"),
+				posts : itm.get("stats").posts,
+				videos : itm.get("stats").videos,
+				images : itm.get("stats").images,
+				location : itm.get("location").name,
+				author : itm.get("author")
+			});
+
+			return {
+				html : html,
+				model : itm
+			};
+		},
+		
 		// Displays content editing options - enabled in the admin view.
 		displayEdit : function() {
 
@@ -232,56 +280,6 @@ if( typeof (SIVVIT) == 'undefined') {
 				flag.toggleClass("idle-notice", true);
 				flag.toggleClass("live-notice", false);
 			}
-		}
-	});
-
-	// Main view. Renders items, displays histogram.
-	SIVVIT.EventsView = SIVVIT.AbstractView.extend({
-
-		template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div>${description}<div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
-
-		display : function() {
-
-			$(this.el).append("<ol id='event-list'></ol>");
-
-			// Render collection
-			this.model.each(function(itm) {
-				itm = this.buildTemplate(itm);
-
-				// Render histogram
-				var histogram = new SIVVIT.HistogramView({
-
-					el : $(itm.html).find("#histogram"),
-					slider : false,
-					model : new SIVVIT.TemporalModel({
-						startDate : new Date(itm.model.get("startDate")),
-						endDate : new Date(itm.model.get("endDate")),
-						min : itm.model.get("histogram").min,
-						max : itm.model.get("histogram").max,
-						resolution : itm.model.get("histogram").resolution,
-						histogram : itm.model.get("histogram").global
-					})
-				}).render();
-
-				this.initItem(itm, "#event-list");
-			}, this);
-		},
-		// Builds each item, returns {model, html} object
-		buildTemplate : function(itm) {
-			html = $.tmpl(this.template, {
-				title : itm.get("title"),
-				description : itm.get("description"),
-				posts : itm.get("stats").posts,
-				videos : itm.get("stats").videos,
-				images : itm.get("stats").images,
-				location : itm.get("location").name,
-				author : itm.get("author")
-			});
-
-			return {
-				html : html,
-				model : itm
-			};
 		}
 	});
 })($, SIVVIT);
