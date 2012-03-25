@@ -76,6 +76,27 @@
 			</div>
 		</div>
 		<script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
-		<script type="text/javascript" src="js/user_events.js"></script>
+		<script>
+			$LAB.script("js/libs/graphael/raphael-min.js").wait();
+			$LAB.script("js/libs/jquery/jquery-1.6.4.min.js").wait();
+			$LAB.script("js/libs/underscore/underscore-min.js").wait();
+			$LAB.script("js/libs/backbone/backbone.js").wait();
+			$LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
+
+			$LAB.script("js/libs/fancybox/jquery.fancybox.js").wait();
+
+			$LAB.script("js/events.js").wait(function() {
+
+				SIVVIT.Events.init("events.json");
+
+				//Initiate user header
+				// SIVVIT.UserHeader = new SIVVIT.UserHeaderView({
+				// model : new SIVVIT.UserModel()
+				// });
+				// SIVVIT.UserHeader.model.url = "user.json";
+				// SIVVIT.UserHeader.model.fetch();
+			});
+
+		</script>
 	</body>
 </html>

@@ -1,9 +1,11 @@
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
 
-}(function(jQuery, SIVVIT) {
+}
 
-	SIVVIT.UserEvents = {
+(function(jQuery, SIVVIT) {
+
+	SIVVIT.Events = {
 
 		// SIVVIT.Model
 		model : null,
@@ -21,7 +23,7 @@ if( typeof (SIVVIT) == 'undefined') {
 		init : function(json) {
 			var self = this;
 
-			this.model = new SIVVIT.Model();
+			this.model = new Backbone.Model();
 			this.collection = new SIVVIT.EventsCollection();
 			this.view = new SIVVIT.EventsView({
 				edit : this.edit
@@ -58,9 +60,6 @@ if( typeof (SIVVIT) == 'undefined') {
 			}, this);
 		}
 	};
-
-	// Main model responsible for loading and mainaining data
-	SIVVIT.Model = Backbone.Model.extend({});
 
 	// Collection containing event models,
 	SIVVIT.EventsCollection = Backbone.Collection.extend({
