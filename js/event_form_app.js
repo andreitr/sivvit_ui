@@ -1,8 +1,6 @@
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
-}
-
-(function(jQuery, SIVVIT) {
+}(function(jQuery, SIVVIT) {
 
 	SIVVIT.EditEvent = {
 
@@ -21,17 +19,12 @@ if( typeof (SIVVIT) == 'undefined') {
 				// New event is being created
 
 				this.model = new SIVVIT.EventModel({
-
-					location : {
-						name : "Denver, CO",
-						lat : -104.984722,
-						lon : 39.739167
-					},
-
 					startDate : new Date(),
 					// Add 24 hours to the existing date
 					endDate : new Date(new Date().getTime() + 86400000)
-				})
+				});
+
+				self.setLocation();
 
 			} else {
 
@@ -51,12 +44,39 @@ if( typeof (SIVVIT) == 'undefined') {
 			// If the event is new render event right away
 			if(id === null || id === undefined) {
 				this.view.update();
-				this.view.initMap();
+				this.setDefaultLocation();
 			} else {
 				this.model.setRequestURL();
 				this.model.fetch();
 			}
-
+		},
+		// Sets HTML5 location if it is available, if not
+		// sets the default one
+		setLocation : function() {
+			var self = this;
+			if(navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					self.model.set({
+						'location' : {
+							'lon' : position.coords.latitude,
+							'lat' : position.coords.longitude
+						}
+					});
+				});
+			} else {
+				this.setDefaultLocation();
+			}
+		},
+		// Default location
+		setDefaultLocation : function() {
+			this.model.set({
+				'location' : {
+					'name' : "Denver, CO",
+					'lat' : -104.984722,
+					'lon' : 39.739167
+				}
+			});
+			this.view.update();
 		}
 	};
 
@@ -168,29 +188,34 @@ if( typeof (SIVVIT) == 'undefined') {
 
 			var self = this;
 
-			this.map = new google.maps.Map($("#form-map")[0], {
-				center : new google.maps.LatLng(self.model.get("location").lon, self.model.get("location").lat),
-				zoom : 8,
-				disableDefaultUI : true,
-				mapTypeId : google.maps.MapTypeId.ROADMAP
-			});
+			if(!this.map) {
 
-			// Auto complete field
-			this.map_complete = new google.maps.places.Autocomplete($("input[name='location']")[0]);
-			google.maps.event.addListener(this.map_complete, 'place_changed', function() {
-				var place = self.map_complete.getPlace();
-				self.map.setCenter(place.geometry.location);
-
-				self.model.set({
-					'location' : {
-						'lat' : place.geometry.location.lat(),
-						'lon' : place.geometry.location.lng(),
-						'name' : place.name
-					}
-				}, {
-					silent : true
+				this.map = new google.maps.Map($("#form-map")[0], {
+					center : new google.maps.LatLng(self.model.get("location").lon, self.model.get("location").lat),
+					zoom : 8,
+					disableDefaultUI : true,
+					mapTypeId : google.maps.MapTypeId.ROADMAP
 				});
-			});
+
+				// Auto complete field
+				this.map_complete = new google.maps.places.Autocomplete($("input[name='location']")[0]);
+				google.maps.event.addListener(this.map_complete, 'place_changed', function() {
+					var place = self.map_complete.getPlace();
+					self.map.setCenter(place.geometry.location);
+
+					self.model.set({
+						'location' : {
+							'lat' : place.geometry.location.lat(),
+							'lon' : place.geometry.location.lng(),
+							'name' : place.name
+						}
+					}, {
+						silent : true
+					});
+				});
+			} else {
+				this.map.setCenter(new google.maps.LatLng(self.model.get("location").lon, self.model.get("location").lat));
+			}
 		}
 	});
 })($, SIVVIT);
