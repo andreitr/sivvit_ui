@@ -4,12 +4,12 @@
 	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="/Users/andreitaraschuk/Documents/code/closure-compiler/compiler.jar" />
 
 	<target name="compile">
-		<jscomp compilationLevel="whitespace" warning="verbose" debug="false" output="js/event.js">
+		<jscomp compilationLevel="whitespace" warning="verbose" debug="false" output="js/event.min.js">
 							
 			<sources dir="${basedir}/js">
 				
 				<file name="header.js" />
-				<file name="event_app.js" />
+				<file name="event.js" />
 
 				<file name="app/models/m.event.js" />
 				<file name="app/models/m.temporal.js" />
