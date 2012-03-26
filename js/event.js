@@ -519,7 +519,7 @@ Date.prototype.format = function() {
 						self.display_buckets = true;
 						self.eventModel.loadMoreContent();
 						
-					}, {offset : '100%'});
+					}, {offset : '100%', onlyOnScroll:true});
 
 				}
 			}
