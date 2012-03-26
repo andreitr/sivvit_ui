@@ -5,12 +5,11 @@ if( typeof (SIVVIT) == 'undefined') {
 // Formats date
 Date.prototype.format = function() {
 	return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; 
-
+};
 (function(jQuery, SIVVIT) {
 
 	SIVVIT.Event = {
- 		// SIVVIT.EventModel app/models/m.event.js
+		// SIVVIT.EventModel app/models/m.event.js
 		eventModel : null,
 
 		// SIVVIT.TemporalModel /app/models/m.temporal.js
@@ -19,7 +18,7 @@ Date.prototype.format = function() {
 		// SIVVIT.ContentController
 		// Controls switching of all other views
 		contentController : null,
-		
+
 		// SIVVIT.ContentView
 		contentView : null,
 
@@ -34,10 +33,10 @@ Date.prototype.format = function() {
 
 		// Enables content editing when set to true
 		edit : false,
-		
+
 		// Initiates the application and loads the main data.
 		init : function(id) {
-			
+
 			var self = this;
 
 			SIVVIT.Lightbox.init();
@@ -49,7 +48,7 @@ Date.prototype.format = function() {
 			});
 
 			this.mapView = new SIVVIT.MapView();
-			
+
 			this.sideHistView = new SIVVIT.HistogramView({
 				el : '#timeline-container',
 				model : this.temporalModel,
@@ -67,12 +66,12 @@ Date.prototype.format = function() {
 				temporalModel : this.temporalModel,
 				view : this.contentView
 			});
-			
+
 			// Load content for the first time.
 			this.eventModel.set({
-				json : 'http://sivvit.com/event/'+id+'.json?callback=?'
+				json : 'http://sivvit.com/event/' + id + '.json?callback=?'
 			});
-			this.eventModel.setSinceRequestURL(); 
+			this.eventModel.setSinceRequestURL();
 			this.eventModel.fetch();
 
 			this.eventModel.bind("change", function() {
@@ -510,11 +509,18 @@ Date.prototype.format = function() {
 			if(this.eventModel.hasMoreContent()) {
 				if($("#load-groups-btn").length <= 0) {
 					$(this.el).append("<div id='load-groups-btn' class=\"content-loader\">More " + this.eventModel.get('histogram').resolution + "s<span class='icon-download'></span></div>");
-					$("#load-groups-btn").click(function(event) {
-						$(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
+					
+					btn = $(this.el).find('#load-groups-btn');
+					
+					// Add way point to track infinite scroll
+					btn.waypoint(function(event, direction) {
+						btn.waypoint('remove');
+						btn.html("<span class='loader'>&nbsp;</span>");
 						self.display_buckets = true;
 						self.eventModel.loadMoreContent();
-					});
+						
+					}, {offset : '100%'});
+
 				}
 			}
 		},
@@ -853,7 +859,7 @@ Date.prototype.format = function() {
 			itm.model.set({
 				status : value.toString()
 			});
-	
+
 			itm.model.save({
 				error : function() {
 					console.log("Error updating model");
