@@ -32,7 +32,7 @@ Date.prototype.format = function() {
 		sideHistView : null,
 
 		// Enables content editing when set to true
-		edit : true,
+		edit : false,
 
 		// Initiates the application and loads the main data.
 		init : function(id) {
