@@ -1,14 +1,8 @@
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
-
-}
-
-(function(jQuery, SIVVIT) {
+}(function(jQuery, SIVVIT) {
 
 	SIVVIT.Events = {
-
-		// SIVVIT.Model
-		model : null,
 
 		//SIVVIT.EventsCollection
 		collection : null,
@@ -17,47 +11,37 @@ if( typeof (SIVVIT) == 'undefined') {
 		view : null,
 
 		// Enables content editing when set to true
-		edit : true,
+		edit : false,
 
 		// Initiates the application and loads the main data.
 		init : function(json) {
+			
 			var self = this;
 
-			this.model = new Backbone.Model();
 			this.collection = new SIVVIT.EventsCollection();
 			this.view = new SIVVIT.EventsView({
 				edit : this.edit
 			});
 
-			this.model.url = json;
-			this.model.fetch();
+			$.getJSON(json, function(data) {
 
-			this.model.bind("change", function() {
-
-				// Show main application
 				$("#content-loader").remove();
-
-				// Move all this jazz into a separate view
 				$("#event-application").show();
 
-				if(this.model.hasChanged("events")) {
+				var len = data.length, i;
 
-					var i, con, len, model;
-					con = this.model.get("events");
-					len = con.length;
-
-					for( i = len; i--; ) {
-						model = new SIVVIT.EventModel(con[i]);
-						// Add timestamp as date for collection sorting
-						model.set({
-							timestamp : new Date(con[i])
-						});
-						this.collection.add(model);
-					}
-					this.view.model = this.collection;
-					this.view.render();
+				for( i = len; i--; ) {
+					
+					var model = new SIVVIT.EventModel(data[i]);
+					// Add timestamp as date for collection sorting
+					model.set({
+						timestamp : new Date(data[i])
+					});
+					self.collection.add(model);
 				}
-			}, this);
+				self.view.model = self.collection;
+				self.view.render();
+			});
 		}
 	};
 
@@ -73,9 +57,9 @@ if( typeof (SIVVIT) == 'undefined') {
 
 	// Core events view. Right now we only have a single implementation.
 	SIVVIT.EventsView = Backbone.View.extend({
-		
+
 		template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div>${description}<div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
-		
+
 		el : '#dynamic-content',
 
 		// Rendered elements
@@ -104,7 +88,6 @@ if( typeof (SIVVIT) == 'undefined') {
 			}
 			this.display();
 		},
-		
 		display : function() {
 
 			$(this.el).append("<ol id='event-list'></ol>");
@@ -148,7 +131,6 @@ if( typeof (SIVVIT) == 'undefined') {
 				model : itm
 			};
 		},
-		
 		// Displays content editing options - enabled in the admin view.
 		displayEdit : function() {
 
