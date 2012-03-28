@@ -12,7 +12,6 @@
 				<file name="events.js" />
 				
 				<file name="app/models/m.event.js" />
-				<file name="app/models/m.user.js" />
 				<file name="app/models/m.temporal.js" />
 				<file name="app/views/v.histogram.js" />
 				

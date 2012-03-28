@@ -29,9 +29,8 @@ if( typeof (SIVVIT) == 'undefined') {
 				$("#event-application").show();
 
 				var len = data.length, i;
-
+				
 				for( i = len; i--; ) {
-					
 					var model = new SIVVIT.EventModel(data[i]);
 					// Add timestamp as date for collection sorting
 					model.set({
@@ -41,6 +40,7 @@ if( typeof (SIVVIT) == 'undefined') {
 				}
 				self.view.model = self.collection;
 				self.view.render();
+				
 			});
 		}
 	};
@@ -95,8 +95,9 @@ if( typeof (SIVVIT) == 'undefined') {
 			// Render collection
 			this.model.each(function(itm) {
 				itm = this.buildTemplate(itm);
-
+				
 				// Render histogram
+			
 				var histogram = new SIVVIT.HistogramView({
 
 					el : $(itm.html).find("#histogram"),
@@ -107,10 +108,10 @@ if( typeof (SIVVIT) == 'undefined') {
 						min : itm.model.get("histogram").min,
 						max : itm.model.get("histogram").max,
 						resolution : itm.model.get("histogram").resolution,
-						histogram : itm.model.get("histogram").global
+						histogram : itm.model.get("histogram").post
 					})
 				}).render();
-
+				
 				this.initItem(itm, "#event-list");
 			}, this);
 		},
