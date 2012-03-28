@@ -68,8 +68,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
 		
 		if(this.model.get("histogram")) {
 			
-			console.log("Rendering view?");
-			
 			var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get("histogramEndDate"))).getTime();
 
 			// Total count of available slots
@@ -93,7 +91,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 			var endTime = adjusted_end_date;
 
 			var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
-
+			
 			for(var i = len; i--; ) {
 
 				var frame = this.model.get("histogram")[i];
