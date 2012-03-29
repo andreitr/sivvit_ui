@@ -1,3 +1,6 @@
+// JSLint variable definition
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false, console:false  */
+
 if( typeof (SIVVIT) == 'undefined') {
 	SIVVIT = {};
 }
