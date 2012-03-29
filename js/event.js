@@ -46,6 +46,7 @@ Date.prototype.format = function() {
 			this.headerView = new SIVVIT.HeaderView({
 				model : this.eventModel
 			});
+			
 
 			this.mapView = new SIVVIT.MapView();
 
@@ -136,7 +137,6 @@ Date.prototype.format = function() {
 			return -itm.get("timestamp");
 		}
 	});
-
 	SIVVIT.Lightbox = {
 
 		// Initiates global lightbox methods.
