@@ -98,7 +98,9 @@ if( typeof (SIVVIT) == 'undefined') {
       // Render collection
       this.model.each(function(itm) {
         itm = this.buildTemplate(itm);
-        
+
+        console.log('end date', new Date(itm.model.get("last_update")));
+
         // Render histogram
         var histogram = new SIVVIT.HistogramView({
 
@@ -106,15 +108,13 @@ if( typeof (SIVVIT) == 'undefined') {
           slider : false,
           model : new SIVVIT.TemporalModel({
             startDate : new Date(itm.model.get("startDate")),
-            endDate : new Date(itm.model.get("endDate")),
+            endDate : new Date(itm.model.get("last_update")),
             min : itm.model.get("histogram").min,
             max : itm.model.get("histogram").max,
             resolution : itm.model.get("histogram").resolution,
             histogram : itm.model.get("histogram").global
           })
         }).render();
-
-
 
         this.initItem(itm, "#event-list");
       }, this);
