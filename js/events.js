@@ -1,5 +1,5 @@
 // JSLint variable definition
-/*global SIVVIT:true, $:false, Backbone:false, confirm:false  */
+/*global SIVVIT:true, $:false, Backbone:false, confirm:false, console:false  */
 
 if( typeof (SIVVIT) == 'undefined') {
   SIVVIT = {};
@@ -98,9 +98,8 @@ if( typeof (SIVVIT) == 'undefined') {
       // Render collection
       this.model.each(function(itm) {
         itm = this.buildTemplate(itm);
-
+        
         // Render histogram
-
         var histogram = new SIVVIT.HistogramView({
 
           el : $(itm.html).find("#histogram"),
@@ -111,9 +110,11 @@ if( typeof (SIVVIT) == 'undefined') {
             min : itm.model.get("histogram").min,
             max : itm.model.get("histogram").max,
             resolution : itm.model.get("histogram").resolution,
-            histogram : itm.model.get("histogram").post
+            histogram : itm.model.get("histogram").global
           })
         }).render();
+
+
 
         this.initItem(itm, "#event-list");
       }, this);
