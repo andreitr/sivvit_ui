@@ -28,8 +28,8 @@ if( typeof (SIVVIT) == 'undefined') {
 
       $.getJSON(json, function(data) {
 
-        $("#content-loader").remove();
-        $("#event-application").show();
+        $('#content-loader').remove();
+        $('#event-application').show();
 
         var len = data.length, i;
 
@@ -43,9 +43,10 @@ if( typeof (SIVVIT) == 'undefined') {
         }
         self.view.model = self.collection;
         self.view.render();
-
       });
+
     }
+
   };
 
   // Collection containing event models,
@@ -54,15 +55,15 @@ if( typeof (SIVVIT) == 'undefined') {
 
     // Sort content by startDate
     comparator : function(itm) {
-      return itm.get("startDate");
+      return itm.get('startDate');
     }
+
   });
 
   // Core events view. Right now we only have a single implementation.
   SIVVIT.EventsView = Backbone.View.extend({
 
     template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div>${description}<div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
-
     el : '#dynamic-content',
 
     // Rendered elements
@@ -73,10 +74,10 @@ if( typeof (SIVVIT) == 'undefined') {
 
     // Set to true when al least of content is displayed
     displayed : false,
-
     initialize : function(options) {
       this.edit = options.edit;
     },
+
     render : function() {
       // Clear out previous content
       $(this.el).empty();
@@ -91,6 +92,7 @@ if( typeof (SIVVIT) == 'undefined') {
       }
       this.display();
     },
+
     display : function() {
 
       $(this.el).append("<ol id='event-list'></ol>");
@@ -99,7 +101,7 @@ if( typeof (SIVVIT) == 'undefined') {
       this.model.each(function(itm) {
         itm = this.buildTemplate(itm);
 
-        console.log('end date', new Date(itm.model.get("last_update")));
+        console.log(itm.model);
 
         // Render histogram
         var histogram = new SIVVIT.HistogramView({
@@ -112,13 +114,15 @@ if( typeof (SIVVIT) == 'undefined') {
             min : itm.model.get("histogram").min,
             max : itm.model.get("histogram").max,
             resolution : itm.model.get("histogram").resolution,
-            histogram : itm.model.get("histogram").global
+            histogram : itm.model.get("histogram").post
           })
         }).render();
 
         this.initItem(itm, "#event-list");
       }, this);
+
     },
+
     // Builds each item, returns {model, html} object
     buildTemplate : function(itm) {
       var html = $.tmpl(this.template, {
@@ -136,6 +140,7 @@ if( typeof (SIVVIT) == 'undefined') {
         model : itm
       };
     },
+
     // Displays content editing options - enabled in the admin view.
     displayEdit : function() {
 
@@ -161,6 +166,7 @@ if( typeof (SIVVIT) == 'undefined') {
           }
         }
       });
+
       // Select all items
       $("#group-select").click(function() {
 
@@ -173,7 +179,9 @@ if( typeof (SIVVIT) == 'undefined') {
           itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
         }
       });
+
     },
+
     // Initiates item functionality, displays appropriate
     // dynamic content.
     initItem : function(itm, parent) {
@@ -210,6 +218,7 @@ if( typeof (SIVVIT) == 'undefined') {
             itm.html.find("#edit-itm").hide();
           });
 
+
           itm.html.click(function(event) {
 
             var checked;
@@ -234,13 +243,15 @@ if( typeof (SIVVIT) == 'undefined') {
             }
             event.stopPropagation();
           });
+
+
           this.toggleLive(itm);
         }
-
         this.rendered.push(itm);
         $(parent).append(itm.html);
       }
     },
+
     // Deletes selected item.
     // To-do: implement server call
     deleteItem : function(itm) {
@@ -249,11 +260,13 @@ if( typeof (SIVVIT) == 'undefined') {
         silent : true
       });
     },
+
     deleteItems : function(itms) {
       for(var i = itms.length; i--; ) {
         this.deleteItem(itms[i]);
       }
     },
+
     // Toggles display.
     toggleLive : function(itm) {
       var flag = itm.html.find("#pending-flag");
@@ -268,5 +281,6 @@ if( typeof (SIVVIT) == 'undefined') {
         flag.toggleClass("live-notice", false);
       }
     }
+
   });
 })($, SIVVIT);
