@@ -106,19 +106,19 @@ if( typeof (SIVVIT) == 'undefined') {
         // Render histogram
         var histogram = new SIVVIT.HistogramView({
 
-          el : $(itm.html).find("#histogram"),
+          el : $(itm.html).find('#histogram'),
           slider : false,
           model : new SIVVIT.TemporalModel({
-            startDate : new Date(itm.model.get("startDate")),
-            endDate : new Date(itm.model.get("last_update")),
-            min : itm.model.get("histogram").min,
-            max : itm.model.get("histogram").max,
-            resolution : itm.model.get("histogram").resolution,
-            histogram : itm.model.get("histogram").post
+            startDate : new Date(itm.model.get('startDate')),
+            endDate : new Date(itm.model.get('last_update')),
+            min : itm.model.get('histogram').min,
+            max : itm.model.get('histogram').max,
+            resolution : itm.model.get('histogram').resolution,
+            histogram : itm.model.get('histogram').global
           })
         }).render();
 
-        this.initItem(itm, "#event-list");
+        this.initItem(itm, '#event-list');
       }, this);
 
     },
@@ -126,13 +126,13 @@ if( typeof (SIVVIT) == 'undefined') {
     // Builds each item, returns {model, html} object
     buildTemplate : function(itm) {
       var html = $.tmpl(this.template, {
-        title : itm.get("title"),
-        description : itm.get("description"),
-        posts : itm.get("stats").posts,
-        videos : itm.get("stats").videos,
-        images : itm.get("stats").images,
-        location : itm.get("location").name,
-        author : itm.get("author")
+        title : itm.get('title'),
+        description : itm.get('description'),
+        posts : itm.get('stats').posts,
+        videos : itm.get('stats').videos,
+        images : itm.get('stats').images,
+        location : itm.get('location').name,
+        author : itm.get('author')
       });
 
       return {
@@ -155,7 +155,7 @@ if( typeof (SIVVIT) == 'undefined') {
         var result = [];
         while(i--) {
           var itm = self.rendered[i];
-          if(itm.html.find("#itm-check").is(':checked')) {
+          if(itm.html.find('#itm-check').is(':checked')) {
             result.push(itm);
           }
         }
@@ -168,15 +168,15 @@ if( typeof (SIVVIT) == 'undefined') {
       });
 
       // Select all items
-      $("#group-select").click(function() {
+      $('group-select').click(function() {
 
         var i = self.rendered.length;
-        var checked = $("#group-select").is(":checked");
+        var checked = $('#group-select').is(':checked');
 
         while(i--) {
           var itm = self.rendered[i];
-          itm.html.find("#itm-check").attr('checked', checked);
-          itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
+          itm.html.find('#itm-check').attr('checked', checked);
+          itm.html.css('background-color', !checked ? '#FFFFFF' : '#FFFFCC');
         }
       });
 
@@ -193,29 +193,29 @@ if( typeof (SIVVIT) == 'undefined') {
         // Initiate button clicks if a user is logged in and modify
         // content template (add hover buttons and check box)
         if(this.edit) {
-          itm.html.find("#content").prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class='icon-cog' id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
-          itm.html.find("#content").prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
+          itm.html.find('#content').prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class='icon-cog' id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
+          itm.html.find('#content').prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
 
-          itm.html.find("#del-itm").hide();
-          itm.html.find("#edit-itm").hide();
+          itm.html.find('#del-itm').hide();
+          itm.html.find('#edit-itm').hide();
 
           // Open light box with event information etc
-          itm.html.find("#edit-itm").fancybox({
+          itm.html.find('#edit-itm').fancybox({
             'transitionIn' : 'fade',
             'transitionOut' : 'fade',
             'href' : 'edit_event.html'
           });
 
-          if(itm.model.get("pending") > 0) {
-            itm.html.find("#title").append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
+          if(itm.model.get('pending') > 0) {
+            itm.html.find('#title').append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
           }
 
           itm.html.hover(function(event) {
-            itm.html.find("#del-itm").show();
-            itm.html.find("#edit-itm").show();
+            itm.html.find('#del-itm').show();
+            itm.html.find('#edit-itm').show();
           }, function(event) {
-            itm.html.find("#del-itm").hide();
-            itm.html.find("#edit-itm").hide();
+            itm.html.find('#del-itm').hide();
+            itm.html.find('#edit-itm').hide();
           });
 
 
@@ -225,8 +225,8 @@ if( typeof (SIVVIT) == 'undefined') {
 
             switch(event.target.id) {
 
-              case "del-itm":
-                if(confirm("Delete this event?") === true) {
+              case 'del-itm':
+                if(confirm('Delete this event?') === true) {
                   self.deleteItem(itm);
                 }
                 break;
@@ -235,10 +235,10 @@ if( typeof (SIVVIT) == 'undefined') {
                 break;
 
               default:
-                if(itm.html.find("#itm-check").length > 0) {
-                  checked = itm.html.find("#itm-check").is(':checked');
-                  itm.html.find("#itm-check").attr('checked', !checked);
-                  itm.html.css("background-color", checked ? "#FFFFFF" : "#FFFFCC");
+                if(itm.html.find('#itm-check').length > 0) {
+                  checked = itm.html.find('#itm-check').is(':checked');
+                  itm.html.find('#itm-check').attr('checked', !checked);
+                  itm.html.css('background-color', checked ? '#FFFFFF' : '#FFFFCC');
                 }
             }
             event.stopPropagation();
@@ -269,16 +269,16 @@ if( typeof (SIVVIT) == 'undefined') {
 
     // Toggles display.
     toggleLive : function(itm) {
-      var flag = itm.html.find("#pending-flag");
+      var flag = itm.html.find('#pending-flag');
 
-      if(itm.model.get("status") === 1) {
+      if(itm.model.get('status') === 1) {
 
-        flag.toggleClass("idle-notice", false);
-        flag.toggleClass("live-notice", true);
+        flag.toggleClass('idle-notice', false);
+        flag.toggleClass('live-notice', true);
 
       } else {
-        flag.toggleClass("idle-notice", true);
-        flag.toggleClass("live-notice", false);
+        flag.toggleClass('idle-notice', true);
+        flag.toggleClass('live-notice', false);
       }
     }
 
