@@ -119,6 +119,8 @@ if( typeof (SIVVIT) == 'undefined') {
         this.initItem(itm, '#event-list');
       }, this);
 
+
+      this.initLightbox();
     },
 
     // Builds each item, returns {model, html} object
@@ -191,22 +193,11 @@ if( typeof (SIVVIT) == 'undefined') {
         // Initiate button clicks if a user is logged in and modify
         // content template (add hover buttons and check box)
         if(this.edit) {
-          itm.html.find('#content').prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class='icon-cog' href=\"event_form.html?id="+itm.model.get('id')+"\" id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
+          itm.html.find('#content').prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class='icon-cog' href=\"event_form.html?id=" + itm.model.get('id') + "\" id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
           itm.html.find('#content').prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
 
           itm.html.find('#del-itm').hide();
           itm.html.find('#edit-itm').hide();
-
-          // Open light box with event information etc
-          itm.html.find('#edit-itm').fancybox({
-            'width' : 860,
-            'height' : 430,
-            'autoScale' : true,
-            'scrolling' : false,
-            'transitionIn' : 'fade',
-            'transitionOut' : 'fade',
-            'type' : 'iframe'
-          });
 
           if(itm.model.get('pending') > 0) {
             itm.html.find('#title').append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
@@ -255,6 +246,20 @@ if( typeof (SIVVIT) == 'undefined') {
       }
     },
 
+    // Initiates event form light box
+    initLightbox : function() {
+      // Open light box with event information etc
+      $('#edit-itm').fancybox({
+        'width' : 860,
+        'height' : 430,
+        'autoScale' : true,
+        'scrolling' : false,
+        'transitionIn' : 'fade',
+        'transitionOut' : 'fade',
+        'type' : 'iframe'
+      });
+    },
+
     // Deletes selected item.
     // To-do: implement server call
     deleteItem : function(itm) {
@@ -286,4 +291,5 @@ if( typeof (SIVVIT) == 'undefined') {
     }
 
   });
+
 })($, SIVVIT);
