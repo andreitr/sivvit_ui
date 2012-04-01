@@ -14,7 +14,7 @@ if( typeof (SIVVIT) == 'undefined') {
     view : null,
 
     // Enables content editing when set to true
-    edit : false,
+    edit : true,
 
     // Initiates the application and loads the main data.
     init : function(json) {
@@ -100,8 +100,6 @@ if( typeof (SIVVIT) == 'undefined') {
       // Render collection
       this.model.each(function(itm) {
         itm = this.buildTemplate(itm);
-
-        console.log(itm.model);
 
         // Render histogram
         var histogram = new SIVVIT.HistogramView({
@@ -232,6 +230,7 @@ if( typeof (SIVVIT) == 'undefined') {
                 break;
 
               case "edit-itm":
+               
                 break;
 
               default:
