@@ -199,9 +199,14 @@ if( typeof (SIVVIT) == 'undefined') {
 
           // Open light box with event information etc
           itm.html.find('#edit-itm').fancybox({
+            'width' : 860,
+            'height' : 430,
+            'autoScale' : true,
+            'scrolling' : false,
             'transitionIn' : 'fade',
             'transitionOut' : 'fade',
-            'href' : 'edit_event.html'
+            'type' : 'iframe',
+            'href' : 'event_form.html?id=' + itm.model.get('id')
           });
 
           if(itm.model.get('pending') > 0) {
@@ -226,11 +231,11 @@ if( typeof (SIVVIT) == 'undefined') {
               case 'del-itm':
                 if(confirm('Delete this event?') === true) {
                   self.deleteItem(itm);
+                  event.stopPropagation();
                 }
                 break;
 
-              case "edit-itm":
-               
+              case 'edit-itm':
                 break;
 
               default:
@@ -239,8 +244,8 @@ if( typeof (SIVVIT) == 'undefined') {
                   itm.html.find('#itm-check').attr('checked', !checked);
                   itm.html.css('background-color', checked ? '#FFFFFF' : '#FFFFCC');
                 }
+                event.stopPropagation();
             }
-            event.stopPropagation();
           });
 
 
