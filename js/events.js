@@ -86,10 +86,6 @@ if( typeof (SIVVIT) == 'undefined') {
 
       this.rendered = [];
 
-      // Display content header if a user is logged in
-      if(this.edit) {
-        this.displayEdit();
-      }
       this.display();
     },
 
@@ -139,47 +135,6 @@ if( typeof (SIVVIT) == 'undefined') {
         html : html,
         model : itm
       };
-    },
-
-    // Displays content editing options - enabled in the admin view.
-    displayEdit : function() {
-
-      $(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"pause-all\" class=\"link\"></div>");
-
-      var self = this;
-
-      // Delete all approved items
-      $("#del-all").click(function() {
-
-        var i = self.rendered.length;
-        var result = [];
-        while(i--) {
-          var itm = self.rendered[i];
-          if(itm.html.find('#itm-check').is(':checked')) {
-            result.push(itm);
-          }
-        }
-
-        if(result.length > 0) {
-          if(confirm("Delete " + result.length + " events?") === true) {
-            self.deleteItems(result);
-          }
-        }
-      });
-
-      // Select all items
-      $('group-select').click(function() {
-
-        var i = self.rendered.length;
-        var checked = $('#group-select').is(':checked');
-
-        while(i--) {
-          var itm = self.rendered[i];
-          itm.html.find('#itm-check').attr('checked', checked);
-          itm.html.css('background-color', !checked ? '#FFFFFF' : '#FFFFCC');
-        }
-      });
-
     },
 
     // Initiates item functionality, displays appropriate
