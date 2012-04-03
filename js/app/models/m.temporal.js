@@ -80,14 +80,14 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   // Formats date object to match event resolution.
   // Standard buckets for histogram count aggregation.
   adjustResolution : function(date) {
-    switch(this.get("resolution")) {
-      case "day":
+    switch(this.get('resolution')) {
+      case 'day':
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      case "hour":
+      case 'hour':
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours());
-      case "minute":
+      case 'minute':
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
-      case "second":
+      case 'second':
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
     }
   },
@@ -95,25 +95,25 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   // NOTE!!! This function is not adjusted for leap year nor for upper limit of the date obj
   adjustToNextBucket : function(date, resolution) {
     var new_date;
-    resolution = resolution === undefined ? this.get("resolution") : resolution;
+    resolution = resolution === undefined ? this.get('resolution') : resolution;
 
     switch(resolution) {
-      case "day":
+      case 'day':
         new_date = this.adjustResolution(date);
         new_date.setDate(new_date.getDate() + 1);
         return new_date;
 
-      case "hour":
+      case 'hour':
         new_date = this.adjustResolution(date);
         new_date.setHours(new_date.getHours() + 1);
         return new_date;
 
-      case "minute":
+      case 'minute':
         new_date = this.adjustResolution(date);
         new_date.setMinutes(new_date.getMinutes() + 1);
         return new_date;
 
-      case "second":
+      case 'second':
         new_date = this.adjustResolution(date);
         new_date.setSeconds(new_date.getSeconds() + 1);
         return new_date;
@@ -121,19 +121,19 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   },
   // Returns milliseconds for the appropriate resolution
   getResolution : function() {
-    switch(this.get("resolution")) {
-      case "day":
+    switch(this.get('resolution')) {
+      case 'day':
         return 86400000;
-      case "hour":
+      case 'hour':
         return 3600000;
-      case "minute":
+      case 'minute':
         return 60000;
-      case "second":
+      case 'second':
         return 1000;
     }
   },
   // Checks the bounds of
   checkDateBounds : function(date) {
-    return date >= this.get("startDate") && date <= this.get("endDate") ? true : false;
+    return date >= this.get('startDate') && date <= this.get('endDate') ? true : false;
   }
 });
