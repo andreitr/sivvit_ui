@@ -112,6 +112,7 @@ if( typeof (SIVVIT) == 'undefined') {
           })
         }).render();
 
+
         this.initItem(itm, '#event-list');
       }, this);
 
