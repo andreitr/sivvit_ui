@@ -9,7 +9,7 @@
 		<title>Project High Jump</title>
 	</head>
 	<body>
-		<div class="body-container">
+		<div class="body-container" id="wrapper">
 			<div id="header">
 				<div id="content-container">
 					<div id="logo"></div>
@@ -50,34 +50,37 @@
 				<div id="content-container">
 					<div id="column-layout">
 						<div id="row">
-							<!-- Right column -->
-							<div id="cell">
-								<div class="h2-inline">
-									Timeline
-								</div>
-								<div class="seconrady-title" id="timeline-label"></div>
-								<div id="contentSidebarBox">
-									<div id="padding">
-										<div id="timline-label">
-											<div id="timeline-maxtime"></div>
-											<div id="timeline-mintime"></div>
+							
+							<!--Left column -->
+								<div id="cell">
+									<div class="h2-inline">
+										Timeline
+									</div>
+									<div class="seconrady-title" id="timeline-label"></div>
+									<div id="contentSidebarBox">
+										<div id="padding">
+											<div id="timline-label">
+												<div id="timeline-maxtime"></div>
+												<div id="timeline-mintime"></div>
+											</div>
+											<div id="timeline-container"></div>
+											<div id="timeline-slider"></div>
 										</div>
-										<div id="timeline-container"></div>
-										<div id="timeline-slider"></div>
+									</div>
+									<div id="contentVSpacer"></div>
+									<div class="h2-inline">
+										Location
+									</div>
+									<div class="seconrady-title" id="map-label"></div>
+									<div id="contentSidebarBox">
+										<div id="padding">
+											<div id="map-container"></div>
+										</div>
 									</div>
 								</div>
-								<div id="contentVSpacer"></div>
-								<div class="h2-inline">
-									Location
-								</div>
-								<div class="seconrady-title" id="map-label"></div>
-								<div id="contentSidebarBox">
-									<div id="padding">
-										<div id="map-container"></div>
-									</div>
-								</div>
-							</div>
-							<!-- Left column -->
+							
+							
+							<!-- Right column -->
 							<div id="cell" style="width:100%; padding-left:20px">
 								<div id="navigation-content">
 									<div class="h2-inline" id="content-stats"></div>
@@ -114,7 +117,6 @@
 		</div>
 		<script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
 		<script type="text/javascript">
-		
       // JSLint variable definition
       /*global $LAB:false, SIVVIT:false */
 

@@ -92,6 +92,7 @@ a:link {
   width: 80%;
   min-width: 960px;
 }
+
 #contentBox, #contentBoxHeader, #contentSidebarBox {
   width: auto;
   height: auto;
