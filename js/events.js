@@ -118,7 +118,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
       this.initLightbox();
     },
-
+    
     // Builds each item, returns {model, html} object
     buildTemplate : function(itm) {
       var html = $.tmpl(this.template, {
