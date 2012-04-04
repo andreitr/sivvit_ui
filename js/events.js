@@ -97,21 +97,26 @@ if( typeof (SIVVIT) == 'undefined') {
       this.model.each(function(itm) {
         itm = this.buildTemplate(itm);
 
+        var mdl = new SIVVIT.TemporalModel({
+          startDate : new Date(itm.model.get('startDate')),
+          endDate : new Date(itm.model.get('last_update')),
+          min : itm.model.get('histogram').min,
+          max : itm.model.get('histogram').max,
+          resolution : itm.model.get('histogram').resolution
+        });
+
+        // Set histogram attribute after all other properties are set
+        // for proper histogram adjustment
+        mdl.set({
+          'histogram' : itm.model.get('histogram').global
+        });
+
         // Render histogram
         var histogram = new SIVVIT.HistogramView({
-
           el : $(itm.html).find('#histogram'),
           slider : false,
-          model : new SIVVIT.TemporalModel({
-            startDate : new Date(itm.model.get('startDate')),
-            endDate : new Date(itm.model.get('last_update')),
-            min : itm.model.get('histogram').min,
-            max : itm.model.get('histogram').max,
-            resolution : itm.model.get('histogram').resolution,
-            histogram : itm.model.get('histogram').global
-          })
+          model : mdl
         }).render();
-
 
         this.initItem(itm, '#event-list');
       }, this);
@@ -119,7 +124,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
       this.initLightbox();
     },
-    
+
     // Builds each item, returns {model, html} object
     buildTemplate : function(itm) {
       var html = $.tmpl(this.template, {

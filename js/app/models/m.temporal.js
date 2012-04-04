@@ -33,6 +33,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   // Override set method to keep track on
   set : function(attributes, options) {
 
+
     // Adjust timestamp
     if(attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
 
@@ -65,7 +66,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
               histogramStartDate : Math.min(attributes.histogram[i].timestamp, this.get('histogramStartDate'))
             });
             this.set({
-              histogramEndDate : Math.max(attributes.histogram[i].timestamp, this.get("histogramEndDate"))
+              histogramEndDate : Math.max(attributes.histogram[i].timestamp, this.get('histogramEndDate'))
             });
           }
         } else {
