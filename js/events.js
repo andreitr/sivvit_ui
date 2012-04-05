@@ -155,7 +155,6 @@ if( typeof (SIVVIT) == 'undefined') {
         // content template (add hover buttons and check box)
         if(this.edit) {
           itm.html.find('#content').prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class='icon-cog' href=\"event_form.html?id=" + itm.model.get('id') + "\" id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
-          itm.html.find('#content').prepend("<div id=\"checkbox\"><input type=\"checkbox\" id=\"itm-check\"/></div>");
 
           itm.html.find('#del-itm').hide();
           itm.html.find('#edit-itm').hide();
