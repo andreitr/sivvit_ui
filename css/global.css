@@ -7,6 +7,12 @@ html, body {
    position:relative;
 }
 
+.sticky{
+	position:fixed;
+	margin-top:-100px
+	
+}
+
 body {
   margin: 0;
   padding: 0;

@@ -158,19 +158,15 @@ Date.prototype.format = function() {
         transitionOut : 'fade'
       });
 
-      //$('.top').addClass('hidden');
-      //$.waypoints.settings.scrollThrottle = 30;
+      $.waypoints.settings.scrollThrottle = 30;
 
-      // $('#sidebar-mother').waypoint(function(event, direction) {
-      //
-      // //$('#sidebar-mother').toggleClass('non-sticky', direction === "up");
-      // }, {
-      // offset : '-100%'
-      // }).find('#timeline-label').waypoint(function(event, direction) {
-      //
-      // $(this).parent().toggleClass('sticky', direction === "down");
-      // event.stopPropagation();
-      // });
+      $('#wrapper').waypoint({
+        offset : '-100%'
+      }).find('#mover').waypoint(function(event, direction) {
+
+        $('#mover').toggleClass('sticky', direction === "down");
+        event.stopPropagation();
+      });
 
     }
 
