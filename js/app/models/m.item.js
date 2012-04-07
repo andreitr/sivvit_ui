@@ -16,7 +16,25 @@ SIVVIT.ItemModel = Backbone.Model.extend({
   },
   // Initialized
   initialize : function() {
-    this.url = "http://sivvit.com/e/post/" + this.get("id") + ".json";
+    this.url = "http://sivvit.com/e/post/" + this.get("id");
+  },
+
+  // Updates the model and calls provided callbacks when done
+  save : function(callbacks) {
+
+    var self = this;
+
+    $.ajax({
+      url : self.url,
+      data : {
+        status : self.get('status'),
+        id : self.get('id')
+      },
+      type : 'PUT',
+      dataType : 'application/json',
+      success : callbacks.success,
+      error : callbacks.error
+    });
   }
 
 });

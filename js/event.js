@@ -895,45 +895,71 @@ Date.prototype.format = function() {
       itm.html.find('#load-itm').show();
     },
 
+    // Sets item status to -1 and initiates PUT request
+    // If request is successful item is removed
     deleteItem : function(itm) {
-      itm.html.fadeOut();
-      this.model.remove(itm.model, {
-        silent : true
+
+      this.disableItem(itm);
+      var self = this;
+
+      itm.model.set({
+        status : -1
       });
+
+      itm.model.save({
+
+        // Remove item if save is successful
+        success : function() {
+
+          itm.html.fadeOut();
+          self.model.remove(itm.model, {
+            silent : true
+          });
+        },
+
+        // Enable item
+        error : function() {
+          self.enableItem(itm);
+          self.showHidePending(itm);
+        }
+
+      });
+
     },
 
+    // Toggles item status and sends serve request
     approveItem : function(itm, value) {
 
       this.disableItem(itm);
       var self = this;
 
       if(value === undefined) {
-        value = itm.model.get("status") === 1 ? 0 : 1;
+        value = Number(itm.model.get("status")) === 1 ? 0 : 1;
+
       } else {
         value = value === true ? 1 : 0;
       }
       itm.model.set({
-        status : value.toString()
+        status : value
       });
 
       itm.model.save({
-        error : function() {
-          console.log("Error updating model");
+        success : function() {
           self.enableItem(itm);
           self.showHidePending(itm);
         },
 
-        success : function() {
-          self.showHidePending(itm);
+        error : function() {
           self.enableItem(itm);
-          console.log("Successfully saved");
+          self.showHidePending(itm);
         }
 
       });
     },
 
     showHidePending : function(itm) {
-      if(itm.model.get("status") === 1) {
+      
+      if(Number(itm.model.get("status")) === 1) {
         itm.html.find("#pending-flag").toggleClass("pending-notice", false);
         itm.html.find("#pending-flag").toggleClass("active-notice", true);
       } else {
