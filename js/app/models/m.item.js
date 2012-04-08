@@ -20,7 +20,7 @@ SIVVIT.ItemModel = Backbone.Model.extend({
   },
 
   // Updates the model and calls provided callbacks when done
-  save : function(callbacks) {
+  save : function(init) {
 
     var self = this;
 
@@ -30,10 +30,11 @@ SIVVIT.ItemModel = Backbone.Model.extend({
         status : self.get('status'),
         id : self.get('id')
       },
-      type : 'PUT',
+      type : init.type,
       dataType : 'application/json',
-      success : callbacks.success,
-      error : callbacks.error
+      success : init.success,
+      complete : init.complete,
+      error: init.error
     });
   }
 

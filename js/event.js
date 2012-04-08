@@ -546,6 +546,9 @@ Date.prototype.format = function() {
 
           // Add way point to track infinite scroll
           btn.waypoint(function(event, direction) {
+
+            event.stopPropagation();
+
             btn.waypoint('remove');
             btn.html("<span class='loader'>&nbsp;</span>");
             self.display_buckets = true;
@@ -908,21 +911,21 @@ Date.prototype.format = function() {
 
       itm.model.save({
 
+        type : 'DELETE',
+
         // Remove item if save is successful
-        success : function() {
+        complete : function(response) {
 
-          itm.html.fadeOut();
-          self.model.remove(itm.model, {
-            silent : true
-          });
-        },
-
-        // Enable item
-        error : function() {
-          self.enableItem(itm);
-          self.showHidePending(itm);
+          if(response.status === 200) {
+            itm.html.fadeOut();
+            self.model.remove(itm.model, {
+              silent : true
+            });
+          } else {
+            self.enableItem(itm);
+            self.showHidePending(itm);
+          }
         }
-
       });
 
     },
@@ -944,6 +947,9 @@ Date.prototype.format = function() {
       });
 
       itm.model.save({
+
+        type : 'PUT',
+
         success : function() {
           self.enableItem(itm);
           self.showHidePending(itm);
@@ -958,7 +964,7 @@ Date.prototype.format = function() {
     },
 
     showHidePending : function(itm) {
-      
+
       if(Number(itm.model.get("status")) === 1) {
         itm.html.find("#pending-flag").toggleClass("pending-notice", false);
         itm.html.find("#pending-flag").toggleClass("active-notice", true);
