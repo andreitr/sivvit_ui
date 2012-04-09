@@ -111,6 +111,10 @@ if( typeof (SIVVIT) == 'undefined') {
       type : 'string'
     }],
 
+    events : {
+      "click #save-event-btn" : "save"
+    },
+
     initialize : function(options) {
 
       var self = this;
@@ -123,6 +127,33 @@ if( typeof (SIVVIT) == 'undefined') {
         self.validate();
       });
 
+
+      $('#save-event-btn').click(function() {
+        self.save();
+      });
+
+    },
+
+    save : function() {
+      ///
+
+      console.log('Are we saving!');
+
+      this.model.save({
+        type : 'POST',
+        success : function() {
+          console.log('Success');
+        },
+
+        error : function() {
+          console.log('Erorr');
+        },
+
+        complete : function() {
+          console.log('Complete');
+        }
+
+      });
     },
 
     // Updates view
@@ -134,19 +165,61 @@ if( typeof (SIVVIT) == 'undefined') {
       $('#content-loader').hide();
 
       $("input[name='title']").val(this.model.get('title'));
+      $("input[name='title']").change(function() {
+        slef.model.set({
+          'title' : $(this).val()
+        }, {
+          silent : true
+        });
+      });
+
+
       $("input[name='location']").val(this.model.get('location').name);
+
       $("input[name='keywords']").val(this.model.get('keywords'));
+      $("input[name='keywords']").change(function() {
+        slef.model.set({
+          'keywords' : $(this).val()
+        }, {
+          silent : true
+        });
+      });
+
+
       $("input[name='description']").val(this.model.get('description'));
+      $("input[name='description']").change(function() {
+        slef.model.set({
+          'description' : $(this).val()
+        }, {
+          silent : true
+        });
+      });
 
       // Start date
       $("input[name='start-date']").datepicker({
-        defaultDate : new Date(this.model.get('startDate'))
+        defaultDate : new Date(this.model.get('startDate')),
+        onSelect : function(date) {
+          slef.model.set({
+            'startDate' : date
+          }, {
+            silent : true
+          });
+        }
+
       });
       $("input[name='start-date']").val(new Date(this.model.get('startDate')).toDateString());
 
       // End date
       $("input[name='end-date']").datepicker({
-        defaultDate : new Date(this.model.get('endDate'))
+        defaultDate : new Date(this.model.get('endDate')),
+        onSelect : function(date) {
+          slef.model.set({
+            'endDate' : date
+          }, {
+            silent : true
+          });
+        }
+
       });
       $("input[name='end-date']").val(new Date(this.model.get('endDate')).toDateString());
 
@@ -233,4 +306,5 @@ if( typeof (SIVVIT) == 'undefined') {
     }
 
   });
+
 })($, SIVVIT);

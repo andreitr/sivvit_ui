@@ -233,6 +233,7 @@ Date.prototype.format = function() {
       "click #post-btn" : "updateView",
       "click #media-btn" : "updateView"
     },
+    
     initialize : function(options) {
       this.eventModel = options.eventModel;
       this.temporalModel = options.temporalModel;
