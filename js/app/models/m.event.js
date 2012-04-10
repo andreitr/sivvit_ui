@@ -78,7 +78,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
     }, this);
 
     // Set url parameter for saving events
-    this.url = 'http://sivvit.com/events';
+    this.url = 'http://sivvit.com/e/event';
 
   },
 
@@ -116,11 +116,12 @@ SIVVIT.EventModel = Backbone.Model.extend({
   save : function(init) {
 
     var self = this;
+
     $.ajax({
       url : self.url,
       data : self.toJSON(),
       type : init.type,
-      dataType : 'application/json',
+      dataType : 'json',
       success : init.success,
       complete : init.complete,
       error : init.error

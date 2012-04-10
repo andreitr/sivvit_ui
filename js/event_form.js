@@ -135,9 +135,6 @@ if( typeof (SIVVIT) == 'undefined') {
     },
 
     save : function() {
-      ///
-
-      console.log('Are we saving!');
 
       this.model.save({
         type : 'POST',
@@ -179,7 +176,7 @@ if( typeof (SIVVIT) == 'undefined') {
       $("input[name='keywords']").val(this.model.get('keywords'));
       $("input[name='keywords']").change(function() {
         slef.model.set({
-          'keywords' : $(this).val()
+          'keywords' : $(this).val().split(',')
         }, {
           silent : true
         });
@@ -236,10 +233,12 @@ if( typeof (SIVVIT) == 'undefined') {
     validate : function() {
 
       var i, field, valid, icon;
+      var global_valid = true;
 
       for( i = 0; i < this.required_fields.length; i++) {
         field = $(this.required_fields[i].field);
         valid = this.validateValue(field.val(), this.required_fields[i].type);
+        global_valid = valid ? global_valid : false;
         icon = $(this.required_fields[i].icon);
 
         field.css('background-color', valid ? '#FFFFCC' : '#FFFFFF');
@@ -248,13 +247,16 @@ if( typeof (SIVVIT) == 'undefined') {
       }
       field = $("input[name='start-time']");
       valid = this.validateTime(field.val());
+      global_valid = valid ? global_valid : false;
       field.css('background-color', valid ? '#FFFFFF' : '#FFFFCC');
       $('#icon-start-time').toggleClass('icon-check-red', valid ? false : true);
       field = $("input[name='end-time']");
       valid = this.validateTime(field.val());
+      global_valid = valid ? global_valid : false;
       field.css('background-color', valid ? '#FFFFFF' : '#FFFFCC');
       $('#icon-end-time').toggleClass('icon-check-red', valid ? false : true);
 
+      return global_valid;
     },
 
     // Validates specific value based on the type
