@@ -130,6 +130,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
     var self = this;
     
+    //TODO: Move object copying into a separate function
     // For existing events we don't need to send the
     // entire model object - send only the required data
     var copy = $.extend(true, {}, this.attributes);
