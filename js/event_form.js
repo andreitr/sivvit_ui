@@ -182,7 +182,6 @@ if( typeof (SIVVIT) == 'undefined') {
         });
       });
 
-
       $("input[name='description']").val(this.model.get('description'));
       $("input[name='description']").change(function() {
         slef.model.set({
@@ -306,7 +305,5 @@ if( typeof (SIVVIT) == 'undefined') {
         this.map.setCenter(new google.maps.LatLng(self.model.get('location').lon, self.model.get('location').lat));
       }
     }
-
   });
-
 })($, SIVVIT);

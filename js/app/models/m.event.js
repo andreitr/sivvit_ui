@@ -76,9 +76,14 @@ SIVVIT.EventModel = Backbone.Model.extend({
         this.startLiveData();
       }
     }, this);
-
+    
     // Set url parameter for saving events
     this.url = 'http://sivvit.com/e/event';
+    
+    // Append id parameter for existing events
+    if(this.get('id')){
+      this.url += '/'+this.get('id');
+    }
 
   },
 
@@ -128,6 +133,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
     });
   },
 
+  
+  
   // The entire histogram is sent only with the first request, all subsequent
   // requests contain only the updated values. In order to keep the entire histogram
   // up to date we need to append all the changes to the initial values.
