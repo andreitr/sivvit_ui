@@ -129,10 +129,25 @@ SIVVIT.EventModel = Backbone.Model.extend({
   updateEvent : function() {
 
     var self = this;
-
+    
+    // For existing events we don't need to send the
+    // entire model object - send only the required data
+    var copy = $.extend(true, {}, this.attributes);
+    delete copy.author;
+    delete copy.content;
+    delete copy.last_update;
+    delete copy.pending;
+    delete copy.stats;
+    delete copy.histogram;
+    delete copy.meta;
+    delete copy.bucket_limit;
+    delete copy.bucket_page;
+    delete copy.userid;
+    delete copy.content_bounds;
+    
     $.ajax({
       url : 'http://sivvit.com/e/event/' + this.get('id'),
-      data : self.toJSON(),
+      data : copy,
       type : 'PUT',
       dataType : 'json'
       // success : init.success,
