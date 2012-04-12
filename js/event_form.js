@@ -90,7 +90,7 @@ if( typeof (SIVVIT) == 'undefined') {
   // Main edit event view
   SIVVIT.EditEventView = Backbone.View.extend({
 
-    el : "document",
+    el : '#form-container',
 
     // Google map instance
     map : null,
@@ -112,7 +112,8 @@ if( typeof (SIVVIT) == 'undefined') {
     }],
 
     events : {
-      "click #save-event-btn" : "save"
+      'click #save-event-btn' : 'saveEvent',
+      'click #delete-event-btn' : 'deleteEvent'
     },
 
     initialize : function(options) {
@@ -127,30 +128,23 @@ if( typeof (SIVVIT) == 'undefined') {
         self.validate();
       });
 
+    },
 
-      $('#save-event-btn').click(function() {
-        self.save();
-      });
+    // Deletes current event
+    deleteEvent : function() {
 
     },
 
-    save : function() {
-
-      this.model.save({
-        type : 'POST',
-        success : function() {
-          console.log('Success');
-        },
-
-        error : function() {
-          console.log('Erorr');
-        },
-
-        complete : function() {
-          console.log('Complete');
-        }
-
-      });
+    saveEvent : function() {
+      
+      
+      if(this.model.get('id')){
+        // Update event
+        this.model.updateEvent();
+      }else{
+        this.model.createEvent();
+      }
+ 
     },
 
     // Updates view
@@ -160,6 +154,12 @@ if( typeof (SIVVIT) == 'undefined') {
 
       $('#form-container').show();
       $('#content-loader').hide();
+
+      // Hide delete button event hasn't been created
+      if(!this.model.get('id')) {
+        $(this.el).find('#delete-event-btn').hide();
+        $(this.el).find('#save-event-btn').text('Create New Event');
+      }
 
       $("input[name='title']").val(this.model.get('title'));
       $("input[name='title']").change(function() {
@@ -181,6 +181,7 @@ if( typeof (SIVVIT) == 'undefined') {
           silent : true
         });
       });
+
 
       $("input[name='description']").val(this.model.get('description'));
       $("input[name='description']").change(function() {
@@ -305,5 +306,6 @@ if( typeof (SIVVIT) == 'undefined') {
         this.map.setCenter(new google.maps.LatLng(self.model.get('location').lon, self.model.get('location').lat));
       }
     }
+
   });
 })($, SIVVIT);
