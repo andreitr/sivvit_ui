@@ -112,7 +112,7 @@ Date.prototype.format = function() {
 
         // Update location
         if(self.eventModel.hasChanged("location")) {
-          self.mapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lon, self.eventModel.get("location").lat);
+          self.mapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lat, self.eventModel.get("location").lon);
         }
       });
 
@@ -233,7 +233,7 @@ Date.prototype.format = function() {
       "click #post-btn" : "updateView",
       "click #media-btn" : "updateView"
     },
-    
+
     initialize : function(options) {
       this.eventModel = options.eventModel;
       this.temporalModel = options.temporalModel;
@@ -989,8 +989,8 @@ Date.prototype.format = function() {
 
     el : '#map-container',
 
-    render : function(name, lon, lat) {
-      $(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=" + lon + "," + lat + "&zoom=10&size=280x130&sensor=false\">");
+    render : function(name, lat, lon) {
+      $(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + lon + "&zoom=10&size=280x130&sensor=false\">");
     }
 
   });

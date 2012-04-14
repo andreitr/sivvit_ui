@@ -280,8 +280,6 @@ if( typeof (SIVVIT) == 'undefined') {
 
       if(!this.map) {
 
-        console.log('Location ', self.model.get('location').lon, self.model.get('location').lat );
-
         this.map = new google.maps.Map($('#form-map')[0], {
           center : new google.maps.LatLng(self.model.get('location').lat, self.model.get('location').lon),
           zoom : 8,
