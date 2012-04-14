@@ -85,7 +85,6 @@ SIVVIT.EventModel = Backbone.Model.extend({
         this.stopLiveData();
       }
     }, this);
-
   },
 
   // Override fetch method to stop live data timer at every request
