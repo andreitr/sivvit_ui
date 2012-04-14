@@ -24,7 +24,10 @@ if( typeof (SIVVIT) == 'undefined') {
         this.model = new SIVVIT.EventModel({
           startDate : new Date(),
           // Add 24 hours to the existing date
-          endDate : new Date(new Date().getTime() + 86400000)
+          endDate : new Date(new Date().getTime() + 86400000),
+          pull : false,
+          meta : 0,
+          type : null
         });
 
         self.setLocation();
@@ -34,9 +37,9 @@ if( typeof (SIVVIT) == 'undefined') {
         // Load data for existing event
         this.model = new SIVVIT.EventModel({
           json : 'http://sivvit.com/event/' + id + '.json?callback=?',
+          pull : false,
           meta : 0,
-          limit : 0,
-          bucket_limit : 0
+          type : null
         });
       }
 
@@ -136,15 +139,14 @@ if( typeof (SIVVIT) == 'undefined') {
     },
 
     saveEvent : function() {
-      
-      
-      if(this.model.get('id')){
+
+      if(this.model.get('id')) {
         // Update event
         this.model.updateEvent();
-      }else{
+      } else {
         this.model.createEvent();
       }
- 
+
     },
 
     // Updates view

@@ -15,7 +15,14 @@ SIVVIT.EventModel = Backbone.Model.extend({
     bucket_limit : 5,
     // Loaded buckets
     bucket_page : 1,
-    // Data type
+
+    // Determines whether the model continuously pulls content from the server.
+    // By default this parameter is true however, when event data is displayed
+    // in the edit window, we don't need to pull the latest content even if the
+    // event is live.
+    pull: true,
+
+    // Default data type
     type : 'post',
 
     // Temporal bounds of loaded content
@@ -70,10 +77,12 @@ SIVVIT.EventModel = Backbone.Model.extend({
   // Add change event listener to restart live pulling with each data update
   initialize : function() {
     this.bind("change", function() {
-      if(this.get('status') < 1) {
-        this.stopLiveData();
-      } else {
+
+      // Initiate continues loading only when status is live or pending
+      if(this.get('status') > 1 && this.get('pull') === true) {
         this.startLiveData();
+      } else {
+        this.stopLiveData();
       }
     }, this);
 
@@ -87,6 +96,11 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
   // Override set method to keep track of the original
   set : function(attributes, options) {
+
+    // Make sure that status is always a number
+    if(attributes.hasOwnProperty('status')  && attributes.histogram !== undefined && attributes.histogram !== null ){
+        attributes.status = Number(attributes.status);
+    }
 
     // Append histogram values
     if(attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
@@ -129,7 +143,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
   updateEvent : function() {
 
     var self = this;
-    
+
     //TODO: Move object copying into a separate function
     // For existing events we don't need to send the
     // entire model object - send only the required data
@@ -145,7 +159,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
     delete copy.bucket_page;
     delete copy.userid;
     delete copy.content_bounds;
-    
+
     $.ajax({
       url : 'http://sivvit.com/e/event/' + this.get('id'),
       data : copy,
