@@ -159,10 +159,11 @@ Date.prototype.format = function() {
       });
 
       $.waypoints.settings.scrollThrottle = 30;
-
+      // Make sure that waypoint is not triggered when page is resized with new content
+      $('#wrapper').waypoint.defaults.onlyOnScroll = true;
       $('#wrapper').waypoint({
         offset : '-100%'
-      }).find('#mover').waypoint(function(event, direction) {
+      }).find('#content-stats').waypoint(function(event, direction) {
 
         $('#mover').toggleClass('sticky', direction === 'down');
         event.stopPropagation();
