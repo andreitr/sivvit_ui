@@ -1028,13 +1028,17 @@ Date.prototype.format = function() {
         $('#timeline-label').html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
         break;
 
-        case -1:
         case 2:
-        $('#timeline-label').html("<span class='icon-time'></span>This event archived.");
+        $('#timeline-label').html("<span class='icon-time'></span>Archived event.");
         break;
 
+        case -1:
+        $('#timeline-label').html("<span class='icon-time'></span>Stopping event tracking...");
+        break;
+
+
         case 0:
-        $('#timeline-label').html("<span class='icon-time'></span>Initializing event.");
+        $('#timeline-label').html("<span class='icon-time'></span>Initializing event tracking...");
         break;
       }
     },
