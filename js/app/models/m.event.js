@@ -20,7 +20,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
     // By default this parameter is true however, when event data is displayed
     // in the edit window, we don't need to pull the latest content even if the
     // event is live.
-    pull: true,
+    pull : true,
 
     // Default data type
     type : 'post',
@@ -45,6 +45,12 @@ SIVVIT.EventModel = Backbone.Model.extend({
     },
     startDate : new Date(),
     endDate : new Date(),
+
+    // Status property can have the following states
+    //-1 ending
+    // 0 not started
+    // 1 running
+    // 2 finished
     status : 0,
     last_update : null,
     pending : 0,
@@ -79,12 +85,13 @@ SIVVIT.EventModel = Backbone.Model.extend({
     this.bind("change", function() {
 
       // Initiate continues loading only when status is live or pending
-      if(this.get('status') > 1 && this.get('pull') === true) {
+      if(this.get('status') === 1 && this.get('pull') === true) {
         this.startLiveData();
       } else {
         this.stopLiveData();
       }
     }, this);
+
   },
 
   // Override fetch method to stop live data timer at every request
@@ -97,8 +104,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
   set : function(attributes, options) {
 
     // Make sure that status is always a number
-    if(attributes.hasOwnProperty('status')  && attributes.histogram !== undefined && attributes.histogram !== null ){
-        attributes.status = Number(attributes.status);
+    if(attributes.hasOwnProperty('status') && attributes.histogram !== undefined && attributes.histogram !== null) {
+      attributes.status = Number(attributes.status);
     }
 
     // Append histogram values
