@@ -196,7 +196,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
       // Start date
       $("input[name='start-date']").datepicker({
-        defaultDate : new Date(this.model.get('startDate')),
+        defaultDate : new Date(this.model.get('startDate') * 1000),
         onSelect : function(date) {
           slef.model.set({
             'startDate' : date
@@ -206,11 +206,11 @@ if( typeof (SIVVIT) == 'undefined') {
         }
 
       });
-      $("input[name='start-date']").val(new Date(this.model.get('startDate')).toDateString());
+      $("input[name='start-date']").val(new Date(this.model.get('startDate') * 1000).toDateString());
 
       // End date
       $("input[name='end-date']").datepicker({
-        defaultDate : new Date(this.model.get('endDate')),
+        defaultDate : new Date(this.model.get('endDate') * 1000),
         onSelect : function(date) {
           slef.model.set({
             'endDate' : date
@@ -220,11 +220,11 @@ if( typeof (SIVVIT) == 'undefined') {
         }
 
       });
-      $("input[name='end-date']").val(new Date(this.model.get('endDate')).toDateString());
+      $("input[name='end-date']").val(new Date(this.model.get('endDate') * 1000).toDateString());
 
       // Time
-      $("input[name='end-time']").val(new Date(this.model.get('endDate')).toTimeString().substring(0, 8));
-      $("input[name='start-time']").val(new Date(this.model.get('startDate')).toTimeString().substring(0, 8));
+      $("input[name='end-time']").val(new Date(this.model.get('endDate') * 1000).toTimeString().substring(0, 8));
+      $("input[name='start-time']").val(new Date(this.model.get('startDate') * 1000).toTimeString().substring(0, 8));
 
       $('#collection-btn').html(this.model === 0 ? 'Start Collection' : 'Start Collection');
 
