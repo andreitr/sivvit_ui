@@ -769,7 +769,7 @@ Date.prototype.format = function() {
 
     displayEdit : function() {
 
-      $(this.el).append("<div id=\"controls-container\"><div id=\"checkbox\"><input type=\"checkbox\" id=\"group-select\"></div><a id=\"del-all\" class=\"link\"><span class=\"icon-delete\"></span>Delete</a><a id=\"apr-all\" class=\"link\"><span class=\"icon-check\"></span>Approve</a></div>");
+      $(this.el).append("<div id='controls-container'><div id='checkbox'><input type='checkbox' id='group-select'></div><a id='del-all' class='link'><span class='icon-delete'></span>Delete</a><a id='apr-all' class='link'><span class='icon-check'></span>Approve</a></div>");
 
       var self = this;
 
@@ -880,6 +880,11 @@ Date.prototype.format = function() {
             self.deleteItem(itm);
             break;
 
+          case 'itm-check':
+            checked = itm.html.find('#itm-check').is(':checked');
+            itm.html.css('background-color', !checked ? '#FFFFFF' : '#FFFFCC');
+            break;
+
           default:
             if(itm.html.find('#itm-check').length > 0) {
               checked = itm.html.find('#itm-check').is(':checked');
@@ -927,6 +932,7 @@ Date.prototype.format = function() {
             self.showHidePending(itm);
           }
         }
+
       });
 
     },
@@ -1022,24 +1028,23 @@ Date.prototype.format = function() {
     // Updates timer
     update : function() {
 
-      switch(this.model.get('status')){
+      switch(this.model.get('status')) {
 
         case 1:
-        $('#timeline-label').html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
-        break;
+          $('#timeline-label').html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
+          break;
 
         case 2:
-        $('#timeline-label').html("<span class='icon-time'></span>Archived event.");
-        break;
+          $('#timeline-label').html("<span class='icon-time'></span>Archived event.");
+          break;
 
         case -1:
-        $('#timeline-label').html("<span class='icon-time'></span>Stopping event tracking...");
-        break;
-
+          $('#timeline-label').html("<span class='icon-time'></span>Stopping event tracking...");
+          break;
 
         case 0:
-        $('#timeline-label').html("<span class='icon-time'></span>Initializing event tracking...");
-        break;
+          $('#timeline-label').html("<span class='icon-time'></span>Initializing event tracking...");
+          break;
       }
     },
 
