@@ -1022,10 +1022,22 @@ Date.prototype.format = function() {
     // Updates timer
     update : function() {
 
-      if(this.model.get("status") > 0) {
+      console.log(this.model.get('status'),'-------');
+
+      switch(this.model.get('status')){
+
+        case 1:
         $("#timeline-label").html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
-      } else {
+        break;
+
+        case -1:
+        case 2:
         $("#timeline-label").html("<span class='icon-time'></span>This event archived.");
+        break;
+
+        case 0:
+        $("#timeline-label").html("<span class='icon-time'></span>Initializing event.");
+        break;
       }
     },
 
