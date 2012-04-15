@@ -33,7 +33,6 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   // Override set method to keep track on
   set : function(attributes, options) {
 
-
     // Adjust timestamp
     if(attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
 
@@ -51,7 +50,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
         // Remove histogram bucket if timestamp it falls outside the range bounds
         if(this.checkDateBounds(attributes.histogram[i].timestamp) === true) {
-         
+
           this.bucket_hash[attributes.histogram[i].timestamp] = attributes.histogram[i];
 
           if(!this.get('histogramStartDate') || !this.get('histogramEndDate')) {
