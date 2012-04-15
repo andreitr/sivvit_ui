@@ -76,43 +76,43 @@ Date.prototype.format = function() {
       this.eventModel.setSinceRequestURL();
       this.eventModel.fetch();
 
-      this.eventModel.bind("change", function() {
+      this.eventModel.bind('change', function() {
 
         // Show main application
-        $("#content-loader").remove();
-        $("#event-application").show();
+        $('#content-loader').remove();
+        $('#event-application').show();
 
-        if(self.eventModel.hasChanged("title") || self.eventModel.hasChanged("description") || self.eventModel.hasChanged("location")) {
+        if(self.eventModel.hasChanged('title') || self.eventModel.hasChanged('description') || self.eventModel.hasChanged('location')) {
           self.headerView.render();
         }
 
         // Reset updated timer
-        if(self.eventModel.hasChanged("last_update")) {
-          self.headerView.reset(new Date(self.eventModel.get("last_update")));
+        if(self.eventModel.hasChanged('last_update')) {
+          self.headerView.reset(new Date(self.eventModel.get('last_update')));
 
           // Update url path to load the latest data
           self.eventModel.setSinceRequestURL();
         }
 
         // Update histogram values
-        if(self.eventModel.hasChanged("last_update") || self.eventModel.hasChanged("histogram")) {
+        if(self.eventModel.hasChanged('last_update') || self.eventModel.hasChanged('histogram')) {
 
           self.temporalModel.set({
-            startDate : new Date(self.eventModel.get("startDate")),
-            endDate : new Date(self.eventModel.get("last_update")),
-            startRange : new Date(self.eventModel.get("startDate")),
-            endRange : new Date(self.eventModel.get("last_update")),
-            min : Math.min(self.temporalModel.get("min"), self.eventModel.get("histogram").min),
-            max : Math.max(self.temporalModel.get("max"), self.eventModel.get("histogram").max),
-            resolution : self.eventModel.get("histogram").resolution
+            startDate : new Date(self.eventModel.get('startDate')),
+            endDate : new Date(self.eventModel.get('last_update')),
+            startRange : new Date(self.eventModel.get('startDate')),
+            endRange : new Date(self.eventModel.get('last_update')),
+            min : Math.min(self.temporalModel.get('min'), self.eventModel.get('histogram').min),
+            max : Math.max(self.temporalModel.get('max'), self.eventModel.get('histogram').max),
+            resolution : self.eventModel.get('histogram').resolution
           });
           // Updates general statistics and histogram
           self.contentController.update();
         }
 
         // Update location
-        if(self.eventModel.hasChanged("location")) {
-          self.mapView.render(self.eventModel.get("location").name, self.eventModel.get("location").lat, self.eventModel.get("location").lon);
+        if(self.eventModel.hasChanged('location')) {
+          self.mapView.render(self.eventModel.get('location').name, self.eventModel.get('location').lat, self.eventModel.get('location').lon);
         }
       });
 
@@ -127,7 +127,7 @@ Date.prototype.format = function() {
 
     // Sort item groups by timestamp
     comparator : function(itm) {
-      return -itm.get("timestamp");
+      return -itm.get('timestamp');
     }
 
   });
@@ -138,7 +138,7 @@ Date.prototype.format = function() {
 
     // Sort content by timestamp
     comparator : function(itm) {
-      return -itm.get("timestamp");
+      return -itm.get('timestamp');
     }
 
   });
@@ -164,7 +164,7 @@ Date.prototype.format = function() {
         offset : '-100%'
       }).find('#mover').waypoint(function(event, direction) {
 
-        $('#mover').toggleClass('sticky', direction === "down");
+        $('#mover').toggleClass('sticky', direction === 'down');
         event.stopPropagation();
       });
 
@@ -177,13 +177,13 @@ Date.prototype.format = function() {
     parse : function(model) {
 
       var tmp_group = [];
-      var content = model.get("content"), i, j, tmp_items, group_model, itm_model;
+      var content = model.get('content'), i, j, tmp_items, group_model, itm_model;
       var len = content.length;
 
       for( i = len; i--; ) {
         group_model = new SIVVIT.ItemGroupModel(content[i]);
         group_model.set({
-          json : model.get("json")
+          json : model.get('json')
         });
         tmp_items = [];
 
@@ -195,14 +195,14 @@ Date.prototype.format = function() {
           tmp_items.push(itm_model);
         }
         group_model.set({
-          id : new Date().getTime() + "-" + i,
+          id : new Date().getTime() + '-' + i,
           items : new SIVVIT.ItemCollection(tmp_items),
           items_new : new SIVVIT.ItemCollection(tmp_items),
           stats : content[i].stats,
           timestamp : new Date(content[i].timestamp)
         });
 
-        model.updateContentRange(group_model.get("timestamp"));
+        model.updateContentRange(group_model.get('timestamp'));
         tmp_group.push(group_model);
       }
       return new SIVVIT.ItemGroupCollection(tmp_group);
@@ -213,7 +213,7 @@ Date.prototype.format = function() {
   // Main application controller and a view at the same time
   SIVVIT.ContentController = Backbone.View.extend({
 
-    el : "#navigation-content",
+    el : '#navigation-content',
 
     prevButton : null,
     activeButton : null,
@@ -229,9 +229,9 @@ Date.prototype.format = function() {
 
     // Bind button events
     events : {
-      "click #all-btn" : "updateView",
-      "click #post-btn" : "updateView",
-      "click #media-btn" : "updateView"
+      'click #all-btn' : 'updateView',
+      'click #post-btn' : 'updateView',
+      'click #media-btn' : 'updateView'
     },
 
     initialize : function(options) {
@@ -240,7 +240,7 @@ Date.prototype.format = function() {
 
       this.view = options.view;
 
-      this.activeButton = "#all-btn";
+      this.activeButton = '#all-btn';
       $(this.activeButton).toggleClass('text-btn', false);
       $(this.activeButton).toggleClass('text-btn-selected', true);
     },
@@ -259,19 +259,19 @@ Date.prototype.format = function() {
         this.update();
         this.view.reset();
 
-        this.eventModel.unset(["content"], {
+        this.eventModel.unset(['content'], {
           silent : true
         });
 
         // Update type in data request
         switch(event.target.id) {
-          case "all-btn":
+          case 'all-btn':
             this.eventModel.setRequestType('all');
             break;
-          case "post-btn":
+          case 'post-btn':
             this.eventModel.setRequestType('post');
             break;
-          case "media-btn":
+          case 'media-btn':
             this.eventModel.setRequestType('media');
             break;
         }
@@ -285,16 +285,16 @@ Date.prototype.format = function() {
     renderStats : function() {
       switch(this.activeButton) {
 
-        case "#all-btn":
-          $("#content-stats").html("Total: " + this.eventModel.get("stats").total);
+        case '#all-btn':
+          $('#content-stats').html('Total: ' + this.eventModel.get('stats').total);
           break;
 
-        case "#post-btn":
-          $("#content-stats").html("Posts: " + this.eventModel.get("stats").posts);
+        case '#post-btn':
+          $('#content-stats').html('Posts: ' + this.eventModel.get('stats').posts);
           break;
 
-        case "#media-btn":
-          $("#content-stats").html("Media: " + (this.eventModel.get("stats").images + this.eventModel.get("stats").videos));
+        case '#media-btn':
+          $('#content-stats').html('Media: ' + (this.eventModel.get('stats').images + this.eventModel.get('stats').videos));
           break;
       }
     },
@@ -303,12 +303,12 @@ Date.prototype.format = function() {
     // rendered.
     renderButtons : function(button) {
 
-      if(this.activeButton == "#" + button) {
+      if(this.activeButton == '#' + button) {
         return false;
       }
 
       this.prevButton = this.activeButton;
-      this.activeButton = "#" + button;
+      this.activeButton = '#' + button;
 
       $(this.activeButton).toggleClass('text-btn', false);
       $(this.activeButton).toggleClass('text-btn-selected', true);
@@ -324,24 +324,24 @@ Date.prototype.format = function() {
     renderHistogram : function() {
 
       switch(this.activeButton) {
-        case "#all-btn":
+        case '#all-btn':
           this.temporalModel.set({
-            histogram : this.eventModel.get("histogram").global,
-            type : "global"
+            histogram : this.eventModel.get('histogram').global,
+            type : 'global'
           });
           break;
 
-        case "#post-btn":
+        case '#post-btn':
           this.temporalModel.set({
-            histogram : this.eventModel.get("histogram").post,
-            type : "post"
+            histogram : this.eventModel.get('histogram').post,
+            type : 'post'
           });
           break;
 
-        case "#media-btn":
+        case '#media-btn':
           this.temporalModel.set({
-            histogram : this.eventModel.get("histogram").media,
-            type : "media"
+            histogram : this.eventModel.get('histogram').media,
+            type : 'media'
           });
           break;
       }
@@ -352,7 +352,7 @@ Date.prototype.format = function() {
   // Displays content buckets etc.
   SIVVIT.ContentView = Backbone.View.extend({
 
-    el : "#dynamic-content",
+    el : '#dynamic-content',
 
     post_template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
     photo_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
@@ -393,13 +393,13 @@ Date.prototype.format = function() {
 
       this.eventModel = options.eventModel;
       // Bind to general change event to make sure the entire model is updated
-      this.eventModel.bind("change", this.onModelContentUpdate, this);
+      this.eventModel.bind('change', this.onModelContentUpdate, this);
     },
 
     // Updates view when model is changed
     onModelContentUpdate : function(event) {
 
-      if(this.eventModel.hasChanged("content")) {
+      if(this.eventModel.hasChanged('content')) {
 
         var collection = SIVVIT.Parser.parse(this.eventModel);
 
@@ -420,24 +420,24 @@ Date.prototype.format = function() {
         // Loop through all available groups - ItemGroupCollection
         collection.each(function(group) {
 
-          var old_group = this.groups_key[group.get("timestamp")];
+          var old_group = this.groups_key[group.get('timestamp')];
 
           if(old_group) {
             // Update stats for the existing model
-            var stats = old_group.get("stats");
+            var stats = old_group.get('stats');
 
             // Please note that model stats are updated bypassing the setter method.
             // Group model does not allow secondary stats updates
-            stats.total = Number(stats.total) + Number(group.get("stats").total);
-            stats.media = Number(stats.media) + Number(group.get("stats").media);
-            stats.post = Number(stats.post) + Number(group.get("stats").post);
+            stats.total = Number(stats.total) + Number(group.get('stats').total);
+            stats.media = Number(stats.media) + Number(group.get('stats').media);
+            stats.post = Number(stats.post) + Number(group.get('stats').post);
 
             this.buildGroupHeader(old_group);
             this.buildGroupFooter(old_group);
 
           } else {
             // Add pending group to the groups key
-            this.groups_key[group.get("timestamp")] = group;
+            this.groups_key[group.get('timestamp')] = group;
             this.new_count += 1;
             this.new_groups.add(group);
           }
@@ -454,12 +454,12 @@ Date.prototype.format = function() {
     update : function() {
       var self = this;
 
-      if($("#load-content-btn").length <= 0) {
+      if($('#load-content-btn').length <= 0) {
 
         $(this.el).prepend("<div id='load-content-btn' class=\"content-loader\">" + this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span></div>");
-        $("#load-content-btn").hide();
-        $("#load-content-btn").slideDown("slow");
-        $("#load-content-btn").click(function(event) {
+        $('#load-content-btn').hide();
+        $('#load-content-btn').slideDown('slow');
+        $('#load-content-btn').click(function(event) {
           $(event.currentTarget).remove();
 
           self.display(self.new_groups, true);
@@ -469,7 +469,7 @@ Date.prototype.format = function() {
         });
 
       } else {
-        $("#load-content-btn").html(this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span>");
+        $('#load-content-btn').html(this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span>");
       }
     },
 
@@ -541,7 +541,7 @@ Date.prototype.format = function() {
       }
 
       if(this.eventModel.hasMoreContent()) {
-        if($("#load-groups-btn").length <= 0) {
+        if($('#load-groups-btn').length <= 0) {
           $(this.el).append("<div id='load-groups-btn' class='content-loader'>More " + this.eventModel.get('histogram').resolution + "s<span class='icon-download'></span></div>");
           btn = $(this.el).find('#load-groups-btn');
 
@@ -576,44 +576,44 @@ Date.prototype.format = function() {
 
       var html;
 
-      switch(itm.get("type")) {
+      switch(itm.get('type')) {
 
         case 'photo':
           html = $.tmpl(this.photo_template, {
-            thumbnail : itm.get("thumbnail"),
-            media : itm.get("media"),
-            avatar : itm.get("avatar"),
-            timestamp : itm.get("timestamp").format(),
-            author : itm.get("author"),
-            source : itm.get("source")
+            thumbnail : itm.get('thumbnail'),
+            media : itm.get('media'),
+            avatar : itm.get('avatar'),
+            timestamp : itm.get('timestamp').format(),
+            author : itm.get('author'),
+            source : itm.get('source')
           });
           break;
 
         case 'media':
           html = $.tmpl(this.media_template, {
-            thumbnail : itm.get("thumbnail"),
-            media : itm.get("media"),
-            avatar : itm.get("avatar"),
-            timestamp : itm.get("timestamp").format(),
-            author : itm.get("author"),
-            source : itm.get("source")
+            thumbnail : itm.get('thumbnail'),
+            media : itm.get('media'),
+            avatar : itm.get('avatar'),
+            timestamp : itm.get('timestamp').format(),
+            author : itm.get('author'),
+            source : itm.get('source')
           });
 
           break;
 
         case 'post':
           html = $.tmpl(this.post_template, {
-            content : itm.get("content"),
-            avatar : itm.get("avatar"),
-            timestamp : itm.get("timestamp").format(),
-            author : itm.get("author"),
-            source : itm.get("source")
+            content : itm.get('content'),
+            avatar : itm.get('avatar'),
+            timestamp : itm.get('timestamp').format(),
+            author : itm.get('author'),
+            source : itm.get('source')
           });
           break;
       }
 
       return {
-        timestamp : itm.get("timestamp"),
+        timestamp : itm.get('timestamp'),
         html : html,
         model : itm
       };
@@ -623,7 +623,7 @@ Date.prototype.format = function() {
     // If prepend is set to true the group is prepended to the list, otherwise appended
     buildGroup : function(group, prepend) {
 
-      var gid = "group-" + group.get("id");
+      var gid = 'group-' + group.get('id');
 
       // Create group element which will contain all items
       var el = "<ol id='" + gid + "'></ol>";
@@ -635,16 +635,16 @@ Date.prototype.format = function() {
       }
 
       group.set({
-        div_id : "#" + gid
+        div_id : '#' + gid
       }, {
         silent : true
       });
 
       // Triggered when additional data is loaded into the group
-      group.bind("change", this.updateGroup, this);
+      group.bind('change', this.updateGroup, this);
 
       this.groups.push(group);
-      this.groups_key[group.get("timestamp")] = group;
+      this.groups_key[group.get('timestamp')] = group;
 
       return group;
     },
@@ -655,12 +655,12 @@ Date.prototype.format = function() {
       var total = this.getItemCount(group);
 
       // Remove existing heder
-      var header = $(group.get("div_id")).find("#group-header");
+      var header = $(group.get('div_id')).find('#group-header');
       if(header.length > 0) {
         header.remove();
       }
 
-      $(group.get("div_id")).prepend("<div id='group-header'>" + total + " items this " + this.eventModel.get('histogram').resolution + " - " + group.get("timestamp").format());
+      $(group.get('div_id')).prepend("<div id='group-header'>" + total + " items this " + this.eventModel.get('histogram').resolution + " - " + group.get("timestamp").format());
     },
 
     buildGroupFooter : function(group) {
@@ -668,26 +668,26 @@ Date.prototype.format = function() {
       var self = this, total;
 
       // Remove existing footer
-      var footer = $(group.get("div_id")).find("#group-footer");
+      var footer = $(group.get('div_id')).find('#group-footer');
       if(footer.length > 0) {
         footer.remove();
       }
 
       // Check whether we need to load more items
-      if(group.get("displayed") < group.get("stats").total) {
+      if(group.get('displayed') < group.get('stats').total) {
 
-        $(group.get("div_id")).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.eventModel.get("histogram").resolution + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
+        $(group.get('div_id')).append("<div id='group-footer'><div id='load-group-btn' class='content-loader'>More from this " + this.eventModel.get("histogram").resolution + "&nbsp;&nbsp;<span class='icon-download'></span></div></div>");
 
-        $(group.get("div_id")).find("#load-group-btn").click(function(event) {
+        $(group.get('div_id')).find('#load-group-btn').click(function(event) {
 
           // Display loader graphics
           $(event.currentTarget).html("<span class='loader'>&nbsp;</span>");
 
-          group.setRequestPath(group.get("timestamp"), self.temporalModel.adjustToNextBucket(group.get("timestamp")), self.eventModel.get("limit"), self.eventModel.get("histogram").resolution, self.eventModel.get("type"));
+          group.setRequestPath(group.get('timestamp'), self.temporalModel.adjustToNextBucket(group.get('timestamp')), self.eventModel.get('limit'), self.eventModel.get('histogram').resolution, self.eventModel.get('type'));
 
           // Save already-parsed items in the temporal old_itms array
           group.set({
-            old_items : group.get("items")
+            old_items : group.get('items')
           }, {
             silent : true
           });
@@ -701,10 +701,10 @@ Date.prototype.format = function() {
     // If is_new is true, then only display new content, otherwise everything
     buildGroupItems : function(group, is_new) {
 
-      var dsp = is_new ? group.get("displayed") : 0;
+      var dsp = is_new ? group.get('displayed') : 0;
 
       // Loop through each available item - ItemCollection
-      group.get( is_new ? "items_new" : "items").each(function(itm) {
+      group.get( is_new ? 'items_new' : 'items').each(function(itm) {
         itm = this.buildTemplate(itm);
         if(itm) {
 
@@ -725,19 +725,19 @@ Date.prototype.format = function() {
     updateGroup : function(group) {
 
       var tmp = [], i, len, items;
-      var content = group.get("content");
+      var content = group.get('content');
       len = content.length;
 
       // It is possible to have more than one bucket, loop through all of them to
       // find the appropriate one
       for( i = len; i--; ) {
-        if(new Date(content[i].timestamp).getTime() === group.get("timestamp").getTime()) {
+        if(new Date(content[i].timestamp).getTime() === group.get('timestamp').getTime()) {
           items = content[i].items;
         }
       }
 
       if(items.length > 0) {
-        len = group.get("items").length;
+        len = group.get('items').length;
 
         for( i = len; i--; ) {
 
@@ -750,14 +750,14 @@ Date.prototype.format = function() {
             });
 
             tmp.push(itm_model);
-            group.get("old_items").add(itm_model);
+            group.get('old_items').add(itm_model);
           }
         }
 
         // Reassign existing collection and add new one
         group.set({
           // Assing augmented old_items back to the items collection
-          items : group.get("old_items"),
+          items : group.get('old_items'),
           items_new : new SIVVIT.ItemGroupCollection(tmp)
         }, {
           silent : true
@@ -774,43 +774,43 @@ Date.prototype.format = function() {
       var self = this;
 
       // Delete all approved items
-      $("#del-all").click(function() {
+      $('#del-all').click(function() {
 
         var i = self.rendered.length;
         while(i--) {
           var itm = self.rendered[i];
-          if(itm.html.find("#itm-check").is(':checked')) {
+          if(itm.html.find('#itm-check').is(':checked')) {
             self.deleteItem(itm);
           }
         }
       });
 
       // Approve all selected items
-      $("#apr-all").click(function() {
+      $('#apr-all').click(function() {
 
         var i = self.rendered.length;
         while(i--) {
           var itm = self.rendered[i];
-          var cb = itm.html.find("#itm-check");
+          var cb = itm.html.find('#itm-check');
           if(cb.is(':checked')) {
             self.approveItem(itm, true);
           }
           cb.attr('checked', false);
-          itm.html.css("background-color", "#FFFFFF");
+          itm.html.css('background-color', '#FFFFFF');
         }
-        $("#group-select").attr('checked', false);
+        $('#group-select').attr('checked', false);
       });
 
       // Select all items
-      $("#group-select").click(function() {
+      $('#group-select').click(function() {
 
         var i = self.rendered.length;
-        var checked = $("#group-select").is(":checked");
+        var checked = $('#group-select').is(':checked');
 
         while(i--) {
           var itm = self.rendered[i];
-          itm.html.find("#itm-check").attr('checked', checked);
-          itm.html.css("background-color", !checked ? "#FFFFFF" : "#FFFFCC");
+          itm.html.find('#itm-check').attr('checked', checked);
+          itm.html.css('background-color', !checked ? '#FFFFFF' : '#FFFFCC');
         }
       });
 
@@ -820,11 +820,11 @@ Date.prototype.format = function() {
     checkFiltered : function() {
 
       if(!this.displayed) {
-        if($("#no-content").length <= 0) {
+        if($('#no-content').length <= 0) {
           $(this.el).append("<div id='no-content' class='notification'>No content in selected timespan.</div>");
         }
       } else {
-        $("#no-content").remove();
+        $('#no-content').remove();
       }
     },
 
@@ -835,8 +835,8 @@ Date.prototype.format = function() {
         // Initiate button clicks if a user is logged in and modify
         // content template (add hover buttons and check box)
         if(this.edit) {
-          itm.html.find("#content").prepend("<span class='item-edit'><span id='load-itm' class='loader'></span><span class='icon-delete' id='del-itm'></span><span class='icon-check' id='apr-itm'></span><div id='pending-flag'></div></span>");
-          itm.html.find("#content").prepend("<div id='checkbox'><input type='checkbox' id='itm-check'/></div>");
+          itm.html.find('#content').prepend("<span class='item-edit'><span id='load-itm' class='loader'></span><span class='icon-delete' id='del-itm'></span><span class='icon-check' id='apr-itm'></span><div id='pending-flag'></div></span>");
+          itm.html.find('#content').prepend("<div id='checkbox'><input type='checkbox' id='itm-check'/></div>");
 
           itm.html.find('#del-itm').hide();
           itm.html.find('#apr-itm').hide();
@@ -847,7 +847,7 @@ Date.prototype.format = function() {
         }
         this.rendered.push(itm);
 
-        $(group.get("div_id")).append(itm.html);
+        $(group.get('div_id')).append(itm.html);
       }
     },
 
@@ -859,11 +859,11 @@ Date.prototype.format = function() {
       itm.html.find('#load-itm').fadeOut();
 
       itm.html.hover(function(event) {
-        itm.html.find("#del-itm").show();
-        itm.html.find("#apr-itm").show();
+        itm.html.find('#del-itm').show();
+        itm.html.find('#apr-itm').show();
       }, function(event) {
-        itm.html.find("#del-itm").hide();
-        itm.html.find("#apr-itm").hide();
+        itm.html.find('#del-itm').hide();
+        itm.html.find('#apr-itm').hide();
       });
 
 
@@ -872,19 +872,19 @@ Date.prototype.format = function() {
         var checked;
 
         switch(event.target.id) {
-          case "apr-itm":
+          case 'apr-itm':
             self.approveItem(itm);
             break;
 
-          case "del-itm":
+          case 'del-itm':
             self.deleteItem(itm);
             break;
 
           default:
-            if(itm.html.find("#itm-check").length > 0) {
-              checked = itm.html.find("#itm-check").is(':checked');
-              itm.html.find("#itm-check").attr('checked', !checked);
-              itm.html.css("background-color", checked ? "#FFFFFF" : "#FFFFCC");
+            if(itm.html.find('#itm-check').length > 0) {
+              checked = itm.html.find('#itm-check').is(':checked');
+              itm.html.find('#itm-check').attr('checked', !checked);
+              itm.html.css('background-color', checked ? '#FFFFFF' : '#FFFFCC');
             }
         }
       });
@@ -938,7 +938,7 @@ Date.prototype.format = function() {
       var self = this;
 
       if(value === undefined) {
-        value = Number(itm.model.get("status")) === 1 ? 0 : 1;
+        value = Number(itm.model.get('status')) === 1 ? 0 : 1;
 
       } else {
         value = value === true ? 1 : 0;
@@ -966,18 +966,18 @@ Date.prototype.format = function() {
 
     showHidePending : function(itm) {
 
-      if(Number(itm.model.get("status")) === 1) {
-        itm.html.find("#pending-flag").toggleClass("pending-notice", false);
-        itm.html.find("#pending-flag").toggleClass("active-notice", true);
+      if(Number(itm.model.get('status')) === 1) {
+        itm.html.find('#pending-flag').toggleClass('pending-notice', false);
+        itm.html.find('#pending-flag').toggleClass('active-notice', true);
       } else {
-        itm.html.find("#pending-flag").toggleClass("pending-notice", true);
-        itm.html.find("#pending-flag").toggleClass("active-notice", false);
+        itm.html.find('#pending-flag').toggleClass('pending-notice', true);
+        itm.html.find('#pending-flag').toggleClass('active-notice', false);
       }
     },
 
     // Returns count of items to be displayed in this view
     getItemCount : function(group) {
-      return group.get("stats").total;
+      return group.get('stats').total;
     }
 
   });
@@ -1004,10 +1004,10 @@ Date.prototype.format = function() {
 
     render : function() {
 
-      $("#event-title").html(this.model.get("title"));
-      $("#event-description").html(this.model.get("description"));
-      $("#event-user").html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + new Date(this.model.get("startDate")).toDateString());
-      $("#map-label").html("<span class='icon-location'></span>" + this.model.get("location").name);
+      $('#event-title').html(this.model.get('title'));
+      $('#event-description').html(this.model.get('description'));
+      $('#event-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + new Date(this.model.get("startDate")).toDateString());
+      $('#map-label').html("<span class='icon-location'></span>" + this.model.get("location").name);
     },
 
     // Reset timer
@@ -1022,21 +1022,19 @@ Date.prototype.format = function() {
     // Updates timer
     update : function() {
 
-      console.log(this.model.get('status'),'-------');
-
       switch(this.model.get('status')){
 
         case 1:
-        $("#timeline-label").html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
+        $('#timeline-label').html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
         break;
 
         case -1:
         case 2:
-        $("#timeline-label").html("<span class='icon-time'></span>This event archived.");
+        $('#timeline-label').html("<span class='icon-time'></span>This event archived.");
         break;
 
         case 0:
-        $("#timeline-label").html("<span class='icon-time'></span>Initializing event.");
+        $('#timeline-label').html("<span class='icon-time'></span>Initializing event.");
         break;
       }
     },
@@ -1049,18 +1047,18 @@ Date.prototype.format = function() {
       var days = Math.floor(milliseconds / 86400000);
 
       if(days > 0) {
-        return "updated " + days + " days ago";
+        return 'updated ' + days + ' days ago';
       }
       if(hours > 0) {
-        return "updated " + hours + " hrs ago";
+        return 'updated ' + hours + ' hrs ago';
       }
       if(minutes > 0) {
-        return "updated " + minutes + " min ago";
+        return 'updated ' + minutes + ' min ago';
       }
       if(seconds > 0) {
-        return "updated " + seconds + " sec ago";
+        return 'updated ' + seconds + ' sec ago';
       }
-      return "updated just now";
+      return 'updated just now';
     }
 
   });
