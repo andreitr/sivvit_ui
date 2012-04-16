@@ -79,7 +79,6 @@
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
 		<script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
 		<script type="text/javascript">
-      
       // JSLint variable definition
       /*global $LAB:false, SIVVIT:false, window:false */
 
@@ -94,12 +93,13 @@
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
           vars[key] = value;
         });
+
         return vars;
       }
 
+
       $LAB.script("js/event_form.min.js").wait(function() {
-        // SIVVIT.EditEvent.init(getUrlVars().id || null);
-        SIVVIT.EditEvent.init('4d1cab74');
+        SIVVIT.EditEvent.init(getUrlVars().id || null);
       });
 
 		</script>
