@@ -5,10 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
   SIVVIT = {};
 }
 
-// Formats date
-Date.prototype.format = function() {
-  return this.getMonth() + 1 + "/" + this.getDate() + "/" + this.getFullYear() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds();
-}; (function(jQuery, SIVVIT) {
+ (function(jQuery, SIVVIT) {
 
   SIVVIT.Event = {
     // SIVVIT.EventModel app/models/m.event.js
