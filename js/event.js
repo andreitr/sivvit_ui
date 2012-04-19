@@ -85,7 +85,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
         // Reset updated timer
         if(self.eventModel.hasChanged('last_update')) {
-          self.headerView.reset(new Date(self.eventModel.get('last_update')));
+          self.headerView.reset(self.eventModel.get('last_update'));
 
           // Update url path to load the latest data
           self.eventModel.setSinceRequestURL();
@@ -96,10 +96,10 @@ if( typeof (SIVVIT) == 'undefined') {
         if(self.eventModel.hasChanged('last_update') || self.eventModel.hasChanged('histogram')) {
 
           self.temporalModel.set({
-            startDate : new Date(self.eventModel.get('startDate') * 1000),
-            endDate : new Date(self.eventModel.get('last_update')),
-            startRange : new Date(self.eventModel.get('startDate') * 1000),
-            endRange : new Date(self.eventModel.get('last_update')),
+            startDate : self.eventModel.get('startDate'),
+            endDate : self.eventModel.get('last_update'),
+            startRange : self.eventModel.get('startDate'),
+            endRange : self.eventModel.get('last_update'),
             min : Math.min(self.temporalModel.get('min'), self.eventModel.get('histogram').min),
             max : Math.max(self.temporalModel.get('max'), self.eventModel.get('histogram').max),
             resolution : self.eventModel.get('histogram').resolution
@@ -1011,7 +1011,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
       $('#event-title').html(this.model.get('title'));
       $('#event-description').html(this.model.get('description'));
-      $('#event-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + new Date(this.model.get("startDate") * 1000).toDateString());
+      $('#event-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + this.model.get("startDate").toDateString());
       $('#map-label').html("<span class='icon-location'></span>" + this.model.get("location").name);
     },
 

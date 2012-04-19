@@ -9,7 +9,7 @@ SIVVIT.ItemModel = Backbone.Model.extend({
     location : [],
     content : null,
     source : null,
-    timestamp : "",
+    timestamp : null,
     rank : 0,
     author : null,
     avatar : null
@@ -17,6 +17,17 @@ SIVVIT.ItemModel = Backbone.Model.extend({
   // Initialized
   initialize : function() {
     this.url = "http://sivvit.com/e/post/" + this.get("id");
+  },
+
+  //  Override set method to ensure correct variable formatting
+  set : function(attributes, options) {
+
+    if(attributes.hasOwnProperty('timestamp')) {
+      attributes.timestamp = Date.parseCustomDate(attributes.timestamp);
+    }
+
+    Backbone.Model.prototype.set.call(this, attributes, options);
+    return this;
   },
 
   // Updates the model and calls provided callbacks when done
@@ -34,7 +45,7 @@ SIVVIT.ItemModel = Backbone.Model.extend({
       dataType : 'application/json',
       success : init.success,
       complete : init.complete,
-      error: init.error
+      error : init.error
     });
   }
 
