@@ -1,121 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<link rel="stylesheet" type="text/css" href="css/secondary.css" />
-		<link rel="stylesheet" type="text/css" href="css/event.css" />
-		<link rel="stylesheet" type="text/css" href="css/global.css" />
-		<link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
-		<link rel="stylesheet" type="text/css" href="js/libs/fancybox/jquery.fancybox.css" />
-		<title>Project High Jump</title>
-	</head>
-	<body>
-		<div class="body-container" id="wrapper">
-			<div id="header">
-				<div id="content-container">
-					<div id="logo"></div>
-					<div class="nav" id="new-event" href="event_form.html">
-						Track New Event
-					</div>
-					<div class="nav">
-						Explore
-					</div>
-					<div class="nav" style="float:right; border: none; padding:0px">
-						Sign In with Facebook Twitter
-					</div>
-				</div>
-			</div>
-			<div id="content-loader"></div>
-			<div id="event-application">
-				<div id="eventHeader">
-					<div id="contentBoxHeader">
-						<div id="content-container">
-							<div id="padding" style="padding: 10px 0 10px 0;">
-								<div id="column-layout">
-									<div id="row">
-										<div id="cell">
-											<h1 id="event-title"></h1>
-											<div id="event-description"></div>
-										</div>
-										<div id="cell">
-											<h1>&nbsp;</h1>
-											<div id="event-user" style="float:right;"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="contentVSpacer"></div>
-				<div id="content-container">
-					<div id="column-layout">
-						<div id="row">
-							<!--Left column -->
-							<div id="cell" style="width:300px; display:block">
-								<div id="mover">
-									<div class="h2-inline">
-										Timeline
-									</div>
-									<div class="seconrady-title" id="timeline-label"></div>
-									<div id="contentSidebarBox">
-										<div id="padding">
-											<div id="timline-label">
-												<div id="timeline-maxtime"></div>
-												<div id="timeline-mintime"></div>
-											</div>
-											<div id="timeline-container"></div>
-											<div id="timeline-slider"></div>
-										</div>
-									</div>
-									<div id="contentVSpacer"></div>
-									<div class="h2-inline">
-										Collecting content in
-									</div>
-									<div class="seconrady-title" id="map-label"></div>
-									<div id="contentSidebarBox">
-										<div id="padding">
-											<div id="map-container"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- Right column -->
-							<div id="cell" style="width:100%; padding-left:20px">
-								<div id="navigation-content">
-									<div class="h2-inline" id="content-stats"></div>
-									<div class="text-btn" id="all-btn">
-										<span class='icon-comment' id='all-btn'>&nbsp;</span>Everything
-									</div>
-									<div class="text-btn" id="media-btn">
-										<span class='icon-media' id='media-btn'>&nbsp;</span>Media
-									</div>
-									<div class="text-btn" id="post-btn">
-										<span class='icon-page' id='post-btn'>&nbsp;</span>Posts
-									</div>
-									<div style="float:right">
-										<div class="text-btn" id="share-btn">
-											<span class='icon-twitter'>&nbsp;</span>Share
-										</div>
-									</div>
-								</div>
-								<!-- CONTENT HERE -->
-								<div id="dynamic-content"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="padding"></div>
-		</div>
-		<div id="footer">
-			<div id="content-container">
-				<div class="notice">
-					&copy; 2012 Sivvit, Inc., All Rights Reserved
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
-		<script type="text/javascript">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/secondary.css" />
+    <link rel="stylesheet" type="text/css" href="css/event.css" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
+    <link rel="stylesheet" type="text/css" href="js/libs/fancybox/jquery.fancybox.css" />
+    <title>Project High Jump</title>
+  </head>
+  <body>
+    <div class="body-container" id="wrapper">
+      <div id="header">
+        <div id="content-container">
+          <div id="logo"></div>
+          <div class="nav" id="new-event" href="event_form.html">
+            Track New Event
+          </div>
+          <div class="nav">
+            Explore
+          </div>
+          <div class="nav" style="float:right; border: none; padding:0px">
+            Sign In with Facebook Twitter
+          </div>
+        </div>
+      </div>
+      <div id="content-loader"></div>
+      <div id="event-application">
+        <div id="eventHeader">
+          <div id="contentBoxHeader">
+            <div id="content-container">
+              <div id="padding" style="padding: 10px 0 10px 0;">
+                <div id="column-layout">
+                  <div id="row">
+                    <div id="cell">
+                      <h1 id="event-title"></h1>
+                      <div id="event-description"></div>
+                    </div>
+                    <div id="cell">
+                      <h1>&nbsp;</h1>
+                      <div id="event-user" style="float:right;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="contentVSpacer"></div>
+        <div id="content-container">
+          <div id="column-layout">
+            <div id="row">
+              <!--Left column -->
+              <div id="cell" style="width:300px; display:block">
+                <div id="mover">
+                  <div class="h2-inline">
+                    Timeline
+                  </div>
+                  <div class="seconrady-title" id="timeline-label"></div>
+                  <div id="contentSidebarBox">
+                    <div id="padding">
+                      <div id="timline-label">
+                        <div id="timeline-maxtime"></div>
+                        <div id="timeline-mintime"></div>
+                      </div>
+                      <div id="timeline-container"></div>
+                      <div id="timeline-slider"></div>
+                    </div>
+                  </div>
+                  <div id="contentVSpacer"></div>
+                  <div class="h2-inline">
+                    Collecting content in
+                  </div>
+                  <div class="seconrady-title" id="map-label"></div>
+                  <div id="contentSidebarBox">
+                    <div id="padding">
+                      <div id="map-container"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Right column -->
+              <div id="cell" style="width:100%; padding-left:20px">
+                <div id="navigation-content">
+                  <div class="h2-inline" id="content-stats"></div>
+                  <div class="text-btn" id="all-btn">
+                    <span class='icon-comment' id='all-btn'>&nbsp;</span>Everything
+                  </div>
+                  <div class="text-btn" id="media-btn">
+                    <span class='icon-media' id='media-btn'>&nbsp;</span>Media
+                  </div>
+                  <div class="text-btn" id="post-btn">
+                    <span class='icon-page' id='post-btn'>&nbsp;</span>Posts
+                  </div>
+                  <div style="float:right">
+                    <div class="text-btn" id="share-btn">
+                      <span class='icon-twitter'>&nbsp;</span>Share
+                    </div>
+                  </div>
+                </div>
+                <!-- CONTENT HERE -->
+                <div id="dynamic-content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="padding"></div>
+    </div>
+    <div id="footer">
+      <div id="content-container">
+        <div class="notice">
+          &copy; 2012 Sivvit, Inc., All Rights Reserved
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
+    <script type="text/javascript">
       // JSLint variable definition
       /*global $LAB:false, SIVVIT:false */
 
@@ -137,6 +137,6 @@
         SIVVIT.Event.init('4d1cab74');
       });
 
-		</script>
-	</body>
+    </script>
+  </body>
 </html>

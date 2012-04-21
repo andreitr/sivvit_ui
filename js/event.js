@@ -188,8 +188,9 @@ if( typeof (SIVVIT) == 'undefined') {
 
         for( j = content[i].items.length; j--; ) {
           itm_model = new SIVVIT.ItemModel(content[i].items[j]);
+
           itm_model.set({
-            timestamp : new Date(content[i].items[j].timestamp)
+            timestamp : content[i].items[j].timestamp
           });
           tmp_items.push(itm_model);
         }
