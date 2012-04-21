@@ -105,11 +105,10 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
       for(var i = len; i--; ) {
 
-        var frame = this.model.get('histogram')[i];
+        var frame = new SIVVIT.TemporalFrameModel(this.model.get('histogram')[i]);
 
-
-        var percentY = (frame.count / maxVal) * 100;
-        var percentX = (frame.timestamp.getTime() - startTime) / (endTime - startTime);
+        var percentY = (frame.get('count') / maxVal) * 100;
+        var percentX = (frame.get('timestamp').getTime() - startTime) / (endTime - startTime);
 
         var barH = Math.round(percentY * maxHeight / 100);
         var barX = Math.round(percentX * maxWidth);
@@ -121,7 +120,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
         });
 
         if(this.slider) {
-          bar.timestamp = frame.timestamp;
+          bar.timestamp = frame.get('timestamp');
           this.updateBarColor(bar);
           this.bars.push(bar);
         }
