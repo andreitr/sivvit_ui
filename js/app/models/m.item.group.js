@@ -1,7 +1,6 @@
 // JSLint variable definition
 /*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false, console:false  */
 
-
 // Model for the temporal bucket
 SIVVIT.ItemGroupModel = Backbone.Model.extend({
   defaults : {
@@ -45,7 +44,7 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
   set : function(attributes, options) {
 
     // Update stats only for the fist time
-    if(attributes.hasOwnProperty("stats")) {
+    if(attributes.hasOwnProperty('stats')) {
       if(!this.lock_stats) {
         this.lock_stats = true;
       } else {
@@ -57,8 +56,8 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
   },
   // Sets url path with all necessary parameters
   setRequestPath : function(startDate, endDate, limit, resolution, type) {
-    var page = Math.round(this.get("displayed") / limit) + 1;
-    this.url = this.get("json") + "&meta=0&fromDate=" + (startDate.getTime() / 1000) + "&toDate=" + (endDate.getTime() / 1000) + "&limit=" + limit + "&page=" + page + "&resolution=" + resolution + "&type[]=" + type;
+    var page = Math.round(this.get('displayed') / limit) + 1;
+    this.url = this.get('json') + '&meta=0&fromDate=' + (startDate.getTime() / 1000) + '&toDate=' + (endDate.getTime() / 1000) + '&limit=' + limit + '&page=' + page + '&resolution=' + resolution + '&type[]=' + type;
   }
 
 });

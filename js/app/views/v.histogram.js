@@ -78,7 +78,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
   drawHistogram : function() {
 
     if(this.model.get('histogram')) {
-      
+
       var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get('histogramEndDate'))).getTime();
 
       // Total count of available slots
@@ -106,6 +106,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
       for(var i = len; i--; ) {
 
         var frame = this.model.get('histogram')[i];
+
 
         var percentY = (frame.count / maxVal) * 100;
         var percentX = (frame.timestamp.getTime() - startTime) / (endTime - startTime);

@@ -5,7 +5,7 @@ if( typeof (SIVVIT) == 'undefined') {
   SIVVIT = {};
 }
 
- (function(jQuery, SIVVIT) {
+(function(jQuery, SIVVIT) {
 
   SIVVIT.Event = {
     // SIVVIT.EventModel app/models/m.event.js
@@ -326,22 +326,19 @@ if( typeof (SIVVIT) == 'undefined') {
       switch(this.activeButton) {
         case '#all-btn':
           this.temporalModel.set({
-            histogram : this.eventModel.get('histogram').global,
-            type : 'global'
+            histogram : this.eventModel.get('histogram').global
           });
           break;
 
         case '#post-btn':
           this.temporalModel.set({
-            histogram : this.eventModel.get('histogram').post,
-            type : 'post'
+            histogram : this.eventModel.get('histogram').post
           });
           break;
 
         case '#media-btn':
           this.temporalModel.set({
-            histogram : this.eventModel.get('histogram').media,
-            type : 'media'
+            histogram : this.eventModel.get('histogram').media
           });
           break;
       }
@@ -865,7 +862,6 @@ if( typeof (SIVVIT) == 'undefined') {
         itm.html.find('#del-itm').hide();
         itm.html.find('#apr-itm').hide();
       });
-
 
       itm.html.click(function(event) {
 

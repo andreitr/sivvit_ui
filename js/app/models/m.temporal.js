@@ -25,9 +25,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
     histogramEndDate : null,
 
     // Minute, second, hour, day
-    resolution : null,
-    // Type of the displayed content - global, media, post
-    type : null
+    resolution : null
   },
 
   // Override set method to keep track on
@@ -138,4 +136,5 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   checkDateBounds : function(date) {
     return date >= this.get('startDate') && date <= this.get('endDate') ? true : false;
   }
+
 });
