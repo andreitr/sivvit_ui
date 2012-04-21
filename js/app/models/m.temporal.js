@@ -46,7 +46,9 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
       var len = attributes.histogram.length;
       for(var i = len; i--; ) {
-        attributes.histogram[i].timestamp = new Date(attributes.histogram[i].timestamp);
+
+        // Date.parseCustomDate is located in date.js
+        attributes.histogram[i].timestamp = Date.parseCustomDate(attributes.histogram[i].timestamp);
 
         // Remove histogram bucket if timestamp it falls outside the range bounds
         if(this.checkDateBounds(attributes.histogram[i].timestamp) === true) {
