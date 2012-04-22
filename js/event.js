@@ -198,7 +198,7 @@ if( typeof (SIVVIT) == 'undefined') {
           items : new SIVVIT.ItemCollection(tmp_items),
           items_new : new SIVVIT.ItemCollection(tmp_items),
           stats : content[i].stats,
-          timestamp : new Date(content[i].timestamp)
+          timestamp : content[i].timestamp
         });
 
         model.updateContentRange(group_model.get('timestamp'));

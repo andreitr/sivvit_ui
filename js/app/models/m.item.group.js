@@ -43,6 +43,11 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
   // Override set method to regulate updating of the stats object
   set : function(attributes, options) {
 
+    // Date.parseCustomDate is in date.js
+    if(attributes.hasOwnProperty('timestamp') && attributes.timestamp !== undefined && attributes.timestamp !== null) {
+      attributes.timestamp = Date.parseCustomDate(attributes.timestamp);
+    }
+
     // Update stats only for the fist time
     if(attributes.hasOwnProperty('stats')) {
       if(!this.lock_stats) {
