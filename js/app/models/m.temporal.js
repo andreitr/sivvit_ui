@@ -55,7 +55,6 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
           tmp_min = Math.min(tmp_min, attributes.histogram[i].count);
           tmp_max = Math.max(tmp_max, attributes.histogram[i].count);
 
-
           // If the histogram is displayed more than once the date object is already present
           if(attributes.histogram[i].timestamp instanceof Date === false) {
             // Date.parseCustomDate is located in date.js

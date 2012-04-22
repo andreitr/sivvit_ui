@@ -23,19 +23,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
     $('#timeline-maxtime').html(this.model.get('endRange').format());
   },
 
-  // Sets histogram bar colors based on the visible range
-  updateBarColor : function(bar) {
-    if(new Date(bar.timestamp).getTime() >= this.model.get('startRange').getTime() && new Date(bar.timestamp).getTime() <= this.model.get('endRange').getTime()) {
-      bar.attr({
-        fill : '#333333'
-      });
-    } else {
-      bar.attr({
-        fill : '#CCCCCC'
-      });
-    }
-  },
-
   // Draws histogram.
   drawHistogram : function() {
 
@@ -44,24 +31,23 @@ SIVVIT.HistogramView = Backbone.View.extend({
       var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get('histogramEndDate'))).getTime();
 
       // Total count of available slots
-      var lenTotal = Math.ceil((adjusted_end_date - this.model.get('histogramStartDate')) / this.model.getResolution());
+      var len_total = Math.ceil((adjusted_end_date - this.model.get('histogramStartDate')) / this.model.getResolution());
 
       // Actual count of temporal slots
       var len = this.model.get('histogram').length;
 
-      var maxVal = this.model.get('max');
-      var minVal = this.model.get('min');
+      var max_val = this.model.get('max');
 
-      var maxHeight = $(this.el).height();
-      var maxWidth = $(this.el).width();
+      var max_height = $(this.el).height();
+      var max_width = $(this.el).width();
 
-      var barW = $(this.el).width() / lenTotal;
+      var bar_w = $(this.el).width() / len_total;
 
       // Anything less than 0.5 displays as a very thin bar
-      barW = barW < 0.5 ? 0.5 : barW;
+      bar_w = bar_w < 0.5 ? 0.5 : bar_w;
 
-      var startTime = this.model.get('histogramStartDate');
-      var endTime = adjusted_end_date;
+      var start_time = this.model.get('histogramStartDate');
+      var end_time = adjusted_end_date;
 
       var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
@@ -69,18 +55,20 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
         var frame = new SIVVIT.TemporalFrameModel(this.model.get('histogram')[i]);
 
-        var percentY = (frame.get('count') / maxVal) * 100;
-        var percentX = (frame.get('timestamp').getTime() - startTime) / (endTime - startTime);
+        var percent_y = (frame.get('count') / max_val) * 100;
+        var percent_x = (frame.get('timestamp').getTime() - start_time) / (end_time - start_time);
 
-        var barH = Math.round(percentY * maxHeight / 100);
-        var barX = Math.round(percentX * maxWidth);
-        var barY = Math.round(maxHeight - barH);
+        var bar_h = Math.round(percent_y * max_height / 100);
+        var bar_x = Math.round(percent_x * max_width);
+        var bar_y = Math.round(max_height - bar_h);
 
-        var bar = histogram.rect(barX, barY, barW, barH).attr({
+        var bar = histogram.rect(bar_x, bar_y, bar_w, bar_h).attr({
           fill : '#333333',
           'stroke-width' : 0
         });
       }
+
+      histogram.text(50, 90, "We have some test");
     }
   }
 
