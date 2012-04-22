@@ -323,6 +323,7 @@ if( typeof (SIVVIT) == 'undefined') {
     renderHistogram : function() {
 
       switch(this.activeButton) {
+
         case '#all-btn':
           this.temporalModel.set({
             histogram : this.eventModel.get('histogram').global

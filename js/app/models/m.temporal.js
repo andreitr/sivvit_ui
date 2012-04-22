@@ -35,6 +35,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
     if(attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
 
       this.bucket_hash = {};
+
       this.set({
         histogramStartDate : null
       });
@@ -44,56 +45,62 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
       var len = attributes.histogram.length;
 
-      var tmp_max = attributes.histogram[0].count;
-      var tmp_min = attributes.histogram[0].count;
+      if(len > 0) {
 
-      for(var i = len; i--; ) {
+        var tmp_max = attributes.histogram[0].count;
+        var tmp_min = attributes.histogram[0].count;
 
-        tmp_min = Math.min(tmp_min, attributes.histogram[i].count);
-        tmp_max = Math.max(tmp_max, attributes.histogram[i].count);
+        for(var i = len; i--; ) {
 
-        // Date.parseCustomDate is located in date.js
-        attributes.histogram[i].timestamp = Date.parseCustomDate(attributes.histogram[i].timestamp);
+          tmp_min = Math.min(tmp_min, attributes.histogram[i].count);
+          tmp_max = Math.max(tmp_max, attributes.histogram[i].count);
 
-        // Remove histogram bucket if timestamp it falls outside the range bounds
-        if(this.checkDateBounds(attributes.histogram[i].timestamp) === true) {
 
-          this.bucket_hash[attributes.histogram[i].timestamp] = attributes.histogram[i];
-
-          if(!this.get('histogramStartDate') || !this.get('histogramEndDate')) {
-            this.set({
-              histogramStartDate : attributes.histogram[i].timestamp
-            });
-            this.set({
-              histogramEndDate : attributes.histogram[i].timestamp
-            });
-          } else {
-            this.set({
-              histogramStartDate : Math.min(attributes.histogram[i].timestamp, this.get('histogramStartDate'))
-            });
-            this.set({
-              histogramEndDate : Math.max(attributes.histogram[i].timestamp, this.get('histogramEndDate'))
-            });
+          // If the histogram is displayed more than once the date object is already present
+          if(attributes.histogram[i].timestamp instanceof Date === false) {
+            // Date.parseCustomDate is located in date.js
+            attributes.histogram[i].timestamp = Date.parseCustomDate(attributes.histogram[i].timestamp);
           }
-        } else {
-          attributes.histogram.splice(i, 1);
+
+          // Remove histogram bucket if timestamp it falls outside the range bounds
+          if(this.checkDateBounds(attributes.histogram[i].timestamp) === true) {
+
+            this.bucket_hash[attributes.histogram[i].timestamp] = attributes.histogram[i];
+
+            if(!this.get('histogramStartDate') || !this.get('histogramEndDate')) {
+              this.set({
+                histogramStartDate : attributes.histogram[i].timestamp
+              });
+              this.set({
+                histogramEndDate : attributes.histogram[i].timestamp
+              });
+            } else {
+              this.set({
+                histogramStartDate : Math.min(attributes.histogram[i].timestamp, this.get('histogramStartDate'))
+              });
+              this.set({
+                histogramEndDate : Math.max(attributes.histogram[i].timestamp, this.get('histogramEndDate'))
+              });
+            }
+          } else {
+            attributes.histogram.splice(i, 1);
+          }
         }
+
+        // Update min, max values on the model
+        this.set({
+          max : tmp_max,
+          min : tmp_min
+        }, {
+          silent : true
+        });
       }
-
-      // Update min, max values on the model
-      this.set({
-        max : tmp_max,
-        min : tmp_min
-
-      }, {
-        silent : true
-      });
-
     }
 
     Backbone.Model.prototype.set.call(this, attributes, options);
     return this;
   },
+
   // Formats date object to match event resolution.
   // Standard buckets for histogram count aggregation.
   adjustResolution : function(date) {
@@ -108,6 +115,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
     }
   },
+
   // Adjusts the date object to the next available bucket
   // NOTE!!! This function is not adjusted for leap year nor for upper limit of the date obj
   adjustToNextBucket : function(date, resolution) {
@@ -151,6 +159,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   },
   // Checks the bounds of
   checkDateBounds : function(date) {
+
     return date >= this.get('startDate') && date <= this.get('endDate') ? true : false;
   }
 
