@@ -22,9 +22,9 @@ if( typeof (SIVVIT) == 'undefined') {
         // New event is being created
 
         this.model = new SIVVIT.EventModel({
-          startDate : new Date(),
+          startDate : new Date().getTime() / 1000,
           // Add 24 hours to the existing date
-          endDate : new Date(new Date().getTime() + 86400000),
+          endDate : new Date(new Date().getTime() + 86400000).getTime() / 1000,
           pull : false,
           meta : 0,
           type : null
@@ -172,7 +172,6 @@ if( typeof (SIVVIT) == 'undefined') {
         });
       });
 
-
       $("input[name='location']").val(this.model.get('location').name);
 
       $("input[name='keywords']").val(this.model.get('keywords'));
@@ -183,7 +182,6 @@ if( typeof (SIVVIT) == 'undefined') {
           silent : true
         });
       });
-
 
       $("input[name='description']").val(this.model.get('description'));
       $("input[name='description']").change(function() {
@@ -196,7 +194,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
       // Start date
       $("input[name='start-date']").datepicker({
-        defaultDate : new Date(this.model.get('startDate') * 1000),
+        defaultDate : this.model.get('startDate'),
         onSelect : function(date) {
           slef.model.set({
             'startDate' : date
@@ -206,11 +204,11 @@ if( typeof (SIVVIT) == 'undefined') {
         }
 
       });
-      $("input[name='start-date']").val(new Date(this.model.get('startDate') * 1000).toDateString());
+      $("input[name='start-date']").val(this.model.get('startDate'));
 
       // End date
       $("input[name='end-date']").datepicker({
-        defaultDate : new Date(this.model.get('endDate') * 1000),
+        defaultDate : this.model.get('endDate'),
         onSelect : function(date) {
           slef.model.set({
             'endDate' : date
@@ -220,11 +218,11 @@ if( typeof (SIVVIT) == 'undefined') {
         }
 
       });
-      $("input[name='end-date']").val(new Date(this.model.get('endDate') * 1000).toDateString());
+      $("input[name='end-date']").val(this.model.get('endDate').toDateString());
 
       // Time
-      $("input[name='end-time']").val(new Date(this.model.get('endDate') * 1000).toTimeString().substring(0, 8));
-      $("input[name='start-time']").val(new Date(this.model.get('startDate') * 1000).toTimeString().substring(0, 8));
+      $("input[name='end-time']").val(this.model.get('endDate').toTimeString().substring(0, 8));
+      $("input[name='start-time']").val(this.model.get('startDate').toTimeString().substring(0, 8));
 
       $('#collection-btn').html(this.model === 0 ? 'Start Collection' : 'Start Collection');
 

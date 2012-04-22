@@ -12,7 +12,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
   },
 
   render : function() {
-
     this.drawHistogram();
     this.updateTime();
   },
@@ -67,8 +66,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
           'stroke-width' : 0
         });
       }
-
-      histogram.text(50, 90, "We have some test");
     }
   }
 
