@@ -7,7 +7,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
   slider : false,
 
   initialize : function(options) {
-    this.slider = options.slider;
     this.model = options.model;
     this.model.bind('change:histogram', this.render, this);
   },
@@ -15,43 +14,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
   render : function() {
 
     this.drawHistogram();
-    if(this.slider) {
-      this.drawSlider();
-    }
-  },
-
-  drawSlider : function() {
-    var self = this;
-
-    $('#timeline-slider').slider({
-      range : true,
-      min : this.model.get('histogramStartDate'),
-      max : this.model.get('histogramEndDate'),
-      values : [this.model.get('startRange').getTime(), this.model.get('endRange').getTime()],
-      stop : function(event, ui) {
-        self.onSliderDragged(event, ui);
-      }
-
-    });
-
-    this.updateTime();
-  },
-
-  onSliderDragged : function(event, ui) {
-    this.model.set({
-      'startRange' : new Date(ui.values[0])
-    });
-    this.model.set({
-      'endRange' : new Date(ui.values[1])
-    });
-    this.updateBars();
-  },
-
-  // Updates histogram bar colors
-  updateBars : function() {
-    for(var i = this.bars.length; i--; ) {
-      this.updateBarColor(this.bars[i]);
-    }
     this.updateTime();
   },
 
@@ -118,12 +80,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
           fill : '#333333',
           'stroke-width' : 0
         });
-
-        if(this.slider) {
-          bar.timestamp = frame.get('timestamp');
-          this.updateBarColor(bar);
-          this.bars.push(bar);
-        }
       }
     }
   }

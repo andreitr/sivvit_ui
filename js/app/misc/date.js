@@ -1,6 +1,6 @@
 // Formats date
 Date.prototype.format = function() {
-  return this.getMonth() + 1 + '/' + this.getDate() + '/' + this.getFullYear() + ' ' + this.getHours() + ':' + this.getMinutes() + ':' + this.getSeconds();
+  return this.getMonth() + 1 + '/' + this.getDate() + '/' + String(this.getFullYear()).substr(2,2) + ' ' + this.getHours() + ':' + this.getMinutes() + ':' + this.getSeconds();
 };
 
 // Date from the server is returned in seconds

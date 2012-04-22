@@ -50,8 +50,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
       this.sideHistView = new SIVVIT.HistogramView({
         el : '#timeline-container',
-        model : this.temporalModel,
-        slider : true
+        model : this.temporalModel
       });
 
       this.contentView = new SIVVIT.ContentView({

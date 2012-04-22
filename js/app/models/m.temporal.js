@@ -42,10 +42,14 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
         histogramEndDate : null
       });
 
-      var len = attributes.histogram.length, tmp_max = 0;
+      var len = attributes.histogram.length;
+
+      var tmp_max = attributes.histogram[0].count;
+      var tmp_min = attributes.histogram[0].count;
 
       for(var i = len; i--; ) {
 
+        tmp_min = Math.min(tmp_min, attributes.histogram[i].count);
         tmp_max = Math.max(tmp_max, attributes.histogram[i].count);
 
         // Date.parseCustomDate is located in date.js
@@ -76,8 +80,11 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
         }
       }
 
+      // Update min, max values on the model
       this.set({
-        max : tmp_max
+        max : tmp_max,
+        min : tmp_min
+
       }, {
         silent : true
       });

@@ -114,7 +114,6 @@ if( typeof (SIVVIT) == 'undefined') {
         // Render histogram
         var histogram = new SIVVIT.HistogramView({
           el : $(itm.html).find('#histogram'),
-          slider : false,
           model : mdl
         }).render();
 
