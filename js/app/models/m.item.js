@@ -23,7 +23,7 @@ SIVVIT.ItemModel = Backbone.Model.extend({
   set : function(attributes, options) {
 
     if(attributes.hasOwnProperty('timestamp')) {
-      attributes.timestamp = Date.parseCustomDate(attributes.timestamp);
+      attributes.timestamp = Date.secondsToDate(attributes.timestamp);
     }
 
     Backbone.Model.prototype.set.call(this, attributes, options);

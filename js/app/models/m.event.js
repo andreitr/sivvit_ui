@@ -109,15 +109,15 @@ SIVVIT.EventModel = Backbone.Model.extend({
     }
 
     // Make sure the data is properly formatted from the start
-    // NOTE: Date.parseCustomDate is in app/misc.date.js
+    // NOTE: Date.secondsToDate is in app/misc.date.js
     if(attributes.hasOwnProperty('startDate')) {
-      attributes.startDate = Date.parseCustomDate(attributes.startDate);
+      attributes.startDate = Date.secondsToDate(attributes.startDate);
     }
     if(attributes.hasOwnProperty('endDate')) {
-      attributes.endDate = Date.parseCustomDate(attributes.endDate);
+      attributes.endDate = Date.secondsToDate(attributes.endDate);
     }
     if(attributes.hasOwnProperty('last_update')) {
-      attributes.last_update = Date.parseCustomDate(attributes.last_update);
+      attributes.last_update = Date.secondsToDate(attributes.last_update);
     }
 
     // Append histogram values
@@ -177,8 +177,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
   formatModel : function() {
 
     var result = {
-      startDate : Date.toSeconds(this.get('startDate')),
-      endDate : Date.toSeconds(this.get('endDate')),
+      startDate : Date.dateToSeconds(this.get('startDate')),
+      endDate : Date.dateToSeconds(this.get('endDate')),
       location : this.get('location'),
       title : this.get('title'),
       description : this.get('description'),

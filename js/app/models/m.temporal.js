@@ -57,8 +57,8 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
           // If the histogram is displayed more than once the date object is already present
           if(attributes.histogram[i].timestamp instanceof Date === false) {
-            // Date.parseCustomDate is located in date.js
-            attributes.histogram[i].timestamp = Date.parseCustomDate(attributes.histogram[i].timestamp);
+            // Date.secondsToDate is located in date.js
+            attributes.histogram[i].timestamp = Date.secondsToDate(attributes.histogram[i].timestamp);
           }
 
           // Remove histogram bucket if timestamp it falls outside the range bounds

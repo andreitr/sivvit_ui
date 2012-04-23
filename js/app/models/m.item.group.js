@@ -43,9 +43,9 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
   // Override set method to regulate updating of the stats object
   set : function(attributes, options) {
 
-    // Date.parseCustomDate is in date.js
+    // Date.secondsToDate is in date.js
     if(attributes.hasOwnProperty('timestamp') && attributes.timestamp !== undefined && attributes.timestamp !== null) {
-      attributes.timestamp = Date.parseCustomDate(attributes.timestamp);
+      attributes.timestamp = Date.secondsToDate(attributes.timestamp);
     }
 
     // Update stats only for the fist time
@@ -62,7 +62,7 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
   // Sets url path with all necessary parameters
   setRequestPath : function(startDate, endDate, limit, resolution, type) {
     var page = Math.round(this.get('displayed') / limit) + 1;
-    this.url = this.get('json') + '&meta=0&fromDate=' + (startDate.getTime() / 1000) + '&toDate=' + (endDate.getTime() / 1000) + '&limit=' + limit + '&page=' + page + '&resolution=' + resolution + '&type[]=' + type;
+    this.url = this.get('json') + '&meta=0&fromDate=' + Date.dateToSeconds(startDate) + '&toDate=' + Date.dateToSeconds(endDate) + '&limit=' + limit + '&page=' + page + '&resolution=' + resolution + '&type[]=' + type;
   }
 
 });

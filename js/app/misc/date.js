@@ -4,10 +4,10 @@ Date.prototype.format = function() {
 };
 
 // Date from the server is returned in seconds
-Date.parseCustomDate = function(seconds) {
+Date.secondsToDate = function(seconds) {
   return new Date(seconds * 1000);
 };
 // Converts date object to seconds
-Date.toSeconds = function(date) {
+Date.dateToSeconds = function(date) {
   return Number(date.getTime() / 1000);
 };
