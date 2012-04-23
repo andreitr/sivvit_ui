@@ -7,3 +7,7 @@ Date.prototype.format = function() {
 Date.parseCustomDate = function(seconds) {
   return new Date(seconds * 1000);
 };
+// Converts date object to seconds
+Date.toSeconds = function(date) {
+  return Number(date.getTime() / 1000);
+};

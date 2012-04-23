@@ -156,8 +156,6 @@ if( typeof (SIVVIT) == 'undefined') {
     // Updates view
     update : function() {
 
-
-
       var slef = this;
 
       $('#form-container').show();
@@ -202,8 +200,9 @@ if( typeof (SIVVIT) == 'undefined') {
       $("input[name='start-date']").datepicker({
         defaultDate : this.model.get('startDate'),
         onSelect : function(date) {
+
           slef.model.set({
-            'startDate' : date
+            'startDate' : new Date(date).getTime() / 1000
           }, {
             silent : true
           });
@@ -217,7 +216,7 @@ if( typeof (SIVVIT) == 'undefined') {
         defaultDate : this.model.get('endDate'),
         onSelect : function(date) {
           slef.model.set({
-            'endDate' : date
+            'endDate' : new Date(date).getTime() / 1000
           }, {
             silent : true
           });

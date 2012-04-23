@@ -43,8 +43,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
       lat : null,
       name : null
     },
-    startDate : new Date(),
-    endDate : new Date(),
+    startDate : null,
+    endDate : null,
 
     // Status property can have the following states
     //-1 ending
@@ -165,18 +165,14 @@ SIVVIT.EventModel = Backbone.Model.extend({
     //TODO: Move object copying into a separate function
     // For existing events we don't need to send the
     // entire model object - send only the required data
-    var copy = $.extend(true, {}, this.attributes);
-    delete copy.author;
-    delete copy.content;
-    delete copy.last_update;
-    delete copy.pending;
-    delete copy.stats;
-    delete copy.histogram;
-    delete copy.meta;
-    delete copy.bucket_limit;
-    delete copy.bucket_page;
-    delete copy.userid;
-    delete copy.content_bounds;
+    var copy = {
+      startDate: Date.toSeconds(this.get('startDate')),
+      endDate: Date.toSeconds(this.get('endDate')),
+      location: this.get('location'),
+      title: this.get('title'),
+      description: this.get('description'),
+      keywords: this.get('keywords')
+    };
 
     $.ajax({
       url : 'http://sivvit.com/e/event/' + this.get('id'),
@@ -218,8 +214,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
   updateContentRange : function(date) {
     // Set default values
     if(this.attributes.content_bounds.min === null) {
-      this.attributes.content_bounds.min = new Date(this.get('endDate'));
-      this.attributes.content_bounds.max = new Date(this.get('startDate'));
+      this.attributes.content_bounds.min = this.get('endDate');
+      this.attributes.content_bounds.max = this.get('startDate');
     }
     this.attributes.content_bounds.min = Math.min(date, this.attributes.content_bounds.min);
     this.attributes.content_bounds.max = Math.max(date, this.attributes.content_bounds.max);
@@ -228,7 +224,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
   // Returns true when earlier buckets can be loaded.
   hasMoreContent : function() {
 
-    if(this.get('content_bounds').min > new Date(this.get('startDate'))) {
+    if(this.get('content_bounds').min > this.get('startDate')) {
       return true;
     } else {
       return false;
