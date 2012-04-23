@@ -3,7 +3,8 @@
 
 if( typeof (SIVVIT) == 'undefined') {
   SIVVIT = {};
-}(function(jQuery, SIVVIT) {
+}
+(function(jQuery, SIVVIT) {
 
   SIVVIT.EditEvent = {
 
@@ -78,11 +79,14 @@ if( typeof (SIVVIT) == 'undefined') {
 
     // Default location
     setDefaultLocation : function() {
+
+      console.log('Default location');
+
       this.model.set({
         'location' : {
           'name' : 'Denver, CO',
-          'lat' : -104.984722,
-          'lon' : 39.739167
+          'lat' : 39.739167,
+          'lon' : -104.984722
         }
       });
       this.view.update();
@@ -151,6 +155,8 @@ if( typeof (SIVVIT) == 'undefined') {
 
     // Updates view
     update : function() {
+
+
 
       var slef = this;
 
