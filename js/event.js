@@ -580,7 +580,7 @@ if( typeof (SIVVIT) == 'undefined') {
             thumbnail : itm.get('thumbnail'),
             media : itm.get('media'),
             avatar : itm.get('avatar'),
-            timestamp : itm.get('timestamp').format(),
+            timestamp : Date.secondsToDate(itm.get('timestamp')).format(),
             author : itm.get('author'),
             source : itm.get('source')
           });
@@ -591,7 +591,7 @@ if( typeof (SIVVIT) == 'undefined') {
             thumbnail : itm.get('thumbnail'),
             media : itm.get('media'),
             avatar : itm.get('avatar'),
-            timestamp : itm.get('timestamp').format(),
+            timestamp : Date.secondsToDate(itm.get('timestamp')).format(),
             author : itm.get('author'),
             source : itm.get('source')
           });
@@ -602,7 +602,7 @@ if( typeof (SIVVIT) == 'undefined') {
           html = $.tmpl(this.post_template, {
             content : itm.get('content'),
             avatar : itm.get('avatar'),
-            timestamp : itm.get('timestamp').format(),
+            timestamp : Date.secondsToDate(itm.get('timestamp')).format(),
             author : itm.get('author'),
             source : itm.get('source')
           });
@@ -739,11 +739,12 @@ if( typeof (SIVVIT) == 'undefined') {
         for( i = len; i--; ) {
 
           var itm = items[i];
+          console.log(items[i]);
           if(itm) {
             var itm_model = new SIVVIT.ItemModel(itm);
 
             itm_model.set({
-              timestamp : new Date(itm.timestamp)
+              timestamp : Date.dateToSeconds(itm.timestamp)
             });
 
             tmp.push(itm_model);
