@@ -148,7 +148,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
     $.ajax({
       url : 'http://sivvit.com/e/event/',
-      data : self.toJSON(),
+      data : self.formatModel(),
       type : 'POST',
       dataType : 'json',
       success : init.success,
@@ -162,27 +162,30 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
     var self = this;
 
-    //TODO: Move object copying into a separate function
-    // For existing events we don't need to send the
-    // entire model object - send only the required data
-    var copy = {
-      startDate: Date.toSeconds(this.get('startDate')),
-      endDate: Date.toSeconds(this.get('endDate')),
-      location: this.get('location'),
-      title: this.get('title'),
-      description: this.get('description'),
-      keywords: this.get('keywords')
-    };
-
     $.ajax({
       url : 'http://sivvit.com/e/event/' + this.get('id'),
-      data : copy,
+      data : self.formatModel(),
       type : 'PUT',
       dataType : 'json'
       // success : init.success,
       // complete : init.complete,
       // error : init.error
     });
+  },
+
+  // Formats model to required format for saving
+  formatModel : function() {
+
+    var result = {
+      startDate : Date.toSeconds(this.get('startDate')),
+      endDate : Date.toSeconds(this.get('endDate')),
+      location : this.get('location'),
+      title : this.get('title'),
+      description : this.get('description'),
+      keywords : this.get('keywords')
+    };
+
+    return result;
   },
 
   // The entire histogram is sent only with the first request, all subsequent
