@@ -31,7 +31,7 @@ if( typeof (SIVVIT) == 'undefined') {
     sideHistView : null,
 
     // Enables content editing when set to true
-    edit : true,
+    edit : false,
 
     // Initiates the application and loads the main data.
     init : function(id) {
@@ -721,6 +721,8 @@ if( typeof (SIVVIT) == 'undefined') {
     // Called once additional group data is loaded.
     updateGroup : function(group) {
 
+      console.log('GROUP UPDATED');
+
       var tmp = [], i, len, items;
       var content = group.get('content');
       len = content.length;
@@ -728,7 +730,7 @@ if( typeof (SIVVIT) == 'undefined') {
       // It is possible to have more than one bucket, loop through all of them to
       // find the appropriate one
       for( i = len; i--; ) {
-        if(new Date(content[i].timestamp).getTime() === group.get('timestamp').getTime()) {
+        if(Date.secondsToDate(content[i].timestamp).getTime() === group.get('timestamp').getTime()) {
           items = content[i].items;
         }
       }
@@ -739,12 +741,11 @@ if( typeof (SIVVIT) == 'undefined') {
         for( i = len; i--; ) {
 
           var itm = items[i];
-          console.log(items[i]);
           if(itm) {
             var itm_model = new SIVVIT.ItemModel(itm);
 
             itm_model.set({
-              timestamp : Date.dateToSeconds(itm.timestamp)
+              timestamp : Date.secondsToDate(itm.timestamp)
             });
 
             tmp.push(itm_model);
