@@ -127,13 +127,13 @@ SIVVIT.EventModel = Backbone.Model.extend({
         attributes.histogram.max = Math.max(attributes.histogram.max, this.get('histogram').max);
         attributes.histogram.min = Math.min(attributes.histogram.min, this.get('histogram').min);
       }
-      if(attributes.histogram.post !== undefined) {
+      if(attributes.histogram.post !== undefined && attributes.histogram.post !== null) {
         attributes.histogram.post = this.appendHistogram(this.post_hash, attributes.histogram.post);
       }
-      if(attributes.histogram.media !== undefined) {
+      if(attributes.histogram.media !== undefined && attributes.histogram.media !== null) {
         attributes.histogram.media = this.appendHistogram(this.media_hash, attributes.histogram.media);
       }
-      if(attributes.histogram.global !== undefined) {
+      if(attributes.histogram.global !== undefined && attributes.histogram.global !== null) {
         attributes.histogram.global = this.appendHistogram(this.global_hash, attributes.histogram.global);
       }
     }

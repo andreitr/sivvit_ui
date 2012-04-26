@@ -1,23 +1,25 @@
 <?xml version="1.0"?>
 <project basedir="../" default="compile">
 
-	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="/Users/andreitaraschuk/Documents/code/closure-compiler/compiler.jar" />
+  <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="/Users/andreitaraschuk/Documents/code/closure-compiler/compiler.jar" />
 
-	<target name="compile">
-		<jscomp compilationLevel="whitespace" warning="verbose" debug="false" output="js/events.min.js">
-							
-			<sources dir="${basedir}/js">
-				
-				<file name="header.js" />
-				<file name="events.js" />
-				
-				<file name="app/models/m.event.js" />
-				<file name="app/models/m.temporal.js" />
-				<file name="app/views/v.histogram.js" />
-				
-			</sources>
-		</jscomp>
-	</target>
+  <target name="compile">
+    <jscomp compilationLevel="whitespace" warning="verbose" debug="false" output="js/events.min.js">
+
+      <sources dir="${basedir}/js">
+
+        <file name="header.js" />
+        <file name="events.js" />
+
+        <file name="app/misc/date.js" />
+
+        <file name="app/models/m.event.js" />
+        <file name="app/models/m.temporal.js" />
+        <file name="app/views/v.histogram.js" />
+
+      </sources>
+    </jscomp>
+  </target>
 </project>
 
 

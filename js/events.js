@@ -37,7 +37,7 @@ if( typeof (SIVVIT) == 'undefined') {
           var model = new SIVVIT.EventModel(data[i]);
           // Add timestamp as date for collection sorting
           model.set({
-            timestamp : new Date(data[i])
+            timestamp : Date.secondsToDate(data[i])
           });
           self.collection.add(model);
         }
@@ -98,8 +98,10 @@ if( typeof (SIVVIT) == 'undefined') {
         itm = this.buildTemplate(itm);
 
         var mdl = new SIVVIT.TemporalModel({
-          startDate : new Date(itm.model.get('startDate') * 1000),
-          endDate : new Date(itm.model.get('last_update')),
+          startDate : Date.secondsToDate(itm.model.get('startDate')),
+          endDate : Date.secondsToDate(itm.model.get('last_update')),
+          startRange : itm.model.get('startDate'),
+          endRange : itm.model.get('last_update'),
           min : itm.model.get('histogram').min,
           max : itm.model.get('histogram').max,
           resolution : itm.model.get('histogram').resolution
@@ -119,8 +121,6 @@ if( typeof (SIVVIT) == 'undefined') {
 
         this.initItem(itm, '#event-list');
       }, this);
-
-
       this.initLightbox();
     },
 
@@ -170,7 +170,6 @@ if( typeof (SIVVIT) == 'undefined') {
             itm.html.find('#edit-itm').hide();
           });
 
-
           itm.html.click(function(event) {
 
             var checked;
@@ -196,7 +195,6 @@ if( typeof (SIVVIT) == 'undefined') {
                 event.stopPropagation();
             }
           });
-
 
           this.toggleLive(itm);
         }
