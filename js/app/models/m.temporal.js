@@ -47,16 +47,11 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
       if(len > 0) {
 
-        var tmp_min = 0;
-        var tmp_max = 0;
+        var tmp_min = 0, tmp_max = 0;
 
         for(var i = len; i--; ) {
 
-          tmp_min = Math.min(tmp_min, attributes.histogram[i].count);
-          tmp_max = Math.max(tmp_max, attributes.histogram[i].count);
-
           // If the histogram is displayed more than once the date object is already present
-          //if(attributes.histogram[i].timestamp instanceof Date === false) {
           if(attributes.histogram[i].timestamp instanceof Date === false) {
 
             // Date.secondsToDate is located in date.js
@@ -65,6 +60,9 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
           // Remove histogram bucket if timestamp it falls outside the range bounds
           if(this.checkDateBounds(attributes.histogram[i].timestamp) === true) {
+
+            tmp_min = Math.min(tmp_min, attributes.histogram[i].count);
+            tmp_max = Math.max(tmp_max, attributes.histogram[i].count);
 
             this.bucket_hash[attributes.histogram[i].timestamp] = attributes.histogram[i];
 
@@ -87,8 +85,6 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
             attributes.histogram.splice(i, 1);
           }
         }
-
-        console.log(tmp_max, tmp_min);
 
         attributes.min = tmp_min;
         attributes.max = tmp_max;
