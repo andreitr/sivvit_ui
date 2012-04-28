@@ -8,7 +8,8 @@
   <body>
     <div id="content-loader" style="height:'390px'; width:'820px';"></div>
     <div id="form-container">
-      <div id="form-main">
+
+      <form id="form-main">
         <div id="form-col-left">
           <h3><span id="icon-title" class="icon-check-green"></span>Event Title</h3>
           <input type="text" name="title"/>
@@ -64,7 +65,7 @@
           <div id="padding"></div>
           <div id="form-map" style="width:auto; height:160px;"></div>
         </div>
-      </div>
+      </form>
       <div id="form-footer">
         <div style="float:right">
           <div class="tabBtn" id="delete-event-btn">
@@ -83,6 +84,8 @@
       /*global $LAB:false, SIVVIT:false, window:false */
 
       $LAB.script("js/libs/jquery/jquery-1.6.4.min.js").wait();
+      $LAB.script("js/libs/jquery/jquery.validate.js").wait();
+
       $LAB.script("js/libs/underscore/underscore-min.js").wait();
       $LAB.script("js/libs/backbone/backbone-min.js").wait();
       $LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();

@@ -12,7 +12,7 @@
 
         <file name="event_form.js" />
 
-        <file name="app/misc/date.js" />
+        <file name="app/utils/date.js" />
         <file name="app/models/m.event.js" />
       </sources>
 

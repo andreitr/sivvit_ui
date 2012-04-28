@@ -77,8 +77,6 @@
     // Default location
     setDefaultLocation : function() {
 
-      console.log('Default location');
-
       this.model.set({
         'location' : {
           'name' : 'Denver, CO',
@@ -233,6 +231,27 @@
 
     // Validates all required form fields
     validate : function() {
+
+      $('#form-main').validate({
+        'rules' : {
+          title : {
+            required : true,
+            minlength: 4
+          },
+          'keywords':{
+            required: true,
+            minlength: 3
+          },
+          'start-date':{
+            required:true,
+            date:true
+          },
+          'end-date':{
+            required:true,
+            date:true
+          }
+        }
+      });
 
       var i, field, valid, icon;
       var global_valid = true;
