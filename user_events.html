@@ -1,91 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<link rel="stylesheet" type="text/css" href="css/secondary.css" />
-		<link rel="stylesheet" type="text/css" href="css/event.css" />
-		<link rel="stylesheet" type="text/css" href="css/global.css" />
-		<link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
-		<link rel="stylesheet" type="text/css" href="js/libs/fancybox/jquery.fancybox.css" />
-		<title>Project High Jump</title>
-	</head>
-	<body>
-		<div class="body-container">
-			<div id="header">
-				<div id="content-container">
-					<div id="logo"></div>
-					<div class="nav" id="new-event" href="event_form.html">
-						Track New Event
-					</div>
-					<div class="nav">
-						Explore
-					</div>
-					<div class="nav" id="account-btn" style="float:right; border: none; padding:0px">
-						Sign In with Facebook Twitter
-					</div>
-				</div>
-			</div>
-			<div id="content-loader"></div>
-			<div id="event-application">
-				<div id="eventHeader">
-					<div id="contentBoxHeader">
-						<div id="content-container">
-							<div id="padding" style="padding: 10px 0 10px 0;">
-								<div id="column-layout">
-									<div id="row">
-										<div id="cell">
-											<div id="user-avatar"></div>
-											<h1 id="user-title"></h1>
-											<div id="user-meta"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="contentVSpacer"></div>
-				<div id="content-container">
-					<div id="column-layout">
-						<div id="row">
-							<!-- Left column -->
-							<div id="cell">
-								<h2>Account</h2>
-								<div id="contentSidebarBox">
-									<div id="padding">
-										<p>
-											<a class="link">Account Admin</a>
-										</p>
-									</div>
-								</div>
-							</div>
-							<!-- Right column -->
-							<div id="cell" style="width:100%; padding-left:20px">
-								<h2>User Events</h2>
-								<!-- CONTENT HERE -->
-								<div id="dynamic-content"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="padding"></div>
-		</div>
-		<div id="footer">
-			<div id="content-container">
-				<div class="notice">
-					&copy; 2012 Sivvit, Inc., All Rights Reserved
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
-		<script>
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/secondary.css" />
+    <link rel="stylesheet" type="text/css" href="css/event.css" />
+    <link rel="stylesheet" type="text/css" href="css/global.css" />
+    <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
+    <link rel="stylesheet" type="text/css" href="js/libs/fancybox/jquery.fancybox.css" />
+    <title>Project High Jump</title>
+  </head>
+  <body>
+    <div class="body-container">
+      <div id="header">
+        <div id="content-container">
+          <div id="logo"></div>
+          <div class="nav" id="new-event" href="event_form.html">
+            Track New Event
+          </div>
+          <div class="nav">
+            Explore
+          </div>
+          <div class="nav" id="account-btn" style="float:right; border: none; padding:0px">
+            Sign In with Facebook Twitter
+          </div>
+        </div>
+      </div>
+      <div id="content-loader"></div>
+      <div id="event-application">
+        <div id="eventHeader">
+          <div id="contentBoxHeader">
+            <div id="content-container">
+              <div id="padding" style="padding: 10px 0 10px 0;">
+                <div id="column-layout">
+                  <div id="row">
+                    <div id="cell">
+                      <div id="user-avatar"></div>
+                      <h1 id="user-title"></h1>
+                      <div id="user-meta"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="contentVSpacer"></div>
+        <div id="content-container">
+          <div id="column-layout">
+            <div id="row">
+              <!-- Left column -->
+              <div id="cell">
+                <h2>Account</h2>
+                <div id="contentSidebarBox">
+                  <div id="padding">
+                    <p>
+                      <a class="link">Account Admin</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- Right column -->
+              <div id="cell" style="width:100%; padding-left:20px">
+                <h2>User Events</h2>
+                <!-- CONTENT HERE -->
+                <div id="dynamic-content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="padding"></div>
+    </div>
+    <div id="footer">
+      <div id="content-container">
+        <div class="notice">
+          &copy; 2012 Sivvit, Inc., All Rights Reserved
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
+    <script>
       // JSLint variable definition
       /*global $LAB:false, SIVVIT:false */
 
       $LAB.script("js/libs/graphael/raphael-min.js").wait();
       $LAB.script("js/libs/jquery/jquery-1.6.4.min.js").wait();
       $LAB.script("js/libs/underscore/underscore-min.js").wait();
-      $LAB.script("js/libs/backbone/backbone.js").wait();
+      $LAB.script("js/libs/backbone/backbone-min.js").wait();
       $LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
 
       $LAB.script("js/libs/fancybox/jquery.fancybox.js").wait();
@@ -102,6 +102,6 @@
         // SIVVIT.UserHeader.model.fetch();
       });
 
-		</script>
-	</body>
+    </script>
+  </body>
 </html>

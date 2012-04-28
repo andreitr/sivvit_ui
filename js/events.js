@@ -102,8 +102,6 @@ if( typeof (SIVVIT) == 'undefined') {
           endDate : itm.model.get('last_update'),
           startRange : itm.model.get('startDate'),
           endRange : itm.model.get('last_update'),
-          min : itm.model.get('histogram').min,
-          max : itm.model.get('histogram').max,
           resolution : itm.model.get('histogram').resolution
         });
 
@@ -120,6 +118,7 @@ if( typeof (SIVVIT) == 'undefined') {
         }).render();
 
         this.initItem(itm, '#event-list');
+
       }, this);
       this.initLightbox();
     },

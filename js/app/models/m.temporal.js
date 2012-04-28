@@ -47,8 +47,8 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
       if(len > 0) {
 
-        var tmp_max = attributes.histogram[0].count;
-        var tmp_min = attributes.histogram[0].count;
+        var tmp_min = 0;
+        var tmp_max = 0;
 
         for(var i = len; i--; ) {
 
@@ -65,8 +65,6 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
           // Remove histogram bucket if timestamp it falls outside the range bounds
           if(this.checkDateBounds(attributes.histogram[i].timestamp) === true) {
-
-            console.log('DO WE HAVE BOUNDS?');
 
             this.bucket_hash[attributes.histogram[i].timestamp] = attributes.histogram[i];
 
@@ -90,13 +88,10 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
           }
         }
 
-        // Update min, max values on the model
-        this.set({
-          max : tmp_max,
-          min : tmp_min
-        }, {
-          silent : true
-        });
+        console.log(tmp_max, tmp_min);
+
+        attributes.min = tmp_min;
+        attributes.max = tmp_max;
       }
     }
 
