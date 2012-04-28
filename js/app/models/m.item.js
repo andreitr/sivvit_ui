@@ -16,7 +16,7 @@ SIVVIT.ItemModel = Backbone.Model.extend({
   },
   // Initialized
   initialize : function() {
-    this.url = "http://sivvit.com/e/post/" + this.get("id");
+    this.url = SIVVIT.Settings.host+'/e/post/' + this.get('id');
   },
 
   //  Override set method to ensure correct variable formatting

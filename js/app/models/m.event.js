@@ -147,7 +147,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
     var self = this;
 
     $.ajax({
-      url : 'http://sivvit.com/e/event/',
+      url : SIVVIT.Settings.host+'/e/event/',
       data : self.formatModel(),
       type : 'POST',
       dataType : 'json',
@@ -163,7 +163,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
     var self = this;
 
     $.ajax({
-      url : 'http://sivvit.com/e/event/' + this.get('id'),
+      url : SIVVIT.Settings.host+'/e/event/' + this.get('id'),
       data : self.formatModel(),
       type : 'PUT',
       dataType : 'json'

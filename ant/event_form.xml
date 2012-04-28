@@ -8,6 +8,8 @@
 
       <sources dir="${basedir}/js">
 
+        <file name="app/globals.js" />
+
         <file name="event_form.js" />
 
         <file name="app/misc/date.js" />

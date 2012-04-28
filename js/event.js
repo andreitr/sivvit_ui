@@ -1,10 +1,6 @@
 // JSLint variable definition
 /*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false, console:false  */
 
-if( typeof (SIVVIT) == 'undefined') {
-  SIVVIT = {};
-}
-
 (function(jQuery, SIVVIT) {
 
   SIVVIT.Event = {
@@ -67,7 +63,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
       // Load content for the first time.
       this.eventModel.set({
-        json : 'http://sivvit.com/event/' + id + '.json?callback=?'
+        json : SIVVIT.Settings.host + '/event/' + id + '.json?callback=?'
       });
       this.eventModel.setSinceRequestURL();
       this.eventModel.fetch();
@@ -720,8 +716,6 @@ if( typeof (SIVVIT) == 'undefined') {
 
     // Called once additional group data is loaded.
     updateGroup : function(group) {
-
-      console.log('GROUP UPDATED');
 
       var tmp = [], i, len, items;
       var content = group.get('content');

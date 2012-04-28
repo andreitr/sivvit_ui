@@ -1,9 +1,6 @@
 // JSLint variable definition
 /*global SIVVIT:true, $:false, Backbone:false, confirm:false, console:false google:false */
 
-if( typeof (SIVVIT) == 'undefined') {
-  SIVVIT = {};
-}
 (function(jQuery, SIVVIT) {
 
   SIVVIT.EditEvent = {
@@ -37,7 +34,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
         // Load data for existing event
         this.model = new SIVVIT.EventModel({
-          json : 'http://sivvit.com/event/' + id + '.json?callback=?',
+          json : SIVVIT.Settings.host + '/event/' + id + '.json?callback=?',
           pull : false,
           meta : 0,
           type : null
