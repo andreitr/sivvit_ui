@@ -13,8 +13,9 @@
 
         <file name="app/misc/date.js" />
 
-        <file name="app/models/m.event.js" />
+        <file name="app/models/m.temporal.frame.js" />
         <file name="app/models/m.temporal.js" />
+        <file name="app/models/m.event.js" />
         <file name="app/views/v.histogram.js" />
 
       </sources>

@@ -98,8 +98,8 @@ if( typeof (SIVVIT) == 'undefined') {
         itm = this.buildTemplate(itm);
 
         var mdl = new SIVVIT.TemporalModel({
-          startDate : Date.secondsToDate(itm.model.get('startDate')),
-          endDate : Date.secondsToDate(itm.model.get('last_update')),
+          startDate : itm.model.get('startDate'),
+          endDate : itm.model.get('last_update'),
           startRange : itm.model.get('startDate'),
           endRange : itm.model.get('last_update'),
           min : itm.model.get('histogram').min,
