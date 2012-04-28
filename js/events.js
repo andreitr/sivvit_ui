@@ -1,9 +1,7 @@
 // JSLint variable definition
 /*global SIVVIT:true, $:false, Backbone:false, confirm:false, console:false  */
 
-if( typeof (SIVVIT) == 'undefined') {
-  SIVVIT = {};
-}(function(jQuery, SIVVIT) {
+(function(jQuery, SIVVIT) {
 
   SIVVIT.Events = {
 
@@ -63,7 +61,7 @@ if( typeof (SIVVIT) == 'undefined') {
   // Core events view. Right now we only have a single implementation.
   SIVVIT.EventsView = Backbone.View.extend({
 
-    template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'>${title}</div>${description}<div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
+    template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'><a href='${link}'>${title}</a></div>${description}<div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
     el : '#dynamic-content',
 
     // Rendered elements
@@ -126,6 +124,7 @@ if( typeof (SIVVIT) == 'undefined') {
     // Builds each item, returns {model, html} object
     buildTemplate : function(itm) {
       var html = $.tmpl(this.template, {
+        link : SIVVIT.Settings.host+'/event/'+itm.get('id'),
         title : itm.get('title'),
         description : itm.get('description'),
         posts : itm.get('stats').posts,
@@ -184,6 +183,7 @@ if( typeof (SIVVIT) == 'undefined') {
 
               case 'edit-itm':
                 break;
+
 
               default:
                 if(itm.html.find('#itm-check').length > 0) {

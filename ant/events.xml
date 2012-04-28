@@ -8,10 +8,13 @@
 
       <sources dir="${basedir}/js">
 
+        <file name="app/globals.js" />
+
         <file name="header.js" />
         <file name="events.js" />
 
-        <file name="app/misc/date.js" />
+
+        <file name="app/utils/date.js" />
 
         <file name="app/models/m.temporal.frame.js" />
         <file name="app/models/m.temporal.js" />
