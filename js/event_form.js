@@ -191,7 +191,7 @@
         });
       });
 
-      // Start date
+
       $("input[name='start-date']").datepicker({
         defaultDate : this.model.get('startDate'),
         onSelect : function(date) {
@@ -220,9 +220,6 @@
       });
       $("input[name='end-date']").val(this.model.get('endDate').toDateString());
 
-      // Time
-      $("input[name='end-time']").val(this.model.get('endDate').toTimeString().substring(0, 8));
-      $("input[name='start-time']").val(this.model.get('startDate').toTimeString().substring(0, 8));
 
       $('#collection-btn').html(this.model === 0 ? 'Start Collection' : 'Start Collection');
 
@@ -266,16 +263,6 @@
         icon.toggleClass('icon-check-green', valid ? false : true);
         icon.toggleClass('icon-check-red', valid ? true : false);
       }
-      field = $("input[name='start-time']");
-      valid = this.validateTime(field.val());
-      global_valid = valid ? global_valid : false;
-      field.css('background-color', valid ? '#FFFFFF' : '#FFFFCC');
-      $('#icon-start-time').toggleClass('icon-check-red', valid ? false : true);
-      field = $("input[name='end-time']");
-      valid = this.validateTime(field.val());
-      global_valid = valid ? global_valid : false;
-      field.css('background-color', valid ? '#FFFFFF' : '#FFFFCC');
-      $('#icon-end-time').toggleClass('icon-check-red', valid ? false : true);
 
       return global_valid;
     },

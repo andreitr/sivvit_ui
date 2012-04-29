@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="css/global.css" />
     <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
+    <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-timepicker-addon.css" />
     <title>Edit Event</title>
   </head>
   <body>
@@ -23,17 +24,17 @@
             Comma delimited list e.g. angry cats, #angrycats
           </div>
           <div id="padding"></div>
+          <h3>Description</h3>
+          <input type="text" name="description" />
+          <div id="form-meta">
+            Additional event description - give some background.
+          </div>
+          <div id="padding"></div>
           <div style="float:left">
             <h3><span id="icon-start-date" class="icon-check-green"> </span>Start Date</h3>
             <input type="text" readonly="true" name="start-date"/>
             <div id="form-meta">
               Start collecting data
-            </div>
-            <div id="padding"></div>
-            <h3><span id="icon-start-time"> </span>Start Time</h3>
-            <input type="text" name="start-time" maxlength="8"/>
-            <div id="form-meta">
-              hh:mm:ss
             </div>
           </div>
           <div style="float:right">
@@ -42,21 +43,10 @@
             <div id="form-meta">
               Runs continuesly if not specified
             </div>
-            <div id="padding"></div>
-            <h3><span id="icon-end-time"> </span>End Time</h3>
-            <input type="text" name="end-time" maxlength="8"/>
-            <div id="form-meta">
-              hh:mm:ss
-            </div>
           </div>
         </div>
+
         <div id="form-col-right">
-          <h3>Description</h3>
-          <input type="text" name="description" />
-          <div id="form-meta">
-            Additional event description - give some background.
-          </div>
-          <div id="padding"></div>
           <h3>Location</h3>
           <input type="text" name="location" />
           <div id="form-meta">
@@ -90,6 +80,7 @@
       $LAB.script("js/libs/backbone/backbone-min.js").wait();
       $LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
       $LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
+      $LAB.script("js/libs/jquery/jquery-ui-timepicker-addon.js").wait()
 
       function getUrlVars() {
         var vars = {};
