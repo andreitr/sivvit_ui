@@ -106,11 +106,17 @@
 
     initialize : function(options) {
 
-      var self = this;
-
       this.model = options.model;
       this.model.bind('change', this.update, this);
       this.model.bind('change:location', this.initMap, this);
+
+      this.validate();
+
+      $('#form-main').validate().element("input[name='title']");
+      $('#form-main').validate().element("input[name='keywords']");
+      $('#form-main').validate().element("input[name='start-date']");
+      $('#form-main').validate().element("input[name='end-date']");
+
     },
 
     // Deletes current event
@@ -131,7 +137,7 @@
     // Updates view
     update : function() {
 
-      var slef = this;
+      var self = this;
 
       $('#form-container').show();
       $('#content-loader').hide();
@@ -144,7 +150,7 @@
 
       $("input[name='title']").val(this.model.get('title'));
       $("input[name='title']").change(function() {
-        slef.model.set({
+        self.model.set({
           'title' : $(this).val()
         }, {
           silent : true
@@ -155,7 +161,7 @@
 
       $("input[name='keywords']").val(this.model.get('keywords'));
       $("input[name='keywords']").change(function() {
-        slef.model.set({
+        self.model.set({
           'keywords' : $(this).val().split(',')
         }, {
           silent : true
@@ -164,7 +170,7 @@
 
       $("input[name='description']").val(this.model.get('description'));
       $("input[name='description']").change(function() {
-        slef.model.set({
+        self.model.set({
           'description' : $(this).val()
         }, {
           silent : true
@@ -173,7 +179,7 @@
 
       // Start date
       $("input[name='start-date']").datetimepicker({
-        dateFormat: 'mm/dd/yy',
+        dateFormat : 'mm/dd/yy',
         defaultDate : this.model.get('startDate'),
         hour : this.model.get('startDate').getHours(),
         minute : this.model.get('startDate').getMinutes(),
@@ -181,7 +187,7 @@
 
         onSelect : function(date) {
 
-          slef.model.set({
+          self.model.set({
             'startDate' : Date.dateToSeconds(new Date(date))
           }, {
             silent : true
@@ -192,14 +198,14 @@
 
       // End date
       $("input[name='end-date']").datetimepicker({
-        dateFormat: 'mm/dd/yy',
+        dateFormat : 'mm/dd/yy',
         defaultDate : this.model.get('endDate'),
         hour : this.model.get('endDate').getHours(),
         minute : this.model.get('endDate').getMinutes(),
         second : this.model.get('endDate').getSeconds(),
         onSelect : function(date) {
 
-          slef.model.set({
+          self.model.set({
             'endDate' : Date.dateToSeconds(new Date(date))
           }, {
             silent : true
@@ -208,10 +214,9 @@
 
       });
 
-      this.validate();
     },
 
-    // Validates all required form fields
+    // Validates all fields initially, sets up validation rules
     validate : function() {
 
       var self = this;
@@ -229,8 +234,8 @@
         highlight : function(element, errorClass) {
 
           var check = $(self.el).find('#' + $(element).attr('name') + '-check');
-          check.addClass('icon-check-red');
-          check.removeClass('icon-check-green');
+          check.toggleClass('icon-check-red', true);
+          check.toggleClass('icon-check-green', false);
 
           $(element).css('background-color', '#FFFFCC');
         },
@@ -238,8 +243,8 @@
         unhighlight : function(element, errorClass) {
 
           var check = $(self.el).find('#' + $(element).attr('name') + '-check');
-          check.removeClass('icon-check-red');
-          check.addClass('icon-check-green');
+          check.toggleClass('icon-check-red', false);
+          check.toggleClass('icon-check-green', true);
 
           $(element).css('background-color', '#FFFFFF');
         },
@@ -260,13 +265,10 @@
           'end-date' : {
             required : true,
             date : true
-          },
-          location : {
-            required : true,
-            minlength : 3
           }
         }
       });
+
     },
 
     // Initializes map display and auto-complete location field
