@@ -20,9 +20,9 @@
         // New event is being created
 
         this.model = new SIVVIT.EventModel({
-          startDate : new Date().getTime() / 1000,
+          startDate : Date.dateToSeconds(new Date()),
           // Add 24 hours to the existing date
-          endDate : new Date(new Date().getTime() + 86400000).getTime() / 1000,
+          endDate : Date.dateToSeconds(new Date(new Date().getTime() + 86400000)),
           pull : false,
           meta : 0,
           type : null
@@ -171,33 +171,42 @@
         });
       });
 
-      $("input[name='start-date']").datepicker({
+      // Start date
+      $("input[name='start-date']").datetimepicker({
+        dateFormat: 'mm/dd/yy',
         defaultDate : this.model.get('startDate'),
+        hour : this.model.get('startDate').getHours(),
+        minute : this.model.get('startDate').getMinutes(),
+        second : this.model.get('startDate').getSeconds(),
+
         onSelect : function(date) {
 
           slef.model.set({
-            'startDate' : new Date(date).getTime() / 1000
+            'startDate' : Date.dateToSeconds(new Date(date))
           }, {
             silent : true
           });
         }
+
       });
-      $("input[name='start-date']").val(this.model.get('startDate'));
 
       // End date
-      $("input[name='end-date']").datepicker({
+      $("input[name='end-date']").datetimepicker({
+        dateFormat: 'mm/dd/yy',
         defaultDate : this.model.get('endDate'),
+        hour : this.model.get('endDate').getHours(),
+        minute : this.model.get('endDate').getMinutes(),
+        second : this.model.get('endDate').getSeconds(),
         onSelect : function(date) {
+
           slef.model.set({
-            'endDate' : new Date(date).getTime() / 1000
+            'endDate' : Date.dateToSeconds(new Date(date))
           }, {
             silent : true
           });
         }
 
       });
-      $("input[name='end-date']").val(this.model.get('endDate').toDateString());
-
 
       this.validate();
     },
