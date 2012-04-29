@@ -28,8 +28,6 @@
           type : null
         });
 
-        self.setLocation();
-
       } else {
 
         // Load data for existing event
@@ -48,7 +46,9 @@
       // If the event is new render event right away
       if(id === null || id === undefined) {
         this.view.update();
-        this.setDefaultLocation();
+        this.setLocation();
+        this.view.initMap();
+
       } else {
         this.model.setRequestURL();
         this.model.fetch();
@@ -58,6 +58,9 @@
     // Sets HTML5 location if it is available, if not
     // sets the default one
     setLocation : function() {
+
+      this.setDefaultLocation();
+
       var self = this;
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -66,11 +69,10 @@
               'lon' : position.coords.latitude,
               'lat' : position.coords.longitude
             }
+          }, {
+            silent : true
           });
         });
-
-      } else {
-        this.setDefaultLocation();
       }
     },
 
@@ -83,8 +85,9 @@
           'lat' : 39.739167,
           'lon' : -104.984722
         }
+      }, {
+        silent : true
       });
-      this.view.update();
     }
 
   };
@@ -108,15 +111,11 @@
 
       this.model = options.model;
       this.model.bind('change', this.update, this);
+
+      // Display a map when a new location is loaded
       this.model.bind('change:location', this.initMap, this);
 
-      this.validate();
-
-      $('#form-main').validate().element("input[name='title']");
-      $('#form-main').validate().element("input[name='keywords']");
-      $('#form-main').validate().element("input[name='start-date']");
-      $('#form-main').validate().element("input[name='end-date']");
-
+      this.setValidationRules();
     },
 
     // Deletes current event
@@ -178,6 +177,7 @@
       });
 
       // Start date
+      $("input[name='start-date']").val(this.model.get('startDate').toDateString());
       $("input[name='start-date']").datetimepicker({
         dateFormat : 'mm/dd/yy',
         defaultDate : this.model.get('startDate'),
@@ -197,9 +197,11 @@
       });
 
       // End date
+      $("input[name='end-date']").val(this.model.get('endDate').toDateString());
       $("input[name='end-date']").datetimepicker({
         dateFormat : 'mm/dd/yy',
         defaultDate : this.model.get('endDate'),
+        minDate : this.model.get('starDate'),
         hour : this.model.get('endDate').getHours(),
         minute : this.model.get('endDate').getMinutes(),
         second : this.model.get('endDate').getSeconds(),
@@ -211,13 +213,20 @@
             silent : true
           });
         }
-
       });
+
+
+
+      // First time around validate all fields separately
+      $('#form-main').validate().element("input[name='title']");
+      $('#form-main').validate().element("input[name='keywords']");
+      $('#form-main').validate().element("input[name='start-date']");
+      $('#form-main').validate().element("input[name='end-date']");
 
     },
 
-    // Validates all fields initially, sets up validation rules
-    validate : function() {
+    // Sets validation rules for the entire form.
+    setValidationRules : function() {
 
       var self = this;
 
