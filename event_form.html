@@ -12,13 +12,13 @@
 
       <form id="form-main">
         <div id="form-col-left">
-          <h3><span id="icon-title" class="icon-check-green"></span>Event Title</h3>
+          <h3><span id="title-check" class="icon-check-green"> </span>Event Title</h3>
           <input type="text" name="title"/>
           <div id="form-meta">
             Describe your event e.g. Angry Cat escapes from jail.
           </div>
           <div id="padding"></div>
-          <h3><span id="icon-keywords" class="icon-check-green"> </span>Keywords, hashtags</h3>
+          <h3><span id="keywords-check" class="icon-check-green"> </span>Keywords, hashtags</h3>
           <input type="text" name="keywords"/>
           <div id="form-meta">
             Comma delimited list e.g. angry cats, #angrycats
@@ -31,23 +31,23 @@
           </div>
           <div id="padding"></div>
           <div style="float:left">
-            <h3><span id="icon-start-date" class="icon-check-green"> </span>Start Date</h3>
+            <h3><span id="start-date-check" class="icon-check-green"> </span>Start Date</h3>
             <input type="text" readonly="true" name="start-date"/>
             <div id="form-meta">
-              Start collecting data
+              Start collecting data at
             </div>
           </div>
           <div style="float:right">
-            <h3>End Date</h3>
+            <h3><span id="end-date-check" class="icon-check-green"> </span>End Date</h3>
             <input type="text" readonly="true" name="end-date"/>
             <div id="form-meta">
-              Runs continuesly if not specified
+              Stops collection data at
             </div>
           </div>
         </div>
 
         <div id="form-col-right">
-          <h3>Location</h3>
+          <h3><span id="start-location" class="icon-check-green"> </span>Location</h3>
           <input type="text" name="location" />
           <div id="form-meta">
             Leave blank for global tracking.

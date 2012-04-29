@@ -99,20 +99,6 @@
     // Auto complete
     map_complete : null,
 
-    required_fields : [{
-      field : "input[name='title']",
-      icon : '#icon-title',
-      type : 'string'
-    }, {
-      field : "input[name='keywords']",
-      icon : '#icon-keywords',
-      type : 'string'
-    }, {
-      field : "input[name='start-date']",
-      icon : '#icon-start-date',
-      type : 'string'
-    }],
-
     events : {
       'click #save-event-btn' : 'saveEvent',
       'click #delete-event-btn' : 'deleteEvent'
@@ -125,11 +111,6 @@
       this.model = options.model;
       this.model.bind('change', this.update, this);
       this.model.bind('change:location', this.initMap, this);
-
-      $('input').change(function() {
-        self.validate();
-      });
-
     },
 
     // Deletes current event
@@ -145,7 +126,6 @@
       } else {
         this.model.createEvent();
       }
-
     },
 
     // Updates view
@@ -191,7 +171,6 @@
         });
       });
 
-
       $("input[name='start-date']").datepicker({
         defaultDate : this.model.get('startDate'),
         onSelect : function(date) {
@@ -202,7 +181,6 @@
             silent : true
           });
         }
-
       });
       $("input[name='start-date']").val(this.model.get('startDate'));
 
@@ -221,62 +199,65 @@
       $("input[name='end-date']").val(this.model.get('endDate').toDateString());
 
 
-      $('#collection-btn').html(this.model === 0 ? 'Start Collection' : 'Start Collection');
-
       this.validate();
     },
 
     // Validates all required form fields
     validate : function() {
 
+      var self = this;
+
       $('#form-main').validate({
-        'rules' : {
+
+        // Don't place default label
+        success : function(label) {
+        },
+
+        // Don't place default error message
+        errorPlacement : function(error, element) {
+        },
+
+        highlight : function(element, errorClass) {
+
+          var check = $(self.el).find('#' + $(element).attr('name') + '-check');
+          check.addClass('icon-check-red');
+          check.removeClass('icon-check-green');
+
+          $(element).css('background-color', '#FFFFCC');
+        },
+
+        unhighlight : function(element, errorClass) {
+
+          var check = $(self.el).find('#' + $(element).attr('name') + '-check');
+          check.removeClass('icon-check-red');
+          check.addClass('icon-check-green');
+
+          $(element).css('background-color', '#FFFFFF');
+        },
+
+        rules : {
           title : {
             required : true,
-            minlength: 4
+            minlength : 3
           },
-          'keywords':{
-            required: true,
-            minlength: 3
+          keywords : {
+            required : true,
+            minlength : 3
           },
-          'start-date':{
-            required:true,
-            date:true
+          'start-date' : {
+            required : true,
+            date : true
           },
-          'end-date':{
-            required:true,
-            date:true
+          'end-date' : {
+            required : true,
+            date : true
+          },
+          location : {
+            required : true,
+            minlength : 3
           }
         }
       });
-
-      var i, field, valid, icon;
-      var global_valid = true;
-
-      for( i = 0; i < this.required_fields.length; i++) {
-        field = $(this.required_fields[i].field);
-        valid = this.validateValue(field.val(), this.required_fields[i].type);
-        global_valid = valid ? global_valid : false;
-        icon = $(this.required_fields[i].icon);
-
-        field.css('background-color', valid ? '#FFFFCC' : '#FFFFFF');
-        icon.toggleClass('icon-check-green', valid ? false : true);
-        icon.toggleClass('icon-check-red', valid ? true : false);
-      }
-
-      return global_valid;
-    },
-
-    // Validates specific value based on the type
-    validateValue : function(value, type) {
-      if(type === "string") {
-        return value.match('^$');
-      }
-    },
-
-    // Validates time format
-    validateTime : function(value) {
-      return value.match(/^(?:(?:(\d+):)?(\d+):)?(\d+)$/);
     },
 
     // Initializes map display and auto-complete location field
