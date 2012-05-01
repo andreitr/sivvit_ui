@@ -177,14 +177,16 @@
       });
 
       // Start date
-      $("input[name='start-date']").val(this.model.get('startDate').toDateString());
+      $("input[name='start-date']").val(this.model.get('startDate').format());
       $("input[name='start-date']").datetimepicker({
+
         dateFormat : 'mm/dd/yy',
+        minDate:new Date(),
+        maxDate: this.model.get('endDate'),
         defaultDate : this.model.get('startDate'),
         hour : this.model.get('startDate').getHours(),
         minute : this.model.get('startDate').getMinutes(),
         second : this.model.get('startDate').getSeconds(),
-
         onSelect : function(date) {
 
           self.model.set({
@@ -197,8 +199,9 @@
       });
 
       // End date
-      $("input[name='end-date']").val(this.model.get('endDate').toDateString());
+      $("input[name='end-date']").val(this.model.get('endDate').format());
       $("input[name='end-date']").datetimepicker({
+
         dateFormat : 'mm/dd/yy',
         defaultDate : this.model.get('endDate'),
         minDate : this.model.get('starDate'),
