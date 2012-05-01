@@ -120,7 +120,7 @@
 
     // Deletes current event
     deleteEvent : function() {
-
+      this.model.deleteEvent();
     },
 
     saveEvent : function() {
@@ -181,8 +181,6 @@
       $("input[name='start-date']").datetimepicker({
 
         dateFormat : 'mm/dd/yy',
-        minDate:new Date(),
-        maxDate: this.model.get('endDate'),
         defaultDate : this.model.get('startDate'),
         hour : this.model.get('startDate').getHours(),
         minute : this.model.get('startDate').getMinutes(),
@@ -204,7 +202,6 @@
 
         dateFormat : 'mm/dd/yy',
         defaultDate : this.model.get('endDate'),
-        minDate : this.model.get('starDate'),
         hour : this.model.get('endDate').getHours(),
         minute : this.model.get('endDate').getMinutes(),
         second : this.model.get('endDate').getSeconds(),
@@ -218,14 +215,11 @@
         }
       });
 
-
-
       // First time around validate all fields separately
       $('#form-main').validate().element("input[name='title']");
       $('#form-main').validate().element("input[name='keywords']");
       $('#form-main').validate().element("input[name='start-date']");
       $('#form-main').validate().element("input[name='end-date']");
-
     },
 
     // Sets validation rules for the entire form.

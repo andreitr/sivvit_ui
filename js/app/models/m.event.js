@@ -146,8 +146,14 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
     var self = this;
 
+    init = init || {
+      success : null,
+      complete : null,
+      error : null
+    };
+
     $.ajax({
-      url : SIVVIT.Settings.host+'/e/event/',
+      url : SIVVIT.Settings.host + '/e/event/',
       data : self.formatModel(),
       type : 'POST',
       dataType : 'json',
@@ -157,19 +163,48 @@ SIVVIT.EventModel = Backbone.Model.extend({
     });
   },
 
-  // Updates existing event
-  updateEvent : function() {
+  // Deletes existing event
+  deleteEvent : function(init) {
 
     var self = this;
 
+    init = init || {
+      success : null,
+      complete : null,
+      error : null
+    };
+
     $.ajax({
-      url : SIVVIT.Settings.host+'/e/event/' + this.get('id'),
+      url : SIVVIT.Settings.host + '/e/event/' + this.get('id'),
+      data : self.formatModel(),
+      type : 'DELETE',
+      dataType : 'json',
+      success : init.success,
+      complete : init.complete,
+      error : init.error
+    });
+
+  },
+
+  // Updates existing event
+  updateEvent : function(init) {
+
+    var self = this;
+
+    init = init || {
+      success : null,
+      complete : null,
+      error : null
+    };
+
+    $.ajax({
+      url : SIVVIT.Settings.host + '/e/event/' + this.get('id'),
       data : self.formatModel(),
       type : 'PUT',
-      dataType : 'json'
-      // success : init.success,
-      // complete : init.complete,
-      // error : init.error
+      dataType : 'json',
+      success : init.success,
+      complete : init.complete,
+      error : init.error
     });
   },
 
