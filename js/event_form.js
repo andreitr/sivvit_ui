@@ -121,6 +121,13 @@
     // Deletes current event
     deleteEvent : function() {
       this.model.deleteEvent();
+
+      $.cookie('com.sivvit.event', JSON.stringify({
+        action : 'delete',
+        model : this.model.formatModel()
+      }), {
+        expires : new Date(new Date().getTime() + 10000)
+      });
     },
 
     saveEvent : function() {

@@ -64,8 +64,8 @@
     template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'><a href='${link}'>${title}</a></div>${description}<div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
     el : '#dynamic-content',
 
-    // Rendered elements
-    rendered : [],
+    // Models hash map
+    models_hash : {},
 
     // Enable content editing. Assumes that user is logged in
     edit : false,
@@ -81,8 +81,6 @@
       $(this.el).empty();
 
       this.displayed = false;
-
-      this.rendered = [];
 
       this.display();
     },
@@ -116,6 +114,9 @@
         }).render();
 
         this.initItem(itm, '#event-list');
+
+        // Populate models hash
+        this.models_hash[itm.model.get('id')] = itm;
 
       }, this);
       this.initLightbox();
@@ -182,7 +183,6 @@
 
           this.toggleLive(itm);
         }
-        this.rendered.push(itm);
         $(parent).append(itm.html);
       }
     },
@@ -203,10 +203,20 @@
         type : 'iframe',
         afterClose : function() {
 
+          var cookie = JSON.parse($.cookie("com.sivvit.event"));
 
-          // Create a hash map of itms
-          console.log($.cookie("com.sivvit.event"));
+          if(cookie) {
+            if(self.models_hash[cookie.model.id]) {
 
+              if(cookie.action === 'delete') {
+                console.log('DELTE? ');
+                self.deleteItem(self.models_hash[cookie.model.id]);
+
+              } else {
+                console.log(cookie.action);
+              }
+            }
+          }
         }
 
       });
