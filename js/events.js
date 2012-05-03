@@ -203,6 +203,8 @@
         type : 'iframe',
         afterClose : function() {
 
+
+          // Create a hash map of itms
           console.log($.cookie("com.sivvit.event"));
 
         }
@@ -210,8 +212,8 @@
       });
     },
 
-    // Deletes selected item.
-    // To-do: implement server call
+    // Deletes selected item from the list. At this point event should
+    // already be deleted from the server
     deleteItem : function(itm) {
       itm.html.fadeOut();
       this.model.remove(itm.model, {

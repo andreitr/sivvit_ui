@@ -217,7 +217,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
       location : this.get('location'),
       title : this.get('title'),
       description : this.get('description'),
-      keywords : this.get('keywords')
+      keywords : this.get('keywords'),
+      id: this.get('id')
     };
 
     return result;
