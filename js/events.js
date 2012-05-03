@@ -124,7 +124,7 @@
     // Builds each item, returns {model, html} object
     buildTemplate : function(itm) {
       var html = $.tmpl(this.template, {
-        link : SIVVIT.Settings.host+'/event/'+itm.get('id'),
+        link : SIVVIT.Settings.host + '/event/' + itm.get('id'),
         title : itm.get('title'),
         description : itm.get('description'),
         posts : itm.get('stats').posts,
@@ -151,9 +151,8 @@
         // Initiate button clicks if a user is logged in and modify
         // content template (add hover buttons and check box)
         if(this.edit) {
-          itm.html.find('#content').prepend("<span class=\"item-edit\"><span class=\"icon-delete\" id=\"del-itm\"></span><span class='icon-cog' href=\"event_form.html?id=" + itm.model.get('id') + "\" id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
+          itm.html.find('#content').prepend("<span class=\"item-edit\"><span class='icon-cog' href=\"event_form.html?id=" + itm.model.get('id') + "\" id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
 
-          itm.html.find('#del-itm').hide();
           itm.html.find('#edit-itm').hide();
 
           if(itm.model.get('pending') > 0) {
@@ -161,10 +160,8 @@
           }
 
           itm.html.hover(function(event) {
-            itm.html.find('#del-itm').show();
             itm.html.find('#edit-itm').show();
           }, function(event) {
-            itm.html.find('#del-itm').hide();
             itm.html.find('#edit-itm').hide();
           });
 
@@ -172,26 +169,14 @@
 
             var checked;
 
-            switch(event.target.id) {
+            if(event.target.id !== 'edit-itm') {
 
-              case 'del-itm':
-                if(confirm('Delete this event?') === true) {
-                  self.deleteItem(itm);
-                  event.stopPropagation();
-                }
-                break;
-
-              case 'edit-itm':
-                break;
-
-
-              default:
-                if(itm.html.find('#itm-check').length > 0) {
-                  checked = itm.html.find('#itm-check').is(':checked');
-                  itm.html.find('#itm-check').attr('checked', !checked);
-                  itm.html.css('background-color', checked ? '#FFFFFF' : '#FFFFCC');
-                }
-                event.stopPropagation();
+              if(itm.html.find('#itm-check').length > 0) {
+                checked = itm.html.find('#itm-check').is(':checked');
+                itm.html.find('#itm-check').attr('checked', !checked);
+                itm.html.css('background-color', checked ? '#FFFFFF' : '#FFFFCC');
+              }
+              event.stopPropagation();
             }
           });
 
@@ -204,15 +189,24 @@
 
     // Initiates event form light box
     initLightbox : function() {
+
+      var self = this;
+
       // Open light box with event information etc
       $('#edit-itm').fancybox({
-        'width' : 860,
-        'height' : 430,
-        'autoScale' : true,
-        'scrolling' : false,
-        'transitionIn' : 'fade',
-        'transitionOut' : 'fade',
-        'type' : 'iframe'
+        width : 860,
+        height : 430,
+        autoScale : true,
+        scrolling : false,
+        transitionIn : 'fade',
+        transitionOut : 'fade',
+        type : 'iframe',
+        afterClose : function() {
+
+          console.log($.cookie("com.sivvit.event"));
+
+        }
+
       });
     },
 
@@ -223,12 +217,6 @@
       this.model.remove(itm.model, {
         silent : true
       });
-    },
-
-    deleteItems : function(itms) {
-      for(var i = itms.length; i--; ) {
-        this.deleteItem(itms[i]);
-      }
     },
 
     // Toggles display.

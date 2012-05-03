@@ -128,9 +128,17 @@
       if(this.model.get('id')) {
         // Update event
         this.model.updateEvent();
+
       } else {
         this.model.createEvent();
       }
+
+      $.cookie('com.sivvit.event', JSON.stringify({
+        type : 'update',
+        id : this.model.get('id')
+      }), {
+        expires : new Date(new Date().getTime() + 10000)
+      });
     },
 
     // Updates view
@@ -213,6 +221,7 @@
             silent : true
           });
         }
+
       });
 
       // First time around validate all fields separately
