@@ -122,12 +122,11 @@
     deleteEvent : function() {
       this.model.deleteEvent();
 
+      // Update event display on the parent page
       $.cookie('com.sivvit.event', JSON.stringify({
         action : 'delete',
         model : this.model.formatModel()
-      }), {
-        expires : new Date(new Date().getTime() + 10000)
-      });
+      }));
     },
 
     saveEvent : function() {
@@ -140,12 +139,11 @@
         this.model.createEvent();
       }
 
+      // Update event display on the parent page
       $.cookie('com.sivvit.event', JSON.stringify({
         action : 'update',
         model : this.model.formatModel()
-      }), {
-        expires : new Date(new Date().getTime() + 10000)
-      });
+      }));
     },
 
     // Updates view

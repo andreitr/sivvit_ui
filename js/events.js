@@ -152,6 +152,7 @@
         // Initiate button clicks if a user is logged in and modify
         // content template (add hover buttons and check box)
         if(this.edit) {
+
           itm.html.find('#content').prepend("<span class=\"item-edit\"><span class='icon-cog' href=\"event_form.html?id=" + itm.model.get('id') + "\" id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
 
           itm.html.find('#edit-itm').hide();
@@ -209,11 +210,13 @@
             if(self.models_hash[cookie.model.id]) {
 
               if(cookie.action === 'delete') {
-                console.log('DELTE? ');
                 self.deleteItem(self.models_hash[cookie.model.id]);
 
               } else {
-                console.log(cookie.action);
+
+                // Update existing model
+                self.models_hash[cookie.model.id].model.set(cookie.model);
+                self.updateItem(self.models_hash[cookie.model.id]);
               }
             }
           }
@@ -230,6 +233,19 @@
         silent : true
       });
     },
+
+    // Update currently rendered item
+    updateItem : function(itm) {
+
+      itm.html.find('#title').html(itm.model.get('title'));
+
+      console.log(itm.model.get('title'));
+
+      this.toggleLive(itm);
+
+    },
+
+
 
     // Toggles display.
     toggleLive : function(itm) {
