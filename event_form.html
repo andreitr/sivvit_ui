@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="css/global.css" />
     <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
     <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-timepicker-addon.css" />
+
     <title>Edit Event</title>
   </head>
   <body>
@@ -58,15 +59,16 @@
       </form>
       <div id="form-footer">
         <div style="float:right">
-          <div class="tabBtn" id="delete-event-btn">
-            Delete Event
-          </div>
+
+          <div class="tabBtn" id="delete-event-btn">Delete event</div>
+
           <div class="tabBtn" id="save-event-btn">
             Save
           </div>
         </div>
       </div>
     </div>
+
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
     <script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
     <script type="text/javascript">
@@ -83,6 +85,7 @@
       $LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
       $LAB.script("js/libs/jquery/jquery-ui-timepicker-addon.js").wait()
 
+
       function getUrlVars() {
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
@@ -95,7 +98,6 @@
 
       $LAB.script("js/event_form.min.js").wait(function() {
         SIVVIT.EditEvent.init(getUrlVars().id || null);
-        // SIVVIT.EditEvent.init('4d1cab74');
       });
 
     </script>

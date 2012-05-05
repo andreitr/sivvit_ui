@@ -61,7 +61,7 @@
   // Core events view. Right now we only have a single implementation.
   SIVVIT.EventsView = Backbone.View.extend({
 
-    template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'><a href='${link}'>${title}</a></div>${description}<div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
+    template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'><a href='${link}'>${title}</a></div><div id='description'>${description}</div><div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
     el : '#dynamic-content',
 
     // Models hash map
@@ -237,15 +237,11 @@
     // Update currently rendered item
     updateItem : function(itm) {
 
-      itm.html.find('#title').html(itm.model.get('title'));
-
-      console.log(itm.model.get('title'));
+      itm.html.find('#title').html("<a href='"+SIVVIT.Settings.host + "/event/" + itm.model.get('id')+"'>"+itm.model.get('title')+"</a>");
+      itm.html.find('#description').html(itm.model.get('description'));
 
       this.toggleLive(itm);
-
     },
-
-
 
     // Toggles display.
     toggleLive : function(itm) {
