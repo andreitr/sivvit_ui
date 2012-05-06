@@ -131,15 +131,18 @@
         },
         complete : function() {
           self.showHideSavingState();
-         // Force close light box
+          // Force close light box
           window.parent.$.fancybox.close([true]);
         },
+
         error : function() {
           self.showHideSavingState('Error deleting event..., please try again.');
           setTimeout(self.showHideSavingState(), 3000);
         }
 
       };
+
+      this.showHideSavingState('Hold it cowboy, working on it...');
 
       this.model.deleteEvent(closure);
     },
@@ -161,6 +164,7 @@
             self.showHideSavingState('Error saving event..., please try again.');
             setTimeout(self.showHideSavingState(), 3000);
           }
+
         };
 
         this.showHideSavingState('Hold it cowboy, working on it...');
