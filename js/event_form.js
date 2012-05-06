@@ -55,7 +55,6 @@
       }
     },
 
-    // Sets HTML5 location if it is available, if not
     // sets the default one
     setLocation : function() {
 
@@ -104,7 +103,7 @@
 
     events : {
       'click #save-event-btn' : 'saveEvent',
-      'click #delete-event-btn' : 'deleteEvent'
+      'click #delete-event-bfatn' : 'deleteEvent'
     },
 
     initialize : function(options) {
@@ -143,7 +142,6 @@
       };
 
       this.showHideSavingState('Hold it cowboy, working on it...');
-
       this.model.deleteEvent(closure);
     },
 

@@ -42,7 +42,6 @@
         self.view.model = self.collection;
         self.view.render();
       });
-
     }
 
   };
@@ -204,26 +203,44 @@
         type : 'iframe',
         afterClose : function() {
 
-          //TODO: Find a better matching strategy without using cookies
+          var cookie = JSON.parse($.cookie('com.sivvit.event'));
 
-          // var cookie = JSON.parse($.cookie("com.sivvit.event"));
-          //
-          // if(cookie) {
-          // if(self.models_hash[cookie.model.id]) {
-          //
-          // if(cookie.action === 'delete') {
-          // self.deleteItem(self.models_hash[cookie.model.id]);
-          //
-          // } else {
-          //
-          // // Update existing model
-          // self.models_hash[cookie.model.id].model.set(cookie.model);
-          // self.updateItem(self.models_hash[cookie.model.id]);
-          // }
-          // }
-          // }
+          if(cookie) {
 
+            switch(cookie.action) {
+
+              case 'delete':
+                if(self.models_hash[cookie.model.id]) {
+                  self.deleteItem(self.models_hash[cookie.model.id]);
+                }
+                break;
+
+              case 'update':
+                // Update existing model
+                if(self.models_hash[cookie.model.id]) {
+                  self.models_hash[cookie.model.id].model.set(cookie.model);
+                  self.updateItem(self.models_hash[cookie.model.id]);
+                }
+                break;
+
+              case 'create':
+
+                //TODO: Create type won't get triggered here since the event listener is assigned
+                // to a different id. Options:
+                // 1. Global class for handiling pop-up
+                // 2. Global generic method for handling on close that will get passed around
+                // 3. Different cookie-less methodology
+
+                //Render the entire view
+                self.model.add(cookie.model);
+                self.render();
+                break;
+            }
+          }
+          // Delete cookie after it has been reacted upon
+          $.cookie('com.sivvit.event', null);
         }
+
       });
     },
 

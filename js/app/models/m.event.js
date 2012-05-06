@@ -161,6 +161,11 @@ SIVVIT.EventModel = Backbone.Model.extend({
       complete : init.complete,
       error : init.error
     });
+
+    $.cookie('com.sivvit.event', JSON.stringify({
+      action : 'create',
+      model : self.formatModel()
+    }));
   },
 
   // Deletes existing event
@@ -184,6 +189,11 @@ SIVVIT.EventModel = Backbone.Model.extend({
       error : init.error
     });
 
+    $.cookie('com.sivvit.event', JSON.stringify({
+      action : 'delete',
+      model : self.formatModel()
+    }));
+
   },
 
   // Updates existing event
@@ -206,6 +216,11 @@ SIVVIT.EventModel = Backbone.Model.extend({
       complete : init.complete,
       error : init.error
     });
+
+    $.cookie('com.sivvit.event', JSON.stringify({
+      action : 'update',
+      model : self.formatModel()
+    }));
   },
 
   // Formats model to required format for saving
