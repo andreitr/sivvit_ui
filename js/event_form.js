@@ -1,5 +1,5 @@
 // JSLint variable definition
-/*global SIVVIT:true, $:false, Backbone:false, confirm:false, console:false google:false */
+/*global SIVVIT:true, $:false, window:false, Backbone:false, confirm:false, console:false google:false */
 
 (function(jQuery, SIVVIT) {
 
@@ -120,7 +120,28 @@
 
     // Deletes current event
     deleteEvent : function() {
-      this.model.deleteEvent();
+
+      var self = this;
+
+      var closure = {
+        sucess : function() {
+          self.showHideSavingState();
+          // Force close light box
+          window.parent.$.fancybox.close([true]);
+        },
+        complete : function() {
+          self.showHideSavingState();
+         // Force close light box
+          window.parent.$.fancybox.close([true]);
+        },
+        error : function() {
+          self.showHideSavingState('Error deleting event..., please try again.');
+          setTimeout(self.showHideSavingState(), 3000);
+        }
+
+      };
+
+      this.model.deleteEvent(closure);
 
       // Update event display on the parent page
       $.cookie('com.sivvit.event', JSON.stringify({
@@ -131,19 +152,60 @@
 
     saveEvent : function() {
 
-      if(this.model.get('id')) {
-        // Update event
-        this.model.updateEvent();
+      if($('#form-main').valid()) {
 
-      } else {
-        this.model.createEvent();
+        var self = this;
+
+        var closure = {
+          sucess : function() {
+            self.showHideSavingState();
+          },
+          complete : function() {
+            self.showHideSavingState();
+          },
+          error : function() {
+            self.showHideSavingState('Error saving event..., please try again.');
+            setTimeout(self.showHideSavingState(), 3000);
+          }
+
+        };
+
+        this.showHideSavingState('Hold it cowboy, working on it...');
+
+        if(this.model.get('id')) {
+          // Update event
+          this.model.updateEvent(closure);
+        } else {
+          this.model.createEvent(closure);
+        }
+
+        // Update event display on the parent page
+        $.cookie('com.sivvit.event', JSON.stringify({
+          action : 'update',
+          model : this.model.formatModel()
+        }));
+      }
+    },
+
+    // Displays a message while date is being sent to the server
+    showHideSavingState : function(msg) {
+
+      var element = $(this.el).find('#save-msg');
+
+      if(element.length > 0) {
+        element.remove();
       }
 
-      // Update event display on the parent page
-      $.cookie('com.sivvit.event', JSON.stringify({
-        action : 'update',
-        model : this.model.formatModel()
-      }));
+      if(msg) {
+
+        $(this.el).find('#save-event-btn').hide();
+        $(this.el).find('#delete-event-btn').hide();
+
+        $(this.el).find('#button-container').append("<span id='save-msg'>" + msg + "<span class='loader'></span></span>");
+      } else {
+        $(this.el).find('#save-event-btn').show();
+        $(this.el).find('#delete-event-btn').show();
+      }
     },
 
     // Updates view

@@ -58,9 +58,11 @@
         </div>
       </form>
       <div id="form-footer">
-        <div style="float:right">
+        <div style="float:right" id='button-container'>
 
-          <div class="tabBtn" id="delete-event-btn">Delete event</div>
+          <div class="tabBtn" id="delete-event-btn">
+            Delete event
+          </div>
 
           <div class="tabBtn" id="save-event-btn">
             Save
@@ -84,7 +86,6 @@
       $LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
       $LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
       $LAB.script("js/libs/jquery/jquery-ui-timepicker-addon.js").wait()
-
 
       function getUrlVars() {
         var vars = {};
