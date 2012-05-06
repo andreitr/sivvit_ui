@@ -204,24 +204,26 @@
         type : 'iframe',
         afterClose : function() {
 
-          var cookie = JSON.parse($.cookie("com.sivvit.event"));
+          //TODO: Find a better matching strategy without using cookies
 
-          if(cookie) {
-            if(self.models_hash[cookie.model.id]) {
+          // var cookie = JSON.parse($.cookie("com.sivvit.event"));
+          //
+          // if(cookie) {
+          // if(self.models_hash[cookie.model.id]) {
+          //
+          // if(cookie.action === 'delete') {
+          // self.deleteItem(self.models_hash[cookie.model.id]);
+          //
+          // } else {
+          //
+          // // Update existing model
+          // self.models_hash[cookie.model.id].model.set(cookie.model);
+          // self.updateItem(self.models_hash[cookie.model.id]);
+          // }
+          // }
+          // }
 
-              if(cookie.action === 'delete') {
-                self.deleteItem(self.models_hash[cookie.model.id]);
-
-              } else {
-
-                // Update existing model
-                self.models_hash[cookie.model.id].model.set(cookie.model);
-                self.updateItem(self.models_hash[cookie.model.id]);
-              }
-            }
-          }
         }
-
       });
     },
 
@@ -237,7 +239,7 @@
     // Update currently rendered item
     updateItem : function(itm) {
 
-      itm.html.find('#title').html("<a href='"+SIVVIT.Settings.host + "/event/" + itm.model.get('id')+"'>"+itm.model.get('title')+"</a>");
+      itm.html.find('#title').html("<a href='" + SIVVIT.Settings.host + "/event/" + itm.model.get('id') + "'>" + itm.model.get('title') + "</a>");
       itm.html.find('#description').html(itm.model.get('description'));
 
       this.toggleLive(itm);

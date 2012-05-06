@@ -142,12 +142,6 @@
       };
 
       this.model.deleteEvent(closure);
-
-      // Update event display on the parent page
-      $.cookie('com.sivvit.event', JSON.stringify({
-        action : 'delete',
-        model : this.model.formatModel()
-      }));
     },
 
     saveEvent : function() {
@@ -167,7 +161,6 @@
             self.showHideSavingState('Error saving event..., please try again.');
             setTimeout(self.showHideSavingState(), 3000);
           }
-
         };
 
         this.showHideSavingState('Hold it cowboy, working on it...');
@@ -178,12 +171,6 @@
         } else {
           this.model.createEvent(closure);
         }
-
-        // Update event display on the parent page
-        $.cookie('com.sivvit.event', JSON.stringify({
-          action : 'update',
-          model : this.model.formatModel()
-        }));
       }
     },
 
