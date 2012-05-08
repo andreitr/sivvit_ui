@@ -152,25 +152,25 @@
         // content template (add hover buttons and check box)
         if(this.edit) {
 
-          itm.html.find('#content').prepend("<span class=\"item-edit\"><span class='icon-cog' href=\"event_form.html?id=" + itm.model.get('id') + "\" id='edit-itm'></span><div id=\"pending-flag\"></div></span>");
+          itm.html.find('#content').prepend("<span class=\"item-edit\"><span class='icon-cog' href=\"event_form.html?id=" + itm.model.get('id') + "\" id='event-form'></span><div id=\"pending-flag\"></div></span>");
 
-          itm.html.find('#edit-itm').hide();
+          itm.html.find('#event-form').hide();
 
           if(itm.model.get('pending') > 0) {
             itm.html.find('#title').append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
           }
 
           itm.html.hover(function(event) {
-            itm.html.find('#edit-itm').show();
+            itm.html.find('#event-form').show();
           }, function(event) {
-            itm.html.find('#edit-itm').hide();
+            itm.html.find('#event-form').hide();
           });
 
           itm.html.click(function(event) {
 
             var checked;
 
-            if(event.target.id !== 'edit-itm') {
+            if(event.target.id !== 'event-form') {
 
               if(itm.html.find('#itm-check').length > 0) {
                 checked = itm.html.find('#itm-check').is(':checked');
@@ -193,7 +193,7 @@
       var self = this;
 
       // Open light box with event information etc
-      $('#edit-itm').fancybox({
+      $('#event-form').fancybox({
         width : 860,
         height : 430,
         autoScale : true,
@@ -227,12 +227,17 @@
 
                 //TODO: Create type won't get triggered here since the event listener is assigned
                 // to a different id. Options:
-                // 1. Global class for handiling pop-up
+                // 1. Global class for handling pop-up
                 // 2. Global generic method for handling on close that will get passed around
                 // 3. Different cookie-less methodology
 
-                //Render the entire view
-                self.model.add(cookie.model);
+                var new_model = new SIVVIT.EventModel(cookie.model);
+
+                new_model.set({
+                  last_update : new_model.get('startDate')
+                });
+
+                self.model.add(new_model);
                 self.render();
                 break;
             }

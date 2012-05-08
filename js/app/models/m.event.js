@@ -148,7 +148,6 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
     init = init || {
       success : null,
-      complete : null,
       error : null
     };
 
@@ -158,14 +157,18 @@ SIVVIT.EventModel = Backbone.Model.extend({
       type : 'POST',
       dataType : 'json',
       success : init.success,
-      complete : init.complete,
+
+      // Add cookie when event is saved
+      complete : function(data) {
+
+        $.cookie('com.sivvit.event', JSON.stringify({
+          action : 'create',
+          model : JSON.parse(data.responseText)
+        }));
+      },
       error : init.error
     });
 
-    $.cookie('com.sivvit.event', JSON.stringify({
-      action : 'create',
-      model : self.formatModel()
-    }));
   },
 
   // Deletes existing event
@@ -184,7 +187,6 @@ SIVVIT.EventModel = Backbone.Model.extend({
       data : self.formatModel(),
       type : 'DELETE',
       dataType : 'json',
-      success : init.success,
       complete : init.complete,
       error : init.error
     });
@@ -203,7 +205,6 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
     init = init || {
       success : null,
-      complete : null,
       error : null
     };
 
@@ -213,14 +214,18 @@ SIVVIT.EventModel = Backbone.Model.extend({
       type : 'PUT',
       dataType : 'json',
       success : init.success,
-      complete : init.complete,
-      error : init.error
+      error : init.error,
+      complete : function() {
+
+        // Update cookie once event is updated
+        $.cookie('com.sivvit.event', JSON.stringify({
+          action : 'update',
+          model : self.formatModel()
+        }));
+      }
+
     });
 
-    $.cookie('com.sivvit.event', JSON.stringify({
-      action : 'update',
-      model : self.formatModel()
-    }));
   },
 
   // Formats model to required format for saving

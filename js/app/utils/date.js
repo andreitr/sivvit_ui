@@ -9,5 +9,5 @@ Date.secondsToDate = function(seconds) {
 };
 // Converts date object to seconds
 Date.dateToSeconds = function(date) {
-  return Number(date.getTime() / 1000);
+ return  Math.round(date.getTime() / 1000);
 };

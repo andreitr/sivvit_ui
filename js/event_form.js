@@ -103,7 +103,7 @@
 
     events : {
       'click #save-event-btn' : 'saveEvent',
-      'click #delete-event-bfatn' : 'deleteEvent'
+      'click #delete-event-btn' : 'deleteEvent'
     },
 
     initialize : function(options) {
@@ -123,14 +123,8 @@
       var self = this;
 
       var closure = {
-        sucess : function() {
-          self.showHideSavingState();
-          // Force close light box
-          window.parent.$.fancybox.close([true]);
-        },
         complete : function() {
           self.showHideSavingState();
-          // Force close light box
           window.parent.$.fancybox.close([true]);
         },
 
@@ -145,6 +139,7 @@
       this.model.deleteEvent(closure);
     },
 
+    // Creates a new event or updates an existing one
     saveEvent : function() {
 
       if($('#form-main').valid()) {
@@ -152,10 +147,7 @@
         var self = this;
 
         var closure = {
-          sucess : function() {
-            self.showHideSavingState();
-          },
-          complete : function() {
+          success : function() {
             self.showHideSavingState();
           },
           error : function() {
