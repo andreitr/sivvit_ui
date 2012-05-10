@@ -3,7 +3,7 @@
 
 (function() {
   // New event or edit existing one.
-  $('#new-event').fancybox({
+  $('#event-form').fancybox({
     'width' : 860,
     'height' : 430,
     'autoScale' : true,
