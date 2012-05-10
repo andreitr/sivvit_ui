@@ -80,18 +80,17 @@ SIVVIT.EventModel = Backbone.Model.extend({
   // Fetch interval id
   fetch_interval : null,
 
-  // Add change event listener to restart live pulling with each data update
-  initialize : function() {
-    this.bind("change", function() {
+  // Override parse method to keep track when new data is loaded from the server.
+  // If a collection hasn't been started and there is no change, then we need to
+  // check its status at periodic intervals.
+  parse : function(resp, xhr) {
 
-      // Initiate continues loading only when status is live or pending
-      if(this.get('status') === 1 && this.get('pull') === true) {
-        this.startLiveData();
-      } else {
-        this.stopLiveData();
-      }
-    }, this);
-
+    if(this.get('status') === 1 || this.get('status') === 0 && this.get('pull') === true) {
+      this.startLiveData();
+    } else {
+      this.stopLiveData();
+    }
+    return resp;
   },
 
   // Override fetch method to stop live data timer at every request

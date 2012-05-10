@@ -1006,12 +1006,12 @@
       $('#event-description').html(this.model.get('description'));
       $('#event-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + this.model.get("startDate").toDateString());
       $('#map-label').html("<span class='icon-location'></span>" + this.model.get("location").name);
+
+      this.update();
     },
 
     // Reset timer
     reset : function(date) {
-
-      var self = this;
 
       this.timestamp = date;
       this.update();
@@ -1023,19 +1023,19 @@
       switch(this.model.get('status')) {
 
         case 1:
-          $('#timeline-label').html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
+          $('#timeline-label').html("<span class='icon-time'></span>Collection Live, " + this.formatTime(new Date() - this.timestamp));
           break;
 
         case 2:
-          $('#timeline-label').html("<span class='icon-time'></span>Event status: Archived");
+          $('#timeline-label').html("<span class='icon-time'></span>Collection Archived");
           break;
 
         case -1:
-          $('#timeline-label').html("<span class='icon-time'></span>Event status: Stopping");
+          $('#timeline-label').html("<span class='icon-time'></span>Stopping Collection");
           break;
 
         case 0:
-          $('#timeline-label').html("<span class='icon-time'></span>Event status: Initializing");
+          $('#timeline-label').html("<span class='icon-time'></span>Starting Collection");
           break;
       }
     },
