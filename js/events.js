@@ -234,7 +234,8 @@
                 var new_model = new SIVVIT.EventModel(cookie.model);
 
                 new_model.set({
-                  last_update : new_model.get('startDate')
+                  last_update : new_model.get('startDate'),
+                  histogram: []
                 });
 
                 self.model.add(new_model);
