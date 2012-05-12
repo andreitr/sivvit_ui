@@ -321,7 +321,6 @@
       switch(this.activeButton) {
 
         case '#all-btn':
-
           this.temporalModel.set({
             histogram : this.eventModel.get('histogram').global
           });
@@ -451,6 +450,7 @@
       if($('#load-content-btn').length <= 0) {
 
         $(this.el).prepend("<div id='load-content-btn' class=\"content-loader\">" + this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span></div>");
+
         $('#load-content-btn').hide();
         $('#load-content-btn').slideDown('slow');
         $('#load-content-btn').click(function(event) {
@@ -460,6 +460,16 @@
           self.new_count = 0;
           // Reset the entire collection
           self.new_groups.reset();
+
+          // Re-render edit bar in the edit mode to make sure it is
+          // at the very top of the list
+
+          if(self.edit) {
+
+            var edit_bar = $(self.el).find('#controls-container').remove();
+            $(self.el).prepend(edit_bar);
+
+          }
         });
 
       } else {
@@ -761,6 +771,7 @@
       }
     },
 
+    // Display edit bar at the top of the list.
     displayEdit : function() {
 
       $(this.el).append("<div id='controls-container'><div id='checkbox'><input type='checkbox' id='group-select'></div><a id='del-all' class='link'><span class='icon-delete'></span>Delete</a><a id='apr-all' class='link'><span class='icon-check'></span>Approve</a></div>");
