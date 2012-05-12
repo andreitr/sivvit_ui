@@ -321,6 +321,7 @@
       switch(this.activeButton) {
 
         case '#all-btn':
+
           this.temporalModel.set({
             histogram : this.eventModel.get('histogram').global
           });
@@ -1023,7 +1024,7 @@
       switch(this.model.get('status')) {
 
         case 1:
-          $('#timeline-label').html("<span class='icon-time'></span>Collection Live, " + this.formatTime(new Date() - this.timestamp));
+          $('#timeline-label').html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
           break;
 
         case 2:

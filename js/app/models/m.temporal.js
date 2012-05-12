@@ -111,7 +111,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   },
 
   // Adjusts the date object to the next available bucket
-  // NOTE!!! This function is not adjusted for leap year nor for upper limit of the date obj
+  // TODO: This function is not adjusted for leap year nor for upper limit of the date obj
   adjustToNextBucket : function(date, resolution) {
     var new_date;
     resolution = resolution === undefined ? this.get('resolution') : resolution;
@@ -138,6 +138,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
         return new_date;
     }
   },
+
   // Returns milliseconds for the appropriate resolution
   getResolution : function() {
     switch(this.get('resolution')) {
@@ -151,10 +152,11 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
         return 1000;
     }
   },
-  // Checks the bounds of
-  checkDateBounds : function(date) {
 
-    return date >= this.get('startDate') && date <= this.get('endDate') ? true : false;
+  // Checks the bounds of the date to see if it should be displayed
+  // Adjusting the date to the next bucket for more accuracy
+  checkDateBounds : function(date) {
+    return this.adjustToNextBucket(date, this.get('resolution')) >= this.get('startDate') && date <= this.get('endDate') ? true : false;
   }
 
 });
