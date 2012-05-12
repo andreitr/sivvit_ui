@@ -449,7 +449,7 @@
 
       if($('#load-content-btn').length <= 0) {
 
-        $(this.el).prepend("<div id='load-content-btn' class=\"content-loader\">" + this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span></div>");
+        $(this.el).prepend("<div id='load-content-btn' class=\"content-loader\">" + this.new_count + " new " + this.temporalModel.get('resolution') + "&nbsp;&nbsp;<span class='icon-download'></span></div>");
 
         $('#load-content-btn').hide();
         $('#load-content-btn').slideDown('slow');
@@ -466,7 +466,7 @@
         });
 
       } else {
-        $('#load-content-btn').html(this.new_count + " new items&nbsp;&nbsp;<span class='icon-download'></span>");
+        $('#load-content-btn').html(this.new_count + " new " + this.temporalModel.get('resolution') + "&nbsp;&nbsp;<span class='icon-download'></span>");
       }
     },
 
@@ -742,7 +742,7 @@
             var itm_model = new SIVVIT.ItemModel(itm);
 
             itm_model.set({
-              timestamp : Date.secondsToDate(itm.timestamp)
+              timestamp : itm.timestamp
             });
 
             tmp.push(itm_model);
@@ -752,12 +752,13 @@
 
         // Reassign existing collection and add new one
         group.set({
-          // Assing augmented old_items back to the items collection
+          // Assign augmented old_items back to the items collection
           items : group.get('old_items'),
           items_new : new SIVVIT.ItemGroupCollection(tmp)
         }, {
           silent : true
         });
+
         this.buildGroupItems(group, true);
         this.buildGroupFooter(group);
       }
