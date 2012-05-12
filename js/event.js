@@ -461,15 +461,8 @@
           // Reset the entire collection
           self.new_groups.reset();
 
-          // Re-render edit bar in the edit mode to make sure it is
-          // at the very top of the list
+          self.updateEdit();
 
-          if(self.edit) {
-
-            var edit_bar = $(self.el).find('#controls-container').remove();
-            $(self.el).prepend(edit_bar);
-
-          }
         });
 
       } else {
@@ -525,10 +518,9 @@
       this.groups = [];
       this.groups_key = {};
 
-      // Display content header if a user is logged in
-      if(this.edit) {
-        this.displayEdit();
-      }
+      // Display edit controls if a user is logged in
+      this.displayEdit();
+
       this.display();
       this.footer();
       this.checkFiltered();
@@ -771,53 +763,66 @@
       }
     },
 
+    // Updates the position of the edit bar, moves it to the top
+    updateEdit : function() {
+
+      var edit_bar = $(this.el).find('#controls-container').remove();
+      if(edit_bar) {
+        $(this.el).prepend(edit_bar);
+      }
+
+    },
+
     // Display edit bar at the top of the list.
     displayEdit : function() {
 
-      $(this.el).append("<div id='controls-container'><div id='checkbox'><input type='checkbox' id='group-select'></div><a id='del-all' class='link'><span class='icon-delete'></span>Delete</a><a id='apr-all' class='link'><span class='icon-check'></span>Approve</a></div>");
-
       var self = this;
 
-      // Delete all approved items
-      $('#del-all').click(function() {
+      if(this.edit) {
 
-        var i = self.rendered.length;
-        while(i--) {
-          var itm = self.rendered[i];
-          if(itm.html.find('#itm-check').is(':checked')) {
-            self.deleteItem(itm);
+        $(this.el).append("<div id='controls-container'><div id='checkbox'><input type='checkbox' id='group-select'></div><a id='del-all' class='link'><span class='icon-delete'></span>Delete</a><a id='apr-all' class='link'><span class='icon-check'></span>Approve</a></div>");
+
+        // Delete all approved items
+        $('#del-all').click(function() {
+
+          var i = self.rendered.length;
+          while(i--) {
+            var itm = self.rendered[i];
+            if(itm.html.find('#itm-check').is(':checked')) {
+              self.deleteItem(itm);
+            }
           }
-        }
-      });
+        });
 
-      // Approve all selected items
-      $('#apr-all').click(function() {
+        // Approve all selected items
+        $('#apr-all').click(function() {
 
-        var i = self.rendered.length;
-        while(i--) {
-          var itm = self.rendered[i];
-          var cb = itm.html.find('#itm-check');
-          if(cb.is(':checked')) {
-            self.approveItem(itm, true);
+          var i = self.rendered.length;
+          while(i--) {
+            var itm = self.rendered[i];
+            var cb = itm.html.find('#itm-check');
+            if(cb.is(':checked')) {
+              self.approveItem(itm, true);
+            }
+            cb.attr('checked', false);
+            itm.html.css('background-color', '#FFFFFF');
           }
-          cb.attr('checked', false);
-          itm.html.css('background-color', '#FFFFFF');
-        }
-        $('#group-select').attr('checked', false);
-      });
+          $('#group-select').attr('checked', false);
+        });
 
-      // Select all items
-      $('#group-select').click(function() {
+        // Select all items
+        $('#group-select').click(function() {
 
-        var i = self.rendered.length;
-        var checked = $('#group-select').is(':checked');
+          var i = self.rendered.length;
+          var checked = $('#group-select').is(':checked');
 
-        while(i--) {
-          var itm = self.rendered[i];
-          itm.html.find('#itm-check').attr('checked', checked);
-          itm.html.css('background-color', !checked ? '#FFFFFF' : '#FFFFCC');
-        }
-      });
+          while(i--) {
+            var itm = self.rendered[i];
+            itm.html.find('#itm-check').attr('checked', checked);
+            itm.html.css('background-color', !checked ? '#FFFFFF' : '#FFFFCC');
+          }
+        });
+      }
 
     },
 
