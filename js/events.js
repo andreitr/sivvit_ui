@@ -24,24 +24,26 @@
         edit : this.edit
       });
 
-      $.getJSON(json, function(data) {
+      var MyModel = Backbone.Model.extend({
+        url : json
+      });
+      var tmpModel = new MyModel();
+
+      tmpModel.bind('change', function() {
 
         $('#content-loader').remove();
         $('#event-application').show();
 
-        var len = data.length, i;
+        $.each(this.attributes, function(index, value) {
+          var actual_model = new SIVVIT.EventModel(value);
+          self.collection.add(actual_model);
+        });
 
-        for( i = len; i--; ) {
-          var model = new SIVVIT.EventModel(data[i]);
-          // Add timestamp as date for collection sorting
-          model.set({
-            timestamp : Date.secondsToDate(data[i])
-          });
-          self.collection.add(model);
-        }
         self.view.model = self.collection;
         self.view.render();
       });
+      tmpModel.fetch();
+
     }
 
   };
@@ -52,7 +54,7 @@
 
     // Sort content by startDate
     comparator : function(itm) {
-      return itm.get('startDate');
+      return -itm.get('startDate');
     }
 
   });
@@ -90,6 +92,9 @@
 
       // Render collection
       this.model.each(function(itm) {
+
+        console.log("--------", itm.get('histogram').global.length);
+
         itm = this.buildTemplate(itm);
 
         var mdl = new SIVVIT.TemporalModel({
@@ -235,7 +240,7 @@
 
                 new_model.set({
                   last_update : new_model.get('startDate'),
-                  histogram: []
+                  histogram : []
                 });
 
                 self.model.add(new_model);

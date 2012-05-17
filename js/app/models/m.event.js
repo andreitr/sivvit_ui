@@ -70,12 +70,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
       media : [],
       post : []
     }
-  },
 
-  // Hash tables for histogram data
-  post_hash : {},
-  media_hash : {},
-  global_hash : {},
+  },
 
   // Fetch interval id
   fetch_interval : null,
@@ -122,18 +118,23 @@ SIVVIT.EventModel = Backbone.Model.extend({
     // Append histogram values
     if(attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
 
+      // Hash tables for histogram data.
+      this.attributes.post_hash = this.attributes.post_hash || {};
+      this.attributes.media_hash = this.attributes.media_hash || {};
+      this.attributes.global_hash = this.attributes.global_hash || {};
+
       if(this.get('histogram') !== undefined) {
         attributes.histogram.max = Math.max(attributes.histogram.max, this.get('histogram').max);
         attributes.histogram.min = Math.min(attributes.histogram.min, this.get('histogram').min);
       }
       if(attributes.histogram.post !== undefined && attributes.histogram.post !== null) {
-        attributes.histogram.post = this.appendHistogram(this.post_hash, attributes.histogram.post);
+        attributes.histogram.post = this.appendHistogram(this.get('post_hash'), attributes.histogram.post);
       }
       if(attributes.histogram.media !== undefined && attributes.histogram.media !== null) {
-        attributes.histogram.media = this.appendHistogram(this.media_hash, attributes.histogram.media);
+        attributes.histogram.media = this.appendHistogram(this.get('media_hash'), attributes.histogram.media);
       }
       if(attributes.histogram.global !== undefined && attributes.histogram.global !== null) {
-        attributes.histogram.global = this.appendHistogram(this.global_hash, attributes.histogram.global);
+        attributes.histogram.global = this.appendHistogram(this.get('global_hash'), attributes.histogram.global);
       }
     }
     Backbone.Model.prototype.set.call(this, attributes, options);
@@ -315,7 +316,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
     if(this.attributes.histogram.resolution !== null) {
       path += '&resolution=' + this.attributes.histogram.resolution;
     } else {
-      path += '&resolution=minute';
+      path += '&resolution=hour';
     }
     this.url = path;
   },
