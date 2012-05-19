@@ -523,7 +523,7 @@
 
       this.display();
       this.footer();
-      this.checkFiltered();
+      this.checkDisplayed();
     },
 
     // Displays footer if there are more buckets to be loaded.
@@ -536,8 +536,13 @@
         btn.remove();
       }
 
-      if(this.eventModel.hasMoreContent()) {
+      //TODO: Fix the resolution adjustment
+      // Adjust the min content bounds to the closest next bucket
+      // var min_content_bounds = this.temporalModel.adjustToNextBucket(new Date(this.eventModel.get('content_bounds').min), 'hour');
+      // min_content_bounds > this.eventModel.get('startDate') && this.eventModel.get('content').length > 0
+      if(true) {
         if($('#load-groups-btn').length <= 0) {
+
           $(this.el).append("<div id='load-groups-btn' class='content-loader'>More " + this.eventModel.get('histogram').resolution + "s<span class='icon-download'></span></div>");
           btn = $(this.el).find('#load-groups-btn');
 
@@ -827,8 +832,8 @@
 
     },
 
-    // Checks whether there any items are displayed
-    checkFiltered : function() {
+    // Checks whether there any items are displayed and shows appropriate message if not.
+    checkDisplayed : function() {
 
       if(!this.displayed) {
         if($('#no-content').length <= 0) {

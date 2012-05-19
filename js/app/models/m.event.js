@@ -280,16 +280,6 @@ SIVVIT.EventModel = Backbone.Model.extend({
     this.attributes.content_bounds.max = Math.max(date, this.attributes.content_bounds.max);
   },
 
-  // Returns true when earlier buckets can be loaded.
-  hasMoreContent : function() {
-
-    if(this.get('content_bounds').min > this.get('startDate')) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-
   // Sets URL path for since requests, loads new live data.
   setSinceRequestURL : function() {
 

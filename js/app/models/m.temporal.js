@@ -139,6 +139,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
     }
   },
 
+
   // Returns milliseconds for the appropriate resolution
   getResolution : function() {
     switch(this.get('resolution')) {
