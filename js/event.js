@@ -832,7 +832,29 @@
 
       if(!this.displayed) {
         if($('#no-content').length <= 0) {
-          $(this.el).append("<div id='no-content' class='notification'>No content in selected timespan.</div>");
+
+          var msg;
+
+          switch(this.eventModel.get('status')) {
+
+            case 1:
+              msg = 'No content yet but we are working on it...';
+              break;
+
+            case 2:
+              msg = 'No content found. This collection is archived.';
+              break;
+
+            case -1:
+              msg = 'No content found. This collection is archived.';
+              break;
+
+            case 0:
+              msg = 'No content yet, the collection will start shortly.';
+              break;
+          }
+
+          $(this.el).append("<div id='no-content' class='notification'>" + msg + "</div>");
         }
       } else {
         $('#no-content').remove();

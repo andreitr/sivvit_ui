@@ -141,6 +141,7 @@ a:link {
   border-radius: 5px;
   background-color: #555555;
 }
+
 span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog, span.icon-pause, span.icon-play, span.icon-check-green, span.icon-check-red, span.icon-media, span.icon-comment, span.icon-page, span.icon-download, span.icon-twitter {
   margin: 0 5px 0 0;
   height: 11px;

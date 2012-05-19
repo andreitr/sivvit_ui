@@ -99,7 +99,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
   set : function(attributes, options) {
 
     // Make sure that status is always a number
-    if(attributes.hasOwnProperty('status') && attributes.histogram !== undefined && attributes.histogram !== null) {
+    if(attributes.hasOwnProperty('status') && attributes.status !== undefined && attributes.status !== null) {
       attributes.status = Number(attributes.status);
     }
 
