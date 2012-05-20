@@ -25,7 +25,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
     histogramEndDate : null,
 
     // Minute, second, hour, day
-    resolution : null
+    resolution : 'hour'
   },
 
   // Override set method to keep track on
@@ -100,7 +100,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   adjustResolution : function(date) {
     switch(this.get('resolution')) {
       case 'day':
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0,0,0);
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
       case 'hour':
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), 0, 0);
       case 'minute':
@@ -112,6 +112,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
   // Adjusts the date object to the next available bucket
   adjustToNextBucket : function(date, resolution) {
+
     resolution = resolution === undefined ? this.get('resolution') : resolution;
 
     switch(resolution) {

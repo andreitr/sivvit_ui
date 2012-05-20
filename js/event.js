@@ -536,16 +536,18 @@
         btn.remove();
       }
 
-      //TODO: Fix the resolution adjustment
-      // Adjust the min content bounds to the closest next bucket
-      // var min_content_bounds = this.temporalModel.adjustToNextBucket(new Date(this.eventModel.get('content_bounds').min), 'hour');
-      // min_content_bounds > this.eventModel.get('startDate') && this.eventModel.get('content').length > 0
+      var min_content_bounds = this.temporalModel.adjustToNextBucket(new Date(this.eventModel.get('content_bounds').min));
 
-      if(true) {
+      if(this.eventModel.get('content').length > 0 && min_content_bounds > this.temporalModel.adjustToNextBucket(this.eventModel.get('startDate'))) {
         if($('#load-groups-btn').length <= 0) {
 
           $(this.el).append("<div id='load-groups-btn' class='content-loader'>More " + this.eventModel.get('histogram').resolution + "s<span class='icon-download'></span></div>");
           btn = $(this.el).find('#load-groups-btn');
+
+
+          // TODO: Add click function to the button
+
+
 
           // Add way point to track infinite scroll
           btn.waypoint(function(event, direction) {
