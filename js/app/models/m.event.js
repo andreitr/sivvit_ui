@@ -65,7 +65,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
     histogram : {
       min : null,
       max : null,
-      resolution : null,
+      resolution : 'minute',
       global : [],
       media : [],
       post : []

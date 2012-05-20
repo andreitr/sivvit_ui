@@ -93,8 +93,6 @@
       // Render collection
       this.model.each(function(itm) {
 
-        console.log("--------", itm.get('histogram').global.length);
-
         itm = this.buildTemplate(itm);
 
         var mdl = new SIVVIT.TemporalModel({
