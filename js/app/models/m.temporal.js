@@ -100,9 +100,9 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   adjustResolution : function(date) {
     switch(this.get('resolution')) {
       case 'day':
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0,0,0);
       case 'hour':
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours());
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), 0, 0);
       case 'minute':
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
       case 'second':
@@ -111,34 +111,43 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   },
 
   // Adjusts the date object to the next available bucket
-  // TODO: This function is not adjusted for leap year nor for upper limit of the date obj
   adjustToNextBucket : function(date, resolution) {
-    var new_date;
     resolution = resolution === undefined ? this.get('resolution') : resolution;
 
     switch(resolution) {
       case 'day':
-        new_date = this.adjustResolution(date);
-        new_date.setDate(new_date.getDate() + 1);
-        return new_date;
+        return Date.plusDay(this.adjustResolution(date));
 
       case 'hour':
-        new_date = this.adjustResolution(date);
-        new_date.setHours(new_date.getHours() + 1);
-        return new_date;
+        return Date.plusHour(this.adjustResolution(date));
 
       case 'minute':
-        new_date = this.adjustResolution(date);
-        new_date.setMinutes(new_date.getMinutes() + 1);
-        return new_date;
+        return Date.plusMinute(this.adjustResolution(date));
 
       case 'second':
-        new_date = this.adjustResolution(date);
-        new_date.setSeconds(new_date.getSeconds() + 1);
-        return new_date;
+        return Date.plusSecond(this.adjustResolution(date));
     }
   },
 
+  // Adjusts date's resolution to the previous bucket
+  adjustToPrevBucket : function(date, resolution) {
+
+    resolution = resolution === undefined ? this.get('resolution') : resolution;
+
+    switch(resolution) {
+      case 'day':
+        return Date.minusDay(this.adjustResolution(date));
+
+      case 'hour':
+        return Date.minusHour(this.adjustResolution(date));
+
+      case 'minute':
+        return Date.minusMinute(this.adjustResolution(date));
+
+      case 'second':
+        return Date.minusSecond(this.adjustResolution(date));
+    }
+  },
 
   // Returns milliseconds for the appropriate resolution
   getResolution : function() {

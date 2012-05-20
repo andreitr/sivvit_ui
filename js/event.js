@@ -540,6 +540,7 @@
       // Adjust the min content bounds to the closest next bucket
       // var min_content_bounds = this.temporalModel.adjustToNextBucket(new Date(this.eventModel.get('content_bounds').min), 'hour');
       // min_content_bounds > this.eventModel.get('startDate') && this.eventModel.get('content').length > 0
+
       if(true) {
         if($('#load-groups-btn').length <= 0) {
 
