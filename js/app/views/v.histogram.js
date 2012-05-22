@@ -57,8 +57,6 @@ SIVVIT.HistogramView = Backbone.View.extend({
         var percent_y = (frame.get('count') / max_val) * 100;
         var percent_x = (frame.get('timestamp').getTime() - start_time) / (end_time - start_time);
 
-        console.log(frame.get('timestamp'));
-
         var bar_h = Math.round(percent_y * max_height / 100);
         var bar_x = Math.round(percent_x * max_width);
         var bar_y = Math.round(max_height - bar_h);

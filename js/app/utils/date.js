@@ -14,7 +14,7 @@ Date.dateToSeconds = function(date) {
 
 Date.plusSecond = function(date) {
   if(date.getSeconds() === 59) {
-    Date.plusMinute(new Date(date.setSeconds(0)));
+    return Date.plusMinute(new Date(date.setSeconds(0)));
   } else {
     return new Date(date.setSeconds(date.getSeconds() + 1));
   }
@@ -23,7 +23,7 @@ Date.plusSecond = function(date) {
 Date.plusMinute = function(date) {
 
   if(date.getMinutes() === 59) {
-    Date.plusHour(new Date(date.setMinutes(0)));
+    return Date.plusHour(new Date(date.setMinutes(0)));
   } else {
     return new Date(date.setMinutes(date.getMinutes() + 1));
   }
@@ -32,7 +32,7 @@ Date.plusMinute = function(date) {
 Date.plusHour = function(date) {
 
   if(date.getHours() === 23) {
-    Date.plusDay(new Date(date.setHours(0)));
+    return Date.plusDay(new Date(date.setHours(0)));
   } else {
     return new Date(date.setHours(date.getHours() + 1));
   }
@@ -41,7 +41,7 @@ Date.plusHour = function(date) {
 Date.plusDay = function(date) {
 
   if(date.getDate() === Date.daysInMonth(date.getMonth(), date.getFullYear())) {
-    Date.plusMonth(new Date(date.setDate(1)));
+    return Date.plusMonth(new Date(date.setDate(1)));
   } else {
     return new Date(date.setDate(date.getDate() + 1));
   }
@@ -49,7 +49,7 @@ Date.plusDay = function(date) {
 
 Date.plusMonth = function(date) {
   if(date.getMonth() === 11) {
-    Date.plusYear(new Date(date.setMonth(0)));
+    return Date.plusYear(new Date(date.setMonth(0)));
   } else {
     return new Date(date.setMonth(date.getMonth() + 1));
   }
@@ -61,7 +61,7 @@ Date.plusYear = function(date) {
 
 Date.minusSecond = function(date) {
   if(date.getSeconds() === 0) {
-    Date.minusMinute(new Date(date.setSeconds(59)));
+    return Date.minusMinute(new Date(date.setSeconds(59)));
   } else {
     return new Date(date.setSeconds(date.getSeconds() - 1));
   }
@@ -69,7 +69,7 @@ Date.minusSecond = function(date) {
 
 Date.minusMinute = function(date) {
   if(date.getMinutes() === 0) {
-    Date.minusHour(new Date(date.setMinutes(59)));
+    return Date.minusHour(new Date(date.setMinutes(59)));
   } else {
     return new Date(date.setMinutes(date.getMinutes() - 1));
   }
@@ -78,7 +78,7 @@ Date.minusMinute = function(date) {
 Date.minusHour = function(date) {
 
   if(date.getHours() === 0) {
-    Date.minusDay(new Date(date.setHours(23)));
+    return Date.minusDay(new Date(date.setHours(23)));
   } else {
     return new Date(date.setHours(date.getHours() - 1));
   }
@@ -87,7 +87,7 @@ Date.minusHour = function(date) {
 Date.minusDay = function(date) {
 
   if(date.getDate() === 1) {
-    Date.minusMonth(new Date(date.setDate(Date.daysInMonth(date.getMonth(), date.getFullYear()))));
+    return Date.minusMonth(new Date(date.setDate(Date.daysInMonth(date.getMonth(), date.getFullYear()))));
   } else {
     return new Date(date.setDate(date.getDate() - 1));
   }
@@ -96,7 +96,7 @@ Date.minusDay = function(date) {
 Date.minusMonth = function(date) {
 
   if(date.getMonth() === 0) {
-    Date.minusYear(new Date(date.setMonth(11)));
+    return Date.minusYear(new Date(date.setMonth(11)));
   } else {
     return new Date(date.setMonth(date.getMonth() - 1));
   }
