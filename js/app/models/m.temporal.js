@@ -167,7 +167,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
   // Checks the bounds of the date to see if it should be displayed
   // Adjusting the date to the next bucket for more accuracy
   checkDateBounds : function(date) {
-    return this.adjustToNextBucket(date, this.get('resolution')) >= this.get('startDate') && date <= this.get('endDate') ? true : false;
+    return this.adjustToPrevBucket(date, this.get('resolution')) >= this.get('startDate') && date <= this.get('endDate') ? true : false;
   }
 
 });
