@@ -544,10 +544,15 @@
           $(this.el).append("<div id='load-groups-btn' class='content-loader'>More " + this.eventModel.get('histogram').resolution + "s<span class='icon-download'></span></div>");
           btn = $(this.el).find('#load-groups-btn');
 
+          // Add manual click for when automatic scroll wasn't triggered
+          btn.click(function(){
 
-          // TODO: Add click function to the button
+            btn.waypoint('remove');
 
-
+            btn.html("<span class='loader'>&nbsp;</span>");
+            self.display_buckets = true;
+            self.eventModel.loadMoreContent();
+          });
 
           // Add way point to track infinite scroll
           btn.waypoint(function(event, direction) {
