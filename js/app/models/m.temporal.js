@@ -25,7 +25,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
     histogramEndDate : null,
 
     // Minute, second, hour, day
-    resolution : 'minute'
+    resolution : null
   },
 
   // Override set method to keep track on
