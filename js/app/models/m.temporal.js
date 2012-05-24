@@ -84,9 +84,12 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
         attributes.min = tmp_min;
         attributes.max = tmp_max;
       }
+
+      this.trigger('change:histogram', this, this.get('histogram'), options);
     }
 
     Backbone.Model.prototype.set.call(this, attributes, options);
+
     return this;
   },
 

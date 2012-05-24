@@ -90,10 +90,6 @@
         // NOTE: startDate, endDate come across as seconds
         if(self.eventModel.hasChanged('last_update') || self.eventModel.hasChanged('histogram')) {
 
-          //TODO: WOrking on this
-
-          console.log('HOW AOBUT THIS?');
-
           self.temporalModel.set({
             startDate : self.eventModel.get('startDate'),
             endDate : self.eventModel.get('last_update'),
@@ -102,12 +98,12 @@
             min : Math.min(self.temporalModel.get('min'), self.eventModel.get('histogram').min),
             max : Math.max(self.temporalModel.get('max'), self.eventModel.get('histogram').max),
             resolution : self.eventModel.get('histogram').resolution
+          }, {
+            silent : true
           });
 
           // Updates general statistics and histogram
           self.contentController.update();
-
-          self.sideHistView.render();
         }
 
         // Update location
