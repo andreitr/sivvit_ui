@@ -12,6 +12,9 @@ SIVVIT.HistogramView = Backbone.View.extend({
   },
 
   render : function() {
+
+    console.log('----- RENDERING VIEW');
+
     this.drawHistogram();
     this.updateTime();
   },

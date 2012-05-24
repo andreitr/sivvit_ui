@@ -90,6 +90,10 @@
         // NOTE: startDate, endDate come across as seconds
         if(self.eventModel.hasChanged('last_update') || self.eventModel.hasChanged('histogram')) {
 
+          //TODO: WOrking on this
+
+          console.log('HOW AOBUT THIS?');
+
           self.temporalModel.set({
             startDate : self.eventModel.get('startDate'),
             endDate : self.eventModel.get('last_update'),
@@ -99,8 +103,11 @@
             max : Math.max(self.temporalModel.get('max'), self.eventModel.get('histogram').max),
             resolution : self.eventModel.get('histogram').resolution
           });
+
           // Updates general statistics and histogram
           self.contentController.update();
+
+          self.sideHistView.render();
         }
 
         // Update location
@@ -383,7 +390,6 @@
     initialize : function(options) {
       this.edit = options.edit;
       this.temporalModel = options.temporalModel;
-
       this.eventModel = options.eventModel;
       // Bind to general change event to make sure the entire model is updated
       this.eventModel.bind('change', this.onModelContentUpdate, this);
@@ -545,7 +551,7 @@
           btn = $(this.el).find('#load-groups-btn');
 
           // Add manual click for when automatic scroll wasn't triggered
-          btn.click(function(){
+          btn.click(function() {
 
             btn.waypoint('remove');
 
