@@ -321,6 +321,10 @@
     // Update temporal model and set the correct histogram
     renderHistogram : function() {
 
+      //TODO: HERE
+
+      console.log('DOING THIS --------------');
+
       switch(this.activeButton) {
 
         case '#all-btn':

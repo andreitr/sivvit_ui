@@ -25,7 +25,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
     histogramEndDate : null,
 
     // Minute, second, hour, day
-    resolution : null
+    resolution : 'minute'
   },
 
   // Override set method to keep track on
@@ -84,7 +84,7 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
         attributes.min = tmp_min;
         attributes.max = tmp_max;
       }
-
+      // Manually trigger change event with every histogram update
       this.trigger('change:histogram', this, this.get('histogram'), options);
     }
 
