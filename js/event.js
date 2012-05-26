@@ -72,7 +72,6 @@
 
         // Show main application
         $('#content-loader').remove();
-
         $('#event-application').show();
 
         if(self.eventModel.hasChanged('title') || self.eventModel.hasChanged('description') || self.eventModel.hasChanged('location')) {
@@ -226,7 +225,6 @@
     // SIVVIT.TemporalModel
     temporalModel : null,
 
-    // Bind button events
     events : {
       'click #all-btn' : 'updateView',
       'click #post-btn' : 'updateView',
@@ -247,14 +245,16 @@
     // Triggered every time eventModel is updated
     // updates main UI elements
     update : function() {
-
       this.renderStats();
       this.renderHistogram();
     },
 
     // Loads data for a newly selected view
     updateView : function(event) {
+
       if(this.renderButtons(event.target.id)) {
+
+        this.enableNavigation(false);
 
         this.update();
         this.view.reset();
@@ -277,8 +277,27 @@
             this.eventModel.setRequestType('media');
             break;
         }
+
+        this.eventModel.on('change', this.resetEvents, this);
+
         this.eventModel.setRequestURL();
         this.eventModel.fetch();
+      }
+    },
+
+    // Handles event model update and resets navigation events
+    resetEvents : function() {
+      this.enableNavigation(true);
+      this.off('change', this.resetEvents, this);
+    },
+
+    // Disables / enables tab buttons
+    enableNavigation : function(bln) {
+
+      if(bln) {
+        this.delegateEvents(this.events);
+      } else {
+        this.undelegateEvents();
       }
     },
 
