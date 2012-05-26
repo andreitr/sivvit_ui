@@ -72,6 +72,7 @@
 
         // Show main application
         $('#content-loader').remove();
+
         $('#event-application').show();
 
         if(self.eventModel.hasChanged('title') || self.eventModel.hasChanged('description') || self.eventModel.hasChanged('location')) {
@@ -246,6 +247,7 @@
     // Triggered every time eventModel is updated
     // updates main UI elements
     update : function() {
+
       this.renderStats();
       this.renderHistogram();
     },
@@ -257,9 +259,7 @@
         this.update();
         this.view.reset();
 
-        this.eventModel.unset(['content'], {
-          silent : true
-        });
+        this.eventModel.set({content:null}, {silent:true});
 
         // Update type in data request
         switch(event.target.id) {
@@ -275,7 +275,6 @@
         }
         this.eventModel.setRequestURL();
         this.eventModel.fetch();
-
       }
     },
 
@@ -320,10 +319,6 @@
 
     // Update temporal model and set the correct histogram
     renderHistogram : function() {
-
-      //TODO: HERE
-
-      console.log('DOING THIS --------------');
 
       switch(this.activeButton) {
 
@@ -583,7 +578,6 @@
     showLoader : function(show) {
       $(this.el).empty();
       $(this.el).html("<div id='content-loader'></div>");
-
     },
 
     // Builds each item, returns {timestamp, html} object
