@@ -1,273 +1,243 @@
-.live { 
-	font-weight: bold;
-	padding:2px 3px 1px 3px;
+.live {
+  font-weight: bold;
+  padding: 2px 3px 1px 3px;
 }
 
-
-
-
-#event-application{
-	display:none;
+#event-application {
+  display: none;
 }
-
 
 /** Secondary title for content boxes */
-.seconrady-title
-{
-	margin-left:10px;
-	display:inline;
+.seconrady-title {
+  margin-left: 10px;
+  display: inline;
 }
 
-#content-stats
-{
-	min-width:120px;
+#content-stats {
+  min-width: 120px;
 }
 
-#share-container
-{
-	display:inline;
-	width:300px;
-	height:50px;
+#share-container {
+  display: inline;
+  width: 300px;
+  height: 50px;
 }
-
 
 /** Show the number of newly-loaded items. */
 .content-loader {
-	text-align: center;
-	font-size: 13px;
-	color: #333333;
-	padding: 5px;
-	border: 1px solid #B2D7E7;
-	background-color: #E1EFF5;
-	cursor: pointer;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius:5px;
-	text-shadow: 1px 1px 1px hsla(0,0%,100%,1);
-	margin-bottom:10px;
+  text-align: center;
+  font-size: 13px;
+  color: #333333;
+  padding: 5px;
+  border: 1px solid #B2D7E7;
+  background-color: #E1EFF5;
+  cursor: pointer;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  text-shadow: 1px 1px 1px hsla(0,0%,100%,1);
+}
+
+.loader-margin {
+  margin-bottom: 10px;
+}
+
+.loader-header {
+  border: 1px solid #FF9900;
+  background-color: #FF9900;
 }
 
 .content-loader:hover {
-	background-color: #c9e0ea;
+  background-color: #c9e0ea;
 }
 
-#map-container
-{
-	height: 130px;
+#map-container {
+  height: 130px;
 }
 
-#controls-container
-{
-	padding:15px;
-	border:1px solid #CCCCCC;
-	background:#FFFFFF;
-	margin-bottom:15px;
+#controls-container {
+  padding: 15px;
+  border: 1px solid #CCCCCC;
+  background: #FFFFFF;
+  margin-bottom: 15px;
 }
 
 ol {
-	
-	margin:0 0 15px 0;
-	padding: 0;
-	list-style: none;
-	background: #FFFFFF;
-    -moz-box-shadow: 0px 0px 3px hsla(0,0%,0%,.3);
-    -webkit-box-shadow: 0px 0px 3px hsla(0,0%,0%,.3);
-    -box-shadow: 0px 0px 3px hsla(0,0%,0%,.3); /* Opera, IE 9 */    
+
+  margin: 0 0 15px 0;
+  padding: 0;
+  list-style: none;
+  background: #FFFFFF;
+  -moz-box-shadow: 0px 0px 3px hsla(0,0%,0%,.3);
+  -webkit-box-shadow: 0px 0px 3px hsla(0,0%,0%,.3);
+  -box-shadow: 0px 0px 3px hsla(0,0%,0%,.3); /* Opera, IE 9 */
 }
 
 #timeline-container {
-    width: auto;
-    height: 85px;
-    display: block;
-    overflow: hidden;
+  width: auto;
+  height: 85px;
+  display: block;
+  overflow: hidden;
 }
 #timline-label {
-	display:block; 
-	height: 20px;
+  display: block;
+  height: 20px;
 }
-#timeline-mintime
-{
-	float:left;
+#timeline-mintime {
+  float: left;
 }
-#timeline-maxtime
-{
-	float: right;
+#timeline-maxtime {
+  float: right;
 }
-#timeline-slider
-{
-	height:10px;
-	margin-top: 10px
+#timeline-slider {
+  height: 10px;
+  margin-top: 10px
 }
 
-#group-header
-{
-	padding:10px;
-	background: url("../img/css/group-header-arrow.png"), url("../img/css/group-header-bg.png");
-	background-repeat: no-repeat, repeat-x;
-	background-position: 10px bottom, bottom;
-	background-color:#FFFFFF;
-}	
-
-
-#group-footer
-{
-	border-bottom: 1px solid #CCCCCC;
-	padding: 10px;
+#group-header {
+  padding: 10px;
+  background: url("../img/css/group-header-arrow.png"), url("../img/css/group-header-bg.png");
+  background-repeat: no-repeat, repeat-x;
+  background-position: 10px bottom, bottom;
+  background-color: #FFFFFF;
 }
 
-
-li#post-list
-{
-	padding:10px;
-	min-height: 50px;
-	border-bottom: 1px solid #CCCCCC;
-	position: relative;
-	background-color: #FFFFFF;
+#group-footer {
+  border-bottom: 1px solid #CCCCCC;
+  padding: 10px;
 }
 
-.item-edit
-{
-	left: 5px;
-	float: right;
-	width: 50px;
-	height: 48px;
-	display: block;
-	position:relative;
+li#post-list {
+  padding: 10px;
+  min-height: 50px;
+  border-bottom: 1px solid #CCCCCC;
+  position: relative;
+  background-color: #FFFFFF;
 }
 
-.active-notice
-{
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -156px transparent;
-	width: 61px;
-	height: 23px;
-	display: block;
-	position: absolute;
-	top:13px;
-	left:-1px;
+.item-edit {
+  left: 5px;
+  float: right;
+  width: 50px;
+  height: 48px;
+  display: block;
+  position: relative;
 }
 
-.pending-notice
-{
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -180px transparent;
-	width: 61px;
-	height: 23px;
-	display: block;
-	position: absolute;
-	top:13px;
-	left:-1px;	
+.active-notice {
+  background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -156px transparent;
+  width: 61px;
+  height: 23px;
+  display: block;
+  position: absolute;
+  top: 13px;
+  left: -1px;
 }
 
-.live-notice
-{
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -290px -156px transparent;
-	width: 61px;
-	height: 23px;
-	display: block;
-	position: absolute;
-	top:13px;
-	left:-1px;
-}
-.idle-notice
-{
-	background: url("../img/css/sprite-icons.png") no-repeat scroll -290px -180px transparent;
-	width: 61px;
-	height: 23px;
-	display: block;
-	position: absolute;
-	top:13px;
-	left:-1px;
+.pending-notice {
+  background: url("../img/css/sprite-icons.png") no-repeat scroll -225px -180px transparent;
+  width: 61px;
+  height: 23px;
+  display: block;
+  position: absolute;
+  top: 13px;
+  left: -1px;
 }
 
-
-li#post-list #content 
-{
-	position: relative;
-	word-wrap: break-word;
+.live-notice {
+  background: url("../img/css/sprite-icons.png") no-repeat scroll -290px -156px transparent;
+  width: 61px;
+  height: 23px;
+  display: block;
+  position: absolute;
+  top: 13px;
+  left: -1px;
+}
+.idle-notice {
+  background: url("../img/css/sprite-icons.png") no-repeat scroll -290px -180px transparent;
+  width: 61px;
+  height: 23px;
+  display: block;
+  position: absolute;
+  top: 13px;
+  left: -1px;
 }
 
-#checkbox
-{
-	float:left;
-	display: inline-block;
-	width: 40px;
+li#post-list #content {
+  position: relative;
+  word-wrap: break-word;
 }
 
+#checkbox {
+  float: left;
+  display: inline-block;
+  width: 40px;
+}
 
-li#post-list #avatar
-{
-	float: left;
-	width: 48px;
-	height: 48px;
-	margin-right: 10px;
-	text-align: right;
-	display: inline-block;
+li#post-list #avatar {
+  float: left;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+  text-align: right;
+  display: inline-block;
 }
 
 /* Histogram container for the events / user pages.*/
-li#post-list #histogram
-{
-	float: left;
-	width: 100px;
-	height: 48px;
-	margin-right: 10px;
-	border:1px solid #CCCCCC;
-	display: inline-block;
+li#post-list #histogram {
+  float: left;
+  width: 100px;
+  height: 48px;
+  margin-right: 10px;
+  border: 1px solid #CCCCCC;
+  display: inline-block;
 }
 
-li#post-list #title
-{
-	color:#002A3A;
-	font-weight: 500;
-	font-size: 18px;
+li#post-list #title {
+  color: #002A3A;
+  font-weight: 500;
+  font-size: 18px;
 }
 
-li#post-list #pending
-{
-	top:-3px;
-	left:10px;
-	padding:3px 5px 2px 5px;
-	color:#FFFFFF;
-	background-color:#FF9900;
-	font-size: 9px;
-	position:relative;
-	display:inline-block;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius:5px;
-	cursor:pointer;
-	
+li#post-list #pending {
+  top: -3px;
+  left: 10px;
+  padding: 3px 5px 2px 5px;
+  color: #FFFFFF;
+  background-color: #FF9900;
+  font-size: 9px;
+  position: relative;
+  display: inline-block;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-li#post-list #media
-{
-	padding:5px;
-	width: 300px;
-	height: 160px;
-	overflow: hidden;
-  	background-color: #EDEDED;
-  	border:1px solid #CCCCCC;
-  	margin-bottom:10px;
-  	text-align: center;
-  	cursor: pointer;
+li#post-list #media {
+  padding: 5px;
+  width: 300px;
+  height: 160px;
+  overflow: hidden;
+  background-color: #EDEDED;
+  border: 1px solid #CCCCCC;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
 }
 
-
-li#post-list #meta
-{
-	font-size: 12px;
-	margin-top:10px;
-	padding:0;
-	color: #999999;
-	width: auto;
-	position: relative;
-	display: block;
+li#post-list #meta {
+  font-size: 12px;
+  margin-top: 10px;
+  padding: 0;
+  color: #999999;
+  width: auto;
+  position: relative;
+  display: block;
 }
 
 /** Override global icons */
-span.icon-delete, span.icon-check, span.icon-cog, span.icon-play, span.icon-pause
-{
-	cursor: pointer;
+span.icon-delete, span.icon-check, span.icon-cog, span.icon-play, span.icon-pause {
+  cursor: pointer;
 }
-
-
 

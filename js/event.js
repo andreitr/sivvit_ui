@@ -473,7 +473,7 @@
 
       if($('#load-content-btn').length <= 0) {
 
-        $(this.el).prepend("<div id='load-content-btn' class=\"content-loader\">Found more content&nbsp;&nbsp;<span class='icon-download'></span></div>");
+        $(this.el).prepend("<div id='load-content-btn' class='content-loader loader-margin loader-header'>Found more content&nbsp;&nbsp;<span class='icon-download'></span></div>");
 
         $('#load-content-btn').hide();
         $('#load-content-btn').slideDown('slow');
@@ -488,9 +488,6 @@
           self.updateEdit();
 
         });
-
-      } else {
-        $('#load-content-btn').html("Found more content&nbsp;&nbsp;<span class='icon-download'></span>");
       }
     },
 
@@ -565,7 +562,7 @@
       if(this.eventModel.get('content').length > 0 && min_content_bounds > this.temporalModel.adjustToNextBucket(this.eventModel.get('startDate'))) {
         if($('#load-groups-btn').length <= 0) {
 
-          $(this.el).append("<div id='load-groups-btn' class='content-loader'>More " + this.eventModel.get('histogram').resolution + "s<span class='icon-download'></span></div>");
+          $(this.el).append("<div id='load-groups-btn' class='content-loader loader-margin'>More " + this.eventModel.get('histogram').resolution + "s<span class='icon-download'></span></div>");
           btn = $(this.el).find('#load-groups-btn');
 
           // Add manual click for when automatic scroll wasn't triggered
