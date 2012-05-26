@@ -473,7 +473,7 @@
 
       if($('#load-content-btn').length <= 0) {
 
-        $(this.el).prepend("<div id='load-content-btn' class=\"content-loader\">" + this.new_count + " new " + this.temporalModel.get('resolution') + "&nbsp;&nbsp;<span class='icon-download'></span></div>");
+        $(this.el).prepend("<div id='load-content-btn' class=\"content-loader\">Found more content&nbsp;&nbsp;<span class='icon-download'></span></div>");
 
         $('#load-content-btn').hide();
         $('#load-content-btn').slideDown('slow');
@@ -490,7 +490,7 @@
         });
 
       } else {
-        $('#load-content-btn').html(this.new_count + " new " + this.temporalModel.get('resolution') + "&nbsp;&nbsp;<span class='icon-download'></span>");
+        $('#load-content-btn').html("Found more content&nbsp;&nbsp;<span class='icon-download'></span>");
       }
     },
 
