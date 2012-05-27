@@ -259,11 +259,8 @@
         this.update();
         this.view.reset();
 
-        this.eventModel.set({
-          content : null
-        }, {
-          silent : true
-        });
+        // Reset existing cotent
+        this.eventModel.resetContent();
 
         // Update type in data request
         switch(event.target.id) {

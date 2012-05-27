@@ -366,6 +366,16 @@ SIVVIT.EventModel = Backbone.Model.extend({
     this.fetch();
   },
 
+  // Resets currently existing contnet
+  resetContent : function() {
+    this.set({
+      bucket_page : 1,
+      content : null
+    }, {
+      silent : true
+    });
+  },
+
   // Start continues data loading
   startLiveData : function() {
     var self = this;
