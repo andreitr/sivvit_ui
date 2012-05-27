@@ -138,6 +138,17 @@
     }
 
   });
+
+  // Collection of newly-loaded buckets
+  SIVVIT.NewItemCollection = Backbone.Collection.extend({
+    model : SIVVIT.ItemModel,
+
+    // Sort content by timestamp
+    comparator : function(itm) {
+      return itm.get('timestamp');
+    }
+  });
+
   SIVVIT.Lightbox = {
 
     // Initiates global lightbox methods.
@@ -386,7 +397,7 @@
     new_count : 0,
 
     // Collection (ItemGroupCollection) of groups that have been loaded but not rendered
-    new_groups : new SIVVIT.ItemCollection(),
+    new_groups : new SIVVIT.NewItemCollection(),
 
     // Instance of TemporalModel
     temporalModel : null,
@@ -399,7 +410,6 @@
 
     // Set to true when at least one content bucket is displayed
     displayed : false,
-
 
     // Set to true when more old content is loaded that has to be
     // appended to the bottom of the scroll
@@ -458,6 +468,8 @@
             this.groups_key[group.get('timestamp')] = group;
             this.new_count += 1;
             this.new_groups.add(group);
+
+            console.log(this.new_count);
           }
 
         }, this);
@@ -1079,7 +1091,7 @@
       $('#event-title').html(this.model.get('title'));
       // $('#event-description').html(this.model.get('description'));
       // I don't think we even need event description
-      $('#event-description').html('Tracking <strong><i>'+this.model.get('keywords').toString()+'</i></strong> near '+this.model.get("location").name);
+      $('#event-description').html('Tracking <strong><i>' + this.model.get('keywords').toString() + '</i></strong> near ' + this.model.get("location").name);
       $('#event-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + this.model.get("startDate").toDateString());
       $('#map-label').html("<span class='icon-location'></span>" + this.model.get("location").name);
 
