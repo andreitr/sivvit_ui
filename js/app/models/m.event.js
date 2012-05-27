@@ -129,12 +129,19 @@ SIVVIT.EventModel = Backbone.Model.extend({
       }
       if(attributes.histogram.post !== undefined && attributes.histogram.post !== null) {
         attributes.histogram.post = this.appendHistogram(this.get('post_hash'), attributes.histogram.post);
+      } else {
+        attributes.histogram.post = this.get('histogram').post;
       }
       if(attributes.histogram.media !== undefined && attributes.histogram.media !== null) {
         attributes.histogram.media = this.appendHistogram(this.get('media_hash'), attributes.histogram.media);
+      } else {
+        attributes.histogram.media = this.get('histogram').media;
+
       }
       if(attributes.histogram.global !== undefined && attributes.histogram.global !== null) {
         attributes.histogram.global = this.appendHistogram(this.get('global_hash'), attributes.histogram.global);
+      } else {
+        attributes.histogram.global = this.get('histogram').global;
       }
     }
     Backbone.Model.prototype.set.call(this, attributes, options);

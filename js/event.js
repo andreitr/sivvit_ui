@@ -403,6 +403,9 @@
     // Set to true when at least one content bucket is displayed
     displayed : false,
 
+
+    // Set to true when more old content is loaded that has to be
+    // appended to the bottom of the scroll
     display_buckets : false,
 
     initialize : function(options) {
@@ -418,6 +421,8 @@
 
       if(this.eventModel.hasChanged('content')) {
 
+        //TODO
+        console.log('New model data updated');
         var collection = SIVVIT.Parser.parse(this.eventModel);
 
         // Render view for the first time
@@ -427,6 +432,7 @@
           return;
         }
 
+        // Render loaded data at the bottom of the list
         if(this.display_buckets) {
           this.display_buckets = false;
           this.display(collection, false);
@@ -452,11 +458,16 @@
             this.buildGroupHeader(old_group);
             this.buildGroupFooter(old_group);
 
+            console.log('Update existing bucket');
+
           } else {
             // Add pending group to the groups key
             this.groups_key[group.get('timestamp')] = group;
             this.new_count += 1;
             this.new_groups.add(group);
+
+            console.log('create new bucket');
+
           }
 
         }, this);
@@ -1076,7 +1087,9 @@
     render : function() {
 
       $('#event-title').html(this.model.get('title'));
-      $('#event-description').html(this.model.get('description'));
+      // $('#event-description').html(this.model.get('description'));
+      // I don't think we even need event description
+      $('#event-description').html('Tracking <i>'+this.model.get('keywords').toString()+'</i> near '+this.model.get("location").name);
       $('#event-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + this.model.get("startDate").toDateString());
       $('#map-label').html("<span class='icon-location'></span>" + this.model.get("location").name);
 
