@@ -38,18 +38,19 @@
   text-shadow: 1px 1px 1px hsla(0,0%,100%,1);
 }
 
+.content-loader:hover {
+  background-color: #c9e0ea;
+}
+
 .loader-margin {
   margin-bottom: 10px;
 }
 
 .loader-header {
-  border: 1px solid #FF9900;
-  background-color: #FF9900;
+  border: 1px solid #f9ad54;
+  background-color: #fce37e;
 }
 
-.content-loader:hover {
-  background-color: #c9e0ea;
-}
 
 #map-container {
   height: 130px;
