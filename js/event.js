@@ -147,6 +147,7 @@
     comparator : function(itm) {
       return itm.get('timestamp');
     }
+
   });
 
   SIVVIT.Lightbox = {
