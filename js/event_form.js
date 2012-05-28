@@ -130,7 +130,9 @@
 
         error : function() {
           self.showHideSavingState('Error deleting event..., please try again.');
-          setTimeout(self.showHideSavingState(), 3000);
+          setTimeout(function() {
+            self.showHideSavingState();
+          }, 3000);
         }
 
       };
@@ -152,7 +154,9 @@
           },
           error : function() {
             self.showHideSavingState('Error saving event..., please try again.');
-            setTimeout(self.showHideSavingState(), 3000);
+            setTimeout(function() {
+              self.showHideSavingState();
+            }, 3000);
           }
 
         };
