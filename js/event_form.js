@@ -123,9 +123,14 @@
       var self = this;
 
       var closure = {
-        complete : function() {
-          self.showHideSavingState();
-          window.parent.$.fancybox.close([true]);
+        complete : function(jqXHR, textStatus) {
+
+          if(textStatus === 'error') {
+            this.error();
+          } else {
+            self.showHideSavingState();
+            window.parent.$.fancybox.close([true]);
+          }
         },
 
         error : function() {
@@ -134,7 +139,6 @@
             self.showHideSavingState();
           }, 3000);
         }
-
       };
 
       this.showHideSavingState('Hold it cowboy, working on it...');
