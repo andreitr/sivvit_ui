@@ -136,12 +136,12 @@ SIVVIT.EventModel = Backbone.Model.extend({
       if(attributes.histogram.media !== undefined && attributes.histogram.media !== null) {
         attributes.histogram.media = this.appendHistogram(this.get('media_hash'), attributes.histogram.media);
       } else {
-        attributes.histogram.media =  this.get('histogram') ? this.get('histogram').media : null;
+        attributes.histogram.media = this.get('histogram') ? this.get('histogram').media : null;
       }
       if(attributes.histogram.global !== undefined && attributes.histogram.global !== null) {
         attributes.histogram.global = this.appendHistogram(this.get('global_hash'), attributes.histogram.global);
       } else {
-        attributes.histogram.global =  this.get('histogram') ? this.get('histogram').global : null;
+        attributes.histogram.global = this.get('histogram') ? this.get('histogram').global : null;
       }
     }
     Backbone.Model.prototype.set.call(this, attributes, options);
@@ -194,15 +194,19 @@ SIVVIT.EventModel = Backbone.Model.extend({
       data : self.formatModel(),
       type : 'DELETE',
       dataType : 'json',
-      complete : init.complete,
+      complete : function(jqXHR, textStatus) {
+
+        if(textStatus !== 'error') {
+
+          $.cookie('com.sivvit.event', JSON.stringify({
+            action : 'delete',
+            model : self.formatModel()
+          }));
+        }
+        init.complete(jqXHR, textStatus);
+      },
       error : init.error
     });
-
-    $.cookie('com.sivvit.event', JSON.stringify({
-      action : 'delete',
-      model : self.formatModel()
-    }));
-
   },
 
   // Updates existing event
@@ -222,13 +226,16 @@ SIVVIT.EventModel = Backbone.Model.extend({
       dataType : 'json',
       success : init.success,
       error : init.error,
-      complete : function() {
+      complete : function(jqXHR, textStatus) {
 
-        // Update cookie once event is updated
-        $.cookie('com.sivvit.event', JSON.stringify({
-          action : 'update',
-          model : self.formatModel()
-        }));
+        if(textStatus !== 'error') {
+
+          // Update cookie once event is updated
+          $.cookie('com.sivvit.event', JSON.stringify({
+            action : 'update',
+            model : self.formatModel()
+          }));
+        }
       }
 
     });
