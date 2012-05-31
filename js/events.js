@@ -29,21 +29,27 @@
       });
       var tmpModel = new MyModel();
 
-      tmpModel.bind('change', function() {
+      tmpModel.fetch({
+        success : function(result) {
 
-        $('#content-loader').remove();
-        $('#event-application').show();
+          $('#content-loader').remove();
+          $('#event-application').show();
 
-        $.each(this.attributes, function(index, value) {
-          var actual_model = new SIVVIT.EventModel(value);
-          self.collection.add(actual_model);
-        });
+          if(result.attributes) {
 
-        self.view.model = self.collection;
-        self.view.render();
+            $.each(result.attributes, function(index, value) {
+
+              var actual_model = new SIVVIT.EventModel(value);
+              self.collection.add(actual_model);
+            });
+
+            self.view.model = self.collection;
+            self.view.render();
+
+          }
+        }
+
       });
-      tmpModel.fetch();
-
     }
 
   };
