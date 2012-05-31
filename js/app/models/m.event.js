@@ -166,12 +166,15 @@ SIVVIT.EventModel = Backbone.Model.extend({
       success : init.success,
 
       // Add cookie when event is saved
-      complete : function(data) {
+      complete : function(jqXHR, textStatus) {
 
-        $.cookie('com.sivvit.event', JSON.stringify({
-          action : 'create',
-          model : JSON.parse(data.responseText)
-        }));
+        if(textStatus !== 'error') {
+
+          $.cookie('com.sivvit.event', JSON.stringify({
+            action : 'create',
+            model : JSON.parse(jqXHR.responseText)
+          }));
+        }
       },
       error : init.error
     });
@@ -203,6 +206,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
             model : self.formatModel()
           }));
         }
+
         init.complete(jqXHR, textStatus);
       },
       error : init.error
