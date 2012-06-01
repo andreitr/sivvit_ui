@@ -1,7 +1,7 @@
 // JSLint variable definition
 /*global SIVVIT:true  */
 
-if( typeof (SIVVIT) == 'undefined') {
+if( typeof (SIVVIT) === 'undefined') {
   SIVVIT = {};
 }
 

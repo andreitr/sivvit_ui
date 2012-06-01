@@ -26,9 +26,9 @@ SIVVIT.HistogramView = Backbone.View.extend({
   drawHistogram : function() {
 
     // Clear out previous drawing
-    var histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
+    var histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
-    if(this.model.get('histogram') && this.model.get('histogramStartDate')) {
+    if (this.model.get('histogram') && this.model.get('histogramStartDate')) {
 
       var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get('histogramEndDate'))).getTime();
 
@@ -51,7 +51,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
       var start_time = this.model.get('histogramStartDate');
       var end_time = adjusted_end_date;
 
-      for(var i = len; i--; ) {
+      for (var i = len; i--; ) {
 
         var frame = new SIVVIT.TemporalFrameModel(this.model.get('histogram')[i]);
 
