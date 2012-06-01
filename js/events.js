@@ -35,7 +35,7 @@
           $('#content-loader').remove();
           $('#event-application').show();
 
-          if(result.attributes) {
+          if (result.attributes) {
 
             $.each(result.attributes, function(index, value) {
 
@@ -155,17 +155,17 @@
 
       var self = this;
 
-      if(itm !== null) {
+      if (itm !== null) {
 
         // Initiate button clicks if a user is logged in and modify
         // content template (add hover buttons and check box)
-        if(this.edit) {
+        if (this.edit) {
 
           itm.html.find('#content').prepend("<span class=\"item-edit\"><span class='icon-cog' href=\"event_form.html?id=" + itm.model.get('id') + "\" id='event-form'></span><div id=\"pending-flag\"></div></span>");
 
           itm.html.find('#event-form').hide();
 
-          if(itm.model.get('pending') > 0) {
+          if (itm.model.get('pending') > 0) {
             itm.html.find('#title').append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
           }
 
@@ -179,9 +179,9 @@
 
             var checked;
 
-            if(event.target.id !== 'event-form') {
+            if (event.target.id !== 'event-form') {
 
-              if(itm.html.find('#itm-check').length > 0) {
+              if (itm.html.find('#itm-check').length > 0) {
                 checked = itm.html.find('#itm-check').is(':checked');
                 itm.html.find('#itm-check').attr('checked', !checked);
                 itm.html.css('background-color', checked ? '#FFFFFF' : '#FFFFCC');
@@ -214,19 +214,19 @@
 
           var cookie = JSON.parse($.cookie('com.sivvit.event'));
 
-          if(cookie) {
+          if (cookie) {
 
             switch(cookie.action) {
 
               case 'delete':
-                if(self.models_hash[cookie.model.id]) {
+                if (self.models_hash[cookie.model.id]) {
                   self.deleteItem(self.models_hash[cookie.model.id]);
                 }
                 break;
 
               case 'update':
                 // Update existing model
-                if(self.models_hash[cookie.model.id]) {
+                if (self.models_hash[cookie.model.id]) {
                   self.models_hash[cookie.model.id].model.set(cookie.model);
                   self.updateItem(self.models_hash[cookie.model.id]);
                 }
@@ -281,7 +281,7 @@
     toggleLive : function(itm) {
       var flag = itm.html.find('#pending-flag');
 
-      if(itm.model.get('status') === 1) {
+      if (itm.model.get('status') === 1) {
 
         flag.toggleClass('idle-notice', false);
         flag.toggleClass('live-notice', true);

@@ -81,7 +81,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
   // check its status at periodic intervals.
   parse : function(resp, xhr) {
 
-    if(this.get('status') === 1 || this.get('status') === 0 && this.get('pull') === true) {
+    if (this.get('status') === 1 || this.get('status') === 0 && this.get('pull') === true) {
       this.startLiveData();
     } else {
       this.stopLiveData();
@@ -99,46 +99,46 @@ SIVVIT.EventModel = Backbone.Model.extend({
   set : function(attributes, options) {
 
     // Make sure that status is always a number
-    if(attributes.hasOwnProperty('status') && attributes.status !== undefined && attributes.status !== null) {
+    if (attributes.hasOwnProperty('status') && attributes.status !== undefined && attributes.status !== null) {
       attributes.status = Number(attributes.status);
     }
 
     // Make sure the data is properly formatted from the start
     // NOTE: Date.secondsToDate is in app/misc.date.js
-    if(attributes.hasOwnProperty('startDate')) {
+    if (attributes.hasOwnProperty('startDate')) {
       attributes.startDate = Date.secondsToDate(attributes.startDate);
     }
-    if(attributes.hasOwnProperty('endDate')) {
+    if (attributes.hasOwnProperty('endDate')) {
       attributes.endDate = Date.secondsToDate(attributes.endDate);
     }
-    if(attributes.hasOwnProperty('last_update')) {
+    if (attributes.hasOwnProperty('last_update')) {
       attributes.last_update = Date.secondsToDate(attributes.last_update);
     }
 
     // Append histogram values
-    if(attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
+    if (attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
 
       // Hash tables for histogram data.
       this.attributes.post_hash = this.attributes.post_hash || {};
       this.attributes.media_hash = this.attributes.media_hash || {};
       this.attributes.global_hash = this.attributes.global_hash || {};
 
-      if(this.get('histogram') !== undefined) {
+      if (this.get('histogram') !== undefined) {
         attributes.histogram.max = Math.max(attributes.histogram.max, this.get('histogram').max);
         attributes.histogram.min = Math.min(attributes.histogram.min, this.get('histogram').min);
       }
 
-      if(attributes.histogram.post !== undefined && attributes.histogram.post !== null) {
+      if (attributes.histogram.post !== undefined && attributes.histogram.post !== null) {
         attributes.histogram.post = this.appendHistogram(this.get('post_hash'), attributes.histogram.post);
       } else {
         attributes.histogram.post = this.get('histogram') ? this.get('histogram').post : null;
       }
-      if(attributes.histogram.media !== undefined && attributes.histogram.media !== null) {
+      if (attributes.histogram.media !== undefined && attributes.histogram.media !== null) {
         attributes.histogram.media = this.appendHistogram(this.get('media_hash'), attributes.histogram.media);
       } else {
         attributes.histogram.media = this.get('histogram') ? this.get('histogram').media : null;
       }
-      if(attributes.histogram.global !== undefined && attributes.histogram.global !== null) {
+      if (attributes.histogram.global !== undefined && attributes.histogram.global !== null) {
         attributes.histogram.global = this.appendHistogram(this.get('global_hash'), attributes.histogram.global);
       } else {
         attributes.histogram.global = this.get('histogram') ? this.get('histogram').global : null;
@@ -168,7 +168,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
       // Add cookie when event is saved
       complete : function(jqXHR, textStatus) {
 
-        if(textStatus !== 'error') {
+        if (textStatus !== 'error') {
 
           $.cookie('com.sivvit.event', JSON.stringify({
             action : 'create',
@@ -199,7 +199,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
       dataType : 'json',
       complete : function(jqXHR, textStatus) {
 
-        if(textStatus !== 'error') {
+        if (textStatus !== 'error') {
 
           $.cookie('com.sivvit.event', JSON.stringify({
             action : 'delete',
@@ -232,7 +232,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
       error : init.error,
       complete : function(jqXHR, textStatus) {
 
-        if(textStatus !== 'error') {
+        if (textStatus !== 'error') {
 
           // Update cookie once event is updated
           $.cookie('com.sivvit.event', JSON.stringify({
@@ -270,17 +270,17 @@ SIVVIT.EventModel = Backbone.Model.extend({
     var len = value.length;
     var result = [];
 
-    for(var i = len; i--; ) {
+    for (var i = len; i--; ) {
 
-      if(hash[value[i].timestamp]) {
+      if (hash[value[i].timestamp]) {
         hash[value[i].timestamp].count = Number(hash[value[i].timestamp].count) + Number(value[i].count);
       } else {
         hash[value[i].timestamp] = value[i];
       }
     }
     // Format output
-    for(var bucket in hash) {
-      if(hash[bucket]) {
+    for (var bucket in hash) {
+      if (hash[bucket]) {
         result.push(hash[bucket]);
       }
     }
@@ -290,7 +290,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
   // Updates temporal range of loaded content.
   updateContentRange : function(date) {
     // Set default values
-    if(this.attributes.content_bounds.min === null) {
+    if (this.attributes.content_bounds.min === null) {
       this.attributes.content_bounds.min = this.get('endDate');
       this.attributes.content_bounds.max = this.get('startDate');
     }
@@ -303,25 +303,25 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
     var path = this.attributes.json;
 
-    if(this.attributes.meta !== null) {
+    if (this.attributes.meta !== null) {
       path += '&meta=' + this.attributes.meta;
     }
-    if(this.attributes.limit !== null) {
+    if (this.attributes.limit !== null) {
       path += '&limit=' + this.attributes.limit;
     }
-    if(this.attributes.last_update !== null) {
+    if (this.attributes.last_update !== null) {
       path += '&since=' + this.attributes.last_update;
     }
-    if(this.attributes.bucket_limit !== null) {
+    if (this.attributes.bucket_limit !== null) {
       path += '&bucket_limit=' + this.attributes.bucket_limit;
     }
-    if(this.attributes.bucket_page !== null) {
+    if (this.attributes.bucket_page !== null) {
       path += '&bucket_page=' + this.attributes.bucket_page;
     }
-    if(this.attributes.type !== null) {
+    if (this.attributes.type !== null) {
       path += '&type[]=' + this.attributes.type;
     }
-    if(this.attributes.histogram.resolution !== null) {
+    if (this.attributes.histogram.resolution !== null) {
       path += '&resolution=' + this.attributes.histogram.resolution;
     }
     this.url = path;
@@ -331,22 +331,22 @@ SIVVIT.EventModel = Backbone.Model.extend({
   setRequestURL : function() {
     var path = this.attributes.json;
 
-    if(this.attributes.meta !== null) {
+    if (this.attributes.meta !== null) {
       path += '&meta=0';
     }
-    if(this.attributes.limit !== null) {
+    if (this.attributes.limit !== null) {
       path += '&limit=' + this.attributes.limit;
     }
-    if(this.attributes.bucket_limit !== null) {
+    if (this.attributes.bucket_limit !== null) {
       path += '&bucket_limit=' + this.attributes.bucket_limit;
     }
-    if(this.attributes.bucket_page !== null) {
+    if (this.attributes.bucket_page !== null) {
       path += '&bucket_page=' + this.attributes.bucket_page;
     }
-    if(this.attributes.type !== null) {
+    if (this.attributes.type !== null) {
       path += '&type[]=' + this.attributes.type;
     }
-    if(this.attributes.histogram.resolution !== null) {
+    if (this.attributes.histogram.resolution !== null) {
       path += '&resolution=' + this.attributes.histogram.resolution;
     }
     this.url = path;
