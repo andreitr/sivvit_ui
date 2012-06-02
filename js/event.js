@@ -845,6 +845,8 @@
         // Approve all selected items
         $('#apr-all').click(function() {
 
+          var b
+
           var i = self.rendered.length;
           while(i--) {
             var itm = self.rendered[i];
