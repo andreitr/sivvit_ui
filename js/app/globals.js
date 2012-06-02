@@ -1,10 +1,11 @@
-// JSLint variable definition
+// JSLint variable definition and formatting
 /*global SIVVIT:true  */
+/*jslint white:true */
 
-if( typeof (SIVVIT) === 'undefined') {
-  SIVVIT = {};
+if ( typeof (SIVVIT) === 'undefined') {
+    SIVVIT = {};
 }
 
 SIVVIT.Settings = {
-  host : 'http://sivvit.com'
+    host : 'http://sivvit.com'
 };
