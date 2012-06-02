@@ -19,10 +19,13 @@
 
       var self = this;
 
+
       this.collection = new SIVVIT.EventsCollection();
       this.view = new SIVVIT.EventsView({
         edit : this.edit
       });
+
+
 
       var MyModel = Backbone.Model.extend({
         url : json

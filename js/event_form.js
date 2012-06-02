@@ -28,6 +28,7 @@
           type : null
         });
 
+
       } else {
 
         // Load data for existing event
@@ -350,6 +351,8 @@
       if(!this.map) {
 
         this.map = new google.maps.Map($('#form-map')[0], {
+
+          
           center : new google.maps.LatLng(self.model.get('location').lat, self.model.get('location').lon),
           zoom : 8,
           disableDefaultUI : true,
