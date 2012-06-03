@@ -1,12 +1,13 @@
-// JSLint variable definition
+// JSLint variable definition and formatting
 /*global SIVVIT:true  */
+/*jslint white:true */
 
-if( typeof (SIVVIT) === 'undefined') {
-  SIVVIT = {};
+if ( typeof (SIVVIT) === 'undefined') {
+    SIVVIT = {};
 }
 
 SIVVIT.Settings = {
-  host : 'http://sivvit.com'
+    host : 'http://sivvit.com'
 };
 
 // JSLint variable definition
@@ -425,7 +426,7 @@ Date.daysInMonth = function(m, y) {
 
 // JSLint variable definition
 /*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false */
-/*jslint white:true plusplus:true devel:true passfail:false sloppy:true*/
+/*jslint white:true plusplus:true devel:true*/
 
 // Contains event data
 SIVVIT.EventModel = Backbone.Model.extend({

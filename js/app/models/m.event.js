@@ -1,6 +1,6 @@
 // JSLint variable definition
 /*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false */
-/*jslint white:true plusplus:true devel:true passfail:false sloppy:true*/
+/*jslint white:true plusplus:true devel:true*/
 
 // Contains event data
 SIVVIT.EventModel = Backbone.Model.extend({

@@ -1,6 +1,6 @@
 // JSLint variable definition
 /*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false */
-/*jslint white:true plusplus:true devel:true passfail:false sloppy:true*/
+/*jslint white:true devel:true passfail:false sloppy:true*/
 
 (function(jQuery, SIVVIT) {
 
@@ -188,14 +188,14 @@
 
             var content = model.get('content'), i, j, tmp_group = [], tmp_items, group_model, itm_model, len = content.length;
 
-            for ( i = len; i--; ) {
+            for ( i = 0; i < len; i += 1) {
                 group_model = new SIVVIT.ItemGroupModel(content[i]);
                 group_model.set({
                     json : model.get('json')
                 });
                 tmp_items = [];
 
-                for ( j = content[i].items.length; j--; ) {
+                for ( j = 0; j < content[i].items.length; j += 1) {
                     itm_model = new SIVVIT.ItemModel(content[i].items[j]);
 
                     itm_model.set({
@@ -341,7 +341,7 @@
             $(this.activeButton).toggleClass('text-btn', false);
             $(this.activeButton).toggleClass('text-btn-selected', true);
 
-            if (this.prevButton != this.activeButton) {
+            if (this.prevButton !== this.activeButton) {
                 $(this.prevButton).toggleClass('text-btn', true);
                 $(this.prevButton).toggleClass('text-btn-selected', false);
             }
@@ -448,11 +448,11 @@
                 // Loop through all available groups - ItemGroupCollection
                 collection.each(function(group) {
 
-                    var old_group = this.groups_key[group.get('timestamp')];
+                    var old_group = this.groups_key[group.get('timestamp')], stats;
 
                     if (old_group) {
                         // Update stats for the existing model
-                        var stats = old_group.get('stats');
+                        stats = old_group.get('stats');
 
                         // Please note that model stats are updated bypassing the setter method.
                         // Group model does not allow secondary stats updates
@@ -562,15 +562,16 @@
 
         // Displays footer if there are more buckets to be loaded.
         footer : function() {
-            var self = this;
+
+            var self = this, btn, min_content_bounds;
 
             // Remove existing loader button
-            var btn = $(this.el).find('#load-groups-btn');
+            btn = $(this.el).find('#load-groups-btn');
             if (btn.length > 0) {
                 btn.remove();
             }
 
-            var min_content_bounds = this.temporalModel.adjustToNextBucket(new Date(this.eventModel.get('content_bounds').min));
+            min_content_bounds = this.temporalModel.adjustToNextBucket(new Date(this.eventModel.get('content_bounds').min));
 
             if (this.eventModel.get('content').length > 0 && min_content_bounds > this.temporalModel.adjustToNextBucket(this.eventModel.get('startDate'))) {
                 if ($('#load-groups-btn').length <= 0) {
@@ -665,10 +666,12 @@
         // If prepend is set to true the group is prepended to the list, otherwise appended
         buildGroup : function(group, prepend) {
 
-            var gid = 'group-' + group.get('id');
+            var gid, el;
+
+            gid = 'group-' + group.get('id');
 
             // Create group element which will contain all items
-            var el = "<ol id='" + gid + "'></ol>";
+            el = "<ol id='" + gid + "'></ol>";
 
             if (prepend) {
                 $(this.el).prepend(el);
@@ -694,10 +697,12 @@
         // Builds group header
         buildGroupHeader : function(group) {
 
-            var total = this.getItemCount(group);
+            var total, header;
+
+            total = this.getItemCount(group);
 
             // Remove existing heder
-            var header = $(group.get('div_id')).find('#group-header');
+            header = $(group.get('div_id')).find('#group-header');
             if (header.length > 0) {
                 header.remove();
             }
@@ -707,10 +712,10 @@
 
         buildGroupFooter : function(group) {
 
-            var self = this, total;
+            var self = this, total, footer;
 
             // Remove existing footer
-            var footer = $(group.get('div_id')).find('#group-footer');
+            footer = $(group.get('div_id')).find('#group-footer');
             if (footer.length > 0) {
                 footer.remove();
             }
@@ -766,13 +771,13 @@
         // Called once additional group data is loaded.
         updateGroup : function(group) {
 
-            var tmp = [], i, len, items;
-            var content = group.get('content');
+            var tmp = [], i, len, items, content, itm, itm_model;
+            content = group.get('content');
             len = content.length;
 
             // It is possible to have more than one bucket, loop through all of them to
             // find the appropriate one
-            for ( i = len; i--; ) {
+            for ( i = 0; i < len; i += 1) {
                 if (Date.secondsToDate(content[i].timestamp).getTime() === group.get('timestamp').getTime()) {
                     items = content[i].items;
                 }
@@ -781,11 +786,11 @@
             if (items.length > 0) {
                 len = group.get('items').length;
 
-                for ( i = len; i--; ) {
+                for ( i = 0; i < len; i += 1) {
 
-                    var itm = items[i];
+                    itm = items[i];
                     if (itm) {
-                        var itm_model = new SIVVIT.ItemModel(itm);
+                        itm_model = new SIVVIT.ItemModel(itm);
 
                         itm_model.set({
                             timestamp : itm.timestamp
@@ -823,7 +828,7 @@
         // Display edit bar at the top of the list.
         displayEdit : function() {
 
-            var self = this;
+            var self = this, i;
 
             if (this.edit) {
 
@@ -832,29 +837,30 @@
                 // Delete all approved items
                 $('#del-all').click(function() {
 
-                    var i = self.rendered.length;
-                    while (i--) {
+                    i = self.rendered.length;
+                    while (i > 0) {
                         var itm = self.rendered[i];
                         if (itm.html.find('#itm-check').is(':checked')) {
                             self.deleteItem(itm);
                         }
+                        i -= 1;
                     }
                 });
 
                 // Approve all selected items
                 $('#apr-all').click(function() {
-
-                    var b
-
-                    var i = self.rendered.length;
-                    while (i--) {
-                        var itm = self.rendered[i];
-                        var cb = itm.html.find('#itm-check');
+                    var i, itm, cb;
+                    i = self.rendered.length;
+                    while (i > 0) {
+                        itm = self.rendered[i];
+                        cb = itm.html.find('#itm-check');
                         if (cb.is(':checked')) {
                             self.approveItem(itm, true);
                         }
                         cb.attr('checked', false);
                         itm.html.css('background-color', '#FFFFFF');
+
+                        i = -1;
                     }
                     $('#group-select').attr('checked', false);
                 });
@@ -862,13 +868,15 @@
                 // Select all items
                 $('#group-select').click(function() {
 
-                    var i = self.rendered.length;
-                    var checked = $('#group-select').is(':checked');
+                    var i, checked, itm;
+                    i = self.rendered.length;
+                    checked = $('#group-select').is(':checked');
 
-                    while (i--) {
-                        var itm = self.rendered[i];
+                    while (i > 0) {
+                        itm = self.rendered[i];
                         itm.html.find('#itm-check').attr('checked', checked);
                         itm.html.css('background-color', !checked ? '#FFFFFF' : '#FFFFCC');
+                        i = -1;
                     }
                 });
             }
@@ -1132,10 +1140,12 @@
 
         formatTime : function(milliseconds) {
 
-            var seconds = Math.floor(milliseconds / 1000);
-            var minutes = Math.floor(milliseconds / 60000);
-            var hours = Math.floor(milliseconds / 3600000);
-            var days = Math.floor(milliseconds / 86400000);
+            var seconds, minutes, hours, days;
+
+            seconds = Math.floor(milliseconds / 1000);
+            minutes = Math.floor(milliseconds / 60000);
+            hours = Math.floor(milliseconds / 3600000);
+            days = Math.floor(milliseconds / 86400000);
 
             if (days > 0) {
                 return 'updated ' + days + ' days ago';
