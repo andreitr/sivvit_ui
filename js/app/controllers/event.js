@@ -43,7 +43,9 @@
                     model : this.eventModel
                 });
 
-                this.mapView = new SIVVIT.MapView();
+                this.mapView = new SIVVIT.MapView({
+                    el : '#map-container'
+                });
 
                 this.sideHistView = new SIVVIT.HistogramView({
                     el : '#timeline-container',
@@ -1072,19 +1074,6 @@
             // Returns count of items to be displayed in this view
             getItemCount : function(group) {
                 return group.get('stats').total;
-            }
-
-        });
-
-        /**
-         * Display static map in the sidebar.
-         */
-        SIVVIT.MapView = Backbone.View.extend({
-
-            el : '#map-container',
-
-            render : function(name, lat, lon) {
-                $(this.el).html("<img src=\"http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + lon + "&zoom=10&size=280x130&sensor=false\">");
             }
 
         });
