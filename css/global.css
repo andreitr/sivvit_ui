@@ -102,20 +102,12 @@ a:link {
   min-width: 960px;
 }
 
-.hidden {
-  display: none;
+.content-header {
+  min-height: 65px;
 }
 
 
-
-#padding {
-  padding: 10px;
-}
-#contentSidebarBox {
-  width: 300px;
-}
-
-#contentBox, #contentBoxHeader, #contentSidebarBox {
+.white-box {
   width: auto;
   height: auto;
   background: #FFFFFF;
@@ -124,10 +116,21 @@ a:link {
   -box-shadow: 0px 0px 3px hsla(0,0%,0%,.3); /* Opera, IE 9 */
 }
 
+
+
 /* Set min-height for page content headers. */
-#contentBoxHeader {
-  min-height: 65px;
+
+/**
+ * Misc classes
+ */
+.hidden {
+  display: none;
 }
+
+#padding {
+  padding: 10px;
+}
+
 /* Displays user header*/
 #user-avatar {
   width: 38px;
