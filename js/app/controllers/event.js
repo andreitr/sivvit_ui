@@ -74,8 +74,8 @@
                 this.eventModel.bind('change', function() {
 
                     // Show main application
-                    $('#content-loader').remove();
-                    $('#event-application').show();
+                    $('.loader').remove();
+                    $('#event-app').show();
 
                     if (self.eventModel.hasChanged('title') || self.eventModel.hasChanged('description') || self.eventModel.hasChanged('location')) {
                         self.headerView.render();
