@@ -36,7 +36,7 @@ h1 {
   text-shadow: 1px 1px 1px hsla(0,0%,100%,.8);
   margin: 0px 0 5px 0;
 }
-h2, h3, .h2-inline {
+h2, h3 {
   color: #333333;
   font-size: 17px;
   font-weight: 100;
@@ -47,9 +47,6 @@ h3 {
   font-size: 16px;
   font-weight: 200;
   margin: 0 0 5px 0;
-}
-.h2-inline {
-  display: inline-block;
 }
 a:link {
   color: #118bff;
@@ -94,6 +91,31 @@ a:link {
   color: #FFFFFF;
 }
 
+/* Columns */
+.column-layout {
+  display: table;
+  width: 100%;
+}
+
+.column-layout .row {
+  display: table-row;
+}
+
+.column-layout .cell {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.column-layout .sidebar-cell {
+  width: 300px;
+  display: block;
+}
+
+.column-layout .main-cell {
+  width: 100%;
+  padding-left: 20px;
+}
+
 /* Content area */
 .content-container {
   display: block;
@@ -106,7 +128,6 @@ a:link {
   min-height: 65px;
 }
 
-
 .white-box {
   width: auto;
   height: auto;
@@ -116,8 +137,6 @@ a:link {
   -box-shadow: 0px 0px 3px hsla(0,0%,0%,.3); /* Opera, IE 9 */
 }
 
-
-
 /* Set min-height for page content headers. */
 
 /**
@@ -125,6 +144,23 @@ a:link {
  */
 .hidden {
   display: none;
+}
+
+.margin-t {
+  margin-top: 20px;
+}
+
+.padding-b {
+  padding-top: 10px;
+}
+.padding-t {
+  padding-bottom: 10px
+}
+.float-r {
+  float: right;
+}
+.inline {
+  display: inline-block;
 }
 
 #padding {

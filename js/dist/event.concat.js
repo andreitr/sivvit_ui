@@ -102,8 +102,8 @@ SIVVIT.Settings = {
                 this.eventModel.bind('change', function() {
 
                     // Show main application
-                    $('.loader').remove();
-                    $('#event-app').show();
+                    $('#js-loader').remove();
+                    $('#js-app').show();
 
                     if (self.eventModel.hasChanged('title') || self.eventModel.hasChanged('description') || self.eventModel.hasChanged('location')) {
                         self.headerView.render();
@@ -1115,11 +1115,12 @@ SIVVIT.Settings = {
 
             render : function() {
 
-                $('#event-title').html(this.model.get('title'));
+                $('#js-e-title').html(this.model.get('title'));
                 // $('#event-description').html(this.model.get('description'));
                 // I don't think we even need event description
-                $('#event-description').html('Tracking <strong><i>' + this.model.get('keywords').toString() + '</i></strong> near ' + this.model.get("location").name);
-                $('#event-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + this.model.get("startDate").toDateString());
+                $('#js-e-descr').html('Tracking <strong><i>' + this.model.get('keywords').toString() + '</i></strong> near ' + this.model.get("location").name);
+                $('#js-e-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + this.model.get("startDate").toDateString());
+
                 $('#map-label').html("<span class='icon-location'></span>" + this.model.get("location").name);
 
                 this.update();

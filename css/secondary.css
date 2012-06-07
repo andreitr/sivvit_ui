@@ -1,13 +1,8 @@
-#contentVSpacer
-{
-    height: 20px;
-    display: block;
-}
 
 #pageHeader
 {
-	min-height: 70px;
-	display: block;
+  min-height: 70px;
+  display: block;
 }
 
 #middle
@@ -23,7 +18,7 @@
 
 #eventHeader
 {
-	display: block;
+  display: block;
     width:100%;
     height: auto;
     overflow: hidden;
@@ -40,19 +35,3 @@
 
 
 
-#column-layout
-{
-    display: table;
-    width: 100%;
-}
-
-#column-layout #row
-{
-    display: table-row;
-}
-
-#column-layout #cell
-{
-    display: table-cell;
-    vertical-align: top;   
-}

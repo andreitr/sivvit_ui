@@ -29,36 +29,38 @@
                 </div>
             </div>
 
-            <div class="loader"></div>
-            <div class="hidden" id="event-app">
-                <div>
-                    <div class="white-box app-header">
-                        <div class="content-container">
-                            <div id="padding" style="padding: 10px 0 10px 0;">
-                                <div id="column-layout">
-                                    <div id="row">
-                                        <div id="cell">
-                                            <h1 id="event-title"></h1>
-                                            <div id="event-description"></div>
-                                        </div>
-                                        <div id="cell">
-                                            <h1>&nbsp;</h1>
-                                            <div id="event-user" style="float:right;"></div>
-                                        </div>
+            <div class="loader" id="js-loader"></div>
+            <div class="hidden" id="js-app">
+
+                <div class="white-box app-header">
+                    <div class="content-container">
+                        <div class="column-layout padding-b padding-t">
+                            <div class="row">
+                                <div class="cell">
+                                    <h1 id="js-e-title">&nbsp;</h1>
+                                    <div id="js-e-descr">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                                <div class="cell">
+                                    <h1>&nbsp;</h1>
+                                    <div id="js-e-user" class="float-r">
+                                        &nbsp;
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="contentVSpacer"></div>
-                <div class="content-container">
-                    <div id="column-layout">
-                        <div id="row">
+
+                <div class="content-container margin-t">
+                    <div class="column-layout">
+                        <div class="row">
+
                             <!--Left column -->
-                            <div id="cell" style="width:300px; display:block">
-                                <div id="mover">
-                                    <div class="h2-inline">
+                            <div class="cell sidebar-cell">
+                                <div id="js-mover">
+                                    <div class="h2 inline">
                                         Timeline
                                     </div>
                                     <div class="seconrady-title" id="timeline-label"></div>
@@ -72,8 +74,7 @@
                                             <div id="timeline-slider"></div>
                                         </div>
                                     </div>
-                                    <div id="contentVSpacer"></div>
-                                    <div class="h2-inline">
+                                    <div class="h2 margin-t inline">
                                         Collecting content in
                                     </div>
                                     <div class="seconrady-title" id="map-label"></div>
@@ -84,10 +85,11 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Right column -->
-                            <div id="cell" style="width:100%; padding-left:20px">
+                            <div class="cell main-cell">
                                 <div id="navigation-content">
-                                    <div class="h2-inline" id="content-stats"></div>
+                                    <div class="h2 inline" id="content-stats"></div>
                                     <div class="text-btn" id="all-btn">
                                         <span class='icon-comment' id='all-btn'>&nbsp;</span>Everything
                                     </div>
