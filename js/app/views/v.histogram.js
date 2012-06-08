@@ -5,7 +5,8 @@
 SIVVIT.HistogramView = Backbone.View.extend({
 
     bars : [],
-    slider : false,
+
+    histogram : null,
 
     initialize : function(options) {
         this.model = options.model;
@@ -27,7 +28,11 @@ SIVVIT.HistogramView = Backbone.View.extend({
     drawHistogram : function() {
 
         // Clear out previous drawing
-        var histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
+        if (this.histogram) {
+            this.histogram.clear();
+        }
+
+        this.histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
         if (this.model.get('histogram') && this.model.get('histogramStartDate')) {
 
@@ -63,7 +68,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
                 var bar_x = Math.round(percent_x * max_width);
                 var bar_y = Math.round(max_height - bar_h);
 
-                var bar = histogram.rect(bar_x, bar_y, bar_w, bar_h).attr({
+                var bar = this.histogram.rect(bar_x, bar_y, bar_w, bar_h).attr({
                     fill : '#333333',
                     'stroke-width' : 0
                 });
