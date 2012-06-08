@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" type="text/css" href="css/secondary.css" />
-        <link rel="stylesheet" type="text/css" href="css/event.css" />
         <link rel="stylesheet" type="text/css" href="css/global.css" />
         <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
         <link rel="stylesheet" type="text/css" href="js/libs/fancybox/jquery.fancybox.css" />
@@ -49,6 +47,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="js-mover-trigger" class="absolute"></div>
                         </div>
                     </div>
                 </div>
@@ -59,29 +58,19 @@
 
                             <!--Left column -->
                             <div class="cell sidebar-cell">
-                                <div id="js-mover">
-                                    <div class="h2 inline">
-                                        Timeline
-                                    </div>
-                                    <div class="seconrady-title" id="timeline-label"></div>
-                                    <div class="white-box">
-                                        <div id="padding">
-                                            <div id="timline-label">
-                                                <div id="timeline-maxtime"></div>
-                                                <div id="timeline-mintime"></div>
-                                            </div>
-                                            <div id="timeline-container"></div>
-                                            <div id="timeline-slider"></div>
+                                <div id="js-mover" class="sidebar-cell">
+                                    <h3 class="inline">Timeline</h3><h4 id="js-e-timeline-lbl"></h4>
+                                    <div class="white-box padding">
+
+                                        <div id="timline-label">
+                                            <div id="timeline-maxtime"></div>
+                                            <div id="timeline-mintime"></div>
                                         </div>
-                                    </div>
-                                    <div class="h2 margin-t inline">
-                                        Collecting content in
-                                    </div>
-                                    <div class="seconrady-title" id="map-label"></div>
+
+                                        <div id="js-e-timeline" class="sidebar-content"></div>
+                                    </div><h3 class='inline margin-t'>Collecting content in</h3><h4 id="js-e-map-lbl"></h4>
                                     <div class="white-box">
-                                        <div id="padding">
-                                            <div id="map-container"></div>
-                                        </div>
+                                        <div class="padding" id="js-e-map"></div>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +78,7 @@
                             <!-- Right column -->
                             <div class="cell main-cell">
                                 <div id="navigation-content">
-                                    <div class="h2 inline" id="content-stats"></div>
+                                    <h3 id="js-e-stats" class="inline"></h3>
                                     <div class="text-btn" id="all-btn">
                                         <span class='icon-comment' id='all-btn'>&nbsp;</span>Everything
                                     </div>
@@ -106,15 +95,15 @@
                                     </div>
                                 </div>
                                 <!-- CONTENT HERE -->
-                                <div id="dynamic-content"></div>
+                                <div id="js-app-content"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="padding"></div>
+
         </div>
-        <div id="footer">
+        <div class="footer margin-t">
             <div class="content-container">
                 <div class="notice">
                     &copy; 2012 Sivvit, Inc., All Rights Reserved
@@ -123,9 +112,6 @@
         </div>
         <script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
         <script type="text/javascript">
-            // JSLint variable definition
-            /*global $LAB:false, SIVVIT:false */
-
             $LAB.script("js/libs/jquery/jquery-1.7.2.min.js").wait();
             $LAB.script("js/libs/graphael/raphael-min.js").wait();
             $LAB.script("js/libs/underscore/underscore-min.js").wait();

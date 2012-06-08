@@ -44,11 +44,11 @@
                 });
 
                 this.mapView = new SIVVIT.MapView({
-                    el : '#map-container'
+                    el : '#js-e-map'
                 });
 
                 this.sideHistView = new SIVVIT.HistogramView({
-                    el : '#timeline-container',
+                    el : '#js-e-timeline',
                     model : this.temporalModel
                 });
 
@@ -174,9 +174,9 @@
                 $('#wrapper').waypoint.defaults.onlyOnScroll = true;
                 $('#wrapper').waypoint({
                     offset : '-100%'
-                }).find('#content-stats').waypoint(function(event, direction) {
+                }).find('#js-mover-trigger').waypoint(function(event, direction) {
 
-                    $('#mover').toggleClass('sticky', direction === 'down');
+                    $('#js-mover').toggleClass('sticky', direction === 'down');
                     event.stopPropagation();
                 });
 
@@ -313,18 +313,21 @@
 
             // Displays stats for the currently-selected view
             renderStats : function() {
+
+                var element = $('#js-e-stats');
+
                 switch(this.activeButton) {
 
                     case '#all-btn':
-                        $('#content-stats').html('Total: ' + this.eventModel.get('stats').total);
+                        element.html('Total: ' + this.eventModel.get('stats').total);
                         break;
 
                     case '#post-btn':
-                        $('#content-stats').html('Posts: ' + this.eventModel.get('stats').posts);
+                        element.html('Posts: ' + this.eventModel.get('stats').posts);
                         break;
 
                     case '#media-btn':
-                        $('#content-stats').html('Media: ' + (this.eventModel.get('stats').images + this.eventModel.get('stats').videos));
+                        element.html('Media: ' + (this.eventModel.get('stats').images + this.eventModel.get('stats').videos));
                         break;
                 }
             },
@@ -380,7 +383,7 @@
         // Displays content buckets etc.
         SIVVIT.ContentView = Backbone.View.extend({
 
-            el : '#dynamic-content',
+            el : '#js-app-content',
 
             post_template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='http://twitter.com/#!/${author}'>${author}</a></div></div></li>",
             photo_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span>${author}</div></div></li>",
@@ -1093,7 +1096,7 @@
                 $('#js-e-descr').html('Tracking <strong><i>' + this.model.get('keywords').toString() + '</i></strong> near ' + this.model.get("location").name);
                 $('#js-e-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + this.model.get("startDate").toDateString());
 
-                $('#map-label').html("<span class='icon-location'></span>" + this.model.get("location").name);
+                $('#js-e-map-lbl').html("<span class='icon-location'></span>" + this.model.get("location").name);
 
                 this.update();
             },
@@ -1108,22 +1111,24 @@
             // Updates timer
             update : function() {
 
+                var element = $('#js-e-timeline-lbl');
+
                 switch(this.model.get('status')) {
 
                     case 1:
-                        $('#timeline-label').html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
+                        element.html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
                         break;
 
                     case 2:
-                        $('#timeline-label').html("<span class='icon-time'></span>Collection Archived");
+                        element.html("<span class='icon-time'></span>Collection Archived");
                         break;
 
                     case -1:
-                        $('#timeline-label').html("<span class='icon-time'></span>Stopping Collection");
+                        element.html("<span class='icon-time'></span>Stopping Collection");
                         break;
 
                     case 0:
-                        $('#timeline-label').html("<span class='icon-time'></span>Starting Collection");
+                        element.html("<span class='icon-time'></span>Starting Collection");
                         break;
                 }
             },

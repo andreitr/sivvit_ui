@@ -72,11 +72,11 @@ SIVVIT.Settings = {
                 });
 
                 this.mapView = new SIVVIT.MapView({
-                    el : '#map-container'
+                    el : '#js-e-map'
                 });
 
                 this.sideHistView = new SIVVIT.HistogramView({
-                    el : '#timeline-container',
+                    el : '#js-e-timeline',
                     model : this.temporalModel
                 });
 
@@ -202,9 +202,9 @@ SIVVIT.Settings = {
                 $('#wrapper').waypoint.defaults.onlyOnScroll = true;
                 $('#wrapper').waypoint({
                     offset : '-100%'
-                }).find('#content-stats').waypoint(function(event, direction) {
+                }).find('#js-e-descr').waypoint(function(event, direction) {
 
-                    $('#mover').toggleClass('sticky', direction === 'down');
+                    $('#js-mover').toggleClass('sticky', direction === 'down');
                     event.stopPropagation();
                 });
 
@@ -341,18 +341,21 @@ SIVVIT.Settings = {
 
             // Displays stats for the currently-selected view
             renderStats : function() {
+
+                var element = $('#js-e-stats');
+
                 switch(this.activeButton) {
 
                     case '#all-btn':
-                        $('#content-stats').html('Total: ' + this.eventModel.get('stats').total);
+                        element.html('Total: ' + this.eventModel.get('stats').total);
                         break;
 
                     case '#post-btn':
-                        $('#content-stats').html('Posts: ' + this.eventModel.get('stats').posts);
+                        element.html('Posts: ' + this.eventModel.get('stats').posts);
                         break;
 
                     case '#media-btn':
-                        $('#content-stats').html('Media: ' + (this.eventModel.get('stats').images + this.eventModel.get('stats').videos));
+                        element.html('Media: ' + (this.eventModel.get('stats').images + this.eventModel.get('stats').videos));
                         break;
                 }
             },
@@ -408,7 +411,7 @@ SIVVIT.Settings = {
         // Displays content buckets etc.
         SIVVIT.ContentView = Backbone.View.extend({
 
-            el : '#dynamic-content',
+            el : '#js-app-content',
 
             post_template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='http://twitter.com/#!/${author}'>${author}</a></div></div></li>",
             photo_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span>${author}</div></div></li>",
@@ -1121,7 +1124,7 @@ SIVVIT.Settings = {
                 $('#js-e-descr').html('Tracking <strong><i>' + this.model.get('keywords').toString() + '</i></strong> near ' + this.model.get("location").name);
                 $('#js-e-user').html("<span class='gray-text'>Created by</span> <span class='icon-user'></span><a href='#'>" + this.model.get("author") + "</a> <span class='gray-text'>on</span> " + this.model.get("startDate").toDateString());
 
-                $('#map-label').html("<span class='icon-location'></span>" + this.model.get("location").name);
+                $('#js-e-map-lbl').html("<span class='icon-location'></span>" + this.model.get("location").name);
 
                 this.update();
             },
@@ -1136,22 +1139,24 @@ SIVVIT.Settings = {
             // Updates timer
             update : function() {
 
+                var element = $('#js-e-timeline-lbl');
+
                 switch(this.model.get('status')) {
 
                     case 1:
-                        $('#timeline-label').html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
+                        element.html("<span class='icon-time'></span>Live, " + this.formatTime(new Date() - this.timestamp));
                         break;
 
                     case 2:
-                        $('#timeline-label').html("<span class='icon-time'></span>Collection Archived");
+                        element.html("<span class='icon-time'></span>Collection Archived");
                         break;
 
                     case -1:
-                        $('#timeline-label').html("<span class='icon-time'></span>Stopping Collection");
+                        element.html("<span class='icon-time'></span>Stopping Collection");
                         break;
 
                     case 0:
-                        $('#timeline-label').html("<span class='icon-time'></span>Starting Collection");
+                        element.html("<span class='icon-time'></span>Starting Collection");
                         break;
                 }
             },
@@ -1298,7 +1303,7 @@ Date.daysInMonth = function(m, y) {
 
 // JSLint variable definition
 /*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false */
-/*jslint white:true plusplus:true devel:true*/
+/*jslint white:true plusplus:true devel:true sloppy:true*/
 
 // Contains event data
 SIVVIT.EventModel = Backbone.Model.extend({
@@ -2017,76 +2022,77 @@ SIVVIT.ItemGroupModel = Backbone.Model.extend({
 
 });
 // JSLint variable definition
-/*global SIVVIT:true, Raphael:false, $:false, Backbone:false, confirm:false, console:false  */
+/*global SIVVIT:true, Raphael:false, $:false, Backbone:false  */
+/*jslint white:true devel:true passfail:false sloppy:true*/
 
 SIVVIT.HistogramView = Backbone.View.extend({
 
-  bars : [],
-  slider : false,
+    bars : [],
+    slider : false,
 
-  initialize : function(options) {
-    this.model = options.model;
-    this.model.bind('change:histogram', this.render, this);
-  },
+    initialize : function(options) {
+        this.model = options.model;
+        this.model.bind('change:histogram', this.render, this);
+    },
 
-  render : function() {
-    this.drawHistogram();
-    this.updateTime();
-  },
+    render : function() {
+        this.drawHistogram();
+        this.updateTime();
+    },
 
-  // Updates min and max time displays
-  updateTime : function() {
-    $('#timeline-mintime').html(this.model.get('startRange').format());
-    $('#timeline-maxtime').html(this.model.get('endRange').format());
-  },
+    // Updates min and max time displays
+    updateTime : function() {
+        $('#timeline-mintime').html(this.model.get('startRange').format());
+        $('#timeline-maxtime').html(this.model.get('endRange').format());
+    },
 
-  // Draws histogram.
-  drawHistogram : function() {
+    // Draws histogram.
+    drawHistogram : function() {
 
-    // Clear out previous drawing
-    var histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
+        // Clear out previous drawing
+        var histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
-    if (this.model.get('histogram') && this.model.get('histogramStartDate')) {
+        if (this.model.get('histogram') && this.model.get('histogramStartDate')) {
 
-      var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get('histogramEndDate'))).getTime();
+            var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get('histogramEndDate'))).getTime();
 
-      // Total count of available slots
-      var len_total = Math.ceil((adjusted_end_date - this.model.get('histogramStartDate')) / this.model.getResolution());
+            // Total count of available slots
+            var len_total = Math.ceil((adjusted_end_date - this.model.get('histogramStartDate')) / this.model.getResolution());
 
-      // Actual count of temporal slots
-      var len = this.model.get('histogram').length;
+            // Actual count of temporal slots
+            var len = this.model.get('histogram').length;
 
-      var max_val = this.model.get('max');
+            var max_val = this.model.get('max');
 
-      var max_height = $(this.el).height();
-      var max_width = $(this.el).width();
+            var max_height = $(this.el).height();
+            var max_width = $(this.el).width();
 
-      var bar_w = $(this.el).width() / len_total;
+            var bar_w = $(this.el).width() / len_total;
 
-      // Anything less than 0.5 displays as a very thin bar
-      bar_w = bar_w < 0.5 ? 0.5 : bar_w;
+            // Anything less than 0.5 displays as a very thin bar
+            bar_w = bar_w < 0.5 ? 0.5 : bar_w;
 
-      var start_time = this.model.get('histogramStartDate');
-      var end_time = adjusted_end_date;
+            var start_time = this.model.get('histogramStartDate');
+            var end_time = adjusted_end_date;
 
-      for (var i = len; i--; ) {
+            for (var i = len; i--; ) {
 
-        var frame = new SIVVIT.TemporalFrameModel(this.model.get('histogram')[i]);
+                var frame = new SIVVIT.TemporalFrameModel(this.model.get('histogram')[i]);
 
-        var percent_y = (frame.get('count') / max_val) * 100;
-        var percent_x = (frame.get('timestamp').getTime() - start_time) / (end_time - start_time);
+                var percent_y = (frame.get('count') / max_val) * 100;
+                var percent_x = (frame.get('timestamp').getTime() - start_time) / (end_time - start_time);
 
-        var bar_h = Math.round(percent_y * max_height / 100);
-        var bar_x = Math.round(percent_x * max_width);
-        var bar_y = Math.round(max_height - bar_h);
+                var bar_h = Math.round(percent_y * max_height / 100);
+                var bar_x = Math.round(percent_x * max_width);
+                var bar_y = Math.round(max_height - bar_h);
 
-        var bar = histogram.rect(bar_x, bar_y, bar_w, bar_h).attr({
-          fill : '#333333',
-          'stroke-width' : 0
-        });
-      }
+                var bar = histogram.rect(bar_x, bar_y, bar_w, bar_h).attr({
+                    fill : '#333333',
+                    'stroke-width' : 0
+                });
+            }
+        }
     }
-  }
 
 });
 
