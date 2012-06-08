@@ -74,7 +74,7 @@
                 this.eventModel.bind('change', function() {
 
                     // Show main application
-                    $('#js-loader').remove();
+                    $('#js-app-loader').remove();
                     $('#js-app').show();
 
                     if (self.eventModel.hasChanged('title') || self.eventModel.hasChanged('description') || self.eventModel.hasChanged('location')) {
@@ -616,7 +616,7 @@
             // Displays content loader
             showLoader : function(show) {
                 $(this.el).empty();
-                $(this.el).html("<div id='content-loader'></div>");
+                $(this.el).html("<span class='loader'></span>");
             },
 
             // Builds each item, returns {timestamp, html} object

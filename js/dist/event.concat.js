@@ -102,7 +102,7 @@ SIVVIT.Settings = {
                 this.eventModel.bind('change', function() {
 
                     // Show main application
-                    $('#js-loader').remove();
+                    $('#js-app-loader').remove();
                     $('#js-app').show();
 
                     if (self.eventModel.hasChanged('title') || self.eventModel.hasChanged('description') || self.eventModel.hasChanged('location')) {
@@ -644,7 +644,7 @@ SIVVIT.Settings = {
             // Displays content loader
             showLoader : function(show) {
                 $(this.el).empty();
-                $(this.el).html("<div id='content-loader'></div>");
+                $(this.el).html("<span class='loader'></span>");
             },
 
             // Builds each item, returns {timestamp, html} object
@@ -2055,7 +2055,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
             this.histogram.clear();
         }
 
-        this.histogram = Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
+        this.histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
         if (this.model.get('histogram') && this.model.get('histogramStartDate')) {
 
