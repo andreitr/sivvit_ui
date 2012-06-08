@@ -158,7 +158,7 @@ a:link {
 
 /** Secondary title for content boxes */
 
-#content-stats {
+.content-stats {
   min-width: 120px;
 }
 
