@@ -267,9 +267,9 @@ SIVVIT.Settings = {
             temporalModel : null,
 
             events : {
-                'click #all-btn' : 'updateView',
-                'click #post-btn' : 'updateView',
-                'click #media-btn' : 'updateView'
+                'click #js-all-btn' : 'updateView',
+                'click #js-post-btn' : 'updateView',
+                'click #js-media-btn' : 'updateView'
             },
 
             initialize : function(options) {
@@ -278,7 +278,7 @@ SIVVIT.Settings = {
 
                 this.view = options.view;
 
-                this.activeButton = '#all-btn';
+                this.activeButton = '#js-all-btn';
                 $(this.activeButton).toggleClass('text-btn', false);
                 $(this.activeButton).toggleClass('text-btn-selected', true);
             },
@@ -300,18 +300,18 @@ SIVVIT.Settings = {
                     this.update();
                     this.view.reset();
 
-                    // Reset existing cotent
+                    // Reset existing content
                     this.eventModel.resetContent();
 
                     // Update type in data request
                     switch(event.target.id) {
-                        case 'all-btn':
+                        case 'js-all-btn':
                             this.eventModel.setRequestType('all');
                             break;
                         case 'post-btn':
                             this.eventModel.setRequestType('post');
                             break;
-                        case 'media-btn':
+                        case 'js-media-btn':
                             this.eventModel.setRequestType('media');
                             break;
                     }
@@ -346,7 +346,7 @@ SIVVIT.Settings = {
 
                 switch(this.activeButton) {
 
-                    case '#all-btn':
+                    case '#js-all-btn':
                         element.html('Total: ' + this.eventModel.get('stats').total);
                         break;
 
@@ -354,7 +354,7 @@ SIVVIT.Settings = {
                         element.html('Posts: ' + this.eventModel.get('stats').posts);
                         break;
 
-                    case '#media-btn':
+                    case '#js-media-btn':
                         element.html('Media: ' + (this.eventModel.get('stats').images + this.eventModel.get('stats').videos));
                         break;
                 }
@@ -363,6 +363,8 @@ SIVVIT.Settings = {
             // Updates navigation buttons. Returns false if the view is already
             // rendered.
             renderButtons : function(button) {
+
+                console.log(button, this.activeButton);
 
                 if (this.activeButton === '#' + button) {
                     return false;
@@ -386,7 +388,7 @@ SIVVIT.Settings = {
 
                 switch(this.activeButton) {
 
-                    case '#all-btn':
+                    case '#js-all-btn':
                         this.temporalModel.set({
                             histogram : this.eventModel.get('histogram').global
                         });
@@ -398,7 +400,7 @@ SIVVIT.Settings = {
                         });
                         break;
 
-                    case '#media-btn':
+                    case '#js-media-btn':
                         this.temporalModel.set({
                             histogram : this.eventModel.get('histogram').media
                         });

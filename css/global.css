@@ -1,15 +1,7 @@
 html, body {
   height: 100%;
 }
-/* Stretched body container to ensure that footer is always at the bottom. */
-.body-container {
-  min-height: 100%;
-  position: relative;
-}
-.sticky {
-  position: fixed;
-  margin-top: -72px
-}
+
 body {
   margin: 0;
   padding: 0;
@@ -27,6 +19,12 @@ body .loader {
   padding: 300px;
   background: url("../img/css/loader.gif") no-repeat;
   background-position: center;
+}
+
+/* Stretched body container to ensure that footer is always at the bottom. */
+body .wrapper {
+  min-height: 100%;
+  position: relative;
 }
 
 h1 {
@@ -52,6 +50,12 @@ h4 {
 a:link {
   color: #118bff;
 }
+
+.sticky {
+  position: fixed;
+  margin-top: -72px
+}
+
 
 .gray-text {
   font-family: Helvetica, Arial, sans-serif;
