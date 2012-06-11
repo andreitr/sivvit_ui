@@ -12,19 +12,20 @@ SIVVIT.Settings = {
 
 // JSLint variable definition
 /*global $:false*/
+/*jslint white:true sloppy:true*/
 
-(function() {
-    // New event or edit existing one.
-    $('#event-form').fancybox({
-        'width' : 860,
-        'height' : 430,
-        'autoScale' : true,
-        'scrolling' : false,
-        'transitionIn' : 'fade',
-        'transitionOut' : 'fade',
-        'type' : 'iframe'
-    });
-})();
+( function() {
+        // New event or edit existing one.
+        $('#event-form').fancybox({
+            'width' : 860,
+            'height' : 430,
+            'autoScale' : true,
+            'scrolling' : false,
+            'transitionIn' : 'fade',
+            'transitionOut' : 'fade',
+            'type' : 'iframe'
+        });
+    }());
 
 // JSLint variable definition
 /*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false */
@@ -415,9 +416,24 @@ SIVVIT.Settings = {
 
             el : '#js-app-content',
 
-            post_template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='http://twitter.com/#!/${author}'>${author}</a></div></div></li>",
-            photo_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span>${author}</div></div></li>",
-            media_template : "<li id='post-list'><div id='content'><div id=\"media\"><img height='160' src='${thumbnail}' id='photo-box' class='fancybox.iframe' href='${media}'/></div><div id='meta'>${source} <span class='icon-time'></span>${timestamp} <span class='icon-user'></span><a href='#'>${author}</a></div></div></li>",
+            post_template : $('#tpl_content-post').html(),
+            photo_template : $('#tpl_content-photo').html(),
+            media_template: $('#tpl_content-media').html(),
+
+            // post_template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img
+            // src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span
+            // class='icon-time'></span>${timestamp} <span class='icon-user'></span><a
+            // href='http://twitter.com/#!/${author}'>${author}</a></div></div></li>",
+
+            // photo_template : "<li id='post-list'><div id='content'><div id=\"media\"><img
+            // height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div
+            // id='meta'>${source} <span class='icon-time'></span>${timestamp} <span
+            // class='icon-user'></span>${author}</div></div></li>",
+            // media_template : "<li id='post-list'><div id='content'><div id=\"media\"><img
+            // height='160' src='${thumbnail}' id='photo-box' class='fancybox.iframe'
+            // href='${media}'/></div><div id='meta'>${source} <span
+            // class='icon-time'></span>${timestamp} <span class='icon-user'></span><a
+            // href='#'>${author}</a></div></div></li>",
 
             // Rendered elements
             rendered : [],
@@ -1190,117 +1206,118 @@ SIVVIT.Settings = {
         });
     }(jQuery, SIVVIT));
 
+/*jslint white:true sloppy:true*/
 // Formats date
 Date.prototype.format = function() {
-  return this.getMonth() + 1 + '/' + this.getDate() + '/' + String(this.getFullYear()).substr(2, 2) + ' ' + this.getHours() + ':' + this.getMinutes() + ':' + this.getSeconds();
+    return this.getMonth() + 1 + '/' + this.getDate() + '/' + String(this.getFullYear()).substr(2, 2) + ' ' + this.getHours() + ':' + this.getMinutes() + ':' + this.getSeconds();
 };
 
 // Date from the server is returned in seconds
 Date.secondsToDate = function(seconds) {
-  return new Date(seconds * 1000);
+    return new Date(seconds * 1000);
 };
 // Converts date object to seconds
 Date.dateToSeconds = function(date) {
-  return Math.round(date.getTime() / 1000);
+    return Math.round(date.getTime() / 1000);
 };
 
 Date.plusSecond = function(date) {
-  if(date.getSeconds() === 59) {
-    return Date.plusMinute(new Date(date.setSeconds(0)));
-  } else {
-    return new Date(date.setSeconds(date.getSeconds() + 1));
-  }
+    if (date.getSeconds() === 59) {
+        return Date.plusMinute(new Date(date.setSeconds(0)));
+    } else {
+        return new Date(date.setSeconds(date.getSeconds() + 1));
+    }
 };
 
 Date.plusMinute = function(date) {
 
-  if(date.getMinutes() === 59) {
-    return Date.plusHour(new Date(date.setMinutes(0)));
-  } else {
-    return new Date(date.setMinutes(date.getMinutes() + 1));
-  }
+    if (date.getMinutes() === 59) {
+        return Date.plusHour(new Date(date.setMinutes(0)));
+    } else {
+        return new Date(date.setMinutes(date.getMinutes() + 1));
+    }
 };
 
 Date.plusHour = function(date) {
 
-  if(date.getHours() === 23) {
-    return Date.plusDay(new Date(date.setHours(0)));
-  } else {
-    return new Date(date.setHours(date.getHours() + 1));
-  }
+    if (date.getHours() === 23) {
+        return Date.plusDay(new Date(date.setHours(0)));
+    } else {
+        return new Date(date.setHours(date.getHours() + 1));
+    }
 };
 
 Date.plusDay = function(date) {
 
-  if(date.getDate() === Date.daysInMonth(date.getMonth(), date.getFullYear())) {
-    return Date.plusMonth(new Date(date.setDate(1)));
-  } else {
-    return new Date(date.setDate(date.getDate() + 1));
-  }
+    if (date.getDate() === Date.daysInMonth(date.getMonth(), date.getFullYear())) {
+        return Date.plusMonth(new Date(date.setDate(1)));
+    } else {
+        return new Date(date.setDate(date.getDate() + 1));
+    }
 };
 
 Date.plusMonth = function(date) {
-  if(date.getMonth() === 11) {
-    return Date.plusYear(new Date(date.setMonth(0)));
-  } else {
-    return new Date(date.setMonth(date.getMonth() + 1));
-  }
+    if (date.getMonth() === 11) {
+        return Date.plusYear(new Date(date.setMonth(0)));
+    } else {
+        return new Date(date.setMonth(date.getMonth() + 1));
+    }
 };
 
 Date.plusYear = function(date) {
-  return new Date(new Date(date.setFullYear(date.getFullYear() + 1)));
+    return new Date(new Date(date.setFullYear(date.getFullYear() + 1)));
 };
 
 Date.minusSecond = function(date) {
-  if(date.getSeconds() === 0) {
-    return Date.minusMinute(new Date(date.setSeconds(59)));
-  } else {
-    return new Date(date.setSeconds(date.getSeconds() - 1));
-  }
+    if (date.getSeconds() === 0) {
+        return Date.minusMinute(new Date(date.setSeconds(59)));
+    } else {
+        return new Date(date.setSeconds(date.getSeconds() - 1));
+    }
 };
 
 Date.minusMinute = function(date) {
-  if(date.getMinutes() === 0) {
-    return Date.minusHour(new Date(date.setMinutes(59)));
-  } else {
-    return new Date(date.setMinutes(date.getMinutes() - 1));
-  }
+    if (date.getMinutes() === 0) {
+        return Date.minusHour(new Date(date.setMinutes(59)));
+    } else {
+        return new Date(date.setMinutes(date.getMinutes() - 1));
+    }
 };
 
 Date.minusHour = function(date) {
 
-  if(date.getHours() === 0) {
-    return Date.minusDay(new Date(date.setHours(23)));
-  } else {
-    return new Date(date.setHours(date.getHours() - 1));
-  }
+    if (date.getHours() === 0) {
+        return Date.minusDay(new Date(date.setHours(23)));
+    } else {
+        return new Date(date.setHours(date.getHours() - 1));
+    }
 };
 
 Date.minusDay = function(date) {
 
-  if(date.getDate() === 1) {
-    return Date.minusMonth(new Date(date.setDate(Date.daysInMonth(date.getMonth(), date.getFullYear()))));
-  } else {
-    return new Date(date.setDate(date.getDate() - 1));
-  }
+    if (date.getDate() === 1) {
+        return Date.minusMonth(new Date(date.setDate(Date.daysInMonth(date.getMonth(), date.getFullYear()))));
+    } else {
+        return new Date(date.setDate(date.getDate() - 1));
+    }
 };
 
 Date.minusMonth = function(date) {
 
-  if(date.getMonth() === 0) {
-    return Date.minusYear(new Date(date.setMonth(11)));
-  } else {
-    return new Date(date.setMonth(date.getMonth() - 1));
-  }
+    if (date.getMonth() === 0) {
+        return Date.minusYear(new Date(date.setMonth(11)));
+    } else {
+        return new Date(date.setMonth(date.getMonth() - 1));
+    }
 };
 
 Date.minusYear = function(date) {
-  return new Date(new Date(date.setFullYear(date.getFullYear() - 1)));
+    return new Date(new Date(date.setFullYear(date.getFullYear() - 1)));
 };
 
 // Returns the number of days for a given month
 Date.daysInMonth = function(m, y) {
-  return 32 - new Date(y, m, 32).getDate();
+    return 32 - new Date(y, m, 32).getDate();
 };
 
 // JSLint variable definition
@@ -1708,173 +1725,175 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
 // JSLint variable definition
 /*global SIVVIT:true, Raphael:false, $:false, Backbone:false, confirm:false, console:false  */
+/*jslint white:true devel:true passfail:false sloppy:true plusplus:*/
 
 // Contains values for the histogram
 SIVVIT.TemporalModel = Backbone.Model.extend({
 
-  defaults : {
-    // Min, max date
-    startDate : new Date(),
-    endDate : new Date(),
+    defaults : {
+        // Min, max date
+        startDate : new Date(),
+        endDate : new Date(),
 
-    // Viewable range
-    startRange : null,
-    endRange : null,
+        // Viewable range
+        startRange : null,
+        endRange : null,
 
-    // Min, max bucket elements
-    min : null,
-    max : null,
+        // Min, max bucket elements
+        min : null,
+        max : null,
 
-    // Array of histogram elements
-    histogram : null,
+        // Array of histogram elements
+        histogram : null,
 
-    // Actual histogram range
-    histogramStartDate : null,
-    histogramEndDate : null,
+        // Actual histogram range
+        histogramStartDate : null,
+        histogramEndDate : null,
 
-    // Minute, second, hour, day
-    resolution : 'minute'
-  },
+        // Minute, second, hour, day
+        resolution : 'minute'
+    },
 
-  // Override set method to keep track on
-  set : function(attributes, options) {
+    // Override set method to keep track on
+    set : function(attributes, options) {
 
-    // Adjust timestamp
-    if(attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
+        // Adjust timestamp
+        if (attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
 
-      this.set({
-        histogramStartDate : null
-      });
-      this.set({
-        histogramEndDate : null
-      });
+            this.set({
+                histogramStartDate : null
+            });
+            this.set({
+                histogramEndDate : null
+            });
 
-      var len = attributes.histogram.length;
+            var len = attributes.histogram.length;
 
-      if(len > 0) {
+            if (len > 0) {
 
-        var tmp_min = 0, tmp_max = 0;
+                var tmp_min = 0, tmp_max = 0;
 
-        for(var i = len; i--; ) {
+                for (var i = len; i--; ) {
 
-          // If the histogram is displayed more than once the date object is already present
-          if(attributes.histogram[i].timestamp instanceof Date === false) {
+                    // If the histogram is displayed more than once the date object is already
+                    // present
+                    if (attributes.histogram[i].timestamp instanceof Date === false) {
 
-            // Date.secondsToDate is located in date.js
-            attributes.histogram[i].timestamp = Date.secondsToDate(attributes.histogram[i].timestamp);
-          }
+                        // Date.secondsToDate is located in date.js
+                        attributes.histogram[i].timestamp = Date.secondsToDate(attributes.histogram[i].timestamp);
+                    }
 
-          // Remove histogram bucket if timestamp it falls outside the range bounds
-          if(this.checkDateBounds(attributes.histogram[i].timestamp) === true) {
+                    // Remove histogram bucket if timestamp it falls outside the range bounds
+                    if (this.checkDateBounds(attributes.histogram[i].timestamp) === true) {
 
-            tmp_min = Math.min(tmp_min, attributes.histogram[i].count);
-            tmp_max = Math.max(tmp_max, attributes.histogram[i].count);
+                        tmp_min = Math.min(tmp_min, attributes.histogram[i].count);
+                        tmp_max = Math.max(tmp_max, attributes.histogram[i].count);
 
-            if(!this.get('histogramStartDate') || !this.get('histogramEndDate')) {
-              this.set({
-                histogramStartDate : attributes.histogram[i].timestamp
-              });
-              this.set({
-                histogramEndDate : attributes.histogram[i].timestamp
-              });
-            } else {
-              this.set({
-                histogramStartDate : Math.min(attributes.histogram[i].timestamp, this.get('histogramStartDate'))
-              });
-              this.set({
-                histogramEndDate : Math.max(attributes.histogram[i].timestamp, this.get('histogramEndDate'))
-              });
+                        if (!this.get('histogramStartDate') || !this.get('histogramEndDate')) {
+                            this.set({
+                                histogramStartDate : attributes.histogram[i].timestamp
+                            });
+                            this.set({
+                                histogramEndDate : attributes.histogram[i].timestamp
+                            });
+                        } else {
+                            this.set({
+                                histogramStartDate : Math.min(attributes.histogram[i].timestamp, this.get('histogramStartDate'))
+                            });
+                            this.set({
+                                histogramEndDate : Math.max(attributes.histogram[i].timestamp, this.get('histogramEndDate'))
+                            });
+                        }
+                    } else {
+                        attributes.histogram.splice(i, 1);
+                    }
+                }
+                attributes.min = tmp_min;
+                attributes.max = tmp_max;
             }
-          } else {
-            attributes.histogram.splice(i, 1);
-          }
+            // Manually trigger change event with every histogram update
+            this.trigger('change:histogram', this, this.get('histogram'), options);
         }
-        attributes.min = tmp_min;
-        attributes.max = tmp_max;
-      }
-      // Manually trigger change event with every histogram update
-      this.trigger('change:histogram', this, this.get('histogram'), options);
+
+        Backbone.Model.prototype.set.call(this, attributes, options);
+
+        return this;
+    },
+
+    // Formats date object to match event resolution.
+    // Standard buckets for histogram count aggregation.
+    adjustResolution : function(date) {
+        switch(this.get('resolution')) {
+            case 'day':
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+            case 'hour':
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), 0, 0);
+            case 'minute':
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
+            case 'second':
+                return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+        }
+    },
+
+    // Adjusts the date object to the next available bucket
+    adjustToNextBucket : function(date, resolution) {
+
+        resolution = resolution === undefined ? this.get('resolution') : resolution;
+
+        switch(resolution) {
+            case 'day':
+                return Date.plusDay(this.adjustResolution(date));
+
+            case 'hour':
+                return Date.plusHour(this.adjustResolution(date));
+
+            case 'minute':
+                return Date.plusMinute(this.adjustResolution(date));
+
+            case 'second':
+                return Date.plusSecond(this.adjustResolution(date));
+        }
+    },
+
+    // Adjusts date's resolution to the previous bucket
+    adjustToPrevBucket : function(date, resolution) {
+
+        resolution = resolution === undefined ? this.get('resolution') : resolution;
+
+        switch(resolution) {
+            case 'day':
+                return Date.minusDay(this.adjustResolution(date));
+
+            case 'hour':
+                return Date.minusHour(this.adjustResolution(date));
+
+            case 'minute':
+                return Date.minusMinute(this.adjustResolution(date));
+
+            case 'second':
+                return Date.minusSecond(this.adjustResolution(date));
+        }
+    },
+
+    // Returns milliseconds for the appropriate resolution
+    getResolution : function() {
+        switch(this.get('resolution')) {
+            case 'day':
+                return 86400000;
+            case 'hour':
+                return 3600000;
+            case 'minute':
+                return 60000;
+            case 'second':
+                return 1000;
+        }
+    },
+
+    // Checks the bounds of the date to see if it should be displayed
+    // Adjusting the date to the next bucket for more accuracy
+    checkDateBounds : function(date) {
+        return this.adjustToPrevBucket(date, this.get('resolution')) >= this.get('startDate') && date <= this.get('endDate') ? true : false;
     }
-
-    Backbone.Model.prototype.set.call(this, attributes, options);
-
-    return this;
-  },
-
-  // Formats date object to match event resolution.
-  // Standard buckets for histogram count aggregation.
-  adjustResolution : function(date) {
-    switch(this.get('resolution')) {
-      case 'day':
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
-      case 'hour':
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), 0, 0);
-      case 'minute':
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
-      case 'second':
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
-    }
-  },
-
-  // Adjusts the date object to the next available bucket
-  adjustToNextBucket : function(date, resolution) {
-
-    resolution = resolution === undefined ? this.get('resolution') : resolution;
-
-    switch(resolution) {
-      case 'day':
-        return Date.plusDay(this.adjustResolution(date));
-
-      case 'hour':
-        return Date.plusHour(this.adjustResolution(date));
-
-      case 'minute':
-        return Date.plusMinute(this.adjustResolution(date));
-
-      case 'second':
-        return Date.plusSecond(this.adjustResolution(date));
-    }
-  },
-
-  // Adjusts date's resolution to the previous bucket
-  adjustToPrevBucket : function(date, resolution) {
-
-    resolution = resolution === undefined ? this.get('resolution') : resolution;
-
-    switch(resolution) {
-      case 'day':
-        return Date.minusDay(this.adjustResolution(date));
-
-      case 'hour':
-        return Date.minusHour(this.adjustResolution(date));
-
-      case 'minute':
-        return Date.minusMinute(this.adjustResolution(date));
-
-      case 'second':
-        return Date.minusSecond(this.adjustResolution(date));
-    }
-  },
-
-  // Returns milliseconds for the appropriate resolution
-  getResolution : function() {
-    switch(this.get('resolution')) {
-      case 'day':
-        return 86400000;
-      case 'hour':
-        return 3600000;
-      case 'minute':
-        return 60000;
-      case 'second':
-        return 1000;
-    }
-  },
-
-  // Checks the bounds of the date to see if it should be displayed
-  // Adjusting the date to the next bucket for more accuracy
-  checkDateBounds : function(date) {
-    return this.adjustToPrevBucket(date, this.get('resolution')) >= this.get('startDate') && date <= this.get('endDate') ? true : false;
-  }
 
 });
 

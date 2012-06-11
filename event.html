@@ -113,6 +113,22 @@
                 </div>
             </div>
         </div>
+
+        <!-- Templates Start -->
+        <script type="text/template" id="tpl_content-post">
+            <li id="post-list"><div id="content"><div id="avatar"><img src="${avatar}" width="48" height="48"></div>${content}<div id="meta">${source} <span class="icon-time"></span>${timestamp} <span class="icon-user"></span><a href="http://twitter.com/#!/${author}">${author}</a></div></div></li>
+        </script>
+
+        <script type="text/template" id="tpl_content-photo">
+            <li id="post-list"><div id="content"><div id="media"><img height="160" src="${thumbnail}" id="photo-box" href="${media}"/></div><div id="meta">${source} <span class="icon-time"></span>${timestamp} <span class="icon-user"></span>${author}</div></div></li>
+        </script>
+
+        <script type="text/template" id="tpl_content_media">
+            <li id="post-list"><div id="content"><div id="media"><img height="160" src="${thumbnail}" id="photo-box" class="fancybox.iframe" href="${media}"/></div><div id="meta">${source} <span class="icon-time"></span>${timestamp} <span class="icon-user"></span><a href="#">${author}</a></div></div></li>,
+        </script>
+
+        <!-- Templates End -->
+
         <script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
         <script type="text/javascript">
             $LAB.script("js/libs/jquery/jquery-1.7.2.min.js").wait();

@@ -48,26 +48,33 @@ module.exports = function(grunt) {
                 dest : 'js/dist/event.form.min.js'
             }
         },
+
+        cssmin : {
+            main : {
+                src : ['css/global.css'],
+                dest : 'css/dist/global.min.css'
+            }
+        },
         watch : {
             files : '<config:lint.files>',
             tasks : 'lint qunit'
         },
         jshint : {
             options : {
-                curly : true,
-                eqeqeq : true,
-                immed : true,
-                latedef : true,
-                newcap : true,
-                noarg : true,
-                sub : true,
-                undef : true,
-                boss : true,
-                eqnull : true,
-                browser : true
+
+                white : true,
+                devel : true,
+                passfail : false,
+                sloppy : true,
+                plusplus:true
+
             },
             globals : {
-                jQuery : true
+                jQuery : true,
+                SIVVIT : true,
+                Backbone : false,
+                $ : false
+
             }
         },
         uglify : { }
