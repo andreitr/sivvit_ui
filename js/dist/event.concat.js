@@ -418,22 +418,7 @@ SIVVIT.Settings = {
 
             post_template : $('#tpl_content-post').html(),
             photo_template : $('#tpl_content-photo').html(),
-            media_template: $('#tpl_content-media').html(),
-
-            // post_template : "<li id='post-list'><div id=\"content\"><div id='avatar'><img
-            // src='${avatar}' width='48' height='48'></div>${content}<div id='meta'>${source} <span
-            // class='icon-time'></span>${timestamp} <span class='icon-user'></span><a
-            // href='http://twitter.com/#!/${author}'>${author}</a></div></div></li>",
-
-            // photo_template : "<li id='post-list'><div id='content'><div id=\"media\"><img
-            // height='160' src='${thumbnail}' id='photo-box' href='${media}'/></div><div
-            // id='meta'>${source} <span class='icon-time'></span>${timestamp} <span
-            // class='icon-user'></span>${author}</div></div></li>",
-            // media_template : "<li id='post-list'><div id='content'><div id=\"media\"><img
-            // height='160' src='${thumbnail}' id='photo-box' class='fancybox.iframe'
-            // href='${media}'/></div><div id='meta'>${source} <span
-            // class='icon-time'></span>${timestamp} <span class='icon-user'></span><a
-            // href='#'>${author}</a></div></div></li>",
+            media_template : $('#tpl_content-media').html(),
 
             // Rendered elements
             rendered : [],
@@ -879,7 +864,7 @@ SIVVIT.Settings = {
             // Display edit bar at the top of the list.
             displayEdit : function() {
 
-                var self = this, i;
+                var self = this;
 
                 if (this.edit) {
 
@@ -888,9 +873,14 @@ SIVVIT.Settings = {
                     // Delete all approved items
                     $('#del-all').click(function() {
 
-                        i = self.rendered.length;
-                        while (i > 0) {
-                            var itm = self.rendered[i];
+                        var i, itm;
+
+                        i = self.rendered.length - 1;
+
+                        while (i >= 0) {
+
+                            itm = self.rendered[i];
+
                             if (itm.html.find('#itm-check').is(':checked')) {
                                 self.deleteItem(itm);
                             }
@@ -900,9 +890,11 @@ SIVVIT.Settings = {
 
                     // Approve all selected items
                     $('#apr-all').click(function() {
+
                         var i, itm, cb;
-                        i = self.rendered.length;
-                        while (i > 0) {
+                        i = self.rendered.length - 1;
+                        while (i >= 0) {
+
                             itm = self.rendered[i];
                             cb = itm.html.find('#itm-check');
                             if (cb.is(':checked')) {
@@ -910,8 +902,7 @@ SIVVIT.Settings = {
                             }
                             cb.attr('checked', false);
                             itm.html.css('background-color', '#FFFFFF');
-
-                            i = -1;
+                            i -= 1;
                         }
                         $('#group-select').attr('checked', false);
                     });
@@ -920,14 +911,17 @@ SIVVIT.Settings = {
                     $('#group-select').click(function() {
 
                         var i, checked, itm;
-                        i = self.rendered.length;
+
+                        i = self.rendered.length - 1;
                         checked = $('#group-select').is(':checked');
 
-                        while (i > 0) {
+                        while (i >= 0) {
+
                             itm = self.rendered[i];
+
                             itm.html.find('#itm-check').attr('checked', checked);
                             itm.html.css('background-color', !checked ? '#FFFFFF' : '#FFFFCC');
-                            i = -1;
+                            i -= 1;
                         }
                     });
                 }

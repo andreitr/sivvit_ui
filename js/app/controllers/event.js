@@ -389,7 +389,7 @@
 
             post_template : $('#tpl_content-post').html(),
             photo_template : $('#tpl_content-photo').html(),
-            media_template: $('#tpl_content-media').html(),
+            media_template : $('#tpl_content-media').html(),
 
             // Rendered elements
             rendered : [],
@@ -835,7 +835,7 @@
             // Display edit bar at the top of the list.
             displayEdit : function() {
 
-                var self = this, i;
+                var self = this;
 
                 if (this.edit) {
 
@@ -844,9 +844,14 @@
                     // Delete all approved items
                     $('#del-all').click(function() {
 
-                        i = self.rendered.length;
-                        while (i > 0) {
-                            var itm = self.rendered[i];
+                        var i, itm;
+
+                        i = self.rendered.length - 1;
+
+                        while (i >= 0) {
+
+                            itm = self.rendered[i];
+
                             if (itm.html.find('#itm-check').is(':checked')) {
                                 self.deleteItem(itm);
                             }
@@ -856,9 +861,11 @@
 
                     // Approve all selected items
                     $('#apr-all').click(function() {
+
                         var i, itm, cb;
-                        i = self.rendered.length;
-                        while (i > 0) {
+                        i = self.rendered.length - 1;
+                        while (i >= 0) {
+
                             itm = self.rendered[i];
                             cb = itm.html.find('#itm-check');
                             if (cb.is(':checked')) {
@@ -866,8 +873,7 @@
                             }
                             cb.attr('checked', false);
                             itm.html.css('background-color', '#FFFFFF');
-
-                            i = -1;
+                            i -= 1;
                         }
                         $('#group-select').attr('checked', false);
                     });
@@ -876,14 +882,17 @@
                     $('#group-select').click(function() {
 
                         var i, checked, itm;
-                        i = self.rendered.length;
+
+                        i = self.rendered.length - 1;
                         checked = $('#group-select').is(':checked');
 
-                        while (i > 0) {
+                        while (i >= 0) {
+
                             itm = self.rendered[i];
+
                             itm.html.find('#itm-check').attr('checked', checked);
                             itm.html.css('background-color', !checked ? '#FFFFFF' : '#FFFFCC');
-                            i = -1;
+                            i -= 1;
                         }
                     });
                 }
