@@ -127,6 +127,20 @@
             <li id="post-list"><div id="content"><div id="media"><img height="160" src="${thumbnail}" id="photo-box" class="fancybox.iframe" href="${media}"/></div><div id="meta">${source} <span class="icon-time"></span>${timestamp} <span class="icon-user"></span><a href="#">${author}</a></div></div></li>,
         </script>
 
+        <script type="text/template" id="tpl_more-content">
+            <div id="load-content-btn" class="content-loader loader-margin loader-header">Found more content <span class="icon-download"></span></div>
+        </script>
+
+        <script type="text/template" id="tpl_edit-controls">
+            <div id="controls-container"><div id="checkbox"><input type="checkbox" id="group-select"></div><a id="del-all" class="link"><span class="icon-delete"></span>Delete</a><a id="apr-all" class="link"><span class="icon-check"></span>Approve</a></div>
+        </script>
+
+        <script type="text/template" id="tpl_edit-item">
+            <div id="checkbox"><input type="checkbox" id="itm-check"/></div>
+            <span class="item-edit"><span id="load-itm" class="loader"></span><span class="icon-delete" id="del-itm"></span><span class="icon-check" id="apr-itm"></span><div id="pending-flag"></div></span>
+
+        </script>
+
         <!-- Templates End -->
 
         <script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>

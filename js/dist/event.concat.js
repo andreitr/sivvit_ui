@@ -522,7 +522,7 @@ SIVVIT.Settings = {
 
                 if ($('#load-content-btn').length <= 0) {
 
-                    $(this.el).prepend("<div id='load-content-btn' class='content-loader loader-margin loader-header'>Found more content&nbsp;&nbsp;<span class='icon-download'></span></div>");
+                    $(this.el).prepend($('#tpl_more-content').html());
 
                     $('#load-content-btn').hide();
                     $('#load-content-btn').slideDown('slow');
@@ -868,7 +868,7 @@ SIVVIT.Settings = {
 
                 if (this.edit) {
 
-                    $(this.el).append("<div id='controls-container'><div id='checkbox'><input type='checkbox' id='group-select'></div><a id='del-all' class='link'><span class='icon-delete'></span>Delete</a><a id='apr-all' class='link'><span class='icon-check'></span>Approve</a></div>");
+                    $(this.el).append($('#tpl_edit-controls').html());
 
                     // Delete all approved items
                     $('#del-all').click(function() {
@@ -969,8 +969,8 @@ SIVVIT.Settings = {
                     // Initiate button clicks if a user is logged in and modify
                     // content template (add hover buttons and check box)
                     if (this.edit) {
-                        itm.html.find('#content').prepend("<span class='item-edit'><span id='load-itm' class='loader'></span><span class='icon-delete' id='del-itm'></span><span class='icon-check' id='apr-itm'></span><div id='pending-flag'></div></span>");
-                        itm.html.find('#content').prepend("<div id='checkbox'><input type='checkbox' id='itm-check'/></div>");
+
+                        itm.html.find('#content').prepend($('#tpl_edit-item').html());
 
                         itm.html.find('#del-itm').hide();
                         itm.html.find('#apr-itm').hide();
