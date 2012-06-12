@@ -13,18 +13,16 @@ body {
   background: url("../img/css/background.png");
 }
 
-body .loader {
-  width: auto;
-  text-align: center;
-  padding: 300px;
-  background: url("../img/css/loader.gif") no-repeat;
-  background-position: center;
-}
-
 /* Stretched body container to ensure that footer is always at the bottom. */
 body .wrapper {
   min-height: 100%;
   position: relative;
+}
+
+body .paceholder {
+  width: 100%;
+  text-align: center;
+  padding-top: 200px;
 }
 
 h1 {
@@ -55,7 +53,6 @@ a:link {
   position: fixed;
   margin-top: -72px
 }
-
 
 .gray-text {
   font-family: Helvetica, Arial, sans-serif;
@@ -159,7 +156,6 @@ a:link {
   padding: 2px 3px 1px 3px;
 }
 
-
 /** Secondary title for content boxes */
 
 .content-stats {
@@ -200,7 +196,6 @@ a:link {
   background-color: #fce37e;
 }
 
-
 #map-container {
   height: 130px;
 }
@@ -222,8 +217,6 @@ ol {
   -webkit-box-shadow: 0px 0px 3px hsla(0,0%,0%,.3);
   -box-shadow: 0px 0px 3px hsla(0,0%,0%,.3); /* Opera, IE 9 */
 }
-
-
 
 #group-header {
   padding: 10px;
@@ -372,8 +365,6 @@ span.icon-delete, span.icon-check, span.icon-cog, span.icon-play, span.icon-paus
   cursor: pointer;
 }
 
-
-
 /**
  * Misc classes
  */
@@ -438,6 +429,12 @@ span.icon-delete, span.icon-check, span.icon-cog, span.icon-play, span.icon-paus
   -moz-border-radius: 5px;
   border-radius: 5px;
   background-color: #555555;
+}
+.loader {
+  background: url("../img/css/loader.gif");
+  width: 16px;
+  height: 11px;
+  display: inline-block;
 }
 
 span.icon, span.icon-location, span.icon-user, span.icon-time, span.icon-event, span.icon-check, span.icon-delete, span.icon-live, span.icon-cog, span.icon-pause, span.icon-play, span.icon-check-green, span.icon-check-red, span.icon-media, span.icon-comment, span.icon-page, span.icon-download, span.icon-twitter {
@@ -536,12 +533,6 @@ span.icon-twitter {
   background: url("../img/css/sivvit-icons.png") no-repeat scroll 0px -15px transparent;
   width: 18px;
   height: 14px;
-}
-span .loader {
-  background: url("../img/css/loader.gif");
-  width: 16px;
-  height: 11px;
-  display: inline-block;
 }
 a.link {
   text-decoration: underline;

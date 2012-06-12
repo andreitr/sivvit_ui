@@ -365,8 +365,6 @@ SIVVIT.Settings = {
             // rendered.
             renderButtons : function(button) {
 
-                console.log(button, this.activeButton);
-
                 if (this.activeButton === '#' + button) {
                     return false;
                 }
