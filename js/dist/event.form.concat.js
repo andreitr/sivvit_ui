@@ -860,6 +860,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
     // Updates type for URL data requests
     setRequestType : function(type) {
+
         switch(type) {
             case 'all':
                 this.attributes.type = 'photo&type[]=media&type[]=post';

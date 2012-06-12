@@ -277,12 +277,15 @@
 
                     // Update type in data request
                     switch(event.target.id) {
+
                         case 'js-all-btn':
                             this.eventModel.setRequestType('all');
                             break;
-                        case 'post-btn':
+
+                        case 'js-post-btn':
                             this.eventModel.setRequestType('post');
                             break;
+
                         case 'js-media-btn':
                             this.eventModel.setRequestType('media');
                             break;
@@ -379,6 +382,7 @@
             }
 
         });
+
         // Main content view.
         // Displays content buckets etc.
         SIVVIT.ContentView = Backbone.View.extend({
@@ -421,17 +425,21 @@
             display_buckets : false,
 
             initialize : function(options) {
+
                 this.edit = options.edit;
                 this.temporalModel = options.temporalModel;
                 this.eventModel = options.eventModel;
+
                 // Bind to general change event to make sure the entire model is updated
-                this.eventModel.bind('change', this.onModelContentUpdate, this);
+                this.eventModel.on('change', this.onModelContentUpdate, this);
             },
 
             // Updates view when model is changed
             onModelContentUpdate : function(event) {
 
-                if (this.eventModel.hasChanged('content')) {
+                // If content for posts and everything tabs is exactly the same
+                // or if the content has changed, then re-render everything
+                if (this.eventModel.hasChanged('content') || this.rendered.length === 0) {
 
                     var collection = SIVVIT.Parser.parse(this.eventModel);
 
@@ -473,8 +481,6 @@
                             this.groups_key[group.get('timestamp')] = group;
                             this.new_count += 1;
                             this.new_groups.add(group);
-
-                            console.log(this.new_count);
                         }
 
                     }, this);
