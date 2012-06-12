@@ -327,7 +327,7 @@ SIVVIT.Settings = {
             // Handles event model update and resets navigation events
             resetEvents : function() {
                 this.enableNavigation(true);
-                this.off('change', this.resetEvents, this);
+                this.eventModel.off('change', this.resetEvents, this);
             },
 
             // Disables / enables tab buttons
@@ -1685,7 +1685,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
         this.fetch();
     },
 
-    // Resets currently existing contnet
+    // Resets currently existing content
     resetContent : function() {
         this.set({
             bucket_page : 1,

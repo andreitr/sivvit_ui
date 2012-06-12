@@ -371,7 +371,7 @@ SIVVIT.EventModel = Backbone.Model.extend({
         this.fetch();
     },
 
-    // Resets currently existing contnet
+    // Resets currently existing content
     resetContent : function() {
         this.set({
             bucket_page : 1,

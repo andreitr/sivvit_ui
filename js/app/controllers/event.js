@@ -298,7 +298,7 @@
             // Handles event model update and resets navigation events
             resetEvents : function() {
                 this.enableNavigation(true);
-                this.off('change', this.resetEvents, this);
+                this.eventModel.off('change', this.resetEvents, this);
             },
 
             // Disables / enables tab buttons
