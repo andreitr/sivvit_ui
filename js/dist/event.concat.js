@@ -354,7 +354,7 @@ SIVVIT.Settings = {
                         element.html('Total: ' + this.eventModel.get('stats').total);
                         break;
 
-                    case '#post-btn':
+                    case '#js-post-btn':
                         element.html('Posts: ' + this.eventModel.get('stats').posts);
                         break;
 
@@ -396,7 +396,7 @@ SIVVIT.Settings = {
                         });
                         break;
 
-                    case '#post-btn':
+                    case '#js-post-btn':
                         this.temporalModel.set({
                             histogram : this.eventModel.get('histogram').post
                         });
