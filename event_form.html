@@ -1,105 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" type="text/css" href="css/global.css" />
-    <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
-    <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-timepicker-addon.css" />
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/global.css" />
+        <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
+        <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui-timepicker-addon.css" />
 
-    <title>Edit Event</title>
-  </head>
-  <body>
-    <div id="content-loader" style="height:'390px'; width:'820px';"></div>
-    <div id="form-container">
+        <title>Event Form</title>
+    </head>
+    <body>
 
-      <form id="form-main">
-        <div id="form-col-left">
-          <h3><span id="title-check" class="icon-check-red"> </span>Event Title</h3>
-          <input type="text" name="title"/>
-          <div id="form-meta">
-            Describe your event e.g. Angry Cat escapes from jail.
-          </div>
-          <div id="padding"></div>
-          <h3><span id="keywords-check" class="icon-check-red"> </span>Keywords, hashtags</h3>
-          <input type="text" name="keywords"/>
-          <div id="form-meta">
-            Comma delimited list e.g. angry cats, #angrycats
-          </div>
-          <div id="padding"></div>
-          <h3>Description</h3>
-          <input type="text" name="description" />
-          <div id="form-meta">
-            Additional event description - give some background.
-          </div>
-          <div id="padding"></div>
-          <div style="float:left">
-            <h3><span id="start-date-check" class="icon-check-red"> </span>Start Date</h3>
-            <input type="text" readonly="true" name="start-date"/>
-            <div id="form-meta">
-              Start collecting data at
+        <div id="js-app-loader" class="paceholder">
+            <span class="loader"></span>
+        </div>
+
+        <div class="form-container hidden" id='js-app'>
+
+            <form class="form-main" id='js-app-form'>
+                <div class="form-col float-l">
+                    <h3><span id="title-check" class="icon-check-red"> </span>Event Title</h3>
+                    <input type="text" name="title"/>
+                    <div class="form-meta">
+                        Describe your event e.g. Angry Cat escapes from jail.
+                    </div>
+                    <div id="padding"></div>
+                    <h3><span id="keywords-check" class="icon-check-red"> </span>Keywords, hashtags</h3>
+                    <input type="text" name="keywords"/>
+                    <div class="form-meta">
+                        Comma delimited list e.g. angry cats, #angrycats
+                    </div><!-- <div id="padding"></div>
+                    <h3>Description</h3>
+                    <input type="text" name="description" />
+                    <div class="form-meta">
+                    Additional event description - give some background.
+                    </div> -->
+                    <div id="padding"></div>
+                    <div style="float:left">
+                        <h3><span id="start-date-check" class="icon-check-red"> </span>Start Date</h3>
+                        <input type="text" readonly="true" name="start-date"/>
+                        <div class="form-meta">
+                            Start collecting data at
+                        </div>
+                    </div>
+                    <div style="float:right">
+                        <h3><span id="end-date-check" class="icon-check-red"> </span>End Date</h3>
+                        <input type="text" readonly="true" name="end-date"/>
+                        <div class="form-meta">
+                            Stops collection data at
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-col float-r">
+                    <h3>Collect Content from Location</h3>
+                    <input type="text" name="location" />
+                    <div class="form-meta">
+                        Leave blank for global tracking.
+                    </div>
+                    <div id="padding"></div>
+                    <div class="form-map"></div>
+                </div>
+            </form>
+            <div class="form-footer">
+                <div class="float-r" id='button-container'>
+
+                    <div class="tabBtn" id="js-delete-btn">
+                        Delete event
+                    </div>
+
+                    <div class="tabBtn" id="js-save-btn">
+                        Save
+                    </div>
+                </div>
             </div>
-          </div>
-          <div style="float:right">
-            <h3><span id="end-date-check" class="icon-check-red"> </span>End Date</h3>
-            <input type="text" readonly="true" name="end-date"/>
-            <div id="form-meta">
-              Stops collection data at
-            </div>
-          </div>
         </div>
 
-        <div id="form-col-right">
-          <h3>Collect Content from Location</h3>
-          <input type="text" name="location" />
-          <div id="form-meta">
-            Leave blank for global tracking.
-          </div>
-          <div id="padding"></div>
-          <div id="form-map" style="width:auto; height:160px;"></div>
-        </div>
-      </form>
-      <div id="form-footer">
-        <div style="float:right" id='button-container'>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
+        <script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
+        <script type="text/javascript">
+            $LAB.script("js/libs/jquery/jquery-1.6.4.min.js").wait();
+            $LAB.script("js/libs/jquery/jquery.validate.js").wait();
+            $LAB.script("js/libs/jquerycookie/jquery.cookie.js").wait();
 
-          <div class="tabBtn" id="delete-event-btn">
-            Delete event
-          </div>
+            $LAB.script("js/libs/underscore/underscore-min.js").wait();
+            $LAB.script("js/libs/backbone/backbone-min.js").wait();
+            $LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
+            $LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
+            $LAB.script("js/libs/jquery/jquery-ui-timepicker-addon.js").wait()
 
-          <div class="tabBtn" id="save-event-btn">
-            Save
-          </div>
-        </div>
-      </div>
-    </div>
+            function getUrlVars() {
+                var vars = {};
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+                    vars[key] = value;
+                });
 
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
-    <script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
-    <script type="text/javascript">
-      // JSLint variable definition
-      /*global $LAB:false, SIVVIT:false, window:false */
+                return vars;
+            }
 
-      $LAB.script("js/libs/jquery/jquery-1.6.4.min.js").wait();
-      $LAB.script("js/libs/jquery/jquery.validate.js").wait();
-      $LAB.script("js/libs/jquerycookie/jquery.cookie.js").wait();
 
-      $LAB.script("js/libs/underscore/underscore-min.js").wait();
-      $LAB.script("js/libs/backbone/backbone-min.js").wait();
-      $LAB.script("js/libs/jquery/jquery-templates/jquery.tmpl.min.js").wait();
-      $LAB.script("js/libs/jquery/jquery-ui-1.8.16.custom.min.js").wait();
-      $LAB.script("js/libs/jquery/jquery-ui-timepicker-addon.js").wait()
+            $LAB.script("js/dist/event.form.concat.js").wait(function() {
+                SIVVIT.EditEvent.init(getUrlVars().id || null);
+            });
 
-      function getUrlVars() {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
-          vars[key] = value;
-        });
-
-        return vars;
-      }
-
-      $LAB.script("js/dist/event.form.min.js").wait(function() {
-        SIVVIT.EditEvent.init(getUrlVars().id || null);
-      });
-
-    </script>
-  </body>
+        </script>
+    </body>
 </html>

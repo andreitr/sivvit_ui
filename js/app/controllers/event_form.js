@@ -25,7 +25,7 @@
                         // Add 24 hours to the existing date
                         endDate : Date.dateToSeconds(new Date(new Date().getTime() + 86400000)),
                         pull : false,
-                        meta : 0,
+                        meta : 0  ,
                         type : null
                     });
 
@@ -41,7 +41,8 @@
                 }
 
                 this.view = new SIVVIT.EditEventView({
-                    model : this.model
+                    model : this.model,
+                    el: '#js-app'
                 });
 
                 // If the event is new render event right away
@@ -95,16 +96,14 @@
         // Main edit event view
         SIVVIT.EditEventView = Backbone.View.extend({
 
-            el : '#form-container',
-
             // Google map instance
             map : null,
             // Auto complete
             map_complete : null,
 
             events : {
-                'click #save-event-btn' : 'saveEvent',
-                'click #delete-event-btn' : 'deleteEvent'
+                'click #js-save-btn' : 'saveEvent',
+                'click #js-delete-btn' : 'deleteEvent'
             },
 
             initialize : function(options) {
@@ -150,7 +149,7 @@
             // Creates a new event or updates an existing one
             saveEvent : function() {
 
-                if ($('#form-main').valid()) {
+                if ($('#js-app-form').valid()) {
 
                     var self = this, closure;
 
@@ -189,13 +188,13 @@
 
                 if (msg) {
 
-                    $(this.el).find('#save-event-btn').hide();
-                    $(this.el).find('#delete-event-btn').hide();
+                    $(this.el).find('#js-save-btn').hide();
+                    $(this.el).find('#js-delete-btn').hide();
 
                     $(this.el).find('#button-container').append("<span id='save-msg'>" + msg + "<span class='loader'></span></span>");
                 } else {
-                    $(this.el).find('#save-event-btn').show();
-                    $(this.el).find('#delete-event-btn').show();
+                    $(this.el).find('#js-save-btn').show();
+                    $(this.el).find('#js-delete-btn').show();
                 }
             },
 
@@ -204,13 +203,13 @@
 
                 var self = this;
 
-                $('#form-container').show();
-                $('#content-loader').hide();
+                $('#js-app').show();
+                $('#js-app-loader').hide();
 
                 // Hide delete button event hasn't been created
                 if (!this.model.get('id')) {
-                    $(this.el).find('#delete-event-btn').hide();
-                    $(this.el).find('#save-event-btn').text('Create New Event');
+                    $(this.el).find('#js-delete-btn').hide();
+                    $(this.el).find('#js-save-btn').text('Create New Event');
                 }
 
                 $("input[name='title']").val(this.model.get('title'));
@@ -283,10 +282,10 @@
                 });
 
                 // First time around validate all fields separately
-                $('#form-main').validate().element("input[name='title']");
-                $('#form-main').validate().element("input[name='keywords']");
-                $('#form-main').validate().element("input[name='start-date']");
-                $('#form-main').validate().element("input[name='end-date']");
+                $('#js-app-form').validate().element("input[name='title']");
+                $('#js-app-form').validate().element("input[name='keywords']");
+                $('#js-app-form').validate().element("input[name='start-date']");
+                $('#js-app-form').validate().element("input[name='end-date']");
             },
 
             // Sets validation rules for the entire form.
@@ -294,7 +293,7 @@
 
                 var self = this;
 
-                $('#form-main').validate({
+                $('#js-app-form').validate({
 
                     // Don't place default label
                     success : function(label) {
@@ -351,7 +350,7 @@
 
                 if (!this.map) {
 
-                    this.map = new google.maps.Map($('#form-map')[0], {
+                    this.map = new google.maps.Map($('.form-map')[0], {
 
                         center : new google.maps.LatLng(self.model.get('location').lat, self.model.get('location').lon),
                         zoom : 8,

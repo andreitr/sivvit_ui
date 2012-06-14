@@ -392,6 +392,9 @@ span.icon-delete, span.icon-check, span.icon-cog, span.icon-play, span.icon-paus
 .float-r {
   float: right;
 }
+.float-l {
+  float: left;
+}
 
 .padding {
   padding: 10px;
@@ -602,37 +605,35 @@ input[type*="radio"] {
   margin: 0 10px 0 0;
   padding: 10px;
 }
-#form-meta {
+
+/**
+ *   Form
+ */
+.form-meta {
   font-size: 11px;
   margin-top: 5px;
   color: #999999;
 }
-#form-field {
-  height: 20px;
-  padding-top: 5px;
-}
-#form-container {
-  display: none;
+
+.form-container {
   height: 390px;
   width: 820px;
   background-color: #FFFFFF;
   padding: 20px
 }
-#form-main {
+.form-main {
   display: block;
   height: 350px;
 }
-#form-footer {
+.form-map {
+  width: auto;
+  height: 160px;
+}
+.form-footer {
   border-top: 1px solid #CCCCCC;
   padding-top: 15px;
 }
-#form-col, #form-col-left, #form-col-right {
+.form-col {
   width: 380px;
   display: block;
-}
-#form-col-left {
-  float: left;
-}
-#form-col-right {
-  float: right;
 }
