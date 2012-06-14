@@ -19,7 +19,7 @@ module.exports = function(grunt) {
             },
             // Events
             events : {
-                src : ['js/app/globals.js', 'js/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
+                src : ['js/app/globals.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
                 dest : 'js/dist/events.concat.js'
             },
 
@@ -35,11 +35,11 @@ module.exports = function(grunt) {
         },
         min : {
             event : {
-                src : ['js/app/globals.js', 'js/header.js', 'js/event.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/models/m.item.js', 'js/app/models/m.item.group.js', 'js/app/views/v.histogram.js'],
+                src : ['js/app/globals.js', 'js/header.js', 'js/app/controllers/event.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/models/m.item.js', 'js/app/models/m.item.group.js', 'js/app/views/v.histogram.js'],
                 dest : 'js/dist/event.min.js'
             },
             events : {
-                src : ['js/app/globals.js', 'js/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
+                src : ['js/app/globals.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
                 dest : 'js/dist/events.min.js'
             },
             // Event form
