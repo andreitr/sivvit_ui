@@ -7,77 +7,86 @@
         <title>Project High Jump</title>
     </head>
     <body>
-        <div class="body-container">
-            <div id="header">
-                <div id="content-container">
-                    <div id="logo"></div>
+        <div class="wrapper">
+            <div class="main-header">
+                <div class="content-container">
+                    <div class="logo">
+                        Sivvit
+                    </div>
                     <div class="nav" id="event-form" href="event_form.html">
                         Track New Event
                     </div>
                     <div class="nav">
                         Explore
                     </div>
-                    <div class="nav" id="account-btn" style="float:right; border: none; padding:0px">
+                    <div class="nav" style="float:right; border: none; padding:0px">
                         Sign In with Facebook Twitter
                     </div>
                 </div>
             </div>
-            <div id="content-loader"></div>
-            <div id="event-application">
-                <div id="eventHeader">
-                    <div id="contentBoxHeader">
-                        <div id="content-container">
-                            <div id="padding" style="padding: 10px 0 10px 0;">
-                                <div id="column-layout">
-                                    <div id="row">
-                                        <div id="cell">
-                                            <div id="user-avatar"></div>
-                                            <h1 id="user-title"></h1>
-                                            <div id="user-meta"></div>
-                                        </div>
+
+            <div id="js-app-loader" class="paceholder">
+                <span class="loader"></span>
+            </div>
+            <div class="hidden" id="js-app">
+
+                <div class="white-box app-header">
+                    <div class="content-container">
+                        <div class="column-layout padding-b padding-t">
+                            <div class="row">
+                                <div class="cell">
+                                    <h1>Browse events</h1>
+                                    <div>
+                                        This is where you find your events!
+                                    </div>
+                                </div>
+                                <div class="cell">
+                                    <h1>&nbsp;</h1>
+                                    <div id="js-p-user" class="float-r">
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="contentVSpacer"></div>
-                <div id="content-container">
-                    <div id="column-layout">
-                        <div id="row">
-                            <!-- Left column -->
-                            <div id="cell">
-                                <h2>Account</h2>
-                                <div id="contentSidebarBox">
-                                    <div id="padding">
-                                        <p>
-                                            <a class="link">Account Admin</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Right column -->
-                            <div id="cell" style="width:100%; padding-left:20px">
-                                <h2>User Events</h2>
-                                <!-- CONTENT HERE -->
-                                <div id="dynamic-content"></div>
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="content-container margin-t">
+                    <h3 id="js-e-stats"></h3>
+                    <!-- CONTENT HERE -->
+                    <div id="js-app-content"></div>
                 </div>
             </div>
-            <div id="padding"></div>
         </div>
-        <div id="footer">
-            <div id="content-container">
+
+        <div class="padding-b padding-t margin-t"></div>
+
+        <div class="footer">
+            <div class="content-container">
                 <div class="notice">
                     &copy; 2012 Sivvit, Inc., All Rights Reserved
                 </div>
             </div>
         </div>
+
+        <!-- Templates Start ------------------------------------------------->
+
+        <script type="text/template" id="tpl_content-list">
+            <li id="post-list">
+            <div id="content">
+            <div id="histogram"></div>
+            <div id="title"><a href="${link}">${title}</a></div>
+            <div id="description">${description}</div>
+            <div id="meta">${posts} posts, ${images} images, ${videos} videos  <span class="icon-location"></span>${location}  <span class="icon-user"></span>${author}</div>
+            </div>
+            </div>
+            </li>
+        </script>
+
+        <!-- Templates End -------------------------------------------------->
+
         <script type="text/javascript" src="js/libs/lab/LAB.min.js"></script>
         <script>
-
             $LAB.script("js/libs/graphael/raphael-min.js").wait();
             $LAB.script("js/libs/jquery/jquery-1.7.2.min.js").wait();
             $LAB.script("js/libs/underscore/underscore-min.js").wait();

@@ -33,8 +33,8 @@
             tmpModel.fetch({
                 success : function(result) {
 
-                    $('#content-loader').remove();
-                    $('#event-application').show();
+                    $('#js-app-loader').remove();
+                    $('#js-app').show();
 
                     if (result.attributes) {
 
@@ -69,8 +69,8 @@
     // Core events view. Right now we only have a single implementation.
     SIVVIT.EventsView = Backbone.View.extend({
 
-        template : "<li id='post-list'><div id='content'><div id='histogram'></div><div id='title'><a href='${link}'>${title}</a></div><div id='description'>${description}</div><div id='meta'>${posts} posts, ${images} images, ${videos} videos &nbsp; &nbsp;<span class='icon-location'></span>${location} &nbsp;<span class='icon-user'></span><a href='#'>${author}</a></div></div></div></li>",
-        el : '#dynamic-content',
+        template : $('#tpl_content-list').html(),
+        el : '#js-app-content',
 
         // Models hash map
         models_hash : {},
@@ -89,6 +89,8 @@
             $(this.el).empty();
 
             this.displayed = false;
+
+            $('#js-e-stats').html('Displaying ' + this.model.length + ' Events');
 
             this.display();
         },
