@@ -168,8 +168,9 @@
                         itm.html.find('#event-form').hide();
 
                         if (itm.model.get('pending') > 0) {
-                            itm.html.find('#title').append("<div id='pending'>pending " + itm.model.get("pending") + "</div>");
+                            itm.html.find('#title').append("<span class='pending'>Pending " + itm.model.get("pending") + "</span>");
                         }
+
 
                         itm.html.hover(function(event) {
                             itm.html.find('#event-form').show();
