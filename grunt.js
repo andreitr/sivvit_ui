@@ -19,7 +19,7 @@ module.exports = function(grunt) {
             },
             // Events
             events : {
-                src : ['js/app/globals.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
+                src : ['js/app/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
                 dest : 'js/dist/events.concat.js'
             },
 
@@ -27,6 +27,12 @@ module.exports = function(grunt) {
             event_form : {
                 src : ['js/app/globals.js', 'js/app/controllers/event_form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
                 dest : 'js/dist/event.form.concat.js'
+            },
+
+            // Login form
+            login_form : {
+                src : ['js/app/globals.js', 'js/app/controllers/login.form.js'],
+                dest : 'js/dist/login.form.concat.js'
             }
 
         },
@@ -39,14 +45,21 @@ module.exports = function(grunt) {
                 dest : 'js/dist/event.min.js'
             },
             events : {
-                src : ['js/app/globals.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
+                src : ['js/app/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
                 dest : 'js/dist/events.min.js'
             },
             // Event form
             event_form : {
                 src : ['js/app/globals.js', 'js/app/controllers/event_form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
                 dest : 'js/dist/event.form.min.js'
+            },
+
+            // Login form
+            login_form : {
+                src : ['js/app/globals.js', 'js/app/controllers/login.form.js'],
+                dest : 'js/dist/login.form.min.js'
             }
+
         },
 
         cssmin : {
@@ -56,7 +69,7 @@ module.exports = function(grunt) {
             }
         },
         watch : {
-            files : ['js/app/*.js', 'js/app/**/*.js'],
+            files : ['js/app/*.js', 'js/app/**/*.js', 'js/app/**/**/*.js'],
             tasks : 'concat min'
         },
         jshint : {
@@ -66,7 +79,7 @@ module.exports = function(grunt) {
                 devel : true,
                 passfail : false,
                 sloppy : true,
-                plusplus:true
+                plusplus : true
 
             },
             globals : {

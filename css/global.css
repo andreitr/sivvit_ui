@@ -15,8 +15,7 @@ body {
 
 /* Stretched body container to ensure that footer is always at the bottom. */
 body .wrapper {
-  min-height: 100%;
-  position: relative;
+  min-height: 100% position : relative;
 }
 
 body .paceholder {
@@ -622,6 +621,11 @@ input[type*="radio"] {
   background-color: #FFFFFF;
   padding: 20px
 }
+
+form-login {
+  width: 450px;
+}
+
 .form-main {
   display: block;
   height: 350px;

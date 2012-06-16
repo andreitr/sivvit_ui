@@ -20,20 +20,20 @@ SIVVIT.Settings = {
             'width' : 860,
             'height' : 430,
             'autoScale' : true,
-            'scrolling' : false,
+            'scrolling' : 'no',
             'transitionIn' : 'fade',
             'transitionOut' : 'fade',
             'type' : 'iframe'
         });
 
          $('#login-form').fancybox({
-            'width' : 300,
-            'height' : 180,
+            'width' : 470,
+            'height' : 110,
             'autoScale' : true,
             'scrolling' : 'no',
             'transitionIn' : 'fade',
             'transitionOut' : 'fade',
-            'type' : 'iframe',
+            'type' : 'iframe'
         });
 
     }());
