@@ -14,7 +14,7 @@
             'type' : 'iframe'
         });
 
-         $('#login-form').fancybox({
+        $('#login-form').fancybox({
             'width' : 470,
             'height' : 110,
             'autoScale' : true,
