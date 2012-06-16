@@ -1,4 +1,3 @@
-// JSLint variable definition and formatting
 /*global SIVVIT:true  */
 /*jslint white:true */
 
@@ -26,7 +25,7 @@ SIVVIT.Settings = {
             'type' : 'iframe'
         });
 
-         $('#login-form').fancybox({
+        $('#login-form').fancybox({
             'width' : 470,
             'height' : 110,
             'autoScale' : true,
@@ -203,7 +202,7 @@ SIVVIT.Settings = {
                     // content template (add hover buttons and check box)
                     if (this.edit) {
 
-                        itm.html.find('#content').prepend("<span class=\"item-edit\"><span class='icon-cog' href=\"event.form.html?id=" + itm.model.get('id') + "\" id='event-form'></span><div id=\"pending-flag\"></div></span>");
+                        itm.html.find('#content').prepend("<span class=\"item-edit\"><span class='icon-cog' href=\"event.form?id=" + itm.model.get('id') + "\" id='event-form'></span><div id=\"pending-flag\"></div></span>");
 
                         itm.html.find('#event-form').hide();
 
@@ -851,9 +850,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
 });
 
-// JSLint variable definition
-/*global SIVVIT:true, Raphael:false, $:false, Backbone:false, confirm:false, console:false  */
-/*jslint white:true devel:true passfail:false sloppy:true plusplus:*/
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false */
+/*jslint white:true devel:true passfail:false sloppy:true*/
 
 // Contains values for the histogram
 SIVVIT.TemporalModel = Backbone.Model.extend({
@@ -885,6 +883,8 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
     // Override set method to keep track on
     set : function(attributes, options) {
 
+        var len, tmp_min, tmp_max, i;
+
         // Adjust timestamp
         if (attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
 
@@ -895,13 +895,14 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
                 histogramEndDate : null
             });
 
-            var len = attributes.histogram.length;
+            len = attributes.histogram.length;
 
             if (len > 0) {
 
-                var tmp_min = 0, tmp_max = 0;
+                tmp_min = 0;
+                tmp_max = 0;
 
-                for (var i = len; i--; ) {
+                for ( i = len; i--; ) {
 
                     // If the histogram is displayed more than once the date object is already
                     // present
@@ -1025,30 +1026,29 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
 });
 
-// JSLint variable definition
-/*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false, console:false  */
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false */
+/*jslint white:true devel:true passfail:false sloppy:true*/
 
 SIVVIT.TemporalFrameModel = Backbone.Model.extend({
-  defaults : {
-    count : null,
-    timestamp : null
-  },
+    defaults : {
+        count : null,
+        timestamp : null
+    },
 
-  //  Override set method to ensure correct variable formatting
-  set : function(attributes, options) {
+    //  Override set method to ensure correct variable formatting
+    set : function(attributes, options) {
 
-    // Make sure attribute comes across as a number
-    if(attributes.hasOwnProperty('count') && attributes.count !== undefined && attributes.count !== null) {
-      attributes.count = Number(attributes.count);
+        // Make sure attribute comes across as a number
+        if (attributes.hasOwnProperty('count') && attributes.count !== undefined && attributes.count !== null) {
+            attributes.count = Number(attributes.count);
+        }
+
+        Backbone.Model.prototype.set.call(this, attributes, options);
+        return this;
     }
-
-    Backbone.Model.prototype.set.call(this, attributes, options);
-    return this;
-  }
 
 });
 
-// JSLint variable definition
 /*global SIVVIT:true, Raphael:false, $:false, Backbone:false  */
 /*jslint white:true devel:true passfail:false sloppy:true*/
 
@@ -1077,6 +1077,8 @@ SIVVIT.HistogramView = Backbone.View.extend({
     // Draws histogram.
     drawHistogram : function() {
 
+        var i, adjusted_end_date, len_total, len, max_val, max_height, max_width, bar, bar_w, bar_h, bar_x, bar_y, start_time, end_time, frame, percent_y, percent_x;
+
         // Clear out previous drawing
         if (this.histogram) {
             this.histogram.clear();
@@ -1086,39 +1088,39 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
         if (this.model.get('histogram') && this.model.get('histogramStartDate')) {
 
-            var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get('histogramEndDate'))).getTime();
+            adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get('histogramEndDate'))).getTime();
 
             // Total count of available slots
-            var len_total = Math.ceil((adjusted_end_date - this.model.get('histogramStartDate')) / this.model.getResolution());
+            len_total = Math.ceil((adjusted_end_date - this.model.get('histogramStartDate')) / this.model.getResolution());
 
             // Actual count of temporal slots
-            var len = this.model.get('histogram').length;
+            len = this.model.get('histogram').length;
 
-            var max_val = this.model.get('max');
+            max_val = this.model.get('max');
 
-            var max_height = $(this.el).height();
-            var max_width = $(this.el).width();
+            max_height = $(this.el).height();
+            max_width = $(this.el).width();
 
-            var bar_w = $(this.el).width() / len_total;
+            bar_w = $(this.el).width() / len_total;
 
             // Anything less than 0.5 displays as a very thin bar
             bar_w = bar_w < 0.5 ? 0.5 : bar_w;
 
-            var start_time = this.model.get('histogramStartDate');
-            var end_time = adjusted_end_date;
+            start_time = this.model.get('histogramStartDate');
+            end_time = adjusted_end_date;
 
-            for (var i = len; i--; ) {
+            for ( i = len; i--; ) {
 
-                var frame = new SIVVIT.TemporalFrameModel(this.model.get('histogram')[i]);
+                frame = new SIVVIT.TemporalFrameModel(this.model.get('histogram')[i]);
 
-                var percent_y = (frame.get('count') / max_val) * 100;
-                var percent_x = (frame.get('timestamp').getTime() - start_time) / (end_time - start_time);
+                percent_y = (frame.get('count') / max_val) * 100;
+                percent_x = (frame.get('timestamp').getTime() - start_time) / (end_time - start_time);
 
-                var bar_h = Math.round(percent_y * max_height / 100);
-                var bar_x = Math.round(percent_x * max_width);
-                var bar_y = Math.round(max_height - bar_h);
+                bar_h = Math.round(percent_y * max_height / 100);
+                bar_x = Math.round(percent_x * max_width);
+                bar_y = Math.round(max_height - bar_h);
 
-                var bar = this.histogram.rect(bar_x, bar_y, bar_w, bar_h).attr({
+                bar = this.histogram.rect(bar_x, bar_y, bar_w, bar_h).attr({
                     fill : '#333333',
                     'stroke-width' : 0
                 });

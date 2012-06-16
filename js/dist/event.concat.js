@@ -1,4 +1,3 @@
-// JSLint variable definition and formatting
 /*global SIVVIT:true  */
 /*jslint white:true */
 
@@ -26,7 +25,7 @@ SIVVIT.Settings = {
             'type' : 'iframe'
         });
 
-         $('#login-form').fancybox({
+        $('#login-form').fancybox({
             'width' : 470,
             'height' : 110,
             'autoScale' : true,
@@ -1733,9 +1732,8 @@ SIVVIT.EventModel = Backbone.Model.extend({
 
 });
 
-// JSLint variable definition
-/*global SIVVIT:true, Raphael:false, $:false, Backbone:false, confirm:false, console:false  */
-/*jslint white:true devel:true passfail:false sloppy:true plusplus:*/
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false */
+/*jslint white:true devel:true passfail:false sloppy:true*/
 
 // Contains values for the histogram
 SIVVIT.TemporalModel = Backbone.Model.extend({
@@ -1767,6 +1765,8 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
     // Override set method to keep track on
     set : function(attributes, options) {
 
+        var len, tmp_min, tmp_max, i;
+
         // Adjust timestamp
         if (attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
 
@@ -1777,13 +1777,14 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
                 histogramEndDate : null
             });
 
-            var len = attributes.histogram.length;
+            len = attributes.histogram.length;
 
             if (len > 0) {
 
-                var tmp_min = 0, tmp_max = 0;
+                tmp_min = 0;
+                tmp_max = 0;
 
-                for (var i = len; i--; ) {
+                for ( i = len; i--; ) {
 
                     // If the histogram is displayed more than once the date object is already
                     // present
@@ -1907,152 +1908,151 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
 
 });
 
-// JSLint variable definition
-/*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false, console:false  */
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false */
+/*jslint white:true devel:true passfail:false sloppy:true*/
 
 SIVVIT.TemporalFrameModel = Backbone.Model.extend({
-  defaults : {
-    count : null,
-    timestamp : null
-  },
+    defaults : {
+        count : null,
+        timestamp : null
+    },
 
-  //  Override set method to ensure correct variable formatting
-  set : function(attributes, options) {
+    //  Override set method to ensure correct variable formatting
+    set : function(attributes, options) {
 
-    // Make sure attribute comes across as a number
-    if(attributes.hasOwnProperty('count') && attributes.count !== undefined && attributes.count !== null) {
-      attributes.count = Number(attributes.count);
+        // Make sure attribute comes across as a number
+        if (attributes.hasOwnProperty('count') && attributes.count !== undefined && attributes.count !== null) {
+            attributes.count = Number(attributes.count);
+        }
+
+        Backbone.Model.prototype.set.call(this, attributes, options);
+        return this;
     }
-
-    Backbone.Model.prototype.set.call(this, attributes, options);
-    return this;
-  }
 
 });
 
-// JSLint variable definition
-/*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false, console:false  */
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false */
+/*jslint white:true devel:true passfail:false sloppy:true*/
 
 SIVVIT.ItemModel = Backbone.Model.extend({
-  defaults : {
-    id : null,
-    status : null,
-    type : null,
-    location : [],
-    content : null,
-    source : null,
-    timestamp : null,
-    rank : 0,
-    author : null,
-    avatar : null
-  },
-  // Initialized
-  initialize : function() {
-    this.url = SIVVIT.Settings.host+'/e/post/' + this.get('id');
-  },
+    defaults : {
+        id : null,
+        status : null,
+        type : null,
+        location : [],
+        content : null,
+        source : null,
+        timestamp : null,
+        rank : 0,
+        author : null,
+        avatar : null
+    },
+    // Initialized
+    initialize : function() {
+        this.url = SIVVIT.Settings.host + '/e/post/' + this.get('id');
+    },
 
-  //  Override set method to ensure correct variable formatting
-  set : function(attributes, options) {
+    //  Override set method to ensure correct variable formatting
+    set : function(attributes, options) {
 
-    if(attributes.hasOwnProperty('timestamp')) {
-      attributes.timestamp = Date.secondsToDate(attributes.timestamp);
+        if (attributes.hasOwnProperty('timestamp')) {
+            attributes.timestamp = Date.secondsToDate(attributes.timestamp);
+        }
+
+        Backbone.Model.prototype.set.call(this, attributes, options);
+        return this;
+    },
+
+    // Updates the model and calls provided callbacks when done
+    save : function(init) {
+
+        var self = this;
+
+        $.ajax({
+            url : self.url,
+            data : {
+                status : self.get('status'),
+                id : self.get('id')
+            },
+            type : init.type,
+            dataType : 'application/json',
+            success : init.success,
+            complete : init.complete,
+            error : init.error
+        });
     }
-
-    Backbone.Model.prototype.set.call(this, attributes, options);
-    return this;
-  },
-
-  // Updates the model and calls provided callbacks when done
-  save : function(init) {
-
-    var self = this;
-
-    $.ajax({
-      url : self.url,
-      data : {
-        status : self.get('status'),
-        id : self.get('id')
-      },
-      type : init.type,
-      dataType : 'application/json',
-      success : init.success,
-      complete : init.complete,
-      error : init.error
-    });
-  }
 
 });
 
-// JSLint variable definition
-/*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false, console:false  */
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false*/
+/*jslint white:true devel:true passfail:false sloppy:true*/
 
 // Model for the temporal bucket
 SIVVIT.ItemGroupModel = Backbone.Model.extend({
-  defaults : {
+    defaults : {
 
-    // Data url
-    json : null,
+        // Data url
+        json : null,
 
-    type : null,
+        type : null,
 
-    id : null,
+        id : null,
 
-    timestamp : null,
+        timestamp : null,
 
-    // Collection of items - ItemCollection
-    items : null,
+        // Collection of items - ItemCollection
+        items : null,
 
-    // Collection of newly loaded items - instance of ItemCollection
-    items_new : null,
+        // Collection of newly loaded items - instance of ItemCollection
+        items_new : null,
 
-    // HTML container for this group
-    div_id : null,
+        // HTML container for this group
+        div_id : null,
 
-    // Count of the displayed items
-    displayed : 0,
+        // Count of the displayed items
+        displayed : 0,
 
-    stats : {
-      total : 0,
-      post : 0,
-      media : 0
+        stats : {
+            total : 0,
+            post : 0,
+            media : 0
+        }
+    },
+
+    // When loading additional items the JSON response has a global stats object
+    // that looks exactly like the one in this model.
+
+    // By default global stats REPLACE the one here. In order to solve this issue
+    // we update local stats only when lock_stats var is set to false.
+    lock_stats : false,
+
+    // Override set method to regulate updating of the stats object
+    set : function(attributes, options) {
+
+        // Date.secondsToDate is in date.js
+        if (attributes.hasOwnProperty('timestamp') && attributes.timestamp !== undefined && attributes.timestamp !== null) {
+            attributes.timestamp = Date.secondsToDate(attributes.timestamp);
+        }
+
+        // Update stats only for the fist time
+        if (attributes.hasOwnProperty('stats')) {
+            if (!this.lock_stats) {
+                this.lock_stats = true;
+            } else {
+                delete attributes.stats;
+            }
+        }
+        Backbone.Model.prototype.set.call(this, attributes, options);
+        return this;
+    },
+    // Sets url path with all necessary parameters
+    setRequestPath : function(startDate, endDate, limit, resolution, type) {
+
+        var page = Math.round(this.get('displayed') / limit) + 1;
+        this.url = this.get('json') + '&meta=0&fromDate=' + Date.dateToSeconds(startDate) + '&toDate=' + Date.dateToSeconds(endDate) + '&limit=' + limit + '&page=' + page + '&resolution=' + resolution + '&type[]=' + type;
     }
-  },
-
-  // When loading additional items the JSON response has a global stats object
-  // that looks exactly like the one in this model.
-
-  // By default global stats REPLACE the one here. In order to solve this issue
-  // we update local stats only when lock_stats var is set to false.
-  lock_stats : false,
-
-  // Override set method to regulate updating of the stats object
-  set : function(attributes, options) {
-
-    // Date.secondsToDate is in date.js
-    if(attributes.hasOwnProperty('timestamp') && attributes.timestamp !== undefined && attributes.timestamp !== null) {
-      attributes.timestamp = Date.secondsToDate(attributes.timestamp);
-    }
-
-    // Update stats only for the fist time
-    if(attributes.hasOwnProperty('stats')) {
-      if(!this.lock_stats) {
-        this.lock_stats = true;
-      } else {
-        delete attributes.stats;
-      }
-    }
-    Backbone.Model.prototype.set.call(this, attributes, options);
-    return this;
-  },
-  // Sets url path with all necessary parameters
-  setRequestPath : function(startDate, endDate, limit, resolution, type) {
-
-    var page = Math.round(this.get('displayed') / limit) + 1;
-    this.url = this.get('json') + '&meta=0&fromDate=' + Date.dateToSeconds(startDate) + '&toDate=' + Date.dateToSeconds(endDate) + '&limit=' + limit + '&page=' + page + '&resolution=' + resolution + '&type[]=' + type;
-  }
 
 });
-// JSLint variable definition
 /*global SIVVIT:true, Raphael:false, $:false, Backbone:false  */
 /*jslint white:true devel:true passfail:false sloppy:true*/
 
@@ -2081,6 +2081,8 @@ SIVVIT.HistogramView = Backbone.View.extend({
     // Draws histogram.
     drawHistogram : function() {
 
+        var i, adjusted_end_date, len_total, len, max_val, max_height, max_width, bar, bar_w, bar_h, bar_x, bar_y, start_time, end_time, frame, percent_y, percent_x;
+
         // Clear out previous drawing
         if (this.histogram) {
             this.histogram.clear();
@@ -2090,39 +2092,39 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
         if (this.model.get('histogram') && this.model.get('histogramStartDate')) {
 
-            var adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get('histogramEndDate'))).getTime();
+            adjusted_end_date = this.model.adjustToNextBucket(new Date(this.model.get('histogramEndDate'))).getTime();
 
             // Total count of available slots
-            var len_total = Math.ceil((adjusted_end_date - this.model.get('histogramStartDate')) / this.model.getResolution());
+            len_total = Math.ceil((adjusted_end_date - this.model.get('histogramStartDate')) / this.model.getResolution());
 
             // Actual count of temporal slots
-            var len = this.model.get('histogram').length;
+            len = this.model.get('histogram').length;
 
-            var max_val = this.model.get('max');
+            max_val = this.model.get('max');
 
-            var max_height = $(this.el).height();
-            var max_width = $(this.el).width();
+            max_height = $(this.el).height();
+            max_width = $(this.el).width();
 
-            var bar_w = $(this.el).width() / len_total;
+            bar_w = $(this.el).width() / len_total;
 
             // Anything less than 0.5 displays as a very thin bar
             bar_w = bar_w < 0.5 ? 0.5 : bar_w;
 
-            var start_time = this.model.get('histogramStartDate');
-            var end_time = adjusted_end_date;
+            start_time = this.model.get('histogramStartDate');
+            end_time = adjusted_end_date;
 
-            for (var i = len; i--; ) {
+            for ( i = len; i--; ) {
 
-                var frame = new SIVVIT.TemporalFrameModel(this.model.get('histogram')[i]);
+                frame = new SIVVIT.TemporalFrameModel(this.model.get('histogram')[i]);
 
-                var percent_y = (frame.get('count') / max_val) * 100;
-                var percent_x = (frame.get('timestamp').getTime() - start_time) / (end_time - start_time);
+                percent_y = (frame.get('count') / max_val) * 100;
+                percent_x = (frame.get('timestamp').getTime() - start_time) / (end_time - start_time);
 
-                var bar_h = Math.round(percent_y * max_height / 100);
-                var bar_x = Math.round(percent_x * max_width);
-                var bar_y = Math.round(max_height - bar_h);
+                bar_h = Math.round(percent_y * max_height / 100);
+                bar_x = Math.round(percent_x * max_width);
+                bar_y = Math.round(max_height - bar_h);
 
-                var bar = this.histogram.rect(bar_x, bar_y, bar_w, bar_h).attr({
+                bar = this.histogram.rect(bar_x, bar_y, bar_w, bar_h).attr({
                     fill : '#333333',
                     'stroke-width' : 0
                 });
@@ -2132,8 +2134,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
 
 });
 
-// JSLint variable definition
-/*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false */
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false */
 /*jslint white:true devel:true passfail:false sloppy:true*/
 
 // Displays a static map based on the provided parameters

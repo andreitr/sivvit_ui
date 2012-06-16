@@ -1,4 +1,3 @@
-// JSLint variable definition and formatting
 /*global SIVVIT:true  */
 /*jslint white:true */
 
