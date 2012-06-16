@@ -1,6 +1,5 @@
-// JSLint variable definition
-/*global SIVVIT:true, Raphael:false, $:false, Backbone:false, confirm:false, console:false  */
-/*jslint white:true devel:true passfail:false sloppy:true plusplus:*/
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false */
+/*jslint white:true devel:true passfail:false sloppy:true*/
 
 // Contains values for the histogram
 SIVVIT.TemporalModel = Backbone.Model.extend({
@@ -32,6 +31,8 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
     // Override set method to keep track on
     set : function(attributes, options) {
 
+        var len, tmp_min, tmp_max, i;
+
         // Adjust timestamp
         if (attributes.hasOwnProperty('histogram') && attributes.histogram !== undefined && attributes.histogram !== null) {
 
@@ -42,13 +43,14 @@ SIVVIT.TemporalModel = Backbone.Model.extend({
                 histogramEndDate : null
             });
 
-            var len = attributes.histogram.length;
+            len = attributes.histogram.length;
 
             if (len > 0) {
 
-                var tmp_min = 0, tmp_max = 0;
+                tmp_min = 0;
+                tmp_max = 0;
 
-                for (var i = len; i--; ) {
+                for ( i = len; i--; ) {
 
                     // If the histogram is displayed more than once the date object is already
                     // present

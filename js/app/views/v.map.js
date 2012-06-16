@@ -1,5 +1,4 @@
-// JSLint variable definition
-/*global jQuery:false, SIVVIT:true, $:false, Backbone:false, confirm:false */
+/*global jQuery:false, SIVVIT:true, $:false, Backbone:false */
 /*jslint white:true devel:true passfail:false sloppy:true*/
 
 // Displays a static map based on the provided parameters
