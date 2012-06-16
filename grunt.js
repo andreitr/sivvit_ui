@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
             // Event form
             event_form : {
-                src : ['js/app/globals.js', 'js/app/controllers/event_form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
+                src : ['js/app/globals.js', 'js/app/controllers/event.form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
                 dest : 'js/dist/event.form.concat.js'
             },
 
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
             },
             // Event form
             event_form : {
-                src : ['js/app/globals.js', 'js/app/controllers/event_form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
+                src : ['js/app/globals.js', 'js/app/controllers/event.form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
                 dest : 'js/dist/event.form.min.js'
             },
 
