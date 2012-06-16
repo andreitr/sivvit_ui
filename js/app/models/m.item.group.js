@@ -1,4 +1,3 @@
-// JSLint variable definition
 /*global jQuery:false, SIVVIT:true, $:false, Backbone:false*/
 /*jslint white:true devel:true passfail:false sloppy:true*/
 

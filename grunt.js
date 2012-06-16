@@ -14,24 +14,24 @@ module.exports = function(grunt) {
         concat : {
             // Main event
             event : {
-                src : ['js/app/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/event.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/models/m.item.js', 'js/app/models/m.item.group.js', 'js/app/views/v.histogram.js', 'js/app/views/v.map.js'],
+                src : ['js/app/controllers/parts/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/event.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/models/m.item.js', 'js/app/models/m.item.group.js', 'js/app/views/v.histogram.js', 'js/app/views/v.map.js'],
                 dest : 'js/dist/event.concat.js'
             },
             // Events
             events : {
-                src : ['js/app/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
+                src : ['js/app/controllers/parts/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
                 dest : 'js/dist/events.concat.js'
             },
 
             // Event form
             event_form : {
-                src : ['js/app/globals.js', 'js/app/controllers/event.form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
+                src : ['js/app/controllers/parts/globals.js', 'js/app/controllers/event.form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
                 dest : 'js/dist/event.form.concat.js'
             },
 
             // Login form
             login_form : {
-                src : ['js/app/globals.js', 'js/app/controllers/login.form.js'],
+                src : ['js/app/controllers/parts/globals.js', 'js/app/controllers/login.form.js'],
                 dest : 'js/dist/login.form.concat.js'
             }
 
@@ -41,22 +41,22 @@ module.exports = function(grunt) {
         },
         min : {
             event : {
-                src : ['js/app/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/event.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/models/m.item.js', 'js/app/models/m.item.group.js', 'js/app/views/v.histogram.js'],
+                src : ['js/app/controllers/parts/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/event.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/models/m.item.js', 'js/app/models/m.item.group.js', 'js/app/views/v.histogram.js'],
                 dest : 'js/dist/event.min.js'
             },
             events : {
-                src : ['js/app/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
+                src : ['js/app/controllers/parts/globals.js', 'js/app/controllers/parts/header.js', 'js/app/controllers/events.js', 'js/app/utils/date.js', 'js/app/models/m.event.js', 'js/app/models/m.temporal.js', 'js/app/models/m.temporal.frame.js', 'js/app/views/v.histogram.js'],
                 dest : 'js/dist/events.min.js'
             },
             // Event form
             event_form : {
-                src : ['js/app/globals.js', 'js/app/controllers/event.form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
+                src : ['js/app/controllers/parts/globals.js', 'js/app/controllers/event.form.js', 'js/app/utils/date.js', 'js/app/models/m.event.js'],
                 dest : 'js/dist/event.form.min.js'
             },
 
             // Login form
             login_form : {
-                src : ['js/app/globals.js', 'js/app/controllers/login.form.js'],
+                src : ['js/app/controllers/parts/globals.js', 'js/app/controllers/login.form.js'],
                 dest : 'js/dist/login.form.min.js'
             }
 
