@@ -25,6 +25,17 @@ SIVVIT.Settings = {
             'transitionOut' : 'fade',
             'type' : 'iframe'
         });
+
+         $('#login-form').fancybox({
+            'width' : 300,
+            'height' : 180,
+            'autoScale' : true,
+            'scrolling' : 'no',
+            'transitionIn' : 'fade',
+            'transitionOut' : 'fade',
+            'type' : 'iframe',
+        });
+
     }());
 
 // JSLint variable definition
