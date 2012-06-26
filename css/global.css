@@ -307,13 +307,13 @@ li#post-list #avatar {
 }
 
 /* Histogram container for the events / user pages.*/
-li#post-list #histogram {
+li#post-list .histogram {
   float: left;
   width: 100px;
   height: 48px;
   margin-right: 10px;
   border: 1px solid #CCCCCC;
-  display: inline-block;
+  display: block;
 }
 
 li#post-list #title {

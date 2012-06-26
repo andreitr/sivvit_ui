@@ -43,7 +43,6 @@
 
                             self.view.model = self.collection;
                             self.view.render();
-
                         }
                     }
 
@@ -119,7 +118,7 @@
 
                     // Render histogram
                     histogram = new SIVVIT.HistogramView({
-                        el : $(itm.html).find('#histogram'),
+                        el : $(itm.html).find('#js-histogram'),
                         model : mdl
                     }).render();
 
@@ -170,7 +169,6 @@
                         if (itm.model.get('pending') > 0) {
                             itm.html.find('#title').append("<span class='pending'>Pending " + itm.model.get("pending") + "</span>");
                         }
-
 
                         itm.html.hover(function(event) {
                             itm.html.find('#event-form').show();

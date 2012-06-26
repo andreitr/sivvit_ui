@@ -82,7 +82,6 @@ SIVVIT.Settings = {
 
                             self.view.model = self.collection;
                             self.view.render();
-
                         }
                     }
 
@@ -158,7 +157,7 @@ SIVVIT.Settings = {
 
                     // Render histogram
                     histogram = new SIVVIT.HistogramView({
-                        el : $(itm.html).find('#histogram'),
+                        el : $(itm.html).find('#js-histogram'),
                         model : mdl
                     }).render();
 
@@ -209,7 +208,6 @@ SIVVIT.Settings = {
                         if (itm.model.get('pending') > 0) {
                             itm.html.find('#title').append("<span class='pending'>Pending " + itm.model.get("pending") + "</span>");
                         }
-
 
                         itm.html.hover(function(event) {
                             itm.html.find('#event-form').show();
@@ -1083,6 +1081,8 @@ SIVVIT.HistogramView = Backbone.View.extend({
         if (this.histogram) {
             this.histogram.clear();
         }
+
+        console.log($(this.el));
 
         this.histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 

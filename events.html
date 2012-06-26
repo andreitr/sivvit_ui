@@ -74,11 +74,11 @@
         <script type="text/template" id="tpl_content-list">
             <li id="post-list">
             <div id="content">
-            <div id="histogram"></div>
-            <div id="title"><a href="${link}">${title}</a></div>
-            <div id="description">${description}</div>
-            <div id="meta">${posts} posts, ${images} images, ${videos} videos  <span class="icon-location"></span>${location}  <span class="icon-user"></span>${author}</div>
-            </div>
+                <div id="js-histogram" class="histogram"></div>
+                <div id="title"><a href="${link}">${title}</a></div>
+                <div id="description">${description}</div>
+                <div id="meta">${posts} posts, ${images} images, ${videos} videos  <span class="icon-location"></span>${location}  <span class="icon-user"></span>${author}</div>
+                </div>
             </div>
             </li>
         </script>
@@ -100,13 +100,6 @@
             $LAB.script("js/dist/events.concat.js").wait(function() {
 
                 SIVVIT.Events.init("http://sivvit.com/events.json?callback=?&meta=1&resolution=hour");
-
-                //Initiate user header
-                // SIVVIT.UserHeader = new SIVVIT.UserHeaderView({
-                // model : new SIVVIT.UserModel()
-                // });
-                // SIVVIT.UserHeader.model.url = "user.json";
-                // SIVVIT.UserHeader.model.fetch();
             });
 
         </script>
