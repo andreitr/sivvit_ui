@@ -201,7 +201,7 @@ SIVVIT.Settings = {
                     // content template (add hover buttons and check box)
                     if (this.edit) {
 
-                        itm.html.find('#content').prepend("<span class=\"item-edit\"><span class='icon-cog' href=\"event.form?id=" + itm.model.get('id') + "\" id='event-form'></span><div id=\"pending-flag\"></div></span>");
+                        itm.html.find('#content').prepend("<span class=\"item-edit\"><span class='icon-cog' href=\"event_form?id=" + itm.model.get('id') + "\" id='event-form'></span><div id=\"pending-flag\"></div></span>");
 
                         itm.html.find('#event-form').hide();
 
