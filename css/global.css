@@ -313,8 +313,9 @@ li#post-list .histogram {
   height: 48px;
   margin-right: 10px;
   border: 1px solid #CCCCCC;
-  display: block;
 }
+
+
 
 li#post-list #title {
   color: #002A3A;
