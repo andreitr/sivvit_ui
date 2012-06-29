@@ -985,16 +985,14 @@ SIVVIT.Settings = {
                     // content template (add hover buttons and check box)
                     if (this.edit) {
 
-                        console.log(itm.html);
+                        itm.html.find('#content').prepend($('#tpl_edit-item').html());
 
-                        // itm.html.find('#content').prepend($('#tpl_edit-item').html());
-                        //
-                        // itm.html.find('#del-itm').hide();
-                        // itm.html.find('#apr-itm').hide();
-                        // itm.html.find('#load-itm').hide();
-                        //
-                        // this.enableItem(itm);
-                        // this.showHidePending(itm);
+                        itm.html.find('#del-itm').hide();
+                        itm.html.find('#apr-itm').hide();
+                        itm.html.find('#load-itm').hide();
+
+                        this.enableItem(itm);
+                        this.showHidePending(itm);
                     }
                     this.rendered.push(itm);
 
@@ -2091,8 +2089,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
             this.histogram.clear();
         }
 
-        console.log($(this.el));
-
+        // this.histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
         this.histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
         if (this.model.get('histogram') && this.model.get('histogramStartDate')) {

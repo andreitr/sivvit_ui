@@ -15,7 +15,9 @@ body {
 
 /* Stretched body container to ensure that footer is always at the bottom. */
 body .wrapper {
-  min-height: 100% position : relative;
+  min-height: 100%;
+  position: relative;
+
 }
 
 body .paceholder {
@@ -232,10 +234,7 @@ ol {
 
 li#post-list {
   padding: 10px;
-  min-height: 50px;
   border-bottom: 1px solid #CCCCCC;
-  position: relative;
-  background-color: #FFFFFF;
 }
 
 .item-edit {
@@ -308,14 +307,12 @@ li#post-list #avatar {
 
 /* Histogram container for the events / user pages.*/
 li#post-list .histogram {
-  float: left;
   width: 100px;
   height: 48px;
+  float: left;
   margin-right: 10px;
   border: 1px solid #CCCCCC;
 }
-
-
 
 li#post-list #title {
   color: #002A3A;

@@ -946,16 +946,14 @@
                     // content template (add hover buttons and check box)
                     if (this.edit) {
 
-                        console.log(itm.html);
+                        itm.html.find('#content').prepend($('#tpl_edit-item').html());
 
-                        // itm.html.find('#content').prepend($('#tpl_edit-item').html());
-                        //
-                        // itm.html.find('#del-itm').hide();
-                        // itm.html.find('#apr-itm').hide();
-                        // itm.html.find('#load-itm').hide();
-                        //
-                        // this.enableItem(itm);
-                        // this.showHidePending(itm);
+                        itm.html.find('#del-itm').hide();
+                        itm.html.find('#apr-itm').hide();
+                        itm.html.find('#load-itm').hide();
+
+                        this.enableItem(itm);
+                        this.showHidePending(itm);
                     }
                     this.rendered.push(itm);
 

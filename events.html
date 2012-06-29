@@ -74,7 +74,9 @@
         <script type="text/template" id="tpl_content-list">
             <li id="post-list">
             <div id="js-content">
-                <div id="js-histogram" class="histogram"></div>
+
+                <!-- For some reason chrome creates an empty style element for this div which breaks histogram size -->
+                <div id="js-histogram" class="histogram" style="width:100px; height:48px"></div>
                 <div id="title"><a href="${link}">${title}</a></div>
                 <div id="description">${description}</div>
                 <div id="meta">${posts} posts, ${images} images, ${videos} videos  <span class="icon-location"></span>${location}  <span class="icon-user"></span>${author}</div>

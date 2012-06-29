@@ -1082,8 +1082,7 @@ SIVVIT.HistogramView = Backbone.View.extend({
             this.histogram.clear();
         }
 
-        console.log($(this.el));
-
+        // this.histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
         this.histogram = new Raphael($(this.el)[0], $(this.el).width(), $(this.el).height());
 
         if (this.model.get('histogram') && this.model.get('histogramStartDate')) {
